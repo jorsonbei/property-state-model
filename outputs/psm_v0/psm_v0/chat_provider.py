@@ -25,6 +25,7 @@ class ProviderResult:
     model: str
     duration_ms: int
     error: str | None = None
+    finish_reason: str | None = None
 
     def to_dict(self) -> dict:
         return asdict(self)
@@ -83,6 +84,7 @@ class OllamaChatProvider:
             provider=self.name,
             model=request.model,
             duration_ms=duration_ms,
+            finish_reason=str(payload.get("done_reason") or "") or None,
         )
 
     def failure_result(

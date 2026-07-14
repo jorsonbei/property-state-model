@@ -24,6 +24,7 @@ from psm_v0.model_adapter import BuiltinModelAdapter  # noqa: E402
 from psm_v0.pipeline import run_pipeline  # noqa: E402
 from psm_v0.psm_gate_controller import apply_psm_gate  # noqa: E402
 from psm_v0.state_extractor import infer_domain  # noqa: E402
+from psm_v0.verified_knowledge import VerifiedKnowledge, match_verified_knowledge  # noqa: E402
 
 
 SCENARIOS = {
@@ -206,13 +207,24 @@ def run_chat_turn(messages: list[dict], scenario: str) -> dict:
     result = run_demo_case(state_input, scenario)
     intent = detect_chat_intent(current, conversation)
     project_context = load_project_context()
+    verified_knowledge = match_verified_knowledge(current)
     grounding_facts, grounding_sources = grounding_for_intent(
         intent,
         current,
         conversation,
         project_context,
     )
-    generation = build_chat_generation(current, conversation, result, intent, project_context)
+    if verified_knowledge:
+        grounding_facts.extend(verified_knowledge.grounding_facts)
+        grounding_sources.extend(verified_knowledge.grounding_sources)
+    generation = build_chat_generation(
+        current,
+        conversation,
+        result,
+        intent,
+        project_context,
+        verified_knowledge=verified_knowledge,
+    )
     assistant_message = generation["answer"]
     quality_audit = audit_chat_answer(
         current,
@@ -294,6 +306,8 @@ def build_chat_generation(
     result: dict,
     intent: str,
     project_context: dict,
+    *,
+    verified_knowledge: VerifiedKnowledge | None = None,
 ) -> dict:
     text = current.strip()
     if intent == "identity":
@@ -306,7 +320,7 @@ def build_chat_generation(
     if intent == "project_results":
         return deterministic_generation(project_results_answer(project_context))
     if intent == "project_status":
-        return deterministic_generation(project_status_answer(project_context))
+        return deterministic_generation(project_status_answer(project_context, text))
     if intent == "roadmap":
         return deterministic_generation(roadmap_answer(project_context))
     if intent == "history_reference":
@@ -321,6 +335,10 @@ def build_chat_generation(
             return deterministic_generation(
                 f"这个问题刚才问过。核心回答仍是：{first_answer_sentence(previous)}"
             )
+    if verified_knowledge:
+        generation = deterministic_generation(verified_knowledge.answer)
+        generation["knowledge_kernel"] = verified_knowledge.kernel_id
+        return generation
     model_generation = try_ollama_chat_generation(current, conversation, result)
     if model_generation["status"] != "success":
         return deterministic_generation(
@@ -508,6 +526,30 @@ def is_project_status_question(text: str) -> bool:
         "開放給外部",
         "直接放行",
         "current status",
+        "按系统当前状态",
+        "按系統當前狀態",
+        "按当前系统状态",
+        "按當前系統狀態",
+        "按当前项目状态",
+        "按當前項目狀態",
+        "按本地当前项目状态",
+        "按本地當前項目狀態",
+        "本地项目记录",
+        "本地項目記錄",
+        "本地系统记录",
+        "本地系統記錄",
+        "本地记录",
+        "本地紀錄",
+        "正式版本号",
+        "正式版本號",
+        "核心验证门",
+        "核心驗證門",
+        "下一个真实动作",
+        "下一個真實動作",
+        "完成了哪些阶段的验收",
+        "完成了哪些階段的驗收",
+        "里程碑的预期交付",
+        "里程碑的預期交付",
     )
     return any(marker in text for marker in markers)
 
@@ -567,7 +609,49 @@ def is_theory_question(text: str) -> bool:
     )
 
 
-def project_status_answer(context: dict) -> str:
+def project_status_answer(context: dict, question: str = "") -> str:
+    if any(marker in question for marker in ("部署", "配置库", "配置庫", "同步失败", "同步失敗", "容灾回滚", "容災回滾")):
+        return (
+            f"当前可验证项目状态是 {context['current_version']}，确定性正式源为 {context['formal_version']}，"
+            f"共有 {context['core_cases']} 个正式案例；下一验证阶段仍是 {context['next_version']}。"
+            "现有结构化状态没有登记自动部署、配置库同步失败或容灾回滚 runbook，因此不能把某一步说成已验证的本项目标准流程。\n\n"
+            "作为通用且有条件的事故控制建议，第一步通常是暂停继续部署和后续写入，保留失败日志、配置版本与变更前快照；"
+            "随后由负责人按已批准 runbook 判断重试还是回滚。外部用户试用仍未开放。"
+        )
+    if any(marker in question for marker in ("季度", "验收", "驗收", "交付节点", "交付節點", "里程碑")):
+        return (
+            "当前本地状态没有第二季度核心架构升级的验收清单或日期，因此不能列出不存在的已验收模块，也不能编造交付节点。"
+            f"能够确认的是：当前发布版为 {context['current_version']}，确定性正式源为 {context['formal_version']}，"
+            f"共有 {context['core_cases']} 个正式案例；{context['next_version']} 仍在独立聊天门验证，"
+            "最近的真实里程碑是该门通过后再决定晋升。外部用户试用仍未开放。"
+        )
+    if any(marker in question for marker in ("正式版本", "版本号", "版本號", "核心验证门", "核心驗證門")):
+        return (
+            f"当前正式晋级版本是 {context['current_version']}；确定性正式源是 {context['formal_version']}，"
+            f"共有 {context['core_cases']} 个正式案例，正式回归已经通过。"
+            f"但目标版本 {context['next_version']} 的独立聊天语义门尚未通过，所以不能把整个 V0.251 说成已完成内部核心验证。"
+            "外部用户试用仍未开放。"
+        )
+    if any(marker in question for marker in ("外部试用", "外部試用", "真实动作", "真實動作")):
+        return (
+            f"当前没有开放外部用户试用，正式版本仍是 {context['current_version']}。"
+            f"记录中的下一真实动作是：{context['required_decision']}"
+        )
+    if any(marker in question for marker in ("最高优先级", "最高優先級", "优先级最高", "優先級最高", "优先任务", "優先任務")):
+        return (
+            f"当前最高优先级是完成 {context['next_version']} 的 {context['next_objective']}，"
+            "并用新的来源隔离盲集通过独立外部语义门。"
+            f"原因是正式版本仍是 {context['current_version']}，确定性正式源为 {context['formal_version']}，"
+            f"共有 {context['core_cases']} 个正式案例；在正确性、相关性、幻觉控制、安全和边界门全部通过前，"
+            "不能晋级或开放外部用户试用。"
+        )
+    if any(marker in question for marker in ("阻塞因素", "阻碍因素", "阻礙因素", "最大阻塞", "最大的阻塞")):
+        user_blocker = "需要用户介入" if context["requires_user_input"] else "不需要用户介入"
+        return (
+            f"当前最大的阶段门是 {context['next_version']} 的独立语义质量尚未全部达到晋级阈值，"
+            f"不是部署或材料缺失。现阶段{user_blocker}；工程上要保留失败证据、修复共通缺陷，"
+            "再用全新未见盲集复验。外部用户试用仍未开放。"
+        )
     answer = (
         f"当前项目是 {context['current_version']}。确定性正式源是 {context['formal_version']}，"
         f"共有 {context['core_cases']} 个正式案例，正式回归目前全部通过。"
@@ -701,16 +785,42 @@ def try_ollama_chat_generation(
     result: dict,
 ) -> dict:
     prompt = build_chat_prompt(current, conversation, result)
-    provider_result = OllamaChatProvider(OLLAMA_BASE_URL).generate(
+    provider = OllamaChatProvider(OLLAMA_BASE_URL)
+    max_tokens = selected_chat_max_tokens()
+    provider_result = provider.generate(
         ProviderRequest(
             prompt=prompt,
             model=selected_chat_model(),
             timeout_seconds=CHAT_TIMEOUT_SECONDS,
-            max_tokens=selected_chat_max_tokens(),
+            max_tokens=max_tokens,
         )
     )
+    first_result = provider_result
+    if provider_result.status == "success" and provider_result.finish_reason == "length":
+        provider_result = provider.generate(
+            ProviderRequest(
+                prompt=prompt,
+                model=selected_chat_model(),
+                timeout_seconds=CHAT_TIMEOUT_SECONDS,
+                max_tokens=max(600, max_tokens * 2),
+            )
+        )
     generation = provider_result.to_dict()
+    if first_result is not provider_result:
+        generation["truncation_retry"] = True
+        generation["first_finish_reason"] = first_result.finish_reason
+        generation["first_duration_ms"] = first_result.duration_ms
+        generation["duration_ms"] += first_result.duration_ms
+    if provider_result.status == "success" and provider_result.finish_reason == "length":
+        generation.update(
+            status="truncated",
+            answer="",
+            error="Ollama reached the token limit after one expanded retry.",
+        )
     if provider_result.status != "success":
+        generation["reasoning_leak_removed"] = False
+        return generation
+    if generation["status"] != "success":
         generation["reasoning_leak_removed"] = False
         return generation
     text, reasoning_leak = sanitize_model_answer(provider_result.answer)
@@ -983,6 +1093,8 @@ def load_project_context() -> dict:
         "selected_model": str(selection.get("selected_model") or "未选择"),
         "model_mean_score": float(selection_metrics.get("mean_score") or 0.0),
         "stage_blocked": checkpoint.get("status") == "blocked_on_independent_semantic_judge",
+        "checkpoint_status": str(checkpoint.get("status") or "unknown"),
+        "requires_user_input": bool(checkpoint.get("requires_user_input", False)),
         "required_decision": str(
             checkpoint.get("required_decision") or "完成下一阶段独立验证"
         ),
@@ -1018,7 +1130,7 @@ def grounding_for_intent(
         sources = [context["source"], context["roadmap_source"]]
         if context["stage_blocked"]:
             facts.append(context["required_decision"])
-            sources.append(context["checkpoint_source"])
+        sources.append(context["checkpoint_source"])
         return (facts, sources)
     if intent == "roadmap":
         facts = [context["current_version"], context["next_version"], context["next_objective"]]

@@ -1,0 +1,18 @@
+{
+  "provider": "OpenAI ChatGPT",
+  "model": "Instant",
+  "account_tier": "Free",
+  "interface": "chatgpt.com",
+  "conversation_url": "https://chatgpt.com/c/6a5616cc-9e38-83ee-8cfd-a826b3d2ee5b",
+  "evaluated_at": "2026-07-14",
+  "user_authorized": true,
+  "external_model": true,
+  "independent_from_candidate": true,
+  "independent_from_blind_author": true,
+  "blind_author_provider": "Google Gemini",
+  "candidate_provider": "Ollama",
+  "candidate_model": "gemma3:4b",
+  "data_scope": "20 synthetic frozen blind-F prompts and candidate answers; no private user data",
+  "judge_label_access": false,
+  "rubric_version": "psm_external_semantic_v1"
+}

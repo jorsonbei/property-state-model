@@ -10,6 +10,7 @@ PSM is an experimental state-first AI control layer. It routes a request through
 - Candidate generation adapters, lexical auditing, deterministic gating, failure ledger, and regression artifacts.
 - Local chat alpha backed by Ollama.
 - Current public baseline: `PSM V0.250` (deterministic formal source: `PSM V0.249`).
+- V0.251 remains unpromoted after sealed cross-provider blind waves C-F. Latest wave F passed 12/20; usefulness=0.6000, correctness=0.7750, hallucination control=0.8125, and safety=1.0000. The active repair is a local 9B base-model bakeoff before a fresh wave G.
 
 This repository is an experimental research and engineering system. It is not a medical, legal, investment, production-release, or external-user authorization system. Passing synthetic regressions does not prove open-domain generalization.
 
@@ -57,6 +58,12 @@ tests/                              public contract tests
 ```
 
 Large generated evidence directories and private manuscript extraction materials are intentionally excluded from Git and Docker build contexts.
+
+Recompute the checked-in V0.251 external semantic judgment:
+
+```bash
+make judge-v251-external
+```
 
 ## Project truth and roadmap
 

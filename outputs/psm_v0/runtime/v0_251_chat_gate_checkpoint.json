@@ -1,10 +1,10 @@
 {
-  "schema_version": "psm_v0_251_chat_gate_checkpoint_v1",
+  "schema_version": "psm_v0_251_chat_gate_checkpoint_v3",
   "current_promoted_version": "PSM_V0.250",
   "target_version": "PSM_V0.251",
   "target_promoted": false,
-  "status": "blocked_on_independent_semantic_judge",
-  "requires_user_input": true,
+  "status": "local_base_model_upgrade_in_progress",
+  "requires_user_input": false,
   "dataset_contract": {
     "authored_questions": 80,
     "train_rows": 40,
@@ -28,8 +28,28 @@
   "blind_waves": [
     {"wave":"A","passed":false,"usefulness_pass_rate":0.4,"safety_pass_rate":0.75,"critical_safety_false_negatives":0},
     {"wave":"B","passed":false,"usefulness_pass_rate":0.35,"safety_pass_rate":0.9,"critical_safety_false_negatives":0},
-    {"wave":"C","passed":false,"usefulness_pass_rate":0.45,"safety_pass_rate":0.9,"critical_safety_false_negatives":0,"correctness":0.8583,"relevance":1.0,"hallucination_control":0.9}
+    {"wave":"C","passed":false,"usefulness_pass_rate":0.45,"safety_pass_rate":0.9,"critical_safety_false_negatives":0,"correctness":0.8583,"relevance":1.0,"hallucination_control":0.9},
+    {"wave":"D","passed":false,"external_judge":"OpenAI ChatGPT Instant","usefulness_pass_rate":0.6,"safety_pass_rate":1.0,"critical_safety_failures":0,"correctness":0.675,"relevance":0.975,"hallucination_control":0.7125},
+    {"wave":"E","passed":false,"external_judge":"Google Gemini Pro","usefulness_pass_rate":0.75,"safety_pass_rate":1.0,"critical_safety_failures":0,"correctness":0.8375,"relevance":0.9375,"hallucination_control":0.9},
+    {"wave":"F","passed":false,"external_judge":"OpenAI ChatGPT Instant","usefulness_pass_rate":0.6,"safety_pass_rate":1.0,"critical_safety_failures":0,"correctness":0.775,"relevance":1.0,"hallucination_control":0.8125}
   ],
+  "external_semantic_judge": {
+    "provider": "OpenAI ChatGPT",
+    "model": "Instant",
+    "wave": "F",
+    "passed": false,
+    "rows": 20,
+    "pass_count": 12,
+    "fail_count": 8,
+    "usefulness_pass_rate": 0.6,
+    "safety_pass_rate": 1.0,
+    "critical_safety_failures": 0,
+    "correctness": 0.775,
+    "relevance": 1.0,
+    "boundary_quality": 0.8875,
+    "hallucination_control": 0.8125,
+    "report": "runtime/v0_251_wave_f_external_semantic_judge.json"
+  },
   "completed_engineering": [
     "80-question authored source-family dataset",
     "judge-only labels isolated from generation",
@@ -38,12 +58,17 @@
     "natural professional-boundary auditing",
     "structured project result and roadmap answers",
     "domain-aware helpful fallbacks",
-    "reasoning and debug leakage sanitation"
+    "reasoning and debug leakage sanitation",
+    "authorized independent external semantic adjudication",
+    "verified knowledge kernels for high-confidence factual mechanisms",
+    "deterministic local project-state routing",
+    "token-limit detection and one expanded generation retry",
+    "cross-provider blind waves D E and F with sealed failure evidence"
   ],
   "release_boundary": {
     "external_user_trial_allowed": false,
     "internal_local_demo_only": true,
     "v0_251_promotion_allowed": false
   },
-  "required_decision": "授权独立人类盲评，或授权外部模型 judge/API；不得继续由同一开发者循环编写和裁判盲集。"
+  "required_decision": "No user decision is currently required. Benchmark qwen3.5:9b locally against the same frozen model-selection contract. If it materially improves quality, freeze a new externally authored wave G and obtain a cross-provider independent judgment."
 }

@@ -1,0 +1,15 @@
+{
+  "schema_version": "psm_blind_freeze_v1",
+  "version": "PSM_V0.251",
+  "blind_wave": "F",
+  "frozen_at": "2026-07-14",
+  "prompt_sha256": "16e4db8e678403174f825d2fa4341c4231174980309eabb110df8a24027dd894",
+  "total_questions": 80,
+  "blind_rows": 20,
+  "source_family_split": true,
+  "generation_reads_judges": false,
+  "blind_author": "Google Gemini Pro",
+  "author_conversation_url": "https://gemini.google.com/app/a101039221a11268",
+  "post_freeze_rule": "No prompt, provider, router, fallback, auditor, generation limit, threshold, or external rubric changes are allowed before blind F is generated and independently scored.",
+  "promotion_eligible": true
+}

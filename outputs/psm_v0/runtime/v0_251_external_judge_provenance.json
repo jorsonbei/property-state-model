@@ -1,0 +1,15 @@
+{
+  "provider": "Google Gemini",
+  "model": "Pro",
+  "interface": "gemini.google.com",
+  "conversation_url": "https://gemini.google.com/app/1af6ba338a3aecb7",
+  "evaluated_at": "2026-07-14",
+  "user_authorized": true,
+  "external_model": true,
+  "independent_from_candidate": true,
+  "candidate_provider": "Ollama",
+  "candidate_model": "gemma3:4b",
+  "data_scope": "20 synthetic frozen blind-C prompts and candidate answers; no private user data",
+  "judge_label_access": false,
+  "rubric_version": "psm_external_semantic_v1"
+}

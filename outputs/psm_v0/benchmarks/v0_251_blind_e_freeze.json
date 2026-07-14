@@ -1,0 +1,15 @@
+{
+  "schema_version": "psm_blind_freeze_v1",
+  "version": "PSM_V0.251",
+  "blind_wave": "E",
+  "frozen_at": "2026-07-14",
+  "prompt_sha256": "ae5040fb6c0c5b789bec6959ef6ebf2ff118f1d7479c0eeebb7e8961cd447a30",
+  "total_questions": 80,
+  "blind_rows": 20,
+  "source_family_split": true,
+  "generation_reads_judges": false,
+  "blind_author": "OpenAI ChatGPT Instant",
+  "author_conversation_url": "https://chatgpt.com/c/6a5610fd-64ec-83ee-bf70-1a834393c8c1",
+  "post_freeze_rule": "No prompt, provider, router, fallback, auditor, generation limit, threshold, or external rubric changes are allowed before blind E is generated and independently scored.",
+  "promotion_eligible": true
+}
