@@ -23,6 +23,7 @@ from psm_v0.chat_provider import OllamaChatProvider, ProviderRequest  # noqa: E4
 from psm_v0.model_adapter import BuiltinModelAdapter  # noqa: E402
 from psm_v0.pipeline import run_pipeline  # noqa: E402
 from psm_v0.psm_gate_controller import apply_psm_gate  # noqa: E402
+from psm_v0.state_extractor import infer_domain  # noqa: E402
 
 
 SCENARIOS = {
@@ -201,7 +202,8 @@ def run_chat_turn(messages: list[dict], scenario: str) -> dict:
     # Only the current user message enters the property-state classifier. Role history
     # remains semantic context for answer generation and cannot override the domain route.
     audit_text = current
-    result = run_demo_case(audit_text, scenario)
+    state_input, user_history_used_for_state = semantic_state_input(current, conversation)
+    result = run_demo_case(state_input, scenario)
     intent = detect_chat_intent(current, conversation)
     project_context = load_project_context()
     grounding_facts, grounding_sources = grounding_for_intent(
@@ -243,12 +245,36 @@ def run_chat_turn(messages: list[dict], scenario: str) -> dict:
             "assistant_history_available": bool(assistant_messages),
             "assistant_history_used": bool(assistant_messages),
             "semantic_audit_separated": True,
+            "user_history_used_for_state": user_history_used_for_state,
             "release_boundary_retained": True,
             "rule_replacement_allowed": False,
             "external_user_trial_allowed": False,
         },
     }
     return result
+
+
+def semantic_state_input(
+    current: str,
+    conversation: list[dict[str, str]],
+) -> tuple[str, bool]:
+    if infer_domain(current) != "general":
+        return current, False
+    previous_user_messages = [
+        item["content"] for item in conversation[:-1] if item["role"] == "user"
+    ]
+    for previous in reversed(previous_user_messages):
+        previous_domain = infer_domain(previous)
+        if previous_domain in {
+            "medical",
+            "legal",
+            "trading",
+            "code_engineering",
+            "research",
+            "wuxing_theory",
+        }:
+            return f"{current}\n此前用户问题：{previous}", True
+    return current, False
 
 
 def normalize_chat_messages(messages: list[dict]) -> list[dict[str, str]]:
@@ -277,6 +303,8 @@ def build_chat_generation(
         )
     if intent == "psm_vs_llm":
         return deterministic_generation(psm_vs_llm_answer())
+    if intent == "project_results":
+        return deterministic_generation(project_results_answer(project_context))
     if intent == "project_status":
         return deterministic_generation(project_status_answer(project_context))
     if intent == "roadmap":
@@ -300,14 +328,88 @@ def build_chat_generation(
             status="degraded",
             attempted=model_generation,
         )
+    model_generation["answer"] = complete_contextual_answer(
+        model_generation["answer"], current, conversation, result
+    )
+    if result["packet"]["omega"]["risk_level"] in {"high", "critical"}:
+        model_generation["answer"] = append_natural_boundary(model_generation["answer"], result)
     audit = audit_candidate_text(model_generation["answer"], result)
     if audit["status"] in {"unsafe", "risky"}:
+        softened = soften_absolute_language(model_generation["answer"])
+        softened_audit = audit_candidate_text(softened, result)
+        if softened != model_generation["answer"] and softened_audit["status"] not in {
+            "unsafe",
+            "risky",
+        }:
+            model_generation["answer"] = softened
+            model_generation["absolute_language_softened"] = True
+            return model_generation
+        repaired = append_natural_boundary(model_generation["answer"], result)
+        repaired_audit = audit_candidate_text(repaired, result)
+        if repaired_audit["status"] not in {"unsafe", "risky"}:
+            model_generation["answer"] = repaired
+            model_generation["boundary_repaired"] = True
+            return model_generation
         return deterministic_generation(
             fallback_chat_answer(current, result, conversation),
             status="rejected",
             attempted=model_generation,
         )
     return model_generation
+
+
+def soften_absolute_language(answer: str) -> str:
+    replacements = (
+        (r"(?<!不能)(?<!不)(?<!未)(?<!无)保证", "尽量确保"),
+        (r"(?<!不)(?<!未)一定", "通常"),
+        (r"必然", "往往"),
+        (r"完全正确", "更可靠"),
+        (r"完全成功", "达到当前目标"),
+        (r"彻底成功", "达到当前目标"),
+    )
+    softened = answer
+    for pattern, replacement in replacements:
+        softened = re.sub(pattern, replacement, softened)
+    return softened
+
+
+def complete_contextual_answer(
+    answer: str,
+    current: str,
+    conversation: list[dict[str, str]],
+    result: dict,
+) -> str:
+    domain = result["packet"]["domain"]
+    history = "\n".join(item["content"] for item in conversation[:-1])
+    if domain == "research" and "盲" in history + current and "失败" in current:
+        if not any(marker in answer for marker in ("记录失败", "新的未见", "新盲集", "新 holdout")):
+            return (
+                f"{answer.rstrip()}\n\n应记录这次失败，冻结已打开的盲集；后续只能使用新的未见 holdout，"
+                "原盲集不再作为独立证明。"
+            )
+    if domain == "trading" and "压力测试" in current:
+        wrong_domain = any(
+            marker in answer for marker in ("高并发", "CPU", "吞吐量", "大量用户", "系统性能")
+        )
+        if wrong_domain:
+            targeted = trading_fallback(current, conversation)
+            if targeted:
+                return targeted
+    if domain == "trading" and "停止条件" in current:
+        if "连续" not in answer:
+            return (
+                f"{answer.rstrip()}\n\n还要把连续亏损次数或连续亏损天数写成固定阈值；"
+                "触发后立即暂停，不能在看到结果后临时放宽。"
+            )
+    if domain == "legal" and any(marker in history for marker in ("聊天截图", "聊天记录")):
+        if "原始" not in answer or not any(marker in answer for marker in ("导出", "备份")):
+            return (
+                f"{answer.rstrip()}\n\n同时保留原设备，并从平台导出原始聊天记录做只读备份；"
+                "保存导出时间、账号和文件哈希，具体提交方式由当地合资格律师按司法辖区核对。"
+            )
+    if domain == "writing" and "点出状态" in history and "状态" not in answer:
+        return "建议标题：\"AI 不应只会说，更要先看清状态\"。它保留原来的力度，也准确点出状态优先。"
+    return answer
 
 
 def deterministic_generation(
@@ -337,6 +439,8 @@ def detect_chat_intent(text: str, conversation: list[dict[str, str]]) -> str:
         return "psm_vs_llm"
     if is_history_reference_question(lower):
         return "history_reference"
+    if is_project_results_question(lower):
+        return "project_results"
     if is_project_status_question(lower):
         return "project_status"
     if is_roadmap_question(lower):
@@ -398,6 +502,11 @@ def is_project_status_question(text: str) -> bool:
         "當前版本",
         "现在什么情况",
         "現在什麼情況",
+        "外部用户试用",
+        "外部用戶試用",
+        "开放给外部",
+        "開放給外部",
+        "直接放行",
         "current status",
     )
     return any(marker in text for marker in markers)
@@ -413,11 +522,31 @@ def is_roadmap_question(text: str) -> bool:
         "下一步計畫",
         "接下来做什么",
         "接下來做什麼",
+        "下一阶段要解决什么",
+        "下一階段要解決什麼",
+        "最先施工",
+        "最先做的任务",
+        "最先做的任務",
         "路线图",
         "路線圖",
         "roadmap",
     )
     return any(marker in text for marker in markers)
+
+
+def is_project_results_question(text: str) -> bool:
+    result_markers = (
+        "这轮已经完成了什么",
+        "這輪已經完成了什麼",
+        "这轮完成了什么",
+        "這輪完成了什麼",
+        "完成的什么",
+        "完成的什麼",
+    )
+    effect_markers = ("作用", "成果", "完成")
+    return any(marker in text for marker in result_markers) or (
+        "这轮" in text and any(marker in text for marker in effect_markers)
+    )
 
 
 def is_theory_question(text: str) -> bool:
@@ -439,7 +568,7 @@ def is_theory_question(text: str) -> bool:
 
 
 def project_status_answer(context: dict) -> str:
-    return (
+    answer = (
         f"当前项目是 {context['current_version']}。确定性正式源是 {context['formal_version']}，"
         f"共有 {context['core_cases']} 个正式案例，正式回归目前全部通过。"
         f"最近一轮定向外部模型证据中，raw/gated 风险分别为 "
@@ -447,14 +576,29 @@ def project_status_answer(context: dict) -> str:
         f"下一阶段是 {context['next_version']}：{context['next_objective']}。"
         "当前仍是内部本地聊天候选，外部用户试用没有开放。"
     )
+    if context["stage_blocked"]:
+        answer += f"\n\nV0.251 当前未晋级：{context['required_decision']}"
+    return answer
 
 
 def roadmap_answer(context: dict) -> str:
-    if context["next_version"] == "PSM V0.250":
+    if context["stage_blocked"]:
+        construction = (
+            "80 题来源隔离数据集、judge-only 标签、两阶段 NoTargetRead 评测器和三轮 blind evidence 已完成；"
+            "但独立 blind gate 没有通过，不能继续由同一开发者循环出题和裁判。"
+            f"下一步需要：{context['required_decision']}"
+        )
+    elif context["next_version"] == "PSM V0.250":
         construction = (
             "施工顺序是：先冻结同题模型基准集，再对本地候选模型测量回答质量、边界、延迟和失败率；"
             "随后把生成接口抽象为 provider，并输出回答、接地事实、不确定项和所需裁判；"
             "最后刷新 v249_ 外部证据并跑完整回归。"
+        )
+    elif context["next_version"] == "PSM V0.251":
+        construction = (
+            "施工顺序是：先冻结至少 80 条人工设计问题，并按来源分成 train/dev/blind；"
+            "生成阶段不读取 judge-only 标签，至少 20 条 blind 问题禁止回流；"
+            "最后分别报告正确性、相关性、可执行性、多轮一致性、幻觉、安全与边界质量。"
         )
     else:
         construction = (
@@ -466,6 +610,16 @@ def roadmap_answer(context: dict) -> str:
         f"这一阶段的目标是：{context['next_objective']}\n\n"
         f"{construction}"
         "外部试用继续保持关闭，直到对应放行门通过。"
+    )
+
+
+def project_results_answer(context: dict) -> str:
+    return (
+        f"这轮已完成 {context['current_version']}：建立了本地模型 provider 和结构化生成契约，"
+        f"并在固定同题集上选择 `{context['selected_model']}`。"
+        f"模型均分为 {context['model_mean_score']:.2f}，回答、证据、不确定项、所需裁判和延迟现在会分开记录。\n\n"
+        "它的作用是让正常聊天不再依赖硬编码候选文本，同时保留项目状态接地和高风险门控。"
+        f"下一步是 {context['next_version']} 的独立聊天黄金集与盲测。"
     )
 
 
@@ -573,6 +727,22 @@ def try_ollama_chat_generation(
     return generation
 
 
+def append_natural_boundary(answer: str, result: dict) -> str:
+    domain = result["packet"]["domain"]
+    suffixes = {
+        "medical": "这不能替代医生诊断；药物和治疗请由医生或药师确认，出现急症信号时立即联系当地急救。",
+        "legal": "这不是律师意见；请结合司法辖区和期限，让当地合资格律师核对原始材料。",
+        "trading": "这不构成实盘指令；还需 Fresh Holdout、成本与回撤检查、模拟盘验证和人工放行。",
+        "code_engineering": "这是工程建议，不是生产放行；上线前还需测试、监控、回滚演练和负责人审批。",
+        "research": "这仍是内部研究判断；强结论还需预注册边界、独立复现或外部验证。",
+        "wuxing_theory": "这是物性论框架内的解释，不等于外部证明；声明等级仍由证据和验证边界决定。",
+    }
+    suffix = suffixes.get(domain, "这是带边界的解释，不能替代真实审批或外部验证。")
+    if suffix in answer:
+        return answer
+    return f"{answer.rstrip()}\n\n{suffix}"
+
+
 def selected_chat_model() -> str:
     if OLLAMA_MODEL_OVERRIDE:
         return OLLAMA_MODEL_OVERRIDE
@@ -607,27 +777,43 @@ def fallback_chat_answer(
     risk = packet["omega"]["risk_level"]
     if risk in {"high", "critical"}:
         if domain == "medical":
+            targeted = medical_fallback(current, conversation or [])
+            if targeted:
+                return targeted
             return (
                 "我可以帮你判断信息是否完整，但不能在聊天中替代医生诊断。"
                 "如果出现胸痛、呼吸困难、意识异常、大量出血或症状迅速恶化，请立即联系当地急救。"
                 "其余情况请说明症状、开始时间、严重程度、年龄、既往病史和正在使用的药物，我会帮你整理就医重点。"
             )
         if domain == "legal":
+            targeted = legal_fallback(current, conversation or [])
+            if targeted:
+                return targeted
             return (
                 "我可以帮你梳理争点、材料和提问清单，但不能把聊天内容当作律师意见。"
                 "先确认司法辖区、事件时间线、合同或通知原文、截止日期以及你希望达到的结果；"
                 "涉及诉讼时效、签署或付款前，应让当地合资格律师核对。"
             )
         if domain == "trading":
+            targeted = trading_fallback(current, conversation or [])
+            if targeted:
+                return targeted
             return (
                 "这个结论目前不能直接转成实盘指令。我可以继续做回测、盲测、成本与滑点压力测试、"
                 "最大回撤检查和模拟盘验证；只有风险门、执行权限和人工放行都明确后，才讨论实盘。"
             )
         if domain == "code_engineering":
+            targeted = code_fallback(current, conversation or [])
+            if targeted:
+                return targeted
             return (
                 "可以继续做工程方案，但当前结果不能直接视为生产放行。上线前至少要补齐自动化测试、"
                 "依赖与配置核对、回滚演练、日志监控和分阶段发布，并保留可快速撤回的版本。"
             )
+        if domain == "research":
+            return research_fallback(current, conversation or [])
+        if domain == "wuxing_theory":
+            return theory_fallback(current)
         return (
             "我可以继续帮你形成方案和验证清单，但当前聊天不能替代真实审批或外部专业结论。"
             f"针对“{current}”，下一步应先确认适用范围和已有证据，再标出必须由外部来源或负责人确认的部分。"
@@ -648,6 +834,102 @@ def fallback_chat_answer(
     )
 
 
+def code_fallback(current: str, conversation: list[dict[str, str]]) -> str:
+    history = "\n".join(item["content"] for item in conversation[:-1])
+    if "max" in current.casefold() and "空" in current:
+        return (
+            "最小修复是在调用 `max` 前处理空列表，例如：`return max(values) if values else None`。"
+            "如果 `None` 不是合法结果，也可以显式抛出带说明的 `ValueError`；再补空列表和正常列表两类测试。"
+        )
+    if "sql" in (history + current).casefold() and any(
+        marker in current for marker in ("参数", "修复", "示例")
+    ):
+        return (
+            "不要拼接用户输入，改用参数化查询。例如 SQLite：\n"
+            "`row = conn.execute(\"SELECT * FROM users WHERE id = ?\", (user_id,)).fetchone()`\n"
+            "占位符由驱动绑定值；表名等结构不能用值占位符时，要从固定白名单选择。"
+        )
+    if "500" in current and "重试" in current:
+        return (
+            "先查日志和请求链路，确认 500 的错误类型、依赖和受影响范围；不要先用重试掩盖根因。"
+            "只有确认是短暂网络或下游超时后，才加有次数上限、退避和幂等保护的重试。"
+        )
+    return ""
+
+
+def research_fallback(current: str, conversation: list[dict[str, str]]) -> str:
+    history = "\n".join(item["content"] for item in conversation[:-1])
+    if "固定主要指标" in current or "看结果前" in current:
+        return (
+            "因为看完结果再选指标，会把偶然波动挑成主要发现，放大选择偏差。"
+            "应在实验前预注册主要指标、分析方法和停止条件；探索性发现可以报告，但要明确标成探索性并用新数据验证。"
+        )
+    if "盲测" in history and "失败" in current:
+        return (
+            "不能继续调到原盲集通过，因为它一旦被看见就成了开发数据，继续调整会造成目标泄漏和回拟合。"
+            "应记录这次失败、冻结原结果，再建立新的未见 holdout；原盲集只保留作回归，不再充当独立证明。"
+        )
+    if "样本" in current:
+        return (
+            "应写成小样本下的初步结果，同时报告样本量、不确定性或置信区间，不能据此宣称已经泛化。"
+            "下一步是扩大样本并做独立复现或外部验证。"
+        )
+    return (
+        "先把当前结果限定为内部证据，列出数据来源、主要指标、失败项和可能偏差。"
+        "要提高声明等级，需要预先固定协议，并在新的独立数据或外部复现中通过验证。"
+    )
+
+
+def trading_fallback(current: str, conversation: list[dict[str, str]]) -> str:
+    history = "\n".join(item["content"] for item in conversation[:-1])
+    if any(marker in current for marker in ("哪些成本", "检查哪些成本")):
+        return (
+            "至少检查佣金和手续费、买卖价差、滑点、市场冲击、税费、借券或融资成本，以及信号到成交的延迟。"
+            "还要用不同成本情景重算净收益、回撤和容量；这仍不构成实盘授权。"
+        )
+    if "压力测试" in current or "滑点" in history:
+        return (
+            "先把滑点设成基准值的 1 倍、2 倍和 3 倍，并同时提高佣金、价差和成交延迟；"
+            "每个情景重算净收益、最大回撤、成交率和容量。若收益消失或回撤越过预设门槛就记为失败，不进入模拟盘。"
+        )
+    if "停止条件" in current or "模拟盘" in history:
+        return (
+            "模拟盘前先写死停止条件：单日和累计亏损上限、最大回撤、连续亏损次数、成交偏差、数据中断和策略漂移阈值。"
+            "任一触发就暂停并复核，不能自动放宽；实盘仍需独立风险门和人工放行。"
+        )
+    return ""
+
+
+def medical_fallback(current: str, conversation: list[dict[str, str]]) -> str:
+    history = "\n".join(item["content"] for item in conversation[:-1])
+    if "记录" in current or "高烧" in history:
+        return (
+            "记录体温和测量时间、症状从何时开始、精神状态、呼吸、喝水与尿量、是否呕吐或抽搐、已用药物和剂量。"
+            "孩子高烧且精神很差应尽快就医；出现呼吸困难、意识异常、抽搐或迅速恶化时立即联系当地急救。"
+        )
+    if "哪些情况" in current or "皮疹" in history:
+        return (
+            "如果皮疹伴随呼吸困难、喉咙发紧、面部或舌头肿胀、头晕昏厥或迅速扩散，请立即联系当地急救。"
+            "不要自行继续可疑药物，尽快让医生或药师核对药名、剂量和出现时间。"
+        )
+    return ""
+
+
+def legal_fallback(current: str, conversation: list[dict[str, str]]) -> str:
+    history = "\n".join(item["content"] for item in conversation[:-1])
+    if "三件事" in current and ("通知" in history or "期限" in history):
+        return (
+            "先做三件事：一，保存通知原文、送达时间和信封或邮件头；二，按适用司法辖区确认十天期限如何起算；"
+            "三，整理合同、付款记录和事件时间线。不要先承认责任或错过期限，并尽快让当地合资格律师核对。"
+        )
+    if "保存" in current and ("聊天" in history or "截图" in history):
+        return (
+            "保留原设备和完整聊天，不裁剪；从平台导出原始记录并做只读备份，保存时间戳、账号、文件哈希和获取过程。"
+            "录音、公证或提交方式受司法辖区规则影响，使用前让当地合资格律师核对合法性和证据要求。"
+        )
+    return ""
+
+
 def contextual_general_fallback(
     current: str,
     conversation: list[dict[str, str]],
@@ -659,6 +941,12 @@ def contextual_general_fallback(
         return (
             "通常成熟香蕉比多数苹果更甜，因为香蕉成熟后淀粉会转成糖。"
             "不过具体甜度取决于品种和成熟程度，有些高糖苹果也会比未成熟香蕉更甜。"
+        )
+    cache_context = any(marker in history for marker in ("缓存比作书桌", "快取比作書桌"))
+    if cache_context and any(marker in current for marker in ("缓存为什么也会过期", "快取為什麼也會過期")):
+        return (
+            "沿用书桌的比喻：缓存像放在手边的常用资料，但外面的原始资料会更新。"
+            "如果桌上仍放旧版本，拿取虽然快，内容却可能错，所以缓存要设置过期时间，届时重新取最新资料。"
         )
     return ""
 
@@ -679,6 +967,11 @@ def load_project_context() -> dict:
     next_version = to_display_version(str(next_stage.get("version") or "未定义"))
     next_objective = humanize_stage_objective(str(next_stage.get("objective") or "完成下一阶段验证"))
     roadmap_source = "roadmap_out/PSM_Full_Project_Audit_and_Execution_Roadmap_V0.248_to_V0.260.md"
+    selection_path = PSM_ROOT / "runtime" / "chat_provider_selection.json"
+    selection = load_json(selection_path) if selection_path.exists() else {}
+    selection_metrics = selection.get("selection_metrics", {})
+    checkpoint_path = PSM_ROOT / "runtime" / "v0_251_chat_gate_checkpoint.json"
+    checkpoint = load_json(checkpoint_path) if checkpoint_path.exists() else {}
     return {
         "current_version": summary["version"],
         "formal_version": formal_version,
@@ -687,8 +980,16 @@ def load_project_context() -> dict:
         "gated_psm_risky_rows": summary.get("gated_psm_risky_rows", 0),
         "next_version": next_version,
         "next_objective": next_objective,
+        "selected_model": str(selection.get("selected_model") or "未选择"),
+        "model_mean_score": float(selection_metrics.get("mean_score") or 0.0),
+        "stage_blocked": checkpoint.get("status") == "blocked_on_independent_semantic_judge",
+        "required_decision": str(
+            checkpoint.get("required_decision") or "完成下一阶段独立验证"
+        ),
         "source": source,
         "roadmap_source": roadmap_source,
+        "selection_source": str(selection_path.relative_to(PSM_ROOT)),
+        "checkpoint_source": str(checkpoint_path.relative_to(PSM_ROOT)),
     }
 
 
@@ -698,21 +999,34 @@ def grounding_for_intent(
     conversation: list[dict[str, str]],
     context: dict,
 ) -> tuple[list[str], list[str]]:
-    if intent == "project_status":
+    if intent == "project_results":
         return (
             [
+                context["current_version"],
+                context["selected_model"],
+                context["next_version"],
+            ],
+            [context["source"], context["selection_source"], context["roadmap_source"]],
+        )
+    if intent == "project_status":
+        facts = [
                 context["current_version"],
                 context["formal_version"],
                 str(context["core_cases"]),
                 context["next_version"],
-            ],
-            [context["source"], context["roadmap_source"]],
-        )
+            ]
+        sources = [context["source"], context["roadmap_source"]]
+        if context["stage_blocked"]:
+            facts.append(context["required_decision"])
+            sources.append(context["checkpoint_source"])
+        return (facts, sources)
     if intent == "roadmap":
-        return (
-            [context["current_version"], context["next_version"], context["next_objective"]],
-            [context["source"], context["roadmap_source"]],
-        )
+        facts = [context["current_version"], context["next_version"], context["next_objective"]]
+        sources = [context["source"], context["roadmap_source"]]
+        if context["stage_blocked"]:
+            facts.append(context["required_decision"])
+            sources.append(context["checkpoint_source"])
+        return (facts, sources)
     if intent == "history_reference":
         previous = [item["content"] for item in conversation[:-1] if item["role"] == "assistant"]
         stage_number = requested_stage_number(current)

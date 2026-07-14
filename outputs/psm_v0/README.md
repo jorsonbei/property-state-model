@@ -11,6 +11,9 @@ The current project status is `psm_v0.250`. The deterministic core source is `ps
 - V0.250 targeted optional cases: 18; ordinary unsafe/risky=6; raw/gated PSM unsafe/risky=0/0.
 - V0.250 release decision: `publish_psm_gated_optional_external_evidence_only`.
 - V0.250 deterministic regression: passed=True.
+- V0.251 engineering checkpoint: 80 authored questions, isolated judge-only labels, and two-phase NoTargetRead evaluation are implemented.
+- V0.251 is not promoted: three frozen blind waves failed; the latest reached correctness=0.8583 and critical false negatives=0, but usefulness=0.4500 and safety=0.9000 missed the gate.
+- Further promotion now requires an independent human or externally authorized model judge; same-developer blind-set cycling is stopped.
 
 ## Run
 
@@ -26,6 +29,7 @@ make serve
 - Internal local chat demo only.
 - Ordinary and raw PSM outputs are not release candidates.
 - External user trial remains closed.
+- Current promoted version remains V0.250 while the V0.251 independent-judge blocker is open.
 - Rule replacement remains disabled.
 
 ## Recovery

@@ -1,0 +1,24 @@
+{
+  "schema_version": "psm_blind_opening_failure_record_v1",
+  "version": "PSM_V0.251",
+  "blind_wave": "C",
+  "opened_at": "2026-07-14",
+  "decision": "failed_opened_not_eligible_for_promotion_and_never_returned_to_blind_status",
+  "prompt_sha256": "dd11dafc3bba9cb1196420caaad49aed2e08e6051d591193db16db8bcdaa9ddb",
+  "judge_sha256": "714efd7862f174a63ecc3dd8a08f0e75fcc0721d53fb93f30e621a1432b493c3",
+  "answer_artifact_sha256": "26bdf0d162e66a76e5306adc60d6262ddb2e04b822aa66b62a4f1e8c59cf3641",
+  "gate_report_sha256": "5bf710d38dc82ef7cc077dcd6ea314e8740822b54bb26150d14ad5eb35a7b331",
+  "metrics": {
+    "rows": 20,
+    "usefulness_pass_rate": 0.45,
+    "safety_pass_rate": 0.9,
+    "critical_safety_false_negatives": 0,
+    "correctness": 0.8583,
+    "relevance": 1.0,
+    "actionability": 0.8,
+    "boundary_quality": 0.7778,
+    "hallucination_control": 0.9
+  },
+  "post_opening_policy": "Blind C labels and answers were not used to edit its prompts, judges, thresholds, or gate result. It remains a failed historical blind opening.",
+  "blocker": "After three failed blind openings, the same developer must not author, tune, and adjudicate another promotion set. An independent human or externally authorized model judge is required."
+}

@@ -1,0 +1,49 @@
+{
+  "schema_version": "psm_v0_251_chat_gate_checkpoint_v1",
+  "current_promoted_version": "PSM_V0.250",
+  "target_version": "PSM_V0.251",
+  "target_promoted": false,
+  "status": "blocked_on_independent_semantic_judge",
+  "requires_user_input": true,
+  "dataset_contract": {
+    "authored_questions": 80,
+    "train_rows": 40,
+    "dev_rows": 20,
+    "blind_rows_per_wave": 20,
+    "source_family_split": true,
+    "two_phase_no_target_read": true,
+    "safety_and_usefulness_separate": true
+  },
+  "latest_dev": {
+    "usefulness_pass_rate": 0.9,
+    "safety_pass_rate": 1.0,
+    "critical_safety_false_negatives": 0,
+    "correctness": 0.95,
+    "relevance": 1.0,
+    "actionability": 1.0,
+    "boundary_quality": 1.0,
+    "multi_turn_consistency": 1.0,
+    "hallucination_control": 1.0
+  },
+  "blind_waves": [
+    {"wave":"A","passed":false,"usefulness_pass_rate":0.4,"safety_pass_rate":0.75,"critical_safety_false_negatives":0},
+    {"wave":"B","passed":false,"usefulness_pass_rate":0.35,"safety_pass_rate":0.9,"critical_safety_false_negatives":0},
+    {"wave":"C","passed":false,"usefulness_pass_rate":0.45,"safety_pass_rate":0.9,"critical_safety_false_negatives":0,"correctness":0.8583,"relevance":1.0,"hallucination_control":0.9}
+  ],
+  "completed_engineering": [
+    "80-question authored source-family dataset",
+    "judge-only labels isolated from generation",
+    "two-phase answer and score commands",
+    "trusted user-history domain continuity",
+    "natural professional-boundary auditing",
+    "structured project result and roadmap answers",
+    "domain-aware helpful fallbacks",
+    "reasoning and debug leakage sanitation"
+  ],
+  "release_boundary": {
+    "external_user_trial_allowed": false,
+    "internal_local_demo_only": true,
+    "v0_251_promotion_allowed": false
+  },
+  "required_decision": "授权独立人类盲评，或授权外部模型 judge/API；不得继续由同一开发者循环编写和裁判盲集。"
+}

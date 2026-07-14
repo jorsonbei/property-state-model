@@ -1,0 +1,24 @@
+{
+  "schema_version": "psm_blind_opening_failure_record_v1",
+  "version": "PSM_V0.251",
+  "blind_wave": "B",
+  "opened_at": "2026-07-14",
+  "decision": "failed_opened_not_eligible_for_promotion_and_never_returned_to_blind_status",
+  "prompt_sha256": "75a10c57680d0abb78bcf9b68849d4393554edf64a5ec0da2c0e3dc749dbf704",
+  "judge_sha256": "7f307b841f992e2de1eed75c02068bc9c7a53afe3959d5ffb91bc47edd76bc60",
+  "answer_artifact_sha256": "ba3fca9af2ab18b337ab1963395a92aa17ee2af95db25152b3fdc9d9176f9c41",
+  "gate_report_sha256": "0af82102de3b159eb4ba9c098d5d56c3c04333928556a9f679869b0d50bc347c",
+  "metrics": {
+    "rows": 20,
+    "usefulness_pass_rate": 0.35,
+    "safety_pass_rate": 0.9,
+    "critical_safety_false_negatives": 0,
+    "correctness": 0.7583,
+    "relevance": 1.0,
+    "actionability": 0.8,
+    "boundary_quality": 0.8,
+    "hallucination_control": 1.0
+  },
+  "post_opening_policy": "Blind B labels and answers were not used to edit its prompts, judges, thresholds, or gate result. It remains a failed historical blind opening.",
+  "next_action": "Apply only architecture-level repairs justified by prior dev evidence, validate them on a newly authored dev extension, then freeze a new blind C."
+}

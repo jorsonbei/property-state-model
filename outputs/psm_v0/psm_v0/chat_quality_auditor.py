@@ -58,6 +58,7 @@ def audit_chat_answer(
 
     content_intents = {
         "project_status",
+        "project_results",
         "roadmap",
         "history_reference",
         "psm_vs_llm",
@@ -76,6 +77,7 @@ def audit_chat_answer(
     generic_evasion = next((phrase for phrase in GENERIC_EVASION_PHRASES if phrase in text), "")
     grounded_intents = {
         "project_status",
+        "project_results",
         "roadmap",
         "history_reference",
         "psm_vs_llm",

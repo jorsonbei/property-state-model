@@ -8,6 +8,13 @@ from psm_v0.chat_quality_auditor import audit_chat_answer
 
 
 class ChatQualityTests(unittest.TestCase):
+    def test_low_risk_absolute_language_can_be_softened_without_breaking_negation(self) -> None:
+        answer = server.soften_absolute_language("这一定能保证成功，但不能保证外部结果。")
+
+        self.assertIn("通常", answer)
+        self.assertIn("尽量确保", answer)
+        self.assertIn("不能保证", answer)
+
     def run_offline(self, messages: list[dict], scenario: str = "review") -> dict:
         provider_failure = {
             "status": "error",
@@ -45,6 +52,32 @@ class ChatQualityTests(unittest.TestCase):
         self.assertIn(context["next_objective"], answer)
         self.assertEqual(result["chat"]["quality_audit"]["status"], "pass")
 
+    def test_project_results_come_from_provider_selection(self) -> None:
+        context = server.load_project_context()
+        result = self.run_offline(
+            [{"role": "user", "content": "用正常聊天方式告诉我：这轮已经完成了什么，有什么作用？"}]
+        )
+        answer = result["chat"]["assistant_message"]
+
+        self.assertEqual(result["chat"]["intent"], "project_results")
+        self.assertIn(context["current_version"], answer)
+        self.assertIn(context["selected_model"], answer)
+        self.assertIn(context["next_version"], answer)
+        self.assertEqual(result["chat"]["quality_audit"]["status"], "pass")
+
+    def test_project_followup_routes_to_frozen_roadmap(self) -> None:
+        result = self.run_offline(
+            [
+                {"role": "user", "content": "告诉我当前项目版本。"},
+                {"role": "assistant", "content": "当前项目是 PSM V0.250。"},
+                {"role": "user", "content": "那下一阶段要解决什么？"},
+            ]
+        )
+
+        self.assertEqual(result["chat"]["intent"], "roadmap")
+        self.assertIn("80", result["chat"]["assistant_message"])
+        self.assertIn("judge-only", result["chat"]["assistant_message"])
+
     def test_assistant_role_history_answers_second_stage(self) -> None:
         messages = [
             {"role": "user", "content": "分三阶段说明。"},
@@ -76,6 +109,21 @@ class ChatQualityTests(unittest.TestCase):
         self.assertNotIn("Q 核", result["chat"]["audit_text"])
         self.assertIn("成熟香蕉", result["chat"]["assistant_message"])
         self.assertEqual(result["chat"]["quality_audit"]["status"], "pass")
+
+    def test_previous_user_topic_carries_high_risk_domain_without_assistant_text(self) -> None:
+        result = self.run_offline(
+            [
+                {"role": "user", "content": "回测没有计入滑点。"},
+                {"role": "assistant", "content": "实际成交表现可能因此被高估。"},
+                {"role": "user", "content": "怎么做一个最基本的压力测试？"},
+            ]
+        )
+
+        self.assertEqual(result["packet"]["domain"], "trading")
+        self.assertEqual(result["chat"]["audit_text"], "怎么做一个最基本的压力测试？")
+        self.assertTrue(result["chat"]["state_continuity"]["user_history_used_for_state"])
+        self.assertIn("滑点", result["chat"]["assistant_message"])
+        self.assertNotIn("CPU", result["chat"]["assistant_message"])
 
     def test_content_question_does_not_receive_chat_mode_acknowledgement(self) -> None:
         result = self.run_offline(

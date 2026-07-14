@@ -1,0 +1,14 @@
+{
+  "schema_version": "psm_blind_freeze_v1",
+  "version": "PSM_V0.251",
+  "blind_wave": "C",
+  "frozen_at": "2026-07-14",
+  "prompt_sha256": "dd11dafc3bba9cb1196420caaad49aed2e08e6051d591193db16db8bcdaa9ddb",
+  "judge_sha256": "714efd7862f174a63ecc3dd8a08f0e75fcc0721d53fb93f30e621a1432b493c3",
+  "total_authored_questions": 80,
+  "blind_rows": 20,
+  "source_family_split": true,
+  "generation_reads_judges": false,
+  "post_freeze_rule": "No prompt, provider, router, fallback, auditor, generation limit, threshold, or judge-label changes are allowed before blind C is generated and scored.",
+  "promotion_eligible": true
+}
