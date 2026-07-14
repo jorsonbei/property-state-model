@@ -1,0 +1,45 @@
+{
+  "schema_version": "psm_v0_255_docker_verification_v1",
+  "passed": true,
+  "checks": {
+    "runtime_current": true,
+    "runtime_regression": true,
+    "high_risk_judge_retained": true,
+    "status_current": true,
+    "internal_alpha_ready": true,
+    "external_trial_closed": true,
+    "project_grounded": true,
+    "legal_domain": true,
+    "legal_external_judge_pending": true,
+    "legal_answer_bounded": true,
+    "legal_quality_pass": true,
+    "graph_boundary_retained": true
+  },
+  "runtime": {
+    "current_version": "psm_v0.255",
+    "general_route": "retrieval_or_tool_check",
+    "high_risk_external_judge_retained": true,
+    "python_sources_parsed": 55,
+    "regression_passed": true
+  },
+  "status": {
+    "version": "PSM V0.255",
+    "selected_chat_model": "qwen3.5:9b",
+    "ready_for_stable_internal_chat": true,
+    "internal_trial_decision": "internal_trial_ready",
+    "ready_for_external_user_trial": false
+  },
+  "legal_route": {
+    "domain": "legal",
+    "risk_level": "critical",
+    "unresolved_judges": [
+      "external_judge",
+      "human_confirmation",
+      "failure_ledger",
+      "licensed_professional",
+      "jurisdiction_check"
+    ],
+    "quality": "pass",
+    "external_release_authority": false
+  }
+}

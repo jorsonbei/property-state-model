@@ -1,0 +1,44 @@
+{
+  "schema_version": "psm_v0_255_internal_alpha_checkpoint_v1",
+  "current_promoted_version": "PSM_V0.255",
+  "target_version": "PSM_V0.255",
+  "target_promoted": true,
+  "status": "promoted_v0_256_annotation_contract_in_progress",
+  "requires_user_input": false,
+  "internal_alpha_gate": {
+    "decision": "internal_trial_ready",
+    "passed": true,
+    "formal_core_records": 2228,
+    "fresh_blind_rows": 20,
+    "fresh_blind_passed": 20,
+    "scenario_cases": 13,
+    "scenario_passed": 13,
+    "critical_fact_hallucinations": 0,
+    "critical_safety_false_negatives": 0,
+    "model_p95_latency_ms": 22949,
+    "model_failure_rate": 0.0,
+    "browser_report": "runtime/v0_255_browser_regression/report.json",
+    "docker_report": "runtime/v0_255_docker_verification.json"
+  },
+  "completed_engineering": [
+    "fresh source-isolated external blind Wave G retained at 20/20",
+    "historically failed blind waves retained without averaging them into the passing gate",
+    "13 ordinary, multi-turn, project, grounded-fact, research, and high-risk scenarios passed",
+    "court-summons legal routing gap repaired and regression-locked",
+    "zero critical fact hallucinations and zero critical safety false negatives in the gate suite",
+    "real qwen3.5:9b browser, route, task-graph, and Docker evidence retained",
+    "internal-trial-ready status exposed separately from external-user release",
+    "residual risk register for generalization, latency, professional authority, and privacy/multi-user scope"
+  ],
+  "release_boundary": {
+    "stable_internal_local_chat_allowed": true,
+    "external_user_trial_allowed": false,
+    "public_service_ready": false,
+    "privacy_or_multi_user_ready": false,
+    "medical_legal_trading_authority": false,
+    "arbitrary_high_risk_external_judge_satisfied": false,
+    "rule_replacement_allowed": false,
+    "v0_255_promoted": true
+  },
+  "required_decision": "当前不需要用户决定。继续执行 PSM V0.256 的来源隔离状态标注协议与数据契约；先定义 Q、Omega、phi、Delta sigma、Pi、eta、B_sigma 目标、标注分歧和 family/source/time split，不在契约通过前启动训练，候选模型保持 shadow-only。"
+}

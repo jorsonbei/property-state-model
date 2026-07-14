@@ -7,13 +7,15 @@ const { chromium } = require("playwright");
 const baseUrl = process.env.PSM_BASE_URL || "http://127.0.0.1:8767";
 const runRealBackend = process.env.PSM_BROWSER_REAL_CHAT === "1";
 const runRouteEvidence = process.env.PSM_BROWSER_ROUTE_EVIDENCE === "1";
+const expectInternalReady = process.env.PSM_BROWSER_EXPECT_INTERNAL_READY === "1";
+const expectedStatusVersion = process.env.PSM_BROWSER_STATUS_VERSION || "PSM V0.251";
 const reportSchema = process.env.PSM_BROWSER_SCHEMA || "psm_v0_252_browser_regression_v1";
 const outdir = path.resolve(
   process.env.PSM_BROWSER_OUTDIR || "outputs/psm_v0/product_alpha_out/browser_regression_latest"
 );
 
 const statusPayload = {
-  version: "PSM V0.251",
+  version: expectedStatusVersion,
   core_cases: 2228,
   chat_gated_risk: 0,
   gated_psm_risky_rows: 0,
@@ -22,6 +24,8 @@ const statusPayload = {
   full_fault_events: 7206,
   targeted_optional_cases: 18,
   ready_for_internal_chat_demo: true,
+  ready_for_stable_internal_chat: expectInternalReady,
+  internal_trial_decision: expectInternalReady ? "internal_trial_ready" : "not_evaluated",
   selected_chat_model: "qwen3.5:9b",
   chat_timeout_seconds: 60,
 };
@@ -218,6 +222,9 @@ async function realBackendSmoke(browser) {
 
   await page.goto(baseUrl, { waitUntil: "domcontentloaded" });
   assert.match(await page.locator("#connection").textContent(), /qwen3\.5:9b/);
+  if (expectInternalReady) {
+    assert.match(await page.locator("#connection").textContent(), /內部聊天 Alpha 總門已通過/);
+  }
   assert.equal(await page.locator("#debug-panel").getAttribute("open"), null);
   await page.locator("#prompt").fill("为什么热水壶烧水时会先出现小气泡？请用正常聊天方式回答。");
   await page.locator("#run").click();
@@ -247,6 +254,7 @@ async function realBackendSmoke(browser) {
     ran: true,
     answer_characters: answerText.length,
     selected_model_visible: true,
+    internal_alpha_ready_visible: expectInternalReady,
     internal_debug_leakage: false,
     console_errors: consoleErrors.length,
   };

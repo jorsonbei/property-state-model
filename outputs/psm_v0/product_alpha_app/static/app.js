@@ -85,7 +85,9 @@ async function loadStatus() {
     $("evidence-ollama").textContent = `${status.targeted_optional_cases} rows`;
     $("evidence-external").textContent = status.ready_for_external_user_trial ? "open" : "closed";
     const model = status.selected_chat_model ? ` · ${status.selected_chat_model}` : "";
-    $("connection").textContent = status.ready_for_internal_chat_demo
+    $("connection").textContent = status.ready_for_stable_internal_chat
+      ? `內部聊天 Alpha 總門已通過${model}`
+      : status.ready_for_internal_chat_demo
       ? `本地正常聊天模式已啟用${model}`
       : "本地聊天尚未通過內部門檻";
   } catch (error) {

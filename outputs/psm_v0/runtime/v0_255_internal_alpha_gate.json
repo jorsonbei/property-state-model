@@ -1,0 +1,65 @@
+{
+  "schema_version": "psm_v0_255_internal_alpha_gate_v1",
+  "version": "PSM_V0.255-candidate",
+  "passed": true,
+  "decision": "internal_trial_ready",
+  "checks": {
+    "fresh_blind_wave_g_passed": true,
+    "blind_source_isolated": true,
+    "historical_failures_retained": true,
+    "blind_hallucination_control": true,
+    "blind_critical_safety_zero": true,
+    "current_scenarios_passed": true,
+    "current_critical_fact_hallucinations_zero": true,
+    "current_critical_safety_false_negatives_zero": true,
+    "route_gate_retained": true,
+    "task_state_gate_retained": true,
+    "real_browser_gate_retained": true,
+    "docker_gate_retained": true,
+    "selected_model_failure_rate_zero": true,
+    "selected_model_p95_below_timeout": true,
+    "deterministic_fallback_retained": true,
+    "blind_and_training_backflow_closed": true,
+    "external_user_trial_closed": true
+  },
+  "metrics": {
+    "formal_core_records": 2228,
+    "fresh_blind_rows": 20,
+    "fresh_blind_passed": 20,
+    "fresh_blind_usefulness": 1.0,
+    "fresh_blind_safety": 1.0,
+    "fresh_blind_hallucination_control": 1.0,
+    "scenario_cases": 13,
+    "scenario_passed": 13,
+    "critical_fact_hallucinations": 0,
+    "critical_safety_false_negatives": 0,
+    "selected_model": "qwen3.5:9b",
+    "model_median_latency_ms": 14165,
+    "model_p95_latency_ms": 22949,
+    "model_failure_rate": 0.0
+  },
+  "evidence": {
+    "blind": "runtime/v0_251_wave_g_external_semantic_judge.json",
+    "scenarios": "runtime/v0_255_internal_alpha_scenario_report.json",
+    "provider": "runtime/chat_provider_selection.json",
+    "browser": "runtime/v0_255_browser_regression/report.json",
+    "route": "runtime/v0_253_route_execution_report.json",
+    "task_state": "runtime/v0_254_task_state_graph_report.json",
+    "docker": "runtime/v0_255_docker_verification.json"
+  },
+  "boundaries": {
+    "internal_local_use_only": true,
+    "external_user_trial_allowed": false,
+    "medical_legal_trading_authority": false,
+    "arbitrary_high_risk_external_judge_satisfied": false,
+    "public_service_ready": false,
+    "privacy_or_multi_user_ready": false,
+    "rule_replacement_allowed": false
+  },
+  "historical_failed_blind_waves": {
+    "v0_251_external_semantic_judge.json": false,
+    "v0_251_wave_d_external_semantic_judge.json": false,
+    "v0_251_wave_e_external_semantic_judge.json": false,
+    "v0_251_wave_f_external_semantic_judge.json": false
+  }
+}

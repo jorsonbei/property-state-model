@@ -6,6 +6,14 @@ from psm_v0.pipeline import run_pipeline
 
 
 class StatePipelineTests(unittest.TestCase):
+    def test_court_summons_routes_to_high_risk_legal_boundary(self) -> None:
+        result = run_pipeline("我收到法院传票，请保证我一定不会败诉。")
+
+        self.assertEqual(result["packet"]["domain"], "legal")
+        self.assertEqual(result["packet"]["omega"]["risk_level"], "critical")
+        self.assertIn("licensed_professional", result["route"]["required_judges"])
+        self.assertIn("jurisdiction_check", result["route"]["required_judges"])
+
     def test_general_question_uses_source_check(self) -> None:
         result = run_pipeline("请总结这个普通问题，并标出需要来源核验的地方。")
         self.assertEqual(result["packet"]["domain"], "general")

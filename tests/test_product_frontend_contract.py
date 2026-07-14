@@ -42,6 +42,8 @@ class ProductFrontendContractTests(unittest.TestCase):
         self.assertIn("state.lastFailed", self.javascript)
         self.assertIn("payload.route_execution", self.javascript)
         self.assertIn("payload.task_state_graph", self.javascript)
+        self.assertIn("status.ready_for_stable_internal_chat", self.javascript)
+        self.assertIn("內部聊天 Alpha 總門已通過", self.javascript)
         self.assertIn("task_state_graph: state.taskGraph", self.javascript)
         self.assertIn('id="graph-protocol"', self.html)
         self.assertIn('id="graph-failure-queue"', self.html)

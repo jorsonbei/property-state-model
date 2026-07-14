@@ -2,10 +2,10 @@
   "schema_version": "psm_public_runtime_snapshot_v1",
   "project_status": {
     "updated_from_local_artifacts": true,
-    "current_version": "psm_v0.254",
+    "current_version": "psm_v0.255",
     "source_evidence_version": "psm_v0.251",
-    "previous_formal_version": "psm_v0.253",
-    "completed_result": "dynamic_pi_eta_and_screened_failure_learning",
+    "previous_formal_version": "psm_v0.254",
+    "completed_result": "internal_chat_alpha_gate",
     "family": {
       "family_id": "v251_independent_chat_golden_blind_set_boundary_adversarial",
       "case_pack": "case_packs/v0_251_independent_chat_golden_blind_set_boundary_adversarial_cases.json",
@@ -244,8 +244,8 @@
       "rule_replacement_allowed": false
     },
     "next_stage": {
-      "version": "PSM_V0.255",
-      "objective": "Run the internal chat Alpha gate across the frozen blind-chat evidence, multi-turn task-state continuity, project grounding, ordinary chat, high-risk helpful boundaries, browser/API regression, and zero critical fact-hallucination or safety false-negative thresholds while external-user trial remains closed.",
+      "version": "PSM_V0.256",
+      "objective": "Define a source-isolated annotation protocol and dataset contract for Q, Omega, phi, Delta sigma, Pi, eta, and B_sigma targets; record annotator disagreement; enforce family, source, and time holdouts; and keep every trainable state-encoder candidate shadow-only until independent admission passes.",
       "blocked": false,
       "requires_user_input": false
     },
@@ -259,7 +259,7 @@
       "candidate_taxonomy": "taxonomy_out/psm_v0.251_candidate_taxonomy.json",
       "candidate_regression_fixtures": "fixture_out/psm_v0.251_candidate_regression_fixtures.json",
       "taxonomy_delta": "taxonomy_delta_out/psm_v0.251_taxonomy_delta.json",
-      "project_status": "project_status_out/psm_v0.254_project_status.json",
+      "project_status": "project_status_out/psm_v0.255_project_status.json",
       "regression": "regression_out/psm_v0.251_regression_check.json",
       "independent_chat_gate": "runtime/v0_251_wave_g_external_semantic_judge.json",
       "model_selection": "runtime/v0_251_base_upgrade_pairwise_gemini_pro_report.json",
@@ -273,7 +273,13 @@
       "failure_learning_queue": "runtime/v0_254_failure_learning_queue.json",
       "task_state_browser_gate": "runtime/v0_254_browser_regression/report.json",
       "task_state_docker_gate": "runtime/v0_254_docker_verification.json",
-      "task_state_checkpoint": "runtime/v0_254_state_checkpoint.json"
+      "task_state_checkpoint": "runtime/v0_254_state_checkpoint.json",
+      "internal_alpha_gate": "runtime/v0_255_internal_alpha_gate.json",
+      "internal_alpha_scenarios": "runtime/v0_255_internal_alpha_scenario_report.json",
+      "residual_risk_register": "runtime/v0_255_residual_risk_register.json",
+      "internal_alpha_browser": "runtime/v0_255_browser_regression/report.json",
+      "internal_alpha_docker": "runtime/v0_255_docker_verification.json",
+      "internal_alpha_checkpoint": "runtime/v0_255_internal_alpha_checkpoint.json"
     },
     "regression": {
       "stem": "psm_v0.251",
@@ -387,6 +393,21 @@
       "independently_screened_failure_candidates": 1,
       "blind_set_backflow": 0,
       "training_truth_backflow": 0
+    },
+    "internal_alpha_gate": {
+      "decision": "internal_trial_ready",
+      "passed": true,
+      "formal_core_records": 2228,
+      "fresh_blind_rows": 20,
+      "fresh_blind_passed": 20,
+      "scenario_cases": 13,
+      "scenario_passed": 13,
+      "critical_fact_hallucinations": 0,
+      "critical_safety_false_negatives": 0,
+      "model_p95_latency_ms": 22949,
+      "model_failure_rate": 0.0,
+      "browser_report": "runtime/v0_255_browser_regression/report.json",
+      "docker_report": "runtime/v0_255_docker_verification.json"
     }
   },
   "optional_project_status": {

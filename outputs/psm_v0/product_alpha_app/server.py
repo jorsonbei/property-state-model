@@ -46,7 +46,7 @@ CHAT_MAX_TOKENS_OVERRIDE = os.environ.get("PSM_CHAT_MAX_TOKENS", "").strip()
 ROUTE_FAILURE_LEDGER = Path(
     os.environ.get(
         "PSM_ROUTE_FAILURE_LEDGER",
-        str(PSM_ROOT / "product_alpha_out" / "v0_254_route_failure_ledger.jsonl"),
+        str(PSM_ROOT / "product_alpha_out" / "v0_255_route_failure_ledger.jsonl"),
     )
 )
 
@@ -63,7 +63,7 @@ def main() -> None:
 
 
 class Handler(BaseHTTPRequestHandler):
-    server_version = "PSMProductAlpha/0.254"
+    server_version = "PSMProductAlpha/0.255"
 
     def do_GET(self) -> None:  # noqa: N802
         parsed = urlparse(self.path)
@@ -837,6 +837,13 @@ def roadmap_answer(context: dict) -> str:
             "随后核对关键事实幻觉和 critical safety false negative 必须为零，并复验桌面、手机和 Docker；"
             "全部通过后只能给出内部使用结论，外部用户试用仍不自动开放。"
         )
+    elif context["next_version"] == "PSM V0.256":
+        construction = (
+            "施工顺序是：先冻结与规则模板来源隔离的状态标注协议，定义 Q、Omega、phi、Delta sigma、Pi、eta 和"
+            "B_sigma 的字段、证据要求与标注者分歧；再建立 family、source、time 三重切分和污染检查；"
+            "随后形成规则基线、普通 LLM 基线与可训练编码器的同题比较契约。契约通过前不启动训练，"
+            "任何候选都只能在 shadow 中观察，不能替换现有规则。"
+        )
     elif context["next_version"] == "PSM V0.250":
         construction = (
             "施工顺序是：先冻结同题模型基准集，再对本地候选模型测量回答质量、边界、延迟和失败率；"
@@ -863,6 +870,16 @@ def roadmap_answer(context: dict) -> str:
 
 
 def project_results_answer(context: dict) -> str:
+    if context["current_version"] == "PSM V0.255":
+        return (
+            "这轮已完成 PSM V0.255 内部聊天 Alpha 总门：独立冻结盲测最终波次 20/20 通过，当前 13/13 个普通聊天、"
+            "多轮、项目接地、事实接地、研究和高风险场景通过；关键事实幻觉与严重安全漏检都是 0。法律传票漏路由"
+            "也已修复。真实 Qwen 浏览器、任务图、路由和 Docker 证据保持通过。\n\n"
+            "它的作用是把“可以体验”升级为“允许稳定本机内部试用”，同时明确没有开放外部用户、公开服务、"
+            "多人隐私或医疗、法律、交易授权。"
+            f"当前聊天模型是 `{context['selected_model']}`。下一步是 {context['next_version']}："
+            f"{context['next_objective']}。"
+        )
     if context["current_version"] == "PSM V0.254":
         return (
             "这轮已完成 PSM V0.254：每轮聊天现在都会把消息、文件、来源、工具、主张、未知项、失败和裁判组织成"
@@ -1233,6 +1250,12 @@ def medical_fallback(current: str, conversation: list[dict[str, str]]) -> str:
 
 def legal_fallback(current: str, conversation: list[dict[str, str]]) -> str:
     history = "\n".join(item["content"] for item in conversation[:-1])
+    if any(marker in current for marker in ("传票", "傳票", "法院", "法庭")):
+        return (
+            "我不能保证诉讼结果。先核对法院、案号、送达时间、开庭或答辩期限，保存传票、起诉状和信封或邮件头；"
+            "再按争议事实整理合同、付款、沟通和时间线，不要忽略送达文件或错过期限。"
+            "尽快让当地合资格律师结合司法辖区和原始材料确认答辩、出庭及证据要求。"
+        )
     if "三件事" in current and ("通知" in history or "期限" in history):
         return (
             "先做三件事：一，保存通知原文、送达时间和信封或邮件头；二，按适用司法辖区确认十天期限如何起算；"
@@ -1287,6 +1310,7 @@ def load_project_context() -> dict:
     selection = load_json(selection_path) if selection_path.exists() else {}
     selection_metrics = selection.get("selection_metrics", {})
     checkpoint_candidates = (
+        PSM_ROOT / "runtime" / "v0_255_internal_alpha_checkpoint.json",
         PSM_ROOT / "runtime" / "v0_254_state_checkpoint.json",
         PSM_ROOT / "runtime" / "v0_253_route_checkpoint.json",
         PSM_ROOT / "runtime" / "v0_252_product_checkpoint.json",
@@ -1426,6 +1450,11 @@ def humanize_stage_objective(objective: str) -> str:
             "执行内部聊天 Alpha 总门：重放冻结盲测，复核多轮任务状态、项目接地、普通聊天和高风险帮助式边界，"
             "要求关键事实幻觉与严重安全漏检为零，并完成浏览器、API 和 Docker 回归"
         )
+    if "source-isolated annotation protocol" in objective.casefold():
+        return (
+            "建立来源隔离的物性状态标注与数据契约，定义 Q、Omega、phi、Delta sigma、Pi、eta、B_sigma 目标和"
+            "标注分歧，执行 family/source/time 切分；训练候选保持 shadow-only，不能替换现有规则"
+        )
     return objective
 
 
@@ -1463,6 +1492,7 @@ def load_status_summary() -> dict:
         readiness_path = PSM_ROOT / "product_alpha_out" / "psm_v0.230_product_alpha_readiness.json"
     readiness = load_json(readiness_path) if readiness_path.exists() else runtime.get("chat_readiness", {})
     candidate_gate = status.get("candidate_gate") or formal_status.get("candidate_gate", {})
+    internal_alpha_gate = status.get("internal_alpha_gate") or {}
     target = optional_status.get("targeted_optional_external", {})
     full = optional_status.get("full_required_fault_external", candidate_gate)
     current_version = status["current_version"].replace("psm_v", "PSM V")
@@ -1483,6 +1513,8 @@ def load_status_summary() -> dict:
         "chat_gated_risk": candidate_gate.get("required_gated_psm_unsafe_or_risky"),
         "ready_for_internal_local_demo": readiness.get("ready_for_internal_local_demo", readiness.get("ready_for_internal_chat_demo")),
         "ready_for_internal_chat_demo": readiness.get("ready_for_internal_chat_demo", readiness.get("ready_for_internal_local_demo")),
+        "ready_for_stable_internal_chat": internal_alpha_gate.get("decision") == "internal_trial_ready",
+        "internal_trial_decision": internal_alpha_gate.get("decision") or "not_evaluated",
         "ready_for_external_user_trial": readiness.get("ready_for_external_user_trial", False),
     }
 

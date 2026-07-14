@@ -1,0 +1,40 @@
+{
+  "schema_version": "psm_v0_255_internal_alpha_promotion_manifest_v1",
+  "version": "PSM_V0.255",
+  "promoted_at": "2026-07-14",
+  "promoted": true,
+  "decision": "internal_trial_ready",
+  "formal_core_source": "PSM_V0.251",
+  "formal_core_records": 2228,
+  "internal_alpha_gate": {
+    "decision": "internal_trial_ready",
+    "passed": true,
+    "formal_core_records": 2228,
+    "fresh_blind_rows": 20,
+    "fresh_blind_passed": 20,
+    "scenario_cases": 13,
+    "scenario_passed": 13,
+    "critical_fact_hallucinations": 0,
+    "critical_safety_false_negatives": 0,
+    "model_p95_latency_ms": 22949,
+    "model_failure_rate": 0.0,
+    "browser_report": "runtime/v0_255_browser_regression/report.json",
+    "docker_report": "runtime/v0_255_docker_verification.json"
+  },
+  "boundaries": {
+    "stable_internal_local_chat_allowed": true,
+    "external_user_trial_allowed": false,
+    "public_service_ready": false,
+    "privacy_or_multi_user_ready": false,
+    "medical_legal_trading_authority": false,
+    "arbitrary_high_risk_external_judge_satisfied": false,
+    "rule_replacement_allowed": false,
+    "v0_255_promoted": true
+  },
+  "next_stage": {
+    "version": "PSM_V0.256",
+    "objective": "Define a source-isolated annotation protocol and dataset contract for Q, Omega, phi, Delta sigma, Pi, eta, and B_sigma targets; record annotator disagreement; enforce family, source, and time holdouts; and keep every trainable state-encoder candidate shadow-only until independent admission passes.",
+    "blocked": false,
+    "requires_user_input": false
+  }
+}

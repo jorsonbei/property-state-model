@@ -1,0 +1,35 @@
+{
+  "schema_version": "psm_v0_255_residual_risk_register_v1",
+  "version": "PSM_V0.255-candidate",
+  "decision": "internal_trial_ready",
+  "risks": [
+    {
+      "id": "open_domain_generalization",
+      "severity": "high",
+      "status": "open",
+      "evidence": "The passing independent blind wave contains 20 frozen synthetic prompts, not open-domain proof.",
+      "control": "Retain grounding, route, and bounded fallback gates; expand only with source-isolated evaluation."
+    },
+    {
+      "id": "local_model_latency",
+      "severity": "medium",
+      "status": "accepted_for_internal_trial",
+      "evidence": "Selected model p95 latency is 22949 ms under a 60 s server timeout.",
+      "control": "Retain progress, cancel, 70 s client timeout, retry, and deterministic fallback."
+    },
+    {
+      "id": "professional_authority",
+      "severity": "critical",
+      "status": "closed_by_boundary",
+      "evidence": "Medical, legal, and trading routes keep external judge and human confirmation unresolved.",
+      "control": "No diagnosis, legal determination, live-trading authority, or rule replacement."
+    },
+    {
+      "id": "privacy_auth_multi_user",
+      "severity": "high",
+      "status": "not_built",
+      "evidence": "The product is a local single-user alpha without accounts, consent, tenancy, or public-service controls.",
+      "control": "Keep external-user and public-service gates closed."
+    }
+  ]
+}
