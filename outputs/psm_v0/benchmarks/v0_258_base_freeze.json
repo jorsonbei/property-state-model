@@ -1,0 +1,18 @@
+{
+  "schema_version": "psm_v0_258_base_freeze_v1",
+  "version": "PSM_V0.258-candidate",
+  "base_version": "PSM_V0.257",
+  "model_path": "runtime/v0_257_shadow_encoder_model.json",
+  "model_sha256": "04a341de13979338d881a35665a38e732de36f962afa731bc9099dcae7fcaaf8",
+  "dataset_path": "runtime/v0_257_shadow_encoder_dataset.jsonl",
+  "dataset_sha256": "a1ff515e8f504d5bc5fdb51c7d537191e8c88fd1918253a6ad0dd594e01b835a",
+  "training_rows": 14,
+  "boundary": {
+    "base_weights_mutable": false,
+    "base_training_data_mutable": false,
+    "calibration_may_update_base": false,
+    "evaluation_may_update_base": false,
+    "unresolved_may_update_base": false,
+    "blind_or_judge_feedback_may_update_base": false
+  }
+}

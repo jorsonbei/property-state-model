@@ -1,0 +1,53 @@
+{
+  "schema_version": "psm_v0_258_calibrated_shadow_promotion_manifest_v1",
+  "version": "PSM_V0.258",
+  "promoted_at": "2026-07-14",
+  "promoted": true,
+  "decision": "calibrated_shadow_ready",
+  "formal_core_source": "PSM_V0.251",
+  "formal_core_records": 2228,
+  "calibrated_shadow_gate": {
+    "decision": "calibrated_shadow_ready",
+    "passed": true,
+    "base_training_rows": 14,
+    "calibration_rows": 14,
+    "evaluation_rows": 14,
+    "unresolved_rows": 7,
+    "targets": 7,
+    "average_evaluation_coverage": 0.95918367,
+    "minimum_evaluation_selective_accuracy": 0.92857143,
+    "accepted_critical_false_negatives": 0,
+    "evaluation_low_confidence_abstentions": 4,
+    "unresolved_model_low_confidence_abstentions": 0,
+    "unresolved_consensus_forced_abstentions": 7,
+    "source_family_overlap": 0,
+    "source_overlap": 0,
+    "content_overlap": 0,
+    "near_duplicate_overlap": 0,
+    "protected_feedback_to_base_training": 0,
+    "initial_rejection_retained": true,
+    "base_candidate_type": "trainable_multinomial_naive_bayes",
+    "calibration_type": "per_head_temperature_scaling_with_confidence_floor",
+    "candidate_shadow_only": true,
+    "deterministic_rule_controller_retained": true,
+    "rule_replacement_allowed": false,
+    "browser_report": "runtime/v0_258_browser_regression/report.json",
+    "docker_report": "runtime/v0_258_docker_verification.json"
+  },
+  "boundaries": {
+    "stable_internal_local_chat_allowed": true,
+    "external_user_trial_allowed": false,
+    "candidate_shadow_only": true,
+    "deterministic_rule_controller_retained": true,
+    "calibration_evaluation_unresolved_blind_judge_feedback_to_base_training": false,
+    "rule_replacement_allowed": false,
+    "external_release_authority": false,
+    "v0_258_promoted": true
+  },
+  "next_stage": {
+    "version": "PSM_V0.259",
+    "objective": "Build a Sigma+ traceable delivery contract that joins natural answers, property state, provenance, tool results, failures, and statement levels; require every strong claim to have evidence provenance or an explicit downgrade; route calibrated low-confidence and unresolved targets back to deterministic rules; and keep internal state details out of ordinary chat.",
+    "blocked": false,
+    "requires_user_input": false
+  }
+}

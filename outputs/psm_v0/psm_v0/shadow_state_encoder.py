@@ -175,6 +175,7 @@ def predict_naive_bayes(model: dict, record: dict) -> dict:
     vocabulary_size = max(1, len(model["vocabulary"]))
     predictions: dict[str, str] = {}
     confidence: dict[str, float] = {}
+    probabilities: dict[str, dict[str, float]] = {}
     for target in TARGET_HEADS:
         target_model = model["targets"][target]
         classes = target_model["classes"]
@@ -199,7 +200,11 @@ def predict_naive_bayes(model: dict, record: dict) -> dict:
         total = sum(exp_scores.values())
         predictions[target] = selected
         confidence[target] = round(exp_scores[selected] / total if total else 0.0, 6)
-    return {"labels": predictions, "confidence": confidence}
+        probabilities[target] = {
+            label: round(value / total if total else 0.0, 8)
+            for label, value in sorted(exp_scores.items())
+        }
+    return {"labels": predictions, "confidence": confidence, "probabilities": probabilities}
 
 
 def transparent_rule_prediction(record: dict) -> dict:

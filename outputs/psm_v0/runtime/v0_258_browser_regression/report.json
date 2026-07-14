@@ -1,0 +1,53 @@
+{
+  "schema_version": "psm_v0_258_browser_regression_v1",
+  "base_url": "http://127.0.0.1:8765",
+  "passed": true,
+  "desktop": {
+    "requests": 4,
+    "retry_duplicate_count": 0,
+    "overflow": {
+      "document": 0,
+      "body": 0
+    },
+    "console_errors": 0
+  },
+  "mobile": {
+    "requests": 1,
+    "layout": {
+      "scrollWidth": 390,
+      "innerWidth": 390,
+      "runInside": true,
+      "resetInside": true
+    },
+    "console_errors": 0
+  },
+  "real_backend": {
+    "ran": true,
+    "answer_characters": 174,
+    "selected_model_visible": true,
+    "internal_alpha_ready_visible": true,
+    "internal_debug_leakage": false,
+    "console_errors": 0
+  },
+  "route_evidence": {
+    "ran": true,
+    "status_visible_in_debug": true,
+    "source_count_visible_in_debug": true,
+    "failure_count_visible_in_debug": true,
+    "task_graph_visible_in_debug": true,
+    "task_graph_delta_visible_after_new_evidence": true,
+    "internal_route_fields_hidden_from_answer": true,
+    "console_errors": 0
+  },
+  "checks": {
+    "generating_state": true,
+    "cancel_and_input_preservation": true,
+    "retry_without_duplicate_user_message": true,
+    "progressive_answer_display": true,
+    "debug_isolated_from_main_chat": true,
+    "keyboard_enter_submit": true,
+    "desktop_overflow": false,
+    "mobile_overflow": false,
+    "console_errors": 0
+  }
+}

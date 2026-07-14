@@ -107,10 +107,10 @@ class ChatQualityTests(unittest.TestCase):
         self.assertIn(context["current_version"], result["chat"]["assistant_message"])
         self.assertIn(context["next_version"], result["chat"]["assistant_message"])
         self.assertIn(context["next_objective"], result["chat"]["assistant_message"])
-        self.assertIn("来源隔离", result["chat"]["assistant_message"])
-        self.assertIn("family、source、time", result["chat"]["assistant_message"])
+        self.assertIn("追溯", result["chat"]["assistant_message"])
+        self.assertIn("provenance", result["chat"]["assistant_message"])
         self.assertIn("shadow", result["chat"]["assistant_message"])
-        self.assertIn("不能替换现有规则", result["chat"]["assistant_message"])
+        self.assertIn("无放行权", result["chat"]["assistant_message"])
 
     def test_working_chat_does_not_imply_external_release(self) -> None:
         context = server.load_project_context()

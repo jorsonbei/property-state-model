@@ -1,0 +1,378 @@
+{
+  "schema_version": "psm_v0_258_confidence_calibration_v1",
+  "version": "PSM_V0.258-candidate",
+  "base_model_sha256": "04a341de13979338d881a35665a38e732de36f962afa731bc9099dcae7fcaaf8",
+  "base_dataset_sha256": "a1ff515e8f504d5bc5fdb51c7d537191e8c88fd1918253a6ad0dd594e01b835a",
+  "base_freeze_contract": "benchmarks/v0_258_base_freeze.json",
+  "base_model_training_rows": 14,
+  "fit_scope": "calibration_source_family_only",
+  "temperatures": {
+    "q_core": 0.5,
+    "omega": 0.5,
+    "phi": 0.5,
+    "delta_sigma": 0.75,
+    "pi": 0.5,
+    "eta": 0.75,
+    "b_sigma": 0.5
+  },
+  "thresholds": {
+    "q_core": 0.80243415,
+    "omega": 0.72406634,
+    "phi": 0.92613494,
+    "delta_sigma": 0.65267203,
+    "pi": 0.80243415,
+    "eta": 0.65267203,
+    "b_sigma": 0.72406634
+  },
+  "heads": {
+    "q_core": {
+      "temperature": 0.5,
+      "nll_before": 0.03247579,
+      "nll_after": 0.01572752,
+      "samples": 14,
+      "grid": [
+        {
+          "temperature": 0.5,
+          "nll": 0.01572752
+        },
+        {
+          "temperature": 0.75,
+          "nll": 0.0248884
+        },
+        {
+          "temperature": 1.0,
+          "nll": 0.03247579
+        },
+        {
+          "temperature": 1.25,
+          "nll": 0.03974573
+        },
+        {
+          "temperature": 1.5,
+          "nll": 0.04744567
+        },
+        {
+          "temperature": 2.0,
+          "nll": 0.06567591
+        },
+        {
+          "temperature": 3.0,
+          "nll": 0.11576268
+        },
+        {
+          "temperature": 4.0,
+          "nll": 0.1784466
+        }
+      ],
+      "ece_before": 0.02642911,
+      "ece_after": 0.01411754,
+      "threshold": {
+        "threshold": 0.80243415,
+        "accuracy": 1.0,
+        "coverage": 1.0,
+        "accepted": 14,
+        "critical_false_negatives": 0
+      }
+    },
+    "omega": {
+      "temperature": 0.5,
+      "nll_before": 0.06759363,
+      "nll_after": 0.0326388,
+      "samples": 14,
+      "grid": [
+        {
+          "temperature": 0.5,
+          "nll": 0.0326388
+        },
+        {
+          "temperature": 0.75,
+          "nll": 0.05081696
+        },
+        {
+          "temperature": 1.0,
+          "nll": 0.06759363
+        },
+        {
+          "temperature": 1.25,
+          "nll": 0.08473374
+        },
+        {
+          "temperature": 1.5,
+          "nll": 0.1030196
+        },
+        {
+          "temperature": 2.0,
+          "nll": 0.14392405
+        },
+        {
+          "temperature": 3.0,
+          "nll": 0.23923863
+        },
+        {
+          "temperature": 4.0,
+          "nll": 0.33954446
+        }
+      ],
+      "ece_before": 0.05495622,
+      "ece_after": 0.02868569,
+      "threshold": {
+        "threshold": 0.72406634,
+        "accuracy": 1.0,
+        "coverage": 1.0,
+        "accepted": 14,
+        "critical_false_negatives": 0
+      }
+    },
+    "phi": {
+      "temperature": 0.5,
+      "nll_before": 0.01899384,
+      "nll_after": 0.00548596,
+      "samples": 14,
+      "grid": [
+        {
+          "temperature": 0.5,
+          "nll": 0.00548596
+        },
+        {
+          "temperature": 0.75,
+          "nll": 0.01232922
+        },
+        {
+          "temperature": 1.0,
+          "nll": 0.01899384
+        },
+        {
+          "temperature": 1.25,
+          "nll": 0.02605955
+        },
+        {
+          "temperature": 1.5,
+          "nll": 0.03418125
+        },
+        {
+          "temperature": 2.0,
+          "nll": 0.0542833
+        },
+        {
+          "temperature": 3.0,
+          "nll": 0.10501951
+        },
+        {
+          "temperature": 4.0,
+          "nll": 0.15886697
+        }
+      ],
+      "ece_before": 0.01695405,
+      "ece_after": 0.00528094,
+      "threshold": {
+        "threshold": 0.92613494,
+        "accuracy": 1.0,
+        "coverage": 1.0,
+        "accepted": 14,
+        "critical_false_negatives": 0
+      }
+    },
+    "delta_sigma": {
+      "temperature": 0.75,
+      "nll_before": 0.12540161,
+      "nll_after": 0.12031859,
+      "samples": 14,
+      "grid": [
+        {
+          "temperature": 0.5,
+          "nll": 0.12572494
+        },
+        {
+          "temperature": 0.75,
+          "nll": 0.12031859
+        },
+        {
+          "temperature": 1.0,
+          "nll": 0.12540161
+        },
+        {
+          "temperature": 1.25,
+          "nll": 0.13550904
+        },
+        {
+          "temperature": 1.5,
+          "nll": 0.14916706
+        },
+        {
+          "temperature": 2.0,
+          "nll": 0.18399539
+        },
+        {
+          "temperature": 3.0,
+          "nll": 0.26696944
+        },
+        {
+          "temperature": 4.0,
+          "nll": 0.34929132
+        }
+      ],
+      "ece_before": 0.03331651,
+      "ece_after": 0.03196757,
+      "threshold": {
+        "threshold": 0.65267203,
+        "accuracy": 0.92857143,
+        "coverage": 1.0,
+        "accepted": 14,
+        "critical_false_negatives": 0
+      }
+    },
+    "pi": {
+      "temperature": 0.5,
+      "nll_before": 0.03247579,
+      "nll_after": 0.01572752,
+      "samples": 14,
+      "grid": [
+        {
+          "temperature": 0.5,
+          "nll": 0.01572752
+        },
+        {
+          "temperature": 0.75,
+          "nll": 0.0248884
+        },
+        {
+          "temperature": 1.0,
+          "nll": 0.03247579
+        },
+        {
+          "temperature": 1.25,
+          "nll": 0.03974573
+        },
+        {
+          "temperature": 1.5,
+          "nll": 0.04744567
+        },
+        {
+          "temperature": 2.0,
+          "nll": 0.06567591
+        },
+        {
+          "temperature": 3.0,
+          "nll": 0.11576268
+        },
+        {
+          "temperature": 4.0,
+          "nll": 0.1784466
+        }
+      ],
+      "ece_before": 0.02642911,
+      "ece_after": 0.01411754,
+      "threshold": {
+        "threshold": 0.80243415,
+        "accuracy": 1.0,
+        "coverage": 1.0,
+        "accepted": 14,
+        "critical_false_negatives": 0
+      }
+    },
+    "eta": {
+      "temperature": 0.75,
+      "nll_before": 0.12540161,
+      "nll_after": 0.12031859,
+      "samples": 14,
+      "grid": [
+        {
+          "temperature": 0.5,
+          "nll": 0.12572494
+        },
+        {
+          "temperature": 0.75,
+          "nll": 0.12031859
+        },
+        {
+          "temperature": 1.0,
+          "nll": 0.12540161
+        },
+        {
+          "temperature": 1.25,
+          "nll": 0.13550904
+        },
+        {
+          "temperature": 1.5,
+          "nll": 0.14916706
+        },
+        {
+          "temperature": 2.0,
+          "nll": 0.18399539
+        },
+        {
+          "temperature": 3.0,
+          "nll": 0.26696944
+        },
+        {
+          "temperature": 4.0,
+          "nll": 0.34929132
+        }
+      ],
+      "ece_before": 0.03331651,
+      "ece_after": 0.03196757,
+      "threshold": {
+        "threshold": 0.65267203,
+        "accuracy": 0.92857143,
+        "coverage": 1.0,
+        "accepted": 14,
+        "critical_false_negatives": 0
+      }
+    },
+    "b_sigma": {
+      "temperature": 0.5,
+      "nll_before": 0.06759363,
+      "nll_after": 0.0326388,
+      "samples": 14,
+      "grid": [
+        {
+          "temperature": 0.5,
+          "nll": 0.0326388
+        },
+        {
+          "temperature": 0.75,
+          "nll": 0.05081696
+        },
+        {
+          "temperature": 1.0,
+          "nll": 0.06759363
+        },
+        {
+          "temperature": 1.25,
+          "nll": 0.08473374
+        },
+        {
+          "temperature": 1.5,
+          "nll": 0.1030196
+        },
+        {
+          "temperature": 2.0,
+          "nll": 0.14392405
+        },
+        {
+          "temperature": 3.0,
+          "nll": 0.23923863
+        },
+        {
+          "temperature": 4.0,
+          "nll": 0.33954446
+        }
+      ],
+      "ece_before": 0.05495622,
+      "ece_after": 0.02868569,
+      "threshold": {
+        "threshold": 0.72406634,
+        "accuracy": 1.0,
+        "coverage": 1.0,
+        "accepted": 14,
+        "critical_false_negatives": 0
+      }
+    }
+  },
+  "boundary": {
+    "base_weights_changed": false,
+    "evaluation_feedback_used": false,
+    "unresolved_feedback_used": false,
+    "blind_or_judge_feedback_used": false
+  }
+}

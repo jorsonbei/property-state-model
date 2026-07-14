@@ -1,10 +1,10 @@
 {
   "plan_version": "psm_execution_plan_v0.248_to_v0.260",
   "created_at": "2026-07-14",
-  "current_project_version": "psm_v0.257",
+  "current_project_version": "psm_v0.258",
   "current_formal_version": "psm_v0.251",
   "authority": {
-    "machine_truth": "project_status_out/psm_v0.257_project_status.json",
+    "machine_truth": "project_status_out/psm_v0.258_project_status.json",
     "human_audit": "roadmap_out/PSM_Full_Project_Audit_and_Execution_Roadmap_V0.248_to_V0.260.md"
   },
   "current_boundary": {
@@ -16,26 +16,27 @@
     "internal_chat_alpha_gate_passed": true,
     "source_isolated_annotation_contract_passed": true,
     "trainable_shadow_encoder_baseline_passed": true,
+    "calibrated_shadow_abstention_gate_passed": true,
     "stable_internal_local_chat": true,
     "external_user_trial": false,
     "native_property_state_foundation_model": false
   },
   "next_executable_stage": {
-    "version": "PSM_V0.258",
-    "objective": "Expand to new source families and add confidence calibration, abstention, and unresolved-disagreement evaluation while preserving source isolation, NoTargetRead, shadow-only use, and the deterministic controller.",
+    "version": "PSM_V0.259",
+    "objective": "Build a Sigma+ traceable delivery contract for natural answers, property state, provenance, tools, failures, and statement levels while routing low-confidence or unresolved targets to deterministic rules and keeping internal debug terms out of ordinary chat.",
     "blocked": false,
     "requires_user_input": false,
     "preconditions": [
-      "PSM_V0.257 shadow encoder decision is shadow_baseline_ready.",
-      "Candidate validation/test exact match is 0.928571/1.0 with zero critical false negatives.",
-      "The initial rejected run and no-protected-feedback repair boundary remain retained.",
-      "Validation, test, blind, judge-only feedback, external-user trial, and rule replacement remain closed."
+      "PSM_V0.258 calibrated shadow decision is calibrated_shadow_ready.",
+      "Evaluation coverage is 0.959184 with minimum selective accuracy 0.928571 and zero accepted critical false negatives.",
+      "Four low-confidence targets abstain and seven unresolved targets fail closed through consensus.",
+      "Base weights, protected feedback, external-user trial, and rule replacement remain closed."
     ],
     "acceptance": [
-      "New source families remain isolated by family/source/time and pass duplicate contamination audit.",
-      "All seven heads report calibrated confidence and abstention coverage.",
-      "Unresolved labels are evaluated without being forced into training truth.",
-      "Critical safety false negatives remain zero after abstention.",
+      "Every sampled strong claim has provenance or an explicit downgrade marker.",
+      "Low-confidence and unresolved targets route to deterministic rules without changing the user-facing answer contract.",
+      "Ordinary chat contains no internal state, threshold, or debug leakage.",
+      "API, desktop, mobile, and Docker regressions pass.",
       "Candidate remains shadow-only; deterministic gating, external-user trial, and rule replacement stay protected."
     ]
   },
@@ -106,6 +107,22 @@
       "candidate_validation_test_exact": "0.928571/1.0",
       "candidate_validation_test_critical_false_negatives": "0/0",
       "protected_backflow": 0,
+      "deterministic_rule_controller_retained": true,
+      "rule_replacement_allowed": false
+    },
+    {
+      "version": "PSM_V0.258",
+      "result": "calibrated_shadow_ready",
+      "records": 35,
+      "split_counts": "14/14/7",
+      "targets": 7,
+      "evaluation_average_coverage": 0.95918367,
+      "minimum_selective_accuracy": 0.92857143,
+      "low_confidence_abstentions": 4,
+      "accepted_critical_false_negatives": 0,
+      "unresolved_consensus_abstentions": "7/7",
+      "model_only_unresolved_detection": "0/7",
+      "protected_feedback_to_base_training": 0,
       "deterministic_rule_controller_retained": true,
       "rule_replacement_allowed": false
     }

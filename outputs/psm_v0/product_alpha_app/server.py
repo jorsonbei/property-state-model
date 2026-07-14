@@ -859,6 +859,13 @@ def roadmap_answer(context: dict) -> str:
             "跨 family 稳定性。validation、test、blind 和 judge-only 反馈仍禁止进入训练，候选继续 shadow-only，"
             "不能替换现有规则，确定性规则控制器继续保留。"
         )
+    elif context["next_version"] == "PSM V0.259":
+        construction = (
+            "施工顺序是：先定义 Sigma+ 交付包，把自然回答、物性状态、来源、工具结果、失败和声明等级绑定在同一追溯链；"
+            "再为强结论加入 provenance 或显式降级，低置信和 unresolved target 一律回退确定性规则；"
+            "随后抽样审计强结论来源，并验证普通聊天只显示自然回答，不泄漏内部状态、阈值或调试术语；"
+            "最后补齐 API、桌面、手机和 Docker 回归，shadow 候选仍无放行权。"
+        )
     elif context["next_version"] == "PSM V0.250":
         construction = (
             "施工顺序是：先冻结同题模型基准集，再对本地候选模型测量回答质量、边界、延迟和失败率；"
@@ -885,6 +892,17 @@ def roadmap_answer(context: dict) -> str:
 
 
 def project_results_answer(context: dict) -> str:
+    if context["current_version"] == "PSM V0.258":
+        return (
+            "这轮已完成 PSM V0.258 七个物性状态 head 的来源隔离置信度校准与 fail-closed 棄权：新增 14 条 calibration、"
+            "14 条 evaluation 和 7 条 unresolved 合成记录，全部不含私人资料且 family、source、内容与近似重复交叉均为 0。"
+            "新来源评估平均覆盖率为 95.92%，最低选择性准确率为 92.86%，4 个低置信 target 自动棄权，接受结果中的"
+            " critical false negative 为 0；7 个标注分歧 target 全由共识契约拒绝采纳，受保护反馈回流训练为 0。\n\n"
+            "它的作用是让 shadow 状态候选开始知道何时不能被采纳，同时不修改 V0.257 基础模型权重。"
+            "模型自身对分歧的低置信识别仍是 0/7，因此当前由共识门和确定性规则兜底，不能声称模型已经理解歧义。"
+            f"当前聊天模型仍是 `{context['selected_model']}`。下一步是 {context['next_version']}："
+            f"{context['next_objective']}。"
+        )
     if context["current_version"] == "PSM V0.257":
         return (
             "这轮已完成 PSM V0.257 首个来源隔离的可训练 shadow 状态编码器：42 条无私人资料的合成记录按来源分成"
@@ -1501,6 +1519,11 @@ def humanize_stage_objective(objective: str) -> str:
             "在 family、source、time 三重来源隔离下扩展新的来源 family，为七个 shadow head 加入置信度校准、"
             "低置信度 abstention 和 unresolved 分歧评估，"
             "继续禁止 validation、test、blind、judge-only 反馈回流训练，并保留确定性规则控制器"
+        )
+    if "sigma+ traceable delivery contract" in objective.casefold():
+        return (
+            "建立 Sigma+ 可追溯交付闭环，把自然回答、物性状态、来源、工具结果、失败与声明等级绑定；"
+            "强结论必须有 provenance 或显式降级，低置信和 unresolved target 回退确定性规则，普通聊天不暴露内部调试细节"
         )
     return objective
 

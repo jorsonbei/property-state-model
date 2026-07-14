@@ -1,0 +1,61 @@
+{
+  "schema_version": "psm_v0_258_calibrated_shadow_gate_v1",
+  "version": "PSM_V0.258-candidate",
+  "passed": true,
+  "decision": "calibrated_shadow_ready",
+  "checks": {
+    "base_model_frozen": true,
+    "base_dataset_frozen": true,
+    "base_training_rows_unchanged": true,
+    "new_source_purpose_isolation": true,
+    "calibration_rows_only_fit_calibrator": true,
+    "evaluation_rows_never_fit_calibrator": true,
+    "unresolved_rows_never_fit_calibrator": true,
+    "all_heads_calibrated": true,
+    "calibration_nll_nonincreasing": true,
+    "evaluation_average_coverage_at_least_half": true,
+    "evaluation_selective_accuracy_at_least_0_8": true,
+    "accepted_critical_false_negatives_zero": true,
+    "unresolved_targets_preserved": true,
+    "evaluation_low_confidence_abstention_observed": true,
+    "unresolved_targets_fail_closed_by_consensus": true,
+    "protected_feedback_to_base_training_zero": true,
+    "candidate_shadow_only": true,
+    "deterministic_rule_controller_retained": true,
+    "rule_replacement_closed": true,
+    "external_release_closed": true
+  },
+  "summary": {
+    "base_training_rows": 14,
+    "calibration_rows": 14,
+    "evaluation_rows": 14,
+    "unresolved_rows": 7,
+    "targets": 7,
+    "average_evaluation_coverage": 0.95918367,
+    "minimum_evaluation_selective_accuracy": 0.92857143,
+    "accepted_critical_false_negatives": 0,
+    "evaluation_low_confidence_abstentions": 4,
+    "unresolved_model_low_confidence_abstentions": 0,
+    "unresolved_consensus_forced_abstentions": 7,
+    "source_family_overlap": 0,
+    "source_overlap": 0,
+    "content_overlap": 0,
+    "near_duplicate_overlap": 0,
+    "protected_feedback_to_base_training": 0
+  },
+  "boundaries": {
+    "base_model_weights_changed": false,
+    "calibrator_uses_calibration_family_only": true,
+    "evaluation_unresolved_blind_judge_feedback_to_training": false,
+    "candidate_shadow_only": true,
+    "deterministic_rule_controller_retained": true,
+    "rule_replacement_allowed": false,
+    "external_release_authority": false
+  },
+  "artifacts": {
+    "dataset": "runtime/v0_258_calibration_evaluation_dataset.jsonl",
+    "calibration": "runtime/v0_258_confidence_calibration.json",
+    "predictions": "runtime/v0_258_calibrated_shadow_predictions.jsonl",
+    "metrics": "runtime/v0_258_calibrated_shadow_metrics.json"
+  }
+}

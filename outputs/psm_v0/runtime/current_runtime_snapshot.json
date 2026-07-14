@@ -2,10 +2,10 @@
   "schema_version": "psm_public_runtime_snapshot_v1",
   "project_status": {
     "updated_from_local_artifacts": true,
-    "current_version": "psm_v0.257",
+    "current_version": "psm_v0.258",
     "source_evidence_version": "psm_v0.251",
-    "previous_formal_version": "psm_v0.256",
-    "completed_result": "source_isolated_trainable_shadow_encoder_baseline",
+    "previous_formal_version": "psm_v0.257",
+    "completed_result": "source_isolated_calibrated_shadow_with_fail_closed_abstention",
     "family": {
       "family_id": "v251_independent_chat_golden_blind_set_boundary_adversarial",
       "case_pack": "case_packs/v0_251_independent_chat_golden_blind_set_boundary_adversarial_cases.json",
@@ -244,8 +244,8 @@
       "rule_replacement_allowed": false
     },
     "next_stage": {
-      "version": "PSM_V0.258",
-      "objective": "Expand the shadow encoder to new source families and add confidence calibration, abstention, and unresolved-disagreement evaluation; keep family/source/time isolation and NoTargetRead; prohibit validation, test, blind, or judge-only feedback from training; and retain the deterministic controller without rule replacement.",
+      "version": "PSM_V0.259",
+      "objective": "Build a Sigma+ traceable delivery contract that joins natural answers, property state, provenance, tool results, failures, and statement levels; require every strong claim to have evidence provenance or an explicit downgrade; route calibrated low-confidence and unresolved targets back to deterministic rules; and keep internal state details out of ordinary chat.",
       "blocked": false,
       "requires_user_input": false
     },
@@ -259,7 +259,7 @@
       "candidate_taxonomy": "taxonomy_out/psm_v0.251_candidate_taxonomy.json",
       "candidate_regression_fixtures": "fixture_out/psm_v0.251_candidate_regression_fixtures.json",
       "taxonomy_delta": "taxonomy_delta_out/psm_v0.251_taxonomy_delta.json",
-      "project_status": "project_status_out/psm_v0.257_project_status.json",
+      "project_status": "project_status_out/psm_v0.258_project_status.json",
       "regression": "regression_out/psm_v0.251_regression_check.json",
       "independent_chat_gate": "runtime/v0_251_wave_g_external_semantic_judge.json",
       "model_selection": "runtime/v0_251_base_upgrade_pairwise_gemini_pro_report.json",
@@ -292,7 +292,14 @@
       "shadow_encoder_predictions": "runtime/v0_257_shadow_encoder_predictions.jsonl",
       "shadow_encoder_initial_rejection": "runtime/v0_257_shadow_encoder_initial_rejection.json",
       "shadow_encoder_residual_risks": "runtime/v0_257_shadow_encoder_residual_risks.json",
-      "shadow_encoder_checkpoint": "runtime/v0_257_shadow_encoder_checkpoint.json"
+      "shadow_encoder_checkpoint": "runtime/v0_257_shadow_encoder_checkpoint.json",
+      "calibrated_shadow_gate": "runtime/v0_258_calibrated_shadow_gate.json",
+      "calibrated_shadow_metrics": "runtime/v0_258_calibrated_shadow_metrics.json",
+      "confidence_calibration": "runtime/v0_258_confidence_calibration.json",
+      "calibrated_shadow_predictions": "runtime/v0_258_calibrated_shadow_predictions.jsonl",
+      "calibrated_shadow_initial_rejection": "runtime/v0_258_calibrated_shadow_initial_rejection.json",
+      "calibrated_shadow_residual_risks": "runtime/v0_258_calibrated_shadow_residual_risks.json",
+      "calibrated_shadow_checkpoint": "runtime/v0_258_calibrated_shadow_checkpoint.json"
     },
     "regression": {
       "stem": "psm_v0.251",
@@ -471,6 +478,34 @@
       "rule_replacement_allowed": false,
       "browser_report": "runtime/v0_257_browser_regression/report.json",
       "docker_report": "runtime/v0_257_docker_verification.json"
+    },
+    "calibrated_shadow_gate": {
+      "decision": "calibrated_shadow_ready",
+      "passed": true,
+      "base_training_rows": 14,
+      "calibration_rows": 14,
+      "evaluation_rows": 14,
+      "unresolved_rows": 7,
+      "targets": 7,
+      "average_evaluation_coverage": 0.95918367,
+      "minimum_evaluation_selective_accuracy": 0.92857143,
+      "accepted_critical_false_negatives": 0,
+      "evaluation_low_confidence_abstentions": 4,
+      "unresolved_model_low_confidence_abstentions": 0,
+      "unresolved_consensus_forced_abstentions": 7,
+      "source_family_overlap": 0,
+      "source_overlap": 0,
+      "content_overlap": 0,
+      "near_duplicate_overlap": 0,
+      "protected_feedback_to_base_training": 0,
+      "initial_rejection_retained": true,
+      "base_candidate_type": "trainable_multinomial_naive_bayes",
+      "calibration_type": "per_head_temperature_scaling_with_confidence_floor",
+      "candidate_shadow_only": true,
+      "deterministic_rule_controller_retained": true,
+      "rule_replacement_allowed": false,
+      "browser_report": "runtime/v0_258_browser_regression/report.json",
+      "docker_report": "runtime/v0_258_docker_verification.json"
     }
   },
   "optional_project_status": {

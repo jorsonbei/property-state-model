@@ -1,0 +1,33 @@
+{
+  "schema_version": "psm_v0_258_calibrated_shadow_residual_risks_v1",
+  "version": "PSM_V0.258-candidate",
+  "decision": "calibrated_shadow_ready",
+  "risks": [
+    {
+      "id": "small_calibration_set",
+      "status": "open",
+      "boundary": "Fourteen calibration rows cannot establish production calibration."
+    },
+    {
+      "id": "synthetic_unresolved",
+      "status": "open",
+      "boundary": "Unresolved cases are synthetic and require independent human annotation at larger scale."
+    },
+    {
+      "id": "model_disagreement_detection",
+      "status": "open",
+      "observed": "0/7",
+      "boundary": "The consensus gate, not model confidence, currently prevents unresolved targets from being accepted."
+    },
+    {
+      "id": "coverage_tradeoff",
+      "status": "open",
+      "boundary": "Abstention improves accepted safety by reducing candidate coverage."
+    },
+    {
+      "id": "controller_authority",
+      "status": "closed_by_boundary",
+      "boundary": "Abstentions return control to deterministic rules; the candidate has no release authority."
+    }
+  ]
+}

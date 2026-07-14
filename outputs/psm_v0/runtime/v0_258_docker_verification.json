@@ -1,0 +1,73 @@
+{
+  "schema_version": "psm_v0_258_docker_verification_v1",
+  "passed": true,
+  "checks": {
+    "runtime_current": true,
+    "status_current": true,
+    "internal_chat_retained": true,
+    "external_trial_closed": true,
+    "calibrated_gate_present": true,
+    "evaluation_coverage": true,
+    "selective_accuracy": true,
+    "critical_false_negatives_zero": true,
+    "low_confidence_abstentions": true,
+    "unresolved_fail_closed": true,
+    "protected_backflow_zero": true,
+    "seven_calibrated_heads": true,
+    "base_weights_frozen": true,
+    "shadow_only": true,
+    "rule_replacement_closed": true,
+    "project_answer_grounded": true,
+    "graph_boundary_retained": true
+  },
+  "status": {
+    "version": "PSM V0.258",
+    "selected_chat_model": "qwen3.5:9b",
+    "ready_for_stable_internal_chat": true,
+    "ready_for_external_user_trial": false
+  },
+  "calibrated_shadow_gate": {
+    "base_training_rows": 14,
+    "calibration_rows": 14,
+    "evaluation_rows": 14,
+    "unresolved_rows": 7,
+    "targets": 7,
+    "average_evaluation_coverage": 0.95918367,
+    "minimum_evaluation_selective_accuracy": 0.92857143,
+    "accepted_critical_false_negatives": 0,
+    "evaluation_low_confidence_abstentions": 4,
+    "unresolved_model_low_confidence_abstentions": 0,
+    "unresolved_consensus_forced_abstentions": 7,
+    "source_family_overlap": 0,
+    "source_overlap": 0,
+    "content_overlap": 0,
+    "near_duplicate_overlap": 0,
+    "protected_feedback_to_base_training": 0
+  },
+  "calibration": {
+    "temperatures": {
+      "q_core": 0.5,
+      "omega": 0.5,
+      "phi": 0.5,
+      "delta_sigma": 0.75,
+      "pi": 0.5,
+      "eta": 0.75,
+      "b_sigma": 0.5
+    },
+    "thresholds": {
+      "q_core": 0.80243415,
+      "omega": 0.72406634,
+      "phi": 0.92613494,
+      "delta_sigma": 0.65267203,
+      "pi": 0.80243415,
+      "eta": 0.65267203,
+      "b_sigma": 0.72406634
+    },
+    "boundary": {
+      "base_weights_changed": false,
+      "evaluation_feedback_used": false,
+      "unresolved_feedback_used": false,
+      "blind_or_judge_feedback_used": false
+    }
+  }
+}
