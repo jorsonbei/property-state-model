@@ -4,7 +4,7 @@ build-backend = "setuptools.build_meta"
 
 [project]
 name = "property-state-model"
-version = "0.248.0"
+version = "0.249.0"
 description = "Experimental property-state-first control layer for audited AI outputs"
 readme = "README.md"
 requires-python = ">=3.11"

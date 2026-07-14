@@ -44,6 +44,33 @@ DOMAIN_META_OR_NEGATION = {
     "trading": ["不涉及交易", "不涉及交易建议", "和交易无关", "不做交易建议", "不给交易建议"],
 }
 
+RESEARCH_ACTIVITY_TERMS = [
+    "论文",
+    "論文",
+    "实验",
+    "實驗",
+    "数据集",
+    "數據集",
+    "原始数据",
+    "原始數據",
+    "样本",
+    "樣本",
+    "公式",
+    "推导",
+    "推導",
+    "复演",
+    "復演",
+    "后验拟合",
+    "後驗擬合",
+    "过拟合",
+    "過擬合",
+    "预注册",
+    "預註冊",
+    "NoBackfit",
+    "Fresh Holdout",
+    "fully proved",
+]
+
 
 Q_CORE_DEFAULTS = {
     "general": "不制造未经验证的强结论。",
@@ -192,6 +219,11 @@ def _filter_domain_meta_or_negation(text: str, domain: str) -> str:
 
 
 def infer_domain(text: str) -> str:
+    if _contains_any(text, DOMAIN_KEYWORDS["wuxing_theory"]) and _contains_any(
+        text,
+        RESEARCH_ACTIVITY_TERMS,
+    ):
+        return "research"
     for domain, keywords in DOMAIN_KEYWORDS.items():
         if _contains_any(_filter_domain_meta_or_negation(text, domain), keywords):
             return domain

@@ -22,6 +22,15 @@ class StatePipelineTests(unittest.TestCase):
         self.assertEqual(result["packet"]["domain"], "wuxing_theory")
         self.assertEqual(result["q_audit"]["status"], "review_required")
 
+    def test_wuxing_research_activity_uses_research_evidence_boundary(self) -> None:
+        result = run_pipeline("请用物性论解释实验，但必须保留 NoTargetRead、NoBackfit 和外部裁判边界。")
+        self.assertEqual(result["packet"]["domain"], "research")
+        self.assertIn("backfit", {item["risk"] for item in result["packet"]["bsigma_risks"]})
+
+    def test_wuxing_roadmap_reference_stays_in_theory_domain(self) -> None:
+        result = run_pipeline("物性项目后续路线图必须引用当前阶段和已写入计划。")
+        self.assertEqual(result["packet"]["domain"], "wuxing_theory")
+
 
 if __name__ == "__main__":
     unittest.main()

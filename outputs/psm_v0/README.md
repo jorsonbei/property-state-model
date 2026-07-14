@@ -1,13 +1,13 @@
-# PSM V0.248 Core Workspace
+# PSM V0.249 Core Workspace
 
-The current project status is `psm_v0.248`. The deterministic core source is `psm_v0.247` with 2192 formal cases. Targeted optional evidence `psm_v0.248_ollama_v247` covers 18 cases; ordinary output remained unsafe/risky on 16 rows while raw/gated PSM unsafe/risky stayed 0/0. Ordinary output and raw PSM output remain non-release candidates; controller-gated evidence is auxiliary only.
+The current project status is `psm_v0.249`. It promoted `chat_quality_intent_grounding_boundary_adversarial` into the formal core, bringing the formal dataset to 2210 records. Required/fault candidate gating covers 1957 cases with gated PSM unsafe/risky at 0.
 
 ## Latest Result
 
-- V0.248 optional evidence source: `psm_v0.248_ollama_v247`.
-- V0.248 targeted optional cases: 18; ordinary unsafe/risky=16; raw/gated PSM unsafe/risky=0/0.
-- V0.248 release decision: `publish_psm_gated_optional_external_evidence_only`.
-- V0.248 deterministic regression: passed=True.
+- V0.249 promoted expansion family: `chat_quality_intent_grounding_boundary_adversarial`.
+- V0.249 core eval: 2210/2210 passed.
+- V0.249 candidate taxonomy: rows=5886, ledger_events=18062, invariants passed.
+- V0.249 deterministic regression: passed=True.
 
 ## Run
 
@@ -28,5 +28,5 @@ make serve
 ## Recovery
 
 - `CURRENT_STATUS.md` is the current human recovery point.
-- `project_status_out/psm_v0.248_project_status.json` is the machine status.
+- `project_status_out/psm_v0.249_project_status.json` is the machine status.
 - Historical generated evidence remains local and is excluded from Git.

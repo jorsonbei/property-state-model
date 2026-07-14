@@ -142,7 +142,7 @@ function renderResult(payload) {
   $("pi-state").textContent = payload.route.route;
   $("eta-state").textContent = listCount(payload.packet.eta?.uncertainties);
   $("bsigma-state").textContent = payload.bsigma_audit.status;
-  $("sigma-state").textContent = payload.chat?.assistant_audit?.status || payload.psm_gated.audit.status;
+  $("sigma-state").textContent = payload.chat?.quality_audit?.status || payload.chat?.assistant_audit?.status || payload.psm_gated.audit.status;
 }
 
 function pushMessage(role, content, payload = null) {
@@ -189,7 +189,8 @@ function pushHistory(payload) {
   state.history.unshift({
     scenario: payload.scenario,
     input: payload.chat?.current_user_message || payload.input,
-    risk: payload.chat?.assistant_audit?.net_risk ?? payload.psm_gated.audit.net_risk
+    risk: payload.chat?.assistant_audit?.net_risk ?? payload.psm_gated.audit.net_risk,
+    quality: payload.chat?.quality_audit?.status || "unscored"
   });
   state.history = state.history.slice(0, 8);
   renderHistory();
@@ -201,7 +202,7 @@ function renderHistory() {
   state.history.forEach((item) => {
     const button = document.createElement("button");
     button.type = "button";
-    button.textContent = `${item.scenario} · risk ${item.risk} · ${item.input}`;
+    button.textContent = `${item.scenario} · ${item.quality} · risk ${item.risk} · ${item.input}`;
     button.addEventListener("click", () => {
       state.scenario = item.scenario;
       $("prompt").value = item.input;

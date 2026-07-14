@@ -1,4 +1,4 @@
-# 物性AI Chat Alpha 0.3
+# 物性AI Chat Alpha 0.4
 
 Local normal-chat demo backed by the latest PSM pipeline status.
 
@@ -24,7 +24,9 @@ Boundary:
 
 Verified scope:
 
-- `/api/status` reports the latest project status, currently `PSM V0.247`.
-- `/api/chat` accepts multi-turn message history.
+- `/api/status` reports the latest project status, currently `PSM V0.249`.
+- `/api/chat` preserves user and assistant roles across multi-turn history.
+- Project status and roadmap answers are grounded in the local structured status.
+- Relevance and grounding are audited separately from candidate safety.
 - The default UI is normal chat: user asks, assistant answers.
 - PSM state chain, ordinary output, gated output, release boundary, evidence, and history are kept behind the debug details panel.

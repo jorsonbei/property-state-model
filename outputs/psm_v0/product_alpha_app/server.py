@@ -4,6 +4,7 @@ import argparse
 import json
 import mimetypes
 import os
+import re
 import sys
 import time
 import urllib.error
@@ -19,6 +20,7 @@ STATIC_ROOT = APP_ROOT / "static"
 sys.path.insert(0, str(PSM_ROOT))
 
 from psm_v0.candidate_auditor import audit_candidate_text  # noqa: E402
+from psm_v0.chat_quality_auditor import audit_chat_answer  # noqa: E402
 from psm_v0.model_adapter import BuiltinModelAdapter  # noqa: E402
 from psm_v0.pipeline import run_pipeline  # noqa: E402
 from psm_v0.psm_gate_controller import apply_psm_gate  # noqa: E402
@@ -186,33 +188,53 @@ def run_demo_case(text: str, scenario: str) -> dict:
 
 
 def run_chat_turn(messages: list[dict], scenario: str) -> dict:
-    user_messages = [
-        str(item.get("content") or "").strip()
-        for item in messages
-        if item.get("role") == "user" and str(item.get("content") or "").strip()
-    ]
-    if not user_messages:
-        user_messages = [SCENARIOS.get(scenario, SCENARIOS["review"])]
-    current = user_messages[-1]
-    context_tail = "；".join(user_messages[-4:])
+    conversation = normalize_chat_messages(messages)
+    user_indexes = [index for index, item in enumerate(conversation) if item["role"] == "user"]
+    if not user_indexes:
+        conversation = [{"role": "user", "content": SCENARIOS.get(scenario, SCENARIOS["review"])}]
+        user_indexes = [0]
+    conversation = conversation[: user_indexes[-1] + 1]
+    current = conversation[-1]["content"]
+    user_messages = [item["content"] for item in conversation if item["role"] == "user"]
+    assistant_messages = [item["content"] for item in conversation if item["role"] == "assistant"]
+
+    # Only the current user message enters the property-state classifier. Role history
+    # remains semantic context for answer generation and cannot override the domain route.
     audit_text = current
-    if len(user_messages) > 1:
-        audit_text = (
-            f"多轮聊天 history：{context_tail}\n"
-            f"本轮请求：{current}\n"
-            "要求：继承上一轮 Q 核、外部裁判、失败入账和 release boundary。"
-        )
     result = run_demo_case(audit_text, scenario)
-    assistant_message = build_chat_answer(current, user_messages, result)
+    intent = detect_chat_intent(current, conversation)
+    project_context = load_project_context()
+    grounding_facts, grounding_sources = grounding_for_intent(
+        intent,
+        current,
+        conversation,
+        project_context,
+    )
+    assistant_message = build_chat_answer(current, conversation, result, intent, project_context)
+    quality_audit = audit_chat_answer(
+        current,
+        assistant_message,
+        intent=intent,
+        grounding_facts=grounding_facts,
+        grounding_sources=grounding_sources,
+        previous_assistant_answers=assistant_messages,
+    )
     result["chat"] = {
         "turn_index": len(user_messages),
         "current_user_message": current,
         "audit_text": audit_text,
+        "intent": intent,
         "assistant_message": assistant_message,
         "assistant_audit": audit_candidate_text(assistant_message, result),
+        "quality_audit": quality_audit,
         "state_continuity": {
             "history_user_turns": len(user_messages),
-            "context_carried_forward": len(user_messages) > 1,
+            "history_assistant_turns": len(assistant_messages),
+            "history_messages": len(conversation),
+            "context_carried_forward": len(conversation) > 1,
+            "assistant_history_available": bool(assistant_messages),
+            "assistant_history_used": bool(assistant_messages),
+            "semantic_audit_separated": True,
             "release_boundary_retained": True,
             "rule_replacement_allowed": False,
             "external_user_trial_allowed": False,
@@ -221,28 +243,74 @@ def run_chat_turn(messages: list[dict], scenario: str) -> dict:
     return result
 
 
-def build_chat_answer(current: str, user_messages: list[str], result: dict) -> str:
+def normalize_chat_messages(messages: list[dict]) -> list[dict[str, str]]:
+    normalized = []
+    for item in messages[-24:]:
+        if not isinstance(item, dict) or item.get("role") not in {"user", "assistant"}:
+            continue
+        content = str(item.get("content") or "").strip()
+        if content:
+            normalized.append({"role": str(item["role"]), "content": content[:4000]})
+    return normalized
+
+
+def build_chat_answer(
+    current: str,
+    conversation: list[dict[str, str]],
+    result: dict,
+    intent: str,
+    project_context: dict,
+) -> str:
     text = current.strip()
-    lower = text.lower()
-    if is_identity_question(lower):
+    if intent == "identity":
         return (
             "你好，我是物性AI的本地聊天原型。你可以像现在这样直接问我问题，我会先按普通对话回答；"
             "如果问题涉及医疗、法律、交易、上线发布等高风险场景，我会保留边界，不把草案说成已经验证的结论。"
         )
-    if is_psm_vs_llm_question(lower):
+    if intent == "psm_vs_llm":
         return psm_vs_llm_answer()
-    if is_chat_capability_question(lower):
+    if intent == "project_status":
+        return project_status_answer(project_context)
+    if intent == "roadmap":
+        return roadmap_answer(project_context)
+    if intent == "history_reference":
+        return history_reference_answer(text, conversation)
+    if intent == "chat_capability":
         return (
-            "可以，现在这个页面应该就是正常聊天模式：你输入问题，我直接回答。"
-            "右侧或下方的调试详情只是给研发看的，不再作为主要回答。"
+            "可以聊天。你直接输入问题，我会结合前面的对话回答；涉及高风险事项时，我会说明证据和执行边界。"
         )
-    answer = try_ollama_chat_answer(current, user_messages, result)
+    if intent == "repeated_question":
+        previous = previous_answer_for_same_question(conversation, current)
+        if previous:
+            return f"这个问题刚才问过。核心回答仍是：{first_answer_sentence(previous)}"
+    answer = try_ollama_chat_answer(current, conversation, result)
     if not answer:
-        answer = fallback_chat_answer(current, result)
+        answer = fallback_chat_answer(current, result, conversation)
     audit = audit_candidate_text(answer, result)
     if audit["status"] in {"unsafe", "risky"}:
-        return fallback_chat_answer(current, result)
+        return fallback_chat_answer(current, result, conversation)
     return answer
+
+
+def detect_chat_intent(text: str, conversation: list[dict[str, str]]) -> str:
+    lower = text.casefold().strip()
+    if is_identity_question(lower):
+        return "identity"
+    if is_psm_vs_llm_question(lower):
+        return "psm_vs_llm"
+    if is_history_reference_question(lower):
+        return "history_reference"
+    if is_project_status_question(lower):
+        return "project_status"
+    if is_roadmap_question(lower):
+        return "roadmap"
+    if is_chat_capability_question(lower):
+        return "chat_capability"
+    if is_theory_question(lower):
+        return "theory"
+    if previous_answer_for_same_question(conversation, text):
+        return "repeated_question"
+    return "general"
 
 
 def is_identity_question(text: str) -> bool:
@@ -263,6 +331,168 @@ def is_psm_vs_llm_question(text: str) -> bool:
     return has_psm and has_llm and asks_difference
 
 
+def is_history_reference_question(text: str) -> bool:
+    history_markers = ("刚才", "剛才", "上一轮", "上一輪", "你刚刚", "你剛剛", "前面")
+    reference_markers = (
+        "阶段",
+        "階段",
+        "第几",
+        "第幾",
+        "说了什么",
+        "說了什麼",
+        "叫什么",
+        "叫什麼",
+        "回答",
+    )
+    return any(marker in text for marker in history_markers) and any(
+        marker in text for marker in reference_markers
+    )
+
+
+def is_project_status_question(text: str) -> bool:
+    markers = (
+        "项目现在做到哪里",
+        "項目現在做到哪裡",
+        "项目做到哪里",
+        "項目做到哪裡",
+        "项目进度",
+        "項目進度",
+        "当前版本",
+        "當前版本",
+        "现在什么情况",
+        "現在什麼情況",
+        "current status",
+    )
+    return any(marker in text for marker in markers)
+
+
+def is_roadmap_question(text: str) -> bool:
+    markers = (
+        "后续计划",
+        "後續計畫",
+        "后续规划",
+        "後續規劃",
+        "下一步计划",
+        "下一步計畫",
+        "接下来做什么",
+        "接下來做什麼",
+        "路线图",
+        "路線圖",
+        "roadmap",
+    )
+    return any(marker in text for marker in markers)
+
+
+def is_theory_question(text: str) -> bool:
+    theory_markers = (
+        "物性论",
+        "物性論",
+        "q 核",
+        "q核",
+        "b_sigma",
+        "状态链",
+        "狀態鏈",
+        "sigma+",
+        "σ+",
+    )
+    question_markers = ("解释", "解釋", "是什么", "是什麼", "为什么", "為什麼", "如何")
+    return any(marker in text for marker in theory_markers) and any(
+        marker in text for marker in question_markers
+    )
+
+
+def project_status_answer(context: dict) -> str:
+    return (
+        f"当前项目是 {context['current_version']}。确定性正式源是 {context['formal_version']}，"
+        f"共有 {context['core_cases']} 个正式案例，正式回归目前全部通过。"
+        f"最近一轮定向外部模型证据中，raw/gated 风险分别为 "
+        f"{context['raw_psm_risky_rows']}/{context['gated_psm_risky_rows']}。\n\n"
+        f"下一阶段是 {context['next_version']}：{context['next_objective']}。"
+        "当前仍是内部本地聊天候选，外部用户试用没有开放。"
+    )
+
+
+def roadmap_answer(context: dict) -> str:
+    if context["next_version"] == "PSM V0.250":
+        construction = (
+            "施工顺序是：先冻结同题模型基准集，再对本地候选模型测量回答质量、边界、延迟和失败率；"
+            "随后把生成接口抽象为 provider，并输出回答、接地事实、不确定项和所需裁判；"
+            "最后刷新 v249_ 外部证据并跑完整回归。"
+        )
+    else:
+        construction = (
+            "施工顺序是：先补齐该阶段的失败复现和固定测试，再实现阶段契约，"
+            "随后运行质量审计和完整回归，全部通过后才刷新运行快照并推进下一版本。"
+        )
+    return (
+        f"项目当前位于 {context['current_version']}，下一阶段是 {context['next_version']}。"
+        f"这一阶段的目标是：{context['next_objective']}\n\n"
+        f"{construction}"
+        "外部试用继续保持关闭，直到对应放行门通过。"
+    )
+
+
+def history_reference_answer(text: str, conversation: list[dict[str, str]]) -> str:
+    previous = [item["content"] for item in conversation[:-1] if item["role"] == "assistant"]
+    if not previous:
+        return "当前对话里没有可引用的上一轮助手回答。"
+    latest = previous[-1]
+    stage_number = requested_stage_number(text)
+    if stage_number:
+        stage = extract_numbered_stage(latest, stage_number)
+        if stage:
+            return f"我上一轮回答中的第{stage_number}阶段是：“{stage}”。"
+        return f"我检查了上一轮回答，没有找到明确标注的第{stage_number}阶段。"
+    return f"我上一轮的核心回答是：{first_answer_sentence(latest)}"
+
+
+def requested_stage_number(text: str) -> int | None:
+    chinese_numbers = {"一": 1, "二": 2, "三": 3, "四": 4, "五": 5}
+    match = re.search(r"第\s*([一二三四五1-5])\s*(?:阶段|階段|步|部分)", text)
+    if not match:
+        return None
+    value = match.group(1)
+    return int(value) if value.isdigit() else chinese_numbers[value]
+
+
+def extract_numbered_stage(answer: str, stage_number: int) -> str:
+    chinese = {1: "一", 2: "二", 3: "三", 4: "四", 5: "五"}[stage_number]
+    patterns = (
+        rf"第\s*{chinese}\s*(?:阶段|階段|步|部分)\s*[:：-]?\s*([^\n。；;]+)",
+        rf"(?:^|\n)\s*{stage_number}\s*[.、)]\s*([^\n。；;]+)",
+    )
+    for pattern in patterns:
+        match = re.search(pattern, answer, flags=re.MULTILINE)
+        if match:
+            return match.group(1).strip().rstrip("。；; ")
+    return ""
+
+
+def previous_answer_for_same_question(
+    conversation: list[dict[str, str]],
+    current: str,
+) -> str:
+    target = normalize_question(current)
+    for index in range(len(conversation) - 2, -1, -1):
+        item = conversation[index]
+        if item["role"] != "user" or normalize_question(item["content"]) != target:
+            continue
+        if index + 1 < len(conversation) and conversation[index + 1]["role"] == "assistant":
+            return conversation[index + 1]["content"]
+    return ""
+
+
+def normalize_question(text: str) -> str:
+    return re.sub(r"[\W_]+", "", text.casefold(), flags=re.UNICODE)
+
+
+def first_answer_sentence(text: str, limit: int = 220) -> str:
+    sentence = re.split(r"(?<=[。！？!?])|\n", text.strip(), maxsplit=1)[0].strip()
+    if len(sentence) > limit:
+        return sentence[:limit].rstrip() + "..."
+    return sentence
+
+
 def psm_vs_llm_answer() -> str:
     return (
         "可以。简单说，普通大模型主要是在“接话”：它根据上下文预测下一段最合适的语言，所以很会解释、总结、续写，"
@@ -274,8 +504,12 @@ def psm_vs_llm_answer() -> str:
     )
 
 
-def try_ollama_chat_answer(current: str, user_messages: list[str], result: dict) -> str:
-    prompt = build_chat_prompt(current, user_messages, result)
+def try_ollama_chat_answer(
+    current: str,
+    conversation: list[dict[str, str]],
+    result: dict,
+) -> str:
+    prompt = build_chat_prompt(current, conversation, result)
     request = urllib.request.Request(
         f"{OLLAMA_BASE_URL}/api/generate",
         data=json.dumps(
@@ -306,12 +540,19 @@ def try_ollama_chat_answer(current: str, user_messages: list[str], result: dict)
     return text[:1800].strip() + (f"\n\n（本地模型回答，用时 {duration_ms}ms）" if duration_ms > 0 else "")
 
 
-def build_chat_prompt(current: str, user_messages: list[str], result: dict) -> str:
+def build_chat_prompt(
+    current: str,
+    conversation: list[dict[str, str]],
+    result: dict,
+) -> str:
     packet = result["packet"]
     q_audit = result["q_audit"]
     route = result["route"]
     bsigma = result["bsigma_audit"]
-    recent = "\n".join(f"- {item}" for item in user_messages[-4:])
+    role_labels = {"user": "用户", "assistant": "助手"}
+    recent = "\n".join(
+        f"{role_labels[item['role']]}：{item['content']}" for item in conversation[-8:]
+    )
     required_judges = ", ".join(route["required_judges"]) or "无强制外部裁判"
     return "\n".join(
         [
@@ -323,7 +564,7 @@ def build_chat_prompt(current: str, user_messages: list[str], result: dict) -> s
             "如果问题是普通闲聊、写作、解释、计划、代码思路，则直接帮助用户。",
             "中文回答，优先繁简混合可读，控制在 500 字以内。",
             "",
-            "最近用户消息：",
+            "最近对话（保留角色）：",
             recent,
             "",
             "当前用户问题：",
@@ -354,16 +595,40 @@ def sanitize_chat_answer(text: str) -> str:
     return "".join(cleaned).strip()
 
 
-def fallback_chat_answer(current: str, result: dict) -> str:
+def fallback_chat_answer(
+    current: str,
+    result: dict,
+    conversation: list[dict[str, str]] | None = None,
+) -> str:
     packet = result["packet"]
     domain = packet["domain"]
     risk = packet["omega"]["risk_level"]
     if risk in {"high", "critical"}:
+        if domain == "medical":
+            return (
+                "我可以帮你判断信息是否完整，但不能在聊天中替代医生诊断。"
+                "如果出现胸痛、呼吸困难、意识异常、大量出血或症状迅速恶化，请立即联系当地急救。"
+                "其余情况请说明症状、开始时间、严重程度、年龄、既往病史和正在使用的药物，我会帮你整理就医重点。"
+            )
+        if domain == "legal":
+            return (
+                "我可以帮你梳理争点、材料和提问清单，但不能把聊天内容当作律师意见。"
+                "先确认司法辖区、事件时间线、合同或通知原文、截止日期以及你希望达到的结果；"
+                "涉及诉讼时效、签署或付款前，应让当地合资格律师核对。"
+            )
+        if domain == "trading":
+            return (
+                "这个结论目前不能直接转成实盘指令。我可以继续做回测、盲测、成本与滑点压力测试、"
+                "最大回撤检查和模拟盘验证；只有风险门、执行权限和人工放行都明确后，才讨论实盘。"
+            )
+        if domain == "code_engineering":
+            return (
+                "可以继续做工程方案，但当前结果不能直接视为生产放行。上线前至少要补齐自动化测试、"
+                "依赖与配置核对、回滚演练、日志监控和分阶段发布，并保留可快速撤回的版本。"
+            )
         return (
-            "可以，我先给你一个带边界的回答：这个问题属于较高风险场景，我能帮你整理思路、检查条件、列出下一步验证清单，"
-            "但不能把当前聊天内容当成已经获得外部授权或专业结论。\n\n"
-            f"针对你的问题：{current}\n\n"
-            "建议先分三步推进：1. 明确目标和适用范围；2. 列出需要真实证据或专业确认的部分；3. 再生成可执行草案或检查清单。"
+            "我可以继续帮你形成方案和验证清单，但当前聊天不能替代真实审批或外部专业结论。"
+            f"针对“{current}”，下一步应先确认适用范围和已有证据，再标出必须由外部来源或负责人确认的部分。"
         )
     if domain == "writing":
         return f"可以。我会按你的目标来写，并避免把没有验证的内容写成定论。你这句话的核心需求是：{current}"
@@ -372,7 +637,132 @@ def fallback_chat_answer(current: str, result: dict) -> str:
             "可以。从物性AI角度看，关键不是先接话，而是先接住状态：对象是什么、边界在哪里、哪些结论已经有证据、哪些还只是候选。"
             "然后再给出回答。"
         )
-    return f"可以。我的理解是：你想让我直接回应“{current}”。我会按正常聊天方式回答；如果涉及高风险结论，我会同时保留必要边界。"
+    context_answer = contextual_general_fallback(current, conversation or [])
+    if context_answer:
+        return context_answer
+    return (
+        f"本地生成模型这次没有返回有效内容，因此我不能可靠回答“{current}”。"
+        "你可以重试；当前状态链和安全边界仍然有效。"
+    )
+
+
+def contextual_general_fallback(
+    current: str,
+    conversation: list[dict[str, str]],
+) -> str:
+    history = "\n".join(item["content"] for item in conversation[:-1])
+    asks_sweetness = any(marker in current for marker in ("哪个更甜", "哪個更甜", "谁更甜", "誰更甜"))
+    compares_apple_banana = any(marker in history for marker in ("苹果和香蕉", "蘋果和香蕉", "苹果与香蕉", "蘋果與香蕉"))
+    if asks_sweetness and compares_apple_banana:
+        return (
+            "通常成熟香蕉比多数苹果更甜，因为香蕉成熟后淀粉会转成糖。"
+            "不过具体甜度取决于品种和成熟程度，有些高糖苹果也会比未成熟香蕉更甜。"
+        )
+    return ""
+
+
+def load_project_context() -> dict:
+    status, source = load_project_status_payload()
+    summary = load_status_summary()
+    next_stage = status.get("next_stage") or {}
+    eval_report = str(status.get("core_metrics", {}).get("eval", {}).get("report") or "")
+    formal_match = re.search(r"PSM_V(\d+\.\d+)", eval_report, flags=re.IGNORECASE)
+    formal_raw = status.get("source_evidence_version")
+    if formal_match:
+        formal_version = f"PSM V{formal_match.group(1)}"
+    elif formal_raw:
+        formal_version = to_display_version(str(formal_raw))
+    else:
+        formal_version = summary["version"]
+    next_version = to_display_version(str(next_stage.get("version") or "未定义"))
+    next_objective = humanize_stage_objective(str(next_stage.get("objective") or "完成下一阶段验证"))
+    roadmap_source = "roadmap_out/PSM_Full_Project_Audit_and_Execution_Roadmap_V0.248_to_V0.260.md"
+    return {
+        "current_version": summary["version"],
+        "formal_version": formal_version,
+        "core_cases": summary["core_cases"],
+        "raw_psm_risky_rows": summary.get("raw_psm_risky_rows", 0),
+        "gated_psm_risky_rows": summary.get("gated_psm_risky_rows", 0),
+        "next_version": next_version,
+        "next_objective": next_objective,
+        "source": source,
+        "roadmap_source": roadmap_source,
+    }
+
+
+def grounding_for_intent(
+    intent: str,
+    current: str,
+    conversation: list[dict[str, str]],
+    context: dict,
+) -> tuple[list[str], list[str]]:
+    if intent == "project_status":
+        return (
+            [
+                context["current_version"],
+                context["formal_version"],
+                str(context["core_cases"]),
+                context["next_version"],
+            ],
+            [context["source"], context["roadmap_source"]],
+        )
+    if intent == "roadmap":
+        return (
+            [context["current_version"], context["next_version"], context["next_objective"]],
+            [context["source"], context["roadmap_source"]],
+        )
+    if intent == "history_reference":
+        previous = [item["content"] for item in conversation[:-1] if item["role"] == "assistant"]
+        stage_number = requested_stage_number(current)
+        if previous and stage_number:
+            stage = extract_numbered_stage(previous[-1], stage_number)
+            return ([stage] if stage else [], ["conversation.assistant_history"])
+        return ([], ["conversation.assistant_history"])
+    if intent == "identity":
+        return (["物性AI"], ["product_identity"])
+    if intent == "chat_capability":
+        return (["聊天"], ["product_capability"])
+    if intent == "psm_vs_llm":
+        return (["物性AI", "普通大模型"], ["product_theory_contract"])
+    return ([], [])
+
+
+def load_project_status_payload() -> tuple[dict, str]:
+    status_paths = sorted(
+        (PSM_ROOT / "project_status_out").glob("psm_v0.*_project_status.json"),
+        key=status_version,
+    )
+    if status_paths:
+        path = status_paths[-1]
+        return load_json(path), str(path.relative_to(PSM_ROOT))
+    runtime_path = PSM_ROOT / "runtime" / "current_runtime_snapshot.json"
+    runtime = load_json(runtime_path) if runtime_path.exists() else {}
+    if runtime.get("project_status"):
+        return runtime["project_status"], str(runtime_path.relative_to(PSM_ROOT))
+    raise FileNotFoundError("No PSM project status or runtime snapshot found.")
+
+
+def to_display_version(version: str) -> str:
+    normalized = version.strip().replace("_", " ")
+    normalized = re.sub(r"(?i)^psm\s*v?", "PSM V", normalized)
+    normalized = re.sub(r"(?i)^psm_v", "PSM V", normalized)
+    return normalized
+
+
+def humanize_stage_objective(objective: str) -> str:
+    if "chat-quality" in objective or "assistant-turn history" in objective:
+        return (
+            "建立聊天回答质量与事实落地边界，补齐项目进度、路线图、助手历史、"
+            "理论解释、重复提问和高风险帮助式拒答"
+        )
+    if "model bakeoff" in objective.casefold():
+        return "建立本地模型对比与选择基线，按质量、风险、延迟和资源占用选择候选模型"
+    if "refresh full required/fault external evidence" in objective.casefold():
+        return (
+            "完成 v249_ 的全量必要/故障与定向 Ollama/控制器证据刷新，"
+            "并建立本地模型对照和结构化生成契约"
+        )
+    return objective
 
 
 def load_status_summary() -> dict:

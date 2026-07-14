@@ -1,13 +1,13 @@
 {
   "schema_version": "psm_artifact_inventory_v1",
-  "generated_at": "2026-07-14T08:00:14.940791+00:00",
+  "generated_at": "2026-07-14T08:23:45.575118+00:00",
   "root": "outputs/psm_v0",
   "read_only_scan": true,
   "content_hashing_performed": false,
-  "metadata_sha256": "89d2f5b0bcab975bc158c6f614cf3f4c1120719b35cc34888a6efccd4b9e2c48",
+  "metadata_sha256": "948a7348b6d8798cd5ed4ab61fc2cba4bf20aab28773625f3938ae27c6583adc",
   "summary": {
-    "files": 26404,
-    "bytes": 6282141276
+    "files": 26531,
+    "bytes": 6346905084
   },
   "directories": [
     {
@@ -19,26 +19,26 @@
     {
       "path": "candidate_holdout_out",
       "policy": "generated_evidence",
-      "files": 6336,
-      "bytes": 2477107492
+      "files": 6394,
+      "bytes": 2523739413
     },
     {
       "path": "state_dataset_out",
       "policy": "generated_evidence",
-      "files": 1219,
-      "bytes": 510613430
+      "files": 1231,
+      "bytes": 519375003
     },
     {
       "path": "eval_out",
       "policy": "generated_evidence",
-      "files": 2396,
-      "bytes": 256608126
+      "files": 2416,
+      "bytes": 261118705
     },
     {
       "path": "assist_out",
       "policy": "generated_evidence",
-      "files": 848,
-      "bytes": 196489415
+      "files": 856,
+      "bytes": 199840311
     },
     {
       "path": "candidate_external_reaudit_out",
@@ -49,20 +49,20 @@
     {
       "path": "shadow_out",
       "policy": "generated_evidence",
-      "files": 424,
-      "bytes": 67378422
+      "files": 428,
+      "bytes": 68538571
     },
     {
       "path": "case_packs",
       "policy": "public_source_or_runtime",
-      "files": 341,
-      "bytes": 18443892
+      "files": 344,
+      "bytes": 18607992
     },
     {
       "path": "project_status_out",
       "policy": "generated_evidence",
-      "files": 448,
-      "bytes": 16153147
+      "files": 450,
+      "bytes": 16162358
     },
     {
       "path": "state_encoder_out",
@@ -73,8 +73,8 @@
     {
       "path": "taxonomy_out",
       "policy": "generated_evidence",
-      "files": 212,
-      "bytes": 6933694
+      "files": 214,
+      "bytes": 7001479
     },
     {
       "path": "taxonomy_external_out",
@@ -85,20 +85,20 @@
     {
       "path": "holdout_out",
       "policy": "generated_evidence",
-      "files": 657,
-      "bytes": 4069434
+      "files": 663,
+      "bytes": 4094888
     },
     {
       "path": "psm_v0",
       "policy": "public_source_or_runtime",
-      "files": 79,
-      "bytes": 1933510
+      "files": 81,
+      "bytes": 1946424
     },
     {
       "path": "cases",
       "policy": "public_source_or_runtime",
-      "files": 127,
-      "bytes": 1883623
+      "files": 128,
+      "bytes": 1901481
     },
     {
       "path": "candidate_external_probe_out",
@@ -115,8 +115,8 @@
     {
       "path": "taxonomy_delta_out",
       "policy": "generated_evidence",
-      "files": 216,
-      "bytes": 1185943
+      "files": 218,
+      "bytes": 1192591
     },
     {
       "path": "work",
@@ -139,8 +139,8 @@
     {
       "path": "status_history",
       "policy": "local_archive",
-      "files": 3,
-      "bytes": 564243
+      "files": 4,
+      "bytes": 566503
     },
     {
       "path": "expansion_out",
@@ -157,8 +157,8 @@
     {
       "path": "regression_out",
       "policy": "generated_evidence",
-      "files": 336,
-      "bytes": 503712
+      "files": 338,
+      "bytes": 506729
     },
     {
       "path": "regression_external_out",
@@ -173,16 +173,16 @@
       "bytes": 409930
     },
     {
+      "path": "fixture_out",
+      "policy": "generated_evidence",
+      "files": 74,
+      "bytes": 275872
+    },
+    {
       "path": "external_fixture_regression_out",
       "policy": "generated_evidence",
       "files": 190,
       "bytes": 271162
-    },
-    {
-      "path": "fixture_out",
-      "policy": "generated_evidence",
-      "files": 72,
-      "bytes": 268416
     },
     {
       "path": "external_risk_out",
@@ -203,16 +203,16 @@
       "bytes": 111095
     },
     {
+      "path": "product_alpha_app",
+      "policy": "public_source_or_runtime",
+      "files": 8,
+      "bytes": 110787
+    },
+    {
       "path": "residual_out",
       "policy": "generated_evidence",
       "files": 18,
       "bytes": 85625
-    },
-    {
-      "path": "product_alpha_app",
-      "policy": "public_source_or_runtime",
-      "files": 8,
-      "bytes": 73873
     },
     {
       "path": "tools",
@@ -223,20 +223,20 @@
     {
       "path": "roadmap_out",
       "policy": "public_source_or_runtime",
-      "files": 31,
-      "bytes": 32035
+      "files": 33,
+      "bytes": 33294
     },
     {
       "path": "runtime",
       "policy": "public_source_or_runtime",
       "files": 1,
-      "bytes": 30430
+      "bytes": 24728
     },
     {
       "path": ".",
       "policy": "public_source_or_runtime",
       "files": 9,
-      "bytes": 22845
+      "bytes": 22361
     },
     {
       "path": "tmp_v61_residual_probe_cases",
@@ -264,6 +264,10 @@
     }
   ],
   "largest_files": [
+    {
+      "path": "candidate_holdout_out/psm_v0.249_candidate_holdout_rows.jsonl",
+      "bytes": 35504029
+    },
     {
       "path": "candidate_holdout_out/psm_v0.247_candidate_holdout_rows.jsonl",
       "bytes": 35193131
@@ -339,10 +343,6 @@
     {
       "path": "candidate_holdout_out/psm_v0.229_candidate_holdout_rows.jsonl",
       "bytes": 32260158
-    },
-    {
-      "path": "candidate_external_out/psm_v0.230_candidate_holdout_rows.jsonl",
-      "bytes": 32260155
     }
   ]
 }
