@@ -6,9 +6,6 @@ import mimetypes
 import os
 import re
 import sys
-import time
-import urllib.error
-import urllib.request
 from http.server import BaseHTTPRequestHandler, ThreadingHTTPServer
 from pathlib import Path
 from urllib.parse import urlparse
@@ -21,6 +18,8 @@ sys.path.insert(0, str(PSM_ROOT))
 
 from psm_v0.candidate_auditor import audit_candidate_text  # noqa: E402
 from psm_v0.chat_quality_auditor import audit_chat_answer  # noqa: E402
+from psm_v0.chat_prompt import build_chat_prompt, sanitize_model_answer  # noqa: E402
+from psm_v0.chat_provider import OllamaChatProvider, ProviderRequest  # noqa: E402
 from psm_v0.model_adapter import BuiltinModelAdapter  # noqa: E402
 from psm_v0.pipeline import run_pipeline  # noqa: E402
 from psm_v0.psm_gate_controller import apply_psm_gate  # noqa: E402
@@ -36,8 +35,9 @@ SCENARIOS = {
 }
 
 OLLAMA_BASE_URL = os.environ.get("OLLAMA_BASE_URL", "http://127.0.0.1:11434").rstrip("/")
-OLLAMA_MODEL = os.environ.get("OLLAMA_MODEL", "gemma3:4b")
+OLLAMA_MODEL_OVERRIDE = os.environ.get("OLLAMA_MODEL", "").strip()
 CHAT_TIMEOUT_SECONDS = int(os.environ.get("PSM_CHAT_TIMEOUT_SECONDS", "45"))
+CHAT_MAX_TOKENS_OVERRIDE = os.environ.get("PSM_CHAT_MAX_TOKENS", "").strip()
 
 
 def main() -> None:
@@ -210,7 +210,8 @@ def run_chat_turn(messages: list[dict], scenario: str) -> dict:
         conversation,
         project_context,
     )
-    assistant_message = build_chat_answer(current, conversation, result, intent, project_context)
+    generation = build_chat_generation(current, conversation, result, intent, project_context)
+    assistant_message = generation["answer"]
     quality_audit = audit_chat_answer(
         current,
         assistant_message,
@@ -225,6 +226,13 @@ def run_chat_turn(messages: list[dict], scenario: str) -> dict:
         "audit_text": audit_text,
         "intent": intent,
         "assistant_message": assistant_message,
+        "generation": {
+            **generation,
+            "grounded_facts": grounding_facts,
+            "grounding_sources": grounding_sources,
+            "uncertainties": result["packet"].get("eta", {}).get("uncertainties", []),
+            "required_judges": result["route"].get("required_judges", []),
+        },
         "assistant_audit": audit_candidate_text(assistant_message, result),
         "quality_audit": quality_audit,
         "state_continuity": {
@@ -254,42 +262,71 @@ def normalize_chat_messages(messages: list[dict]) -> list[dict[str, str]]:
     return normalized
 
 
-def build_chat_answer(
+def build_chat_generation(
     current: str,
     conversation: list[dict[str, str]],
     result: dict,
     intent: str,
     project_context: dict,
-) -> str:
+) -> dict:
     text = current.strip()
     if intent == "identity":
-        return (
+        return deterministic_generation(
             "你好，我是物性AI的本地聊天原型。你可以像现在这样直接问我问题，我会先按普通对话回答；"
             "如果问题涉及医疗、法律、交易、上线发布等高风险场景，我会保留边界，不把草案说成已经验证的结论。"
         )
     if intent == "psm_vs_llm":
-        return psm_vs_llm_answer()
+        return deterministic_generation(psm_vs_llm_answer())
     if intent == "project_status":
-        return project_status_answer(project_context)
+        return deterministic_generation(project_status_answer(project_context))
     if intent == "roadmap":
-        return roadmap_answer(project_context)
+        return deterministic_generation(roadmap_answer(project_context))
     if intent == "history_reference":
-        return history_reference_answer(text, conversation)
+        return deterministic_generation(history_reference_answer(text, conversation))
     if intent == "chat_capability":
-        return (
+        return deterministic_generation(
             "可以聊天。你直接输入问题，我会结合前面的对话回答；涉及高风险事项时，我会说明证据和执行边界。"
         )
     if intent == "repeated_question":
         previous = previous_answer_for_same_question(conversation, current)
         if previous:
-            return f"这个问题刚才问过。核心回答仍是：{first_answer_sentence(previous)}"
-    answer = try_ollama_chat_answer(current, conversation, result)
-    if not answer:
-        answer = fallback_chat_answer(current, result, conversation)
-    audit = audit_candidate_text(answer, result)
+            return deterministic_generation(
+                f"这个问题刚才问过。核心回答仍是：{first_answer_sentence(previous)}"
+            )
+    model_generation = try_ollama_chat_generation(current, conversation, result)
+    if model_generation["status"] != "success":
+        return deterministic_generation(
+            fallback_chat_answer(current, result, conversation),
+            status="degraded",
+            attempted=model_generation,
+        )
+    audit = audit_candidate_text(model_generation["answer"], result)
     if audit["status"] in {"unsafe", "risky"}:
-        return fallback_chat_answer(current, result, conversation)
-    return answer
+        return deterministic_generation(
+            fallback_chat_answer(current, result, conversation),
+            status="rejected",
+            attempted=model_generation,
+        )
+    return model_generation
+
+
+def deterministic_generation(
+    answer: str,
+    *,
+    status: str = "success",
+    attempted: dict | None = None,
+) -> dict:
+    return {
+        "answer": answer,
+        "status": status,
+        "provider": "deterministic" if attempted is None else "deterministic_fallback",
+        "model": None,
+        "duration_ms": (attempted or {}).get("duration_ms", 0),
+        "error": (attempted or {}).get("error"),
+        "attempted_provider": (attempted or {}).get("provider"),
+        "attempted_model": (attempted or {}).get("model"),
+        "reasoning_leak_removed": (attempted or {}).get("reasoning_leak_removed", False),
+    }
 
 
 def detect_chat_intent(text: str, conversation: list[dict[str, str]]) -> str:
@@ -504,95 +541,60 @@ def psm_vs_llm_answer() -> str:
     )
 
 
-def try_ollama_chat_answer(
+def try_ollama_chat_generation(
     current: str,
     conversation: list[dict[str, str]],
     result: dict,
-) -> str:
+) -> dict:
     prompt = build_chat_prompt(current, conversation, result)
-    request = urllib.request.Request(
-        f"{OLLAMA_BASE_URL}/api/generate",
-        data=json.dumps(
-            {
-                "model": OLLAMA_MODEL,
-                "prompt": prompt,
-                "stream": False,
-                "options": {"temperature": 0.3, "num_predict": 420},
-            },
-            ensure_ascii=False,
-        ).encode("utf-8"),
-        headers={"Content-Type": "application/json"},
-        method="POST",
+    provider_result = OllamaChatProvider(OLLAMA_BASE_URL).generate(
+        ProviderRequest(
+            prompt=prompt,
+            model=selected_chat_model(),
+            timeout_seconds=CHAT_TIMEOUT_SECONDS,
+            max_tokens=selected_chat_max_tokens(),
+        )
     )
-    started = time.perf_counter()
-    try:
-        with urllib.request.urlopen(request, timeout=CHAT_TIMEOUT_SECONDS) as response:
-            payload = json.loads(response.read().decode("utf-8"))
-    except (urllib.error.URLError, TimeoutError, json.JSONDecodeError):
-        return ""
-    text = str(payload.get("response") or "").strip()
-    if not text:
-        return ""
+    generation = provider_result.to_dict()
+    if provider_result.status != "success":
+        generation["reasoning_leak_removed"] = False
+        return generation
+    text, reasoning_leak = sanitize_model_answer(provider_result.answer)
     if text.startswith(("PSM 门控候选回答", "普通候选回答")):
-        return ""
-    duration_ms = int((time.perf_counter() - started) * 1000)
-    text = sanitize_chat_answer(text)
-    return text[:1800].strip() + (f"\n\n（本地模型回答，用时 {duration_ms}ms）" if duration_ms > 0 else "")
+        generation.update(status="invalid_response", answer="", error="Candidate template leaked.")
+        generation["reasoning_leak_removed"] = reasoning_leak
+        return generation
+    if not text:
+        generation.update(status="empty", answer="", error="No visible answer remained after sanitation.")
+        generation["reasoning_leak_removed"] = reasoning_leak
+        return generation
+    generation["answer"] = text[:1800].strip()
+    generation["reasoning_leak_removed"] = reasoning_leak
+    return generation
 
 
-def build_chat_prompt(
-    current: str,
-    conversation: list[dict[str, str]],
-    result: dict,
-) -> str:
-    packet = result["packet"]
-    q_audit = result["q_audit"]
-    route = result["route"]
-    bsigma = result["bsigma_audit"]
-    role_labels = {"user": "用户", "assistant": "助手"}
-    recent = "\n".join(
-        f"{role_labels[item['role']]}：{item['content']}" for item in conversation[-8:]
-    )
-    required_judges = ", ".join(route["required_judges"]) or "无强制外部裁判"
-    return "\n".join(
-        [
-            "你是物性AI的聊天助手。用户希望正常聊天：我问，你答。",
-            "请像普通聊天产品一样直接、自然、简洁地回答，不要把内部审计流程当作正文展示。",
-            "不要使用 emoji，不要用过度热情的客服腔，不要只确认页面状态而回避用户真正问题。",
-            "除非用户主动询问机制，不要输出 PSM、Q 核、Ω、B_sigma、Σ+、门控候选、状态链这些术语。",
-            "如果问题属于医疗、法律、交易、生产上线、隐私合规、外部发布等高风险场景：可以解释、列步骤、给草案，但必须明确不能替代专业判断或真实授权，不要给已验证/已批准/可直接执行的结论。",
-            "如果问题是普通闲聊、写作、解释、计划、代码思路，则直接帮助用户。",
-            "中文回答，优先繁简混合可读，控制在 500 字以内。",
-            "",
-            "最近对话（保留角色）：",
-            recent,
-            "",
-            "当前用户问题：",
-            current,
-            "",
-            "内部状态，只用于把握风险，不要原样输出：",
-            f"- domain: {packet['domain']}",
-            f"- risk_level: {packet['omega']['risk_level']}",
-            f"- q_status: {q_audit['status']}",
-            f"- route: {route['route']}",
-            f"- required_judges: {required_judges}",
-            f"- bsigma_status: {bsigma['status']}",
-        ]
-    )
+def selected_chat_model() -> str:
+    if OLLAMA_MODEL_OVERRIDE:
+        return OLLAMA_MODEL_OVERRIDE
+    selection_path = PSM_ROOT / "runtime" / "chat_provider_selection.json"
+    if selection_path.exists():
+        selection = load_json(selection_path)
+        selected = str(selection.get("selected_model") or "").strip()
+        if selected:
+            return selected
+    return "gemma3:4b"
 
 
-def sanitize_chat_answer(text: str) -> str:
-    emoji_ranges = [
-        (0x1F300, 0x1FAFF),
-        (0x2600, 0x27BF),
-    ]
-    cleaned = []
-    for char in text:
-        code = ord(char)
-        if any(start <= code <= end for start, end in emoji_ranges):
-            continue
-        cleaned.append(char)
-    return "".join(cleaned).strip()
+def selected_chat_max_tokens() -> int:
+    if CHAT_MAX_TOKENS_OVERRIDE:
+        return int(CHAT_MAX_TOKENS_OVERRIDE)
+    selection_path = PSM_ROOT / "runtime" / "chat_provider_selection.json"
+    if selection_path.exists():
+        selection = load_json(selection_path)
+        selected = selection.get("generation_parameters", {}).get("max_tokens")
+        if isinstance(selected, int) and selected > 0:
+            return selected
+    return 180
 
 
 def fallback_chat_answer(
@@ -757,6 +759,11 @@ def humanize_stage_objective(objective: str) -> str:
         )
     if "model bakeoff" in objective.casefold():
         return "建立本地模型对比与选择基线，按质量、风险、延迟和资源占用选择候选模型"
+    if "independent chat golden and blind-set contract" in objective.casefold():
+        return (
+            "建立独立聊天黄金集和冻结盲集，按来源切分并禁止盲集回流，"
+            "将回答有用性与安全指标分开报告"
+        )
     if "refresh full required/fault external evidence" in objective.casefold():
         return (
             "完成 v249_ 的全量必要/故障与定向 Ollama/控制器证据刷新，"

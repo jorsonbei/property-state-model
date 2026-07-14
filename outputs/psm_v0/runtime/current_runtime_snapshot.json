@@ -2,17 +2,9 @@
   "schema_version": "psm_public_runtime_snapshot_v1",
   "project_status": {
     "updated_from_local_artifacts": true,
-    "current_version": "psm_v0.249",
+    "current_version": "psm_v0.250",
     "source_evidence_version": "psm_v0.249",
-    "previous_formal_version": "psm_v0.247",
-    "completed_result": "formal_core_expansion",
-    "family": {
-      "family_id": "v249_chat_quality_intent_grounding_boundary_adversarial",
-      "case_pack": "case_packs/v0_249_chat_quality_intent_grounding_boundary_adversarial_cases.json",
-      "formal_cases": "cases/v0_249_chat_quality_intent_grounding_boundary_adversarial_cases.json",
-      "objective": "Add chat-quality intent and grounding boundaries: project status, roadmaps, assistant-turn history, hidden audit context, identity, theory explanations, repeated questions, and high-risk refusal-with-help must remain relevant and grounded instead of becoming invented progress, debug leakage, domain override, generic capability acknowledgements, duplicate loops, or total evasion.",
-      "cases": 18
-    },
+    "completed_result": "optional_external_refresh",
     "core_metrics": {
       "eval": {
         "report": "eval_out/PSM_V0.249_Eval_Report.md",
@@ -59,8 +51,8 @@
       "holdout_no_retrain_ledger_events": 0,
       "active_learning_queue_items": 0
     },
-    "candidate_gate": {
-      "version": "psm_v0.249",
+    "full_required_fault_external": {
+      "version": "psm_v0.250",
       "holdout_cases": 1957,
       "case_prefixes": [
         "v15_",
@@ -204,20 +196,173 @@
       "optional_controller_rescue_count": null,
       "rule_replacement_allowed": false
     },
-    "taxonomy": {
-      "rows": 5886,
-      "ledger_events": 18062,
+    "targeted_optional_external": {
+      "version": "psm_v0.250_ollama_v249",
+      "holdout_cases": 18,
+      "case_prefixes": [
+        "v249_"
+      ],
+      "adapters_run": [
+        "builtin",
+        "sample_command",
+        "ollama_command",
+        "fault_boundary_erasure",
+        "fault_malformed_json",
+        "fault_empty_stdout",
+        "fault_timeout"
+      ],
+      "required_gate_adapters": [
+        "builtin",
+        "sample_command"
+      ],
+      "optional_external_adapters": [
+        "ollama_command"
+      ],
+      "fault_injection_adapters": [
+        "fault_boundary_erasure",
+        "fault_malformed_json",
+        "fault_empty_stdout",
+        "fault_timeout"
+      ],
+      "candidate_text_clean": true,
+      "external_candidate_text_clean": true,
+      "required_gated_psm_unsafe_or_risky": 0,
+      "optional_gated_psm_unsafe_or_risky": 0,
+      "fault_gated_psm_unsafe_or_risky": 0,
+      "fault_injection_events": 101,
+      "controller_rescue_count": 18,
+      "optional_ordinary_unsafe_or_risky": 6,
+      "optional_raw_psm_unsafe_or_risky": 0,
+      "optional_gated_psm_unsafe_or_risky_adapter": 0,
+      "optional_controller_changed_count": 18,
+      "optional_controller_rescue_count": 0,
+      "rule_replacement_allowed": false
+    },
+    "targeted_optional_taxonomy": {
+      "rows": 87,
+      "ledger_events": 156,
       "invariants_passed": true
     },
-    "fixtures": {
-      "coverage_passed": true,
-      "fixtures": 6
-    },
-    "taxonomy_delta": {
-      "changed_groups": 19,
+    "targeted_optional_taxonomy_delta": {
+      "changed_groups": 79,
       "invariant_changes": 0,
       "unexpected_regression": false,
       "rule_replacement_allowed": false
+    },
+    "risk_analysis": {
+      "optional_rows": 18,
+      "raw_psm_risky_rows": 0,
+      "controller_rescued_rows": 0,
+      "gated_psm_risky_rows": 0,
+      "risk_counts": {},
+      "domain_counts": {},
+      "require_rescues": false,
+      "rule_replacement_allowed": false
+    },
+    "fixture_regression": {
+      "fixtures": 0,
+      "passed_fixtures": 0,
+      "failed_fixtures": 0,
+      "target_counts": {},
+      "risk_counts": {},
+      "empty_fixture_allowed": true,
+      "release_candidate_mode": "psm_gated",
+      "raw_or_ordinary_release_allowed": false,
+      "rule_replacement_allowed": false
+    },
+    "optional_external_regression": {
+      "passed": true,
+      "checks": 19
+    },
+    "hardening": {
+      "static_checks_passed": true,
+      "fresh_evidence_available": true,
+      "target_counts": {},
+      "source_raw_risk_counts": {},
+      "fresh_metrics_version": "psm_v0.250_ollama_v249",
+      "fresh_holdout_cases": 18,
+      "fresh_optional_raw_psm_unsafe_or_risky": 0,
+      "fresh_optional_gated_psm_unsafe_or_risky": 0,
+      "fresh_controller_rescue_count": 0,
+      "fresh_risk_analysis_summary": {
+        "optional_rows": 18,
+        "raw_psm_risky_rows": 0,
+        "controller_rescued_rows": 0,
+        "gated_psm_risky_rows": 0,
+        "risk_counts": {},
+        "domain_counts": {},
+        "require_rescues": false,
+        "rule_replacement_allowed": false
+      },
+      "release_candidate_mode": "psm_gated",
+      "raw_or_ordinary_release_allowed": false,
+      "rule_replacement_allowed": false
+    },
+    "trend_passed": true,
+    "reaudit": {
+      "version": "psm_v0.250_ollama_v249",
+      "holdout_cases": 18,
+      "case_prefixes": [
+        "v249_"
+      ],
+      "adapters_run": [
+        "builtin",
+        "sample_command",
+        "ollama_command",
+        "fault_boundary_erasure",
+        "fault_malformed_json",
+        "fault_empty_stdout",
+        "fault_timeout"
+      ],
+      "required_gate_adapters": [
+        "builtin",
+        "sample_command"
+      ],
+      "optional_external_adapters": [
+        "ollama_command"
+      ],
+      "fault_injection_adapters": [
+        "fault_boundary_erasure",
+        "fault_malformed_json",
+        "fault_empty_stdout",
+        "fault_timeout"
+      ],
+      "candidate_text_clean": true,
+      "external_candidate_text_clean": true,
+      "required_gated_psm_unsafe_or_risky": 0,
+      "optional_gated_psm_unsafe_or_risky": 0,
+      "fault_gated_psm_unsafe_or_risky": 0,
+      "fault_injection_events": 101,
+      "controller_rescue_count": 18,
+      "optional_ordinary_unsafe_or_risky": 6,
+      "optional_raw_psm_unsafe_or_risky": 0,
+      "optional_gated_psm_unsafe_or_risky_adapter": 0,
+      "optional_controller_changed_count": 18,
+      "optional_controller_rescue_count": 0,
+      "rule_replacement_allowed": false
+    },
+    "trend": {
+      "core_source_version": "psm_v0.249",
+      "core_records": 2210,
+      "latest_generation_version": "psm_v0.250_ollama_v249",
+      "latest_generation_case_prefixes": [
+        "v249_"
+      ],
+      "latest_generation_cases": 18,
+      "latest_optional_raw_psm_unsafe_or_risky": 0,
+      "latest_optional_gated_psm_unsafe_or_risky": 0,
+      "baseline_to_latest_raw_risk_delta": 0,
+      "baseline_to_latest_controller_rescue_delta": 0,
+      "reaudit_version": "psm_v0.250_ollama_v249",
+      "reaudit_optional_raw_psm_unsafe_or_risky": 0,
+      "reaudit_optional_gated_psm_unsafe_or_risky": 0,
+      "recommended_next_stage": "Protect the independent chat golden and blind-set contract: authored questions, source-based splits, non-backflow blind rows, separate usefulness and safety reporting, and domain-specific blind evidence must not become training truth, open-domain generalization, release approval, clinical validation, profitability, or theory proof.",
+      "rule_replacement_allowed": false
+    },
+    "release_summary": {
+      "passed": true,
+      "decision": "publish_psm_gated_optional_external_evidence_only",
+      "next_family": "v251_independent_chat_golden_blind_set_boundary_adversarial"
     },
     "boundaries": {
       "state_labels_authoritative": true,
@@ -227,23 +372,28 @@
       "rule_replacement_allowed": false
     },
     "next_stage": {
-      "version": "PSM_V0.250",
-      "objective": "refresh full required/fault external evidence and targeted optional Ollama/controller evidence for `v249_`.",
+      "version": "PSM_V0.251",
+      "objective": "Protect the independent chat golden and blind-set contract: authored questions, source-based splits, non-backflow blind rows, separate usefulness and safety reporting, and domain-specific blind evidence must not become training truth, open-domain generalization, release approval, clinical validation, profitability, or theory proof.",
       "blocked": false,
       "requires_user_input": false
     },
     "primary_artifacts": {
-      "case_pack": "case_packs/v0_249_chat_quality_intent_grounding_boundary_adversarial_cases.json",
-      "case_pack_validation": "case_packs/v0_249_chat_quality_intent_grounding_boundary_adversarial_cases_validation.json",
-      "formal_cases": "cases/v0_249_chat_quality_intent_grounding_boundary_adversarial_cases.json",
-      "eval_report": "eval_out/PSM_V0.249_Eval_Report.md",
-      "state_dataset": "state_dataset_out/psm_v0.249_state_encoder.jsonl",
-      "candidate_metrics": "candidate_holdout_out/psm_v0.249_candidate_holdout_metrics.json",
-      "candidate_taxonomy": "taxonomy_out/psm_v0.249_candidate_taxonomy.json",
-      "candidate_regression_fixtures": "fixture_out/psm_v0.249_candidate_regression_fixtures.json",
-      "taxonomy_delta": "taxonomy_delta_out/psm_v0.249_taxonomy_delta.json",
-      "project_status": "project_status_out/psm_v0.249_project_status.json",
-      "regression": "regression_out/psm_v0.249_regression_check.json"
+      "source_formal_status": "project_status_out/psm_v0.249_project_status.json",
+      "full_required_fault_metrics": "candidate_external_out/psm_v0.250_candidate_holdout_metrics.json",
+      "optional_external_metrics": "candidate_external_out/psm_v0.250_ollama_v249_candidate_holdout_metrics.json",
+      "optional_external_ledger": "candidate_external_out/psm_v0.250_ollama_v249_candidate_failure_ledger.jsonl",
+      "optional_external_taxonomy": "taxonomy_external_out/psm_v0.250_ollama_v249_candidate_taxonomy.json",
+      "optional_external_taxonomy_delta": "taxonomy_external_delta_out/psm_v0.250_ollama_v249_taxonomy_delta.json",
+      "optional_external_risk_fixtures": "external_risk_out/psm_v0.250_ollama_v249_optional_external_risk_fixtures.json",
+      "optional_external_fixture_regression": "external_fixture_regression_out/psm_v0.250_ollama_v249_optional_external_fixture_regression.json",
+      "optional_external_regression": "regression_external_out/psm_v0.250_ollama_v249_optional_external_regression_check.json",
+      "optional_external_hardening_check": "external_hardening_out/psm_v0.250_ollama_v249_optional_external_hardening_check.json",
+      "optional_external_reaudit_metrics": "candidate_external_reaudit_out/psm_v0.250_ollama_v249_candidate_reaudit_metrics.json",
+      "optional_external_evidence_trend": "evidence_trend_out/psm_v0.250_ollama_v249_optional_external_evidence_trend.json",
+      "optional_external_release_summary": "release_out/psm_v0.250_ollama_v249_optional_external_release_summary.json",
+      "next_expansion_family": "expansion_out/psm_v0.250_ollama_v249_next_expansion_family.json",
+      "project_status": "project_status_out/psm_v0.250_project_status.json",
+      "regression": "regression_out/psm_v0.250_regression_check.json"
     },
     "regression": {
       "stem": "psm_v0.249",
@@ -290,41 +440,41 @@
         "taxonomy_delta_changed_groups": 19
       },
       "rule_replacement_allowed": false,
-      "check_version": "psm_v0.249"
+      "check_version": "psm_v0.250"
     }
   },
   "optional_project_status": {
     "updated_from_local_artifacts": true,
-    "current_version": "psm_v0.248",
-    "source_evidence_version": "psm_v0.247",
+    "current_version": "psm_v0.250",
+    "source_evidence_version": "psm_v0.249",
     "completed_result": "optional_external_refresh",
     "core_metrics": {
       "eval": {
-        "report": "eval_out/PSM_V0.247_Eval_Report.md",
-        "cases": 2192,
-        "passed": 2192,
+        "report": "eval_out/PSM_V0.249_Eval_Report.md",
+        "cases": 2210,
+        "passed": 2210,
         "failed": 0,
         "average_gate_score": 1.0
       },
-      "state_records": 2192,
+      "state_records": 2210,
       "state_validation_passed": true,
       "state_validation_errors": 0,
       "state_validation_warnings": 0,
       "splits": {
         "test": 10,
-        "train": 2172,
+        "train": 2190,
         "validation": 10
       },
       "domains": {
         "business_decision": 104,
         "code_engineering": 383,
-        "general": 285,
+        "general": 293,
         "legal": 121,
-        "medical": 782,
+        "medical": 784,
         "research": 138,
         "trading": 165,
         "writing": 106,
-        "wuxing_theory": 108
+        "wuxing_theory": 116
       },
       "state_encoder_exact_match": 1.0,
       "bsigma_exact_match": 1.0,
@@ -345,8 +495,8 @@
       "active_learning_queue_items": 0
     },
     "full_required_fault_external": {
-      "version": "psm_v0.248",
-      "holdout_cases": 1939,
+      "version": "psm_v0.250",
+      "holdout_cases": 1957,
       "case_prefixes": [
         "v15_",
         "v26_residual_",
@@ -453,7 +603,8 @@
         "v241_",
         "v243_",
         "v245_",
-        "v247_"
+        "v247_",
+        "v249_"
       ],
       "adapters_run": [
         "builtin",
@@ -479,8 +630,8 @@
       "required_gated_psm_unsafe_or_risky": 0,
       "optional_gated_psm_unsafe_or_risky": 0,
       "fault_gated_psm_unsafe_or_risky": 0,
-      "fault_injection_events": 7092,
-      "controller_rescue_count": 1939,
+      "fault_injection_events": 7148,
+      "controller_rescue_count": 1957,
       "optional_ordinary_unsafe_or_risky": null,
       "optional_raw_psm_unsafe_or_risky": null,
       "optional_gated_psm_unsafe_or_risky_adapter": null,
@@ -489,10 +640,10 @@
       "rule_replacement_allowed": false
     },
     "targeted_optional_external": {
-      "version": "psm_v0.248_ollama_v247",
+      "version": "psm_v0.250_ollama_v249",
       "holdout_cases": 18,
       "case_prefixes": [
-        "v247_"
+        "v249_"
       ],
       "adapters_run": [
         "builtin",
@@ -521,9 +672,9 @@
       "required_gated_psm_unsafe_or_risky": 0,
       "optional_gated_psm_unsafe_or_risky": 0,
       "fault_gated_psm_unsafe_or_risky": 0,
-      "fault_injection_events": 113,
+      "fault_injection_events": 101,
       "controller_rescue_count": 18,
-      "optional_ordinary_unsafe_or_risky": 16,
+      "optional_ordinary_unsafe_or_risky": 6,
       "optional_raw_psm_unsafe_or_risky": 0,
       "optional_gated_psm_unsafe_or_risky_adapter": 0,
       "optional_controller_changed_count": 18,
@@ -532,11 +683,11 @@
     },
     "targeted_optional_taxonomy": {
       "rows": 87,
-      "ledger_events": 253,
+      "ledger_events": 156,
       "invariants_passed": true
     },
     "targeted_optional_taxonomy_delta": {
-      "changed_groups": 27,
+      "changed_groups": 79,
       "invariant_changes": 0,
       "unexpected_regression": false,
       "rule_replacement_allowed": false
@@ -571,7 +722,7 @@
       "fresh_evidence_available": true,
       "target_counts": {},
       "source_raw_risk_counts": {},
-      "fresh_metrics_version": "psm_v0.248_ollama_v247",
+      "fresh_metrics_version": "psm_v0.250_ollama_v249",
       "fresh_holdout_cases": 18,
       "fresh_optional_raw_psm_unsafe_or_risky": 0,
       "fresh_optional_gated_psm_unsafe_or_risky": 0,
@@ -592,10 +743,10 @@
     },
     "trend_passed": true,
     "reaudit": {
-      "version": "psm_v0.248_ollama_v247",
+      "version": "psm_v0.250_ollama_v249",
       "holdout_cases": 18,
       "case_prefixes": [
-        "v247_"
+        "v249_"
       ],
       "adapters_run": [
         "builtin",
@@ -624,9 +775,9 @@
       "required_gated_psm_unsafe_or_risky": 0,
       "optional_gated_psm_unsafe_or_risky": 0,
       "fault_gated_psm_unsafe_or_risky": 0,
-      "fault_injection_events": 113,
+      "fault_injection_events": 101,
       "controller_rescue_count": 18,
-      "optional_ordinary_unsafe_or_risky": 16,
+      "optional_ordinary_unsafe_or_risky": 6,
       "optional_raw_psm_unsafe_or_risky": 0,
       "optional_gated_psm_unsafe_or_risky_adapter": 0,
       "optional_controller_changed_count": 18,
@@ -634,27 +785,27 @@
       "rule_replacement_allowed": false
     },
     "trend": {
-      "core_source_version": "psm_v0.247",
-      "core_records": 2192,
-      "latest_generation_version": "psm_v0.248_ollama_v247",
+      "core_source_version": "psm_v0.249",
+      "core_records": 2210,
+      "latest_generation_version": "psm_v0.250_ollama_v249",
       "latest_generation_case_prefixes": [
-        "v247_"
+        "v249_"
       ],
       "latest_generation_cases": 18,
       "latest_optional_raw_psm_unsafe_or_risky": 0,
       "latest_optional_gated_psm_unsafe_or_risky": 0,
       "baseline_to_latest_raw_risk_delta": 0,
       "baseline_to_latest_controller_rescue_delta": 0,
-      "reaudit_version": "psm_v0.248_ollama_v247",
+      "reaudit_version": "psm_v0.250_ollama_v249",
       "reaudit_optional_raw_psm_unsafe_or_risky": 0,
       "reaudit_optional_gated_psm_unsafe_or_risky": 0,
-      "recommended_next_stage": "Add chat-quality intent and grounding boundaries: project status, roadmaps, assistant-turn history, hidden audit context, identity, theory explanations, repeated questions, and high-risk refusal-with-help must remain relevant and grounded instead of becoming invented progress, debug leakage, domain override, generic capability acknowledgements, duplicate loops, or total evasion.",
+      "recommended_next_stage": "Protect the independent chat golden and blind-set contract: authored questions, source-based splits, non-backflow blind rows, separate usefulness and safety reporting, and domain-specific blind evidence must not become training truth, open-domain generalization, release approval, clinical validation, profitability, or theory proof.",
       "rule_replacement_allowed": false
     },
     "release_summary": {
       "passed": true,
       "decision": "publish_psm_gated_optional_external_evidence_only",
-      "next_family": "v249_chat_quality_intent_grounding_boundary_adversarial"
+      "next_family": "v251_independent_chat_golden_blind_set_boundary_adversarial"
     },
     "boundaries": {
       "state_labels_authoritative": true,
@@ -664,31 +815,31 @@
       "rule_replacement_allowed": false
     },
     "next_stage": {
-      "version": "PSM_V0.249",
-      "objective": "Add chat-quality intent and grounding boundaries: project status, roadmaps, assistant-turn history, hidden audit context, identity, theory explanations, repeated questions, and high-risk refusal-with-help must remain relevant and grounded instead of becoming invented progress, debug leakage, domain override, generic capability acknowledgements, duplicate loops, or total evasion.",
+      "version": "PSM_V0.251",
+      "objective": "Protect the independent chat golden and blind-set contract: authored questions, source-based splits, non-backflow blind rows, separate usefulness and safety reporting, and domain-specific blind evidence must not become training truth, open-domain generalization, release approval, clinical validation, profitability, or theory proof.",
       "blocked": false,
       "requires_user_input": false
     },
     "primary_artifacts": {
-      "source_formal_status": "project_status_out/psm_v0.247_project_status.json",
-      "full_required_fault_metrics": "candidate_external_out/psm_v0.248_candidate_holdout_metrics.json",
-      "optional_external_metrics": "candidate_external_out/psm_v0.248_ollama_v247_candidate_holdout_metrics.json",
-      "optional_external_ledger": "candidate_external_out/psm_v0.248_ollama_v247_candidate_failure_ledger.jsonl",
-      "optional_external_taxonomy": "taxonomy_external_out/psm_v0.248_ollama_v247_candidate_taxonomy.json",
-      "optional_external_taxonomy_delta": "taxonomy_external_delta_out/psm_v0.248_ollama_v247_taxonomy_delta.json",
-      "optional_external_risk_fixtures": "external_risk_out/psm_v0.248_ollama_v247_optional_external_risk_fixtures.json",
-      "optional_external_fixture_regression": "external_fixture_regression_out/psm_v0.248_ollama_v247_optional_external_fixture_regression.json",
-      "optional_external_regression": "regression_external_out/psm_v0.248_ollama_v247_optional_external_regression_check.json",
-      "optional_external_hardening_check": "external_hardening_out/psm_v0.248_ollama_v247_optional_external_hardening_check.json",
-      "optional_external_reaudit_metrics": "candidate_external_reaudit_out/psm_v0.248_ollama_v247_candidate_reaudit_metrics.json",
-      "optional_external_evidence_trend": "evidence_trend_out/psm_v0.248_ollama_v247_optional_external_evidence_trend.json",
-      "optional_external_release_summary": "release_out/psm_v0.248_ollama_v247_optional_external_release_summary.json",
-      "next_expansion_family": "expansion_out/psm_v0.248_ollama_v247_next_expansion_family.json",
-      "project_status": "project_status_out/psm_v0.248_project_status.json",
-      "regression": "regression_out/psm_v0.248_regression_check.json"
+      "source_formal_status": "project_status_out/psm_v0.249_project_status.json",
+      "full_required_fault_metrics": "candidate_external_out/psm_v0.250_candidate_holdout_metrics.json",
+      "optional_external_metrics": "candidate_external_out/psm_v0.250_ollama_v249_candidate_holdout_metrics.json",
+      "optional_external_ledger": "candidate_external_out/psm_v0.250_ollama_v249_candidate_failure_ledger.jsonl",
+      "optional_external_taxonomy": "taxonomy_external_out/psm_v0.250_ollama_v249_candidate_taxonomy.json",
+      "optional_external_taxonomy_delta": "taxonomy_external_delta_out/psm_v0.250_ollama_v249_taxonomy_delta.json",
+      "optional_external_risk_fixtures": "external_risk_out/psm_v0.250_ollama_v249_optional_external_risk_fixtures.json",
+      "optional_external_fixture_regression": "external_fixture_regression_out/psm_v0.250_ollama_v249_optional_external_fixture_regression.json",
+      "optional_external_regression": "regression_external_out/psm_v0.250_ollama_v249_optional_external_regression_check.json",
+      "optional_external_hardening_check": "external_hardening_out/psm_v0.250_ollama_v249_optional_external_hardening_check.json",
+      "optional_external_reaudit_metrics": "candidate_external_reaudit_out/psm_v0.250_ollama_v249_candidate_reaudit_metrics.json",
+      "optional_external_evidence_trend": "evidence_trend_out/psm_v0.250_ollama_v249_optional_external_evidence_trend.json",
+      "optional_external_release_summary": "release_out/psm_v0.250_ollama_v249_optional_external_release_summary.json",
+      "next_expansion_family": "expansion_out/psm_v0.250_ollama_v249_next_expansion_family.json",
+      "project_status": "project_status_out/psm_v0.250_project_status.json",
+      "regression": "regression_out/psm_v0.250_regression_check.json"
     },
     "regression": {
-      "stem": "psm_v0.247",
+      "stem": "psm_v0.249",
       "passed": true,
       "checks": {
         "eval_report_exists": true,
@@ -723,16 +874,16 @@
         "case_pack_expected_count": true
       },
       "counts": {
-        "dataset_rows": 2192,
-        "manifest_records": 2192,
-        "candidate_rows": 5832,
-        "expected_candidate_rows": 5832,
-        "candidate_ledger_events": 17958,
-        "expected_candidate_ledger_events": 17958,
-        "taxonomy_delta_changed_groups": 58
+        "dataset_rows": 2210,
+        "manifest_records": 2210,
+        "candidate_rows": 5886,
+        "expected_candidate_rows": 5886,
+        "candidate_ledger_events": 18062,
+        "expected_candidate_ledger_events": 18062,
+        "taxonomy_delta_changed_groups": 19
       },
       "rule_replacement_allowed": false,
-      "check_version": "psm_v0.248"
+      "check_version": "psm_v0.250"
     }
   },
   "chat_readiness": {

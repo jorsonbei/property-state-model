@@ -1,20 +1,20 @@
 {
   "schema_version": "psm_artifact_inventory_v1",
-  "generated_at": "2026-07-14T08:23:45.575118+00:00",
+  "generated_at": "2026-07-14T09:01:39.176316+00:00",
   "root": "outputs/psm_v0",
   "read_only_scan": true,
   "content_hashing_performed": false,
-  "metadata_sha256": "948a7348b6d8798cd5ed4ab61fc2cba4bf20aab28773625f3938ae27c6583adc",
+  "metadata_sha256": "8c37917d5eda55b129ec26cf9e51646e72e795ec18c5f676a141957265e3161c",
   "summary": {
-    "files": 26531,
-    "bytes": 6346905084
+    "files": 26663,
+    "bytes": 6395003306
   },
   "directories": [
     {
       "path": "candidate_external_out",
       "policy": "generated_evidence",
-      "files": 9985,
-      "bytes": 2587188095
+      "files": 10079,
+      "bytes": 2634592141
     },
     {
       "path": "candidate_holdout_out",
@@ -43,8 +43,8 @@
     {
       "path": "candidate_external_reaudit_out",
       "policy": "generated_evidence",
-      "files": 327,
-      "bytes": 110881549
+      "files": 330,
+      "bytes": 111381431
     },
     {
       "path": "shadow_out",
@@ -61,8 +61,8 @@
     {
       "path": "project_status_out",
       "policy": "generated_evidence",
-      "files": 450,
-      "bytes": 16162358
+      "files": 452,
+      "bytes": 16177295
     },
     {
       "path": "state_encoder_out",
@@ -79,8 +79,8 @@
     {
       "path": "taxonomy_external_out",
       "policy": "generated_evidence",
-      "files": 220,
-      "bytes": 4193773
+      "files": 222,
+      "bytes": 4217029
     },
     {
       "path": "holdout_out",
@@ -91,8 +91,8 @@
     {
       "path": "psm_v0",
       "policy": "public_source_or_runtime",
-      "files": 81,
-      "bytes": 1946424
+      "files": 87,
+      "bytes": 1994202
     },
     {
       "path": "cases",
@@ -109,8 +109,8 @@
     {
       "path": "taxonomy_external_delta_out",
       "policy": "generated_evidence",
-      "files": 214,
-      "bytes": 1217044
+      "files": 216,
+      "bytes": 1241595
     },
     {
       "path": "taxonomy_delta_out",
@@ -122,31 +122,31 @@
       "path": "work",
       "policy": "public_source_or_runtime",
       "files": 63,
-      "bytes": 929562
+      "bytes": 942093
     },
     {
       "path": "evidence_trend_out",
       "policy": "generated_evidence",
-      "files": 214,
-      "bytes": 741347
+      "files": 216,
+      "bytes": 753355
     },
     {
       "path": "release_out",
       "policy": "generated_evidence",
-      "files": 204,
-      "bytes": 726773
+      "files": 206,
+      "bytes": 733752
     },
     {
       "path": "status_history",
       "policy": "local_archive",
-      "files": 4,
-      "bytes": 566503
+      "files": 5,
+      "bytes": 569040
     },
     {
       "path": "expansion_out",
       "policy": "generated_evidence",
-      "files": 204,
-      "bytes": 537378
+      "files": 206,
+      "bytes": 540361
     },
     {
       "path": "fixtures_out",
@@ -157,20 +157,20 @@
     {
       "path": "regression_out",
       "policy": "generated_evidence",
-      "files": 338,
-      "bytes": 506729
+      "files": 340,
+      "bytes": 509746
     },
     {
       "path": "regression_external_out",
       "policy": "generated_evidence",
-      "files": 220,
-      "bytes": 433748
+      "files": 222,
+      "bytes": 437612
     },
     {
       "path": "external_hardening_out",
       "policy": "generated_evidence",
-      "files": 216,
-      "bytes": 409930
+      "files": 218,
+      "bytes": 413633
     },
     {
       "path": "fixture_out",
@@ -181,14 +181,14 @@
     {
       "path": "external_fixture_regression_out",
       "policy": "generated_evidence",
-      "files": 190,
-      "bytes": 271162
+      "files": 192,
+      "bytes": 272859
     },
     {
       "path": "external_risk_out",
       "policy": "generated_evidence",
-      "files": 220,
-      "bytes": 223757
+      "files": 222,
+      "bytes": 224893
     },
     {
       "path": "compare_out",
@@ -197,16 +197,16 @@
       "bytes": 121767
     },
     {
+      "path": "product_alpha_app",
+      "policy": "public_source_or_runtime",
+      "files": 8,
+      "bytes": 112348
+    },
+    {
       "path": "dataset_out",
       "policy": "generated_evidence",
       "files": 4,
       "bytes": 111095
-    },
-    {
-      "path": "product_alpha_app",
-      "policy": "public_source_or_runtime",
-      "files": 8,
-      "bytes": 110787
     },
     {
       "path": "residual_out",
@@ -223,20 +223,26 @@
     {
       "path": "roadmap_out",
       "policy": "public_source_or_runtime",
-      "files": 33,
-      "bytes": 33294
+      "files": 35,
+      "bytes": 34741
     },
     {
       "path": "runtime",
       "policy": "public_source_or_runtime",
-      "files": 1,
-      "bytes": 24728
+      "files": 2,
+      "bytes": 31162
     },
     {
       "path": ".",
       "policy": "public_source_or_runtime",
       "files": 9,
-      "bytes": 22361
+      "bytes": 23883
+    },
+    {
+      "path": "model_bakeoff_out",
+      "policy": "public_source_or_runtime",
+      "files": 2,
+      "bytes": 17737
     },
     {
       "path": "tmp_v61_residual_probe_cases",
@@ -249,6 +255,12 @@
       "policy": "public_source_or_runtime",
       "files": 3,
       "bytes": 5908
+    },
+    {
+      "path": "benchmarks",
+      "policy": "public_source_or_runtime",
+      "files": 1,
+      "bytes": 4616
     },
     {
       "path": "external_model_profiles",
@@ -264,6 +276,10 @@
     }
   ],
   "largest_files": [
+    {
+      "path": "candidate_external_out/psm_v0.250_candidate_holdout_rows.jsonl",
+      "bytes": 35504029
+    },
     {
       "path": "candidate_holdout_out/psm_v0.249_candidate_holdout_rows.jsonl",
       "bytes": 35504029
@@ -339,10 +355,6 @@
     {
       "path": "candidate_holdout_out/psm_v0.231_candidate_holdout_rows.jsonl",
       "bytes": 32581029
-    },
-    {
-      "path": "candidate_holdout_out/psm_v0.229_candidate_holdout_rows.jsonl",
-      "bytes": 32260158
     }
   ]
 }

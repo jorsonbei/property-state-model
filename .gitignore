@@ -32,6 +32,7 @@ __pycache__/
 /outputs/psm_v0/fixture_out/
 /outputs/psm_v0/fixtures_out/
 /outputs/psm_v0/holdout_out/
+/outputs/psm_v0/model_bakeoff_out/
 /outputs/psm_v0/product_alpha_out/
 /outputs/psm_v0/project_status_out/
 /outputs/psm_v0/regression_external_out/

@@ -1,0 +1,31 @@
+{
+  "schema_version": "psm_chat_provider_selection_v1",
+  "version": "PSM_V0.250",
+  "selected_model": "gemma3:4b",
+  "fallback_model": null,
+  "benchmark_sha256": "a65545b2e6955dd22a38b067b2c3af2db1f805fb13220f6160e6de8f1c0e3e74",
+  "generation_parameters": {
+    "timeout_seconds": 45,
+    "max_tokens": 180
+  },
+  "selection_metrics": {
+    "cases": 10,
+    "mean_score": 0.95,
+    "quality_pass_rate": 1.0,
+    "mean_expected_coverage": 0.95,
+    "mean_boundary_coverage": 0.95,
+    "failures": 0,
+    "failure_rate": 0.0,
+    "empty_visible_answers": 0,
+    "median_latency_ms": 5700,
+    "p95_latency_ms": 6914,
+    "latency_target_ms": 5000,
+    "median_latency_target_passed": false,
+    "reasoning_leak_rows": 0
+  },
+  "boundary": {
+    "project_status_and_roadmap_bypass_model": true,
+    "deterministic_fallback_retained": true,
+    "external_user_trial_allowed": false
+  }
+}

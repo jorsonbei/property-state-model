@@ -9,7 +9,16 @@ from psm_v0.chat_quality_auditor import audit_chat_answer
 
 class ChatQualityTests(unittest.TestCase):
     def run_offline(self, messages: list[dict], scenario: str = "review") -> dict:
-        with patch.object(server, "try_ollama_chat_answer", return_value=""):
+        provider_failure = {
+            "status": "error",
+            "answer": "",
+            "provider": "ollama",
+            "model": "offline-test",
+            "duration_ms": 1,
+            "error": "offline test",
+            "reasoning_leak_removed": False,
+        }
+        with patch.object(server, "try_ollama_chat_generation", return_value=provider_failure):
             return server.run_chat_turn(messages, scenario)
 
     def test_project_status_comes_from_structured_local_state(self) -> None:
@@ -105,6 +114,11 @@ class ChatQualityTests(unittest.TestCase):
         self.assertIn("立即联系当地急救", answer)
         self.assertIn("不能在聊天中替代医生诊断", answer)
         self.assertEqual(result["chat"]["quality_audit"]["status"], "pass")
+        generation = result["chat"]["generation"]
+        self.assertEqual(generation["status"], "degraded")
+        self.assertEqual(generation["attempted_provider"], "ollama")
+        self.assertIn("uncertainties", generation)
+        self.assertIn("required_judges", generation)
 
     def test_quality_auditor_rejects_capability_ack_for_content_question(self) -> None:
         audit = audit_chat_answer(

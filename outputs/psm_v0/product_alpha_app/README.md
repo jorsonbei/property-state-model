@@ -1,4 +1,4 @@
-# 物性AI Chat Alpha 0.4
+# 物性AI Chat Alpha 0.5
 
 Local normal-chat demo backed by the latest PSM pipeline status.
 
@@ -24,9 +24,11 @@ Boundary:
 
 Verified scope:
 
-- `/api/status` reports the latest project status, currently `PSM V0.249`.
+- `/api/status` reports the latest project status, currently `PSM V0.250`.
 - `/api/chat` preserves user and assistant roles across multi-turn history.
 - Project status and roadmap answers are grounded in the local structured status.
 - Relevance and grounding are audited separately from candidate safety.
+- The provider contract exposes answer, grounded facts, uncertainties, required judges, model, latency, and fallback state separately.
+- `gemma3:4b` is the current local default selected by the frozen V0.250 same-question bakeoff; deterministic fallback remains mandatory.
 - The default UI is normal chat: user asks, assistant answers.
 - PSM state chain, ordinary output, gated output, release boundary, evidence, and history are kept behind the debug details panel.
