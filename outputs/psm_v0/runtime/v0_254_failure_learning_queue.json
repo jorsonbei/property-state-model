@@ -1,0 +1,22 @@
+{
+  "schema_version": "psm_failure_learning_queue_v1",
+  "candidates": [
+    {
+      "candidate_id": "flc_ce42085978debc35",
+      "failure_code": "tool_timeout",
+      "route": "retrieval_or_tool_check",
+      "state": "screened_for_regression",
+      "independent_screening_required": true,
+      "independent_screening_passed": true,
+      "eligible_for_regression": true,
+      "eligible_for_blind_set": false,
+      "eligible_for_training_truth": false,
+      "automatic_backflow_allowed": false,
+      "source_event_sha256": "ce42085978debc35257d77c76a4688525c50824baefbd65f8891b3810c6b1748"
+    }
+  ],
+  "candidate_count": 1,
+  "screened_count": 1,
+  "blind_set_backflow_count": 0,
+  "training_truth_backflow_count": 0
+}

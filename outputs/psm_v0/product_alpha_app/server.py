@@ -26,6 +26,7 @@ from psm_v0.pipeline import run_pipeline  # noqa: E402
 from psm_v0.psm_gate_controller import apply_psm_gate  # noqa: E402
 from psm_v0.route_executor import execute_route  # noqa: E402
 from psm_v0.state_extractor import infer_domain  # noqa: E402
+from psm_v0.task_state_graph import build_task_state_graph  # noqa: E402
 from psm_v0.verified_knowledge import VerifiedKnowledge, match_verified_knowledge  # noqa: E402
 
 
@@ -45,7 +46,7 @@ CHAT_MAX_TOKENS_OVERRIDE = os.environ.get("PSM_CHAT_MAX_TOKENS", "").strip()
 ROUTE_FAILURE_LEDGER = Path(
     os.environ.get(
         "PSM_ROUTE_FAILURE_LEDGER",
-        str(PSM_ROOT / "product_alpha_out" / "v0_253_route_failure_ledger.jsonl"),
+        str(PSM_ROOT / "product_alpha_out" / "v0_254_route_failure_ledger.jsonl"),
     )
 )
 
@@ -62,7 +63,7 @@ def main() -> None:
 
 
 class Handler(BaseHTTPRequestHandler):
-    server_version = "PSMProductAlpha/0.253"
+    server_version = "PSMProductAlpha/0.254"
 
     def do_GET(self) -> None:  # noqa: N802
         parsed = urlparse(self.path)
@@ -103,7 +104,12 @@ class Handler(BaseHTTPRequestHandler):
             scenario = str(payload.get("scenario") or "review")
             if parsed.path == "/api/chat":
                 messages = payload.get("messages") if isinstance(payload.get("messages"), list) else []
-                self.write_json(run_chat_turn(messages, scenario))
+                previous_graph = (
+                    payload.get("task_state_graph")
+                    if isinstance(payload.get("task_state_graph"), dict)
+                    else None
+                )
+                self.write_json(run_chat_turn(messages, scenario, previous_graph=previous_graph))
                 return
             text = str(payload.get("text") or "").strip()
             if not text:
@@ -198,7 +204,12 @@ def run_demo_case(text: str, scenario: str) -> dict:
     }
 
 
-def run_chat_turn(messages: list[dict], scenario: str) -> dict:
+def run_chat_turn(
+    messages: list[dict],
+    scenario: str,
+    *,
+    previous_graph: dict | None = None,
+) -> dict:
     conversation = normalize_chat_messages(messages)
     user_indexes = [index for index, item in enumerate(conversation) if item["role"] == "user"]
     if not user_indexes:
@@ -237,6 +248,30 @@ def run_chat_turn(messages: list[dict], scenario: str) -> dict:
         ledger_path=ROUTE_FAILURE_LEDGER,
     )
     result["route_execution"] = route_execution
+    task_state_graph = build_task_state_graph(
+        conversation,
+        result,
+        route_execution,
+        previous_graph=previous_graph,
+    )
+    result["task_state_graph"] = task_state_graph
+    result["packet"]["pi_cavity"] = {
+        **result["packet"].get("pi_cavity", {}),
+        "mode": "task_evidence_graph",
+        "graph_id": task_state_graph["graph_id"],
+        "node_count": len(task_state_graph["nodes"]),
+        "edge_count": len(task_state_graph["edges"]),
+        "state_counts": task_state_graph["state_counts"],
+        "next_protocol": task_state_graph["next_protocol"],
+    }
+    result["packet"]["eta"] = {
+        **result["packet"].get("eta", {}),
+        "mode": "task_evidence_state",
+        "unknown_count": task_state_graph["state_counts"].get("unknown", 0),
+        "conflict_count": task_state_graph["state_counts"].get("conflicting", 0),
+        "pending_count": task_state_graph["state_counts"].get("pending", 0),
+        "failure_learning_queue": task_state_graph["failure_learning_queue"],
+    }
     generation = build_chat_generation(
         current,
         conversation,
@@ -269,6 +304,8 @@ def run_chat_turn(messages: list[dict], scenario: str) -> dict:
             "uncertainties": result["packet"].get("eta", {}).get("uncertainties", []),
             "required_judges": result["route"].get("required_judges", []),
             "route_execution": route_execution,
+            "task_state_graph_id": task_state_graph["graph_id"],
+            "next_protocol": task_state_graph["next_protocol"],
         },
         "assistant_audit": audit_candidate_text(assistant_message, result),
         "quality_audit": quality_audit,
@@ -793,6 +830,13 @@ def roadmap_answer(context: dict) -> str:
             "随后加入新证据、证据撤回、未知项和冲突项的图差分测试；最后从 failure ledger 生成隔离候选队列，"
             "只有独立筛选通过后才允许进入开发集，冻结盲集与训练真相继续禁止自动回流。"
         )
+    elif context["next_version"] == "PSM V0.255":
+        construction = (
+            "施工顺序是：先重放 V0.251 冻结盲测与 V0.252-V0.254 产品、路由和状态图证据；"
+            "再用独立的正常聊天、多轮连续性、项目接地与高风险帮助式边界场景执行 API 总门；"
+            "随后核对关键事实幻觉和 critical safety false negative 必须为零，并复验桌面、手机和 Docker；"
+            "全部通过后只能给出内部使用结论，外部用户试用仍不自动开放。"
+        )
     elif context["next_version"] == "PSM V0.250":
         construction = (
             "施工顺序是：先冻结同题模型基准集，再对本地候选模型测量回答质量、边界、延迟和失败率；"
@@ -819,6 +863,16 @@ def roadmap_answer(context: dict) -> str:
 
 
 def project_results_answer(context: dict) -> str:
+    if context["current_version"] == "PSM V0.254":
+        return (
+            "这轮已完成 PSM V0.254：每轮聊天现在都会把消息、文件、来源、工具、主张、未知项、失败和裁判组织成"
+            "任务级 Π 依赖图，并把节点分成已知、推断、未知、冲突和待确认。加入新证据后，系统会给出图差分和新的"
+            "下一协议；动态 Π 与 η 已回写状态包。\n\n"
+            "它的作用是让多轮聊天不再只记住文字，而是能说明证据如何改变任务状态。失败事件只能进入隔离队列，"
+            "经过独立筛选后也只获得回归候选资格，不能自动污染盲集或训练真值。"
+            f"当前聊天模型是 `{context['selected_model']}`。下一步是 {context['next_version']}："
+            f"{context['next_objective']}。"
+        )
     if context["current_version"] == "PSM V0.253":
         return (
             "这轮已完成 PSM V0.253：Omega 不再只有路线标签，现在能实际读取结构化项目状态、已验证来源和项目内文件，"
@@ -1233,6 +1287,7 @@ def load_project_context() -> dict:
     selection = load_json(selection_path) if selection_path.exists() else {}
     selection_metrics = selection.get("selection_metrics", {})
     checkpoint_candidates = (
+        PSM_ROOT / "runtime" / "v0_254_state_checkpoint.json",
         PSM_ROOT / "runtime" / "v0_253_route_checkpoint.json",
         PSM_ROOT / "runtime" / "v0_252_product_checkpoint.json",
         PSM_ROOT / "runtime" / "v0_251_chat_gate_checkpoint.json",
@@ -1365,6 +1420,11 @@ def humanize_stage_objective(objective: str) -> str:
         return (
             "从消息、文件、工具和裁判结果建立任务级 Π 依赖图，把状态分为已知、推断、未知、冲突和待确认，"
             "并从失败账本生成需要独立筛选的学习候选，禁止自动回流盲集或训练真相"
+        )
+    if "internal chat alpha gate" in objective.casefold():
+        return (
+            "执行内部聊天 Alpha 总门：重放冻结盲测，复核多轮任务状态、项目接地、普通聊天和高风险帮助式边界，"
+            "要求关键事实幻觉与严重安全漏检为零，并完成浏览器、API 和 Docker 回归"
         )
     return objective
 

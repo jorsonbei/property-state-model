@@ -13,6 +13,7 @@ const state = {
   scenario: "review",
   history: [],
   messages: [],
+  taskGraph: null,
   activeRequest: null,
   lastFailed: null,
   nextMessageId: 1
@@ -135,7 +136,11 @@ async function runChat(options = {}) {
     const response = await fetch("/api/chat", {
       method: "POST",
       headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({ messages: conversationMessages(), scenario: state.scenario }),
+      body: JSON.stringify({
+        messages: conversationMessages(),
+        scenario: state.scenario,
+        task_state_graph: state.taskGraph
+      }),
       signal: controller.signal
     });
     const payload = await response.json().catch(() => ({}));
@@ -147,6 +152,7 @@ async function runChat(options = {}) {
     setRequestPhase("回答已通過邊界檢查，正在顯示");
     $("cancel").hidden = true;
     renderResult(payload);
+    state.taskGraph = payload.task_state_graph || null;
     const answer = payload.chat?.assistant_message || "我收到你的問題了，但這次沒有生成有效回答。";
     await pushAssistantProgressively(answer, requestId);
     if (state.activeRequest?.id !== requestId) return;
@@ -261,6 +267,7 @@ function resetChat() {
   if (state.activeRequest?.canCancel) cancelActiveRequest("cancelled");
   state.messages = [];
   state.history = [];
+  state.taskGraph = null;
   state.lastFailed = null;
   $("prompt").value = "";
   autoResizePrompt();
@@ -316,6 +323,16 @@ function renderResult(payload) {
   $("evidence-route-status").textContent = execution.status || "not available";
   $("evidence-route-sources").textContent = String(execution.sources?.length || 0);
   $("evidence-route-failures").textContent = String(execution.failure_events?.length || 0);
+  const graph = payload.task_state_graph || {};
+  const graphDelta = graph.delta || {};
+  $("graph-nodes").textContent = String(graph.nodes?.length || 0);
+  $("graph-edges").textContent = String(graph.edges?.length || 0);
+  $("graph-states").textContent = Object.entries(graph.state_counts || {})
+    .map(([key, value]) => `${key} ${value}`)
+    .join(" · ") || "-";
+  $("graph-delta").textContent = `+${graphDelta.added_nodes?.length || 0} / -${graphDelta.removed_nodes?.length || 0}`;
+  $("graph-protocol").textContent = graph.next_protocol?.action || "-";
+  $("graph-failure-queue").textContent = String(graph.failure_learning_queue?.candidate_count || 0);
 }
 
 function pushMessage(role, content) {

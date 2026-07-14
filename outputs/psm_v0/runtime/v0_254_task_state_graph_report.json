@@ -1,0 +1,338 @@
+{
+  "schema_version": "psm_v0_254_task_state_graph_report_v1",
+  "version": "PSM_V0.254-candidate",
+  "passed": true,
+  "checks": {
+    "messages_bound": true,
+    "files_bound": true,
+    "tools_bound": true,
+    "judges_bound": true,
+    "all_claim_states_present": true,
+    "file_route_real": true,
+    "code_route_real": true,
+    "delta_explained": true,
+    "conflict_changes_protocol": true,
+    "independent_screening_required": true,
+    "screened_regression_candidate": true,
+    "blind_backflow_zero": true,
+    "training_backflow_zero": true,
+    "external_release_closed": true
+  },
+  "summary": {
+    "graphs": 4,
+    "observed_node_kinds": [
+      "adapter",
+      "claim",
+      "evidence_value",
+      "fact",
+      "failure",
+      "judge",
+      "message",
+      "source",
+      "task",
+      "uncertainty"
+    ],
+    "observed_claim_states": [
+      "conflicting",
+      "inferred",
+      "known",
+      "pending",
+      "unknown"
+    ],
+    "real_route_adapters": [
+      "local_file_evidence",
+      "local_project_status",
+      "sandboxed_code_check"
+    ],
+    "graph_deltas": 3,
+    "failure_candidates": 1,
+    "independently_screened": 1,
+    "blind_set_backflow": 0,
+    "training_truth_backflow": 0,
+    "external_release_authority": false,
+    "rule_replacement_allowed": false
+  },
+  "graphs": [
+    {
+      "graph_id": "graph_e61f04f16b908b929f87",
+      "nodes": 14,
+      "edges": 19,
+      "state_counts": {
+        "inferred": 2,
+        "known": 10,
+        "unknown": 2
+      },
+      "next_protocol": {
+        "action": "collect_missing_evidence",
+        "reason": "2 task uncertainties still limit the claim.",
+        "external_release_authority": false
+      },
+      "delta": {
+        "schema_version": "psm_task_state_graph_delta_v1",
+        "previous_graph_id": null,
+        "current_graph_id": "graph_e61f04f16b908b929f87",
+        "added_nodes": [
+          "adapter_8dcdc1026c720150",
+          "claim_ba4f91fc67fc404e",
+          "claim_c2c01e0512d47e4e",
+          "claim_f2dc7f8afcc5d82e",
+          "fact_208dc7c0697b580e",
+          "fact_3f14a60b7590cb27",
+          "fact_6b54f3a52318793c",
+          "inference_4313e961850883ab",
+          "judge_16739d825f689f23",
+          "message_38841b5c2cc399da",
+          "source_c213c443174f926c",
+          "task_0feae16d55365acf",
+          "unknown_264537e0e15a6a7d",
+          "unknown_c3591e47e7a7dabb"
+        ],
+        "removed_nodes": [],
+        "changed_nodes": [],
+        "added_edges": [
+          "edge_03a71498bc617bdd",
+          "edge_04d11acefb573a57",
+          "edge_2fb905dea4c5533f",
+          "edge_458716c1e677b439",
+          "edge_45a4e8efdfed3fc1",
+          "edge_50bff5b27f2d02b0",
+          "edge_5ae30d276a5a48d6",
+          "edge_5bda8ec8efb42aca",
+          "edge_65a970b82dcbcf14",
+          "edge_9701e5ed7a8b3213",
+          "edge_a207debd9e792a72",
+          "edge_aa8286a4ae7f49c1",
+          "edge_b7bf9c3cd56a2837",
+          "edge_c17934cc4c89a86d",
+          "edge_c730e996e2580626",
+          "edge_c73222a792fc29c2",
+          "edge_ca43ea007f15de0b",
+          "edge_e93449cbfe62e2b3",
+          "edge_fc31b3e6d6a00b15"
+        ],
+        "removed_edges": [],
+        "state_transitions": [],
+        "explanation": "Initialized the task graph from the current conversation and route evidence."
+      }
+    },
+    {
+      "graph_id": "graph_f84b3e8a28ebe741e14d",
+      "nodes": 9,
+      "edges": 9,
+      "state_counts": {
+        "inferred": 2,
+        "known": 5,
+        "unknown": 2
+      },
+      "next_protocol": {
+        "action": "collect_missing_evidence",
+        "reason": "2 task uncertainties still limit the claim.",
+        "external_release_authority": false
+      },
+      "delta": {
+        "schema_version": "psm_task_state_graph_delta_v1",
+        "previous_graph_id": "graph_e61f04f16b908b929f87",
+        "current_graph_id": "graph_f84b3e8a28ebe741e14d",
+        "added_nodes": [
+          "adapter_5389a94d812510ec",
+          "fact_3d5d91c84ff0907c",
+          "message_5d52584816a78f40",
+          "source_d7f8d60d94de078a"
+        ],
+        "removed_nodes": [
+          "adapter_8dcdc1026c720150",
+          "claim_ba4f91fc67fc404e",
+          "claim_c2c01e0512d47e4e",
+          "claim_f2dc7f8afcc5d82e",
+          "fact_208dc7c0697b580e",
+          "fact_3f14a60b7590cb27",
+          "fact_6b54f3a52318793c",
+          "message_38841b5c2cc399da",
+          "source_c213c443174f926c"
+        ],
+        "changed_nodes": [],
+        "added_edges": [
+          "edge_62c3e8286f9478c7",
+          "edge_b2d855bfe9160f36",
+          "edge_d73e380c43e0b9a9",
+          "edge_f6f579d5e122ba8a",
+          "edge_f7d7f481e07bd777"
+        ],
+        "removed_edges": [
+          "edge_03a71498bc617bdd",
+          "edge_04d11acefb573a57",
+          "edge_2fb905dea4c5533f",
+          "edge_458716c1e677b439",
+          "edge_45a4e8efdfed3fc1",
+          "edge_50bff5b27f2d02b0",
+          "edge_5ae30d276a5a48d6",
+          "edge_5bda8ec8efb42aca",
+          "edge_9701e5ed7a8b3213",
+          "edge_aa8286a4ae7f49c1",
+          "edge_b7bf9c3cd56a2837",
+          "edge_c17934cc4c89a86d",
+          "edge_c730e996e2580626",
+          "edge_c73222a792fc29c2",
+          "edge_ca43ea007f15de0b"
+        ],
+        "state_transitions": [],
+        "explanation": "Task state changed: +4 nodes, -9 nodes, 0 updated nodes, 0 state transitions."
+      }
+    },
+    {
+      "graph_id": "graph_3f29dbbcfc903158c941",
+      "nodes": 16,
+      "edges": 17,
+      "state_counts": {
+        "inferred": 2,
+        "known": 7,
+        "pending": 4,
+        "unknown": 3
+      },
+      "next_protocol": {
+        "action": "obtain_required_judges",
+        "reason": "4 required judges remain pending.",
+        "external_release_authority": false
+      },
+      "delta": {
+        "schema_version": "psm_task_state_graph_delta_v1",
+        "previous_graph_id": "graph_f84b3e8a28ebe741e14d",
+        "current_graph_id": "graph_3f29dbbcfc903158c941",
+        "added_nodes": [
+          "adapter_a62b8ee9273d9de0",
+          "claim_365708f54f702aaf",
+          "fact_8944cbd35e76e3e1",
+          "judge_55927af713fb6855",
+          "judge_7f3ba176bdbbf8be",
+          "judge_855fd141bf12cd02",
+          "judge_92150a94e9019c0c",
+          "judge_da966368ea663ea5",
+          "judge_e0a22a9269cc6c85",
+          "message_d4d4fce68088e449",
+          "source_58137dae15abb2b6",
+          "task_0055a07fd560d969",
+          "unknown_7c297eab929ff39a"
+        ],
+        "removed_nodes": [
+          "adapter_5389a94d812510ec",
+          "fact_3d5d91c84ff0907c",
+          "judge_16739d825f689f23",
+          "message_5d52584816a78f40",
+          "source_d7f8d60d94de078a",
+          "task_0feae16d55365acf"
+        ],
+        "changed_nodes": [],
+        "added_edges": [
+          "edge_013d09dc2182e92b",
+          "edge_12b9a3dea08faee3",
+          "edge_1b228032fe7fb0bc",
+          "edge_1fd80ba89123838e",
+          "edge_32426ec2363fb2e3",
+          "edge_5a2431d8c51bd650",
+          "edge_64bc8d24e3eaa30f",
+          "edge_841ec7691321a01d",
+          "edge_847c23757704fdbe",
+          "edge_94a9109c441c4196",
+          "edge_b119acb972e75e0c",
+          "edge_ca7b83c171a9c9e1",
+          "edge_d05aeb91393d7174",
+          "edge_d4b8167c4db6ec6d",
+          "edge_e5d2619c820cadab",
+          "edge_f0af9ad17496c958",
+          "edge_f117dc68c47f1ec8"
+        ],
+        "removed_edges": [
+          "edge_62c3e8286f9478c7",
+          "edge_65a970b82dcbcf14",
+          "edge_a207debd9e792a72",
+          "edge_b2d855bfe9160f36",
+          "edge_d73e380c43e0b9a9",
+          "edge_e93449cbfe62e2b3",
+          "edge_f6f579d5e122ba8a",
+          "edge_f7d7f481e07bd777",
+          "edge_fc31b3e6d6a00b15"
+        ],
+        "state_transitions": [],
+        "explanation": "Task state changed: +13 nodes, -6 nodes, 0 updated nodes, 0 state transitions."
+      }
+    },
+    {
+      "graph_id": "graph_49135f799fc92c2e7f64",
+      "nodes": 10,
+      "edges": 8,
+      "state_counts": {
+        "conflicting": 4,
+        "inferred": 2,
+        "known": 1,
+        "pending": 1,
+        "unknown": 2
+      },
+      "next_protocol": {
+        "action": "resolve_evidence_conflicts",
+        "reason": "4 conflicting state nodes must be resolved before a stronger claim.",
+        "external_release_authority": false
+      },
+      "delta": {
+        "schema_version": "psm_task_state_graph_delta_v1",
+        "previous_graph_id": "graph_3f29dbbcfc903158c941",
+        "current_graph_id": "graph_49135f799fc92c2e7f64",
+        "added_nodes": [
+          "claim_8376f2a71fb9b0fb",
+          "conflict_value_48e606218f59ecf5",
+          "conflict_value_e5cf690ed965963e",
+          "failure_70a915ae94dad059",
+          "judge_16739d825f689f23",
+          "message_315a96976b8eeb3c",
+          "task_0feae16d55365acf"
+        ],
+        "removed_nodes": [
+          "adapter_a62b8ee9273d9de0",
+          "claim_365708f54f702aaf",
+          "fact_8944cbd35e76e3e1",
+          "judge_55927af713fb6855",
+          "judge_7f3ba176bdbbf8be",
+          "judge_855fd141bf12cd02",
+          "judge_92150a94e9019c0c",
+          "judge_da966368ea663ea5",
+          "judge_e0a22a9269cc6c85",
+          "message_d4d4fce68088e449",
+          "source_58137dae15abb2b6",
+          "task_0055a07fd560d969",
+          "unknown_7c297eab929ff39a"
+        ],
+        "changed_nodes": [],
+        "added_edges": [
+          "edge_65a970b82dcbcf14",
+          "edge_66764524fd9181db",
+          "edge_8e1da626dc739f5d",
+          "edge_95dcdca842d49605",
+          "edge_a207debd9e792a72",
+          "edge_ca18ac145d793e30",
+          "edge_e93449cbfe62e2b3",
+          "edge_fc31b3e6d6a00b15"
+        ],
+        "removed_edges": [
+          "edge_013d09dc2182e92b",
+          "edge_12b9a3dea08faee3",
+          "edge_1b228032fe7fb0bc",
+          "edge_1fd80ba89123838e",
+          "edge_32426ec2363fb2e3",
+          "edge_5a2431d8c51bd650",
+          "edge_64bc8d24e3eaa30f",
+          "edge_841ec7691321a01d",
+          "edge_847c23757704fdbe",
+          "edge_94a9109c441c4196",
+          "edge_b119acb972e75e0c",
+          "edge_ca7b83c171a9c9e1",
+          "edge_d05aeb91393d7174",
+          "edge_d4b8167c4db6ec6d",
+          "edge_e5d2619c820cadab",
+          "edge_f0af9ad17496c958",
+          "edge_f117dc68c47f1ec8"
+        ],
+        "state_transitions": [],
+        "explanation": "Task state changed: +7 nodes, -13 nodes, 0 updated nodes, 0 state transitions."
+      }
+    }
+  ]
+}

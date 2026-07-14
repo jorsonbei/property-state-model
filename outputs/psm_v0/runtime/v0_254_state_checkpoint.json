@@ -1,0 +1,58 @@
+{
+  "schema_version": "psm_v0_254_state_checkpoint_v1",
+  "current_promoted_version": "PSM_V0.254",
+  "target_version": "PSM_V0.254",
+  "target_promoted": true,
+  "status": "promoted_v0_255_internal_chat_alpha_gate_in_progress",
+  "requires_user_input": false,
+  "state_gate": {
+    "graph_report": "runtime/v0_254_task_state_graph_report.json",
+    "failure_queue": "runtime/v0_254_failure_learning_queue.json",
+    "browser_report": "runtime/v0_254_browser_regression/report.json",
+    "docker_report": "runtime/v0_254_docker_verification.json",
+    "graphs": 4,
+    "claim_states": [
+      "conflicting",
+      "inferred",
+      "known",
+      "pending",
+      "unknown"
+    ],
+    "node_kinds": [
+      "adapter",
+      "claim",
+      "evidence_value",
+      "fact",
+      "failure",
+      "judge",
+      "message",
+      "source",
+      "task",
+      "uncertainty"
+    ],
+    "graph_deltas": 3,
+    "independently_screened_failure_candidates": 1,
+    "blind_set_backflow": 0,
+    "training_truth_backflow": 0
+  },
+  "completed_engineering": [
+    "task-level Pi graph for messages, sources, adapters, facts, claims, unknowns, failures, and judges",
+    "known, inferred, unknown, conflicting, and pending node states",
+    "stable graph identity and explainable multi-turn graph delta",
+    "dynamic Pi and eta packet projection from current task evidence",
+    "next-protocol selection for conflicts, failures, pending judges, unknowns, and bounded output",
+    "independently screened failure-learning queue with blind/training backflow sealed",
+    "debug-only graph metrics and multi-turn browser continuity",
+    "host and Docker task-graph evaluation"
+  ],
+  "release_boundary": {
+    "external_user_trial_allowed": false,
+    "arbitrary_high_risk_external_judge_satisfied": false,
+    "automatic_blind_set_backflow": false,
+    "automatic_training_truth_backflow": false,
+    "rule_replacement_allowed": false,
+    "internal_local_demo_only": true,
+    "v0_254_promoted": true
+  },
+  "required_decision": "当前不需要用户决定。继续执行 PSM V0.255 内部聊天 Alpha 总门：复核冻结盲集与失败账本、多轮状态连续性、项目接地、高风险帮助式边界、关键幻觉与浏览器/API 回归；外部试用继续关闭。"
+}

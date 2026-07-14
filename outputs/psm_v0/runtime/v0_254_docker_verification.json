@@ -1,0 +1,85 @@
+{
+  "schema_version": "psm_v0_254_docker_verification_v1",
+  "passed": true,
+  "runtime": {
+    "current_version": "psm_v0.254",
+    "general_route": "retrieval_or_tool_check",
+    "high_risk_external_judge_retained": true,
+    "python_sources_parsed": 55,
+    "regression_passed": true
+  },
+  "status": {
+    "version": "PSM V0.254",
+    "selected_chat_model": "qwen3.5:9b",
+    "core_cases": 2228,
+    "ready_for_external_user_trial": false,
+    "expected_version": "PSM V0.254"
+  },
+  "graph_checks": {
+    "schema": true,
+    "previous_graph_linked": true,
+    "delta_added_nodes": true,
+    "messages_bound": true,
+    "file_source_bound": true,
+    "dynamic_pi": true,
+    "dynamic_eta": true,
+    "blind_backflow_off": true,
+    "training_backflow_off": true,
+    "external_release_closed": true
+  },
+  "graph": {
+    "first_graph_id": "graph_77b9e40fb8942a325546",
+    "second_graph_id": "graph_f70c8462383dd64c557e",
+    "nodes": 11,
+    "edges": 13,
+    "state_counts": {
+      "inferred": 2,
+      "known": 7,
+      "unknown": 2
+    },
+    "next_protocol": {
+      "action": "collect_missing_evidence",
+      "reason": "2 task uncertainties still limit the claim.",
+      "external_release_authority": false
+    },
+    "delta": {
+      "schema_version": "psm_task_state_graph_delta_v1",
+      "previous_graph_id": "graph_77b9e40fb8942a325546",
+      "current_graph_id": "graph_f70c8462383dd64c557e",
+      "added_nodes": [
+        "adapter_5389a94d812510ec",
+        "fact_732c138d219c8144",
+        "message_0584801d9d9298f3",
+        "message_c08fc0e21992d71d",
+        "source_b6c9c4d54f8fe7a3"
+      ],
+      "removed_nodes": [
+        "adapter_a62b8ee9273d9de0",
+        "claim_6511a8186132eda5",
+        "fact_d3244f8454432c63",
+        "source_05f54cb310361532"
+      ],
+      "changed_nodes": [],
+      "added_edges": [
+        "edge_067e084f310f109d",
+        "edge_1bb19cd1a0eadf26",
+        "edge_4917c03db118ce0f",
+        "edge_56229acfa562dd61",
+        "edge_6e46606ebab38e54",
+        "edge_b2d855bfe9160f36",
+        "edge_bb74501a13e69926",
+        "edge_cfa7c3dcbececc20"
+      ],
+      "removed_edges": [
+        "edge_00a3621535fbab8c",
+        "edge_0601b3f31023a2b1",
+        "edge_19adbb81db2247b5",
+        "edge_5b243a52f79fad68",
+        "edge_9ade8da54e876054",
+        "edge_c28a03ffb7f41f10"
+      ],
+      "state_transitions": [],
+      "explanation": "Task state changed: +5 nodes, -4 nodes, 0 updated nodes, 0 state transitions."
+    }
+  }
+}

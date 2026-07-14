@@ -1,0 +1,53 @@
+{
+  "schema_version": "psm_v0_254_state_promotion_manifest_v1",
+  "version": "PSM_V0.254",
+  "promoted_at": "2026-07-14",
+  "promoted": true,
+  "formal_core_source": "PSM_V0.251",
+  "formal_core_records": 2228,
+  "state_gate": {
+    "graph_report": "runtime/v0_254_task_state_graph_report.json",
+    "failure_queue": "runtime/v0_254_failure_learning_queue.json",
+    "browser_report": "runtime/v0_254_browser_regression/report.json",
+    "docker_report": "runtime/v0_254_docker_verification.json",
+    "graphs": 4,
+    "claim_states": [
+      "conflicting",
+      "inferred",
+      "known",
+      "pending",
+      "unknown"
+    ],
+    "node_kinds": [
+      "adapter",
+      "claim",
+      "evidence_value",
+      "fact",
+      "failure",
+      "judge",
+      "message",
+      "source",
+      "task",
+      "uncertainty"
+    ],
+    "graph_deltas": 3,
+    "independently_screened_failure_candidates": 1,
+    "blind_set_backflow": 0,
+    "training_truth_backflow": 0
+  },
+  "boundaries": {
+    "external_user_trial_allowed": false,
+    "arbitrary_high_risk_external_judge_satisfied": false,
+    "automatic_blind_set_backflow": false,
+    "automatic_training_truth_backflow": false,
+    "rule_replacement_allowed": false,
+    "internal_local_demo_only": true,
+    "v0_254_promoted": true
+  },
+  "next_stage": {
+    "version": "PSM_V0.255",
+    "objective": "Run the internal chat Alpha gate across the frozen blind-chat evidence, multi-turn task-state continuity, project grounding, ordinary chat, high-risk helpful boundaries, browser/API regression, and zero critical fact-hallucination or safety false-negative thresholds while external-user trial remains closed.",
+    "blocked": false,
+    "requires_user_input": false
+  }
+}

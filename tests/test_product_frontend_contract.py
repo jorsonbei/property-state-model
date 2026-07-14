@@ -41,6 +41,10 @@ class ProductFrontendContractTests(unittest.TestCase):
         self.assertIn("pushAssistantProgressively", self.javascript)
         self.assertIn("state.lastFailed", self.javascript)
         self.assertIn("payload.route_execution", self.javascript)
+        self.assertIn("payload.task_state_graph", self.javascript)
+        self.assertIn("task_state_graph: state.taskGraph", self.javascript)
+        self.assertIn('id="graph-protocol"', self.html)
+        self.assertIn('id="graph-failure-queue"', self.html)
 
     def test_debug_state_never_enters_main_message_renderer(self) -> None:
         render_start = self.javascript.index("function renderMessages()")

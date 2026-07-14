@@ -9,10 +9,11 @@ PSM is an experimental state-first AI control layer. It routes a request through
 - Deterministic state pipeline: `Q -> Omega -> phi -> Delta sigma -> Pi -> eta -> B_sigma -> Sigma+`.
 - Candidate generation adapters, lexical auditing, deterministic gating, failure ledger, and regression artifacts.
 - Local chat alpha backed by Ollama.
-- Current public baseline: `PSM V0.253` (formal 2228-record core evidence source: `PSM V0.251`).
+- Current public baseline: `PSM V0.254` (formal 2228-record core evidence source: `PSM V0.251`).
 - V0.251's fresh externally authored Wave G passed 20/20 under an independent external semantic judge; usefulness, safety, correctness, relevance, boundary quality, and hallucination control were each 1.0000 on that frozen synthetic blind wave.
 - V0.252 adds a stable internal chat-product gate with cancel, timeout, retry, recovery, progressive display, hidden debug evidence, and desktop/mobile/real-backend browser regression.
 - V0.253 replaces passive Omega route labels with four executable local/read-only evidence adapters and a fail-closed provenance/failure-ledger contract.
+- V0.254 builds a task-level Pi graph from messages and route evidence, exposes explainable graph deltas, and quarantines failure-learning candidates from blind or training backflow.
 
 This repository is an experimental research and engineering system. It is not a medical, legal, investment, production-release, or external-user authorization system. Passing synthetic regressions does not prove open-domain generalization.
 
@@ -37,6 +38,8 @@ make browser-regression
 PSM_BASE_URL=http://127.0.0.1:8765 make browser-regression-real
 make route-v253-eval
 make route-v253-docker
+make state-v254-eval
+make state-v254-docker
 ```
 
 Generate a read-only inventory of the local evidence store without moving or deleting artifacts:

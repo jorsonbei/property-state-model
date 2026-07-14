@@ -1,10 +1,10 @@
 {
   "plan_version": "psm_execution_plan_v0.248_to_v0.260",
   "created_at": "2026-07-14",
-  "current_project_version": "psm_v0.253",
+  "current_project_version": "psm_v0.254",
   "current_formal_version": "psm_v0.251",
   "authority": {
-    "machine_truth": "project_status_out/psm_v0.253_project_status.json",
+    "machine_truth": "project_status_out/psm_v0.254_project_status.json",
     "human_audit": "roadmap_out/PSM_Full_Project_Audit_and_Execution_Roadmap_V0.248_to_V0.260.md"
   },
   "current_boundary": {
@@ -12,26 +12,27 @@
     "internal_chat_quality_gate_passed": true,
     "internal_product_ux_gate_passed": true,
     "real_omega_route_gate_passed": true,
+    "dynamic_pi_eta_gate_passed": true,
     "external_user_trial": false,
     "native_property_state_foundation_model": false
   },
   "next_executable_stage": {
-    "version": "PSM_V0.254",
-    "objective": "Build a task-level Pi dependency graph, classify known/inferred/unknown/conflicting/pending state, and derive independently screened failure-learning candidates without automatic blind or training backflow.",
+    "version": "PSM_V0.255",
+    "objective": "Run the internal chat Alpha gate across frozen blind-chat evidence, multi-turn task-state continuity, project grounding, ordinary chat, high-risk helpful boundaries, browser/API regression, and zero critical hallucination or safety-false-negative thresholds.",
     "blocked": false,
     "requires_user_input": false,
     "preconditions": [
-      "PSM_V0.253 route evaluation passed 10/10 across four real adapter classes.",
-      "Missing, blocked, timeout, and conflict failures are recorded in a separate ledger.",
-      "Host full-project and Docker runtime verifiers passed.",
+      "PSM_V0.254 task-state evaluation covers all five claim states and ten node kinds.",
+      "Multi-turn graph deltas and next-protocol changes are explainable.",
+      "Independently screened failure candidates cannot enter blind sets or training truth.",
       "Arbitrary high-risk external judgment, external-user trial, and rule replacement remain closed."
     ],
     "acceptance": [
-      "Messages, files, tools, and judge results form a task-level dependency graph.",
-      "Claims are classified as known, inferred, unknown, conflicting, or pending.",
-      "Adding evidence produces an explainable graph delta.",
-      "Failure-ledger items enter an independently screened candidate queue only.",
-      "Blind sets, training truth, external-user trial, and rule replacement remain protected."
+      "Frozen independent blind-chat evidence remains passing and source-isolated.",
+      "Ordinary, project-grounded, multi-turn, and high-risk helpful chat suites pass.",
+      "Critical fact hallucinations and critical safety false negatives are zero.",
+      "API, desktop, mobile, real-backend, and Docker regressions pass.",
+      "The decision is internal-use only; external-user trial and rule replacement remain protected."
     ]
   },
   "completed_stages": [
@@ -60,6 +61,15 @@
       "real_adapter_classes": 4,
       "failure_ledger_classes": 4,
       "docker_runtime_verifier": true
+    },
+    {
+      "version": "PSM_V0.254",
+      "result": "passed",
+      "task_graphs": 4,
+      "node_kinds": 10,
+      "claim_states": 5,
+      "graph_deltas": 3,
+      "blind_training_backflow": 0
     }
   ],
   "stages": [

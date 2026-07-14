@@ -15,7 +15,13 @@ class ChatQualityTests(unittest.TestCase):
         self.assertIn("尽量确保", answer)
         self.assertIn("不能保证", answer)
 
-    def run_offline(self, messages: list[dict], scenario: str = "review") -> dict:
+    def run_offline(
+        self,
+        messages: list[dict],
+        scenario: str = "review",
+        *,
+        previous_graph: dict | None = None,
+    ) -> dict:
         provider_failure = {
             "status": "error",
             "answer": "",
@@ -26,7 +32,7 @@ class ChatQualityTests(unittest.TestCase):
             "reasoning_leak_removed": False,
         }
         with patch.object(server, "try_ollama_chat_generation", return_value=provider_failure):
-            return server.run_chat_turn(messages, scenario)
+            return server.run_chat_turn(messages, scenario, previous_graph=previous_graph)
 
     def test_project_status_comes_from_structured_local_state(self) -> None:
         context = server.load_project_context()
@@ -40,6 +46,27 @@ class ChatQualityTests(unittest.TestCase):
         self.assertIn(context["next_version"], answer)
         self.assertNotIn("未来几个月", answer)
         self.assertEqual(result["chat"]["quality_audit"]["status"], "pass")
+
+    def test_chat_task_graph_updates_from_real_route_evidence(self) -> None:
+        first = self.run_offline([{"role": "user", "content": "项目现在做到哪里了？"}])
+        first_graph = first["task_state_graph"]
+        second = self.run_offline(
+            [
+                {"role": "user", "content": "项目现在做到哪里了？"},
+                {"role": "assistant", "content": first["chat"]["assistant_message"]},
+                {"role": "user", "content": "再读取 `outputs/psm_v0/CURRENT_STATUS.md` 核验。"},
+            ],
+            previous_graph=first_graph,
+        )
+        graph = second["task_state_graph"]
+
+        self.assertEqual(second["packet"]["pi_cavity"]["mode"], "task_evidence_graph")
+        self.assertEqual(second["packet"]["eta"]["mode"], "task_evidence_state")
+        self.assertEqual(graph["delta"]["previous_graph_id"], first_graph["graph_id"])
+        self.assertGreater(len(graph["delta"]["added_nodes"]), 0)
+        self.assertTrue(any(node["kind"] == "source" for node in graph["nodes"]))
+        self.assertFalse(graph["boundaries"]["automatic_blind_set_backflow"])
+        self.assertFalse(graph["boundaries"]["automatic_training_truth_backflow"])
 
     def test_roadmap_comes_from_structured_next_stage(self) -> None:
         context = server.load_project_context()
@@ -80,8 +107,9 @@ class ChatQualityTests(unittest.TestCase):
         self.assertIn(context["current_version"], result["chat"]["assistant_message"])
         self.assertIn(context["next_version"], result["chat"]["assistant_message"])
         self.assertIn(context["next_objective"], result["chat"]["assistant_message"])
-        self.assertIn("任务级 Π 依赖图", result["chat"]["assistant_message"])
-        self.assertIn("禁止自动回流", result["chat"]["assistant_message"])
+        self.assertIn("内部聊天 Alpha 总门", result["chat"]["assistant_message"])
+        self.assertIn("关键事实幻觉", result["chat"]["assistant_message"])
+        self.assertIn("外部用户试用仍不自动开放", result["chat"]["assistant_message"])
 
     def test_working_chat_does_not_imply_external_release(self) -> None:
         context = server.load_project_context()

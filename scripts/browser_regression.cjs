@@ -44,6 +44,16 @@ function chatPayload(question, answer = `已完成回答：${question}`) {
       sources: ["runtime/current_runtime_snapshot.json"],
       failure_events: [],
     },
+    task_state_graph: {
+      schema_version: "psm_task_state_graph_v1",
+      graph_id: "graph_mock",
+      nodes: [{ id: "message_mock", kind: "message", state: "known" }],
+      edges: [],
+      state_counts: { known: 1 },
+      next_protocol: { action: "retain_bounded_answer" },
+      failure_learning_queue: { candidate_count: 0 },
+      delta: { added_nodes: ["message_mock"], removed_nodes: [] },
+    },
     ordinary: { text: "ordinary", audit: { status: "guarded", net_risk: 0 } },
     psm_gated: { text: "gated", audit: { status: "guarded", net_risk: 0 } },
     chat: {
@@ -136,6 +146,8 @@ async function desktopRegression(browser) {
   assert.equal(await page.locator("#evidence-toggle").getAttribute("aria-expanded"), "true");
   assert.equal(await page.locator("#evidence-route-status").textContent(), "success");
   assert.equal(await page.locator("#evidence-route-sources").textContent(), "1");
+  assert.equal(await page.locator("#graph-nodes").textContent(), "1");
+  assert.equal(await page.locator("#graph-protocol").textContent(), "retain_bounded_answer");
   const mainTextAfterDebug = await page.locator("#messages").textContent();
   assert.equal(mainTextAfterDebug, mainTextBeforeDebug);
   assert.doesNotMatch(mainTextAfterDebug, /boundary retained|external trial closed|turn \d/);
@@ -267,6 +279,24 @@ async function realRouteEvidenceSmoke(browser) {
   assert.equal(await page.locator("#evidence-route-status").textContent(), "success");
   assert.ok(Number(await page.locator("#evidence-route-sources").textContent()) >= 1);
   assert.equal(await page.locator("#evidence-route-failures").textContent(), "0");
+  const firstGraphNodes = Number(await page.locator("#graph-nodes").textContent());
+  assert.ok(firstGraphNodes >= 1);
+  assert.notEqual(await page.locator("#graph-protocol").textContent(), "-");
+
+  await page.locator("#evidence-toggle").click();
+  await page.locator("#prompt").fill("再读取 `outputs/psm_v0/runtime/current_runtime_snapshot.json` 核验。");
+  await page.locator("#run").click();
+  await page.waitForFunction(
+    () => document.querySelectorAll(".message.user").length === 2
+      && !document.querySelector("#run")?.disabled
+      && document.querySelector("#request-feedback")?.hidden,
+    null,
+    { timeout: 20000 },
+  );
+  await page.locator("#evidence-toggle").click();
+  const graphDelta = await page.locator("#graph-delta").textContent();
+  assert.notEqual(graphDelta, "+0 / -0");
+  assert.ok(Number(await page.locator("#graph-nodes").textContent()) >= 3);
   assert.deepEqual(consoleErrors, []);
   await page.screenshot({ path: path.join(outdir, "route-evidence.png"), fullPage: true });
   await context.close();
@@ -275,6 +305,8 @@ async function realRouteEvidenceSmoke(browser) {
     status_visible_in_debug: true,
     source_count_visible_in_debug: true,
     failure_count_visible_in_debug: true,
+    task_graph_visible_in_debug: true,
+    task_graph_delta_visible_after_new_evidence: true,
     internal_route_fields_hidden_from_answer: true,
     console_errors: consoleErrors.length,
   };
