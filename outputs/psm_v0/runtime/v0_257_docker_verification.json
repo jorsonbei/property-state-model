@@ -1,0 +1,60 @@
+{
+  "schema_version": "psm_v0_257_docker_verification_v1",
+  "passed": true,
+  "checks": {
+    "runtime_current": true,
+    "status_current": true,
+    "internal_chat_retained": true,
+    "external_trial_closed": true,
+    "shadow_gate_present": true,
+    "candidate_validation_exact": true,
+    "candidate_test_exact": true,
+    "candidate_critical_false_negatives_zero": true,
+    "protected_backflow_zero": true,
+    "model_has_seven_heads": true,
+    "feature_boundary_retained": true,
+    "shadow_only": true,
+    "rule_replacement_closed": true,
+    "project_answer_grounded": true,
+    "graph_boundary_retained": true
+  },
+  "status": {
+    "version": "PSM V0.257",
+    "selected_chat_model": "qwen3.5:9b",
+    "ready_for_stable_internal_chat": true,
+    "ready_for_external_user_trial": false
+  },
+  "shadow_gate": {
+    "records": 42,
+    "training_rows": 14,
+    "validation_rows": 14,
+    "test_rows": 14,
+    "targets": 7,
+    "majority_validation_exact_match": 0.0,
+    "majority_test_exact_match": 0.0,
+    "rule_validation_exact_match": 1.0,
+    "rule_test_exact_match": 1.0,
+    "candidate_validation_exact_match": 0.928571,
+    "candidate_test_exact_match": 1.0,
+    "candidate_validation_critical_false_negatives": 0,
+    "candidate_test_critical_false_negatives": 0,
+    "protected_backflow": 0
+  },
+  "model": {
+    "model_type": "trainable_multinomial_naive_bayes",
+    "training_rows": 14,
+    "targets": [
+      "b_sigma",
+      "delta_sigma",
+      "eta",
+      "omega",
+      "phi",
+      "pi",
+      "q_core"
+    ],
+    "boundary": {
+      "shadow_only": true,
+      "rule_replacement_allowed": false
+    }
+  }
+}

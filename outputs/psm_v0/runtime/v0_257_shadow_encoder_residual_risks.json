@@ -1,0 +1,27 @@
+{
+  "schema_version": "psm_v0_257_shadow_encoder_residual_risks_v1",
+  "version": "PSM_V0.257-candidate",
+  "decision": "shadow_baseline_ready",
+  "risks": [
+    {
+      "id": "synthetic_scale",
+      "status": "open",
+      "boundary": "The 42-record synthetic benchmark does not establish open-domain generalization."
+    },
+    {
+      "id": "correlated_heads",
+      "status": "open",
+      "boundary": "The seven projected heads share scenario structure and require larger independently annotated data."
+    },
+    {
+      "id": "non_neural_baseline",
+      "status": "open",
+      "boundary": "The first candidate is a trainable transparent probabilistic baseline, not a foundation model."
+    },
+    {
+      "id": "controller_authority",
+      "status": "closed_by_boundary",
+      "boundary": "Candidate predictions are shadow-only and cannot control release, routing, or professional action."
+    }
+  ]
+}

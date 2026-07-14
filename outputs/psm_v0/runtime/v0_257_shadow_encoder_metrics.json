@@ -1,0 +1,245 @@
+{
+  "schema_version": "psm_v0_257_shadow_encoder_metrics_v1",
+  "version": "PSM_V0.257-candidate",
+  "dataset": {
+    "records": 42,
+    "split_counts": {
+      "test": 14,
+      "train": 14,
+      "validation": 14
+    },
+    "training_rows": 14,
+    "record_errors": [],
+    "isolation": {
+      "passed": true,
+      "errors": [],
+      "near_duplicates": [],
+      "source_overlap_count": 0,
+      "family_overlap_count": 0,
+      "content_overlap_count": 0,
+      "split_counts": {
+        "test": 14,
+        "train": 14,
+        "validation": 14
+      }
+    }
+  },
+  "models": {
+    "majority": {
+      "splits": {
+        "train": {
+          "records": 14,
+          "scored_records": 14,
+          "unresolved_targets": 0,
+          "exact_match": 0.0,
+          "target_accuracy": {
+            "q_core": 0.428571,
+            "omega": 0.428571,
+            "phi": 0.857143,
+            "delta_sigma": 0.714286,
+            "pi": 0.428571,
+            "eta": 0.714286,
+            "b_sigma": 0.428571
+          },
+          "critical_cases": 6,
+          "critical_false_negatives": 0
+        },
+        "validation": {
+          "records": 14,
+          "scored_records": 14,
+          "unresolved_targets": 0,
+          "exact_match": 0.0,
+          "target_accuracy": {
+            "q_core": 0.428571,
+            "omega": 0.428571,
+            "phi": 0.857143,
+            "delta_sigma": 0.714286,
+            "pi": 0.428571,
+            "eta": 0.714286,
+            "b_sigma": 0.428571
+          },
+          "critical_cases": 6,
+          "critical_false_negatives": 0
+        },
+        "test": {
+          "records": 14,
+          "scored_records": 14,
+          "unresolved_targets": 0,
+          "exact_match": 0.0,
+          "target_accuracy": {
+            "q_core": 0.428571,
+            "omega": 0.428571,
+            "phi": 0.857143,
+            "delta_sigma": 0.714286,
+            "pi": 0.428571,
+            "eta": 0.714286,
+            "b_sigma": 0.428571
+          },
+          "critical_cases": 6,
+          "critical_false_negatives": 0
+        }
+      },
+      "overall": {
+        "records": 42,
+        "scored_records": 42,
+        "unresolved_targets": 0,
+        "exact_match": 0.0,
+        "target_accuracy": {
+          "q_core": 0.428571,
+          "omega": 0.428571,
+          "phi": 0.857143,
+          "delta_sigma": 0.714286,
+          "pi": 0.428571,
+          "eta": 0.714286,
+          "b_sigma": 0.428571
+        },
+        "critical_cases": 18,
+        "critical_false_negatives": 0
+      }
+    },
+    "transparent_rule": {
+      "splits": {
+        "train": {
+          "records": 14,
+          "scored_records": 14,
+          "unresolved_targets": 0,
+          "exact_match": 1.0,
+          "target_accuracy": {
+            "q_core": 1.0,
+            "omega": 1.0,
+            "phi": 1.0,
+            "delta_sigma": 1.0,
+            "pi": 1.0,
+            "eta": 1.0,
+            "b_sigma": 1.0
+          },
+          "critical_cases": 6,
+          "critical_false_negatives": 0
+        },
+        "validation": {
+          "records": 14,
+          "scored_records": 14,
+          "unresolved_targets": 0,
+          "exact_match": 1.0,
+          "target_accuracy": {
+            "q_core": 1.0,
+            "omega": 1.0,
+            "phi": 1.0,
+            "delta_sigma": 1.0,
+            "pi": 1.0,
+            "eta": 1.0,
+            "b_sigma": 1.0
+          },
+          "critical_cases": 6,
+          "critical_false_negatives": 0
+        },
+        "test": {
+          "records": 14,
+          "scored_records": 14,
+          "unresolved_targets": 0,
+          "exact_match": 1.0,
+          "target_accuracy": {
+            "q_core": 1.0,
+            "omega": 1.0,
+            "phi": 1.0,
+            "delta_sigma": 1.0,
+            "pi": 1.0,
+            "eta": 1.0,
+            "b_sigma": 1.0
+          },
+          "critical_cases": 6,
+          "critical_false_negatives": 0
+        }
+      },
+      "overall": {
+        "records": 42,
+        "scored_records": 42,
+        "unresolved_targets": 0,
+        "exact_match": 1.0,
+        "target_accuracy": {
+          "q_core": 1.0,
+          "omega": 1.0,
+          "phi": 1.0,
+          "delta_sigma": 1.0,
+          "pi": 1.0,
+          "eta": 1.0,
+          "b_sigma": 1.0
+        },
+        "critical_cases": 18,
+        "critical_false_negatives": 0
+      }
+    },
+    "trainable_candidate": {
+      "splits": {
+        "train": {
+          "records": 14,
+          "scored_records": 14,
+          "unresolved_targets": 0,
+          "exact_match": 1.0,
+          "target_accuracy": {
+            "q_core": 1.0,
+            "omega": 1.0,
+            "phi": 1.0,
+            "delta_sigma": 1.0,
+            "pi": 1.0,
+            "eta": 1.0,
+            "b_sigma": 1.0
+          },
+          "critical_cases": 6,
+          "critical_false_negatives": 0
+        },
+        "validation": {
+          "records": 14,
+          "scored_records": 14,
+          "unresolved_targets": 0,
+          "exact_match": 0.928571,
+          "target_accuracy": {
+            "q_core": 1.0,
+            "omega": 0.928571,
+            "phi": 1.0,
+            "delta_sigma": 1.0,
+            "pi": 1.0,
+            "eta": 1.0,
+            "b_sigma": 0.928571
+          },
+          "critical_cases": 6,
+          "critical_false_negatives": 0
+        },
+        "test": {
+          "records": 14,
+          "scored_records": 14,
+          "unresolved_targets": 0,
+          "exact_match": 1.0,
+          "target_accuracy": {
+            "q_core": 1.0,
+            "omega": 1.0,
+            "phi": 1.0,
+            "delta_sigma": 1.0,
+            "pi": 1.0,
+            "eta": 1.0,
+            "b_sigma": 1.0
+          },
+          "critical_cases": 6,
+          "critical_false_negatives": 0
+        }
+      },
+      "overall": {
+        "records": 42,
+        "scored_records": 42,
+        "unresolved_targets": 0,
+        "exact_match": 0.97619,
+        "target_accuracy": {
+          "q_core": 1.0,
+          "omega": 0.97619,
+          "phi": 1.0,
+          "delta_sigma": 1.0,
+          "pi": 1.0,
+          "eta": 1.0,
+          "b_sigma": 0.97619
+        },
+        "critical_cases": 18,
+        "critical_false_negatives": 0
+      }
+    }
+  }
+}

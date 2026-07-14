@@ -1,0 +1,50 @@
+{
+  "schema_version": "psm_v0_257_shadow_encoder_promotion_manifest_v1",
+  "version": "PSM_V0.257",
+  "promoted_at": "2026-07-14",
+  "promoted": true,
+  "decision": "shadow_baseline_ready",
+  "formal_core_source": "PSM_V0.251",
+  "formal_core_records": 2228,
+  "shadow_encoder_gate": {
+    "decision": "shadow_baseline_ready",
+    "passed": true,
+    "records": 42,
+    "training_rows": 14,
+    "validation_rows": 14,
+    "test_rows": 14,
+    "targets": 7,
+    "majority_validation_exact_match": 0.0,
+    "majority_test_exact_match": 0.0,
+    "rule_validation_exact_match": 1.0,
+    "rule_test_exact_match": 1.0,
+    "candidate_validation_exact_match": 0.928571,
+    "candidate_test_exact_match": 1.0,
+    "candidate_validation_critical_false_negatives": 0,
+    "candidate_test_critical_false_negatives": 0,
+    "protected_backflow": 0,
+    "initial_rejection_retained": true,
+    "candidate_type": "trainable_multinomial_naive_bayes",
+    "candidate_shadow_only": true,
+    "deterministic_rule_controller_retained": true,
+    "rule_replacement_allowed": false,
+    "browser_report": "runtime/v0_257_browser_regression/report.json",
+    "docker_report": "runtime/v0_257_docker_verification.json"
+  },
+  "boundaries": {
+    "stable_internal_local_chat_allowed": true,
+    "external_user_trial_allowed": false,
+    "candidate_shadow_only": true,
+    "deterministic_rule_controller_retained": true,
+    "validation_test_blind_judge_feedback_to_training": false,
+    "rule_replacement_allowed": false,
+    "external_release_authority": false,
+    "v0_257_promoted": true
+  },
+  "next_stage": {
+    "version": "PSM_V0.258",
+    "objective": "Expand the shadow encoder to new source families and add confidence calibration, abstention, and unresolved-disagreement evaluation; keep family/source/time isolation and NoTargetRead; prohibit validation, test, blind, or judge-only feedback from training; and retain the deterministic controller without rule replacement.",
+    "blocked": false,
+    "requires_user_input": false
+  }
+}

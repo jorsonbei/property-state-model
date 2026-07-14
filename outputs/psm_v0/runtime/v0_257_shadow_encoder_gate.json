@@ -1,0 +1,54 @@
+{
+  "schema_version": "psm_v0_257_shadow_encoder_gate_v1",
+  "version": "PSM_V0.257-candidate",
+  "passed": true,
+  "decision": "shadow_baseline_ready",
+  "checks": {
+    "records_valid": true,
+    "dataset_has_42_records": true,
+    "balanced_protected_splits": true,
+    "source_family_time_isolation": true,
+    "all_overlap_counts_zero": true,
+    "training_loader_train_only": true,
+    "seven_trainable_heads": true,
+    "candidate_features_exclude_protected_fields": true,
+    "candidate_beats_majority_validation": true,
+    "candidate_beats_majority_test": true,
+    "candidate_not_worse_per_target_validation": true,
+    "candidate_not_worse_per_target_test": true,
+    "candidate_critical_false_negatives_zero": true,
+    "rule_critical_false_negatives_zero": true,
+    "candidate_shadow_only": true,
+    "rule_replacement_closed": true,
+    "external_release_closed": true
+  },
+  "summary": {
+    "records": 42,
+    "training_rows": 14,
+    "validation_rows": 14,
+    "test_rows": 14,
+    "targets": 7,
+    "majority_validation_exact_match": 0.0,
+    "majority_test_exact_match": 0.0,
+    "rule_validation_exact_match": 1.0,
+    "rule_test_exact_match": 1.0,
+    "candidate_validation_exact_match": 0.928571,
+    "candidate_test_exact_match": 1.0,
+    "candidate_validation_critical_false_negatives": 0,
+    "candidate_test_critical_false_negatives": 0,
+    "protected_backflow": 0
+  },
+  "boundaries": {
+    "candidate_shadow_only": true,
+    "deterministic_rule_controller_retained": true,
+    "validation_test_blind_judge_feedback_to_training": false,
+    "rule_replacement_allowed": false,
+    "external_release_authority": false
+  },
+  "artifacts": {
+    "dataset": "runtime/v0_257_shadow_encoder_dataset.jsonl",
+    "model": "runtime/v0_257_shadow_encoder_model.json",
+    "predictions": "runtime/v0_257_shadow_encoder_predictions.jsonl",
+    "metrics": "runtime/v0_257_shadow_encoder_metrics.json"
+  }
+}

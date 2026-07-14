@@ -2,10 +2,10 @@
   "schema_version": "psm_public_runtime_snapshot_v1",
   "project_status": {
     "updated_from_local_artifacts": true,
-    "current_version": "psm_v0.256",
+    "current_version": "psm_v0.257",
     "source_evidence_version": "psm_v0.251",
-    "previous_formal_version": "psm_v0.255",
-    "completed_result": "source_isolated_annotation_and_dataset_contract",
+    "previous_formal_version": "psm_v0.256",
+    "completed_result": "source_isolated_trainable_shadow_encoder_baseline",
     "family": {
       "family_id": "v251_independent_chat_golden_blind_set_boundary_adversarial",
       "case_pack": "case_packs/v0_251_independent_chat_golden_blind_set_boundary_adversarial_cases.json",
@@ -244,8 +244,8 @@
       "rule_replacement_allowed": false
     },
     "next_stage": {
-      "version": "PSM_V0.257",
-      "objective": "Build the first source-isolated shadow state-encoder baseline from resolved training-only annotations; compare transparent rule, majority, and trainable candidates per target and protected split; keep critical safety false negatives non-increasing; and prohibit validation, test, judge-only, or blind feedback from training.",
+      "version": "PSM_V0.258",
+      "objective": "Expand the shadow encoder to new source families and add confidence calibration, abstention, and unresolved-disagreement evaluation; keep family/source/time isolation and NoTargetRead; prohibit validation, test, blind, or judge-only feedback from training; and retain the deterministic controller without rule replacement.",
       "blocked": false,
       "requires_user_input": false
     },
@@ -259,7 +259,7 @@
       "candidate_taxonomy": "taxonomy_out/psm_v0.251_candidate_taxonomy.json",
       "candidate_regression_fixtures": "fixture_out/psm_v0.251_candidate_regression_fixtures.json",
       "taxonomy_delta": "taxonomy_delta_out/psm_v0.251_taxonomy_delta.json",
-      "project_status": "project_status_out/psm_v0.256_project_status.json",
+      "project_status": "project_status_out/psm_v0.257_project_status.json",
       "regression": "regression_out/psm_v0.251_regression_check.json",
       "independent_chat_gate": "runtime/v0_251_wave_g_external_semantic_judge.json",
       "model_selection": "runtime/v0_251_base_upgrade_pairwise_gemini_pro_report.json",
@@ -285,7 +285,14 @@
       "source_isolation_report": "runtime/v0_256_source_isolation_report.json",
       "shadow_training_preview": "runtime/v0_256_shadow_training_export_preview.json",
       "external_contract_review_package": "runtime/v0_256_external_contract_review_package.json",
-      "annotation_contract_checkpoint": "runtime/v0_256_annotation_contract_checkpoint.json"
+      "annotation_contract_checkpoint": "runtime/v0_256_annotation_contract_checkpoint.json",
+      "shadow_encoder_gate": "runtime/v0_257_shadow_encoder_gate.json",
+      "shadow_encoder_metrics": "runtime/v0_257_shadow_encoder_metrics.json",
+      "shadow_encoder_model": "runtime/v0_257_shadow_encoder_model.json",
+      "shadow_encoder_predictions": "runtime/v0_257_shadow_encoder_predictions.jsonl",
+      "shadow_encoder_initial_rejection": "runtime/v0_257_shadow_encoder_initial_rejection.json",
+      "shadow_encoder_residual_risks": "runtime/v0_257_shadow_encoder_residual_risks.json",
+      "shadow_encoder_checkpoint": "runtime/v0_257_shadow_encoder_checkpoint.json"
     },
     "regression": {
       "stem": "psm_v0.251",
@@ -439,6 +446,31 @@
       "source_isolation_report": "runtime/v0_256_source_isolation_report.json",
       "browser_report": "runtime/v0_256_browser_regression/report.json",
       "docker_report": "runtime/v0_256_docker_verification.json"
+    },
+    "shadow_encoder_gate": {
+      "decision": "shadow_baseline_ready",
+      "passed": true,
+      "records": 42,
+      "training_rows": 14,
+      "validation_rows": 14,
+      "test_rows": 14,
+      "targets": 7,
+      "majority_validation_exact_match": 0.0,
+      "majority_test_exact_match": 0.0,
+      "rule_validation_exact_match": 1.0,
+      "rule_test_exact_match": 1.0,
+      "candidate_validation_exact_match": 0.928571,
+      "candidate_test_exact_match": 1.0,
+      "candidate_validation_critical_false_negatives": 0,
+      "candidate_test_critical_false_negatives": 0,
+      "protected_backflow": 0,
+      "initial_rejection_retained": true,
+      "candidate_type": "trainable_multinomial_naive_bayes",
+      "candidate_shadow_only": true,
+      "deterministic_rule_controller_retained": true,
+      "rule_replacement_allowed": false,
+      "browser_report": "runtime/v0_257_browser_regression/report.json",
+      "docker_report": "runtime/v0_257_docker_verification.json"
     }
   },
   "optional_project_status": {

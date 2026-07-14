@@ -852,6 +852,13 @@ def roadmap_answer(context: dict) -> str:
             "随后在 validation/test 上独立报告准确率、分歧覆盖和 critical false negative。候选全程 shadow-only，"
             "不能读取 judge-only 标签，也不能把验证或测试错误回流训练，不能替换现有规则。"
         )
+    elif context["next_version"] == "PSM V0.258":
+        construction = (
+            "施工顺序是：冻结新的来源 family 并保持 family、source、time 三重来源隔离；再对七个 head 分别做置信度校准，"
+            "加入低置信度 abstention 和 unresolved 分歧评估；随后检查校准误差、覆盖率、critical false negative 与"
+            "跨 family 稳定性。validation、test、blind 和 judge-only 反馈仍禁止进入训练，候选继续 shadow-only，"
+            "不能替换现有规则，确定性规则控制器继续保留。"
+        )
     elif context["next_version"] == "PSM V0.250":
         construction = (
             "施工顺序是：先冻结同题模型基准集，再对本地候选模型测量回答质量、边界、延迟和失败率；"
@@ -878,6 +885,17 @@ def roadmap_answer(context: dict) -> str:
 
 
 def project_results_answer(context: dict) -> str:
+    if context["current_version"] == "PSM V0.257":
+        return (
+            "这轮已完成 PSM V0.257 首个来源隔离的可训练 shadow 状态编码器：42 条无私人资料的合成记录按来源分成"
+            "14 train、14 validation、14 test，七个 head 分别预测 Q、Omega、phi、Delta sigma、Pi、eta 和 B_sigma。"
+            "首轮因 validation/test 各有 3 个 critical false negative 被拒绝并保留；修复未知词似然 bug 后，候选的"
+            "validation exact 为 0.928571、test exact 为 1.0，两个受保护 split 的 critical false negative 都是 0。\n\n"
+            "它的作用是证明物性状态可以由隔离数据训练出参数化候选，而不只来自手写规则；但透明规则在 validation/test"
+            "仍为 1.0，因此规则继续掌权，候选只能 shadow 观察，不能控制路由、放行或专业行动。"
+            f"当前聊天模型仍是 `{context['selected_model']}`。下一步是 {context['next_version']}："
+            f"{context['next_objective']}。"
+        )
     if context["current_version"] == "PSM V0.256":
         return (
             "这轮已完成 PSM V0.256 来源隔离的物性状态标注与数据契约：Q、Omega、phi、Delta sigma、Pi、eta、"
@@ -1477,6 +1495,12 @@ def humanize_stage_objective(objective: str) -> str:
         return (
             "只用来源隔离且已解析的训练标注建立首个 shadow 状态编码器，逐目标比较透明规则、多数类与可训练候选，"
             "验证集、测试集、blind 和 judge-only 资料禁止回流，critical safety false negative 不得增加"
+        )
+    if "confidence calibration" in objective.casefold():
+        return (
+            "在 family、source、time 三重来源隔离下扩展新的来源 family，为七个 shadow head 加入置信度校准、"
+            "低置信度 abstention 和 unresolved 分歧评估，"
+            "继续禁止 validation、test、blind、judge-only 反馈回流训练，并保留确定性规则控制器"
         )
     return objective
 

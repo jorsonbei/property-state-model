@@ -2,47 +2,47 @@
 
 ## Current Version
 
-`PSM V0.256`
+`PSM V0.257`
 
-The current project status is `psm_v0.256`. V0.256 promotes the source-isolated property-state annotation and dataset contract while retaining `psm_v0.251` as the formal 2228-record core evidence source and the V0.255 stable internal local chat Alpha decision.
+The current project status is `psm_v0.257`. V0.257 promotes the first source-isolated trainable shadow state-encoder baseline while retaining `psm_v0.251` as the formal 2228-record core evidence source, the V0.255 stable internal local chat Alpha decision, and the V0.256 annotation contract.
 
 ## Latest Completed Result
 
-- A frozen contract now defines Q, Omega, phi, Delta sigma, Pi, eta, and B_sigma targets, required evidence fields, and unknown-retention policy.
-- Eight synthetic non-private records carry 16 independent annotations across train, validation, and test source families.
-- Three intentional target disagreements remain `unresolved`; none is flattened into training truth.
-- Source overlap: 0. Family overlap: 0. Exact-content overlap: 0. Cross-split near duplicates: 0.
-- Candidate-input target/judge leakage: 0. Validation/test backflow into training: 0.
-- Three resolved train records are exportable only as a shadow-training preview; training has not started.
-- A synthetic-only external review package is prepared under user authorization; submission is pending because no external API credential is configured.
-- V0.255 internal-chat evidence remains retained: blind Wave G 20/20, current scenarios 13/13, critical fact hallucinations 0, critical safety false negatives 0.
-- External user trial, professional authority, rule replacement, and external release authority remain closed.
+- The V0.257 benchmark contains 42 synthetic non-private records: 14 train, 14 validation, and 14 test, with distinct source families and clean family/source/time isolation.
+- A trainable multinomial Naive Bayes model estimates seven separate heads for Q, Omega, phi, Delta sigma, Pi, eta, and B_sigma projections.
+- Candidate features include request text and public evidence status only; source identity, source time, split, annotation, consensus, and judge fields are excluded.
+- The initial run was rejected at 0.142857 validation/test exact match with three critical false negatives on each protected split; the failure remains recorded.
+- The repair corrected out-of-vocabulary likelihood handling and medical synonym coverage without adding validation or test rows to training and without changing labels or splits.
+- Final candidate validation exact match: 0.928571. Test exact match: 1.0. Critical false negatives: 0/0.
+- Transparent-rule validation/test exact match remains 1.0/1.0, so deterministic gating remains the controller and the candidate remains shadow-only.
+- Protected backflow: 0. External user trial, professional authority, rule replacement, and external release authority remain closed.
 
 ## Next Stage
 
-`PSM V0.257`
+`PSM V0.258`
 
-Build the first source-isolated shadow state-encoder baseline:
+Calibrate and expand the shadow state encoder:
 
-- train only from resolved V0.256 training annotations;
-- compare majority, transparent-rule, and trainable candidates per state target;
-- report train, validation, and test metrics separately;
-- keep validation, test, blind, and judge-only artifacts out of training;
-- require critical safety false negatives to remain non-increasing;
-- keep every candidate shadow-only and retain the deterministic rule controller.
+- add new source families without crossing the existing family/source/time boundary;
+- calibrate confidence separately for all seven heads;
+- add low-confidence abstention and unresolved-disagreement evaluation;
+- report calibration error, coverage, critical false negatives, and cross-family stability;
+- keep validation, test, blind, and judge-only feedback out of training;
+- keep the candidate shadow-only and retain the deterministic rule controller.
 
 - Blocked: false.
 - Requires user input: false.
 
 ## Recovery Artifacts
 
-- Machine status: `project_status_out/psm_v0.256_project_status.json`.
+- Machine status: `project_status_out/psm_v0.257_project_status.json`.
 - Public runtime snapshot: `runtime/current_runtime_snapshot.json`.
-- Annotation contract: `benchmarks/v0_256_state_annotation_contract.json`.
-- Annotation checkpoint: `runtime/v0_256_annotation_contract_checkpoint.json`.
-- Annotation gate: `runtime/v0_256_annotation_contract_gate.json`.
-- Source-isolation report: `runtime/v0_256_source_isolation_report.json`.
-- External review package: `runtime/v0_256_external_contract_review_package.json`.
+- Shadow encoder checkpoint: `runtime/v0_257_shadow_encoder_checkpoint.json`.
+- Shadow encoder gate: `runtime/v0_257_shadow_encoder_gate.json`.
+- Shadow encoder metrics: `runtime/v0_257_shadow_encoder_metrics.json`.
+- Shadow encoder model: `runtime/v0_257_shadow_encoder_model.json`.
+- Initial rejection: `runtime/v0_257_shadow_encoder_initial_rejection.json`.
+- Residual risks: `runtime/v0_257_shadow_encoder_residual_risks.json`.
 - Current execution roadmap: `roadmap_out/PSM_Full_Project_Audit_and_Execution_Roadmap_V0.248_to_V0.260.md`.
 
 Version history is stored as independent snapshots under `status_history/`; it is never embedded recursively here.

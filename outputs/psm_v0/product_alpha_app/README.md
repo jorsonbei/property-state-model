@@ -1,4 +1,4 @@
-# 物性AI Chat Alpha 0.256
+# 物性AI Chat Alpha 0.257
 
 Local normal-chat demo backed by the latest PSM pipeline status.
 
@@ -24,7 +24,7 @@ Boundary:
 
 Verified scope:
 
-- `/api/status` reports the latest project status, currently `PSM V0.256`.
+- `/api/status` reports the latest project status, currently `PSM V0.257`.
 - `/api/status` exposes `internal_trial_ready` separately from the still-closed external-user gate.
 - `/api/chat` preserves user and assistant roles across multi-turn history.
 - Project status and roadmap answers are grounded in the local structured status.
@@ -40,6 +40,7 @@ Verified scope:
 - PSM state chain, ordinary output, gated output, release boundary, evidence, and history are kept behind the debug details panel.
 - The internal chat Alpha gate is ready for stable local single-user use; this is not public-service, multi-user, privacy-compliance, or professional-authority approval.
 - The V0.256 annotation contract keeps Q/Omega/phi/Delta sigma/Pi/eta/B_sigma targets, disagreement, protected splits, and judge-only fields outside the normal chat feature view; training has not started and rule replacement remains closed.
+- The V0.257 trainable seven-head state encoder runs as an offline shadow baseline only; it cannot control chat routing, release, or professional action, and deterministic gating remains authoritative.
 
 Browser regression:
 
@@ -51,4 +52,5 @@ make route-v253-eval
 make state-v254-eval
 make alpha-v255-eval
 make annotation-v256-eval
+make encoder-v257-eval
 ```

@@ -249,14 +249,21 @@
 
 实测结果：冻结 Q、Omega、phi、Delta sigma、Pi、eta、B_sigma 七类目标及未知项策略。8 条无私人资料的合成来源获得 16 份独立标注，刻意制造的 3 个目标分歧全部保持 unresolved，不进入训练真值。family/source/time 分组切分通过；来源、family、精确内容、近似重复、候选输入泄漏和 validation/test 回流均为 0。3 条一致训练记录只生成 shadow-training preview，训练尚未启动。外部独立契约评审包已经按用户授权生成，但当前没有 API 凭证，因此保持 ready-not-submitted，不影响本地契约门晋级。
 
-### V0.257-V0.258：可训练物性状态模型
+### V0.257：首个可训练 shadow 状态编码器
+
+状态：已完成（2026-07-14）。
+
+实测结果：构建 42 条无私人资料的合成 benchmark，按独立来源 family 分成 14 train、14 validation、14 test。首个可训练 multinomial Naive Bayes 候选分七个 head 预测 Q、Omega、phi、Delta sigma、Pi、eta、B_sigma 投影，特征明确排除 source id、time、split、annotation、consensus 和 judge。首轮 validation/test exact 均为 0.142857，且各有 3 个 critical false negative，阶段门拒绝晋级并保留失败报告。修复未知词似然实现 bug 和医疗同义安全标记后，没有增加 protected rows、没有改标签或切分；最终候选 validation/test exact 为 0.928571/1.0，critical false negative 为 0/0。透明规则仍为 1.0/1.0，因此继续作为控制器，候选只允许 shadow。
+
+### V0.258：校准、abstention 与跨来源扩展
 
 目标：开始真正的 V1 状态编码器研究。
 
 施工：
 
-- 只从 V0.256 已解析的 train 标注建立透明规则、多数类和可训练状态编码候选。
-- 分目标比较候选，并保留 unresolved 的拒答/不学习行为。
+- 扩展新的来源 family，不跨越既有 family/source/time 边界。
+- 为七个 head 分别做 confidence calibration，并加入低置信度 abstention。
+- 将 unresolved 分歧作为不强制真值的独立评估面。
 - 使用 family/source/time holdout，禁止同源模板跨 split。
 - 只有独立集提升且 critical false negative 不增加时，才允许进入 shadow。
 
@@ -292,7 +299,7 @@
 
 ## 六、执行顺序与停止条件
 
-下一条可执行任务是 V0.257：来源隔离的 shadow 状态编码器基线。
+下一条可执行任务是 V0.258：shadow 状态编码器校准、abstention 与跨来源扩展。
 
 默认持续执行顺序：
 

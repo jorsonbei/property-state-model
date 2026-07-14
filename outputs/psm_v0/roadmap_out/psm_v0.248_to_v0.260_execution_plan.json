@@ -1,10 +1,10 @@
 {
   "plan_version": "psm_execution_plan_v0.248_to_v0.260",
   "created_at": "2026-07-14",
-  "current_project_version": "psm_v0.256",
+  "current_project_version": "psm_v0.257",
   "current_formal_version": "psm_v0.251",
   "authority": {
-    "machine_truth": "project_status_out/psm_v0.256_project_status.json",
+    "machine_truth": "project_status_out/psm_v0.257_project_status.json",
     "human_audit": "roadmap_out/PSM_Full_Project_Audit_and_Execution_Roadmap_V0.248_to_V0.260.md"
   },
   "current_boundary": {
@@ -15,27 +15,28 @@
     "dynamic_pi_eta_gate_passed": true,
     "internal_chat_alpha_gate_passed": true,
     "source_isolated_annotation_contract_passed": true,
+    "trainable_shadow_encoder_baseline_passed": true,
     "stable_internal_local_chat": true,
     "external_user_trial": false,
     "native_property_state_foundation_model": false
   },
   "next_executable_stage": {
-    "version": "PSM_V0.257",
-    "objective": "Build the first source-isolated shadow state-encoder baseline from resolved training-only annotations and compare majority, transparent-rule, and trainable candidates per target and protected split.",
+    "version": "PSM_V0.258",
+    "objective": "Expand to new source families and add confidence calibration, abstention, and unresolved-disagreement evaluation while preserving source isolation, NoTargetRead, shadow-only use, and the deterministic controller.",
     "blocked": false,
     "requires_user_input": false,
     "preconditions": [
-      "PSM_V0.256 annotation contract decision is contract_ready_training_not_started.",
-      "Q/Omega/phi/Delta sigma/Pi/eta/B_sigma targets and unresolved disagreement are frozen.",
-      "Family, source, content, near-duplicate, candidate-input leakage, and protected-backflow counts are zero.",
+      "PSM_V0.257 shadow encoder decision is shadow_baseline_ready.",
+      "Candidate validation/test exact match is 0.928571/1.0 with zero critical false negatives.",
+      "The initial rejected run and no-protected-feedback repair boundary remain retained.",
       "Validation, test, blind, judge-only feedback, external-user trial, and rule replacement remain closed."
     ],
     "acceptance": [
-      "Only resolved train annotations are visible to the training target loader.",
-      "Majority, transparent-rule, and trainable candidates are scored per target and per split.",
-      "Unresolved labels are reported as abstention targets, not forced truth.",
-      "Critical safety false negatives do not increase on validation or test.",
-      "Candidate outputs remain shadow-only; deterministic gating, external-user trial, and rule replacement stay protected."
+      "New source families remain isolated by family/source/time and pass duplicate contamination audit.",
+      "All seven heads report calibrated confidence and abstention coverage.",
+      "Unresolved labels are evaluated without being forced into training truth.",
+      "Critical safety false negatives remain zero after abstention.",
+      "Candidate remains shadow-only; deterministic gating, external-user trial, and rule replacement stay protected."
     ]
   },
   "completed_stages": [
@@ -94,6 +95,18 @@
       "candidate_input_leaks": 0,
       "protected_backflow": 0,
       "training_started": false,
+      "rule_replacement_allowed": false
+    },
+    {
+      "version": "PSM_V0.257",
+      "result": "shadow_baseline_ready",
+      "records": 42,
+      "split_counts": "14/14/14",
+      "targets": 7,
+      "candidate_validation_test_exact": "0.928571/1.0",
+      "candidate_validation_test_critical_false_negatives": "0/0",
+      "protected_backflow": 0,
+      "deterministic_rule_controller_retained": true,
       "rule_replacement_allowed": false
     }
   ],
