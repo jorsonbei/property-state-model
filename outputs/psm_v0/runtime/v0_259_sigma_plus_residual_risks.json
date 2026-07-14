@@ -1,0 +1,27 @@
+{
+  "schema_version": "psm_v0_259_sigma_plus_residual_risks_v1",
+  "version": "PSM_V0.259-candidate",
+  "decision": "sigma_plus_delivery_ready",
+  "risks": [
+    {
+      "id": "claim_segmentation",
+      "status": "open",
+      "boundary": "Rule-based sentence claim segmentation is not semantic entailment."
+    },
+    {
+      "id": "source_entailment",
+      "status": "open",
+      "boundary": "A provenance link does not by itself prove that every phrasing is entailed by the source."
+    },
+    {
+      "id": "shadow_generalization",
+      "status": "open",
+      "boundary": "The calibrated shadow encoder remains synthetic-small and has no output authority."
+    },
+    {
+      "id": "external_trial",
+      "status": "closed_by_boundary",
+      "boundary": "V0.259 does not authorize external users or professional action."
+    }
+  ]
+}

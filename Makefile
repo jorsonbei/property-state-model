@@ -2,7 +2,7 @@ PYTHON ?= python3
 NPM ?= npm
 PSM_ROOT := outputs/psm_v0
 
-.PHONY: check test serve inventory sync-runtime route-v253-eval route-v253-docker state-v254-eval state-v254-docker alpha-v255-eval alpha-v255-docker annotation-v256-eval annotation-v256-docker encoder-v257-eval encoder-v257-docker calibrate-v258-eval calibrate-v258-docker browser-install browser-regression browser-regression-real browser-regression-v253 browser-regression-v254 browser-regression-v255 browser-regression-v256 browser-regression-v257 browser-regression-v258 judge-v251-external judge-v251-external-c judge-v251-external-d judge-v251-external-e judge-v251-external-f judge-v251-external-g docker-config docker-build docker-up
+.PHONY: check test serve inventory sync-runtime route-v253-eval route-v253-docker state-v254-eval state-v254-docker alpha-v255-eval alpha-v255-docker annotation-v256-eval annotation-v256-docker encoder-v257-eval encoder-v257-docker calibrate-v258-eval calibrate-v258-docker sigma-v259-eval sigma-v259-docker browser-install browser-regression browser-regression-real browser-regression-v253 browser-regression-v254 browser-regression-v255 browser-regression-v256 browser-regression-v257 browser-regression-v258 browser-regression-v259 judge-v251-external judge-v251-external-c judge-v251-external-d judge-v251-external-e judge-v251-external-f judge-v251-external-g docker-config docker-build docker-up
 
 check:
 	$(PYTHON) scripts/verify_project.py
@@ -54,6 +54,12 @@ calibrate-v258-eval:
 
 calibrate-v258-docker:
 	$(PYTHON) scripts/verify_v0_258_docker.py
+
+sigma-v259-eval:
+	$(PYTHON) scripts/evaluate_v0_259_sigma_plus.py
+
+sigma-v259-docker:
+	$(PYTHON) scripts/verify_v0_259_docker.py
 
 browser-install:
 	$(NPM) install
@@ -113,6 +119,15 @@ browser-regression-v258:
 	PSM_BROWSER_REAL_CHAT=1 PSM_BROWSER_ROUTE_EVIDENCE=1 \
 	PSM_BROWSER_EXPECT_INTERNAL_READY=1 \
 	PSM_BROWSER_STATUS_VERSION="PSM V0.258" \
+	$(NPM) run browser-regression
+
+browser-regression-v259:
+	PSM_BASE_URL=$${PSM_BASE_URL:-http://127.0.0.1:8765} \
+	PSM_BROWSER_OUTDIR=$(PSM_ROOT)/runtime/v0_259_browser_regression \
+	PSM_BROWSER_SCHEMA=psm_v0_259_browser_regression_v1 \
+	PSM_BROWSER_REAL_CHAT=1 PSM_BROWSER_ROUTE_EVIDENCE=1 \
+	PSM_BROWSER_EXPECT_INTERNAL_READY=1 \
+	PSM_BROWSER_STATUS_VERSION="PSM V0.259" \
 	$(NPM) run browser-regression
 
 judge-v251-external: judge-v251-external-c judge-v251-external-d judge-v251-external-e judge-v251-external-f judge-v251-external-g

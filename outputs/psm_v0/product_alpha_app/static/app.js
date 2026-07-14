@@ -320,7 +320,19 @@ function renderResult(payload) {
   $("pi-state").textContent = payload.route.route;
   $("eta-state").textContent = listCount(payload.packet.eta?.uncertainties);
   $("bsigma-state").textContent = payload.bsigma_audit.status;
-  $("sigma-state").textContent = payload.chat?.quality_audit?.status || payload.chat?.assistant_audit?.status || payload.psm_gated.audit.status;
+  const delivery = payload.sigma_plus_delivery || {};
+  const developerDelivery = delivery.developer_view || {};
+  const statementAudit = developerDelivery.statement_audit || {};
+  const shadowObservation = developerDelivery.calibrated_shadow_observation || {};
+  $("sigma-state").textContent = delivery.decision || payload.chat?.quality_audit?.status || payload.chat?.assistant_audit?.status || payload.psm_gated.audit.status;
+  $("delivery-decision").textContent = delivery.decision || "not available";
+  $("delivery-strong-claims").textContent = String(statementAudit.strong_claims || 0);
+  $("delivery-claim-coverage").textContent = statementAudit.strong_claim_coverage == null
+    ? "-"
+    : `${Math.round(statementAudit.strong_claim_coverage * 100)}%`;
+  $("delivery-provenance").textContent = String(developerDelivery.provenance?.length || 0);
+  $("delivery-shadow-fallback").textContent = String(shadowObservation.fallback_targets?.length || 0);
+  $("delivery-controller").textContent = shadowObservation.controller_used || "-";
   const execution = payload.route_execution || {};
   $("evidence-route-status").textContent = execution.status || "not available";
   $("evidence-route-sources").textContent = String(execution.sources?.length || 0);

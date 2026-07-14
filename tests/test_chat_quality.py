@@ -107,10 +107,10 @@ class ChatQualityTests(unittest.TestCase):
         self.assertIn(context["current_version"], result["chat"]["assistant_message"])
         self.assertIn(context["next_version"], result["chat"]["assistant_message"])
         self.assertIn(context["next_objective"], result["chat"]["assistant_message"])
-        self.assertIn("追溯", result["chat"]["assistant_message"])
-        self.assertIn("provenance", result["chat"]["assistant_message"])
-        self.assertIn("shadow", result["chat"]["assistant_message"])
-        self.assertIn("无放行权", result["chat"]["assistant_message"])
+        self.assertIn("安全", result["chat"]["assistant_message"])
+        self.assertIn("聊天质量", result["chat"]["assistant_message"])
+        self.assertIn("internal_trial_ready", result["chat"]["assistant_message"])
+        self.assertIn("外部", result["chat"]["assistant_message"])
 
     def test_working_chat_does_not_imply_external_release(self) -> None:
         context = server.load_project_context()
@@ -269,6 +269,21 @@ class ChatQualityTests(unittest.TestCase):
         self.assertTrue(execution["provenance"][0]["sha256"])
         self.assertIn("source_or_tool_check", execution["satisfied_judges"])
         self.assertEqual(result["chat"]["quality_audit"]["route_execution_status"], "success")
+
+    def test_chat_api_exposes_sigma_plus_delivery_without_changing_user_view(self) -> None:
+        result = self.run_offline([{"role": "user", "content": "项目现在做到哪里了？"}])
+        delivery = result["sigma_plus_delivery"]
+
+        self.assertTrue(delivery["passed"])
+        self.assertEqual(delivery["decision"], "traceable_candidate_delivery")
+        self.assertEqual(delivery["user_view"]["assistant_message"], result["chat"]["assistant_message"])
+        self.assertEqual(delivery["developer_view"]["statement_audit"]["strong_claim_coverage"], 1.0)
+        self.assertTrue(delivery["developer_view"]["provenance"])
+        self.assertEqual(
+            delivery["developer_view"]["calibrated_shadow_observation"]["controller_used"],
+            "deterministic_rule",
+        )
+        self.assertFalse(delivery["release_boundary"]["external_release_authority"])
 
     def test_verified_kernel_route_is_grounded_and_passes_quality(self) -> None:
         result = self.run_offline(

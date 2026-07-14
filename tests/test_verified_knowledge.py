@@ -148,9 +148,9 @@ class VerifiedKnowledgeTests(unittest.TestCase):
         self.assertIn("没有开放", answer)
         self.assertIn(context["selected_model"], answer)
         self.assertIn(context["next_version"], answer)
-        self.assertIn("可追溯", answer)
-        self.assertIn("provenance", answer)
-        self.assertIn("回退确定性规则", answer)
+        self.assertIn("internal_trial_ready", answer)
+        self.assertIn("needs_more_work", answer)
+        self.assertIn("外部用户试用", answer)
         self.assertNotIn("域特定检查", answer)
 
     def test_food_allergy_kernel_rejects_absolute_guarantee(self) -> None:

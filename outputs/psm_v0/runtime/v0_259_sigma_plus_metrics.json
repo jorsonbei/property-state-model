@@ -1,0 +1,38 @@
+{
+  "schema_version": "psm_v0_259_sigma_plus_metrics_v1",
+  "version": "PSM_V0.259-candidate",
+  "summary": {
+    "cases": 15,
+    "delivery_passed": 15,
+    "strong_claims": 22,
+    "minimum_strong_claim_coverage": 1.0,
+    "supported_provenance_failures": 0,
+    "downgrade_marker_failures": 0,
+    "ordinary_internal_debug_leaks": 0,
+    "user_view_mismatches": 0,
+    "provenance_records": 6,
+    "retained_failure_events": 2,
+    "retained_unresolved_judges": 25,
+    "shadow_fallback_target_events": 19,
+    "candidate_controlled_outputs": 0,
+    "deterministic_controller_rows": 15,
+    "external_release_authority_rows": 0,
+    "fail_closed_repairs": 0
+  },
+  "families": [
+    "high_risk",
+    "ordinary_chat",
+    "project",
+    "release_boundary",
+    "research",
+    "theory",
+    "tool_failure",
+    "verified_knowledge"
+  ],
+  "boundary": {
+    "base_model_weights_changed": false,
+    "shadow_training_feedback_written": false,
+    "normal_chat_reads_developer_view": false,
+    "external_release_authority": false
+  }
+}

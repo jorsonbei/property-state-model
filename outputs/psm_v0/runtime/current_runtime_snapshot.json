@@ -2,10 +2,10 @@
   "schema_version": "psm_public_runtime_snapshot_v1",
   "project_status": {
     "updated_from_local_artifacts": true,
-    "current_version": "psm_v0.258",
+    "current_version": "psm_v0.259",
     "source_evidence_version": "psm_v0.251",
-    "previous_formal_version": "psm_v0.257",
-    "completed_result": "source_isolated_calibrated_shadow_with_fail_closed_abstention",
+    "previous_formal_version": "psm_v0.258",
+    "completed_result": "traceable_sigma_plus_candidate_delivery",
     "family": {
       "family_id": "v251_independent_chat_golden_blind_set_boundary_adversarial",
       "case_pack": "case_packs/v0_251_independent_chat_golden_blind_set_boundary_adversarial_cases.json",
@@ -244,8 +244,8 @@
       "rule_replacement_allowed": false
     },
     "next_stage": {
-      "version": "PSM_V0.259",
-      "objective": "Build a Sigma+ traceable delivery contract that joins natural answers, property state, provenance, tool results, failures, and statement levels; require every strong claim to have evidence provenance or an explicit downgrade; route calibrated low-confidence and unresolved targets back to deterministic rules; and keep internal state details out of ordinary chat.",
+      "version": "PSM_V0.260",
+      "objective": "Run the internal trial readiness review by consolidating safety, chat quality, blind-set, model comparison, performance, failure-ledger, and residual-risk evidence; issue only internal_trial_ready, needs_more_work, or blocked; keep external user trial, privacy compliance, public service, and professional authority closed.",
       "blocked": false,
       "requires_user_input": false
     },
@@ -259,7 +259,7 @@
       "candidate_taxonomy": "taxonomy_out/psm_v0.251_candidate_taxonomy.json",
       "candidate_regression_fixtures": "fixture_out/psm_v0.251_candidate_regression_fixtures.json",
       "taxonomy_delta": "taxonomy_delta_out/psm_v0.251_taxonomy_delta.json",
-      "project_status": "project_status_out/psm_v0.258_project_status.json",
+      "project_status": "project_status_out/psm_v0.259_project_status.json",
       "regression": "regression_out/psm_v0.251_regression_check.json",
       "independent_chat_gate": "runtime/v0_251_wave_g_external_semantic_judge.json",
       "model_selection": "runtime/v0_251_base_upgrade_pairwise_gemini_pro_report.json",
@@ -299,7 +299,12 @@
       "calibrated_shadow_predictions": "runtime/v0_258_calibrated_shadow_predictions.jsonl",
       "calibrated_shadow_initial_rejection": "runtime/v0_258_calibrated_shadow_initial_rejection.json",
       "calibrated_shadow_residual_risks": "runtime/v0_258_calibrated_shadow_residual_risks.json",
-      "calibrated_shadow_checkpoint": "runtime/v0_258_calibrated_shadow_checkpoint.json"
+      "calibrated_shadow_checkpoint": "runtime/v0_258_calibrated_shadow_checkpoint.json",
+      "sigma_plus_gate": "runtime/v0_259_sigma_plus_gate.json",
+      "sigma_plus_metrics": "runtime/v0_259_sigma_plus_metrics.json",
+      "sigma_plus_evaluation": "runtime/v0_259_sigma_plus_evaluation.jsonl",
+      "sigma_plus_residual_risks": "runtime/v0_259_sigma_plus_residual_risks.json",
+      "sigma_plus_checkpoint": "runtime/v0_259_sigma_plus_checkpoint.json"
     },
     "regression": {
       "stem": "psm_v0.251",
@@ -506,6 +511,33 @@
       "rule_replacement_allowed": false,
       "browser_report": "runtime/v0_258_browser_regression/report.json",
       "docker_report": "runtime/v0_258_docker_verification.json"
+    },
+    "sigma_plus_gate": {
+      "decision": "sigma_plus_delivery_ready",
+      "passed": true,
+      "cases": 15,
+      "delivery_passed": 15,
+      "strong_claims": 22,
+      "minimum_strong_claim_coverage": 1.0,
+      "supported_provenance_failures": 0,
+      "downgrade_marker_failures": 0,
+      "ordinary_internal_debug_leaks": 0,
+      "user_view_mismatches": 0,
+      "provenance_records": 6,
+      "retained_failure_events": 2,
+      "retained_unresolved_judges": 25,
+      "shadow_fallback_target_events": 19,
+      "candidate_controlled_outputs": 0,
+      "deterministic_controller_rows": 15,
+      "external_release_authority_rows": 0,
+      "fail_closed_repairs": 0,
+      "delivery_contract": "natural_answer_plus_developer_trace",
+      "statement_policy": "strong_claim_requires_provenance_or_explicit_downgrade",
+      "candidate_shadow_only": true,
+      "deterministic_rule_controller_retained": true,
+      "rule_replacement_allowed": false,
+      "browser_report": "runtime/v0_259_browser_regression/report.json",
+      "docker_report": "runtime/v0_259_docker_verification.json"
     }
   },
   "optional_project_status": {

@@ -1,10 +1,10 @@
 {
   "plan_version": "psm_execution_plan_v0.248_to_v0.260",
   "created_at": "2026-07-14",
-  "current_project_version": "psm_v0.258",
+  "current_project_version": "psm_v0.259",
   "current_formal_version": "psm_v0.251",
   "authority": {
-    "machine_truth": "project_status_out/psm_v0.258_project_status.json",
+    "machine_truth": "project_status_out/psm_v0.259_project_status.json",
     "human_audit": "roadmap_out/PSM_Full_Project_Audit_and_Execution_Roadmap_V0.248_to_V0.260.md"
   },
   "current_boundary": {
@@ -17,27 +17,28 @@
     "source_isolated_annotation_contract_passed": true,
     "trainable_shadow_encoder_baseline_passed": true,
     "calibrated_shadow_abstention_gate_passed": true,
+    "traceable_sigma_plus_delivery_gate_passed": true,
     "stable_internal_local_chat": true,
     "external_user_trial": false,
     "native_property_state_foundation_model": false
   },
   "next_executable_stage": {
-    "version": "PSM_V0.259",
-    "objective": "Build a Sigma+ traceable delivery contract for natural answers, property state, provenance, tools, failures, and statement levels while routing low-confidence or unresolved targets to deterministic rules and keeping internal debug terms out of ordinary chat.",
+    "version": "PSM_V0.260",
+    "objective": "Run the internal trial readiness review across safety, chat quality, blind-set, model-comparison, performance, failure-ledger, and residual-risk evidence, issuing only internal_trial_ready, needs_more_work, or blocked while external authority remains closed.",
     "blocked": false,
     "requires_user_input": false,
     "preconditions": [
-      "PSM_V0.258 calibrated shadow decision is calibrated_shadow_ready.",
-      "Evaluation coverage is 0.959184 with minimum selective accuracy 0.928571 and zero accepted critical false negatives.",
-      "Four low-confidence targets abstain and seven unresolved targets fail closed through consensus.",
-      "Base weights, protected feedback, external-user trial, and rule replacement remain closed."
+      "PSM_V0.259 Sigma+ decision is sigma_plus_delivery_ready.",
+      "All 15 frozen delivery cases pass with 1.0 strong-claim provenance-or-downgrade coverage.",
+      "Ordinary debug leakage, candidate-controlled output, and external release authority are zero.",
+      "Base weights, training feedback, external-user trial, and rule replacement remain closed."
     ],
     "acceptance": [
-      "Every sampled strong claim has provenance or an explicit downgrade marker.",
-      "Low-confidence and unresolved targets route to deterministic rules without changing the user-facing answer contract.",
-      "Ordinary chat contains no internal state, threshold, or debug leakage.",
-      "API, desktop, mobile, and Docker regressions pass.",
-      "Candidate remains shadow-only; deterministic gating, external-user trial, and rule replacement stay protected."
+      "Safety, chat quality, blind, model comparison, performance, failure ledger, and residual-risk inputs are present and version-consistent.",
+      "Critical safety, hallucination, provenance, browser, API, Docker, and release-boundary gates all pass.",
+      "The decision is exactly one of internal_trial_ready, needs_more_work, or blocked.",
+      "The report distinguishes internal readiness from external-user, privacy, public-service, and professional authority.",
+      "External user trial and rule replacement remain closed."
     ]
   },
   "completed_stages": [
@@ -124,6 +125,21 @@
       "model_only_unresolved_detection": "0/7",
       "protected_feedback_to_base_training": 0,
       "deterministic_rule_controller_retained": true,
+      "rule_replacement_allowed": false
+    },
+    {
+      "version": "PSM_V0.259",
+      "result": "sigma_plus_delivery_ready",
+      "cases": "15/15",
+      "strong_claims": 22,
+      "minimum_strong_claim_coverage": 1.0,
+      "provenance_cases": 6,
+      "retained_failure_events": 2,
+      "retained_unresolved_judges": 25,
+      "shadow_fallback_target_events": 19,
+      "ordinary_internal_debug_leaks": 0,
+      "candidate_controlled_outputs": 0,
+      "external_release_authority_rows": 0,
       "rule_replacement_allowed": false
     }
   ],

@@ -25,6 +25,11 @@ from psm_v0.model_adapter import BuiltinModelAdapter  # noqa: E402
 from psm_v0.pipeline import run_pipeline  # noqa: E402
 from psm_v0.psm_gate_controller import apply_psm_gate  # noqa: E402
 from psm_v0.route_executor import execute_route  # noqa: E402
+from psm_v0.sigma_plus_delivery import (  # noqa: E402
+    build_sigma_plus_delivery,
+    load_shadow_resources,
+    repair_user_answer,
+)
 from psm_v0.state_extractor import infer_domain  # noqa: E402
 from psm_v0.task_state_graph import build_task_state_graph  # noqa: E402
 from psm_v0.verified_knowledge import VerifiedKnowledge, match_verified_knowledge  # noqa: E402
@@ -63,7 +68,7 @@ def main() -> None:
 
 
 class Handler(BaseHTTPRequestHandler):
-    server_version = "PSMProductAlpha/0.255"
+    server_version = "PSMProductAlpha/0.259"
 
     def do_GET(self) -> None:  # noqa: N802
         parsed = urlparse(self.path)
@@ -291,6 +296,56 @@ def run_chat_turn(
         previous_assistant_answers=assistant_messages,
         route_execution=route_execution,
     )
+    shadow_model, calibration = load_shadow_resources(str(PSM_ROOT))
+    sigma_plus_delivery = build_sigma_plus_delivery(
+        request=current,
+        answer=assistant_message,
+        intent=intent,
+        pipeline_result=result,
+        route_execution=route_execution,
+        task_state_graph=task_state_graph,
+        grounding_facts=grounding_facts,
+        grounding_sources=grounding_sources,
+        quality_audit=quality_audit,
+        shadow_model=shadow_model,
+        calibration=calibration,
+    )
+    original_candidate = assistant_message
+    if not sigma_plus_delivery["passed"]:
+        assistant_message = repair_user_answer(
+            assistant_message,
+            sigma_plus_delivery["developer_view"]["statement_audit"],
+            sigma_plus_delivery["internal_debug_terms_in_user_view"],
+        )
+        quality_audit = audit_chat_answer(
+            current,
+            assistant_message,
+            intent=intent,
+            grounding_facts=grounding_facts,
+            grounding_sources=grounding_sources,
+            previous_assistant_answers=assistant_messages,
+            route_execution=route_execution,
+        )
+        sigma_plus_delivery = build_sigma_plus_delivery(
+            request=current,
+            answer=assistant_message,
+            intent=intent,
+            pipeline_result=result,
+            route_execution=route_execution,
+            task_state_graph=task_state_graph,
+            grounding_facts=grounding_facts,
+            grounding_sources=grounding_sources,
+            quality_audit=quality_audit,
+            shadow_model=shadow_model,
+            calibration=calibration,
+        )
+        sigma_plus_delivery["repair"] = {
+            "applied": True,
+            "original_candidate": original_candidate,
+            "original_candidate_user_visible": False,
+        }
+    else:
+        sigma_plus_delivery["repair"] = {"applied": False, "original_candidate_user_visible": True}
     result["chat"] = {
         "turn_index": len(user_messages),
         "current_user_message": current,
@@ -299,6 +354,7 @@ def run_chat_turn(
         "assistant_message": assistant_message,
         "generation": {
             **generation,
+            "answer": assistant_message,
             "grounded_facts": grounding_facts,
             "grounding_sources": grounding_sources,
             "uncertainties": result["packet"].get("eta", {}).get("uncertainties", []),
@@ -323,6 +379,7 @@ def run_chat_turn(
             "external_user_trial_allowed": False,
         },
     }
+    result["sigma_plus_delivery"] = sigma_plus_delivery
     return result
 
 
@@ -866,6 +923,13 @@ def roadmap_answer(context: dict) -> str:
             "随后抽样审计强结论来源，并验证普通聊天只显示自然回答，不泄漏内部状态、阈值或调试术语；"
             "最后补齐 API、桌面、手机和 Docker 回归，shadow 候选仍无放行权。"
         )
+    elif context["next_version"] == "PSM V0.260":
+        construction = (
+            "施工顺序是：先冻结评审输入清单，汇总安全、聊天质量、盲测、模型对照、性能、失败账本与剩余风险；"
+            "再重放关键门槛并检查证据版本、时间与放行边界一致；随后只允许给出 internal_trial_ready、"
+            "needs_more_work 或 blocked 三种机器结论；最后复验 API、桌面、手机和 Docker。"
+            "这个评审只决定本机内部真实使用，不会自动开放外部用户、隐私合规、公开服务或专业权限。"
+        )
     elif context["next_version"] == "PSM V0.250":
         construction = (
             "施工顺序是：先冻结同题模型基准集，再对本地候选模型测量回答质量、边界、延迟和失败率；"
@@ -892,6 +956,17 @@ def roadmap_answer(context: dict) -> str:
 
 
 def project_results_answer(context: dict) -> str:
+    if context["current_version"] == "PSM V0.259":
+        return (
+            "这轮已完成 PSM V0.259 Sigma+ 可追溯交付闭环：普通用户仍只看到自然回答，研发视图则把 Q 到 Sigma+ 状态、"
+            "来源、工具结果、失败、声明等级和 V0.258 calibrated shadow 观察绑定在同一个交付包。强结论必须有 provenance，"
+            "否则可见文本中必须明确降级；不满足时会在送达前 fail-closed 修复。\n\n"
+            "冻结验收 15/15 通过，共审计 22 条强声明，追溯或降级覆盖率 100%；6 题走真实 provenance，保留 2 个工具失败、"
+            "25 个未解 judge 和 19 个 shadow 回退 target。普通回答内部术语泄漏、候选控制输出与外部放行权都是 0。"
+            "它的作用是把“回答正确”升级为“回答、证据、未知项和失败可以逐层追溯”，但这仍不是开放外部试用。"
+            f"当前聊天模型仍是 `{context['selected_model']}`。下一步是 {context['next_version']}："
+            f"{context['next_objective']}。"
+        )
     if context["current_version"] == "PSM V0.258":
         return (
             "这轮已完成 PSM V0.258 七个物性状态 head 的来源隔离置信度校准与 fail-closed 棄权：新增 14 条 calibration、"
@@ -1524,6 +1599,11 @@ def humanize_stage_objective(objective: str) -> str:
         return (
             "建立 Sigma+ 可追溯交付闭环，把自然回答、物性状态、来源、工具结果、失败与声明等级绑定；"
             "强结论必须有 provenance 或显式降级，低置信和 unresolved target 回退确定性规则，普通聊天不暴露内部调试细节"
+        )
+    if "internal trial readiness review" in objective.casefold():
+        return (
+            "执行内部试用就绪总评审，汇总安全、聊天质量、盲测、模型对照、性能、失败账本与剩余风险，"
+            "结论只能是 internal_trial_ready、needs_more_work 或 blocked；外部用户与专业权限继续关闭"
         )
     return objective
 

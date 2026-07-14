@@ -1,0 +1,52 @@
+{
+  "schema_version": "psm_v0_259_sigma_plus_promotion_manifest_v1",
+  "version": "PSM_V0.259",
+  "promoted_at": "2026-07-14",
+  "promoted": true,
+  "decision": "sigma_plus_delivery_ready",
+  "formal_core_source": "PSM_V0.251",
+  "formal_core_records": 2228,
+  "sigma_plus_gate": {
+    "decision": "sigma_plus_delivery_ready",
+    "passed": true,
+    "cases": 15,
+    "delivery_passed": 15,
+    "strong_claims": 22,
+    "minimum_strong_claim_coverage": 1.0,
+    "supported_provenance_failures": 0,
+    "downgrade_marker_failures": 0,
+    "ordinary_internal_debug_leaks": 0,
+    "user_view_mismatches": 0,
+    "provenance_records": 6,
+    "retained_failure_events": 2,
+    "retained_unresolved_judges": 25,
+    "shadow_fallback_target_events": 19,
+    "candidate_controlled_outputs": 0,
+    "deterministic_controller_rows": 15,
+    "external_release_authority_rows": 0,
+    "fail_closed_repairs": 0,
+    "delivery_contract": "natural_answer_plus_developer_trace",
+    "statement_policy": "strong_claim_requires_provenance_or_explicit_downgrade",
+    "candidate_shadow_only": true,
+    "deterministic_rule_controller_retained": true,
+    "rule_replacement_allowed": false,
+    "browser_report": "runtime/v0_259_browser_regression/report.json",
+    "docker_report": "runtime/v0_259_docker_verification.json"
+  },
+  "boundaries": {
+    "stable_internal_local_chat_allowed": true,
+    "external_user_trial_allowed": false,
+    "candidate_shadow_only": true,
+    "deterministic_rule_controller_retained": true,
+    "shadow_training_feedback_written": false,
+    "rule_replacement_allowed": false,
+    "external_release_authority": false,
+    "v0_259_promoted": true
+  },
+  "next_stage": {
+    "version": "PSM_V0.260",
+    "objective": "Run the internal trial readiness review by consolidating safety, chat quality, blind-set, model comparison, performance, failure-ledger, and residual-risk evidence; issue only internal_trial_ready, needs_more_work, or blocked; keep external user trial, privacy compliance, public service, and professional authority closed.",
+    "blocked": false,
+    "requires_user_input": false
+  }
+}

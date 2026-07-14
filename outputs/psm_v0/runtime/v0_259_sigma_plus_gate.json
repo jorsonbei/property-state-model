@@ -1,0 +1,53 @@
+{
+  "schema_version": "psm_v0_259_sigma_plus_gate_v1",
+  "version": "PSM_V0.259-candidate",
+  "passed": true,
+  "decision": "sigma_plus_delivery_ready",
+  "checks": {
+    "frozen_synthetic_non_private_cases": true,
+    "all_deliveries_pass": true,
+    "all_strong_claims_supported_or_downgraded": true,
+    "supported_claims_have_provenance": true,
+    "downgraded_claims_have_markers": true,
+    "ordinary_user_view_has_no_internal_debug_terms": true,
+    "user_and_developer_views_separated": true,
+    "provenance_path_exercised": true,
+    "tool_failure_retained": true,
+    "unresolved_judges_retained": true,
+    "calibrated_shadow_fallback_exercised": true,
+    "candidate_output_authority_zero": true,
+    "deterministic_controller_retained": true,
+    "external_release_authority_zero": true
+  },
+  "summary": {
+    "cases": 15,
+    "delivery_passed": 15,
+    "strong_claims": 22,
+    "minimum_strong_claim_coverage": 1.0,
+    "supported_provenance_failures": 0,
+    "downgrade_marker_failures": 0,
+    "ordinary_internal_debug_leaks": 0,
+    "user_view_mismatches": 0,
+    "provenance_records": 6,
+    "retained_failure_events": 2,
+    "retained_unresolved_judges": 25,
+    "shadow_fallback_target_events": 19,
+    "candidate_controlled_outputs": 0,
+    "deterministic_controller_rows": 15,
+    "external_release_authority_rows": 0,
+    "fail_closed_repairs": 0
+  },
+  "artifacts": {
+    "benchmark": "benchmarks/v0_259_sigma_plus_delivery_cases.json",
+    "evaluation": "runtime/v0_259_sigma_plus_evaluation.jsonl",
+    "metrics": "runtime/v0_259_sigma_plus_metrics.json"
+  },
+  "release_boundary": {
+    "candidate_only": true,
+    "shadow_output_authority": false,
+    "deterministic_rule_controller_retained": true,
+    "rule_replacement_allowed": false,
+    "external_user_trial_allowed": false,
+    "external_release_authority": false
+  }
+}

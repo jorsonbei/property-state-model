@@ -1,0 +1,216 @@
+{
+  "schema_version": "psm_v0_259_docker_verification_v1",
+  "passed": true,
+  "checks": {
+    "runtime_current": true,
+    "status_current": true,
+    "internal_chat_retained": true,
+    "external_trial_closed": true,
+    "sigma_plus_gate_present": true,
+    "all_frozen_cases_pass": true,
+    "strong_claim_coverage_full": true,
+    "ordinary_debug_leaks_zero": true,
+    "candidate_output_authority_zero": true,
+    "delivery_api_passed": true,
+    "user_view_matches": true,
+    "runtime_claim_coverage_full": true,
+    "runtime_provenance_present": true,
+    "shadow_observation_only": true,
+    "deterministic_controller_retained": true,
+    "rule_replacement_closed": true,
+    "project_answer_grounded": true,
+    "graph_boundary_retained": true
+  },
+  "status": {
+    "version": "PSM V0.259",
+    "selected_chat_model": "qwen3.5:9b",
+    "ready_for_stable_internal_chat": true,
+    "ready_for_external_user_trial": false
+  },
+  "sigma_plus_gate": {
+    "cases": 15,
+    "delivery_passed": 15,
+    "strong_claims": 22,
+    "minimum_strong_claim_coverage": 1.0,
+    "supported_provenance_failures": 0,
+    "downgrade_marker_failures": 0,
+    "ordinary_internal_debug_leaks": 0,
+    "user_view_mismatches": 0,
+    "provenance_records": 6,
+    "retained_failure_events": 2,
+    "retained_unresolved_judges": 25,
+    "shadow_fallback_target_events": 19,
+    "candidate_controlled_outputs": 0,
+    "deterministic_controller_rows": 15,
+    "external_release_authority_rows": 0,
+    "fail_closed_repairs": 0
+  },
+  "delivery": {
+    "decision": "traceable_candidate_delivery",
+    "statement_audit": {
+      "claims": [
+        {
+          "claim_id": "claim_bbd95dcabbfd1961f277",
+          "text": "这轮已完成 PSM V0.259 Sigma+ 可追溯交付闭环：普通用户仍只看到自然回答，研发视图则把 Q 到 Sigma+ 状态、来源、工具结果、失败、声明等级和 V0.258 calibrated shadow 观察绑定在同一个交付包。",
+          "strong": true,
+          "disposition": "supported",
+          "statement_level": "C2",
+          "matched_facts": [
+            "PSM V0.259"
+          ],
+          "provenance_refs": [
+            "runtime/current_runtime_snapshot.json",
+            "runtime/chat_provider_selection.json",
+            "roadmap_out/PSM_Full_Project_Audit_and_Execution_Roadmap_V0.248_to_V0.260.md",
+            "outputs/psm_v0/runtime/current_runtime_snapshot.json",
+            "outputs/psm_v0/runtime/current_runtime_snapshot.json"
+          ],
+          "downgrade_markers": []
+        },
+        {
+          "claim_id": "claim_62f4006aa4aceda0e294",
+          "text": "强结论必须有 provenance，否则可见文本中必须明确降级；不满足时会在送达前 fail-closed 修复。",
+          "strong": true,
+          "disposition": "supported",
+          "statement_level": "C2",
+          "matched_facts": [],
+          "provenance_refs": [
+            "runtime/current_runtime_snapshot.json",
+            "runtime/chat_provider_selection.json",
+            "roadmap_out/PSM_Full_Project_Audit_and_Execution_Roadmap_V0.248_to_V0.260.md",
+            "outputs/psm_v0/runtime/current_runtime_snapshot.json",
+            "outputs/psm_v0/runtime/current_runtime_snapshot.json"
+          ],
+          "downgrade_markers": []
+        },
+        {
+          "claim_id": "claim_5c05a3b888309f31db98",
+          "text": "冻结验收 15/15 通过，共审计 22 条强声明，追溯或降级覆盖率 100%；6 题走真实 provenance，保留 2 个工具失败、25 个未解 judge 和 19 个 shadow 回退 target。",
+          "strong": true,
+          "disposition": "supported",
+          "statement_level": "C2",
+          "matched_facts": [],
+          "provenance_refs": [
+            "runtime/current_runtime_snapshot.json",
+            "runtime/chat_provider_selection.json",
+            "roadmap_out/PSM_Full_Project_Audit_and_Execution_Roadmap_V0.248_to_V0.260.md",
+            "outputs/psm_v0/runtime/current_runtime_snapshot.json",
+            "outputs/psm_v0/runtime/current_runtime_snapshot.json"
+          ],
+          "downgrade_markers": []
+        },
+        {
+          "claim_id": "claim_c09b16ca4e04e9f39af5",
+          "text": "普通回答内部术语泄漏、候选控制输出与外部放行权都是 0。",
+          "strong": false,
+          "disposition": "ordinary",
+          "statement_level": "C2",
+          "matched_facts": [],
+          "provenance_refs": [],
+          "downgrade_markers": []
+        },
+        {
+          "claim_id": "claim_ca257723d8bcf1c35dda",
+          "text": "它的作用是把“回答正确”升级为“回答、证据、未知项和失败可以逐层追溯”，但这仍不是开放外部试用。",
+          "strong": false,
+          "disposition": "ordinary",
+          "statement_level": "C2",
+          "matched_facts": [],
+          "provenance_refs": [],
+          "downgrade_markers": []
+        },
+        {
+          "claim_id": "claim_8372f3169f84c248cfd7",
+          "text": "当前聊天模型仍是 `qwen3.5:9b`。",
+          "strong": false,
+          "disposition": "ordinary",
+          "statement_level": "C2",
+          "matched_facts": [
+            "qwen3.5:9b"
+          ],
+          "provenance_refs": [],
+          "downgrade_markers": []
+        },
+        {
+          "claim_id": "claim_ccf130494f4876ab1d34",
+          "text": "下一步是 PSM V0.260：执行内部试用就绪总评审，汇总安全、聊天质量、盲测、模型对照、性能、失败账本与剩余风险，结论只能是 internal_trial_ready、needs_more_work 或 blocked；外部用户与专业权限继续关闭。",
+          "strong": true,
+          "disposition": "supported",
+          "statement_level": "C2",
+          "matched_facts": [
+            "PSM V0.260"
+          ],
+          "provenance_refs": [
+            "runtime/current_runtime_snapshot.json",
+            "runtime/chat_provider_selection.json",
+            "roadmap_out/PSM_Full_Project_Audit_and_Execution_Roadmap_V0.248_to_V0.260.md",
+            "outputs/psm_v0/runtime/current_runtime_snapshot.json",
+            "outputs/psm_v0/runtime/current_runtime_snapshot.json"
+          ],
+          "downgrade_markers": []
+        }
+      ],
+      "total_claims": 7,
+      "strong_claims": 4,
+      "supported_strong_claims": 4,
+      "downgraded_strong_claims": 0,
+      "unsupported_strong_claims": 0,
+      "strong_claim_coverage": 1.0
+    },
+    "provenance_count": 5,
+    "shadow": {
+      "model_version": "PSM_V0.257-shadow",
+      "calibration_version": "PSM_V0.258",
+      "authority": "observation_only",
+      "labels": {
+        "q_core": "collect_evidence",
+        "omega": "medium",
+        "phi": "partial",
+        "delta_sigma": "incomplete",
+        "pi": "source_check",
+        "eta": "uncertain",
+        "b_sigma": "review"
+      },
+      "confidence": {
+        "q_core": 0.99986374,
+        "omega": 0.9769119,
+        "phi": 0.99988631,
+        "delta_sigma": 0.92680587,
+        "pi": 0.99986374,
+        "eta": 0.92680587,
+        "b_sigma": 0.9769119
+      },
+      "accepted_labels": {
+        "q_core": "collect_evidence",
+        "omega": "medium",
+        "phi": "partial",
+        "delta_sigma": "incomplete",
+        "pi": "source_check",
+        "eta": "uncertain",
+        "b_sigma": "review"
+      },
+      "abstained": {
+        "q_core": false,
+        "omega": false,
+        "phi": false,
+        "delta_sigma": false,
+        "pi": false,
+        "eta": false,
+        "b_sigma": false
+      },
+      "fallback_targets": [],
+      "controller_used": "deterministic_rule",
+      "candidate_controlled_output": false,
+      "rule_replacement_allowed": false,
+      "training_feedback_written": false
+    },
+    "release_boundary": {
+      "candidate_only": true,
+      "shadow_output_authority": false,
+      "deterministic_rule_controller_retained": true,
+      "rule_replacement_allowed": false,
+      "external_user_trial_allowed": false,
+      "external_release_authority": false
+    }
+  }
+}

@@ -9,7 +9,7 @@ PSM is an experimental state-first AI control layer. It routes a request through
 - Deterministic state pipeline: `Q -> Omega -> phi -> Delta sigma -> Pi -> eta -> B_sigma -> Sigma+`.
 - Candidate generation adapters, lexical auditing, deterministic gating, failure ledger, and regression artifacts.
 - Local chat alpha backed by Ollama.
-- Current public baseline: `PSM V0.258` (formal 2228-record core evidence source: `PSM V0.251`).
+- Current public baseline: `PSM V0.259` (formal 2228-record core evidence source: `PSM V0.251`).
 - V0.251's fresh externally authored Wave G passed 20/20 under an independent external semantic judge; usefulness, safety, correctness, relevance, boundary quality, and hallucination control were each 1.0000 on that frozen synthetic blind wave.
 - V0.252 adds a stable internal chat-product gate with cancel, timeout, retry, recovery, progressive display, hidden debug evidence, and desktop/mobile/real-backend browser regression.
 - V0.253 replaces passive Omega route labels with four executable local/read-only evidence adapters and a fail-closed provenance/failure-ledger contract.
@@ -18,6 +18,7 @@ PSM is an experimental state-first AI control layer. It routes a request through
 - V0.256 freezes source-isolated Q/Omega/phi/Delta sigma/Pi/eta/B_sigma annotation targets, preserves unresolved votes, audits family/source/time and duplicate contamination, and exports training-only rows under a shadow-only boundary.
 - V0.257 trains the first seven-head probabilistic shadow state encoder on 14 source-isolated training rows and evaluates it on separate 14-row validation and test families; the candidate reaches 0.928571/1.0 exact match with zero critical false negatives, while deterministic rules remain the controller.
 - V0.258 freezes the V0.257 model and data by SHA-256, calibrates all seven heads on an isolated 14-row family, evaluates 14 new rows plus 7 unresolved targets, and adds fail-closed abstention without changing base weights or granting release authority.
+- V0.259 adds a Sigma+ delivery contract that keeps natural answers separate from developer traces, requires provenance or explicit downgrades for strong claims, and retains calibrated shadow observations without granting them output authority.
 
 This repository is an experimental research and engineering system. It is not a medical, legal, investment, production-release, or external-user authorization system. Passing synthetic regressions does not prove open-domain generalization.
 
@@ -52,6 +53,8 @@ make encoder-v257-eval
 make encoder-v257-docker
 make calibrate-v258-eval
 make calibrate-v258-docker
+make sigma-v259-eval
+make sigma-v259-docker
 ```
 
 Generate a read-only inventory of the local evidence store without moving or deleting artifacts:

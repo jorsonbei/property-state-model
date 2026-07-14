@@ -287,6 +287,10 @@ async function realRouteEvidenceSmoke(browser) {
   assert.equal(await page.locator("#evidence-route-status").textContent(), "success");
   assert.ok(Number(await page.locator("#evidence-route-sources").textContent()) >= 1);
   assert.equal(await page.locator("#evidence-route-failures").textContent(), "0");
+  assert.equal(await page.locator("#delivery-decision").textContent(), "traceable_candidate_delivery");
+  assert.equal(await page.locator("#delivery-claim-coverage").textContent(), "100%");
+  assert.ok(Number(await page.locator("#delivery-provenance").textContent()) >= 1);
+  assert.equal(await page.locator("#delivery-controller").textContent(), "deterministic_rule");
   const firstGraphNodes = Number(await page.locator("#graph-nodes").textContent());
   assert.ok(firstGraphNodes >= 1);
   assert.notEqual(await page.locator("#graph-protocol").textContent(), "-");
@@ -313,6 +317,10 @@ async function realRouteEvidenceSmoke(browser) {
     status_visible_in_debug: true,
     source_count_visible_in_debug: true,
     failure_count_visible_in_debug: true,
+    sigma_plus_decision_visible_in_debug: true,
+    claim_coverage_visible_in_debug: true,
+    provenance_visible_in_debug: true,
+    deterministic_controller_visible_in_debug: true,
     task_graph_visible_in_debug: true,
     task_graph_delta_visible_after_new_evidence: true,
     internal_route_fields_hidden_from_answer: true,
