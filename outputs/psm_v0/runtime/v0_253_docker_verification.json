@@ -1,0 +1,26 @@
+{
+  "schema_version": "psm_v0_253_docker_verification_v1",
+  "passed": true,
+  "runtime": {
+    "current_version": "psm_v0.253",
+    "general_route": "retrieval_or_tool_check",
+    "high_risk_external_judge_retained": true,
+    "python_sources_parsed": 54,
+    "regression_passed": true
+  },
+  "status": {
+    "version": "PSM V0.253",
+    "selected_chat_model": "qwen3.5:9b",
+    "chat_timeout_seconds": 60,
+    "core_cases": 2228,
+    "ready_for_external_user_trial": false
+  },
+  "code_route": {
+    "status": "success",
+    "adapter": "sandboxed_code_check",
+    "command_id": "verify_runtime",
+    "source": "outputs/psm_v0/psm_v0/runtime_verifier.py",
+    "quality": "pass",
+    "external_release_authority": false
+  }
+}

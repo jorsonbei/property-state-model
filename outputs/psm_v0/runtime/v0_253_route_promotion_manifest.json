@@ -1,0 +1,44 @@
+{
+  "schema_version": "psm_v0_253_route_promotion_manifest_v1",
+  "version": "PSM_V0.253",
+  "promoted_at": "2026-07-14",
+  "promoted": true,
+  "formal_core_source": "PSM_V0.251",
+  "formal_core_records": 2228,
+  "route_gate": {
+    "route_report": "runtime/v0_253_route_execution_report.json",
+    "browser_report": "runtime/v0_253_browser_regression/report.json",
+    "docker_report": "runtime/v0_253_docker_verification.json",
+    "cases": 10,
+    "passed": 10,
+    "real_adapter_classes": [
+      "local_file_evidence",
+      "local_project_status",
+      "sandboxed_code_check",
+      "verified_source_retrieval"
+    ],
+    "failure_ledger_events": 4,
+    "browser_base_url": "http://127.0.0.1:8766",
+    "docker_runtime_check": {
+      "current_version": "psm_v0.253",
+      "general_route": "retrieval_or_tool_check",
+      "high_risk_external_judge_retained": true,
+      "python_sources_parsed": 54,
+      "regression_passed": true
+    },
+    "high_risk_external_judge_unresolved": true
+  },
+  "boundaries": {
+    "external_user_trial_allowed": false,
+    "external_judge_satisfied_for_arbitrary_high_risk_requests": false,
+    "rule_replacement_allowed": false,
+    "internal_local_demo_only": true,
+    "v0_253_promoted": true
+  },
+  "next_stage": {
+    "version": "PSM_V0.254",
+    "objective": "Build a task-level Pi dependency graph from messages, files, tools, and judge results; classify known, inferred, unknown, conflicting, and pending state; derive failure-learning candidates without automatic blind-set or training backflow.",
+    "blocked": false,
+    "requires_user_input": false
+  }
+}

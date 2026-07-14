@@ -22,6 +22,9 @@ class ProductFrontendContractTests(unittest.TestCase):
             "request-elapsed",
             "cancel",
             "retry",
+            "evidence-route-status",
+            "evidence-route-sources",
+            "evidence-route-failures",
         ):
             self.assertIn(f'id="{element_id}"', self.html)
         self.assertIn('role="status"', self.html)
@@ -37,6 +40,7 @@ class ProductFrontendContractTests(unittest.TestCase):
         self.assertIn("discardUnansweredFailedTurn", self.javascript)
         self.assertIn("pushAssistantProgressively", self.javascript)
         self.assertIn("state.lastFailed", self.javascript)
+        self.assertIn("payload.route_execution", self.javascript)
 
     def test_debug_state_never_enters_main_message_renderer(self) -> None:
         render_start = self.javascript.index("function renderMessages()")

@@ -14,6 +14,7 @@ from urllib.parse import urlparse
 APP_ROOT = Path(__file__).resolve().parent
 PSM_ROOT = APP_ROOT.parent
 STATIC_ROOT = APP_ROOT / "static"
+PROJECT_ROOT = APP_ROOT.parents[2]
 sys.path.insert(0, str(PSM_ROOT))
 
 from psm_v0.candidate_auditor import audit_candidate_text  # noqa: E402
@@ -23,6 +24,7 @@ from psm_v0.chat_provider import OllamaChatProvider, ProviderRequest  # noqa: E4
 from psm_v0.model_adapter import BuiltinModelAdapter  # noqa: E402
 from psm_v0.pipeline import run_pipeline  # noqa: E402
 from psm_v0.psm_gate_controller import apply_psm_gate  # noqa: E402
+from psm_v0.route_executor import execute_route  # noqa: E402
 from psm_v0.state_extractor import infer_domain  # noqa: E402
 from psm_v0.verified_knowledge import VerifiedKnowledge, match_verified_knowledge  # noqa: E402
 
@@ -40,6 +42,12 @@ OLLAMA_BASE_URL = os.environ.get("OLLAMA_BASE_URL", "http://127.0.0.1:11434").rs
 OLLAMA_MODEL_OVERRIDE = os.environ.get("OLLAMA_MODEL", "").strip()
 CHAT_TIMEOUT_OVERRIDE = os.environ.get("PSM_CHAT_TIMEOUT_SECONDS", "").strip()
 CHAT_MAX_TOKENS_OVERRIDE = os.environ.get("PSM_CHAT_MAX_TOKENS", "").strip()
+ROUTE_FAILURE_LEDGER = Path(
+    os.environ.get(
+        "PSM_ROUTE_FAILURE_LEDGER",
+        str(PSM_ROOT / "product_alpha_out" / "v0_253_route_failure_ledger.jsonl"),
+    )
+)
 
 
 def main() -> None:
@@ -54,7 +62,7 @@ def main() -> None:
 
 
 class Handler(BaseHTTPRequestHandler):
-    server_version = "PSMProductAlpha/0.252"
+    server_version = "PSMProductAlpha/0.253"
 
     def do_GET(self) -> None:  # noqa: N802
         parsed = urlparse(self.path)
@@ -146,6 +154,7 @@ def run_demo_case(text: str, scenario: str) -> dict:
         "scenario": scenario,
         "status": load_status_summary(),
         "packet": {
+            "packet_id": packet.get("packet_id"),
             "domain": packet["domain"],
             "risk_level": packet["omega"]["risk_level"],
             "phi_state": packet["phi_state"],
@@ -217,6 +226,17 @@ def run_chat_turn(messages: list[dict], scenario: str) -> dict:
     if verified_knowledge:
         grounding_facts.extend(verified_knowledge.grounding_facts)
         grounding_sources.extend(verified_knowledge.grounding_sources)
+    route_execution = execute_route(
+        current,
+        intent=intent,
+        pipeline_result=result,
+        project_root=PROJECT_ROOT,
+        psm_root=PSM_ROOT,
+        verified_facts=verified_knowledge.grounding_facts if verified_knowledge else (),
+        verified_sources=verified_knowledge.grounding_sources if verified_knowledge else (),
+        ledger_path=ROUTE_FAILURE_LEDGER,
+    )
+    result["route_execution"] = route_execution
     generation = build_chat_generation(
         current,
         conversation,
@@ -224,6 +244,7 @@ def run_chat_turn(messages: list[dict], scenario: str) -> dict:
         intent,
         project_context,
         verified_knowledge=verified_knowledge,
+        route_execution=route_execution,
     )
     assistant_message = generation["answer"]
     quality_audit = audit_chat_answer(
@@ -233,6 +254,7 @@ def run_chat_turn(messages: list[dict], scenario: str) -> dict:
         grounding_facts=grounding_facts,
         grounding_sources=grounding_sources,
         previous_assistant_answers=assistant_messages,
+        route_execution=route_execution,
     )
     result["chat"] = {
         "turn_index": len(user_messages),
@@ -246,6 +268,7 @@ def run_chat_turn(messages: list[dict], scenario: str) -> dict:
             "grounding_sources": grounding_sources,
             "uncertainties": result["packet"].get("eta", {}).get("uncertainties", []),
             "required_judges": result["route"].get("required_judges", []),
+            "route_execution": route_execution,
         },
         "assistant_audit": audit_candidate_text(assistant_message, result),
         "quality_audit": quality_audit,
@@ -308,6 +331,7 @@ def build_chat_generation(
     project_context: dict,
     *,
     verified_knowledge: VerifiedKnowledge | None = None,
+    route_execution: dict | None = None,
 ) -> dict:
     text = current.strip()
     if intent == "identity":
@@ -339,7 +363,24 @@ def build_chat_generation(
         generation = deterministic_generation(verified_knowledge.answer)
         generation["knowledge_kernel"] = verified_knowledge.kernel_id
         return generation
-    model_generation = try_ollama_chat_generation(current, conversation, result)
+    route_answer = route_execution_answer(route_execution or {})
+    if route_answer:
+        generation = deterministic_generation(
+            route_answer,
+            status=(
+                "success"
+                if (route_execution or {}).get("status") in {"success", "partial"}
+                else "degraded"
+            ),
+        )
+        generation["route_grounded"] = True
+        return generation
+    model_generation = try_ollama_chat_generation(
+        current,
+        conversation,
+        result,
+        route_execution=route_execution,
+    )
     if model_generation["status"] != "success":
         return deterministic_generation(
             fallback_chat_answer(current, result, conversation),
@@ -374,6 +415,56 @@ def build_chat_generation(
             attempted=model_generation,
         )
     return model_generation
+
+
+def route_execution_answer(route_execution: dict) -> str:
+    if not route_execution:
+        return ""
+    adapters = {item.get("adapter"): item for item in route_execution.get("adapters", [])}
+    status = str(route_execution.get("status") or "not_executed")
+    failures = route_execution.get("failures") or []
+
+    file_result = adapters.get("local_file_evidence")
+    if file_result and status in {"success", "partial"}:
+        answer = "已按只读方式读取项目内文件，并记录了路径、大小和 SHA-256。\n\n" + "\n".join(
+            f"- {fact}" for fact in file_result.get("facts") or []
+        )
+        if failures:
+            answer += "\n\n部分路径没有完成：" + "；".join(item["message"] for item in failures)
+        return answer
+
+    code_result = adapters.get("sandboxed_code_check")
+    if code_result and status in {"success", "partial"}:
+        details = code_result.get("details") or {}
+        if details.get("mode") == "python_ast":
+            return (
+                "静态语法检查已通过；用户代码没有被执行。这个结果只证明 Python 语法可解析，"
+                "不证明逻辑正确、边界安全或可以上线，还需要针对行为补测试。"
+            )
+        command_id = details.get("command_id") or "project_verifier"
+        return (
+            f"已执行固定白名单中的项目验证命令 `{command_id}`，结果通过。"
+            "这证明当前自动化检查通过，但不等于生产发布、外部用户试用或规则替换已经获准。"
+        )
+
+    if route_execution.get("explicit_evidence_request") and status in {
+        "blocked",
+        "conflict",
+        "failed",
+        "missing_evidence",
+        "not_executed",
+        "timeout",
+    }:
+        reason = "；".join(item.get("message", "证据路线未完成") for item in failures)
+        if not reason:
+            reason = "当前没有适用的本地证据适配器或可核验来源。"
+        elif not reason.endswith(("。", ".", "！", "!", "？", "?")):
+            reason += "。"
+        return (
+            f"这次证据路线没有完成，状态为 `{status}`：{reason}"
+            "我不会把缺失、冲突或失败的工具结果包装成已经核验的结论。"
+        )
+    return ""
 
 
 def soften_absolute_language(answer: str) -> str:
@@ -696,6 +787,12 @@ def roadmap_answer(context: dict) -> str:
             "四类路线接入真实本地适配器；随后注入超时、缺失来源、工具失败和输出冲突，确保失败会入账并降级；"
             "最后补 API、回归和 Docker 验证，工具结果仍不能绕过 PSM 门控。"
         )
+    elif context["next_version"] == "PSM V0.254":
+        construction = (
+            "施工顺序是：先定义任务级节点、边和声明状态契约；再把消息、文件、工具结果和裁判结果转成 Π 依赖图；"
+            "随后加入新证据、证据撤回、未知项和冲突项的图差分测试；最后从 failure ledger 生成隔离候选队列，"
+            "只有独立筛选通过后才允许进入开发集，冻结盲集与训练真相继续禁止自动回流。"
+        )
     elif context["next_version"] == "PSM V0.250":
         construction = (
             "施工顺序是：先冻结同题模型基准集，再对本地候选模型测量回答质量、边界、延迟和失败率；"
@@ -722,6 +819,15 @@ def roadmap_answer(context: dict) -> str:
 
 
 def project_results_answer(context: dict) -> str:
+    if context["current_version"] == "PSM V0.253":
+        return (
+            "这轮已完成 PSM V0.253：Omega 不再只有路线标签，现在能实际读取结构化项目状态、已验证来源和项目内文件，"
+            "也能对 Python 做不执行代码的 AST 检查，或运行固定白名单中的项目验证命令。每次执行都会分开记录来源、"
+            "SHA-256、耗时、未满足裁判与失败事件。\n\n"
+            "它的作用是让“需要查证”从一句提示变成真实动作；缺失、越界、超时和冲突都不能被流畅语言覆盖。"
+            f"当前聊天模型是 `{context['selected_model']}`。下一步是 {context['next_version']}："
+            f"{context['next_objective']}。"
+        )
     if context["current_version"] == "PSM V0.252":
         return (
             "这轮已完成 PSM V0.252：正常聊天现在有明确生成阶段、耗时、取消、70 秒超时、保留输入重试和错误恢复，"
@@ -815,8 +921,10 @@ def try_ollama_chat_generation(
     current: str,
     conversation: list[dict[str, str]],
     result: dict,
+    *,
+    route_execution: dict | None = None,
 ) -> dict:
-    prompt = build_chat_prompt(current, conversation, result)
+    prompt = build_chat_prompt(current, conversation, result, route_execution=route_execution)
     provider = OllamaChatProvider(OLLAMA_BASE_URL)
     max_tokens = selected_chat_max_tokens()
     provider_result = provider.generate(
@@ -1125,6 +1233,7 @@ def load_project_context() -> dict:
     selection = load_json(selection_path) if selection_path.exists() else {}
     selection_metrics = selection.get("selection_metrics", {})
     checkpoint_candidates = (
+        PSM_ROOT / "runtime" / "v0_253_route_checkpoint.json",
         PSM_ROOT / "runtime" / "v0_252_product_checkpoint.json",
         PSM_ROOT / "runtime" / "v0_251_chat_gate_checkpoint.json",
     )
@@ -1247,6 +1356,16 @@ def humanize_stage_objective(objective: str) -> str:
         )
     if "stable internal chat alpha" in objective.casefold():
         return "稳定内部聊天 alpha：生成状态、取消、超时、重试、错误恢复、渐进显示和桌面/移动浏览器回归"
+    if "replace route labels with executable" in objective.casefold():
+        return (
+            "把 Ω 路由标签升级为可执行的本地状态、来源检索、代码检查和文件证据适配器，"
+            "记录来源与失败，并禁止工具结果绕过 PSM 门控"
+        )
+    if "task-level pi dependency graph" in objective.casefold():
+        return (
+            "从消息、文件、工具和裁判结果建立任务级 Π 依赖图，把状态分为已知、推断、未知、冲突和待确认，"
+            "并从失败账本生成需要独立筛选的学习候选，禁止自动回流盲集或训练真相"
+        )
     return objective
 
 

@@ -2,7 +2,7 @@ PYTHON ?= python3
 NPM ?= npm
 PSM_ROOT := outputs/psm_v0
 
-.PHONY: check test serve inventory sync-runtime browser-install browser-regression browser-regression-real judge-v251-external judge-v251-external-c judge-v251-external-d judge-v251-external-e judge-v251-external-f judge-v251-external-g docker-config docker-build docker-up
+.PHONY: check test serve inventory sync-runtime route-v253-eval route-v253-docker browser-install browser-regression browser-regression-real browser-regression-v253 judge-v251-external judge-v251-external-c judge-v251-external-d judge-v251-external-e judge-v251-external-f judge-v251-external-g docker-config docker-build docker-up
 
 check:
 	$(PYTHON) scripts/verify_project.py
@@ -19,6 +19,12 @@ inventory:
 sync-runtime:
 	$(PYTHON) scripts/sync_runtime_snapshot.py
 
+route-v253-eval:
+	$(PYTHON) scripts/evaluate_v0_253_routes.py
+
+route-v253-docker:
+	$(PYTHON) scripts/verify_v0_253_docker.py
+
 browser-install:
 	$(NPM) install
 	$(NPM) exec playwright install chromium
@@ -28,6 +34,13 @@ browser-regression:
 
 browser-regression-real:
 	PSM_BASE_URL=$${PSM_BASE_URL:-http://127.0.0.1:8765} PSM_BROWSER_REAL_CHAT=1 $(NPM) run browser-regression
+
+browser-regression-v253:
+	PSM_BASE_URL=$${PSM_BASE_URL:-http://127.0.0.1:8765} \
+	PSM_BROWSER_OUTDIR=$(PSM_ROOT)/runtime/v0_253_browser_regression \
+	PSM_BROWSER_SCHEMA=psm_v0_253_browser_regression_v1 \
+	PSM_BROWSER_REAL_CHAT=1 PSM_BROWSER_ROUTE_EVIDENCE=1 \
+	$(NPM) run browser-regression
 
 judge-v251-external: judge-v251-external-c judge-v251-external-d judge-v251-external-e judge-v251-external-f judge-v251-external-g
 

@@ -1,0 +1,320 @@
+{
+  "schema_version": "psm_v0_253_route_execution_report_v1",
+  "version": "PSM_V0.253-candidate",
+  "passed": true,
+  "summary": {
+    "cases": 10,
+    "passed": 10,
+    "failed": 0,
+    "real_adapter_classes": [
+      "local_file_evidence",
+      "local_project_status",
+      "sandboxed_code_check",
+      "verified_source_retrieval"
+    ],
+    "real_adapter_class_count": 4,
+    "failure_ledger_events": 4,
+    "external_judge_unresolved_on_high_risk": true,
+    "external_release_authority": false,
+    "rule_replacement_allowed": false
+  },
+  "cases": [
+    {
+      "case_id": "project_status_success",
+      "passed": true,
+      "checks": {
+        "status": true,
+        "adapter": true,
+        "failure": true,
+        "release_authority_false": true,
+        "rule_replacement_false": true
+      },
+      "observed": {
+        "status": "success",
+        "adapters": [
+          "local_project_status"
+        ],
+        "sources": [
+          "outputs/psm_v0/project_status_out/psm_v0.252_project_status.json"
+        ],
+        "failure_codes": [],
+        "satisfied_judges": [
+          "source_or_tool_check"
+        ],
+        "unresolved_judges": [],
+        "can_support_answer": true,
+        "can_support_strong_claim": true,
+        "duration_ms": 2
+      }
+    },
+    {
+      "case_id": "verified_source_success",
+      "passed": true,
+      "checks": {
+        "status": true,
+        "adapter": true,
+        "failure": true,
+        "release_authority_false": true,
+        "rule_replacement_false": true
+      },
+      "observed": {
+        "status": "success",
+        "adapters": [
+          "verified_source_retrieval"
+        ],
+        "sources": [
+          "verified_kernel:touch_temperature_thermal_effusivity"
+        ],
+        "failure_codes": [],
+        "satisfied_judges": [
+          "source_or_tool_check"
+        ],
+        "unresolved_judges": [],
+        "can_support_answer": true,
+        "can_support_strong_claim": true,
+        "duration_ms": 0
+      }
+    },
+    {
+      "case_id": "file_evidence_success",
+      "passed": true,
+      "checks": {
+        "status": true,
+        "adapter": true,
+        "failure": true,
+        "release_authority_false": true,
+        "rule_replacement_false": true
+      },
+      "observed": {
+        "status": "success",
+        "adapters": [
+          "local_file_evidence"
+        ],
+        "sources": [
+          "outputs/psm_v0/CURRENT_STATUS.md"
+        ],
+        "failure_codes": [],
+        "satisfied_judges": [
+          "source_or_tool_check"
+        ],
+        "unresolved_judges": [],
+        "can_support_answer": true,
+        "can_support_strong_claim": true,
+        "duration_ms": 0
+      }
+    },
+    {
+      "case_id": "python_static_success",
+      "passed": true,
+      "checks": {
+        "status": true,
+        "adapter": true,
+        "failure": true,
+        "release_authority_false": true,
+        "rule_replacement_false": true
+      },
+      "observed": {
+        "status": "success",
+        "adapters": [
+          "sandboxed_code_check"
+        ],
+        "sources": [
+          "inline_user_code"
+        ],
+        "failure_codes": [],
+        "satisfied_judges": [
+          "bsigma_audit",
+          "boundary_statement"
+        ],
+        "unresolved_judges": [
+          "domain_specific_check",
+          "lint",
+          "unit_tests",
+          "sandbox_run"
+        ],
+        "can_support_answer": true,
+        "can_support_strong_claim": false,
+        "duration_ms": 0
+      }
+    },
+    {
+      "case_id": "allowlisted_project_check_success",
+      "passed": true,
+      "checks": {
+        "status": true,
+        "adapter": true,
+        "failure": true,
+        "release_authority_false": true,
+        "rule_replacement_false": true
+      },
+      "observed": {
+        "status": "success",
+        "adapters": [
+          "sandboxed_code_check"
+        ],
+        "sources": [
+          "scripts/verify_project.py"
+        ],
+        "failure_codes": [],
+        "satisfied_judges": [
+          "source_or_tool_check"
+        ],
+        "unresolved_judges": [],
+        "can_support_answer": true,
+        "can_support_strong_claim": true,
+        "duration_ms": 669
+      }
+    },
+    {
+      "case_id": "source_missing_fail_closed",
+      "passed": true,
+      "checks": {
+        "status": true,
+        "adapter": true,
+        "failure": true,
+        "release_authority_false": true,
+        "rule_replacement_false": true
+      },
+      "observed": {
+        "status": "not_executed",
+        "adapters": [],
+        "sources": [],
+        "failure_codes": [],
+        "satisfied_judges": [],
+        "unresolved_judges": [
+          "source_or_tool_check"
+        ],
+        "can_support_answer": false,
+        "can_support_strong_claim": false,
+        "duration_ms": 0
+      }
+    },
+    {
+      "case_id": "file_path_blocked",
+      "passed": true,
+      "checks": {
+        "status": true,
+        "adapter": true,
+        "failure": true,
+        "release_authority_false": true,
+        "rule_replacement_false": true
+      },
+      "observed": {
+        "status": "blocked",
+        "adapters": [
+          "local_file_evidence"
+        ],
+        "sources": [],
+        "failure_codes": [
+          "path_outside_project"
+        ],
+        "satisfied_judges": [],
+        "unresolved_judges": [
+          "source_or_tool_check"
+        ],
+        "can_support_answer": false,
+        "can_support_strong_claim": false,
+        "duration_ms": 0
+      }
+    },
+    {
+      "case_id": "allowlisted_tool_timeout",
+      "passed": true,
+      "checks": {
+        "status": true,
+        "adapter": true,
+        "failure": true,
+        "release_authority_false": true,
+        "rule_replacement_false": true
+      },
+      "observed": {
+        "status": "timeout",
+        "adapters": [
+          "sandboxed_code_check"
+        ],
+        "sources": [],
+        "failure_codes": [
+          "tool_timeout"
+        ],
+        "satisfied_judges": [],
+        "unresolved_judges": [
+          "source_or_tool_check"
+        ],
+        "can_support_answer": false,
+        "can_support_strong_claim": false,
+        "duration_ms": 3
+      }
+    },
+    {
+      "case_id": "evidence_conflict_fail_closed",
+      "passed": true,
+      "checks": {
+        "status": true,
+        "adapter": true,
+        "failure": true,
+        "release_authority_false": true,
+        "rule_replacement_false": true
+      },
+      "observed": {
+        "status": "conflict",
+        "adapters": [
+          "fixture_a",
+          "fixture_b"
+        ],
+        "sources": [
+          "synthetic_conflict_fixture:fixture_a",
+          "synthetic_conflict_fixture:fixture_b"
+        ],
+        "failure_codes": [
+          "evidence_conflict"
+        ],
+        "satisfied_judges": [],
+        "unresolved_judges": [
+          "source_or_tool_check"
+        ],
+        "can_support_answer": false,
+        "can_support_strong_claim": false,
+        "duration_ms": 0
+      }
+    },
+    {
+      "case_id": "high_risk_external_judge_unresolved",
+      "passed": true,
+      "checks": {
+        "status": true,
+        "adapter": true,
+        "failure": true,
+        "release_authority_false": true,
+        "rule_replacement_false": true
+      },
+      "observed": {
+        "status": "not_executed",
+        "adapters": [],
+        "sources": [],
+        "failure_codes": [],
+        "satisfied_judges": [],
+        "unresolved_judges": [
+          "external_judge",
+          "human_confirmation",
+          "failure_ledger",
+          "licensed_professional",
+          "emergency_triage"
+        ],
+        "can_support_answer": true,
+        "can_support_strong_claim": false,
+        "duration_ms": 0
+      }
+    }
+  ],
+  "failure_ledger": {
+    "path": "runtime/v0_253_route_failure_ledger.jsonl",
+    "sha256": "c44cfbdb695a7dc1c43df4830fa5db35b3e43cd8760db7bcc8f917451814e7ea",
+    "events": 4,
+    "codes": [
+      "evidence_conflict",
+      "path_outside_project",
+      "route_not_executed",
+      "tool_timeout"
+    ]
+  }
+}

@@ -1,36 +1,37 @@
 {
   "plan_version": "psm_execution_plan_v0.248_to_v0.260",
   "created_at": "2026-07-14",
-  "current_project_version": "psm_v0.252",
+  "current_project_version": "psm_v0.253",
   "current_formal_version": "psm_v0.251",
   "authority": {
-    "machine_truth": "project_status_out/psm_v0.252_project_status.json",
+    "machine_truth": "project_status_out/psm_v0.253_project_status.json",
     "human_audit": "roadmap_out/PSM_Full_Project_Audit_and_Execution_Roadmap_V0.248_to_V0.260.md"
   },
   "current_boundary": {
     "internal_local_demo": true,
     "internal_chat_quality_gate_passed": true,
     "internal_product_ux_gate_passed": true,
+    "real_omega_route_gate_passed": true,
     "external_user_trial": false,
     "native_property_state_foundation_model": false
   },
   "next_executable_stage": {
-    "version": "PSM_V0.253",
-    "objective": "Replace route labels with executable local state, retrieval, code-check, and file-evidence adapters with provenance and failure-ledger recording.",
+    "version": "PSM_V0.254",
+    "objective": "Build a task-level Pi dependency graph, classify known/inferred/unknown/conflicting/pending state, and derive independently screened failure-learning candidates without automatic blind or training backflow.",
     "blocked": false,
     "requires_user_input": false,
     "preconditions": [
-      "PSM_V0.251 independent Wave G chat gate passed 20/20.",
-      "PSM_V0.252 desktop, mobile, and real-backend browser regression passed.",
-      "Selected qwen3.5:9b model is available through both host and Docker runtimes.",
-      "External-user trial and rule replacement remain closed."
+      "PSM_V0.253 route evaluation passed 10/10 across four real adapter classes.",
+      "Missing, blocked, timeout, and conflict failures are recorded in a separate ledger.",
+      "Host full-project and Docker runtime verifiers passed.",
+      "Arbitrary high-risk external judgment, external-user trial, and rule replacement remain closed."
     ],
     "acceptance": [
-      "At least four route classes execute real local evidence adapters.",
-      "Every adapter result records provenance, timing, status, and failure details.",
-      "Tool failure and conflicting evidence cannot be hidden by fluent language.",
-      "Tool output cannot bypass PSM candidate gating.",
-      "External-user trial and rule replacement remain false."
+      "Messages, files, tools, and judge results form a task-level dependency graph.",
+      "Claims are classified as known, inferred, unknown, conflicting, or pending.",
+      "Adding evidence produces an explainable graph delta.",
+      "Failure-ledger items enter an independently screened candidate queue only.",
+      "Blind sets, training truth, external-user trial, and rule replacement remain protected."
     ]
   },
   "completed_stages": [
@@ -51,6 +52,14 @@
       "result": "passed",
       "desktop_mobile_real_backend_browser_regression": true,
       "console_errors": 0
+    },
+    {
+      "version": "PSM_V0.253",
+      "result": "passed",
+      "route_cases": "10/10",
+      "real_adapter_classes": 4,
+      "failure_ledger_classes": 4,
+      "docker_runtime_verifier": true
     }
   ],
   "stages": [

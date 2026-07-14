@@ -2,10 +2,10 @@
   "schema_version": "psm_public_runtime_snapshot_v1",
   "project_status": {
     "updated_from_local_artifacts": true,
-    "current_version": "psm_v0.252",
+    "current_version": "psm_v0.253",
     "source_evidence_version": "psm_v0.251",
-    "previous_formal_version": "psm_v0.251",
-    "completed_result": "product_ux_and_browser_regression",
+    "previous_formal_version": "psm_v0.252",
+    "completed_result": "real_omega_routes_and_tool_evidence",
     "family": {
       "family_id": "v251_independent_chat_golden_blind_set_boundary_adversarial",
       "case_pack": "case_packs/v0_251_independent_chat_golden_blind_set_boundary_adversarial_cases.json",
@@ -244,8 +244,8 @@
       "rule_replacement_allowed": false
     },
     "next_stage": {
-      "version": "PSM_V0.253",
-      "objective": "Replace route labels with executable local state, source/retrieval, code-check, and file-evidence adapters; record provenance and failures without allowing tool output to bypass PSM gating.",
+      "version": "PSM_V0.254",
+      "objective": "Build a task-level Pi dependency graph from messages, files, tools, and judge results; classify known, inferred, unknown, conflicting, and pending state; derive failure-learning candidates without automatic blind-set or training backflow.",
       "blocked": false,
       "requires_user_input": false
     },
@@ -259,12 +259,16 @@
       "candidate_taxonomy": "taxonomy_out/psm_v0.251_candidate_taxonomy.json",
       "candidate_regression_fixtures": "fixture_out/psm_v0.251_candidate_regression_fixtures.json",
       "taxonomy_delta": "taxonomy_delta_out/psm_v0.251_taxonomy_delta.json",
-      "project_status": "project_status_out/psm_v0.252_project_status.json",
+      "project_status": "project_status_out/psm_v0.253_project_status.json",
       "regression": "regression_out/psm_v0.251_regression_check.json",
       "independent_chat_gate": "runtime/v0_251_wave_g_external_semantic_judge.json",
       "model_selection": "runtime/v0_251_base_upgrade_pairwise_gemini_pro_report.json",
       "product_ux_gate": "runtime/v0_252_browser_regression/report.json",
-      "product_checkpoint": "runtime/v0_252_product_checkpoint.json"
+      "product_checkpoint": "runtime/v0_252_product_checkpoint.json",
+      "route_execution_gate": "runtime/v0_253_route_execution_report.json",
+      "route_browser_gate": "runtime/v0_253_browser_regression/report.json",
+      "route_docker_gate": "runtime/v0_253_docker_verification.json",
+      "route_checkpoint": "runtime/v0_253_route_checkpoint.json"
     },
     "regression": {
       "stem": "psm_v0.251",
@@ -325,6 +329,29 @@
       "layout_overflow": 0,
       "duplicate_user_messages_after_retry": 0,
       "internal_debug_leakage": false
+    },
+    "route_execution_gate": {
+      "route_report": "runtime/v0_253_route_execution_report.json",
+      "browser_report": "runtime/v0_253_browser_regression/report.json",
+      "docker_report": "runtime/v0_253_docker_verification.json",
+      "cases": 10,
+      "passed": 10,
+      "real_adapter_classes": [
+        "local_file_evidence",
+        "local_project_status",
+        "sandboxed_code_check",
+        "verified_source_retrieval"
+      ],
+      "failure_ledger_events": 4,
+      "browser_base_url": "http://127.0.0.1:8766",
+      "docker_runtime_check": {
+        "current_version": "psm_v0.253",
+        "general_route": "retrieval_or_tool_check",
+        "high_risk_external_judge_retained": true,
+        "python_sources_parsed": 54,
+        "regression_passed": true
+      },
+      "high_risk_external_judge_unresolved": true
     }
   },
   "optional_project_status": {

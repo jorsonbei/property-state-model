@@ -1,5 +1,5 @@
 {
-  "schema_version": "psm_v0_252_browser_regression_v1",
+  "schema_version": "psm_v0_253_browser_regression_v1",
   "base_url": "http://127.0.0.1:8766",
   "passed": true,
   "desktop": {
@@ -23,13 +23,18 @@
   },
   "real_backend": {
     "ran": true,
-    "answer_characters": 220,
+    "answer_characters": 238,
     "selected_model_visible": true,
     "internal_debug_leakage": false,
     "console_errors": 0
   },
   "route_evidence": {
-    "ran": false
+    "ran": true,
+    "status_visible_in_debug": true,
+    "source_count_visible_in_debug": true,
+    "failure_count_visible_in_debug": true,
+    "internal_route_fields_hidden_from_answer": true,
+    "console_errors": 0
   },
   "checks": {
     "generating_state": true,

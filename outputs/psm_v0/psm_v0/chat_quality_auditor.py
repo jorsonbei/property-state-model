@@ -36,6 +36,7 @@ def audit_chat_answer(
     grounding_facts: Iterable[str] = (),
     grounding_sources: Iterable[str] = (),
     previous_assistant_answers: Iterable[str] = (),
+    route_execution: dict | None = None,
 ) -> dict:
     """Audit conversational relevance separately from candidate safety."""
 
@@ -133,12 +134,80 @@ def audit_chat_answer(
         "missing=" + repr(missing_markers),
     )
 
+    execution = route_execution or {}
+    execution_status = str(execution.get("status") or "not_available")
+    false_verification = next(
+        (
+            phrase
+            for phrase in (
+                "工具检查已经通过",
+                "工具檢查已經通過",
+                "来源已经核实",
+                "來源已經核實",
+                "外部验证已经完成",
+                "外部驗證已經完成",
+            )
+            if phrase in text
+        ),
+        "",
+    )
+    evidence_succeeded = execution_status in {
+        "not_available",
+        "not_required",
+        "partial",
+        "success",
+    }
+    add(
+        "route_claim_integrity",
+        evidence_succeeded or not false_verification,
+        "do not describe missing, failed, blocked, or conflicting route evidence as verified",
+        false_verification or f"route_status={execution_status}",
+    )
+    if execution.get("explicit_evidence_request") and execution_status in {
+        "blocked",
+        "conflict",
+        "failed",
+        "missing_evidence",
+        "not_executed",
+        "timeout",
+    }:
+        transparent = any(
+            marker in text
+            for marker in (
+                "没有完成",
+                "沒有完成",
+                "缺失",
+                "冲突",
+                "衝突",
+                "失败",
+                "失敗",
+                "超时",
+                "超時",
+                "blocked",
+                "timeout",
+            )
+        )
+        add(
+            "route_failure_transparency",
+            transparent,
+            "surface an explicitly requested route failure in the user-facing answer",
+            f"route_status={execution_status}, transparent={transparent}",
+        )
+
     passed = sum(1 for check in checks if check["passed"])
     critical_failures = {
         check["name"]
         for check in checks
         if not check["passed"]
-        and check["name"] in {"non_empty", "directness", "non_evasion", "fact_grounding"}
+        and check["name"]
+        in {
+            "non_empty",
+            "directness",
+            "non_evasion",
+            "fact_grounding",
+            "route_claim_integrity",
+            "route_failure_transparency",
+        }
     }
     if critical_failures:
         status = "fail"
@@ -154,6 +223,7 @@ def audit_chat_answer(
         "checks": checks,
         "grounding_facts": facts,
         "grounding_sources": [str(item) for item in grounding_sources],
+        "route_execution_status": execution_status,
     }
 
 

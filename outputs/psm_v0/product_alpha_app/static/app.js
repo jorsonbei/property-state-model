@@ -312,6 +312,10 @@ function renderResult(payload) {
   $("eta-state").textContent = listCount(payload.packet.eta?.uncertainties);
   $("bsigma-state").textContent = payload.bsigma_audit.status;
   $("sigma-state").textContent = payload.chat?.quality_audit?.status || payload.chat?.assistant_audit?.status || payload.psm_gated.audit.status;
+  const execution = payload.route_execution || {};
+  $("evidence-route-status").textContent = execution.status || "not available";
+  $("evidence-route-sources").textContent = String(execution.sources?.length || 0);
+  $("evidence-route-failures").textContent = String(execution.failure_events?.length || 0);
 }
 
 function pushMessage(role, content) {

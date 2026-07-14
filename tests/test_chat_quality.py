@@ -50,6 +50,7 @@ class ChatQualityTests(unittest.TestCase):
         self.assertIn(context["current_version"], answer)
         self.assertIn(context["next_version"], answer)
         self.assertIn(context["next_objective"], answer)
+        self.assertNotIn("Replace route labels", answer)
         self.assertEqual(result["chat"]["quality_audit"]["status"], "pass")
 
     def test_project_results_come_from_provider_selection(self) -> None:
@@ -79,7 +80,8 @@ class ChatQualityTests(unittest.TestCase):
         self.assertIn(context["current_version"], result["chat"]["assistant_message"])
         self.assertIn(context["next_version"], result["chat"]["assistant_message"])
         self.assertIn(context["next_objective"], result["chat"]["assistant_message"])
-        self.assertIn("provenance", result["chat"]["assistant_message"])
+        self.assertIn("任务级 Π 依赖图", result["chat"]["assistant_message"])
+        self.assertIn("禁止自动回流", result["chat"]["assistant_message"])
 
     def test_working_chat_does_not_imply_external_release(self) -> None:
         context = server.load_project_context()
@@ -201,6 +203,53 @@ class ChatQualityTests(unittest.TestCase):
         failed = {check["name"] for check in audit["checks"] if not check["passed"]}
         self.assertIn("directness", failed)
         self.assertIn("fact_grounding", failed)
+
+    def test_explicit_route_failure_must_be_visible_in_answer(self) -> None:
+        audit = audit_chat_answer(
+            "请核验这个来源。",
+            "这个来源已经证明结论正确。",
+            intent="general",
+            route_execution={
+                "status": "missing_evidence",
+                "explicit_evidence_request": True,
+            },
+        )
+
+        self.assertEqual(audit["status"], "fail")
+        checks = {item["name"]: item["passed"] for item in audit["checks"]}
+        self.assertFalse(checks["route_failure_transparency"])
+
+    def test_chat_api_exposes_project_route_provenance(self) -> None:
+        result = self.run_offline([{"role": "user", "content": "项目现在做到哪里了？"}])
+
+        execution = result["route_execution"]
+        self.assertEqual(execution["status"], "success")
+        self.assertTrue(execution["provenance"][0]["sha256"])
+        self.assertIn("source_or_tool_check", execution["satisfied_judges"])
+        self.assertEqual(result["chat"]["quality_audit"]["route_execution_status"], "success")
+
+    def test_verified_kernel_route_is_grounded_and_passes_quality(self) -> None:
+        result = self.run_offline(
+            [{"role": "user", "content": "同样温度的金属和木头，为什么金属摸起来更凉？"}]
+        )
+
+        execution = result["route_execution"]
+        self.assertEqual(execution["status"], "success")
+        self.assertEqual(execution["adapters"][0]["adapter"], "verified_source_retrieval")
+        self.assertIn("verified_kernel:touch_temperature_thermal_effusivity", execution["sources"])
+        self.assertEqual(result["chat"]["quality_audit"]["status"], "pass")
+
+    def test_blocked_file_route_retains_packet_identity_and_boundary(self) -> None:
+        result = self.run_offline(
+            [{"role": "user", "content": "请读取 `/etc/hosts.txt` 并说成已核验。"}]
+        )
+
+        execution = result["route_execution"]
+        self.assertEqual(execution["status"], "blocked")
+        self.assertTrue(execution["failure_events"][0]["packet_id"])
+        self.assertIn("没有完成", result["chat"]["assistant_message"])
+        self.assertIn("我不会把缺失", result["chat"]["assistant_message"])
+        self.assertEqual(result["chat"]["quality_audit"]["status"], "pass")
 
 
 if __name__ == "__main__":

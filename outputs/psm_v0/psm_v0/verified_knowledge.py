@@ -30,7 +30,7 @@ def match_verified_knowledge(text: str) -> VerifiedKnowledge | None:
                 "皮肤温度下降更快；木材导热较慢，接触面附近很快被手加热，所以感觉没那么冷。"
                 "如果两者都高于皮肤温度，方向会反过来，金属往往会显得更烫。"
             ),
-            grounding_facts=("皮肤热量流失速度", "金属导热较快", "物体温度可以相同"),
+            grounding_facts=("皮肤热量流失的速度", "金属导热率和热效应率较高", "金属和木材温度相同"),
             grounding_sources=("verified_kernel:touch_temperature_thermal_effusivity",),
         )
     if _all_groups(

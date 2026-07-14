@@ -2,46 +2,44 @@
 
 ## Current Version
 
-`PSM V0.252`
+`PSM V0.253`
 
-The current project status is `psm_v0.252`. V0.252 promotes the stable internal chat-product gate while retaining `psm_v0.251` as the formal 2228-record core evidence source. Required/fault candidate gating covers 1975 cases with gated PSM unsafe/risky at 0.
+The current project status is `psm_v0.253`. V0.253 promotes executable Omega route evidence while retaining `psm_v0.251` as the formal 2228-record core evidence source. Required/fault candidate gating remains 1975 cases with gated PSM unsafe/risky at 0.
 
 ## Latest Completed Result
 
-- Added explicit generating phases, elapsed time, cancellation, a 70-second client timeout, retry, and failure recovery.
-- Failed or cancelled turns preserve the user's input; retry does not duplicate the user message.
-- Audited answers are progressively displayed without putting hidden audit fields in the main conversation.
-- Debug evidence is closed by default and isolated from the user-facing message log.
-- Added Enter submission, Escape cancellation, focus control, ARIA live regions, and accessible labels.
-- Added reproducible Playwright regression through `npm` and `make`.
-- Desktop regression: no duplicate messages, layout overflow=0, console errors=0.
-- Mobile regression at 390x844: layout overflow=0, primary controls remain inside the viewport, console errors=0.
-- Real `qwen3.5:9b` backend UI smoke passed on the Docker runtime at `http://127.0.0.1:8766`.
-- Docker runtime uses the selected 9B model and a 60-second server timeout.
-- Product promotion evidence: `runtime/v0_252_product_checkpoint.json` and `runtime/v0_252_product_promotion_manifest.json`.
-- External user trial and rule replacement remain closed.
+- Added `psm_route_execution_v1`: adapter status, facts, sources, claims, provenance, SHA-256, timing, failures, satisfied judges, and unresolved judges are separate fields.
+- Added four real read-only/local adapter classes: structured project status, verified sources, project-confined file evidence, and sandboxed code checks.
+- Python snippets are AST-parsed without execution; project commands are fixed allowlist entries, never user-supplied shell commands.
+- Host code checks run the full project verifier; Docker runs a smaller runtime verifier against the packaged snapshot and core routes.
+- Path traversal, missing sources, tool timeout, and evidence conflicts fail closed and enter a JSONL failure ledger.
+- Explicit evidence failures must remain visible in the user-facing answer; unsupported claims of completed verification fail chat quality audit.
+- Route evaluation: 10/10 cases passed across four real adapter classes and four failure-ledger classes.
+- Browser regression passed on Docker with real `qwen3.5:9b`; route status/source/failure counts appear only in the closed-by-default debug panel.
+- Docker runtime verification passed with 54 Python files parsed, regression retained, and high-risk external-judge requirements unresolved rather than fabricated.
+- External user trial, arbitrary high-risk external judgment, and rule replacement remain closed.
 
 ## Next Stage
 
-`PSM V0.253`
+`PSM V0.254`
 
-Replace route labels with executable evidence adapters:
+Build dynamic Pi and eta state from actual task evidence:
 
-- define a uniform route-result, provenance, and failure-ledger contract;
-- connect project questions to local structured status;
-- connect factual questions to source/retrieval evidence;
-- connect code questions to real static checks, tests, and sandboxed commands;
-- connect file questions to real file reads and citations;
-- inject tool failures and conflicts so language cannot hide missing evidence or bypass PSM gating.
+- construct a task-level dependency graph from messages, files, route adapters, tool results, and judge results;
+- classify nodes and claims as known, inferred, unknown, conflicting, or pending;
+- update the graph when new evidence arrives and explain what changed;
+- derive failure-learning candidates from the ledger only through independent screening;
+- prohibit automatic backflow into frozen blind sets or training truth.
 
 - Blocked: false.
 - Requires user input: false.
 
 ## Recovery Artifacts
 
-- Machine status: `project_status_out/psm_v0.252_project_status.json`.
+- Machine status: `project_status_out/psm_v0.253_project_status.json`.
 - Public runtime snapshot: `runtime/current_runtime_snapshot.json`.
-- Product checkpoint: `runtime/v0_252_product_checkpoint.json`.
+- Route checkpoint: `runtime/v0_253_route_checkpoint.json`.
+- Route evaluation: `runtime/v0_253_route_execution_report.json`.
 - Current execution roadmap: `roadmap_out/PSM_Full_Project_Audit_and_Execution_Roadmap_V0.248_to_V0.260.md`.
 
 Version history is stored as independent snapshots under `status_history/`; it is never embedded recursively here.

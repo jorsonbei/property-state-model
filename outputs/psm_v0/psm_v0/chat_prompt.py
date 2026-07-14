@@ -7,6 +7,8 @@ def build_chat_prompt(
     current: str,
     conversation: list[dict[str, str]],
     result: dict,
+    *,
+    route_execution: dict | None = None,
 ) -> str:
     packet = result["packet"]
     q_audit = result["q_audit"]
@@ -17,6 +19,14 @@ def build_chat_prompt(
         f"{role_labels[item['role']]}：{item['content']}" for item in conversation[-8:]
     )
     required_judges = ", ".join(route["required_judges"]) or "无强制外部裁判"
+    execution = route_execution or {}
+    executed_facts = " | ".join(
+        str(item)[:500] for item in execution.get("facts", [])[:4]
+    ) or "无"
+    execution_failures = " | ".join(
+        str(item.get("message") or item.get("code"))[:300]
+        for item in execution.get("failures", [])[:4]
+    ) or "无"
     return "\n".join(
         [
             "你是物性AI的聊天助手。用户希望正常聊天：我问，你答。",
@@ -52,6 +62,10 @@ def build_chat_prompt(
             f"- route: {route['route']}",
             f"- required_judges: {required_judges}",
             f"- bsigma_status: {bsigma['status']}",
+            f"- route_execution_status: {execution.get('status', 'not_executed')}",
+            f"- route_execution_facts: {executed_facts}",
+            f"- route_execution_failures: {execution_failures}",
+            "- 工具或来源失败时不得写成已经核验；证据冲突时不得自行选择较顺口的一边。",
         ]
     )
 

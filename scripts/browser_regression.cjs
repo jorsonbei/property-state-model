@@ -6,8 +6,10 @@ const { chromium } = require("playwright");
 
 const baseUrl = process.env.PSM_BASE_URL || "http://127.0.0.1:8767";
 const runRealBackend = process.env.PSM_BROWSER_REAL_CHAT === "1";
+const runRouteEvidence = process.env.PSM_BROWSER_ROUTE_EVIDENCE === "1";
+const reportSchema = process.env.PSM_BROWSER_SCHEMA || "psm_v0_252_browser_regression_v1";
 const outdir = path.resolve(
-  process.env.PSM_BROWSER_OUTDIR || "outputs/psm_v0/runtime/v0_252_browser_regression"
+  process.env.PSM_BROWSER_OUTDIR || "outputs/psm_v0/product_alpha_out/browser_regression_latest"
 );
 
 const statusPayload = {
@@ -37,6 +39,11 @@ function chatPayload(question, answer = `已完成回答：${question}`) {
     q_audit: { status: "pass" },
     route: { route: "retrieval_or_tool_check" },
     bsigma_audit: { status: "review" },
+    route_execution: {
+      status: "success",
+      sources: ["runtime/current_runtime_snapshot.json"],
+      failure_events: [],
+    },
     ordinary: { text: "ordinary", audit: { status: "guarded", net_risk: 0 } },
     psm_gated: { text: "gated", audit: { status: "guarded", net_risk: 0 } },
     chat: {
@@ -127,6 +134,8 @@ async function desktopRegression(browser) {
   await page.locator("#evidence-toggle").click();
   assert.equal(await page.locator("#debug-panel").getAttribute("open"), "");
   assert.equal(await page.locator("#evidence-toggle").getAttribute("aria-expanded"), "true");
+  assert.equal(await page.locator("#evidence-route-status").textContent(), "success");
+  assert.equal(await page.locator("#evidence-route-sources").textContent(), "1");
   const mainTextAfterDebug = await page.locator("#messages").textContent();
   assert.equal(mainTextAfterDebug, mainTextBeforeDebug);
   assert.doesNotMatch(mainTextAfterDebug, /boundary retained|external trial closed|turn \d/);
@@ -231,6 +240,46 @@ async function realBackendSmoke(browser) {
   };
 }
 
+async function realRouteEvidenceSmoke(browser) {
+  if (!runRouteEvidence) return { ran: false };
+  const context = await browser.newContext({ viewport: { width: 1280, height: 820 } });
+  const page = await context.newPage();
+  const consoleErrors = [];
+  page.on("console", (message) => {
+    if (message.type() === "error") consoleErrors.push(message.text());
+  });
+  page.on("pageerror", (error) => consoleErrors.push(error.message));
+
+  await page.goto(baseUrl, { waitUntil: "domcontentloaded" });
+  await page.locator("#prompt").fill("项目现在做到哪里了？");
+  await page.locator("#run").click();
+  await page.waitForFunction(
+    () => !document.querySelector("#run")?.disabled && document.querySelector("#request-feedback")?.hidden,
+    null,
+    { timeout: 20000 },
+  );
+  const answerText = await page.locator(".message.assistant p").textContent();
+  const currentVersion = await page.locator("#metric-version").textContent();
+  assert.ok(currentVersion && answerText.includes(currentVersion));
+  assert.doesNotMatch(answerText, /route_execution|SHA-256|source_or_tool_check/);
+  assert.equal(await page.locator("#debug-panel").getAttribute("open"), null);
+  await page.locator("#evidence-toggle").click();
+  assert.equal(await page.locator("#evidence-route-status").textContent(), "success");
+  assert.ok(Number(await page.locator("#evidence-route-sources").textContent()) >= 1);
+  assert.equal(await page.locator("#evidence-route-failures").textContent(), "0");
+  assert.deepEqual(consoleErrors, []);
+  await page.screenshot({ path: path.join(outdir, "route-evidence.png"), fullPage: true });
+  await context.close();
+  return {
+    ran: true,
+    status_visible_in_debug: true,
+    source_count_visible_in_debug: true,
+    failure_count_visible_in_debug: true,
+    internal_route_fields_hidden_from_answer: true,
+    console_errors: consoleErrors.length,
+  };
+}
+
 async function main() {
   await fs.mkdir(outdir, { recursive: true });
   const browser = await chromium.launch({ headless: true });
@@ -238,13 +287,15 @@ async function main() {
     const desktop = await desktopRegression(browser);
     const mobile = await mobileRegression(browser);
     const real_backend = await realBackendSmoke(browser);
+    const route_evidence = await realRouteEvidenceSmoke(browser);
     const report = {
-      schema_version: "psm_v0_252_browser_regression_v1",
+      schema_version: reportSchema,
       base_url: baseUrl,
       passed: true,
       desktop,
       mobile,
       real_backend,
+      route_evidence,
       checks: {
         generating_state: true,
         cancel_and_input_preservation: true,

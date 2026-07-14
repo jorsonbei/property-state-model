@@ -1,0 +1,51 @@
+{
+  "schema_version": "psm_v0_253_route_checkpoint_v1",
+  "current_promoted_version": "PSM_V0.253",
+  "target_version": "PSM_V0.253",
+  "target_promoted": true,
+  "status": "promoted_v0_254_dynamic_pi_eta_in_progress",
+  "requires_user_input": false,
+  "route_gate": {
+    "route_report": "runtime/v0_253_route_execution_report.json",
+    "browser_report": "runtime/v0_253_browser_regression/report.json",
+    "docker_report": "runtime/v0_253_docker_verification.json",
+    "cases": 10,
+    "passed": 10,
+    "real_adapter_classes": [
+      "local_file_evidence",
+      "local_project_status",
+      "sandboxed_code_check",
+      "verified_source_retrieval"
+    ],
+    "failure_ledger_events": 4,
+    "browser_base_url": "http://127.0.0.1:8766",
+    "docker_runtime_check": {
+      "current_version": "psm_v0.253",
+      "general_route": "retrieval_or_tool_check",
+      "high_risk_external_judge_retained": true,
+      "python_sources_parsed": 54,
+      "regression_passed": true
+    },
+    "high_risk_external_judge_unresolved": true
+  },
+  "completed_engineering": [
+    "uniform route execution schema with status, facts, sources, claims, provenance, timing, and failures",
+    "local structured project-status adapter",
+    "verified knowledge and source adapter",
+    "project-root-confined read-only file evidence adapter",
+    "Python AST and fixed-command sandboxed code-check adapter",
+    "host full-project verifier and container runtime verifier",
+    "explicit missing, blocked, timeout, and conflict failure ledger",
+    "route failure transparency and false-verification quality gate",
+    "debug-only route status, source count, and failure count",
+    "host and Docker real-backend browser regression"
+  ],
+  "release_boundary": {
+    "external_user_trial_allowed": false,
+    "external_judge_satisfied_for_arbitrary_high_risk_requests": false,
+    "rule_replacement_allowed": false,
+    "internal_local_demo_only": true,
+    "v0_253_promoted": true
+  },
+  "required_decision": "当前不需要用户决定。继续执行 PSM V0.254 的动态 Pi、eta、证据冲突和失败学习候选施工；失败不得自动流入冻结盲集或训练真相。"
+}
