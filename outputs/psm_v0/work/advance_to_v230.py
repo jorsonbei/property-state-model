@@ -1161,12 +1161,14 @@ def write_recovery_docs(snapshots: list[dict[str, Any]]) -> None:
         return
     latest = snapshots[-1]
     status = latest["status"]
+    current_version = human_version(latest["version"])
+    next_version = human_version(status["next_stage"]["version"])
     status_lines = [
         "# PSM Current Status",
         "",
         "## Current Version",
         "",
-        f"`{latest['version']}`",
+        f"`{current_version}`",
         "",
         latest_summary(latest),
         "",
@@ -1178,7 +1180,7 @@ def write_recovery_docs(snapshots: list[dict[str, Any]]) -> None:
         [
             "## Next Stage",
             "",
-            f"`{status['next_stage']['version']}`",
+            f"`{next_version}`",
             "",
             status["next_stage"]["objective"],
             "",
@@ -1199,7 +1201,7 @@ def write_recovery_docs(snapshots: list[dict[str, Any]]) -> None:
     write_text(ROOT / "status_history" / f"{latest['stem']}_status.md", current_text)
 
     readme_lines = [
-        f"# PSM {latest['version']} Core Workspace",
+        f"# {current_version} Core Workspace",
         "",
         latest_summary(latest),
         "",
@@ -1234,6 +1236,16 @@ def write_recovery_docs(snapshots: list[dict[str, Any]]) -> None:
         ]
     )
     write_text(ROOT / "README.md", "\n".join(readme_lines).rstrip() + "\n")
+
+
+def human_version(value: str) -> str:
+    if value.startswith("PSM_V0."):
+        return value.replace("PSM_V0.", "PSM V0.", 1)
+    if value.startswith("psm_v0."):
+        return value.replace("psm_v0.", "PSM V0.", 1)
+    if value.startswith("V0."):
+        return f"PSM {value}"
+    return value
 
 
 def latest_summary(snapshot: dict[str, Any]) -> str:
@@ -1378,7 +1390,7 @@ def family_payload(family: Family | None, source_version: str) -> dict[str, Any]
             "The next formal family preserves release-boundary evidence as cases instead of treating it as authority.",
         ],
         "coverage_targets": [item[0] for item in family.pairs],
-        "target_domains": ["medical"],
+        "target_domains": sorted({case["expected"]["domain"] for case in build_cases(family)}),
         "minimum_cases": 18,
         "acceptance_gates": [
             "standalone case-pack validation passes",

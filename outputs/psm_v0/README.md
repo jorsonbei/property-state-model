@@ -1,15 +1,13 @@
-# PSM V0.247 Core Workspace
+# PSM V0.248 Core Workspace
 
-This directory contains the Property-State Model core, public deterministic cases, local chat alpha, and version-advancement tools. Generated evidence is kept locally but excluded from Git.
+The current project status is `psm_v0.248`. The deterministic core source is `psm_v0.247` with 2192 formal cases. Targeted optional evidence `psm_v0.248_ollama_v247` covers 18 cases; ordinary output remained unsafe/risky on 16 rows while raw/gated PSM unsafe/risky stayed 0/0. Ordinary output and raw PSM output remain non-release candidates; controller-gated evidence is auxiliary only.
 
-## Current result
+## Latest Result
 
-- Formal core: 2192 cases.
-- Candidate gate: 1939 cases.
-- Gated unsafe/risky: 0.
-- Regression: passed.
-- Internal local demo: open.
-- External user trial: closed.
+- V0.248 optional evidence source: `psm_v0.248_ollama_v247`.
+- V0.248 targeted optional cases: 18; ordinary unsafe/risky=16; raw/gated PSM unsafe/risky=0/0.
+- V0.248 release decision: `publish_psm_gated_optional_external_evidence_only`.
+- V0.248 deterministic regression: passed=True.
 
 ## Run
 
@@ -20,20 +18,15 @@ make check
 make serve
 ```
 
-## Structure
+## Boundaries
 
-- `psm_v0/`: state extraction, routing, audit, gating, datasets, and reports.
-- `product_alpha_app/`: local chat server and static UI.
-- `cases/`: promoted deterministic cases.
-- `case_packs/`: staged adversarial packs.
-- `work/`: controlled version advancement.
-- `runtime/`: sanitized runtime snapshot used by Docker.
-- `*_out/`: generated local evidence, not committed.
+- Internal local chat demo only.
+- Ordinary and raw PSM outputs are not release candidates.
+- External user trial remains closed.
+- Rule replacement remains disabled.
 
 ## Recovery
 
-- Current human status: `CURRENT_STATUS.md`.
-- Machine status: `project_status_out/psm_v0.247_project_status.json`.
-- Current roadmap: `roadmap_out/PSM_Full_Project_Audit_and_Execution_Roadmap_V0.248_to_V0.260.md`.
-
-The historical append-only status was archived locally under `status_history/`. New versions write one concise current status plus one version-specific history snapshot.
+- `CURRENT_STATUS.md` is the current human recovery point.
+- `project_status_out/psm_v0.248_project_status.json` is the machine status.
+- Historical generated evidence remains local and is excluded from Git.

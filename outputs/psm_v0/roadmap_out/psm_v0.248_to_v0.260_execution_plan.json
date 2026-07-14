@@ -1,9 +1,10 @@
 {
   "plan_version": "psm_execution_plan_v0.248_to_v0.260",
   "created_at": "2026-07-14",
+  "current_project_version": "psm_v0.248",
   "current_formal_version": "psm_v0.247",
   "authority": {
-    "machine_truth": "project_status_out/psm_v0.247_project_status.json",
+    "machine_truth": "project_status_out/psm_v0.248_project_status.json",
     "human_audit": "roadmap_out/PSM_Full_Project_Audit_and_Execution_Roadmap_V0.248_to_V0.260.md"
   },
   "current_boundary": {
@@ -13,24 +14,32 @@
     "native_property_state_foundation_model": false
   },
   "next_executable_stage": {
-    "version": "PSM_V0.248",
-    "objective": "Harden recovery/tooling contracts, define V0.249 before refresh, then refresh required/fault and targeted optional evidence for v247_.",
+    "version": "PSM_V0.249",
+    "objective": "Repair chat intent routing, grounded project answers, assistant-turn memory, hidden-audit separation, and relevance auditing.",
     "blocked": false,
     "requires_user_input": false,
     "preconditions": [
-      "Replace recursive status history with one current summary plus archive/index.",
-      "Define the V0.249 family before calling next_family_after_even(248).",
-      "Unify fixture_out path handling.",
-      "Create a local non-destructive version-control baseline without a remote.",
-      "Re-run the V0.247 deterministic regression."
+      "PSM_V0.248 regression passed with 30 checks.",
+      "PSM_V0.248 targeted optional raw/gated risk is 0/0.",
+      "V0.249 family and its 18-case preview are defined and passing.",
+      "Project and optional evidence status are available through the public runtime snapshot."
     ],
     "acceptance": [
-      "One current version and one next version in recovery docs.",
-      "V0.247 regression passes.",
-      "V0.248 optional raw/gated risk is 0/0.",
-      "V0.248 next stage is PSM_V0.249."
+      "Project-status questions use structured current facts and do not invent progress.",
+      "Assistant turns are retained and can answer references to prior assistant content.",
+      "Hidden audit terms cannot override the semantic domain of the user message.",
+      "Identity, theory, roadmap, repeated-question, and refusal-with-help cases pass relevance and grounding checks.",
+      "Candidate gating remains gated-zero and rule replacement remains false."
     ]
   },
+  "completed_stages": [
+    {
+      "version": "PSM_V0.248",
+      "result": "passed",
+      "optional_raw_gated_risk": "0/0",
+      "regression_checks": 30
+    }
+  ],
   "stages": [
     {"version": "PSM_V0.248", "theme": "recovery_and_toolchain_hardening"},
     {"version": "PSM_V0.249", "theme": "chat_intent_grounding_and_multiturn"},
