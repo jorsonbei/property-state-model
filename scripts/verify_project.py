@@ -22,10 +22,16 @@ def parse_python_sources() -> int:
 
 def latest_status() -> dict:
     paths = list((PSM_ROOT / "project_status_out").glob("psm_v0.*_project_status.json"))
-    if not paths:
-        raise AssertionError("No project status files found.")
-    path = max(paths, key=lambda item: int(item.name.split(".")[1].split("_")[0]))
-    return json.loads(path.read_text(encoding="utf-8"))
+    if paths:
+        path = max(paths, key=lambda item: int(item.name.split(".")[1].split("_")[0]))
+        return json.loads(path.read_text(encoding="utf-8"))
+
+    runtime_path = PSM_ROOT / "runtime" / "current_runtime_snapshot.json"
+    runtime = json.loads(runtime_path.read_text(encoding="utf-8"))
+    status = runtime.get("project_status")
+    if not isinstance(status, dict):
+        raise AssertionError("No project status or public runtime status snapshot found.")
+    return status
 
 
 def verify_recovery_docs(status: dict) -> None:
