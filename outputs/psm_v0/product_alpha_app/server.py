@@ -844,6 +844,14 @@ def roadmap_answer(context: dict) -> str:
             "随后形成规则基线、普通 LLM 基线与可训练编码器的同题比较契约。契约通过前不启动训练，"
             "任何候选都只能在 shadow 中观察，不能替换现有规则。"
         )
+    elif context["next_version"] == "PSM V0.257":
+        construction = (
+            "施工顺序是：继续继承 family、source、time 三重来源隔离，只读取 V0.256 已解析且属于 train 的一致标注，"
+            "先建立多数类和透明信号规则基线；"
+            "再训练首个轻量状态编码候选，并按 Q、Omega、phi、Delta sigma、Pi、eta、B_sigma 分目标评估；"
+            "随后在 validation/test 上独立报告准确率、分歧覆盖和 critical false negative。候选全程 shadow-only，"
+            "不能读取 judge-only 标签，也不能把验证或测试错误回流训练，不能替换现有规则。"
+        )
     elif context["next_version"] == "PSM V0.250":
         construction = (
             "施工顺序是：先冻结同题模型基准集，再对本地候选模型测量回答质量、边界、延迟和失败率；"
@@ -870,6 +878,16 @@ def roadmap_answer(context: dict) -> str:
 
 
 def project_results_answer(context: dict) -> str:
+    if context["current_version"] == "PSM V0.256":
+        return (
+            "这轮已完成 PSM V0.256 来源隔离的物性状态标注与数据契约：Q、Omega、phi、Delta sigma、Pi、eta、"
+            "B_sigma 七类目标已经冻结。8 条无私人资料的合成记录获得 16 份独立标注，3 个目标分歧被保留为 unresolved，"
+            "没有被压成训练真值；family、source、内容、近似重复、候选输入泄漏和受保护集回流均为 0。\n\n"
+            "它的作用是让系统能机器化判断哪些资料可进入训练、哪些只能用于验证或 judge-only 裁判。当前训练尚未启动，"
+            "所有未来候选仍是 shadow-only，不能替换规则或开放外部权限。"
+            f"当前聊天模型仍是 `{context['selected_model']}`。"
+            f"下一步是 {context['next_version']}：{context['next_objective']}。"
+        )
     if context["current_version"] == "PSM V0.255":
         return (
             "这轮已完成 PSM V0.255 内部聊天 Alpha 总门：独立冻结盲测最终波次 20/20 通过，当前 13/13 个普通聊天、"
@@ -1309,14 +1327,14 @@ def load_project_context() -> dict:
     selection_path = PSM_ROOT / "runtime" / "chat_provider_selection.json"
     selection = load_json(selection_path) if selection_path.exists() else {}
     selection_metrics = selection.get("selection_metrics", {})
-    checkpoint_candidates = (
-        PSM_ROOT / "runtime" / "v0_255_internal_alpha_checkpoint.json",
-        PSM_ROOT / "runtime" / "v0_254_state_checkpoint.json",
-        PSM_ROOT / "runtime" / "v0_253_route_checkpoint.json",
-        PSM_ROOT / "runtime" / "v0_252_product_checkpoint.json",
-        PSM_ROOT / "runtime" / "v0_251_chat_gate_checkpoint.json",
+    checkpoint_candidates = sorted(
+        (PSM_ROOT / "runtime").glob("v0_*_checkpoint.json"),
+        key=lambda path: int(re.search(r"v0_(\d+)", path.name).group(1))
+        if re.search(r"v0_(\d+)", path.name)
+        else -1,
+        reverse=True,
     )
-    checkpoint_path = next((path for path in checkpoint_candidates if path.exists()), checkpoint_candidates[-1])
+    checkpoint_path = checkpoint_candidates[0] if checkpoint_candidates else PSM_ROOT / "runtime" / "missing_checkpoint.json"
     checkpoint = load_json(checkpoint_path) if checkpoint_path.exists() else {}
     chat_gate = status.get("independent_chat_gate") or {}
     return {
@@ -1454,6 +1472,11 @@ def humanize_stage_objective(objective: str) -> str:
         return (
             "建立来源隔离的物性状态标注与数据契约，定义 Q、Omega、phi、Delta sigma、Pi、eta、B_sigma 目标和"
             "标注分歧，执行 family/source/time 切分；训练候选保持 shadow-only，不能替换现有规则"
+        )
+    if "shadow state-encoder baseline" in objective.casefold():
+        return (
+            "只用来源隔离且已解析的训练标注建立首个 shadow 状态编码器，逐目标比较透明规则、多数类与可训练候选，"
+            "验证集、测试集、blind 和 judge-only 资料禁止回流，critical safety false negative 不得增加"
         )
     return objective
 

@@ -1,0 +1,48 @@
+{
+  "schema_version": "psm_v0_256_source_isolation_report_v1",
+  "version": "PSM_V0.256-candidate",
+  "passed": true,
+  "contract_sha256": "eac63131e4c0d373e4aa55384610c8c954ca5259da5369fccf3bbdb086fd0aed",
+  "records": 8,
+  "split_counts": {
+    "test": 3,
+    "train": 3,
+    "validation": 2
+  },
+  "record_errors": [],
+  "candidate_input_leaks": {},
+  "unresolved_targets": {
+    "transition_disputed_risk": [
+      "omega"
+    ],
+    "transition_disputed_uncertainty": [
+      "eta"
+    ],
+    "holdout_disputed_bsigma": [
+      "b_sigma"
+    ]
+  },
+  "isolation": {
+    "passed": true,
+    "errors": [],
+    "near_duplicates": [],
+    "source_overlap_count": 0,
+    "family_overlap_count": 0,
+    "content_overlap_count": 0,
+    "split_counts": {
+      "test": 3,
+      "train": 3,
+      "validation": 2
+    }
+  },
+  "training_export": {
+    "rows": 3,
+    "record_ids": [
+      "foundation_fact_boundary",
+      "foundation_high_risk_authority",
+      "foundation_unknown_retention"
+    ],
+    "protected_rows_exported": [],
+    "shadow_only": true
+  }
+}

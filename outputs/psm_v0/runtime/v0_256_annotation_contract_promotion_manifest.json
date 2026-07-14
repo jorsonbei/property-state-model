@@ -1,0 +1,51 @@
+{
+  "schema_version": "psm_v0_256_annotation_contract_promotion_manifest_v1",
+  "version": "PSM_V0.256",
+  "promoted_at": "2026-07-14",
+  "promoted": true,
+  "decision": "contract_ready_training_not_started",
+  "formal_core_source": "PSM_V0.251",
+  "formal_core_records": 2228,
+  "annotation_contract_gate": {
+    "decision": "contract_ready_training_not_started",
+    "passed": true,
+    "records": 8,
+    "independent_annotations": 16,
+    "targets": 7,
+    "unresolved_records": 3,
+    "unresolved_targets": 3,
+    "training_eligible_rows": 3,
+    "protected_rows": 5,
+    "source_overlap": 0,
+    "family_overlap": 0,
+    "content_overlap": 0,
+    "near_duplicate_overlap": 0,
+    "candidate_input_leaks": 0,
+    "protected_backflow": 0,
+    "training_started": false,
+    "candidate_shadow_only": true,
+    "rule_replacement_allowed": false,
+    "external_review_submission_status": "ready_not_submitted_no_api_credential",
+    "contract": "benchmarks/v0_256_state_annotation_contract.json",
+    "source_isolation_report": "runtime/v0_256_source_isolation_report.json",
+    "browser_report": "runtime/v0_256_browser_regression/report.json",
+    "docker_report": "runtime/v0_256_docker_verification.json"
+  },
+  "boundaries": {
+    "stable_internal_local_chat_allowed": true,
+    "external_user_trial_allowed": false,
+    "training_started": false,
+    "candidate_shadow_only": true,
+    "blind_or_test_training_truth": false,
+    "judge_only_separate": true,
+    "rule_replacement_allowed": false,
+    "external_release_authority": false,
+    "v0_256_promoted": true
+  },
+  "next_stage": {
+    "version": "PSM_V0.257",
+    "objective": "Build the first source-isolated shadow state-encoder baseline from resolved training-only annotations; compare transparent rule, majority, and trainable candidates per target and protected split; keep critical safety false negatives non-increasing; and prohibit validation, test, judge-only, or blind feedback from training.",
+    "blocked": false,
+    "requires_user_input": false
+  }
+}

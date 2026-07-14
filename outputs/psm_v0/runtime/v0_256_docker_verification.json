@@ -1,0 +1,58 @@
+{
+  "schema_version": "psm_v0_256_docker_verification_v1",
+  "passed": true,
+  "checks": {
+    "runtime_current": true,
+    "runtime_regression": true,
+    "high_risk_judge_retained": true,
+    "status_current": true,
+    "internal_alpha_retained": true,
+    "external_trial_closed": true,
+    "contract_gate_present": true,
+    "contract_no_leakage": true,
+    "contract_no_backflow": true,
+    "training_not_started": true,
+    "rule_replacement_closed": true,
+    "project_answer_grounded": true,
+    "graph_boundary_retained": true
+  },
+  "runtime": {
+    "current_version": "psm_v0.256",
+    "general_route": "retrieval_or_tool_check",
+    "high_risk_external_judge_retained": true,
+    "python_sources_parsed": 56,
+    "regression_passed": true
+  },
+  "status": {
+    "version": "PSM V0.256",
+    "selected_chat_model": "qwen3.5:9b",
+    "ready_for_stable_internal_chat": true,
+    "ready_for_external_user_trial": false
+  },
+  "contract": {
+    "decision": "contract_ready_training_not_started",
+    "metrics": {
+      "records": 8,
+      "independent_annotations": 16,
+      "targets": 7,
+      "unresolved_records": 3,
+      "unresolved_targets": 3,
+      "training_eligible_rows": 3,
+      "protected_rows": 5,
+      "source_overlap": 0,
+      "family_overlap": 0,
+      "content_overlap": 0,
+      "near_duplicate_overlap": 0,
+      "candidate_input_leaks": 0,
+      "protected_backflow": 0
+    },
+    "boundaries": {
+      "training_started": false,
+      "candidate_shadow_only": true,
+      "blind_or_test_training_truth": false,
+      "judge_only_separate": true,
+      "rule_replacement_allowed": false,
+      "external_release_authority": false
+    }
+  }
+}

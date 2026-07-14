@@ -1,0 +1,73 @@
+{
+  "schema_version": "psm_state_annotation_contract_v1",
+  "version": "PSM_V0.256",
+  "status": "frozen",
+  "purpose": "Source-isolated supervision for property-state targets without target read, blind backflow, or rule replacement.",
+  "targets": {
+    "q_core": {
+      "required_fields": ["objective", "protected_boundaries", "veto_conditions"],
+      "unknown_policy": "retain_unknown"
+    },
+    "omega": {
+      "required_fields": ["risk_level", "time_scale", "validation_scale", "cost_scale"],
+      "risk_levels": ["low", "medium", "high", "critical", "unknown"],
+      "unknown_policy": "retain_unknown"
+    },
+    "phi": {
+      "required_fields": ["facts", "unknowns"],
+      "unknown_policy": "retain_unknown"
+    },
+    "delta_sigma": {
+      "required_fields": ["pressures", "missing_pressure_data"],
+      "unknown_policy": "retain_unknown"
+    },
+    "pi": {
+      "required_fields": ["actors", "artifacts", "dependencies"],
+      "unknown_policy": "retain_unknown"
+    },
+    "eta": {
+      "required_fields": ["uncertainties", "tail_events"],
+      "unknown_policy": "retain_unknown"
+    },
+    "b_sigma": {
+      "required_fields": ["status", "risks", "required_actions"],
+      "statuses": ["pass", "review", "suspect", "veto", "unknown"],
+      "unknown_policy": "retain_unknown"
+    }
+  },
+  "record_contract": {
+    "required_top_level": ["schema_version", "record_id", "source", "input", "annotations"],
+    "required_source": ["source_family", "source_id", "source_created_at", "content_sha256", "data_class", "contains_private_data"],
+    "required_input": ["request", "evidence"],
+    "minimum_independent_annotations": 2,
+    "forbidden_candidate_input_keys": ["annotations", "consensus", "adjudication", "expected", "judge", "judge_labels", "target_labels"]
+  },
+  "split_policy": {
+    "version": "source_family_time_v1",
+    "assignment_unit": ["source_family", "source_id"],
+    "train_before": "2026-05-01T00:00:00Z",
+    "validation_before": "2026-06-01T00:00:00Z",
+    "test_from": "2026-06-01T00:00:00Z",
+    "family_overlap_allowed": false,
+    "source_overlap_allowed": false,
+    "content_overlap_allowed": false,
+    "near_duplicate_jaccard_threshold": 0.9,
+    "record_order_assignment_allowed": false
+  },
+  "disagreement_policy": {
+    "resolution_threshold": 1.0,
+    "unresolved_is_training_truth": false,
+    "adjudication_store": "judge_only_separate_artifact",
+    "preserve_vote_distribution": true
+  },
+  "boundaries": {
+    "no_target_read": true,
+    "no_backfit": true,
+    "blind_and_test_no_backflow": true,
+    "judge_only_separate": true,
+    "candidate_shadow_only": true,
+    "rule_replacement_allowed": false,
+    "training_allowed_before_contract_gate": false,
+    "external_release_authority": false
+  }
+}

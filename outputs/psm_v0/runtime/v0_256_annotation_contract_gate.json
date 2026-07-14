@@ -1,0 +1,55 @@
+{
+  "schema_version": "psm_v0_256_annotation_contract_gate_v1",
+  "version": "PSM_V0.256-candidate",
+  "passed": true,
+  "decision": "contract_ready_training_not_started",
+  "checks": {
+    "contract_frozen": true,
+    "all_targets_declared": true,
+    "records_valid": true,
+    "source_family_time_isolation": true,
+    "source_overlap_zero": true,
+    "family_overlap_zero": true,
+    "content_overlap_zero": true,
+    "near_duplicate_overlap_zero": true,
+    "no_target_read": true,
+    "disagreement_preserved": true,
+    "unresolved_not_training_truth": true,
+    "validation_test_no_backflow": true,
+    "training_export_shadow_only": true,
+    "judge_fields_absent_from_training_features": true,
+    "training_not_started": true,
+    "rule_replacement_closed": true,
+    "external_release_authority_closed": true
+  },
+  "metrics": {
+    "records": 8,
+    "independent_annotations": 16,
+    "targets": 7,
+    "unresolved_records": 3,
+    "unresolved_targets": 3,
+    "training_eligible_rows": 3,
+    "protected_rows": 5,
+    "source_overlap": 0,
+    "family_overlap": 0,
+    "content_overlap": 0,
+    "near_duplicate_overlap": 0,
+    "candidate_input_leaks": 0,
+    "protected_backflow": 0
+  },
+  "boundaries": {
+    "training_started": false,
+    "candidate_shadow_only": true,
+    "blind_or_test_training_truth": false,
+    "judge_only_separate": true,
+    "rule_replacement_allowed": false,
+    "external_release_authority": false
+  },
+  "artifacts": {
+    "contract": "benchmarks/v0_256_state_annotation_contract.json",
+    "fixture": "runtime/v0_256_source_isolated_annotation_fixture.jsonl",
+    "source_isolation_report": "runtime/v0_256_source_isolation_report.json",
+    "training_preview": "runtime/v0_256_shadow_training_export_preview.json",
+    "external_review_package": "runtime/v0_256_external_contract_review_package.json"
+  }
+}

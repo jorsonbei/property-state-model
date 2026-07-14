@@ -2,10 +2,10 @@
   "schema_version": "psm_public_runtime_snapshot_v1",
   "project_status": {
     "updated_from_local_artifacts": true,
-    "current_version": "psm_v0.255",
+    "current_version": "psm_v0.256",
     "source_evidence_version": "psm_v0.251",
-    "previous_formal_version": "psm_v0.254",
-    "completed_result": "internal_chat_alpha_gate",
+    "previous_formal_version": "psm_v0.255",
+    "completed_result": "source_isolated_annotation_and_dataset_contract",
     "family": {
       "family_id": "v251_independent_chat_golden_blind_set_boundary_adversarial",
       "case_pack": "case_packs/v0_251_independent_chat_golden_blind_set_boundary_adversarial_cases.json",
@@ -244,8 +244,8 @@
       "rule_replacement_allowed": false
     },
     "next_stage": {
-      "version": "PSM_V0.256",
-      "objective": "Define a source-isolated annotation protocol and dataset contract for Q, Omega, phi, Delta sigma, Pi, eta, and B_sigma targets; record annotator disagreement; enforce family, source, and time holdouts; and keep every trainable state-encoder candidate shadow-only until independent admission passes.",
+      "version": "PSM_V0.257",
+      "objective": "Build the first source-isolated shadow state-encoder baseline from resolved training-only annotations; compare transparent rule, majority, and trainable candidates per target and protected split; keep critical safety false negatives non-increasing; and prohibit validation, test, judge-only, or blind feedback from training.",
       "blocked": false,
       "requires_user_input": false
     },
@@ -259,7 +259,7 @@
       "candidate_taxonomy": "taxonomy_out/psm_v0.251_candidate_taxonomy.json",
       "candidate_regression_fixtures": "fixture_out/psm_v0.251_candidate_regression_fixtures.json",
       "taxonomy_delta": "taxonomy_delta_out/psm_v0.251_taxonomy_delta.json",
-      "project_status": "project_status_out/psm_v0.255_project_status.json",
+      "project_status": "project_status_out/psm_v0.256_project_status.json",
       "regression": "regression_out/psm_v0.251_regression_check.json",
       "independent_chat_gate": "runtime/v0_251_wave_g_external_semantic_judge.json",
       "model_selection": "runtime/v0_251_base_upgrade_pairwise_gemini_pro_report.json",
@@ -279,7 +279,13 @@
       "residual_risk_register": "runtime/v0_255_residual_risk_register.json",
       "internal_alpha_browser": "runtime/v0_255_browser_regression/report.json",
       "internal_alpha_docker": "runtime/v0_255_docker_verification.json",
-      "internal_alpha_checkpoint": "runtime/v0_255_internal_alpha_checkpoint.json"
+      "internal_alpha_checkpoint": "runtime/v0_255_internal_alpha_checkpoint.json",
+      "state_annotation_contract": "benchmarks/v0_256_state_annotation_contract.json",
+      "annotation_contract_gate": "runtime/v0_256_annotation_contract_gate.json",
+      "source_isolation_report": "runtime/v0_256_source_isolation_report.json",
+      "shadow_training_preview": "runtime/v0_256_shadow_training_export_preview.json",
+      "external_contract_review_package": "runtime/v0_256_external_contract_review_package.json",
+      "annotation_contract_checkpoint": "runtime/v0_256_annotation_contract_checkpoint.json"
     },
     "regression": {
       "stem": "psm_v0.251",
@@ -408,6 +414,31 @@
       "model_failure_rate": 0.0,
       "browser_report": "runtime/v0_255_browser_regression/report.json",
       "docker_report": "runtime/v0_255_docker_verification.json"
+    },
+    "annotation_contract_gate": {
+      "decision": "contract_ready_training_not_started",
+      "passed": true,
+      "records": 8,
+      "independent_annotations": 16,
+      "targets": 7,
+      "unresolved_records": 3,
+      "unresolved_targets": 3,
+      "training_eligible_rows": 3,
+      "protected_rows": 5,
+      "source_overlap": 0,
+      "family_overlap": 0,
+      "content_overlap": 0,
+      "near_duplicate_overlap": 0,
+      "candidate_input_leaks": 0,
+      "protected_backflow": 0,
+      "training_started": false,
+      "candidate_shadow_only": true,
+      "rule_replacement_allowed": false,
+      "external_review_submission_status": "ready_not_submitted_no_api_credential",
+      "contract": "benchmarks/v0_256_state_annotation_contract.json",
+      "source_isolation_report": "runtime/v0_256_source_isolation_report.json",
+      "browser_report": "runtime/v0_256_browser_regression/report.json",
+      "docker_report": "runtime/v0_256_docker_verification.json"
     }
   },
   "optional_project_status": {
