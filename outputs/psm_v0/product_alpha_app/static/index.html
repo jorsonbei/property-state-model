@@ -1,0 +1,120 @@
+<!doctype html>
+<html lang="zh-Hant">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>物性AI Chat</title>
+    <link rel="stylesheet" href="/styles.css" />
+  </head>
+  <body>
+    <main class="chat-shell">
+      <header class="chat-header">
+        <div class="brand-block">
+          <span class="brand-mark">Σ</span>
+          <div>
+            <h1>物性AI Chat</h1>
+            <p id="connection">本地聊天模式</p>
+          </div>
+        </div>
+        <div class="metrics-strip" aria-label="Runtime status">
+          <span id="metric-version">PSM V0</span>
+          <span id="metric-core">- cases</span>
+          <span id="metric-risk">risk 0</span>
+          <span id="metric-trial">external closed</span>
+        </div>
+      </header>
+
+      <section class="chat-card" aria-live="polite">
+        <div class="message-list" id="messages"></div>
+        <div class="suggestions" aria-label="Example prompts">
+          <button class="scenario" data-scenario="review">產品邊界</button>
+          <button class="scenario" data-scenario="research">研究判斷</button>
+          <button class="scenario" data-scenario="code">代碼上線</button>
+          <button class="scenario" data-scenario="writing">寫作</button>
+          <button class="scenario" data-scenario="theory">物性論</button>
+          <button class="scenario" data-scenario="trading">交易風險</button>
+        </div>
+      </section>
+
+      <section class="composer" aria-label="Chat input">
+        <textarea id="prompt" placeholder="直接輸入你的問題。按 Enter 發送，Shift + Enter 換行。" spellcheck="false"></textarea>
+        <div class="composer-actions">
+          <button id="run" class="primary">發送</button>
+          <button id="reset">清空</button>
+          <button id="evidence-toggle">調試</button>
+        </div>
+      </section>
+
+      <details class="debug-panel" id="debug-panel">
+        <summary>調試詳情</summary>
+        <div class="debug-grid">
+          <section class="debug-section">
+            <h2>State Chain</h2>
+            <ol class="state-chain">
+              <li><span>Q</span><strong id="q-state">-</strong></li>
+              <li><span>Ω</span><strong id="omega-state">-</strong></li>
+              <li><span>φ</span><strong id="phi-state">-</strong></li>
+              <li><span>Δσ</span><strong id="delta-state">-</strong></li>
+              <li><span>Π</span><strong id="pi-state">-</strong></li>
+              <li><span>η</span><strong id="eta-state">-</strong></li>
+              <li><span>Bσ</span><strong id="bsigma-state">-</strong></li>
+              <li><span>Σ+</span><strong id="sigma-state">candidate</strong></li>
+            </ol>
+          </section>
+
+          <section class="debug-section">
+            <h2>Evidence</h2>
+            <dl>
+              <div><dt>Full external</dt><dd id="evidence-full">-</dd></div>
+              <div><dt>Fault events</dt><dd id="evidence-fault">-</dd></div>
+              <div><dt>Ollama rows</dt><dd id="evidence-ollama">-</dd></div>
+              <div><dt>External trial</dt><dd id="evidence-external">closed</dd></div>
+            </dl>
+          </section>
+
+          <section class="debug-section">
+            <h2>Release Boundary</h2>
+            <ul class="boundary-list">
+              <li><span></span>ordinary not release candidate</li>
+              <li><span></span>raw PSM not release candidate</li>
+              <li><span></span>external judge retained</li>
+              <li><span></span>rule replacement off</li>
+            </ul>
+          </section>
+
+          <section class="debug-section">
+            <h2>History</h2>
+            <div class="history" id="history"></div>
+          </section>
+        </div>
+
+        <section class="comparison-grid" aria-live="polite">
+          <article class="output-panel ordinary">
+            <div class="panel-head">
+              <span>Ordinary output</span>
+              <strong id="ordinary-status">waiting</strong>
+            </div>
+            <pre id="ordinary-output"></pre>
+            <div class="risk-row">
+              <span>Net risk</span>
+              <strong id="ordinary-risk">-</strong>
+            </div>
+          </article>
+
+          <article class="output-panel gated">
+            <div class="panel-head">
+              <span>PSM gated output</span>
+              <strong id="gated-status">waiting</strong>
+            </div>
+            <pre id="gated-output"></pre>
+            <div class="risk-row">
+              <span>Net risk</span>
+              <strong id="gated-risk">-</strong>
+            </div>
+          </article>
+        </section>
+      </details>
+    </main>
+    <script src="/app.js"></script>
+  </body>
+</html>

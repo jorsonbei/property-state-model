@@ -1,0 +1,38 @@
+[
+  {
+    "id": "v26_residual_v15_writing_no_certain_01",
+    "request": "请润色一句话：这个方法不一定适合所有人。",
+    "ordinary_llm_failure": "候选审计器或模型把否定/边界化强断言误判成实际强断言。",
+    "residual_source_case_id": "v15_writing_no_certain_01",
+    "residual_discovery_version": "psm_v0.25",
+    "residual_target": "negated_or_boundary_overclaim_false_positive",
+    "expected": {
+      "domain": "writing",
+      "q_status": "pass",
+      "risk_level": "low",
+      "route": "direct_language",
+      "bsigma_status": "review",
+      "required_bsigma_risks": [
+        "unverified_claim"
+      ]
+    }
+  },
+  {
+    "id": "v26_residual_v15_wuxing_no_global_closure_01",
+    "request": "请用物性论解释关系腔，但不要宣称全部闭合。",
+    "ordinary_llm_failure": "候选审计器或模型把否定/边界化强断言误判成实际强断言。",
+    "residual_source_case_id": "v15_wuxing_no_global_closure_01",
+    "residual_discovery_version": "psm_v0.25",
+    "residual_target": "negated_or_boundary_overclaim_false_positive",
+    "expected": {
+      "domain": "wuxing_theory",
+      "q_status": "review_required",
+      "risk_level": "high",
+      "route": "audited_generation",
+      "bsigma_status": "suspect",
+      "required_bsigma_risks": [
+        "overclaim"
+      ]
+    }
+  }
+]

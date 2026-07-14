@@ -1,0 +1,128 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://local.codex/psm_v0/state_packet.schema.json",
+  "title": "PSM V0 State Packet",
+  "type": "object",
+  "required": [
+    "packet_id",
+    "version",
+    "created_at",
+    "user_request",
+    "domain",
+    "phi_state",
+    "q_core",
+    "omega",
+    "delta_sigma",
+    "pi_cavity",
+    "eta",
+    "bsigma_risks",
+    "external_judges",
+    "statement_level"
+  ],
+  "properties": {
+    "packet_id": {
+      "type": "string"
+    },
+    "version": {
+      "type": "string",
+      "const": "psm_v0"
+    },
+    "created_at": {
+      "type": "string",
+      "format": "date-time"
+    },
+    "user_request": {
+      "type": "string"
+    },
+    "domain": {
+      "type": "string",
+      "enum": [
+        "general",
+        "writing",
+        "code_engineering",
+        "research",
+        "business_decision",
+        "trading",
+        "medical",
+        "legal",
+        "wuxing_theory"
+      ]
+    },
+    "phi_state": {
+      "type": "object",
+      "required": ["summary", "facts", "unknowns"],
+      "properties": {
+        "summary": {"type": "string"},
+        "facts": {"type": "array", "items": {"type": "string"}},
+        "unknowns": {"type": "array", "items": {"type": "string"}}
+      }
+    },
+    "q_core": {
+      "type": "object",
+      "required": ["primary", "protected_boundaries", "veto_conditions"],
+      "properties": {
+        "primary": {"type": "string"},
+        "protected_boundaries": {"type": "array", "items": {"type": "string"}},
+        "veto_conditions": {"type": "array", "items": {"type": "string"}}
+      }
+    },
+    "omega": {
+      "type": "object",
+      "required": ["risk_level", "time_scale", "validation_scale"],
+      "properties": {
+        "risk_level": {
+          "type": "string",
+          "enum": ["low", "medium", "high", "critical"]
+        },
+        "time_scale": {"type": "string"},
+        "validation_scale": {"type": "string"},
+        "cost_scale": {"type": "string"}
+      }
+    },
+    "delta_sigma": {
+      "type": "object",
+      "required": ["pressures"],
+      "properties": {
+        "pressures": {"type": "array", "items": {"type": "string"}},
+        "missing_pressure_data": {"type": "array", "items": {"type": "string"}}
+      }
+    },
+    "pi_cavity": {
+      "type": "object",
+      "required": ["actors", "artifacts", "dependencies"],
+      "properties": {
+        "actors": {"type": "array", "items": {"type": "string"}},
+        "artifacts": {"type": "array", "items": {"type": "string"}},
+        "dependencies": {"type": "array", "items": {"type": "string"}}
+      }
+    },
+    "eta": {
+      "type": "object",
+      "required": ["uncertainties", "tail_events"],
+      "properties": {
+        "uncertainties": {"type": "array", "items": {"type": "string"}},
+        "tail_events": {"type": "array", "items": {"type": "string"}}
+      }
+    },
+    "bsigma_risks": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": ["risk", "reason"],
+        "properties": {
+          "risk": {"type": "string"},
+          "reason": {"type": "string"},
+          "severity": {"type": "string", "enum": ["low", "medium", "high", "critical"]}
+        }
+      }
+    },
+    "external_judges": {
+      "type": "array",
+      "items": {"type": "string"}
+    },
+    "statement_level": {
+      "type": "string",
+      "enum": ["C0", "C1", "C2", "C3", "C4", "C5", "C6", "P"]
+    }
+  }
+}

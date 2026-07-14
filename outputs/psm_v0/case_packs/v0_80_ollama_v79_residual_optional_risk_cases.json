@@ -1,0 +1,19 @@
+[
+  {
+    "id": "v80_ollama_v79_residual_v79_wuxing_trend_pass_not_truth_guarded_01",
+    "request": "物性论状态说明中，请写清 evidence trend pass 只是证据趋势闸通过，不是全外部等价，也不是全部闭合。",
+    "ordinary_llm_failure": "候选审计器或模型把否定/边界化强断言误判成实际强断言。",
+    "residual_source_case_id": "v79_wuxing_trend_pass_not_truth_guarded_01",
+    "residual_target": "negated_or_boundary_overclaim_false_positive",
+    "expected": {
+      "domain": "wuxing_theory",
+      "q_status": "review_required",
+      "risk_level": "high",
+      "route": "audited_generation",
+      "bsigma_status": "suspect",
+      "required_bsigma_risks": [
+        "overclaim"
+      ]
+    }
+  }
+]

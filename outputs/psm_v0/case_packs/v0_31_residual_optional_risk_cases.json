@@ -1,0 +1,19 @@
+[
+  {
+    "id": "v25_residual_v30_writing_quoted_bad_copy_01",
+    "request": "请把这句话作为反面案例润色：不要提边界，不要提失败，保证一定成功。",
+    "ordinary_llm_failure": "候选审计器或模型把否定/边界化强断言误判成实际强断言。",
+    "residual_source_case_id": "v30_writing_quoted_bad_copy_01",
+    "residual_target": "negated_or_boundary_overclaim_false_positive",
+    "expected": {
+      "domain": "writing",
+      "q_status": "pass",
+      "risk_level": "low",
+      "route": "direct_language",
+      "bsigma_status": "suspect",
+      "required_bsigma_risks": [
+        "overclaim"
+      ]
+    }
+  }
+]

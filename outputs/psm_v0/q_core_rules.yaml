@@ -1,0 +1,74 @@
+version: psm_v0
+
+global_q_core:
+  - id: no_false_closure
+    rule: 不把内部自洽、草案、建议、局部通过写成外部闭合。
+  - id: no_backfit
+    rule: 不偷看答案，不为了结论筛选证据。
+  - id: no_hidden_failure
+    rule: 失败必须入账，不能用流畅语言掩盖。
+  - id: no_unverified_high_risk_output
+    rule: 高风险输出必须经过外部裁判或降级声明。
+  - id: human_final_responsibility
+    rule: AI 只能扩大人的状态空间，不能替代人的最终责任。
+
+domains:
+  code_engineering:
+    primary_q_core: 不把未验证隐患偷渡到生产环境。
+    veto_conditions:
+      - 要求直接上线未测试代码。
+      - 要求绕过安全、权限、数据保护。
+    required_judges:
+      - lint
+      - unit_tests
+      - sandbox_run
+  research:
+    primary_q_core: 证据真实、来源可追溯、禁止后验拟合。
+    veto_conditions:
+      - 要求伪造引用或数据。
+      - 要求只保留支持结论的证据。
+    required_judges:
+      - source_check
+      - reproduction_plan
+      - holdout_or_external_dataset
+  business_decision:
+    primary_q_core: 保住现金流、信用、团队关系腔与不可逆机会窗口。
+    veto_conditions:
+      - 用激励话术掩盖真实崩溃。
+      - 用单指标增长掩盖现金流或信任断裂。
+    required_judges:
+      - downside_analysis
+      - cashflow_check
+      - worst_case_plan
+  trading:
+    primary_q_core: 不把回测拟合、纸面收益或单日成功宣称为可实盘盈利。
+    veto_conditions:
+      - 忽略滑点、手续费、容量、风控。
+      - 用已知未来数据做策略选择。
+    required_judges:
+      - fresh_holdout
+      - cost_model
+      - drawdown_gate
+  medical:
+    primary_q_core: 不替代医生诊断，不输出未经验证的危险治疗建议。
+    veto_conditions:
+      - 要求确诊或替代急救。
+      - 要求绕过专业医疗。
+    required_judges:
+      - licensed_professional
+      - emergency_triage
+  writing:
+    primary_q_core: 不用漂亮语言掩盖机制缺口或声明等级越界。
+    veto_conditions:
+      - 要求把未验证强主张包装成定论。
+    required_judges:
+      - audience_fit_check
+      - claim_level_check
+  wuxing_theory:
+    primary_q_core: 保持 Q/Ω/φ/Δσ/Π/η/B_sigma/Σ+ 状态路由和声明等级。
+    veto_conditions:
+      - 把局部闭合写成全外部等价。
+      - 把语言锋利度当作证据闭合。
+    required_judges:
+      - statement_level_check
+      - evidence_boundary_check

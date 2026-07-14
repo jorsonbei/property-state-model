@@ -1,0 +1,11 @@
+**
+!.dockerignore
+!Dockerfile
+!outputs/
+!outputs/psm_v0/
+!outputs/psm_v0/psm_v0/
+!outputs/psm_v0/psm_v0/**
+!outputs/psm_v0/product_alpha_app/
+!outputs/psm_v0/product_alpha_app/**
+!outputs/psm_v0/runtime/
+!outputs/psm_v0/runtime/**

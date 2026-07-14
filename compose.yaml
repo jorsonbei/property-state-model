@@ -1,0 +1,14 @@
+services:
+  psm-chat:
+    build:
+      context: .
+    image: property-state-model:local
+    ports:
+      - "${PSM_DOCKER_PORT:-8766}:8765"
+    environment:
+      OLLAMA_BASE_URL: "${OLLAMA_BASE_URL:-http://host.docker.internal:11434}"
+      OLLAMA_MODEL: "${OLLAMA_MODEL:-gemma3:4b}"
+      PSM_CHAT_TIMEOUT_SECONDS: "${PSM_CHAT_TIMEOUT_SECONDS:-45}"
+    extra_hosts:
+      - "host.docker.internal:host-gateway"
+    restart: unless-stopped

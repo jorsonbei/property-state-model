@@ -1,0 +1,53 @@
+{
+  "plan_version": "psm_execution_plan_v0.248_to_v0.260",
+  "created_at": "2026-07-14",
+  "current_formal_version": "psm_v0.247",
+  "authority": {
+    "machine_truth": "project_status_out/psm_v0.247_project_status.json",
+    "human_audit": "roadmap_out/PSM_Full_Project_Audit_and_Execution_Roadmap_V0.248_to_V0.260.md"
+  },
+  "current_boundary": {
+    "internal_local_demo": true,
+    "internal_chat_quality_gate_passed": false,
+    "external_user_trial": false,
+    "native_property_state_foundation_model": false
+  },
+  "next_executable_stage": {
+    "version": "PSM_V0.248",
+    "objective": "Harden recovery/tooling contracts, define V0.249 before refresh, then refresh required/fault and targeted optional evidence for v247_.",
+    "blocked": false,
+    "requires_user_input": false,
+    "preconditions": [
+      "Replace recursive status history with one current summary plus archive/index.",
+      "Define the V0.249 family before calling next_family_after_even(248).",
+      "Unify fixture_out path handling.",
+      "Create a local non-destructive version-control baseline without a remote.",
+      "Re-run the V0.247 deterministic regression."
+    ],
+    "acceptance": [
+      "One current version and one next version in recovery docs.",
+      "V0.247 regression passes.",
+      "V0.248 optional raw/gated risk is 0/0.",
+      "V0.248 next stage is PSM_V0.249."
+    ]
+  },
+  "stages": [
+    {"version": "PSM_V0.248", "theme": "recovery_and_toolchain_hardening"},
+    {"version": "PSM_V0.249", "theme": "chat_intent_grounding_and_multiturn"},
+    {"version": "PSM_V0.250", "theme": "local_model_bakeoff_and_generation_contract"},
+    {"version": "PSM_V0.251", "theme": "independent_golden_and_blind_chat_set"},
+    {"version": "PSM_V0.252", "theme": "product_ux_and_browser_regression"},
+    {"version": "PSM_V0.253", "theme": "real_omega_routes_and_external_judges"},
+    {"version": "PSM_V0.254", "theme": "dynamic_pi_eta_and_failure_learning"},
+    {"version": "PSM_V0.255", "theme": "internal_chat_alpha_gate"},
+    {"version": "PSM_V0.256_to_V0.258", "theme": "trainable_property_state_encoder"},
+    {"version": "PSM_V0.259", "theme": "traceable_sigma_plus_delivery"},
+    {"version": "PSM_V0.260", "theme": "internal_trial_readiness_review"}
+  ],
+  "user_gates": [
+    "paid_or_data_uploading_external_model_api",
+    "external_user_trial",
+    "real_sensitive_medical_legal_trading_or_private_data",
+    "deletion_or_migration_of_historical_artifacts"
+  ]
+}
