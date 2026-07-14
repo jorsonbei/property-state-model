@@ -1,0 +1,348 @@
+{
+  "schema_version": "psm_artifact_inventory_v1",
+  "generated_at": "2026-07-14T07:44:04.340507+00:00",
+  "root": "outputs/psm_v0",
+  "read_only_scan": true,
+  "content_hashing_performed": false,
+  "metadata_sha256": "207af34af22268fad0db4a89864589b65db90199e0230b5e9e1d7a96e2e6bc02",
+  "summary": {
+    "files": 26282,
+    "bytes": 6234349866
+  },
+  "directories": [
+    {
+      "path": "candidate_external_out",
+      "policy": "generated_evidence",
+      "files": 9891,
+      "bytes": 2540041329
+    },
+    {
+      "path": "candidate_holdout_out",
+      "policy": "generated_evidence",
+      "files": 6336,
+      "bytes": 2477107492
+    },
+    {
+      "path": "state_dataset_out",
+      "policy": "generated_evidence",
+      "files": 1219,
+      "bytes": 510613430
+    },
+    {
+      "path": "eval_out",
+      "policy": "generated_evidence",
+      "files": 2396,
+      "bytes": 256608126
+    },
+    {
+      "path": "assist_out",
+      "policy": "generated_evidence",
+      "files": 848,
+      "bytes": 196489415
+    },
+    {
+      "path": "candidate_external_reaudit_out",
+      "policy": "generated_evidence",
+      "files": 324,
+      "bytes": 110355034
+    },
+    {
+      "path": "shadow_out",
+      "policy": "generated_evidence",
+      "files": 424,
+      "bytes": 67378422
+    },
+    {
+      "path": "case_packs",
+      "policy": "public_source_or_runtime",
+      "files": 341,
+      "bytes": 18443892
+    },
+    {
+      "path": "project_status_out",
+      "policy": "generated_evidence",
+      "files": 446,
+      "bytes": 16138086
+    },
+    {
+      "path": "state_encoder_out",
+      "policy": "generated_evidence",
+      "files": 60,
+      "bytes": 11358271
+    },
+    {
+      "path": "taxonomy_out",
+      "policy": "generated_evidence",
+      "files": 212,
+      "bytes": 6933694
+    },
+    {
+      "path": "taxonomy_external_out",
+      "policy": "generated_evidence",
+      "files": 218,
+      "bytes": 4146906
+    },
+    {
+      "path": "holdout_out",
+      "policy": "generated_evidence",
+      "files": 657,
+      "bytes": 4069434
+    },
+    {
+      "path": "psm_v0",
+      "policy": "public_source_or_runtime",
+      "files": 79,
+      "bytes": 1933442
+    },
+    {
+      "path": "cases",
+      "policy": "public_source_or_runtime",
+      "files": 127,
+      "bytes": 1883623
+    },
+    {
+      "path": "candidate_external_probe_out",
+      "policy": "generated_evidence",
+      "files": 111,
+      "bytes": 1812103
+    },
+    {
+      "path": "taxonomy_external_delta_out",
+      "policy": "generated_evidence",
+      "files": 212,
+      "bytes": 1207910
+    },
+    {
+      "path": "taxonomy_delta_out",
+      "policy": "generated_evidence",
+      "files": 216,
+      "bytes": 1185943
+    },
+    {
+      "path": "work",
+      "policy": "public_source_or_runtime",
+      "files": 63,
+      "bytes": 928291
+    },
+    {
+      "path": "evidence_trend_out",
+      "policy": "generated_evidence",
+      "files": 212,
+      "bytes": 729862
+    },
+    {
+      "path": "release_out",
+      "policy": "generated_evidence",
+      "files": 202,
+      "bytes": 719800
+    },
+    {
+      "path": "status_history",
+      "policy": "local_archive",
+      "files": 2,
+      "bytes": 561656
+    },
+    {
+      "path": "expansion_out",
+      "policy": "generated_evidence",
+      "files": 202,
+      "bytes": 534362
+    },
+    {
+      "path": "fixtures_out",
+      "policy": "generated_evidence",
+      "files": 140,
+      "bytes": 511153
+    },
+    {
+      "path": "regression_out",
+      "policy": "generated_evidence",
+      "files": 334,
+      "bytes": 500695
+    },
+    {
+      "path": "regression_external_out",
+      "policy": "generated_evidence",
+      "files": 218,
+      "bytes": 429882
+    },
+    {
+      "path": "external_hardening_out",
+      "policy": "generated_evidence",
+      "files": 214,
+      "bytes": 406227
+    },
+    {
+      "path": "external_fixture_regression_out",
+      "policy": "generated_evidence",
+      "files": 188,
+      "bytes": 269465
+    },
+    {
+      "path": "fixture_out",
+      "policy": "generated_evidence",
+      "files": 72,
+      "bytes": 268416
+    },
+    {
+      "path": "external_risk_out",
+      "policy": "generated_evidence",
+      "files": 218,
+      "bytes": 222621
+    },
+    {
+      "path": "compare_out",
+      "policy": "generated_evidence",
+      "files": 16,
+      "bytes": 121767
+    },
+    {
+      "path": "dataset_out",
+      "policy": "generated_evidence",
+      "files": 4,
+      "bytes": 111095
+    },
+    {
+      "path": "residual_out",
+      "policy": "generated_evidence",
+      "files": 18,
+      "bytes": 85625
+    },
+    {
+      "path": "product_alpha_app",
+      "policy": "public_source_or_runtime",
+      "files": 8,
+      "bytes": 73873
+    },
+    {
+      "path": "tools",
+      "policy": "public_source_or_runtime",
+      "files": 6,
+      "bytes": 68955
+    },
+    {
+      "path": "roadmap_out",
+      "policy": "public_source_or_runtime",
+      "files": 29,
+      "bytes": 30433
+    },
+    {
+      "path": "runtime",
+      "policy": "public_source_or_runtime",
+      "files": 1,
+      "bytes": 24897
+    },
+    {
+      "path": ".",
+      "policy": "public_source_or_runtime",
+      "files": 9,
+      "bytes": 21732
+    },
+    {
+      "path": "tmp_v61_residual_probe_cases",
+      "policy": "generated_evidence",
+      "files": 1,
+      "bytes": 8521
+    },
+    {
+      "path": "examples",
+      "policy": "public_source_or_runtime",
+      "files": 3,
+      "bytes": 5908
+    },
+    {
+      "path": "external_model_profiles",
+      "policy": "public_source_or_runtime",
+      "files": 1,
+      "bytes": 4219
+    },
+    {
+      "path": "product_alpha_out",
+      "policy": "generated_evidence",
+      "files": 4,
+      "bytes": 3859
+    }
+  ],
+  "largest_files": [
+    {
+      "path": "candidate_holdout_out/psm_v0.247_candidate_holdout_rows.jsonl",
+      "bytes": 35193131
+    },
+    {
+      "path": "candidate_external_out/psm_v0.246_candidate_holdout_rows.jsonl",
+      "bytes": 34859147
+    },
+    {
+      "path": "candidate_holdout_out/psm_v0.245_candidate_holdout_rows.jsonl",
+      "bytes": 34859147
+    },
+    {
+      "path": "candidate_holdout_out/psm_v0.243_candidate_holdout_rows.jsonl",
+      "bytes": 34530889
+    },
+    {
+      "path": "candidate_external_out/psm_v0.244_candidate_holdout_rows.jsonl",
+      "bytes": 34530883
+    },
+    {
+      "path": "candidate_holdout_out/psm_v0.241_candidate_holdout_rows.jsonl",
+      "bytes": 34198571
+    },
+    {
+      "path": "candidate_external_out/psm_v0.242_candidate_holdout_rows.jsonl",
+      "bytes": 34198566
+    },
+    {
+      "path": "candidate_holdout_out/psm_v0.239_candidate_holdout_rows.jsonl",
+      "bytes": 33872838
+    },
+    {
+      "path": "candidate_external_out/psm_v0.240_candidate_holdout_rows.jsonl",
+      "bytes": 33872832
+    },
+    {
+      "path": "candidate_holdout_out/psm_v0.237_candidate_holdout_rows.jsonl",
+      "bytes": 33545663
+    },
+    {
+      "path": "candidate_external_out/psm_v0.238_candidate_holdout_rows.jsonl",
+      "bytes": 33545662
+    },
+    {
+      "path": "candidate_holdout_out/psm_v0.235_candidate_holdout_rows.jsonl",
+      "bytes": 33223249
+    },
+    {
+      "path": "candidate_external_out/psm_v0.236_candidate_holdout_rows.jsonl",
+      "bytes": 33223243
+    },
+    {
+      "path": "candidate_holdout_out/psm_v0.233_candidate_holdout_rows.jsonl",
+      "bytes": 32905931
+    },
+    {
+      "path": "candidate_external_out/psm_v0.234_candidate_holdout_rows.jsonl",
+      "bytes": 32905928
+    },
+    {
+      "path": "candidate_external_out/psm_v0.232_candidate_holdout_rows.jsonl",
+      "bytes": 32581039
+    },
+    {
+      "path": "candidate_holdout_out/psm_v0.231_candidate_holdout_rows.jsonl",
+      "bytes": 32581029
+    },
+    {
+      "path": "candidate_holdout_out/psm_v0.229_candidate_holdout_rows.jsonl",
+      "bytes": 32260158
+    },
+    {
+      "path": "candidate_external_out/psm_v0.230_candidate_holdout_rows.jsonl",
+      "bytes": 32260155
+    },
+    {
+      "path": "candidate_holdout_out/psm_v0.227_candidate_holdout_rows.jsonl",
+      "bytes": 31918173
+    }
+  ]
+}

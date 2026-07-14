@@ -26,6 +26,12 @@ Open `http://127.0.0.1:8765/`.
 
 The deterministic pipeline itself uses only the Python standard library. Ollama is optional; the chat app falls back to a deterministic bounded response when the model is unavailable.
 
+Generate a read-only inventory of the local evidence store without moving or deleting artifacts:
+
+```bash
+make inventory
+```
+
 ## Docker
 
 Docker is optional and keeps the public runtime isolated from the multi-gigabyte local evidence store. Docker Desktop must be running, and Ollama remains on the host:

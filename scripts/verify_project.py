@@ -52,6 +52,22 @@ def verify_existing_regression(status: dict) -> None:
         raise AssertionError(f"Latest regression has failed checks: {failed}")
 
 
+def verify_artifact_inventory() -> None:
+    path = PSM_ROOT / "runtime" / "artifact_inventory.json"
+    inventory = json.loads(path.read_text(encoding="utf-8"))
+    if inventory.get("schema_version") != "psm_artifact_inventory_v1":
+        raise AssertionError("Artifact inventory schema is not recognized.")
+    if inventory.get("read_only_scan") is not True:
+        raise AssertionError("Artifact inventory is not marked as a read-only scan.")
+    if Path(inventory.get("root", "")).is_absolute():
+        raise AssertionError("Artifact inventory exposes an absolute local root.")
+    if inventory.get("summary", {}).get("files", 0) <= 0:
+        raise AssertionError("Artifact inventory is empty.")
+    for item in inventory.get("largest_files", []):
+        if Path(item["path"]).is_absolute():
+            raise AssertionError("Artifact inventory exposes an absolute local file path.")
+
+
 def run_tests() -> None:
     env = dict(os.environ)
     env["PYTHONPATH"] = str(PSM_ROOT)
@@ -64,6 +80,7 @@ def main() -> None:
     status = latest_status()
     verify_recovery_docs(status)
     verify_existing_regression(status)
+    verify_artifact_inventory()
     json.loads((PSM_ROOT / "roadmap_out" / "psm_v0.248_to_v0.260_execution_plan.json").read_text(encoding="utf-8"))
     run_tests()
     print(f"python_sources_parsed: {source_count}")
