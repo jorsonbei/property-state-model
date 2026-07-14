@@ -1,0 +1,106 @@
+{
+  "schema_version": "psm_v0_260_internal_readiness_evidence_manifest_v1",
+  "version": "PSM_V0.260-candidate",
+  "contract_sha256": "3bfabf8e4f6db22a4ead4568ffa8e826f50fb997db6e6abbdbe40d48afee2838",
+  "required_artifacts": 16,
+  "available_artifacts": 16,
+  "missing_artifacts": [],
+  "artifacts": [
+    {
+      "name": "formal_core",
+      "path": "project_status_out/psm_v0.260_project_status.json",
+      "sha256": "c8e5f885eb9cb5222ec0eb651fee1fbd1e1c8190815d7e8662e1d736ec778308",
+      "size_bytes": 20576
+    },
+    {
+      "name": "independent_blind",
+      "path": "runtime/v0_251_wave_g_external_semantic_judge.json",
+      "sha256": "a4b114db1eadb8a3d676868fd684f2ca73118b64d628244e4b8b7da71775fc21",
+      "size_bytes": 12737
+    },
+    {
+      "name": "model_selection",
+      "path": "runtime/chat_provider_selection.json",
+      "sha256": "51a4c09bdfc8dbeb8bde5d804281df837dfcb038415965b011fc360a96f81d72",
+      "size_bytes": 1951
+    },
+    {
+      "name": "internal_alpha",
+      "path": "runtime/v0_255_internal_alpha_gate.json",
+      "sha256": "efc5291cedf06414ec320da56032dd13883092de899922243b11d56cc8aaa190",
+      "size_bytes": 2428
+    },
+    {
+      "name": "shadow_encoder",
+      "path": "runtime/v0_257_shadow_encoder_gate.json",
+      "sha256": "44e9d94c8b676fa8c893dbe8eba805df6444b1dcf302ed53fd73a1875e28f60f",
+      "size_bytes": 1923
+    },
+    {
+      "name": "confidence_calibration",
+      "path": "runtime/v0_258_calibrated_shadow_gate.json",
+      "sha256": "c3c26aaec64d95cf90132ab5c0d05ac45c1ba2e41e7aa0bdbccc4a3e932cdc84",
+      "size_bytes": 2343
+    },
+    {
+      "name": "sigma_plus",
+      "path": "runtime/v0_259_sigma_plus_gate.json",
+      "sha256": "143b12d7d17869d68a83c36ad4d454f199b3702d626c3f881c062ee33d5be439",
+      "size_bytes": 1857
+    },
+    {
+      "name": "browser",
+      "path": "runtime/v0_260_browser_regression/report.json",
+      "sha256": "d8cfc3836004b63ea0ede768e43bd4d4544cd11a7e412d524368214f0b5bba7c",
+      "size_bytes": 1550
+    },
+    {
+      "name": "docker",
+      "path": "runtime/v0_260_docker_verification.json",
+      "sha256": "238e0f9130ce127a833c5dc7ce6186883f6a6c3c4324dbbe19e585dca37f806a",
+      "size_bytes": 9481
+    },
+    {
+      "name": "failure_ledger",
+      "path": "product_alpha_out/v0_255_route_failure_ledger.jsonl",
+      "sha256": "cb71bb32328953459ddb03ba50d608b77ae57638f108823bc9c124d79b4617fa",
+      "size_bytes": 9724
+    },
+    {
+      "name": "v255_risks",
+      "path": "runtime/v0_255_residual_risk_register.json",
+      "sha256": "1fc3aba37a8e3eb2edeb6afe25750740b70c0136a9ec6a8ce7af53c5fa3c7185",
+      "size_bytes": 1439
+    },
+    {
+      "name": "v257_risks",
+      "path": "runtime/v0_257_shadow_encoder_residual_risks.json",
+      "sha256": "380e17b9c70f2a2336c9ce72e2bf742318fb140c3664c1501838ca527d528d02",
+      "size_bytes": 914
+    },
+    {
+      "name": "v258_risks",
+      "path": "runtime/v0_258_calibrated_shadow_residual_risks.json",
+      "sha256": "80e34fc3aada1b77fc6ac8c597c69d564dece287438cf357965b5cc5b8cf8401",
+      "size_bytes": 1094
+    },
+    {
+      "name": "v259_risks",
+      "path": "runtime/v0_259_sigma_plus_residual_risks.json",
+      "sha256": "11586f6d6d38be7ec65356135e038fa471cba07fb9aa8fe9f28591ee7a5d55d8",
+      "size_bytes": 844
+    },
+    {
+      "name": "external_contract_review",
+      "path": "runtime/v0_256_external_contract_review_package.json",
+      "sha256": "e6cc214417ed480fd7695f7f0ab9c352293e43df844c1860226ebabcb457f879",
+      "size_bytes": 5785
+    },
+    {
+      "name": "project_verification",
+      "path": "runtime/v0_260_project_verification.json",
+      "sha256": "109177eb9513d45cb8b81f3b55e3fe3659b24f9ce058970b26bf593512219249",
+      "size_bytes": 917
+    }
+  ]
+}

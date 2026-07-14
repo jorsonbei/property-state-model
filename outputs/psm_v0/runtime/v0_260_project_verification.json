@@ -1,0 +1,19 @@
+{
+  "schema_version": "psm_v0_260_project_verification_v1",
+  "passed": true,
+  "returncode": 0,
+  "tests": 114,
+  "duration_ms": 1089,
+  "python_sources_parsed": 162,
+  "current_version": "psm_v0.260",
+  "output_tail": [
+    "test_metal_touch_kernel_uses_heat_transfer_not_radiation (test_verified_knowledge.VerifiedKnowledgeTests.test_metal_touch_kernel_uses_heat_transfer_not_radiation) ... ok",
+    "test_pressure_kernel_preserves_direction_of_pressure_difference (test_verified_knowledge.VerifiedKnowledgeTests.test_pressure_kernel_preserves_direction_of_pressure_difference) ... ok",
+    "test_project_unknowns_are_not_filled_with_invented_milestones (test_verified_knowledge.VerifiedKnowledgeTests.test_project_unknowns_are_not_filled_with_invented_milestones) ... ok",
+    "",
+    "----------------------------------------------------------------------",
+    "Ran 114 tests in 0.443s",
+    "",
+    "OK"
+  ]
+}

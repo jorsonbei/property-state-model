@@ -1,6 +1,8 @@
 from __future__ import annotations
 
+import tempfile
 import unittest
+from pathlib import Path
 from unittest.mock import patch
 
 from product_alpha_app import server
@@ -8,6 +10,17 @@ from psm_v0.chat_quality_auditor import audit_chat_answer
 
 
 class ChatQualityTests(unittest.TestCase):
+    def setUp(self) -> None:
+        self._temporary_directory = tempfile.TemporaryDirectory()
+        self.addCleanup(self._temporary_directory.cleanup)
+        ledger_patch = patch.object(
+            server,
+            "ROUTE_FAILURE_LEDGER",
+            Path(self._temporary_directory.name) / "route_failures.jsonl",
+        )
+        ledger_patch.start()
+        self.addCleanup(ledger_patch.stop)
+
     def test_low_risk_absolute_language_can_be_softened_without_breaking_negation(self) -> None:
         answer = server.soften_absolute_language("这一定能保证成功，但不能保证外部结果。")
 
@@ -107,9 +120,9 @@ class ChatQualityTests(unittest.TestCase):
         self.assertIn(context["current_version"], result["chat"]["assistant_message"])
         self.assertIn(context["next_version"], result["chat"]["assistant_message"])
         self.assertIn(context["next_objective"], result["chat"]["assistant_message"])
-        self.assertIn("安全", result["chat"]["assistant_message"])
-        self.assertIn("聊天质量", result["chat"]["assistant_message"])
-        self.assertIn("internal_trial_ready", result["chat"]["assistant_message"])
+        self.assertIn("数据处理", result["chat"]["assistant_message"])
+        self.assertIn("隐私", result["chat"]["assistant_message"])
+        self.assertIn("API", result["chat"]["assistant_message"])
         self.assertIn("外部", result["chat"]["assistant_message"])
 
     def test_working_chat_does_not_imply_external_release(self) -> None:

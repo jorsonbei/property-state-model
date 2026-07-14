@@ -2,10 +2,10 @@
   "schema_version": "psm_public_runtime_snapshot_v1",
   "project_status": {
     "updated_from_local_artifacts": true,
-    "current_version": "psm_v0.259",
+    "current_version": "psm_v0.260",
     "source_evidence_version": "psm_v0.251",
-    "previous_formal_version": "psm_v0.258",
-    "completed_result": "traceable_sigma_plus_candidate_delivery",
+    "previous_formal_version": "psm_v0.259",
+    "completed_result": "local_single_user_internal_trial_ready",
     "family": {
       "family_id": "v251_independent_chat_golden_blind_set_boundary_adversarial",
       "case_pack": "case_packs/v0_251_independent_chat_golden_blind_set_boundary_adversarial_cases.json",
@@ -244,10 +244,10 @@
       "rule_replacement_allowed": false
     },
     "next_stage": {
-      "version": "PSM_V0.260",
-      "objective": "Run the internal trial readiness review by consolidating safety, chat quality, blind-set, model comparison, performance, failure-ledger, and residual-risk evidence; issue only internal_trial_ready, needs_more_work, or blocked; keep external user trial, privacy compliance, public service, and professional authority closed.",
-      "blocked": false,
-      "requires_user_input": false
+      "version": "PSM_V0.261",
+      "objective": "Define and authorize the post-internal external-validation lane, including external-user scope, privacy and data handling, deployment, budget, and API credentials for the already-authorized synthetic contract judge; do not begin external use or data upload until these user-owned decisions are supplied.",
+      "blocked": true,
+      "requires_user_input": true
     },
     "primary_artifacts": {
       "case_pack": "case_packs/v0_251_independent_chat_golden_blind_set_boundary_adversarial_cases.json",
@@ -259,7 +259,7 @@
       "candidate_taxonomy": "taxonomy_out/psm_v0.251_candidate_taxonomy.json",
       "candidate_regression_fixtures": "fixture_out/psm_v0.251_candidate_regression_fixtures.json",
       "taxonomy_delta": "taxonomy_delta_out/psm_v0.251_taxonomy_delta.json",
-      "project_status": "project_status_out/psm_v0.259_project_status.json",
+      "project_status": "project_status_out/psm_v0.260_project_status.json",
       "regression": "regression_out/psm_v0.251_regression_check.json",
       "independent_chat_gate": "runtime/v0_251_wave_g_external_semantic_judge.json",
       "model_selection": "runtime/v0_251_base_upgrade_pairwise_gemini_pro_report.json",
@@ -304,7 +304,13 @@
       "sigma_plus_metrics": "runtime/v0_259_sigma_plus_metrics.json",
       "sigma_plus_evaluation": "runtime/v0_259_sigma_plus_evaluation.jsonl",
       "sigma_plus_residual_risks": "runtime/v0_259_sigma_plus_residual_risks.json",
-      "sigma_plus_checkpoint": "runtime/v0_259_sigma_plus_checkpoint.json"
+      "sigma_plus_checkpoint": "runtime/v0_259_sigma_plus_checkpoint.json",
+      "internal_readiness_review": "runtime/v0_260_internal_readiness_review.json",
+      "internal_readiness_report": "runtime/v0_260_internal_readiness_report.md",
+      "internal_readiness_evidence_manifest": "runtime/v0_260_internal_readiness_evidence_manifest.json",
+      "internal_readiness_project_verification": "runtime/v0_260_project_verification.json",
+      "internal_readiness_residual_risks": "runtime/v0_260_internal_readiness_residual_risks.json",
+      "internal_readiness_checkpoint": "runtime/v0_260_internal_readiness_checkpoint.json"
     },
     "regression": {
       "stem": "psm_v0.251",
@@ -538,6 +544,33 @@
       "rule_replacement_allowed": false,
       "browser_report": "runtime/v0_259_browser_regression/report.json",
       "docker_report": "runtime/v0_259_docker_verification.json"
+    },
+    "internal_readiness_gate": {
+      "decision": "internal_trial_ready",
+      "passed": true,
+      "formal_core": "2228/2228",
+      "independent_blind": "20/20",
+      "internal_alpha_scenarios": "13/13",
+      "critical_fact_hallucinations": 0,
+      "critical_safety_false_negatives": 0,
+      "selected_model": "qwen3.5:9b",
+      "model_failure_rate": 0.0,
+      "model_p95_latency_ms": 22949,
+      "server_timeout_ms": 60000,
+      "current_tests": 114,
+      "python_sources_parsed": 162,
+      "sigma_plus_cases": 15,
+      "sigma_plus_strong_claims": 22,
+      "failure_ledger_events": 26,
+      "residual_risks": 17,
+      "open_or_not_built_risks": 12,
+      "bounded_or_accepted_risks": 5,
+      "external_contract_review_authorized": true,
+      "external_contract_review_submission_status": "ready_not_submitted_no_api_credential",
+      "scope": "local_single_user_internal",
+      "evidence_manifest_artifacts": 16,
+      "browser_report": "runtime/v0_260_browser_regression/report.json",
+      "docker_report": "runtime/v0_260_docker_verification.json"
     }
   },
   "optional_project_status": {

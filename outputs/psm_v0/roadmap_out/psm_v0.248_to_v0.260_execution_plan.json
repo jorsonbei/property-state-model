@@ -1,10 +1,10 @@
 {
   "plan_version": "psm_execution_plan_v0.248_to_v0.260",
   "created_at": "2026-07-14",
-  "current_project_version": "psm_v0.259",
+  "current_project_version": "psm_v0.260",
   "current_formal_version": "psm_v0.251",
   "authority": {
-    "machine_truth": "project_status_out/psm_v0.259_project_status.json",
+    "machine_truth": "project_status_out/psm_v0.260_project_status.json",
     "human_audit": "roadmap_out/PSM_Full_Project_Audit_and_Execution_Roadmap_V0.248_to_V0.260.md"
   },
   "current_boundary": {
@@ -18,27 +18,27 @@
     "trainable_shadow_encoder_baseline_passed": true,
     "calibrated_shadow_abstention_gate_passed": true,
     "traceable_sigma_plus_delivery_gate_passed": true,
+    "internal_readiness_gate_passed": true,
     "stable_internal_local_chat": true,
     "external_user_trial": false,
     "native_property_state_foundation_model": false
   },
   "next_executable_stage": {
-    "version": "PSM_V0.260",
-    "objective": "Run the internal trial readiness review across safety, chat quality, blind-set, model-comparison, performance, failure-ledger, and residual-risk evidence, issuing only internal_trial_ready, needs_more_work, or blocked while external authority remains closed.",
-    "blocked": false,
-    "requires_user_input": false,
+    "version": "PSM_V0.261",
+    "objective": "Define and authorize the post-internal external-validation lane, including external-user scope, privacy and data handling, deployment, budget, and API credentials for the already-authorized synthetic contract judge.",
+    "blocked": true,
+    "requires_user_input": true,
     "preconditions": [
-      "PSM_V0.259 Sigma+ decision is sigma_plus_delivery_ready.",
-      "All 15 frozen delivery cases pass with 1.0 strong-claim provenance-or-downgrade coverage.",
-      "Ordinary debug leakage, candidate-controlled output, and external release authority are zero.",
-      "Base weights, training feedback, external-user trial, and rule replacement remain closed."
+      "PSM_V0.260 decision is internal_trial_ready for local single-user internal use.",
+      "The user decides external participant scope, data handling and privacy, deployment, and budget.",
+      "A usable external-model API credential is configured before submitting the authorized synthetic contract judge.",
+      "No external user or data upload is opened implicitly."
     ],
     "acceptance": [
-      "Safety, chat quality, blind, model comparison, performance, failure ledger, and residual-risk inputs are present and version-consistent.",
-      "Critical safety, hallucination, provenance, browser, API, Docker, and release-boundary gates all pass.",
-      "The decision is exactly one of internal_trial_ready, needs_more_work, or blocked.",
-      "The report distinguishes internal readiness from external-user, privacy, public-service, and professional authority.",
-      "External user trial and rule replacement remain closed."
+      "External-validation scope and prohibited data classes are explicit.",
+      "Privacy, retention, deletion, deployment, and budget boundaries are explicit.",
+      "Credential use is limited to the authorized synthetic non-private review package.",
+      "External user trial remains closed until an independent release gate passes."
     ]
   },
   "completed_stages": [
@@ -141,6 +141,21 @@
       "candidate_controlled_outputs": 0,
       "external_release_authority_rows": 0,
       "rule_replacement_allowed": false
+    },
+    {
+      "version": "PSM_V0.260",
+      "result": "internal_trial_ready",
+      "scope": "local_single_user_internal",
+      "formal_core": "2228/2228",
+      "independent_blind": "20/20",
+      "internal_alpha_scenarios": "13/13",
+      "current_tests": 114,
+      "critical_fact_hallucinations": 0,
+      "critical_safety_false_negatives": 0,
+      "residual_risks": 17,
+      "external_contract_review": "authorized_not_submitted_no_api_credential",
+      "external_user_trial": false,
+      "requires_user_input_for_v0_261": true
     }
   ],
   "stages": [

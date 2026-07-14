@@ -1,0 +1,35 @@
+{
+  "schema_version": "psm_v0_260_internal_readiness_contract_v1",
+  "version": "PSM_V0.260-candidate",
+  "frozen": true,
+  "allowed_decisions": ["internal_trial_ready", "needs_more_work", "blocked"],
+  "required_evidence_classes": [
+    "formal_core",
+    "independent_blind",
+    "model_comparison_and_performance",
+    "internal_alpha",
+    "shadow_encoder",
+    "confidence_calibration",
+    "sigma_plus_delivery",
+    "current_project_verification",
+    "current_browser",
+    "current_docker",
+    "failure_ledger",
+    "residual_risks"
+  ],
+  "decision_policy": {
+    "blocked": "One or more required artifacts are missing, unreadable, or the current verifier cannot run.",
+    "needs_more_work": "Required evidence is available, but one or more required readiness checks fail.",
+    "internal_trial_ready": "Every required readiness check passes for local single-user internal use."
+  },
+  "required_boundaries": {
+    "scope": "local_single_user_internal",
+    "external_user_trial_allowed": false,
+    "privacy_compliance_claimed": false,
+    "public_service_allowed": false,
+    "medical_legal_trading_authority": false,
+    "shadow_output_authority": false,
+    "rule_replacement_allowed": false,
+    "external_release_authority": false
+  }
+}

@@ -1,0 +1,107 @@
+{
+  "schema_version": "psm_v0_260_internal_readiness_residual_risks_v1",
+  "version": "PSM_V0.260-candidate",
+  "decision": "internal_trial_ready",
+  "counts": {
+    "total": 17,
+    "open_or_not_built": 12,
+    "bounded_or_accepted": 5
+  },
+  "risks": [
+    {
+      "id": "open_domain_generalization",
+      "severity": "high",
+      "status": "open",
+      "evidence": "The passing independent blind wave contains 20 frozen synthetic prompts, not open-domain proof.",
+      "control": "Retain grounding, route, and bounded fallback gates; expand only with source-isolated evaluation."
+    },
+    {
+      "id": "local_model_latency",
+      "severity": "medium",
+      "status": "accepted_for_internal_trial",
+      "evidence": "Selected model p95 latency is 22949 ms under a 60 s server timeout.",
+      "control": "Retain progress, cancel, 70 s client timeout, retry, and deterministic fallback."
+    },
+    {
+      "id": "professional_authority",
+      "severity": "critical",
+      "status": "closed_by_boundary",
+      "evidence": "Medical, legal, and trading routes keep external judge and human confirmation unresolved.",
+      "control": "No diagnosis, legal determination, live-trading authority, or rule replacement."
+    },
+    {
+      "id": "privacy_auth_multi_user",
+      "severity": "high",
+      "status": "not_built",
+      "evidence": "The product is a local single-user alpha without accounts, consent, tenancy, or public-service controls.",
+      "control": "Keep external-user and public-service gates closed."
+    },
+    {
+      "id": "synthetic_scale",
+      "status": "open",
+      "boundary": "The 42-record synthetic benchmark does not establish open-domain generalization."
+    },
+    {
+      "id": "correlated_heads",
+      "status": "open",
+      "boundary": "The seven projected heads share scenario structure and require larger independently annotated data."
+    },
+    {
+      "id": "non_neural_baseline",
+      "status": "open",
+      "boundary": "The first candidate is a trainable transparent probabilistic baseline, not a foundation model."
+    },
+    {
+      "id": "controller_authority",
+      "status": "closed_by_boundary",
+      "boundary": "Candidate predictions are shadow-only and cannot control release, routing, or professional action."
+    },
+    {
+      "id": "small_calibration_set",
+      "status": "open",
+      "boundary": "Fourteen calibration rows cannot establish production calibration."
+    },
+    {
+      "id": "synthetic_unresolved",
+      "status": "open",
+      "boundary": "Unresolved cases are synthetic and require independent human annotation at larger scale."
+    },
+    {
+      "id": "model_disagreement_detection",
+      "status": "open",
+      "observed": "0/7",
+      "boundary": "The consensus gate, not model confidence, currently prevents unresolved targets from being accepted."
+    },
+    {
+      "id": "coverage_tradeoff",
+      "status": "open",
+      "boundary": "Abstention improves accepted safety by reducing candidate coverage."
+    },
+    {
+      "id": "controller_authority",
+      "status": "closed_by_boundary",
+      "boundary": "Abstentions return control to deterministic rules; the candidate has no release authority."
+    },
+    {
+      "id": "claim_segmentation",
+      "status": "open",
+      "boundary": "Rule-based sentence claim segmentation is not semantic entailment."
+    },
+    {
+      "id": "source_entailment",
+      "status": "open",
+      "boundary": "A provenance link does not by itself prove that every phrasing is entailed by the source."
+    },
+    {
+      "id": "shadow_generalization",
+      "status": "open",
+      "boundary": "The calibrated shadow encoder remains synthetic-small and has no output authority."
+    },
+    {
+      "id": "external_trial",
+      "status": "closed_by_boundary",
+      "boundary": "V0.259 does not authorize external users or professional action."
+    }
+  ],
+  "review_boundary": "Open risks are acceptable only for local single-user internal use under the frozen closed authorities."
+}

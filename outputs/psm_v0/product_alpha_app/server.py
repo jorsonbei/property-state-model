@@ -844,6 +844,11 @@ def project_status_answer(context: dict, question: str = "") -> str:
         )
     if any(marker in question for marker in ("阻塞因素", "阻碍因素", "阻礙因素", "最大阻塞", "最大的阻塞")):
         user_blocker = "需要用户介入" if context["requires_user_input"] else "不需要用户介入"
+        if context["stage_blocked"]:
+            return (
+                f"当前 {context['next_version']} 确实受阻，且{user_blocker}。阻塞内容是："
+                f"{context['required_decision']} 外部用户试用仍未开放。"
+            )
         return (
             f"当前没有阻止施工的外部 blocker；最大的阶段门是 {context['next_version']} 的"
             f"{context['next_objective']}。现阶段{user_blocker}；"
@@ -865,9 +870,9 @@ def project_status_answer(context: dict, question: str = "") -> str:
 def roadmap_answer(context: dict) -> str:
     if context["stage_blocked"]:
         construction = (
-            "80 题来源隔离数据集、judge-only 标签、两阶段 NoTargetRead 评测器和三轮 blind evidence 已完成；"
-            "但独立 blind gate 没有通过，不能继续由同一开发者循环出题和裁判。"
-            f"下一步需要：{context['required_decision']}"
+            "当前内部阶段的工程与评审已经完成，但下一阶段涉及外部范围、数据处理、部署、费用或凭证，"
+            "不能由系统自行推定授权。"
+            f"继续前需要：{context['required_decision']}"
         )
     elif context["next_version"] == "PSM V0.252":
         construction = (
@@ -956,6 +961,18 @@ def roadmap_answer(context: dict) -> str:
 
 
 def project_results_answer(context: dict) -> str:
+    if context["current_version"] == "PSM V0.260":
+        return (
+            "这轮已完成 PSM V0.260 内部试用就绪总评审，机器结论是 `internal_trial_ready`，适用范围严格限定为"
+            "本机、单用户、内部使用。评审重新核对了 2228/2228 正式核心、20/20 独立盲测、13/13 内部 Alpha 场景、"
+            "114 项当前测试、162 个 Python source、V0.259 Sigma+、浏览器、Docker、模型性能、失败账本和剩余风险。"
+            f"关键事实幻觉和关键安全漏判都是 0；当前聊天模型是 `{context['selected_model']}`，模型失败率为 0，"
+            "p95 22.949 秒低于 60 秒服务端时限。\n\n"
+            "评审保留了 17 项剩余风险，其中 12 项仍开放或尚未建设，只有在当前封闭边界内才可接受。"
+            "V0.256 合成契约外部评审虽已获授权，但仍因没有 API 凭证而未提交，系统没有把它写成已完成。"
+            "外部用户、隐私合规、公开服务、医疗/法律/交易权限、shadow 控制输出与规则替换仍全部关闭。"
+            f"下一阶段是 {context['next_version']}，当前需要你介入：{context['required_decision']}"
+        )
     if context["current_version"] == "PSM V0.259":
         return (
             "这轮已完成 PSM V0.259 Sigma+ 可追溯交付闭环：普通用户仍只看到自然回答，研发视图则把 Q 到 Sigma+ 状态、"
@@ -1458,7 +1475,7 @@ def load_project_context() -> dict:
         "next_objective": next_objective,
         "selected_model": str(selection.get("selected_model") or "未选择"),
         "model_mean_score": float(selection_metrics.get("mean_score") or 0.0),
-        "stage_blocked": checkpoint.get("status") == "blocked_on_independent_semantic_judge",
+        "stage_blocked": bool(checkpoint.get("requires_user_input", False)) or str(checkpoint.get("status") or "").startswith("blocked_"),
         "checkpoint_status": str(checkpoint.get("status") or "unknown"),
         "requires_user_input": bool(checkpoint.get("requires_user_input", False)),
         "chat_gate_passed": bool(chat_gate.get("passed", False)),
@@ -1604,6 +1621,11 @@ def humanize_stage_objective(objective: str) -> str:
         return (
             "执行内部试用就绪总评审，汇总安全、聊天质量、盲测、模型对照、性能、失败账本与剩余风险，"
             "结论只能是 internal_trial_ready、needs_more_work 或 blocked；外部用户与专业权限继续关闭"
+        )
+    if "post-internal external-validation lane" in objective.casefold():
+        return (
+            "定义内部就绪之后的外部验证阶段，包括外部用户范围、数据与隐私要求、部署、预算和 API 凭证；"
+            "这些属于用户授权边界，未决定前不能上传资料或启动外部试用"
         )
     return objective
 

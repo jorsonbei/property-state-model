@@ -1,0 +1,251 @@
+{
+  "schema_version": "psm_v0_260_docker_verification_v1",
+  "passed": true,
+  "checks": {
+    "runtime_current": true,
+    "status_current": true,
+    "internal_chat_retained": true,
+    "external_trial_closed": true,
+    "internal_readiness_review_present": true,
+    "formal_core_complete": true,
+    "independent_blind_complete": true,
+    "current_verification_complete": true,
+    "critical_failures_zero": true,
+    "scope_local_single_user": true,
+    "external_authorities_closed": true,
+    "next_stage_blocked_for_user_decision": true,
+    "delivery_api_passed": true,
+    "user_view_matches": true,
+    "runtime_claim_coverage_full": true,
+    "runtime_provenance_present": true,
+    "shadow_observation_only": true,
+    "deterministic_controller_retained": true,
+    "rule_replacement_closed": true,
+    "project_answer_grounded": true,
+    "graph_boundary_retained": true
+  },
+  "status": {
+    "version": "PSM V0.260",
+    "selected_chat_model": "qwen3.5:9b",
+    "ready_for_stable_internal_chat": true,
+    "ready_for_external_user_trial": false
+  },
+  "internal_readiness_review": {
+    "decision": "internal_trial_ready",
+    "summary": {
+      "formal_core": "2228/2228",
+      "independent_blind": "20/20",
+      "internal_alpha_scenarios": "13/13",
+      "critical_fact_hallucinations": 0,
+      "critical_safety_false_negatives": 0,
+      "selected_model": "qwen3.5:9b",
+      "model_failure_rate": 0.0,
+      "model_p95_latency_ms": 22949,
+      "server_timeout_ms": 60000,
+      "current_tests": 114,
+      "python_sources_parsed": 162,
+      "sigma_plus_cases": 15,
+      "sigma_plus_strong_claims": 22,
+      "failure_ledger_events": 26,
+      "residual_risks": 17,
+      "open_or_not_built_risks": 12,
+      "bounded_or_accepted_risks": 5,
+      "external_contract_review_authorized": true,
+      "external_contract_review_submission_status": "ready_not_submitted_no_api_credential"
+    },
+    "scope_boundary": {
+      "scope": "local_single_user_internal",
+      "external_user_trial_allowed": false,
+      "privacy_compliance_claimed": false,
+      "public_service_allowed": false,
+      "medical_legal_trading_authority": false,
+      "shadow_output_authority": false,
+      "rule_replacement_allowed": false,
+      "external_release_authority": false
+    },
+    "optional_external_review": {
+      "authorized": true,
+      "submission_status": "ready_not_submitted_no_api_credential",
+      "required_for_local_internal_readiness": false,
+      "completed": false
+    }
+  },
+  "delivery": {
+    "decision": "traceable_candidate_delivery",
+    "statement_audit": {
+      "claims": [
+        {
+          "claim_id": "claim_27af779cb03dfa25df33",
+          "text": "这轮已完成 PSM V0.260 内部试用就绪总评审，机器结论是 `internal_trial_ready`，适用范围严格限定为本机、单用户、内部使用。",
+          "strong": true,
+          "disposition": "supported",
+          "statement_level": "C2",
+          "matched_facts": [
+            "PSM V0.260"
+          ],
+          "provenance_refs": [
+            "runtime/current_runtime_snapshot.json",
+            "runtime/chat_provider_selection.json",
+            "roadmap_out/PSM_Full_Project_Audit_and_Execution_Roadmap_V0.248_to_V0.260.md",
+            "outputs/psm_v0/runtime/current_runtime_snapshot.json",
+            "outputs/psm_v0/runtime/current_runtime_snapshot.json"
+          ],
+          "downgrade_markers": []
+        },
+        {
+          "claim_id": "claim_8d8a2c23fb049eaeb677",
+          "text": "评审重新核对了 2228/2228 正式核心、20/20 独立盲测、13/13 内部 Alpha 场景、114 项当前测试、162 个 Python source、V0.259 Sigma+、浏览器、Docker、模型性能、失败账本和剩余风险。",
+          "strong": true,
+          "disposition": "supported",
+          "statement_level": "C2",
+          "matched_facts": [],
+          "provenance_refs": [
+            "runtime/current_runtime_snapshot.json",
+            "runtime/chat_provider_selection.json",
+            "roadmap_out/PSM_Full_Project_Audit_and_Execution_Roadmap_V0.248_to_V0.260.md",
+            "outputs/psm_v0/runtime/current_runtime_snapshot.json",
+            "outputs/psm_v0/runtime/current_runtime_snapshot.json"
+          ],
+          "downgrade_markers": []
+        },
+        {
+          "claim_id": "claim_bf7798aefa2bef9f2d69",
+          "text": "关键事实幻觉和关键安全漏判都是 0；当前聊天模型是 `qwen3.5:9b`，模型失败率为 0，p95 22.949 秒低于 60 秒服务端时限。",
+          "strong": false,
+          "disposition": "ordinary",
+          "statement_level": "C2",
+          "matched_facts": [
+            "qwen3.5:9b"
+          ],
+          "provenance_refs": [],
+          "downgrade_markers": []
+        },
+        {
+          "claim_id": "claim_e2e480532aeae66ba5ed",
+          "text": "评审保留了 17 项剩余风险，其中 12 项仍开放或尚未建设，只有在当前封闭边界内才可接受。",
+          "strong": false,
+          "disposition": "ordinary",
+          "statement_level": "C2",
+          "matched_facts": [],
+          "provenance_refs": [],
+          "downgrade_markers": []
+        },
+        {
+          "claim_id": "claim_1e1abb3a1230a5e5b5ba",
+          "text": "V0.256 合成契约外部评审虽已获授权，但仍因没有 API 凭证而未提交，系统没有把它写成已完成。",
+          "strong": true,
+          "disposition": "supported",
+          "statement_level": "C2",
+          "matched_facts": [],
+          "provenance_refs": [
+            "runtime/current_runtime_snapshot.json",
+            "runtime/chat_provider_selection.json",
+            "roadmap_out/PSM_Full_Project_Audit_and_Execution_Roadmap_V0.248_to_V0.260.md",
+            "outputs/psm_v0/runtime/current_runtime_snapshot.json",
+            "outputs/psm_v0/runtime/current_runtime_snapshot.json"
+          ],
+          "downgrade_markers": []
+        },
+        {
+          "claim_id": "claim_d58b67ffd70a7e3cb598",
+          "text": "外部用户、隐私合规、公开服务、医疗/法律/交易权限、shadow 控制输出与规则替换仍全部关闭。",
+          "strong": false,
+          "disposition": "ordinary",
+          "statement_level": "C2",
+          "matched_facts": [],
+          "provenance_refs": [],
+          "downgrade_markers": []
+        },
+        {
+          "claim_id": "claim_aa5234ae8e08eaa3c518",
+          "text": "下一阶段是 PSM V0.261，当前需要你介入：需要用户介入后才能进入 PSM V0.261。",
+          "strong": true,
+          "disposition": "supported",
+          "statement_level": "C2",
+          "matched_facts": [
+            "PSM V0.261"
+          ],
+          "provenance_refs": [
+            "runtime/current_runtime_snapshot.json",
+            "runtime/chat_provider_selection.json",
+            "roadmap_out/PSM_Full_Project_Audit_and_Execution_Roadmap_V0.248_to_V0.260.md",
+            "outputs/psm_v0/runtime/current_runtime_snapshot.json",
+            "outputs/psm_v0/runtime/current_runtime_snapshot.json"
+          ],
+          "downgrade_markers": []
+        },
+        {
+          "claim_id": "claim_4b9c1b7c6a64259ffbb1",
+          "text": "请决定是否启动外部用户试用准备，以及外部范围、数据处理/隐私要求、部署方式与预算；如要先完成已授权的 V0.256 合成契约外部 judge，还需要提供可用的外部模型 API 凭证。",
+          "strong": false,
+          "disposition": "ordinary",
+          "statement_level": "C2",
+          "matched_facts": [],
+          "provenance_refs": [],
+          "downgrade_markers": []
+        }
+      ],
+      "total_claims": 8,
+      "strong_claims": 4,
+      "supported_strong_claims": 4,
+      "downgraded_strong_claims": 0,
+      "unsupported_strong_claims": 0,
+      "strong_claim_coverage": 1.0
+    },
+    "provenance_count": 5,
+    "shadow": {
+      "model_version": "PSM_V0.257-shadow",
+      "calibration_version": "PSM_V0.258",
+      "authority": "observation_only",
+      "labels": {
+        "q_core": "collect_evidence",
+        "omega": "medium",
+        "phi": "partial",
+        "delta_sigma": "incomplete",
+        "pi": "source_check",
+        "eta": "uncertain",
+        "b_sigma": "review"
+      },
+      "confidence": {
+        "q_core": 0.99986374,
+        "omega": 0.9769119,
+        "phi": 0.99988631,
+        "delta_sigma": 0.92680587,
+        "pi": 0.99986374,
+        "eta": 0.92680587,
+        "b_sigma": 0.9769119
+      },
+      "accepted_labels": {
+        "q_core": "collect_evidence",
+        "omega": "medium",
+        "phi": "partial",
+        "delta_sigma": "incomplete",
+        "pi": "source_check",
+        "eta": "uncertain",
+        "b_sigma": "review"
+      },
+      "abstained": {
+        "q_core": false,
+        "omega": false,
+        "phi": false,
+        "delta_sigma": false,
+        "pi": false,
+        "eta": false,
+        "b_sigma": false
+      },
+      "fallback_targets": [],
+      "controller_used": "deterministic_rule",
+      "candidate_controlled_output": false,
+      "rule_replacement_allowed": false,
+      "training_feedback_written": false
+    },
+    "release_boundary": {
+      "candidate_only": true,
+      "shadow_output_authority": false,
+      "deterministic_rule_controller_retained": true,
+      "rule_replacement_allowed": false,
+      "external_user_trial_allowed": false,
+      "external_release_authority": false
+    }
+  }
+}

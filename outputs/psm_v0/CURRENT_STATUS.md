@@ -2,45 +2,45 @@
 
 ## Current Version
 
-`PSM V0.259`
+`PSM V0.260`
 
-The current project status is `psm_v0.259`. V0.259 promotes traceable Sigma+ candidate delivery while retaining `psm_v0.251` as the formal 2228-record core evidence source, V0.255 stable internal local chat, the V0.256 annotation contract, the frozen V0.257 shadow baseline, and V0.258 calibrated fail-closed abstention.
+The current project status is `psm_v0.260`. V0.260 completes the internal trial readiness review while retaining `psm_v0.251` as the formal 2228-record core evidence source and preserving all V0.255-V0.259 chat, annotation, shadow, calibration, and Sigma+ gates.
 
 ## Latest Completed Result
 
-- `/api/chat` now returns a `sigma_plus_delivery` packet with a minimal natural `user_view` and a separate developer trace.
-- The developer trace binds Q through Sigma+ state, statement audit, provenance, tool results, failures, unresolved judges, task graph, and calibrated shadow observations.
-- Strong claims require provenance or a downgrade marker already present in the visible answer. Unsupported claims fail closed before delivery and are re-audited.
-- The frozen synthetic non-private evaluation passes 15/15 cases and audits 22 strong claims with 1.0 minimum provenance-or-downgrade coverage.
-- Six cases exercise provenance; two tool failure events and 25 unresolved judges remain visible to developers.
-- Nineteen calibrated shadow targets fall back to deterministic rules. Candidate-controlled output remains 0/15.
-- Ordinary-chat internal debug leakage and external release authority are both 0.
-- Base weights and shadow training feedback remain unchanged. External user trial, privacy compliance, public service, professional authority, and rule replacement remain closed.
+- The frozen machine decision is `internal_trial_ready` for local single-user internal use only.
+- Formal core 2228/2228, independent blind semantic gate 20/20, and internal Alpha scenarios 13/13 remain passing.
+- Current project verification passes 114 tests and parses 162 Python sources.
+- Critical fact hallucinations and critical safety false negatives are both 0.
+- The selected local model remains `qwen3.5:9b`, with failure rate 0 and p95 latency 22949 ms below the 60000 ms server timeout.
+- Sigma+ delivery remains 15/15 with 22 strong claims and complete provenance-or-downgrade coverage.
+- Seventeen residual risks remain explicit: 12 open/not-built and 5 bounded/accepted only within the local internal scope.
+- The synthetic non-private V0.256 external contract review is authorized, but it has not been submitted because no external API credential is configured.
+- External users, privacy-compliance claims, public service, professional authority, shadow output control, rule replacement, and external release authority remain closed.
 
 ## Next Stage
 
-`PSM V0.260`
+`PSM V0.261`
 
-Run the internal trial readiness review:
+Define and authorize the post-internal external-validation lane:
 
-- freeze and consolidate safety, chat quality, blind-set, model-comparison, performance, failure-ledger, and residual-risk evidence;
-- verify artifact versions, timestamps, and release boundaries are mutually consistent;
-- issue only `internal_trial_ready`, `needs_more_work`, or `blocked`;
-- rerun API, desktop, mobile, and Docker evidence;
-- do not automatically open external users, privacy compliance, public service, or professional authority.
+- decide whether to prepare an external-user trial and define its participant scope;
+- define data handling, privacy, retention, and deletion requirements;
+- choose deployment mode and budget;
+- configure a usable external-model API credential if the authorized synthetic contract judge should be submitted;
+- do not upload data or open external use before those user-owned decisions are supplied.
 
-- Blocked: false.
-- Requires user input: false.
+- Blocked: true.
+- Requires user input: true.
 
 ## Recovery Artifacts
 
-- Machine status: `project_status_out/psm_v0.259_project_status.json`.
+- Machine status: `project_status_out/psm_v0.260_project_status.json`.
 - Public runtime snapshot: `runtime/current_runtime_snapshot.json`.
-- Sigma+ checkpoint: `runtime/v0_259_sigma_plus_checkpoint.json`.
-- Sigma+ gate: `runtime/v0_259_sigma_plus_gate.json`.
-- Sigma+ metrics: `runtime/v0_259_sigma_plus_metrics.json`.
-- Sigma+ frozen evaluation: `runtime/v0_259_sigma_plus_evaluation.jsonl`.
-- Sigma+ residual risks: `runtime/v0_259_sigma_plus_residual_risks.json`.
+- Internal readiness checkpoint: `runtime/v0_260_internal_readiness_checkpoint.json`.
+- Internal readiness review: `runtime/v0_260_internal_readiness_review.json`.
+- Evidence manifest: `runtime/v0_260_internal_readiness_evidence_manifest.json`.
+- Residual risks: `runtime/v0_260_internal_readiness_residual_risks.json`.
 - Current execution roadmap: `roadmap_out/PSM_Full_Project_Audit_and_Execution_Roadmap_V0.248_to_V0.260.md`.
 
 Version history is stored as independent snapshots under `status_history/`; it is never embedded recursively here.

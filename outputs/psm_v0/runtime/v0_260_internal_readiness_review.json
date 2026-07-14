@@ -1,0 +1,78 @@
+{
+  "schema_version": "psm_v0_260_internal_readiness_review_v1",
+  "version": "PSM_V0.260-candidate",
+  "passed": true,
+  "decision": "internal_trial_ready",
+  "allowed_decisions": [
+    "internal_trial_ready",
+    "needs_more_work",
+    "blocked"
+  ],
+  "checks": {
+    "contract_frozen_and_decision_enum_exact": true,
+    "status_tracks_v0_260_readiness": true,
+    "formal_core_2228_of_2228": true,
+    "formal_core_state_validation_clean": true,
+    "independent_blind_20_of_20": true,
+    "independent_blind_critical_safety_zero": true,
+    "model_selected_with_zero_failures": true,
+    "model_p95_below_server_timeout": true,
+    "internal_alpha_gate_ready": true,
+    "shadow_encoder_gate_passed": true,
+    "calibrated_shadow_gate_passed": true,
+    "sigma_plus_gate_passed": true,
+    "current_project_verification_passed": true,
+    "current_browser_real_backend_passed": true,
+    "current_docker_passed": true,
+    "current_artifact_versions_consistent": true,
+    "failure_ledger_retained": true,
+    "residual_risks_explicit": true,
+    "internal_scope_boundary_exact": true,
+    "external_user_trial_closed_everywhere": true,
+    "shadow_and_rule_replacement_authority_closed": true
+  },
+  "summary": {
+    "formal_core": "2228/2228",
+    "independent_blind": "20/20",
+    "internal_alpha_scenarios": "13/13",
+    "critical_fact_hallucinations": 0,
+    "critical_safety_false_negatives": 0,
+    "selected_model": "qwen3.5:9b",
+    "model_failure_rate": 0.0,
+    "model_p95_latency_ms": 22949,
+    "server_timeout_ms": 60000,
+    "current_tests": 114,
+    "python_sources_parsed": 162,
+    "sigma_plus_cases": 15,
+    "sigma_plus_strong_claims": 22,
+    "failure_ledger_events": 26,
+    "residual_risks": 17,
+    "open_or_not_built_risks": 12,
+    "bounded_or_accepted_risks": 5,
+    "external_contract_review_authorized": true,
+    "external_contract_review_submission_status": "ready_not_submitted_no_api_credential"
+  },
+  "scope_boundary": {
+    "scope": "local_single_user_internal",
+    "external_user_trial_allowed": false,
+    "privacy_compliance_claimed": false,
+    "public_service_allowed": false,
+    "medical_legal_trading_authority": false,
+    "shadow_output_authority": false,
+    "rule_replacement_allowed": false,
+    "external_release_authority": false
+  },
+  "optional_external_review": {
+    "authorized": true,
+    "submission_status": "ready_not_submitted_no_api_credential",
+    "required_for_local_internal_readiness": false,
+    "completed": false
+  },
+  "artifacts": {
+    "contract": "benchmarks/v0_260_internal_readiness_contract.json",
+    "evidence_manifest": "runtime/v0_260_internal_readiness_evidence_manifest.json",
+    "project_verification": "runtime/v0_260_project_verification.json",
+    "report": "runtime/v0_260_internal_readiness_report.md",
+    "residual_risks": "runtime/v0_260_internal_readiness_residual_risks.json"
+  }
+}
