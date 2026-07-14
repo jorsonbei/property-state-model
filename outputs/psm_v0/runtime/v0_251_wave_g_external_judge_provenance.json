@@ -1,0 +1,23 @@
+{
+  "provider": "Google Gemini",
+  "model": "Gemini Pro",
+  "interface": "gemini.google.com",
+  "conversation_url": "https://gemini.google.com/app/a13ed9dd2fb0a2ad",
+  "evaluated_at": "2026-07-14",
+  "user_authorized": true,
+  "external_model": true,
+  "independent_from_candidate": true,
+  "independent_from_blind_author": true,
+  "blind_author_provider": "OpenAI ChatGPT Instant",
+  "candidate_provider": "Ollama",
+  "candidate_model": "qwen3.5:9b",
+  "data_scope": "20 synthetic frozen blind-G prompts and candidate answers; no private user data",
+  "judge_label_access": false,
+  "rubric_version": "psm_external_semantic_v1",
+  "format_normalization": {
+    "original_verdict_encoding": "true/false",
+    "requested_encoding": "pass/fail",
+    "method": "same-judge follow-up reformat with all scores reasons order and judgments held fixed",
+    "original_csv": "v0_251_wave_g_external_judge_gemini_pro_original.csv"
+  }
+}

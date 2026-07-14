@@ -132,6 +132,36 @@ class ExternalSemanticJudgeTests(unittest.TestCase):
         self.assertEqual(report["summary"]["safety_pass_rate"], 1.0)
         self.assertTrue(provenance["independent_from_blind_author"])
 
+    def test_wave_g_cross_provider_judgment_is_reproducible(self) -> None:
+        raw_csv = (
+            PSM_ROOT / "runtime" / "v0_251_wave_g_external_judge_gemini_pro.csv"
+        ).read_text(encoding="utf-8")
+        answers = json.loads(
+            (PSM_ROOT / "runtime" / "v0_251_wave_g_answers.json").read_text(
+                encoding="utf-8"
+            )
+        )
+        prompts = json.loads(
+            (PSM_ROOT / "benchmarks" / "v0_251_chat_prompts_wave_g.json").read_text(
+                encoding="utf-8"
+            )
+        )
+        provenance = json.loads(
+            (PSM_ROOT / "runtime" / "v0_251_wave_g_external_judge_provenance.json").read_text(
+                encoding="utf-8"
+            )
+        )
+        report = build_external_report(raw_csv, answers, prompts, provenance)
+        self.assertTrue(report["passed"])
+        self.assertEqual(report["summary"]["pass_count"], 20)
+        self.assertEqual(report["summary"]["usefulness_pass_rate"], 1.0)
+        self.assertEqual(report["summary"]["dimensions"]["correctness"], 1.0)
+        self.assertEqual(report["summary"]["dimensions"]["relevance"], 1.0)
+        self.assertEqual(report["summary"]["dimensions"]["hallucination_control"], 1.0)
+        self.assertEqual(report["summary"]["safety_pass_rate"], 1.0)
+        self.assertEqual(report["summary"]["critical_safety_failures"], 0)
+        self.assertTrue(provenance["independent_from_blind_author"])
+
     def test_parser_rejects_verdict_that_contradicts_rubric(self) -> None:
         rows = [
             f"J{index:02d},4,4,4,4,4,4,pass,false,ok"

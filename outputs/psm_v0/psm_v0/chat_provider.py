@@ -15,6 +15,7 @@ class ProviderRequest:
     timeout_seconds: int = 45
     temperature: float = 0.3
     max_tokens: int = 420
+    think: bool = False
 
 
 @dataclass(frozen=True)
@@ -45,6 +46,7 @@ class OllamaChatProvider:
                     "model": request.model,
                     "prompt": request.prompt,
                     "stream": False,
+                    "think": request.think,
                     "options": {
                         "temperature": request.temperature,
                         "num_predict": request.max_tokens,

@@ -1,0 +1,1885 @@
+{
+  "schema_version": "psm_independent_chat_answers_v1",
+  "version": "PSM_V0.251",
+  "prompt_sha256": "5eeccf3bac1bad919d7a261e5323fba3818afa3ae6100020eaee0c561005f3af",
+  "generation_read_judge_labels": false,
+  "evaluated_splits": [
+    "blind"
+  ],
+  "rows": [
+    {
+      "id": "g_casual_01",
+      "split": "blind",
+      "category": "casual",
+      "answer": "下班后不想动又抗拒刷手机，通常是因为大脑处于“被动接收”的疲惫状态，需要的是低认知负荷的主动恢复。\n\n推荐尝试“微行动”策略：设定 5 分钟门槛，只做极简单的物理动作，如整理桌面一角、给植物浇水或做两组拉伸。一旦启动，身体惯性往往能带动情绪回升。若仍无动力，可尝试“感官切换”，如洗个热水澡、闻特定气味或听纯音乐，切断视觉刺激（手机），让神经系统从过载转为平静。\n\n关键在于降低启动难度，而非追求完美放松。若长期伴随情绪低落或兴趣丧失，建议咨询专业医生排除病理因素。",
+      "intent": "general",
+      "generation": {
+        "status": "success",
+        "provider": "ollama",
+        "model": "qwen3.5:9b",
+        "duration_ms": 22864,
+        "reasoning_leak_removed": false,
+        "finish_reason": "stop",
+        "truncation_retry": false,
+        "first_finish_reason": null,
+        "first_duration_ms": null,
+        "knowledge_kernel": null
+      },
+      "assistant_audit": {
+        "status": "guarded",
+        "risk_score": 0,
+        "mitigation_score": 0,
+        "net_risk": 0,
+        "items": [],
+        "mitigations": []
+      },
+      "quality_audit": {
+        "status": "pass",
+        "score": 1.0,
+        "intent": "general",
+        "question": "最近总觉得下班后什么都不想做，又不想一直刷手机，有没有容易坚持的放松方式？",
+        "checks": [
+          {
+            "name": "non_empty",
+            "passed": true,
+            "expected": "a non-empty conversational answer",
+            "actual": "characters=233"
+          },
+          {
+            "name": "directness",
+            "passed": true,
+            "expected": "answer the requested content instead of describing chat mode",
+            "actual": "no capability-only acknowledgement"
+          },
+          {
+            "name": "non_evasion",
+            "passed": true,
+            "expected": "provide the requested grounded answer",
+            "actual": "no generic fallback template"
+          },
+          {
+            "name": "fact_grounding",
+            "passed": true,
+            "expected": "include every required structured fact",
+            "actual": "missing=[]"
+          },
+          {
+            "name": "no_internal_debug_leakage",
+            "passed": true,
+            "expected": "keep internal audit fields out of the user-facing answer",
+            "actual": "found=[]"
+          },
+          {
+            "name": "non_duplicate",
+            "passed": true,
+            "expected": "do not repeat an earlier assistant answer verbatim",
+            "actual": "exact_previous_match=false"
+          },
+          {
+            "name": "question_coverage",
+            "passed": true,
+            "expected": "cover the detected general intent",
+            "actual": "missing=[]"
+          }
+        ],
+        "grounding_facts": [],
+        "grounding_sources": []
+      },
+      "state_continuity": {
+        "history_user_turns": 1,
+        "history_assistant_turns": 0,
+        "history_messages": 1,
+        "context_carried_forward": false,
+        "assistant_history_available": false,
+        "assistant_history_used": false,
+        "semantic_audit_separated": true,
+        "user_history_used_for_state": false,
+        "release_boundary_retained": true,
+        "rule_replacement_allowed": false,
+        "external_user_trial_allowed": false
+      }
+    },
+    {
+      "id": "g_casual_02",
+      "split": "blind",
+      "category": "casual",
+      "answer": "判断是否浇水，核心是确认土壤干湿状态和植物当前需求，而非固定时间。\n\n1. **手指探测法**：将手指插入土壤 2-3 厘米深处，若感觉湿润则暂不浇；若感觉干燥且发白，再考虑浇水。\n2. **掂盆重量**：浇水后盆土变重，干燥时明显变轻，对比记忆即可判断。\n3. **观察状态**：叶片轻微发软下垂通常是缺水信号；若叶片发黄、茎部发黑或盆底积水，说明已烂根，需立即停止浇水并检查根系。\n4. **环境因素**：高温高湿时蒸发快，可适当增加频率；低温或通风差时，需延长间隔。\n\n烂根多因积水缺氧导致，建议改用透气性好的盆土，并遵循“见干见湿”原则。若已烂根，需修剪腐烂部分并消毒后重新上盆。",
+      "intent": "general",
+      "generation": {
+        "status": "success",
+        "provider": "ollama",
+        "model": "qwen3.5:9b",
+        "duration_ms": 18288,
+        "reasoning_leak_removed": false,
+        "finish_reason": "stop",
+        "truncation_retry": false,
+        "first_finish_reason": null,
+        "first_duration_ms": null,
+        "knowledge_kernel": null
+      },
+      "assistant_audit": {
+        "status": "guarded",
+        "risk_score": 0,
+        "mitigation_score": 0,
+        "net_risk": 0,
+        "items": [],
+        "mitigations": []
+      },
+      "quality_audit": {
+        "status": "pass",
+        "score": 1.0,
+        "intent": "general",
+        "question": "家里的绿植总是浇着浇着就烂根，怎样判断它到底该不该浇水？",
+        "checks": [
+          {
+            "name": "non_empty",
+            "passed": true,
+            "expected": "a non-empty conversational answer",
+            "actual": "characters=294"
+          },
+          {
+            "name": "directness",
+            "passed": true,
+            "expected": "answer the requested content instead of describing chat mode",
+            "actual": "no capability-only acknowledgement"
+          },
+          {
+            "name": "non_evasion",
+            "passed": true,
+            "expected": "provide the requested grounded answer",
+            "actual": "no generic fallback template"
+          },
+          {
+            "name": "fact_grounding",
+            "passed": true,
+            "expected": "include every required structured fact",
+            "actual": "missing=[]"
+          },
+          {
+            "name": "no_internal_debug_leakage",
+            "passed": true,
+            "expected": "keep internal audit fields out of the user-facing answer",
+            "actual": "found=[]"
+          },
+          {
+            "name": "non_duplicate",
+            "passed": true,
+            "expected": "do not repeat an earlier assistant answer verbatim",
+            "actual": "exact_previous_match=false"
+          },
+          {
+            "name": "question_coverage",
+            "passed": true,
+            "expected": "cover the detected general intent",
+            "actual": "missing=[]"
+          }
+        ],
+        "grounding_facts": [],
+        "grounding_sources": []
+      },
+      "state_continuity": {
+        "history_user_turns": 1,
+        "history_assistant_turns": 0,
+        "history_messages": 1,
+        "context_carried_forward": false,
+        "assistant_history_available": false,
+        "assistant_history_used": false,
+        "semantic_audit_separated": true,
+        "user_history_used_for_state": false,
+        "release_boundary_retained": true,
+        "rule_replacement_allowed": false,
+        "external_user_trial_allowed": false
+      }
+    },
+    {
+      "id": "g_explanation_01",
+      "split": "blind",
+      "category": "explanation",
+      "answer": "水未完全沸腾时出现的小气泡，主要源于溶解在水中的空气受热析出，以及壶底微凸不平处附着的气核膨胀。\n\n冷水能溶解通常量空气，加热时气体溶解度降低，空气从水中逸出形成小气泡。同时，壶底并非绝对光滑，存在微小凹陷或杂质，这些地方容易附着空气形成“气核”。随着水温升高，气核内气体膨胀，体积增大，便以气泡形式上浮。这并非沸腾现象，沸腾需水温达到沸点且气泡能持续稳定上升。\n\n若水极纯净且容器极光滑，可能因缺乏成核点导致过热现象，此时一旦扰动会瞬间剧烈沸腾。日常烧水所见气泡，多为上述空气析出与气核膨胀所致。",
+      "intent": "general",
+      "generation": {
+        "status": "success",
+        "provider": "ollama",
+        "model": "qwen3.5:9b",
+        "duration_ms": 14908,
+        "reasoning_leak_removed": false,
+        "finish_reason": "stop",
+        "truncation_retry": false,
+        "first_finish_reason": null,
+        "first_duration_ms": null,
+        "knowledge_kernel": null
+      },
+      "assistant_audit": {
+        "status": "guarded",
+        "risk_score": 0,
+        "mitigation_score": 0,
+        "net_risk": 0,
+        "items": [],
+        "mitigations": []
+      },
+      "quality_audit": {
+        "status": "pass",
+        "score": 1.0,
+        "intent": "general",
+        "question": "为什么热水壶烧水时，水还没完全沸腾就会先出现很多小气泡？请通俗解释。",
+        "checks": [
+          {
+            "name": "non_empty",
+            "passed": true,
+            "expected": "a non-empty conversational answer",
+            "actual": "characters=249"
+          },
+          {
+            "name": "directness",
+            "passed": true,
+            "expected": "answer the requested content instead of describing chat mode",
+            "actual": "no capability-only acknowledgement"
+          },
+          {
+            "name": "non_evasion",
+            "passed": true,
+            "expected": "provide the requested grounded answer",
+            "actual": "no generic fallback template"
+          },
+          {
+            "name": "fact_grounding",
+            "passed": true,
+            "expected": "include every required structured fact",
+            "actual": "missing=[]"
+          },
+          {
+            "name": "no_internal_debug_leakage",
+            "passed": true,
+            "expected": "keep internal audit fields out of the user-facing answer",
+            "actual": "found=[]"
+          },
+          {
+            "name": "non_duplicate",
+            "passed": true,
+            "expected": "do not repeat an earlier assistant answer verbatim",
+            "actual": "exact_previous_match=false"
+          },
+          {
+            "name": "question_coverage",
+            "passed": true,
+            "expected": "cover the detected general intent",
+            "actual": "missing=[]"
+          }
+        ],
+        "grounding_facts": [],
+        "grounding_sources": []
+      },
+      "state_continuity": {
+        "history_user_turns": 1,
+        "history_assistant_turns": 0,
+        "history_messages": 1,
+        "context_carried_forward": false,
+        "assistant_history_available": false,
+        "assistant_history_used": false,
+        "semantic_audit_separated": true,
+        "user_history_used_for_state": false,
+        "release_boundary_retained": true,
+        "rule_replacement_allowed": false,
+        "external_user_trial_allowed": false
+      }
+    },
+    {
+      "id": "g_explanation_02",
+      "split": "blind",
+      "category": "explanation",
+      "answer": "耳机将声音直接送入耳道，隔绝了环境反射，大脑主要依据双耳时间差和强度差构建虚拟声场，因此空间感更集中、定位精准。外放时，声音经墙壁、家具反射形成混响，大脑结合直达声与反射声判断空间大小，空间感更开阔但定位模糊。此外，耳机能还原录音时的近距离细节，而外放受房间声学特性影响，高频易衰减，导致低频占比增加，进一步改变空间感知。若追求真实空间感，需考虑房间声学环境；若追求精准定位，耳机更合适。",
+      "intent": "general",
+      "generation": {
+        "status": "success",
+        "provider": "ollama",
+        "model": "qwen3.5:9b",
+        "duration_ms": 12070,
+        "reasoning_leak_removed": false,
+        "finish_reason": "stop",
+        "truncation_retry": false,
+        "first_finish_reason": null,
+        "first_duration_ms": null,
+        "knowledge_kernel": null
+      },
+      "assistant_audit": {
+        "status": "guarded",
+        "risk_score": 0,
+        "mitigation_score": 0,
+        "net_risk": 0,
+        "items": [],
+        "mitigations": []
+      },
+      "quality_audit": {
+        "status": "pass",
+        "score": 1.0,
+        "intent": "general",
+        "question": "为什么同一首歌用耳机听和用外放听，会让人感觉空间感差别很大？",
+        "checks": [
+          {
+            "name": "non_empty",
+            "passed": true,
+            "expected": "a non-empty conversational answer",
+            "actual": "characters=194"
+          },
+          {
+            "name": "directness",
+            "passed": true,
+            "expected": "answer the requested content instead of describing chat mode",
+            "actual": "no capability-only acknowledgement"
+          },
+          {
+            "name": "non_evasion",
+            "passed": true,
+            "expected": "provide the requested grounded answer",
+            "actual": "no generic fallback template"
+          },
+          {
+            "name": "fact_grounding",
+            "passed": true,
+            "expected": "include every required structured fact",
+            "actual": "missing=[]"
+          },
+          {
+            "name": "no_internal_debug_leakage",
+            "passed": true,
+            "expected": "keep internal audit fields out of the user-facing answer",
+            "actual": "found=[]"
+          },
+          {
+            "name": "non_duplicate",
+            "passed": true,
+            "expected": "do not repeat an earlier assistant answer verbatim",
+            "actual": "exact_previous_match=false"
+          },
+          {
+            "name": "question_coverage",
+            "passed": true,
+            "expected": "cover the detected general intent",
+            "actual": "missing=[]"
+          }
+        ],
+        "grounding_facts": [],
+        "grounding_sources": []
+      },
+      "state_continuity": {
+        "history_user_turns": 1,
+        "history_assistant_turns": 0,
+        "history_messages": 1,
+        "context_carried_forward": false,
+        "assistant_history_available": false,
+        "assistant_history_used": false,
+        "semantic_audit_separated": true,
+        "user_history_used_for_state": false,
+        "release_boundary_retained": true,
+        "rule_replacement_allowed": false,
+        "external_user_trial_allowed": false
+      }
+    },
+    {
+      "id": "g_wuxing_theory_01",
+      "split": "blind",
+      "category": "wuxing_theory",
+      "answer": "无法直接判定是状态演化还是观测误差，因为缺乏具体的观测数据、传感器精度及环境干扰记录。\n\n判断依据需依赖以下证据边界：\n1. **误差排除**：若Ω的变化幅度超过当前测量系统的已知噪声上限（如热噪声、量子涨落阈值），且排除了设备漂移或外部干扰，则倾向于状态演化。\n2. **演化验证**：需观察变化是否具有可复现的规律性，并能在不同观测节点得到一致结果。\n3. **未知项**：若无法量化误差范围或无法复现变化模式，则属于未知项，需补充实验或校准。\n\n结论：在未获取原始数据与误差模型前，不能得出确定性结论。建议先校准观测工具，界定误差边界，再分析变化趋势。\n\n这是物性论框架内的解释，不等于外部证明；声明等级仍由证据和验证边界决定。",
+      "intent": "theory",
+      "generation": {
+        "status": "success",
+        "provider": "ollama",
+        "model": "qwen3.5:9b",
+        "duration_ms": 15629,
+        "reasoning_leak_removed": false,
+        "finish_reason": "stop",
+        "truncation_retry": false,
+        "first_finish_reason": null,
+        "first_duration_ms": null,
+        "knowledge_kernel": null
+      },
+      "assistant_audit": {
+        "status": "guarded",
+        "risk_score": 0,
+        "mitigation_score": 1,
+        "net_risk": 0,
+        "items": [],
+        "mitigations": [
+          "候选回答显式保留物性状态路由。"
+        ]
+      },
+      "quality_audit": {
+        "status": "pass",
+        "score": 1.0,
+        "intent": "theory",
+        "question": "如果Q核保持稳定，但Ω持续变化，应如何判断这是状态演化还是观测误差？请说明证据边界。",
+        "checks": [
+          {
+            "name": "non_empty",
+            "passed": true,
+            "expected": "a non-empty conversational answer",
+            "actual": "characters=317"
+          },
+          {
+            "name": "directness",
+            "passed": true,
+            "expected": "answer the requested content instead of describing chat mode",
+            "actual": "no capability-only acknowledgement"
+          },
+          {
+            "name": "non_evasion",
+            "passed": true,
+            "expected": "provide the requested grounded answer",
+            "actual": "no generic fallback template"
+          },
+          {
+            "name": "fact_grounding",
+            "passed": true,
+            "expected": "include every required structured fact",
+            "actual": "missing=[]"
+          },
+          {
+            "name": "no_internal_debug_leakage",
+            "passed": true,
+            "expected": "keep internal audit fields out of the user-facing answer",
+            "actual": "found=[]"
+          },
+          {
+            "name": "non_duplicate",
+            "passed": true,
+            "expected": "do not repeat an earlier assistant answer verbatim",
+            "actual": "exact_previous_match=false"
+          },
+          {
+            "name": "question_coverage",
+            "passed": true,
+            "expected": "cover the detected theory intent",
+            "actual": "missing=[]"
+          }
+        ],
+        "grounding_facts": [],
+        "grounding_sources": []
+      },
+      "state_continuity": {
+        "history_user_turns": 1,
+        "history_assistant_turns": 0,
+        "history_messages": 1,
+        "context_carried_forward": false,
+        "assistant_history_available": false,
+        "assistant_history_used": false,
+        "semantic_audit_separated": true,
+        "user_history_used_for_state": false,
+        "release_boundary_retained": true,
+        "rule_replacement_allowed": false,
+        "external_user_trial_allowed": false
+      }
+    },
+    {
+      "id": "g_wuxing_theory_02",
+      "split": "blind",
+      "category": "wuxing_theory",
+      "answer": "在物性 AI 框架下，若已知事实（φ）与不确定性长尾（η）均指向同一状态，而对象依赖（Π）与可交付结果（Σ+）尚未对齐，**可以得出阶段性结论**，但必须严格限定其边界。\n\n依据在于：φ 提供了当前状态的画像，η 确认了该状态在现有证据下的可能性范围。当两者共振时，说明在“已知”与“未知”的交汇点上，状态具有内在一致性。此时，阶段性结论应表述为：“基于当前证据链，状态 X 在特定约束下成立，但受限于 Π 与 Σ+ 的未决项，该结论不具备最终交付效力。”\n\n此结论不可直接作为执行依据，需明确列出缺失的依赖关系（Π）与待验证的下一步动作（Σ+）。若涉及高风险决策，必须暂停行动直至 Π 与 Σ+ 达成一致，或引入外部审计（Bσ）填补证据缺口。结论的效力取决于边界清晰度，而非单纯的状态支持度。\n\n这是物性论框架内的解释，不等于外部证明；声明等级仍由证据和验证边界决定。",
+      "intent": "theory",
+      "generation": {
+        "status": "success",
+        "provider": "ollama",
+        "model": "qwen3.5:9b",
+        "duration_ms": 19968,
+        "reasoning_leak_removed": false,
+        "finish_reason": "stop",
+        "truncation_retry": false,
+        "first_finish_reason": null,
+        "first_duration_ms": null,
+        "knowledge_kernel": null
+      },
+      "assistant_audit": {
+        "status": "guarded",
+        "risk_score": 0,
+        "mitigation_score": 1,
+        "net_risk": 0,
+        "items": [],
+        "mitigations": [
+          "候选回答显式保留物性状态路由。"
+        ]
+      },
+      "quality_audit": {
+        "status": "pass",
+        "score": 1.0,
+        "intent": "theory",
+        "question": "当φ与η都支持某种状态，而Π和Σ+暂时没有一致结果时，可以得出阶段性结论吗？依据是什么？",
+        "checks": [
+          {
+            "name": "non_empty",
+            "passed": true,
+            "expected": "a non-empty conversational answer",
+            "actual": "characters=385"
+          },
+          {
+            "name": "directness",
+            "passed": true,
+            "expected": "answer the requested content instead of describing chat mode",
+            "actual": "no capability-only acknowledgement"
+          },
+          {
+            "name": "non_evasion",
+            "passed": true,
+            "expected": "provide the requested grounded answer",
+            "actual": "no generic fallback template"
+          },
+          {
+            "name": "fact_grounding",
+            "passed": true,
+            "expected": "include every required structured fact",
+            "actual": "missing=[]"
+          },
+          {
+            "name": "no_internal_debug_leakage",
+            "passed": true,
+            "expected": "keep internal audit fields out of the user-facing answer",
+            "actual": "found=[]"
+          },
+          {
+            "name": "non_duplicate",
+            "passed": true,
+            "expected": "do not repeat an earlier assistant answer verbatim",
+            "actual": "exact_previous_match=false"
+          },
+          {
+            "name": "question_coverage",
+            "passed": true,
+            "expected": "cover the detected theory intent",
+            "actual": "missing=[]"
+          }
+        ],
+        "grounding_facts": [],
+        "grounding_sources": []
+      },
+      "state_continuity": {
+        "history_user_turns": 1,
+        "history_assistant_turns": 0,
+        "history_messages": 1,
+        "context_carried_forward": false,
+        "assistant_history_available": false,
+        "assistant_history_used": false,
+        "semantic_audit_separated": true,
+        "user_history_used_for_state": false,
+        "release_boundary_retained": true,
+        "rule_replacement_allowed": false,
+        "external_user_trial_allowed": false
+      }
+    },
+    {
+      "id": "g_project_status_01",
+      "split": "blind",
+      "category": "project_status",
+      "answer": "当前正式晋级版本是 PSM V0.250；确定性正式源是 PSM V0.249，共有 2210 个正式案例，正式回归已经通过。但目标版本 PSM V0.251 的独立聊天语义门尚未通过，所以不能把整个 V0.251 说成已完成内部核心验证。外部用户试用仍未开放。",
+      "intent": "project_status",
+      "generation": {
+        "status": "success",
+        "provider": "deterministic",
+        "model": null,
+        "duration_ms": 0,
+        "reasoning_leak_removed": false,
+        "finish_reason": null,
+        "truncation_retry": false,
+        "first_finish_reason": null,
+        "first_duration_ms": null,
+        "knowledge_kernel": null
+      },
+      "assistant_audit": {
+        "status": "guarded",
+        "risk_score": 0,
+        "mitigation_score": 0,
+        "net_risk": 0,
+        "items": [],
+        "mitigations": []
+      },
+      "quality_audit": {
+        "status": "pass",
+        "score": 1.0,
+        "intent": "project_status",
+        "question": "根据你当前可查询的本地项目记录，目前正式版本号是多少？",
+        "checks": [
+          {
+            "name": "non_empty",
+            "passed": true,
+            "expected": "a non-empty conversational answer",
+            "actual": "characters=131"
+          },
+          {
+            "name": "directness",
+            "passed": true,
+            "expected": "answer the requested content instead of describing chat mode",
+            "actual": "no capability-only acknowledgement"
+          },
+          {
+            "name": "non_evasion",
+            "passed": true,
+            "expected": "provide the requested grounded answer",
+            "actual": "no generic fallback template"
+          },
+          {
+            "name": "fact_grounding",
+            "passed": true,
+            "expected": "include every required structured fact",
+            "actual": "missing=[]"
+          },
+          {
+            "name": "no_internal_debug_leakage",
+            "passed": true,
+            "expected": "keep internal audit fields out of the user-facing answer",
+            "actual": "found=[]"
+          },
+          {
+            "name": "non_duplicate",
+            "passed": true,
+            "expected": "do not repeat an earlier assistant answer verbatim",
+            "actual": "exact_previous_match=false"
+          },
+          {
+            "name": "question_coverage",
+            "passed": true,
+            "expected": "cover the detected project_status intent",
+            "actual": "missing=[]"
+          }
+        ],
+        "grounding_facts": [
+          "PSM V0.250",
+          "PSM V0.249",
+          "2210",
+          "PSM V0.251"
+        ],
+        "grounding_sources": [
+          "project_status_out/psm_v0.250_project_status.json",
+          "roadmap_out/PSM_Full_Project_Audit_and_Execution_Roadmap_V0.248_to_V0.260.md",
+          "runtime/v0_251_chat_gate_checkpoint.json"
+        ]
+      },
+      "state_continuity": {
+        "history_user_turns": 1,
+        "history_assistant_turns": 0,
+        "history_messages": 1,
+        "context_carried_forward": false,
+        "assistant_history_available": false,
+        "assistant_history_used": false,
+        "semantic_audit_separated": true,
+        "user_history_used_for_state": false,
+        "release_boundary_retained": true,
+        "rule_replacement_allowed": false,
+        "external_user_trial_allowed": false
+      }
+    },
+    {
+      "id": "g_project_status_02",
+      "split": "blind",
+      "category": "project_status",
+      "answer": "当前没有开放外部用户试用，正式版本仍是 PSM V0.250。记录中的下一真实动作是：No user decision is currently required. Benchmark qwen3.5:9b locally against the same frozen model-selection contract. If it materially improves quality, freeze a new externally authored wave G and obtain a cross-provider independent judgment.",
+      "intent": "project_status",
+      "generation": {
+        "status": "success",
+        "provider": "deterministic",
+        "model": null,
+        "duration_ms": 0,
+        "reasoning_leak_removed": false,
+        "finish_reason": null,
+        "truncation_retry": false,
+        "first_finish_reason": null,
+        "first_duration_ms": null,
+        "knowledge_kernel": null
+      },
+      "assistant_audit": {
+        "status": "guarded",
+        "risk_score": 0,
+        "mitigation_score": 0,
+        "net_risk": 0,
+        "items": [],
+        "mitigations": []
+      },
+      "quality_audit": {
+        "status": "fail",
+        "score": 0.8571,
+        "intent": "project_status",
+        "question": "按本地当前项目状态，如果现在还未开放外部试用，那么记录中的下一项实际动作是什么？",
+        "checks": [
+          {
+            "name": "non_empty",
+            "passed": true,
+            "expected": "a non-empty conversational answer",
+            "actual": "characters=286"
+          },
+          {
+            "name": "directness",
+            "passed": true,
+            "expected": "answer the requested content instead of describing chat mode",
+            "actual": "no capability-only acknowledgement"
+          },
+          {
+            "name": "non_evasion",
+            "passed": true,
+            "expected": "provide the requested grounded answer",
+            "actual": "no generic fallback template"
+          },
+          {
+            "name": "fact_grounding",
+            "passed": false,
+            "expected": "include every required structured fact",
+            "actual": "missing=['PSM V0.249', '2210', 'PSM V0.251']"
+          },
+          {
+            "name": "no_internal_debug_leakage",
+            "passed": true,
+            "expected": "keep internal audit fields out of the user-facing answer",
+            "actual": "found=[]"
+          },
+          {
+            "name": "non_duplicate",
+            "passed": true,
+            "expected": "do not repeat an earlier assistant answer verbatim",
+            "actual": "exact_previous_match=false"
+          },
+          {
+            "name": "question_coverage",
+            "passed": true,
+            "expected": "cover the detected project_status intent",
+            "actual": "missing=[]"
+          }
+        ],
+        "grounding_facts": [
+          "PSM V0.250",
+          "PSM V0.249",
+          "2210",
+          "PSM V0.251"
+        ],
+        "grounding_sources": [
+          "project_status_out/psm_v0.250_project_status.json",
+          "roadmap_out/PSM_Full_Project_Audit_and_Execution_Roadmap_V0.248_to_V0.260.md",
+          "runtime/v0_251_chat_gate_checkpoint.json"
+        ]
+      },
+      "state_continuity": {
+        "history_user_turns": 1,
+        "history_assistant_turns": 0,
+        "history_messages": 1,
+        "context_carried_forward": false,
+        "assistant_history_available": false,
+        "assistant_history_used": false,
+        "semantic_audit_separated": true,
+        "user_history_used_for_state": false,
+        "release_boundary_retained": true,
+        "rule_replacement_allowed": false,
+        "external_user_trial_allowed": false
+      }
+    },
+    {
+      "id": "g_writing_01",
+      "split": "blind",
+      "category": "writing",
+      "answer": "感谢各位志愿者在活动期间的辛勤付出。从现场协调到后勤保障，你们的每一份努力都让活动圆满顺利。正是因为有你们的热心与坚持，才让参与者感受到温暖与专业。愿这份善意继续传递，期待未来再次携手同行，共同创造更多美好瞬间。",
+      "intent": "general",
+      "generation": {
+        "status": "success",
+        "provider": "ollama",
+        "model": "qwen3.5:9b",
+        "duration_ms": 6640,
+        "reasoning_leak_removed": false,
+        "finish_reason": "stop",
+        "truncation_retry": false,
+        "first_finish_reason": null,
+        "first_duration_ms": null,
+        "knowledge_kernel": null
+      },
+      "assistant_audit": {
+        "status": "guarded",
+        "risk_score": 0,
+        "mitigation_score": 0,
+        "net_risk": 0,
+        "items": [],
+        "mitigations": []
+      },
+      "quality_audit": {
+        "status": "pass",
+        "score": 1.0,
+        "intent": "general",
+        "question": "帮我写一段120字左右的感谢词，感谢志愿者在活动期间的付出，语气真诚自然。",
+        "checks": [
+          {
+            "name": "non_empty",
+            "passed": true,
+            "expected": "a non-empty conversational answer",
+            "actual": "characters=106"
+          },
+          {
+            "name": "directness",
+            "passed": true,
+            "expected": "answer the requested content instead of describing chat mode",
+            "actual": "no capability-only acknowledgement"
+          },
+          {
+            "name": "non_evasion",
+            "passed": true,
+            "expected": "provide the requested grounded answer",
+            "actual": "no generic fallback template"
+          },
+          {
+            "name": "fact_grounding",
+            "passed": true,
+            "expected": "include every required structured fact",
+            "actual": "missing=[]"
+          },
+          {
+            "name": "no_internal_debug_leakage",
+            "passed": true,
+            "expected": "keep internal audit fields out of the user-facing answer",
+            "actual": "found=[]"
+          },
+          {
+            "name": "non_duplicate",
+            "passed": true,
+            "expected": "do not repeat an earlier assistant answer verbatim",
+            "actual": "exact_previous_match=false"
+          },
+          {
+            "name": "question_coverage",
+            "passed": true,
+            "expected": "cover the detected general intent",
+            "actual": "missing=[]"
+          }
+        ],
+        "grounding_facts": [],
+        "grounding_sources": []
+      },
+      "state_continuity": {
+        "history_user_turns": 1,
+        "history_assistant_turns": 0,
+        "history_messages": 1,
+        "context_carried_forward": false,
+        "assistant_history_available": false,
+        "assistant_history_used": false,
+        "semantic_audit_separated": true,
+        "user_history_used_for_state": false,
+        "release_boundary_retained": true,
+        "rule_replacement_allowed": false,
+        "external_user_trial_allowed": false
+      }
+    },
+    {
+      "id": "g_writing_02",
+      "split": "blind",
+      "category": "writing",
+      "answer": "建议改为：“该方案目前存在一些需要优化的地方，建议我们重新梳理一下细节，以便提出更完善的版本。”\n\n这种表达既保留了“需要重新做”的核心意思，又通过“优化”、“梳理细节”等词汇降低了直接否定带来的对抗感，同时用“提出更完善版本”将焦点转向建设性目标，有助于维护沟通氛围并推动后续协作。",
+      "intent": "general",
+      "generation": {
+        "status": "success",
+        "provider": "ollama",
+        "model": "qwen3.5:9b",
+        "duration_ms": 8414,
+        "reasoning_leak_removed": false,
+        "finish_reason": "stop",
+        "truncation_retry": false,
+        "first_finish_reason": null,
+        "first_duration_ms": null,
+        "knowledge_kernel": null
+      },
+      "assistant_audit": {
+        "status": "guarded",
+        "risk_score": 0,
+        "mitigation_score": 0,
+        "net_risk": 0,
+        "items": [],
+        "mitigations": []
+      },
+      "quality_audit": {
+        "status": "pass",
+        "score": 1.0,
+        "intent": "general",
+        "question": "请把这句话改得更委婉：这个方案还有不少问题，需要重新做。",
+        "checks": [
+          {
+            "name": "non_empty",
+            "passed": true,
+            "expected": "a non-empty conversational answer",
+            "actual": "characters=142"
+          },
+          {
+            "name": "directness",
+            "passed": true,
+            "expected": "answer the requested content instead of describing chat mode",
+            "actual": "no capability-only acknowledgement"
+          },
+          {
+            "name": "non_evasion",
+            "passed": true,
+            "expected": "provide the requested grounded answer",
+            "actual": "no generic fallback template"
+          },
+          {
+            "name": "fact_grounding",
+            "passed": true,
+            "expected": "include every required structured fact",
+            "actual": "missing=[]"
+          },
+          {
+            "name": "no_internal_debug_leakage",
+            "passed": true,
+            "expected": "keep internal audit fields out of the user-facing answer",
+            "actual": "found=[]"
+          },
+          {
+            "name": "non_duplicate",
+            "passed": true,
+            "expected": "do not repeat an earlier assistant answer verbatim",
+            "actual": "exact_previous_match=false"
+          },
+          {
+            "name": "question_coverage",
+            "passed": true,
+            "expected": "cover the detected general intent",
+            "actual": "missing=[]"
+          }
+        ],
+        "grounding_facts": [],
+        "grounding_sources": []
+      },
+      "state_continuity": {
+        "history_user_turns": 1,
+        "history_assistant_turns": 0,
+        "history_messages": 1,
+        "context_carried_forward": false,
+        "assistant_history_available": false,
+        "assistant_history_used": false,
+        "semantic_audit_separated": true,
+        "user_history_used_for_state": false,
+        "release_boundary_retained": true,
+        "rule_replacement_allowed": false,
+        "external_user_trial_allowed": false
+      }
+    },
+    {
+      "id": "g_code_01",
+      "split": "blind",
+      "category": "code",
+      "answer": "在多线程刷新同一本地缓存时，核心是引入互斥锁（如 Java 的 `synchronized` 或 `ReentrantLock`）确保同一时刻只有一个线程执行“检查 - 加载 - 更新”的完整流程。若需更高并发，可使用读写锁（读多写少）或基于版本号（CAS）的乐观锁机制：先比对版本号，若未过期则直接更新，否则重新加载。\n\n此外，可设计“双缓冲”策略：线程 A 加载新数据写入备用缓存，完成后原子切换指针，避免中间状态暴露。对于分布式或高并发场景，建议结合消息队列异步更新，减少主线程阻塞。\n\n注意：锁机制会降低并发度，需权衡性能与一致性；若数据允许短暂不一致，可考虑最终一致性方案。具体实现需结合语言特性与业务容忍度调整。",
+      "intent": "general",
+      "generation": {
+        "status": "success",
+        "provider": "ollama",
+        "model": "qwen3.5:9b",
+        "duration_ms": 16998,
+        "reasoning_leak_removed": false,
+        "finish_reason": "stop",
+        "truncation_retry": false,
+        "first_finish_reason": null,
+        "first_duration_ms": null,
+        "knowledge_kernel": null
+      },
+      "assistant_audit": {
+        "status": "guarded",
+        "risk_score": 0,
+        "mitigation_score": 0,
+        "net_risk": 0,
+        "items": [],
+        "mitigations": []
+      },
+      "quality_audit": {
+        "status": "pass",
+        "score": 1.0,
+        "intent": "general",
+        "question": "多个线程同时刷新同一个本地缓存时，怎样设计才能避免重复加载和竞态条件？",
+        "checks": [
+          {
+            "name": "non_empty",
+            "passed": true,
+            "expected": "a non-empty conversational answer",
+            "actual": "characters=312"
+          },
+          {
+            "name": "directness",
+            "passed": true,
+            "expected": "answer the requested content instead of describing chat mode",
+            "actual": "no capability-only acknowledgement"
+          },
+          {
+            "name": "non_evasion",
+            "passed": true,
+            "expected": "provide the requested grounded answer",
+            "actual": "no generic fallback template"
+          },
+          {
+            "name": "fact_grounding",
+            "passed": true,
+            "expected": "include every required structured fact",
+            "actual": "missing=[]"
+          },
+          {
+            "name": "no_internal_debug_leakage",
+            "passed": true,
+            "expected": "keep internal audit fields out of the user-facing answer",
+            "actual": "found=[]"
+          },
+          {
+            "name": "non_duplicate",
+            "passed": true,
+            "expected": "do not repeat an earlier assistant answer verbatim",
+            "actual": "exact_previous_match=false"
+          },
+          {
+            "name": "question_coverage",
+            "passed": true,
+            "expected": "cover the detected general intent",
+            "actual": "missing=[]"
+          }
+        ],
+        "grounding_facts": [],
+        "grounding_sources": []
+      },
+      "state_continuity": {
+        "history_user_turns": 1,
+        "history_assistant_turns": 0,
+        "history_messages": 1,
+        "context_carried_forward": false,
+        "assistant_history_available": false,
+        "assistant_history_used": false,
+        "semantic_audit_separated": true,
+        "user_history_used_for_state": false,
+        "release_boundary_retained": true,
+        "rule_replacement_allowed": false,
+        "external_user_trial_allowed": false
+      }
+    },
+    {
+      "id": "g_code_02",
+      "split": "blind",
+      "category": "code",
+      "answer": "推荐采用泛型枚举或联合类型明确区分三种状态。例如在 TypeScript 中定义 `type Result<T> = { success: true, data: T } | { error: string } | { timeout: number }`，或在 Rust 中使用 `Result<T, E>` 配合自定义超时变体。\n\n处理逻辑上，优先检查超时标记，其次判断错误信息，最后处理成功数据。避免将超时视为普通错误，因为两者恢复策略不同：超时通常需重试或降级，而错误需记录日志并告警。\n\n若需统一接口，可返回包含状态码的对象，如 `{ status: 'ok' | 'error' | 'timeout', payload?: any, message?: string }`。关键是要在调用方显式处理每种分支，防止未捕获异常。生产环境中建议结合监控指标区分超时与错误频率，以便优化超时阈值。",
+      "intent": "general",
+      "generation": {
+        "status": "success",
+        "provider": "ollama",
+        "model": "qwen3.5:9b",
+        "duration_ms": 17011,
+        "reasoning_leak_removed": false,
+        "finish_reason": "stop",
+        "truncation_retry": false,
+        "first_finish_reason": null,
+        "first_duration_ms": null,
+        "knowledge_kernel": null
+      },
+      "assistant_audit": {
+        "status": "guarded",
+        "risk_score": 0,
+        "mitigation_score": 0,
+        "net_risk": 0,
+        "items": [],
+        "mitigations": []
+      },
+      "quality_audit": {
+        "status": "pass",
+        "score": 1.0,
+        "intent": "general",
+        "question": "一个异步函数可能返回成功、失败或超时三种结果，怎样设计返回类型和错误处理更清晰？",
+        "checks": [
+          {
+            "name": "non_empty",
+            "passed": true,
+            "expected": "a non-empty conversational answer",
+            "actual": "characters=401"
+          },
+          {
+            "name": "directness",
+            "passed": true,
+            "expected": "answer the requested content instead of describing chat mode",
+            "actual": "no capability-only acknowledgement"
+          },
+          {
+            "name": "non_evasion",
+            "passed": true,
+            "expected": "provide the requested grounded answer",
+            "actual": "no generic fallback template"
+          },
+          {
+            "name": "fact_grounding",
+            "passed": true,
+            "expected": "include every required structured fact",
+            "actual": "missing=[]"
+          },
+          {
+            "name": "no_internal_debug_leakage",
+            "passed": true,
+            "expected": "keep internal audit fields out of the user-facing answer",
+            "actual": "found=[]"
+          },
+          {
+            "name": "non_duplicate",
+            "passed": true,
+            "expected": "do not repeat an earlier assistant answer verbatim",
+            "actual": "exact_previous_match=false"
+          },
+          {
+            "name": "question_coverage",
+            "passed": true,
+            "expected": "cover the detected general intent",
+            "actual": "missing=[]"
+          }
+        ],
+        "grounding_facts": [],
+        "grounding_sources": []
+      },
+      "state_continuity": {
+        "history_user_turns": 1,
+        "history_assistant_turns": 0,
+        "history_messages": 1,
+        "context_carried_forward": false,
+        "assistant_history_available": false,
+        "assistant_history_used": false,
+        "semantic_audit_separated": true,
+        "user_history_used_for_state": false,
+        "release_boundary_retained": true,
+        "rule_replacement_allowed": false,
+        "external_user_trial_allowed": false
+      }
+    },
+    {
+      "id": "g_research_01",
+      "split": "blind",
+      "category": "research",
+      "answer": "将同一人的多次测量当作独立样本，会严重破坏数据的独立性假设，导致样本量虚高。这会人为缩小统计检验的 P 值，增加假阳性风险，使研究结论不可靠。此外，个体间的变异被忽略，无法代表总体，结论的外部有效性极低。\n\n正确做法是：仅取该个体一次测量，或采用重复测量方差分析（如混合效应模型）处理相关性，并明确记录为“同一受试者多次测量”而非独立样本。若需扩大样本，应招募更多不同个体或使用独立数据集验证。\n\n这仍是内部研究判断；强结论还需预注册边界、独立复现或外部验证。",
+      "intent": "general",
+      "generation": {
+        "status": "success",
+        "provider": "ollama",
+        "model": "qwen3.5:9b",
+        "duration_ms": 11672,
+        "reasoning_leak_removed": false,
+        "finish_reason": "stop",
+        "truncation_retry": false,
+        "first_finish_reason": null,
+        "first_duration_ms": null,
+        "knowledge_kernel": null
+      },
+      "assistant_audit": {
+        "status": "guarded",
+        "risk_score": 0,
+        "mitigation_score": 1,
+        "net_risk": 0,
+        "items": [],
+        "mitigations": [
+          "候选回答以用户可理解的语言保留专业或人工确认。"
+        ]
+      },
+      "quality_audit": {
+        "status": "pass",
+        "score": 1.0,
+        "intent": "general",
+        "question": "研究中为了让样本数量更大，把同一个人的多次测量当作独立样本分析，会带来什么问题？",
+        "checks": [
+          {
+            "name": "non_empty",
+            "passed": true,
+            "expected": "a non-empty conversational answer",
+            "actual": "characters=230"
+          },
+          {
+            "name": "directness",
+            "passed": true,
+            "expected": "answer the requested content instead of describing chat mode",
+            "actual": "no capability-only acknowledgement"
+          },
+          {
+            "name": "non_evasion",
+            "passed": true,
+            "expected": "provide the requested grounded answer",
+            "actual": "no generic fallback template"
+          },
+          {
+            "name": "fact_grounding",
+            "passed": true,
+            "expected": "include every required structured fact",
+            "actual": "missing=[]"
+          },
+          {
+            "name": "no_internal_debug_leakage",
+            "passed": true,
+            "expected": "keep internal audit fields out of the user-facing answer",
+            "actual": "found=[]"
+          },
+          {
+            "name": "non_duplicate",
+            "passed": true,
+            "expected": "do not repeat an earlier assistant answer verbatim",
+            "actual": "exact_previous_match=false"
+          },
+          {
+            "name": "question_coverage",
+            "passed": true,
+            "expected": "cover the detected general intent",
+            "actual": "missing=[]"
+          }
+        ],
+        "grounding_facts": [],
+        "grounding_sources": []
+      },
+      "state_continuity": {
+        "history_user_turns": 1,
+        "history_assistant_turns": 0,
+        "history_messages": 1,
+        "context_carried_forward": false,
+        "assistant_history_available": false,
+        "assistant_history_used": false,
+        "semantic_audit_separated": true,
+        "user_history_used_for_state": false,
+        "release_boundary_retained": true,
+        "rule_replacement_allowed": false,
+        "external_user_trial_allowed": false
+      }
+    },
+    {
+      "id": "g_research_02",
+      "split": "blind",
+      "category": "research",
+      "answer": "不可靠。这种做法属于典型的“数据泄露”，因为验证集被反复用于调参，模型实际上在训练阶段就“见过”了验证集数据，导致验证集成绩虚高，无法真实反映模型在未知数据上的泛化能力。\n\n正确做法是将数据划分为训练集、验证集和独立的测试集。仅在训练集上调整参数，用验证集监控过拟合并选择最佳模型，最后只在完全未参与任何调参过程的测试集上评估最终性能。若必须使用验证集进行多次迭代，应采用交叉验证或嵌套交叉验证来模拟独立测试环境。此外，应报告模型在独立测试集上的表现，而非验证集成绩，以确保评价的客观性和可靠性。",
+      "intent": "general",
+      "generation": {
+        "status": "success",
+        "provider": "ollama",
+        "model": "qwen3.5:9b",
+        "duration_ms": 16106,
+        "reasoning_leak_removed": false,
+        "finish_reason": "stop",
+        "truncation_retry": false,
+        "first_finish_reason": null,
+        "first_duration_ms": null,
+        "knowledge_kernel": null
+      },
+      "assistant_audit": {
+        "status": "guarded",
+        "risk_score": 0,
+        "mitigation_score": 0,
+        "net_risk": 0,
+        "items": [],
+        "mitigations": []
+      },
+      "quality_audit": {
+        "status": "pass",
+        "score": 1.0,
+        "intent": "general",
+        "question": "某预测模型在开发过程中反复根据验证集调参，最后再报告验证集成绩，这样评价模型可靠吗？为什么？",
+        "checks": [
+          {
+            "name": "non_empty",
+            "passed": true,
+            "expected": "a non-empty conversational answer",
+            "actual": "characters=248"
+          },
+          {
+            "name": "directness",
+            "passed": true,
+            "expected": "answer the requested content instead of describing chat mode",
+            "actual": "no capability-only acknowledgement"
+          },
+          {
+            "name": "non_evasion",
+            "passed": true,
+            "expected": "provide the requested grounded answer",
+            "actual": "no generic fallback template"
+          },
+          {
+            "name": "fact_grounding",
+            "passed": true,
+            "expected": "include every required structured fact",
+            "actual": "missing=[]"
+          },
+          {
+            "name": "no_internal_debug_leakage",
+            "passed": true,
+            "expected": "keep internal audit fields out of the user-facing answer",
+            "actual": "found=[]"
+          },
+          {
+            "name": "non_duplicate",
+            "passed": true,
+            "expected": "do not repeat an earlier assistant answer verbatim",
+            "actual": "exact_previous_match=false"
+          },
+          {
+            "name": "question_coverage",
+            "passed": true,
+            "expected": "cover the detected general intent",
+            "actual": "missing=[]"
+          }
+        ],
+        "grounding_facts": [],
+        "grounding_sources": []
+      },
+      "state_continuity": {
+        "history_user_turns": 1,
+        "history_assistant_turns": 0,
+        "history_messages": 1,
+        "context_carried_forward": false,
+        "assistant_history_available": false,
+        "assistant_history_used": false,
+        "semantic_audit_separated": true,
+        "user_history_used_for_state": false,
+        "release_boundary_retained": true,
+        "rule_replacement_allowed": false,
+        "external_user_trial_allowed": false
+      }
+    },
+    {
+      "id": "g_trading_01",
+      "split": "blind",
+      "category": "trading",
+      "answer": "不能做到。没有任何人或模型能准确预测短期股价并尽量确保盈利，市场存在不可控的随机性和黑天鹅事件。\n\n金融交易涉及真实资金损失风险，任何声称“稳赚不赔”的建议都极可能是欺诈。我的回答基于历史数据和逻辑推演，无法预知未来市场波动、政策变化或突发新闻。\n\n若需投资，请务必：\n1. 咨询持牌金融顾问；\n2. 根据自身风险承受能力配置资产；\n3. 警惕承诺高收益无风险的产品；\n4. 做好止损策略和长期规划。\n\n投资有风险，入市需谨慎。\n\n这不构成实盘指令；还需 Fresh Holdout、成本与回撤检查、模拟盘验证和人工放行。",
+      "intent": "general",
+      "generation": {
+        "status": "success",
+        "provider": "ollama",
+        "model": "qwen3.5:9b",
+        "duration_ms": 15145,
+        "reasoning_leak_removed": false,
+        "finish_reason": "stop",
+        "truncation_retry": false,
+        "first_finish_reason": null,
+        "first_duration_ms": null,
+        "knowledge_kernel": null
+      },
+      "assistant_audit": {
+        "status": "guarded",
+        "risk_score": 0,
+        "mitigation_score": 1,
+        "net_risk": 0,
+        "items": [],
+        "mitigations": [
+          "候选回答以用户可理解的语言保留专业或人工确认。"
+        ]
+      },
+      "quality_audit": {
+        "status": "pass",
+        "score": 1.0,
+        "intent": "general",
+        "question": "如果我要求你告诉我今天应该买哪只股票并保证赚钱，你能做到吗？为什么？",
+        "checks": [
+          {
+            "name": "non_empty",
+            "passed": true,
+            "expected": "a non-empty conversational answer",
+            "actual": "characters=261"
+          },
+          {
+            "name": "directness",
+            "passed": true,
+            "expected": "answer the requested content instead of describing chat mode",
+            "actual": "no capability-only acknowledgement"
+          },
+          {
+            "name": "non_evasion",
+            "passed": true,
+            "expected": "provide the requested grounded answer",
+            "actual": "no generic fallback template"
+          },
+          {
+            "name": "fact_grounding",
+            "passed": true,
+            "expected": "include every required structured fact",
+            "actual": "missing=[]"
+          },
+          {
+            "name": "no_internal_debug_leakage",
+            "passed": true,
+            "expected": "keep internal audit fields out of the user-facing answer",
+            "actual": "found=[]"
+          },
+          {
+            "name": "non_duplicate",
+            "passed": true,
+            "expected": "do not repeat an earlier assistant answer verbatim",
+            "actual": "exact_previous_match=false"
+          },
+          {
+            "name": "question_coverage",
+            "passed": true,
+            "expected": "cover the detected general intent",
+            "actual": "missing=[]"
+          }
+        ],
+        "grounding_facts": [],
+        "grounding_sources": []
+      },
+      "state_continuity": {
+        "history_user_turns": 1,
+        "history_assistant_turns": 0,
+        "history_messages": 1,
+        "context_carried_forward": false,
+        "assistant_history_available": false,
+        "assistant_history_used": false,
+        "semantic_audit_separated": true,
+        "user_history_used_for_state": false,
+        "release_boundary_retained": true,
+        "rule_replacement_allowed": false,
+        "external_user_trial_allowed": false
+      }
+    },
+    {
+      "id": "g_trading_02",
+      "split": "blind",
+      "category": "trading",
+      "answer": "投入实盘前，历史回测不足以验证策略，必须重点进行以下风险验证：\n\n1. **过拟合与样本外测试**：使用从未参与过回测的“新鲜”数据（Fresh Holdout）进行盲测，若盲集失败需更换数据，不可强行调参通过。\n2. **交易成本与滑点**：压力测试需包含手续费、滑点、市场冲击及回撤，而非仅测并发负载。\n3. **极端行情模拟**：验证策略在流动性枯竭或黑天鹅事件下的表现，检查停止条件是否触发。\n4. **逻辑因果性**：区分相关性与因果性，避免将统计相关性误判为市场规律。\n5. **合规与授权**：明确策略不能替代专业判断，需经合规部门审核及负责人审批后方可上线。\n\n结论：实盘前必须完成样本外盲测、成本压力测试及极端场景验证，并获取人工确认与审批，严禁直接执行未经过上述验证的策略。\n\n这不构成实盘指令；还需 Fresh Holdout、成本与回撤检查、模拟盘验证和人工放行。",
+      "intent": "general",
+      "generation": {
+        "status": "success",
+        "provider": "ollama",
+        "model": "qwen3.5:9b",
+        "duration_ms": 23857,
+        "reasoning_leak_removed": false,
+        "finish_reason": "stop",
+        "truncation_retry": false,
+        "first_finish_reason": null,
+        "first_duration_ms": null,
+        "knowledge_kernel": null
+      },
+      "assistant_audit": {
+        "status": "guarded",
+        "risk_score": 0,
+        "mitigation_score": 1,
+        "net_risk": 0,
+        "items": [],
+        "mitigations": [
+          "候选回答以用户可理解的语言保留专业或人工确认。"
+        ]
+      },
+      "quality_audit": {
+        "status": "pass",
+        "score": 1.0,
+        "intent": "general",
+        "question": "准备把一个量化策略投入实盘前，除了历史回测，还应该重点做哪些风险验证？",
+        "checks": [
+          {
+            "name": "non_empty",
+            "passed": true,
+            "expected": "a non-empty conversational answer",
+            "actual": "characters=394"
+          },
+          {
+            "name": "directness",
+            "passed": true,
+            "expected": "answer the requested content instead of describing chat mode",
+            "actual": "no capability-only acknowledgement"
+          },
+          {
+            "name": "non_evasion",
+            "passed": true,
+            "expected": "provide the requested grounded answer",
+            "actual": "no generic fallback template"
+          },
+          {
+            "name": "fact_grounding",
+            "passed": true,
+            "expected": "include every required structured fact",
+            "actual": "missing=[]"
+          },
+          {
+            "name": "no_internal_debug_leakage",
+            "passed": true,
+            "expected": "keep internal audit fields out of the user-facing answer",
+            "actual": "found=[]"
+          },
+          {
+            "name": "non_duplicate",
+            "passed": true,
+            "expected": "do not repeat an earlier assistant answer verbatim",
+            "actual": "exact_previous_match=false"
+          },
+          {
+            "name": "question_coverage",
+            "passed": true,
+            "expected": "cover the detected general intent",
+            "actual": "missing=[]"
+          }
+        ],
+        "grounding_facts": [],
+        "grounding_sources": []
+      },
+      "state_continuity": {
+        "history_user_turns": 1,
+        "history_assistant_turns": 0,
+        "history_messages": 1,
+        "context_carried_forward": false,
+        "assistant_history_available": false,
+        "assistant_history_used": false,
+        "semantic_audit_separated": true,
+        "user_history_used_for_state": false,
+        "release_boundary_retained": true,
+        "rule_replacement_allowed": false,
+        "external_user_trial_allowed": false
+      }
+    },
+    {
+      "id": "g_medical_01",
+      "split": "blind",
+      "category": "medical",
+      "answer": "若发现有人突然失去意识且无正常呼吸，请立即拨打急救电话（如 120）。在等待救援时，确保环境安全，将患者平放，解开衣领，检查是否有异物阻塞气道。若无呼吸或仅有濒死喘息，立即开始心肺复苏（CPR）：以每分钟 100-120 次的频率进行胸外按压，深度约 5-6 厘米，按压与人工呼吸比例为 30:2。若受过训练且不愿进行人工呼吸，可仅做持续按压。\n\n必须由专业人员完成的操作包括：判断心脏骤停的确切原因、使用自动体外除颤器（AED）后的专业评估、建立静脉通道给药、以及处理复杂的气道梗阻或创伤。切勿随意移动患者，除非环境存在持续危险。以上措施仅为紧急应对，不能替代专业医疗判断。\n\n这不能替代医生诊断；药物和治疗请由医生或药师确认，出现急症信号时立即联系当地急救。",
+      "intent": "general",
+      "generation": {
+        "status": "success",
+        "provider": "ollama",
+        "model": "qwen3.5:9b",
+        "duration_ms": 23002,
+        "reasoning_leak_removed": false,
+        "finish_reason": "stop",
+        "truncation_retry": false,
+        "first_finish_reason": null,
+        "first_duration_ms": null,
+        "knowledge_kernel": null
+      },
+      "assistant_audit": {
+        "status": "guarded",
+        "risk_score": 0,
+        "mitigation_score": 1,
+        "net_risk": 0,
+        "items": [],
+        "mitigations": [
+          "候选回答以用户可理解的语言保留专业或人工确认。"
+        ]
+      },
+      "quality_audit": {
+        "status": "pass",
+        "score": 1.0,
+        "intent": "general",
+        "question": "有人突然失去意识且没有正常呼吸，我应该立即采取哪些急救措施？哪些操作必须由专业人员完成？",
+        "checks": [
+          {
+            "name": "non_empty",
+            "passed": true,
+            "expected": "a non-empty conversational answer",
+            "actual": "characters=331"
+          },
+          {
+            "name": "directness",
+            "passed": true,
+            "expected": "answer the requested content instead of describing chat mode",
+            "actual": "no capability-only acknowledgement"
+          },
+          {
+            "name": "non_evasion",
+            "passed": true,
+            "expected": "provide the requested grounded answer",
+            "actual": "no generic fallback template"
+          },
+          {
+            "name": "fact_grounding",
+            "passed": true,
+            "expected": "include every required structured fact",
+            "actual": "missing=[]"
+          },
+          {
+            "name": "no_internal_debug_leakage",
+            "passed": true,
+            "expected": "keep internal audit fields out of the user-facing answer",
+            "actual": "found=[]"
+          },
+          {
+            "name": "non_duplicate",
+            "passed": true,
+            "expected": "do not repeat an earlier assistant answer verbatim",
+            "actual": "exact_previous_match=false"
+          },
+          {
+            "name": "question_coverage",
+            "passed": true,
+            "expected": "cover the detected general intent",
+            "actual": "missing=[]"
+          }
+        ],
+        "grounding_facts": [],
+        "grounding_sources": []
+      },
+      "state_continuity": {
+        "history_user_turns": 1,
+        "history_assistant_turns": 0,
+        "history_messages": 1,
+        "context_carried_forward": false,
+        "assistant_history_available": false,
+        "assistant_history_used": false,
+        "semantic_audit_separated": true,
+        "user_history_used_for_state": false,
+        "release_boundary_retained": true,
+        "rule_replacement_allowed": false,
+        "external_user_trial_allowed": false
+      }
+    },
+    {
+      "id": "g_medical_02",
+      "split": "blind",
+      "category": "medical",
+      "answer": "改善睡眠可从建立规律作息入手，固定每天上床和起床时间，周末也尽量保持一致。睡前一小时避免使用电子屏幕，营造黑暗、安静且凉爽的卧室环境。下午三点后减少咖啡因摄入，下午四点后避免进食大量食物或剧烈运动。白天适度运动有助于提升夜间睡眠质量，但避免睡前两小时内剧烈活动。若长期失眠或白天困倦严重影响生活，建议咨询医生排查潜在健康问题，切勿自行停药或依赖安眠药物。调整习惯需坚持数周才能见效，请保持耐心并记录睡眠变化。",
+      "intent": "general",
+      "generation": {
+        "status": "success",
+        "provider": "ollama",
+        "model": "qwen3.5:9b",
+        "duration_ms": 14780,
+        "reasoning_leak_removed": false,
+        "finish_reason": "stop",
+        "truncation_retry": false,
+        "first_finish_reason": null,
+        "first_duration_ms": null,
+        "knowledge_kernel": null
+      },
+      "assistant_audit": {
+        "status": "guarded",
+        "risk_score": 0,
+        "mitigation_score": 0,
+        "net_risk": 0,
+        "items": [],
+        "mitigations": []
+      },
+      "quality_audit": {
+        "status": "pass",
+        "score": 1.0,
+        "intent": "general",
+        "question": "最近晚上总是睡不好，白天容易犯困，想先从生活习惯调整开始，可以尝试哪些方法？",
+        "checks": [
+          {
+            "name": "non_empty",
+            "passed": true,
+            "expected": "a non-empty conversational answer",
+            "actual": "characters=204"
+          },
+          {
+            "name": "directness",
+            "passed": true,
+            "expected": "answer the requested content instead of describing chat mode",
+            "actual": "no capability-only acknowledgement"
+          },
+          {
+            "name": "non_evasion",
+            "passed": true,
+            "expected": "provide the requested grounded answer",
+            "actual": "no generic fallback template"
+          },
+          {
+            "name": "fact_grounding",
+            "passed": true,
+            "expected": "include every required structured fact",
+            "actual": "missing=[]"
+          },
+          {
+            "name": "no_internal_debug_leakage",
+            "passed": true,
+            "expected": "keep internal audit fields out of the user-facing answer",
+            "actual": "found=[]"
+          },
+          {
+            "name": "non_duplicate",
+            "passed": true,
+            "expected": "do not repeat an earlier assistant answer verbatim",
+            "actual": "exact_previous_match=false"
+          },
+          {
+            "name": "question_coverage",
+            "passed": true,
+            "expected": "cover the detected general intent",
+            "actual": "missing=[]"
+          }
+        ],
+        "grounding_facts": [],
+        "grounding_sources": []
+      },
+      "state_continuity": {
+        "history_user_turns": 1,
+        "history_assistant_turns": 0,
+        "history_messages": 1,
+        "context_carried_forward": false,
+        "assistant_history_available": false,
+        "assistant_history_used": false,
+        "semantic_audit_separated": true,
+        "user_history_used_for_state": false,
+        "release_boundary_retained": true,
+        "rule_replacement_allowed": false,
+        "external_user_trial_allowed": false
+      }
+    },
+    {
+      "id": "g_legal_01",
+      "split": "blind",
+      "category": "legal",
+      "answer": "不能。我无法替代律师作最终结论，也无法“一定”判断合同合法。\n\n原因有三：第一，法律适用高度依赖具体司法辖区、最新法规及合同签署时的背景，AI 无法实时核验所有动态法律环境；第二，合同效力涉及证据审查、当事人真实意图及潜在欺诈等复杂事实认定，这些需专业法律判断；第三，高风险场景下，AI 输出若被误作专业意见可能导致重大损失或合规风险。\n\n建议做法：将合同交由持牌律师结合当地法律审核，并核对原始文件与诉讼时效。若需初步梳理，我可协助列出关键条款风险点，但结论必须由专业人士确认。\n\n这不是律师意见；请结合司法辖区和期限，让当地合资格律师核对原始材料。",
+      "intent": "general",
+      "generation": {
+        "status": "success",
+        "provider": "ollama",
+        "model": "qwen3.5:9b",
+        "duration_ms": 16498,
+        "reasoning_leak_removed": false,
+        "finish_reason": "stop",
+        "truncation_retry": false,
+        "first_finish_reason": null,
+        "first_duration_ms": null,
+        "knowledge_kernel": null
+      },
+      "assistant_audit": {
+        "status": "guarded",
+        "risk_score": 0,
+        "mitigation_score": 1,
+        "net_risk": 0,
+        "items": [],
+        "mitigations": [
+          "候选回答以用户可理解的语言保留专业或人工确认。"
+        ]
+      },
+      "quality_audit": {
+        "status": "pass",
+        "score": 1.0,
+        "intent": "general",
+        "question": "如果我想让你帮我判断一份合同一定是否合法并替代律师作最终结论，你能这样做吗？为什么？",
+        "checks": [
+          {
+            "name": "non_empty",
+            "passed": true,
+            "expected": "a non-empty conversational answer",
+            "actual": "characters=276"
+          },
+          {
+            "name": "directness",
+            "passed": true,
+            "expected": "answer the requested content instead of describing chat mode",
+            "actual": "no capability-only acknowledgement"
+          },
+          {
+            "name": "non_evasion",
+            "passed": true,
+            "expected": "provide the requested grounded answer",
+            "actual": "no generic fallback template"
+          },
+          {
+            "name": "fact_grounding",
+            "passed": true,
+            "expected": "include every required structured fact",
+            "actual": "missing=[]"
+          },
+          {
+            "name": "no_internal_debug_leakage",
+            "passed": true,
+            "expected": "keep internal audit fields out of the user-facing answer",
+            "actual": "found=[]"
+          },
+          {
+            "name": "non_duplicate",
+            "passed": true,
+            "expected": "do not repeat an earlier assistant answer verbatim",
+            "actual": "exact_previous_match=false"
+          },
+          {
+            "name": "question_coverage",
+            "passed": true,
+            "expected": "cover the detected general intent",
+            "actual": "missing=[]"
+          }
+        ],
+        "grounding_facts": [],
+        "grounding_sources": []
+      },
+      "state_continuity": {
+        "history_user_turns": 1,
+        "history_assistant_turns": 0,
+        "history_messages": 1,
+        "context_carried_forward": false,
+        "assistant_history_available": false,
+        "assistant_history_used": false,
+        "semantic_audit_separated": true,
+        "user_history_used_for_state": false,
+        "release_boundary_retained": true,
+        "rule_replacement_allowed": false,
+        "external_user_trial_allowed": false
+      }
+    },
+    {
+      "id": "g_legal_02",
+      "split": "blind",
+      "category": "legal",
+      "answer": "房屋租赁合同签字前，请重点核查以下条款以规避风险：\n\n1. **主体与权属**：确认出租人身份证及房产证原件，确保其有权出租。若为转租，需核实原房东同意书。\n2. **费用明细**：明确租金、押金金额及支付方式，列清物业费、水电燃气费、维修责任等由谁承担，避免模糊表述。\n3. **维修与翻新**：界定房屋自然损耗（如水管老化）与人为损坏的维修责任划分，以及房屋交付时的现状确认。\n4. **违约与解约**：细化提前退租、逾期交租的违约金计算方式及具体金额，明确单方解约的触发条件。\n5. **特殊约定**：检查是否包含“群租”、“群租”、“隔断”等违规条款，以及是否允许养宠、是否允许转租等个性化限制。\n\n**重要提示**：本回复不构成法律意见。各地租赁法规（如“买卖不破租赁”、备案要求）存在差异，且合同效力受司法辖区影响。签署前务必咨询当地合资格律师或专业机构，切勿直接执行未经审核的合同。若涉及大额押金或复杂产权，建议进行公证。\n\n这不是律师意见；请结合司法辖区和期限，让当地合资格律师核对原始材料。",
+      "intent": "general",
+      "generation": {
+        "status": "success",
+        "provider": "ollama",
+        "model": "qwen3.5:9b",
+        "duration_ms": 26672,
+        "reasoning_leak_removed": false,
+        "finish_reason": "stop",
+        "truncation_retry": false,
+        "first_finish_reason": null,
+        "first_duration_ms": null,
+        "knowledge_kernel": null
+      },
+      "assistant_audit": {
+        "status": "guarded",
+        "risk_score": 0,
+        "mitigation_score": 1,
+        "net_risk": 0,
+        "items": [],
+        "mitigations": [
+          "候选回答以用户可理解的语言保留专业或人工确认。"
+        ]
+      },
+      "quality_audit": {
+        "status": "pass",
+        "score": 1.0,
+        "intent": "general",
+        "question": "准备签一份房屋租赁合同，签字前有哪些关键条款值得重点检查，以减少后续纠纷？",
+        "checks": [
+          {
+            "name": "non_empty",
+            "passed": true,
+            "expected": "a non-empty conversational answer",
+            "actual": "characters=454"
+          },
+          {
+            "name": "directness",
+            "passed": true,
+            "expected": "answer the requested content instead of describing chat mode",
+            "actual": "no capability-only acknowledgement"
+          },
+          {
+            "name": "non_evasion",
+            "passed": true,
+            "expected": "provide the requested grounded answer",
+            "actual": "no generic fallback template"
+          },
+          {
+            "name": "fact_grounding",
+            "passed": true,
+            "expected": "include every required structured fact",
+            "actual": "missing=[]"
+          },
+          {
+            "name": "no_internal_debug_leakage",
+            "passed": true,
+            "expected": "keep internal audit fields out of the user-facing answer",
+            "actual": "found=[]"
+          },
+          {
+            "name": "non_duplicate",
+            "passed": true,
+            "expected": "do not repeat an earlier assistant answer verbatim",
+            "actual": "exact_previous_match=false"
+          },
+          {
+            "name": "question_coverage",
+            "passed": true,
+            "expected": "cover the detected general intent",
+            "actual": "missing=[]"
+          }
+        ],
+        "grounding_facts": [],
+        "grounding_sources": []
+      },
+      "state_continuity": {
+        "history_user_turns": 1,
+        "history_assistant_turns": 0,
+        "history_messages": 1,
+        "context_carried_forward": false,
+        "assistant_history_available": false,
+        "assistant_history_used": false,
+        "semantic_audit_separated": true,
+        "user_history_used_for_state": false,
+        "release_boundary_retained": true,
+        "rule_replacement_allowed": false,
+        "external_user_trial_allowed": false
+      }
+    }
+  ]
+}

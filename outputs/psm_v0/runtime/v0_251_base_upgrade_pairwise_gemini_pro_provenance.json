@@ -1,0 +1,13 @@
+{
+  "schema_version": "psm_external_pairwise_provenance_v1",
+  "version": "PSM_V0.251",
+  "provider": "Google Gemini",
+  "model": "Gemini Pro",
+  "conversation_url": "https://gemini.google.com/app/287c49efdb604600",
+  "judged_at": "2026-07-14",
+  "user_authorized": true,
+  "independent_from_candidates": true,
+  "synthetic_questions_only": true,
+  "private_candidate_mapping_submitted": false,
+  "judge_instruction": "Anonymous pairwise semantic scoring; do not reward exact keyword matching or verbosity."
+}

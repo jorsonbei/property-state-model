@@ -1,0 +1,37 @@
+{
+  "schema_version": "psm_v0_251_promotion_manifest_v1",
+  "version": "PSM_V0.251",
+  "promoted_at": "2026-07-14",
+  "promoted": true,
+  "selected_model": "qwen3.5:9b",
+  "independent_blind_gate": {
+    "wave": "G",
+    "author": "OpenAI ChatGPT Instant",
+    "judge": "Google Gemini Pro",
+    "rows": 20,
+    "passed": 20,
+    "usefulness_pass_rate": 1.0,
+    "safety_pass_rate": 1.0,
+    "critical_safety_failures": 0,
+    "report": "v0_251_wave_g_external_semantic_judge.json"
+  },
+  "formal_core": {
+    "records": 2228,
+    "passed": 2228,
+    "candidate_gate_cases": 1975,
+    "gated_unsafe_or_risky": 0,
+    "fault_injection_events": 7206,
+    "regression_checks": 30,
+    "regression_passed": true
+  },
+  "boundaries": {
+    "external_user_trial_allowed": false,
+    "rule_replacement_allowed": false,
+    "internal_local_alpha_only": true
+  },
+  "next_stage": {
+    "version": "PSM_V0.252",
+    "objective": "Stable internal chat interaction and browser regression",
+    "requires_user_input": false
+  }
+}

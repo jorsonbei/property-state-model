@@ -38,7 +38,7 @@ SCENARIOS = {
 
 OLLAMA_BASE_URL = os.environ.get("OLLAMA_BASE_URL", "http://127.0.0.1:11434").rstrip("/")
 OLLAMA_MODEL_OVERRIDE = os.environ.get("OLLAMA_MODEL", "").strip()
-CHAT_TIMEOUT_SECONDS = int(os.environ.get("PSM_CHAT_TIMEOUT_SECONDS", "45"))
+CHAT_TIMEOUT_OVERRIDE = os.environ.get("PSM_CHAT_TIMEOUT_SECONDS", "").strip()
 CHAT_MAX_TOKENS_OVERRIDE = os.environ.get("PSM_CHAT_MAX_TOKENS", "").strip()
 
 
@@ -622,35 +622,47 @@ def project_status_answer(context: dict, question: str = "") -> str:
         return (
             "当前本地状态没有第二季度核心架构升级的验收清单或日期，因此不能列出不存在的已验收模块，也不能编造交付节点。"
             f"能够确认的是：当前发布版为 {context['current_version']}，确定性正式源为 {context['formal_version']}，"
-            f"共有 {context['core_cases']} 个正式案例；{context['next_version']} 仍在独立聊天门验证，"
-            "最近的真实里程碑是该门通过后再决定晋升。外部用户试用仍未开放。"
+            f"共有 {context['core_cases']} 个正式案例；下一阶段 {context['next_version']} 的目标是"
+            f"{context['next_objective']}。外部用户试用仍未开放。"
+        )
+    if any(marker in question for marker in ("直接放行", "聊天已经能用", "聊天已經能用")):
+        return (
+            f"不能因为聊天已经能用就直接放行。当前正式版本仍是 {context['current_version']}，"
+            "V0.251 的全新盲集和独立外部语义门已经通过；但下一阶段仍要完成生成状态、取消、超时、重试、"
+            "错误恢复、桌面与移动端浏览器回归。能生成正常回答只证明功能可运行，不能证明稳定性、可访问性、"
+            "隐私合规或外部用户发布条件已经成立；因此外部用户试用仍未开放。"
         )
     if any(marker in question for marker in ("正式版本", "版本号", "版本號", "核心验证门", "核心驗證門")):
-        return (
+        answer = (
             f"当前正式晋级版本是 {context['current_version']}；确定性正式源是 {context['formal_version']}，"
             f"共有 {context['core_cases']} 个正式案例，正式回归已经通过。"
-            f"但目标版本 {context['next_version']} 的独立聊天语义门尚未通过，所以不能把整个 V0.251 说成已完成内部核心验证。"
-            "外部用户试用仍未开放。"
         )
+        if context["chat_gate_passed"]:
+            answer += "V0.251 的全新盲集独立外部语义门也已通过。"
+        answer += (
+            f"下一阶段是 {context['next_version']} 的产品交互与浏览器回归；"
+            "这些内部门通过前不能升级产品稳定性声明，外部用户试用仍未开放。"
+        )
+        return answer
     if any(marker in question for marker in ("外部试用", "外部試用", "真实动作", "真實動作")):
         return (
             f"当前没有开放外部用户试用，正式版本仍是 {context['current_version']}。"
-            f"记录中的下一真实动作是：{context['required_decision']}"
+            f"当前聊天基座是 {context['selected_model']}。记录中的下一真实动作是："
+            f"{context['required_decision']}"
         )
     if any(marker in question for marker in ("最高优先级", "最高優先級", "优先级最高", "優先級最高", "优先任务", "優先任務")):
         return (
             f"当前最高优先级是完成 {context['next_version']} 的 {context['next_objective']}，"
-            "并用新的来源隔离盲集通过独立外部语义门。"
             f"原因是正式版本仍是 {context['current_version']}，确定性正式源为 {context['formal_version']}，"
-            f"共有 {context['core_cases']} 个正式案例；在正确性、相关性、幻觉控制、安全和边界门全部通过前，"
-            "不能晋级或开放外部用户试用。"
+            f"共有 {context['core_cases']} 个正式案例，V0.251 独立外部语义门已经通过；"
+            "当前剩余门是交互稳定性、失败恢复和浏览器回归，不是继续改写已封存盲集。"
         )
     if any(marker in question for marker in ("阻塞因素", "阻碍因素", "阻礙因素", "最大阻塞", "最大的阻塞")):
         user_blocker = "需要用户介入" if context["requires_user_input"] else "不需要用户介入"
         return (
-            f"当前最大的阶段门是 {context['next_version']} 的独立语义质量尚未全部达到晋级阈值，"
-            f"不是部署或材料缺失。现阶段{user_blocker}；工程上要保留失败证据、修复共通缺陷，"
-            "再用全新未见盲集复验。外部用户试用仍未开放。"
+            f"当前没有阻止施工的外部 blocker；最大的阶段门是 {context['next_version']} 的"
+            f"{context['next_objective']}。现阶段{user_blocker}；工程上要完成交互状态、失败恢复和浏览器回归，"
+            "外部用户试用仍未开放。"
         )
     answer = (
         f"当前项目是 {context['current_version']}。确定性正式源是 {context['formal_version']}，"
@@ -671,6 +683,12 @@ def roadmap_answer(context: dict) -> str:
             "80 题来源隔离数据集、judge-only 标签、两阶段 NoTargetRead 评测器和三轮 blind evidence 已完成；"
             "但独立 blind gate 没有通过，不能继续由同一开发者循环出题和裁判。"
             f"下一步需要：{context['required_decision']}"
+        )
+    elif context["next_version"] == "PSM V0.252":
+        construction = (
+            "施工顺序是：先建立生成中、取消、超时、重试和错误恢复状态；再接入渐进式回答显示，"
+            "确保 9B 模型生成期间主界面持续反馈；随后把调试证据默认隐藏，并补齐桌面与移动视口、"
+            "键盘操作、基础无障碍、重复消息和布局溢出回归；最后重建本地与 Docker 运行时。"
         )
     elif context["next_version"] == "PSM V0.250":
         construction = (
@@ -791,7 +809,7 @@ def try_ollama_chat_generation(
         ProviderRequest(
             prompt=prompt,
             model=selected_chat_model(),
-            timeout_seconds=CHAT_TIMEOUT_SECONDS,
+            timeout_seconds=selected_chat_timeout_seconds(),
             max_tokens=max_tokens,
         )
     )
@@ -801,7 +819,7 @@ def try_ollama_chat_generation(
             ProviderRequest(
                 prompt=prompt,
                 model=selected_chat_model(),
-                timeout_seconds=CHAT_TIMEOUT_SECONDS,
+                timeout_seconds=selected_chat_timeout_seconds(),
                 max_tokens=max(600, max_tokens * 2),
             )
         )
@@ -875,6 +893,18 @@ def selected_chat_max_tokens() -> int:
         if isinstance(selected, int) and selected > 0:
             return selected
     return 180
+
+
+def selected_chat_timeout_seconds() -> int:
+    if CHAT_TIMEOUT_OVERRIDE:
+        return int(CHAT_TIMEOUT_OVERRIDE)
+    selection_path = PSM_ROOT / "runtime" / "chat_provider_selection.json"
+    if selection_path.exists():
+        selection = load_json(selection_path)
+        selected = selection.get("generation_parameters", {}).get("timeout_seconds")
+        if isinstance(selected, int) and selected > 0:
+            return selected
+    return 45
 
 
 def fallback_chat_answer(
@@ -1082,6 +1112,7 @@ def load_project_context() -> dict:
     selection_metrics = selection.get("selection_metrics", {})
     checkpoint_path = PSM_ROOT / "runtime" / "v0_251_chat_gate_checkpoint.json"
     checkpoint = load_json(checkpoint_path) if checkpoint_path.exists() else {}
+    chat_gate = status.get("independent_chat_gate") or {}
     return {
         "current_version": summary["version"],
         "formal_version": formal_version,
@@ -1095,6 +1126,7 @@ def load_project_context() -> dict:
         "stage_blocked": checkpoint.get("status") == "blocked_on_independent_semantic_judge",
         "checkpoint_status": str(checkpoint.get("status") or "unknown"),
         "requires_user_input": bool(checkpoint.get("requires_user_input", False)),
+        "chat_gate_passed": bool(chat_gate.get("passed", False)),
         "required_decision": str(
             checkpoint.get("required_decision") or "完成下一阶段独立验证"
         ),
@@ -1195,6 +1227,8 @@ def humanize_stage_objective(objective: str) -> str:
             "完成 v249_ 的全量必要/故障与定向 Ollama/控制器证据刷新，"
             "并建立本地模型对照和结构化生成契约"
         )
+    if "stable internal chat alpha" in objective.casefold():
+        return "稳定内部聊天 alpha：生成状态、取消、超时、重试、错误恢复、渐进显示和桌面/移动浏览器回归"
     return objective
 
 

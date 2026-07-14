@@ -1,19 +1,16 @@
-# PSM V0.250 Core Workspace
+# PSM V0.251 Core Workspace
 
-The current project status is `psm_v0.250`. The deterministic core source is `psm_v0.249` with 2210 formal cases. Targeted optional evidence `psm_v0.250_ollama_v249` covers 18 cases; ordinary output remained unsafe/risky on 6 rows while raw/gated PSM unsafe/risky stayed 0/0. Ordinary output and raw PSM output remain non-release candidates; controller-gated evidence is auxiliary only.
+The current project status is `psm_v0.251`. It promoted `independent_chat_golden_blind_set_boundary_adversarial` into the formal core, bringing the formal dataset to 2228 records. Required/fault candidate gating covers 1975 cases with gated PSM unsafe/risky at 0.
 
 ## Latest Result
 
-- V0.250 local-model bakeoff selected `gemma3:4b` at mean score 0.9500 versus `deepseek-r1:8B` at 0.2850.
-- The selected bakeoff produced 10/10 visible answers with no reasoning leaks; the runtime token budget is 300 with one recorded expanded retry on token-limit termination. The 5000 ms latency target remains open.
-- Chat generation now uses a provider abstraction and a structured answer/evidence/uncertainty/judge contract with deterministic fallback.
-- V0.250 optional evidence source: `psm_v0.250_ollama_v249`.
-- V0.250 targeted optional cases: 18; ordinary unsafe/risky=6; raw/gated PSM unsafe/risky=0/0.
-- V0.250 release decision: `publish_psm_gated_optional_external_evidence_only`.
-- V0.250 deterministic regression: passed=True.
-- V0.251 engineering checkpoint: 80 authored questions, isolated judge-only labels, and two-phase NoTargetRead evaluation are implemented.
-- V0.251 is not promoted. Sealed cross-provider external waves D/E/F passed 12/20, 15/20, and 12/20 respectively; every wave retained safety=1.0000 with zero critical safety failures, but open-domain correctness/usefulness/hallucination gates remain unstable.
-- The independent-judge authorization blocker is resolved. The active work is a local `qwen3.5:9b` bakeoff, followed by a fresh externally authored wave G only if the larger base model materially improves the fixed benchmark.
+- Frozen Wave G independent semantic gate: passed 20/20 with usefulness and safety both 1.0000 and no critical safety failure.
+- Selected local model: `qwen3.5:9b`; anonymous external comparison versus `gemma3:4b` was 13 wins, 3 losses, and 4 ties.
+- V0.251 promoted expansion family: `independent_chat_golden_blind_set_boundary_adversarial`.
+- V0.251 core eval: 2228/2228 passed.
+- V0.251 candidate taxonomy: rows=5940, ledger_events=17864, invariants passed.
+- V0.251 deterministic regression: passed=True.
+- Next stage: V0.252 product interaction and browser regression.
 
 ## Run
 
@@ -29,11 +26,10 @@ make serve
 - Internal local chat demo only.
 - Ordinary and raw PSM outputs are not release candidates.
 - External user trial remains closed.
-- Current promoted version remains V0.250 while V0.251 undergoes local base-model upgrade and fresh independent rejudgment.
 - Rule replacement remains disabled.
 
 ## Recovery
 
 - `CURRENT_STATUS.md` is the current human recovery point.
-- `project_status_out/psm_v0.250_project_status.json` is the machine status.
+- `project_status_out/psm_v0.251_project_status.json` is the machine status.
 - Historical generated evidence remains local and is excluded from Git.

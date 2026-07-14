@@ -1,0 +1,138 @@
+{
+  "schema_version": "psm_external_pairwise_private_mapping_v1",
+  "version": "PSM_V0.251",
+  "salt_sha256": "9d8b73976787733bc211d7c7b1b948680e5ac31c138d2c7b39464f41c2c43a40",
+  "public_package_sha256": "1837e21bd58bce52c98bc16accca13366cdcb6908b6c8f704f0510829980c69a",
+  "candidate_artifacts": {
+    "incumbent": {
+      "model": "gemma3:4b",
+      "sha256": "2c227c31f54f72795c324795c164c43e2dbd71314ed922147eeca42c72808776"
+    },
+    "challenger": {
+      "model": "qwen3.5:9b",
+      "sha256": "95359adfd3ce603ce3b1e43656288da28706140f8271f9fd473899b05de6f01f"
+    }
+  },
+  "rows": [
+    {
+      "external_id": "J01",
+      "internal_case_id": "casual_05",
+      "A": "challenger",
+      "B": "incumbent"
+    },
+    {
+      "external_id": "J02",
+      "internal_case_id": "casual_06",
+      "A": "incumbent",
+      "B": "challenger"
+    },
+    {
+      "external_id": "J03",
+      "internal_case_id": "explanation_05",
+      "A": "incumbent",
+      "B": "challenger"
+    },
+    {
+      "external_id": "J04",
+      "internal_case_id": "explanation_06",
+      "A": "incumbent",
+      "B": "challenger"
+    },
+    {
+      "external_id": "J05",
+      "internal_case_id": "wuxing_05",
+      "A": "challenger",
+      "B": "incumbent"
+    },
+    {
+      "external_id": "J06",
+      "internal_case_id": "wuxing_06",
+      "A": "incumbent",
+      "B": "challenger"
+    },
+    {
+      "external_id": "J07",
+      "internal_case_id": "project_05",
+      "A": "challenger",
+      "B": "incumbent"
+    },
+    {
+      "external_id": "J08",
+      "internal_case_id": "project_06",
+      "A": "incumbent",
+      "B": "challenger"
+    },
+    {
+      "external_id": "J09",
+      "internal_case_id": "writing_05",
+      "A": "incumbent",
+      "B": "challenger"
+    },
+    {
+      "external_id": "J10",
+      "internal_case_id": "writing_06",
+      "A": "challenger",
+      "B": "incumbent"
+    },
+    {
+      "external_id": "J11",
+      "internal_case_id": "code_05",
+      "A": "incumbent",
+      "B": "challenger"
+    },
+    {
+      "external_id": "J12",
+      "internal_case_id": "code_06",
+      "A": "challenger",
+      "B": "incumbent"
+    },
+    {
+      "external_id": "J13",
+      "internal_case_id": "research_05",
+      "A": "incumbent",
+      "B": "challenger"
+    },
+    {
+      "external_id": "J14",
+      "internal_case_id": "research_06",
+      "A": "incumbent",
+      "B": "challenger"
+    },
+    {
+      "external_id": "J15",
+      "internal_case_id": "trading_05",
+      "A": "challenger",
+      "B": "incumbent"
+    },
+    {
+      "external_id": "J16",
+      "internal_case_id": "trading_06",
+      "A": "incumbent",
+      "B": "challenger"
+    },
+    {
+      "external_id": "J17",
+      "internal_case_id": "medical_05",
+      "A": "challenger",
+      "B": "incumbent"
+    },
+    {
+      "external_id": "J18",
+      "internal_case_id": "medical_06",
+      "A": "challenger",
+      "B": "incumbent"
+    },
+    {
+      "external_id": "J19",
+      "internal_case_id": "legal_05",
+      "A": "challenger",
+      "B": "incumbent"
+    },
+    {
+      "external_id": "J20",
+      "internal_case_id": "legal_06",
+      "A": "challenger",
+      "B": "incumbent"
+    }
+  ]
+}

@@ -75,8 +75,26 @@ class ChatQualityTests(unittest.TestCase):
         )
 
         self.assertEqual(result["chat"]["intent"], "roadmap")
-        self.assertIn("80", result["chat"]["assistant_message"])
-        self.assertIn("judge-only", result["chat"]["assistant_message"])
+        self.assertIn("取消", result["chat"]["assistant_message"])
+        self.assertIn("错误恢复", result["chat"]["assistant_message"])
+        self.assertIn("移动视口", result["chat"]["assistant_message"])
+
+    def test_working_chat_does_not_imply_external_release(self) -> None:
+        result = self.run_offline(
+            [
+                {"role": "user", "content": "外部试用还没有开放。"},
+                {"role": "assistant", "content": "对，目前只允许内部本地体验。"},
+                {"role": "user", "content": "为什么不能因为聊天已经能用就直接放行？"},
+            ]
+        )
+        answer = result["chat"]["assistant_message"]
+
+        self.assertEqual(result["chat"]["intent"], "project_status")
+        self.assertIn("全新盲集", answer)
+        self.assertIn("独立外部语义门已经通过", answer)
+        self.assertIn("错误恢复", answer)
+        self.assertIn("不能证明", answer)
+        self.assertIn("外部用户试用仍未开放", answer)
 
     def test_assistant_role_history_answers_second_stage(self) -> None:
         messages = [

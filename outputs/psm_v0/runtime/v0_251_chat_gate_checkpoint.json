@@ -1,9 +1,9 @@
 {
-  "schema_version": "psm_v0_251_chat_gate_checkpoint_v3",
-  "current_promoted_version": "PSM_V0.250",
+  "schema_version": "psm_v0_251_chat_gate_checkpoint_v4",
+  "current_promoted_version": "PSM_V0.251",
   "target_version": "PSM_V0.251",
-  "target_promoted": false,
-  "status": "local_base_model_upgrade_in_progress",
+  "target_promoted": true,
+  "status": "promoted_v0_252_product_ux_in_progress",
   "requires_user_input": false,
   "dataset_contract": {
     "authored_questions": 80,
@@ -31,24 +31,25 @@
     {"wave":"C","passed":false,"usefulness_pass_rate":0.45,"safety_pass_rate":0.9,"critical_safety_false_negatives":0,"correctness":0.8583,"relevance":1.0,"hallucination_control":0.9},
     {"wave":"D","passed":false,"external_judge":"OpenAI ChatGPT Instant","usefulness_pass_rate":0.6,"safety_pass_rate":1.0,"critical_safety_failures":0,"correctness":0.675,"relevance":0.975,"hallucination_control":0.7125},
     {"wave":"E","passed":false,"external_judge":"Google Gemini Pro","usefulness_pass_rate":0.75,"safety_pass_rate":1.0,"critical_safety_failures":0,"correctness":0.8375,"relevance":0.9375,"hallucination_control":0.9},
-    {"wave":"F","passed":false,"external_judge":"OpenAI ChatGPT Instant","usefulness_pass_rate":0.6,"safety_pass_rate":1.0,"critical_safety_failures":0,"correctness":0.775,"relevance":1.0,"hallucination_control":0.8125}
+    {"wave":"F","passed":false,"external_judge":"OpenAI ChatGPT Instant","usefulness_pass_rate":0.6,"safety_pass_rate":1.0,"critical_safety_failures":0,"correctness":0.775,"relevance":1.0,"hallucination_control":0.8125},
+    {"wave":"G","passed":true,"author":"OpenAI ChatGPT Instant","external_judge":"Google Gemini Pro","usefulness_pass_rate":1.0,"safety_pass_rate":1.0,"critical_safety_failures":0,"correctness":1.0,"relevance":1.0,"boundary_quality":1.0,"hallucination_control":1.0}
   ],
   "external_semantic_judge": {
-    "provider": "OpenAI ChatGPT",
-    "model": "Instant",
-    "wave": "F",
-    "passed": false,
+    "provider": "Google Gemini",
+    "model": "Pro",
+    "wave": "G",
+    "passed": true,
     "rows": 20,
-    "pass_count": 12,
-    "fail_count": 8,
-    "usefulness_pass_rate": 0.6,
+    "pass_count": 20,
+    "fail_count": 0,
+    "usefulness_pass_rate": 1.0,
     "safety_pass_rate": 1.0,
     "critical_safety_failures": 0,
-    "correctness": 0.775,
+    "correctness": 1.0,
     "relevance": 1.0,
-    "boundary_quality": 0.8875,
-    "hallucination_control": 0.8125,
-    "report": "runtime/v0_251_wave_f_external_semantic_judge.json"
+    "boundary_quality": 1.0,
+    "hallucination_control": 1.0,
+    "report": "runtime/v0_251_wave_g_external_semantic_judge.json"
   },
   "completed_engineering": [
     "80-question authored source-family dataset",
@@ -63,12 +64,16 @@
     "verified knowledge kernels for high-confidence factual mechanisms",
     "deterministic local project-state routing",
     "token-limit detection and one expanded generation retry",
-    "cross-provider blind waves D E and F with sealed failure evidence"
+    "cross-provider blind waves D E and F with sealed failure evidence",
+    "anonymous external base-model comparison and qwen3.5:9b selection",
+    "fresh externally authored Wave G with independent Gemini Pro pass",
+    "formal V0.251 expansion to 2228 core records with 30 regression checks"
   ],
   "release_boundary": {
     "external_user_trial_allowed": false,
     "internal_local_demo_only": true,
-    "v0_251_promotion_allowed": false
+    "v0_251_promoted": true,
+    "v0_252_product_work_allowed": true
   },
-  "required_decision": "No user decision is currently required. Benchmark qwen3.5:9b locally against the same frozen model-selection contract. If it materially improves quality, freeze a new externally authored wave G and obtain a cross-provider independent judgment."
+  "required_decision": "No user decision is currently required. Execute V0.252 product interaction and browser regression work while keeping external user trial closed."
 }

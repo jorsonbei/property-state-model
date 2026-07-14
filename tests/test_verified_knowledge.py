@@ -77,10 +77,12 @@ class VerifiedKnowledgeTests(unittest.TestCase):
                 "review",
             )
         answer = result["chat"]["assistant_message"]
+        context = server.load_project_context()
         self.assertEqual(result["chat"]["intent"], "project_status")
         self.assertIn("没有", answer)
         self.assertIn("不能编造", answer)
-        self.assertIn("PSM V0.250", answer)
+        self.assertIn(context["current_version"], answer)
+        self.assertIn(context["next_version"], answer)
         self.assertNotIn("数据库迁移模块", answer)
 
     def test_local_project_priority_uses_structured_gate(self) -> None:
@@ -89,9 +91,11 @@ class VerifiedKnowledgeTests(unittest.TestCase):
             "review",
         )
         answer = result["chat"]["assistant_message"]
+        context = server.load_project_context()
         self.assertEqual(result["chat"]["intent"], "project_status")
-        self.assertIn("独立外部语义门", answer)
-        self.assertIn("PSM V0.250", answer)
+        self.assertIn(context["next_version"], answer)
+        self.assertIn("交互稳定性", answer)
+        self.assertIn(context["current_version"], answer)
         self.assertNotIn("未知的证据缺口", answer)
 
     def test_local_project_blocker_does_not_invent_missing_materials(self) -> None:
@@ -101,7 +105,8 @@ class VerifiedKnowledgeTests(unittest.TestCase):
         )
         answer = result["chat"]["assistant_message"]
         self.assertEqual(result["chat"]["intent"], "project_status")
-        self.assertIn("独立语义质量", answer)
+        self.assertIn("没有阻止施工的外部 blocker", answer)
+        self.assertIn("失败恢复", answer)
         self.assertIn("不需要用户介入", answer)
         self.assertNotIn("关键材料", answer)
 
@@ -116,12 +121,13 @@ class VerifiedKnowledgeTests(unittest.TestCase):
             "review",
         )
         answer = result["chat"]["assistant_message"]
+        context = server.load_project_context()
         self.assertEqual(result["chat"]["intent"], "project_status")
-        self.assertIn("PSM V0.250", answer)
-        self.assertIn("PSM V0.249", answer)
+        self.assertIn(context["current_version"], answer)
+        self.assertIn(context["formal_version"], answer)
         self.assertIn("正式回归已经通过", answer)
-        self.assertIn("V0.251", answer)
-        self.assertIn("尚未通过", answer)
+        self.assertIn("V0.251 的全新盲集独立外部语义门也已通过", answer)
+        self.assertIn(context["next_version"], answer)
 
     def test_local_record_next_action_keeps_external_trial_closed(self) -> None:
         result = server.run_chat_turn(
@@ -134,9 +140,11 @@ class VerifiedKnowledgeTests(unittest.TestCase):
             "review",
         )
         answer = result["chat"]["assistant_message"]
+        context = server.load_project_context()
         self.assertEqual(result["chat"]["intent"], "project_status")
         self.assertIn("没有开放", answer)
-        self.assertIn("qwen3.5:9b", answer)
+        self.assertIn(context["selected_model"], answer)
+        self.assertIn("V0.252", answer)
         self.assertNotIn("域特定检查", answer)
 
     def test_food_allergy_kernel_rejects_absolute_guarantee(self) -> None:

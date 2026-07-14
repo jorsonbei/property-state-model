@@ -19,6 +19,7 @@ JUDGES = ROOT / "outputs" / "psm_v0" / "benchmarks" / "v0_251_chat_judges.json"
 WAVE_D_PROMPTS = ROOT / "outputs" / "psm_v0" / "benchmarks" / "v0_251_chat_prompts_wave_d.json"
 WAVE_E_PROMPTS = ROOT / "outputs" / "psm_v0" / "benchmarks" / "v0_251_chat_prompts_wave_e.json"
 WAVE_F_PROMPTS = ROOT / "outputs" / "psm_v0" / "benchmarks" / "v0_251_chat_prompts_wave_f.json"
+WAVE_G_PROMPTS = ROOT / "outputs" / "psm_v0" / "benchmarks" / "v0_251_chat_prompts_wave_g.json"
 
 
 class IndependentChatEvalTests(unittest.TestCase):
@@ -114,6 +115,26 @@ class IndependentChatEvalTests(unittest.TestCase):
         }
         self.assertFalse(
             original_questions
+            & {case["messages"][-1]["content"] for case in blind}
+        )
+
+    def test_externally_authored_wave_g_is_frozen_and_source_isolated(self) -> None:
+        prompts = json.loads(WAVE_G_PROMPTS.read_text(encoding="utf-8"))
+        validate_prompt_contract(prompts)
+        blind = [case for case in prompts["cases"] if case["split"] == "blind"]
+        self.assertEqual(len(blind), 20)
+        self.assertEqual({case["authored_by"] for case in blind}, {"OpenAI ChatGPT Instant"})
+        self.assertTrue(all(case["source_family"].startswith("external_wave_g_") for case in blind))
+        prior_questions = set()
+        for path in (WAVE_D_PROMPTS, WAVE_E_PROMPTS, WAVE_F_PROMPTS):
+            prior = json.loads(path.read_text(encoding="utf-8"))
+            prior_questions.update(
+                case["messages"][-1]["content"]
+                for case in prior["cases"]
+                if case["split"] == "blind"
+            )
+        self.assertFalse(
+            prior_questions
             & {case["messages"][-1]["content"] for case in blind}
         )
 

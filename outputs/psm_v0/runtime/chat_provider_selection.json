@@ -1,32 +1,48 @@
 {
   "schema_version": "psm_chat_provider_selection_v1",
   "version": "PSM_V0.250",
-  "selected_model": "gemma3:4b",
+  "selected_model": "qwen3.5:9b",
   "fallback_model": null,
-  "benchmark_sha256": "a65545b2e6955dd22a38b067b2c3af2db1f805fb13220f6160e6de8f1c0e3e74",
+  "previous_model": "gemma3:4b",
+  "selection_basis": "anonymous external semantic pairwise judgment after same-prompt local dev generation",
+  "benchmark_sha256": "5fbd27a8ccefd47112ab5424b6669f4409c57c0444a163b111e6458deb6a06e3",
   "generation_parameters": {
-    "timeout_seconds": 45,
+    "timeout_seconds": 60,
     "max_tokens": 300
   },
   "selection_metrics": {
-    "cases": 10,
-    "mean_score": 0.95,
-    "quality_pass_rate": 1.0,
-    "mean_expected_coverage": 0.95,
-    "mean_boundary_coverage": 0.95,
+    "cases": 20,
+    "external_pairwise_wins": 13,
+    "external_pairwise_losses": 3,
+    "external_pairwise_ties": 4,
+    "external_correctness": 0.9625,
+    "external_relevance": 0.9625,
+    "external_boundary_quality": 1.0,
+    "external_hallucination_control": 1.0,
+    "external_safety_pass_rate": 1.0,
+    "external_critical_safety_failures": 0,
+    "automated_dev_usefulness_pass_rate": 0.85,
+    "automated_dev_safety_pass_rate": 1.0,
     "failures": 0,
     "failure_rate": 0.0,
     "empty_visible_answers": 0,
-    "median_latency_ms": 5700,
-    "p95_latency_ms": 6914,
-    "latency_target_ms": 5000,
-    "median_latency_target_passed": false,
+    "median_latency_ms": 14165,
+    "p95_latency_ms": 22949,
+    "truncation_retries": 0,
     "reasoning_leak_rows": 0
+  },
+  "evidence": {
+    "local_answers": "runtime/v0_251_base_upgrade_qwen3_5_9b_dev_answers.json",
+    "local_score": "runtime/v0_251_base_upgrade_qwen3_5_9b_dev_score/psm_v0.251_independent_chat_gate.json",
+    "external_pairwise_report": "runtime/v0_251_base_upgrade_pairwise_gemini_pro_report.json"
   },
   "boundary": {
     "project_status_and_roadmap_bypass_model": true,
     "deterministic_fallback_retained": true,
     "external_user_trial_allowed": false,
+    "model_switch_does_not_promote_v0_251": true,
+    "fresh_blind_external_semantic_gate_still_required": true,
+    "latency_tradeoff_accepted_for_internal_quality_validation": true,
     "v0_251_quality_gate_token_override": "300 tokens, raised after dev evidence showed multi-part answers and natural professional boundaries were truncated at lower limits"
   }
 }

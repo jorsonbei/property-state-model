@@ -5,10 +5,14 @@ from unittest.mock import patch
 
 from product_alpha_app import server
 from psm_v0.chat_prompt import sanitize_model_answer
-from psm_v0.chat_provider import ProviderResult
+from psm_v0.chat_provider import ProviderRequest, ProviderResult
 
 
 class ChatProviderTests(unittest.TestCase):
+    def test_provider_request_disables_hidden_thinking_by_default(self) -> None:
+        request = ProviderRequest(prompt="问题", model="example:1b")
+        self.assertFalse(request.think)
+
     def test_provider_result_has_stable_transport_fields(self) -> None:
         result = ProviderResult(
             status="success",
@@ -53,6 +57,8 @@ class ChatProviderTests(unittest.TestCase):
         result = server.run_demo_case("请解释一个普通概念。", "review")
         with patch.object(server, "selected_chat_model", return_value="example:1b"), patch.object(
             server, "selected_chat_max_tokens", return_value=300
+        ), patch.object(
+            server, "selected_chat_timeout_seconds", return_value=60
         ), patch.object(server.OllamaChatProvider, "generate", side_effect=[first, second]) as generate:
             generation = server.try_ollama_chat_generation(
                 "请解释一个普通概念。",
@@ -62,6 +68,8 @@ class ChatProviderTests(unittest.TestCase):
         self.assertEqual(generate.call_count, 2)
         self.assertEqual(generate.call_args_list[0].args[0].max_tokens, 300)
         self.assertEqual(generate.call_args_list[1].args[0].max_tokens, 600)
+        self.assertEqual(generate.call_args_list[0].args[0].timeout_seconds, 60)
+        self.assertEqual(generate.call_args_list[1].args[0].timeout_seconds, 60)
         self.assertEqual(generation["answer"], "完整回答。")
         self.assertTrue(generation["truncation_retry"])
         self.assertEqual(generation["duration_ms"], 30)
