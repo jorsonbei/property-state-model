@@ -2,54 +2,46 @@
 
 ## Current Version
 
-`PSM V0.251`
+`PSM V0.252`
 
-The current project status is `psm_v0.251`. It promoted `independent_chat_golden_blind_set_boundary_adversarial` into the formal core, bringing the formal dataset to 2228 records. Required/fault candidate gating covers 1975 cases with gated PSM unsafe/risky at 0.
+The current project status is `psm_v0.252`. V0.252 promotes the stable internal chat-product gate while retaining `psm_v0.251` as the formal 2228-record core evidence source. Required/fault candidate gating covers 1975 cases with gated PSM unsafe/risky at 0.
 
 ## Latest Completed Result
 
-- The externally authored, frozen Wave G blind gate passed 20/20 under independent `Gemini Pro` semantic judgment.
-- Wave G usefulness/safety/correctness/relevance/boundary/hallucination scores are all 1.0000; critical safety failures=0.
-- The selected local chat model is now `qwen3.5:9b`, chosen after anonymous pairwise judgment against `gemma3:4b` (13 wins, 3 losses, 4 ties).
-- Built `case_packs/v0_251_independent_chat_golden_blind_set_boundary_adversarial_cases.json`.
-- Standalone validation: 18/18 passed, including candidate-audit checks.
-- Promoted the pack into `cases/v0_251_independent_chat_golden_blind_set_boundary_adversarial_cases.json`.
-- Core eval: 2228/2228 passed.
-- State dataset: 2228 records, errors=0, warnings=0.
-- State encoder candidate: exact_match=1.000, B_sigma exact_match=1.000, micro_f1=1.000.
-- Admission gate: passed=True, observed={'exact_match': 1.0, 'micro_f1': 1.0, 'critical_false_negatives': 0}.
-- Shadow replacement boundary: ledger_events=0, replacement_boundary_passed=True.
-- Candidate-assisted mode: override_events=0, drift_present=False, rule_replacement_allowed=false.
-- Holdout no-retrain ledger events: 0 on `v251_`.
-- Required candidate-output gate: 1975 cases, clean=True, gated PSM unsafe/risky=0.
-- Fault injection events: 7206.
-- Controller rescue count: 1975.
-- Candidate taxonomy: rows=5940, ledger_events=17864, invariants_passed=True.
-- Candidate regression fixtures: coverage_passed=True, fixtures=6.
-- Taxonomy delta: changed_groups=47, unexpected_regression=False.
-- Project status: `project_status_out/psm_v0.251_project_status.json`.
-- Regression: passed=True with explicit taxonomy-expansion allowance.
-- At completion, the assigned next stage is `PSM_V0.252`.
+- Added explicit generating phases, elapsed time, cancellation, a 70-second client timeout, retry, and failure recovery.
+- Failed or cancelled turns preserve the user's input; retry does not duplicate the user message.
+- Audited answers are progressively displayed without putting hidden audit fields in the main conversation.
+- Debug evidence is closed by default and isolated from the user-facing message log.
+- Added Enter submission, Escape cancellation, focus control, ARIA live regions, and accessible labels.
+- Added reproducible Playwright regression through `npm` and `make`.
+- Desktop regression: no duplicate messages, layout overflow=0, console errors=0.
+- Mobile regression at 390x844: layout overflow=0, primary controls remain inside the viewport, console errors=0.
+- Real `qwen3.5:9b` backend UI smoke passed on the Docker runtime at `http://127.0.0.1:8766`.
+- Docker runtime uses the selected 9B model and a 60-second server timeout.
+- Product promotion evidence: `runtime/v0_252_product_checkpoint.json` and `runtime/v0_252_product_promotion_manifest.json`.
+- External user trial and rule replacement remain closed.
 
 ## Next Stage
 
-`PSM V0.252`
+`PSM V0.253`
 
-Bring the local chat experience to a stable internal alpha:
+Replace route labels with executable evidence adapters:
 
-- add explicit generating, cancel, timeout, retry, and failure-recovery states;
-- stream or progressively reveal the answer so the selected 9B model does not leave the UI silent;
-- keep debug evidence hidden from the main conversation;
-- add desktop/mobile, keyboard, accessibility, duplicate-message, and overflow regression coverage;
-- rebuild and verify both the local server and Docker runtime.
+- define a uniform route-result, provenance, and failure-ledger contract;
+- connect project questions to local structured status;
+- connect factual questions to source/retrieval evidence;
+- connect code questions to real static checks, tests, and sandboxed commands;
+- connect file questions to real file reads and citations;
+- inject tool failures and conflicts so language cannot hide missing evidence or bypass PSM gating.
 
 - Blocked: false.
 - Requires user input: false.
 
 ## Recovery Artifacts
 
-- Machine status: `project_status_out/psm_v0.251_project_status.json`.
+- Machine status: `project_status_out/psm_v0.252_project_status.json`.
 - Public runtime snapshot: `runtime/current_runtime_snapshot.json`.
+- Product checkpoint: `runtime/v0_252_product_checkpoint.json`.
 - Current execution roadmap: `roadmap_out/PSM_Full_Project_Audit_and_Execution_Roadmap_V0.248_to_V0.260.md`.
 
 Version history is stored as independent snapshots under `status_history/`; it is never embedded recursively here.

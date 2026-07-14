@@ -17,6 +17,8 @@ class ProductStatusTests(unittest.TestCase):
         self.assertTrue(status["version"].startswith("PSM V0."))
         self.assertGreater(status["core_cases"], 0)
         self.assertFalse(status["ready_for_external_user_trial"])
+        self.assertEqual(status["selected_chat_model"], "qwen3.5:9b")
+        self.assertEqual(status["chat_timeout_seconds"], 60)
 
 
 if __name__ == "__main__":

@@ -24,8 +24,8 @@
         </div>
       </header>
 
-      <section class="chat-card" aria-live="polite">
-        <div class="message-list" id="messages"></div>
+      <section class="chat-card">
+        <div class="message-list" id="messages" role="log" aria-live="polite" aria-relevant="additions text"></div>
         <div class="suggestions" aria-label="Example prompts">
           <button class="scenario" data-scenario="review">產品邊界</button>
           <button class="scenario" data-scenario="research">研究判斷</button>
@@ -37,11 +37,26 @@
       </section>
 
       <section class="composer" aria-label="Chat input">
-        <textarea id="prompt" placeholder="直接輸入你的問題。按 Enter 發送，Shift + Enter 換行。" spellcheck="false"></textarea>
+        <div class="composer-main">
+          <textarea
+            id="prompt"
+            aria-label="輸入聊天問題"
+            maxlength="4000"
+            placeholder="直接輸入你的問題。按 Enter 發送，Shift + Enter 換行。"
+            spellcheck="false"
+          ></textarea>
+          <div class="request-feedback" id="request-feedback" role="status" aria-live="polite" hidden>
+            <span class="activity-indicator" id="activity-indicator" aria-hidden="true"></span>
+            <span id="request-status">準備回答</span>
+            <span id="request-elapsed"></span>
+          </div>
+        </div>
         <div class="composer-actions">
-          <button id="run" class="primary">發送</button>
-          <button id="reset">清空</button>
-          <button id="evidence-toggle">調試</button>
+          <button id="run" class="primary" type="button"><span aria-hidden="true">↑</span><span>發送</span></button>
+          <button id="cancel" class="danger" type="button" title="取消生成" aria-label="取消生成" hidden><span aria-hidden="true">■</span></button>
+          <button id="retry" type="button" title="重試上次問題" hidden><span aria-hidden="true">↻</span><span>重試</span></button>
+          <button id="reset" type="button" title="清空聊天"><span aria-hidden="true">⌫</span><span>清空</span></button>
+          <button id="evidence-toggle" type="button" aria-controls="debug-panel" aria-expanded="false"><span aria-hidden="true">⚙</span><span>調試</span></button>
         </div>
       </section>
 

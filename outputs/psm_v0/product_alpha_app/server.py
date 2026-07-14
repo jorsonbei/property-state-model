@@ -54,7 +54,7 @@ def main() -> None:
 
 
 class Handler(BaseHTTPRequestHandler):
-    server_version = "PSMProductAlpha/0.2"
+    server_version = "PSMProductAlpha/0.252"
 
     def do_GET(self) -> None:  # noqa: N802
         parsed = urlparse(self.path)
@@ -628,9 +628,9 @@ def project_status_answer(context: dict, question: str = "") -> str:
     if any(marker in question for marker in ("直接放行", "聊天已经能用", "聊天已經能用")):
         return (
             f"不能因为聊天已经能用就直接放行。当前正式版本仍是 {context['current_version']}，"
-            "V0.251 的全新盲集和独立外部语义门已经通过；但下一阶段仍要完成生成状态、取消、超时、重试、"
-            "错误恢复、桌面与移动端浏览器回归。能生成正常回答只证明功能可运行，不能证明稳定性、可访问性、"
-            "隐私合规或外部用户发布条件已经成立；因此外部用户试用仍未开放。"
+            "独立聊天盲测和内部产品交互门已经通过；但这仍不能证明真实工具路线、隐私合规或外部用户发布条件"
+            f"已经成立。下一阶段是 {context['next_version']}：{context['next_objective']}。"
+            "因此外部用户试用仍未开放。"
         )
     if any(marker in question for marker in ("正式版本", "版本号", "版本號", "核心验证门", "核心驗證門")):
         answer = (
@@ -640,7 +640,7 @@ def project_status_answer(context: dict, question: str = "") -> str:
         if context["chat_gate_passed"]:
             answer += "V0.251 的全新盲集独立外部语义门也已通过。"
         answer += (
-            f"下一阶段是 {context['next_version']} 的产品交互与浏览器回归；"
+            f"下一阶段是 {context['next_version']}：{context['next_objective']}；"
             "这些内部门通过前不能升级产品稳定性声明，外部用户试用仍未开放。"
         )
         return answer
@@ -655,13 +655,13 @@ def project_status_answer(context: dict, question: str = "") -> str:
             f"当前最高优先级是完成 {context['next_version']} 的 {context['next_objective']}，"
             f"原因是正式版本仍是 {context['current_version']}，确定性正式源为 {context['formal_version']}，"
             f"共有 {context['core_cases']} 个正式案例，V0.251 独立外部语义门已经通过；"
-            "当前剩余门是交互稳定性、失败恢复和浏览器回归，不是继续改写已封存盲集。"
+            "当前应执行记录中的真实下一阶段，不再改写已封存盲集。"
         )
     if any(marker in question for marker in ("阻塞因素", "阻碍因素", "阻礙因素", "最大阻塞", "最大的阻塞")):
         user_blocker = "需要用户介入" if context["requires_user_input"] else "不需要用户介入"
         return (
             f"当前没有阻止施工的外部 blocker；最大的阶段门是 {context['next_version']} 的"
-            f"{context['next_objective']}。现阶段{user_blocker}；工程上要完成交互状态、失败恢复和浏览器回归，"
+            f"{context['next_objective']}。现阶段{user_blocker}；"
             "外部用户试用仍未开放。"
         )
     answer = (
@@ -673,7 +673,7 @@ def project_status_answer(context: dict, question: str = "") -> str:
         "当前仍是内部本地聊天候选，外部用户试用没有开放。"
     )
     if context["stage_blocked"]:
-        answer += f"\n\nV0.251 当前未晋级：{context['required_decision']}"
+        answer += f"\n\n{context['next_version']} 当前受阻：{context['required_decision']}"
     return answer
 
 
@@ -689,6 +689,12 @@ def roadmap_answer(context: dict) -> str:
             "施工顺序是：先建立生成中、取消、超时、重试和错误恢复状态；再接入渐进式回答显示，"
             "确保 9B 模型生成期间主界面持续反馈；随后把调试证据默认隐藏，并补齐桌面与移动视口、"
             "键盘操作、基础无障碍、重复消息和布局溢出回归；最后重建本地与 Docker 运行时。"
+        )
+    elif context["next_version"] == "PSM V0.253":
+        construction = (
+            "施工顺序是：先定义统一 route-result 与 provenance 契约；再把项目状态、事实来源、代码检查和文件读取"
+            "四类路线接入真实本地适配器；随后注入超时、缺失来源、工具失败和输出冲突，确保失败会入账并降级；"
+            "最后补 API、回归和 Docker 验证，工具结果仍不能绕过 PSM 门控。"
         )
     elif context["next_version"] == "PSM V0.250":
         construction = (
@@ -716,6 +722,14 @@ def roadmap_answer(context: dict) -> str:
 
 
 def project_results_answer(context: dict) -> str:
+    if context["current_version"] == "PSM V0.252":
+        return (
+            "这轮已完成 PSM V0.252：正常聊天现在有明确生成阶段、耗时、取消、70 秒超时、保留输入重试和错误恢复，"
+            "回答通过审计后会逐步显示，调试证据不会进入主对话。桌面、手机、键盘、布局溢出和真实 Qwen/Docker"
+            f"后端都已通过自动化浏览器回归，当前聊天模型是 `{context['selected_model']}`。\n\n"
+            "它的作用是把“能生成答案”升级成可稳定操作、失败可恢复、结果可验收的内部聊天 alpha。"
+            f"下一步是 {context['next_version']}：{context['next_objective']}。"
+        )
     return (
         f"这轮已完成 {context['current_version']}：建立了本地模型 provider 和结构化生成契约，"
         f"并在固定同题集上选择 `{context['selected_model']}`。"
@@ -1110,7 +1124,11 @@ def load_project_context() -> dict:
     selection_path = PSM_ROOT / "runtime" / "chat_provider_selection.json"
     selection = load_json(selection_path) if selection_path.exists() else {}
     selection_metrics = selection.get("selection_metrics", {})
-    checkpoint_path = PSM_ROOT / "runtime" / "v0_251_chat_gate_checkpoint.json"
+    checkpoint_candidates = (
+        PSM_ROOT / "runtime" / "v0_252_product_checkpoint.json",
+        PSM_ROOT / "runtime" / "v0_251_chat_gate_checkpoint.json",
+    )
+    checkpoint_path = next((path for path in checkpoint_candidates if path.exists()), checkpoint_candidates[-1])
     checkpoint = load_json(checkpoint_path) if checkpoint_path.exists() else {}
     chat_gate = status.get("independent_chat_gate") or {}
     return {
@@ -1271,6 +1289,8 @@ def load_status_summary() -> dict:
     current_version = status["current_version"].replace("psm_v", "PSM V")
     return {
         "version": current_version,
+        "selected_chat_model": selected_chat_model(),
+        "chat_timeout_seconds": selected_chat_timeout_seconds(),
         "core_cases": status["core_metrics"]["state_records"],
         "full_external_cases": full.get("holdout_cases"),
         "full_gated_risk": full.get("required_gated_psm_unsafe_or_risky"),

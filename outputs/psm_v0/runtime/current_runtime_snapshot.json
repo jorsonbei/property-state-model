@@ -2,10 +2,10 @@
   "schema_version": "psm_public_runtime_snapshot_v1",
   "project_status": {
     "updated_from_local_artifacts": true,
-    "current_version": "psm_v0.251",
+    "current_version": "psm_v0.252",
     "source_evidence_version": "psm_v0.251",
-    "previous_formal_version": "psm_v0.249",
-    "completed_result": "formal_core_expansion",
+    "previous_formal_version": "psm_v0.251",
+    "completed_result": "product_ux_and_browser_regression",
     "family": {
       "family_id": "v251_independent_chat_golden_blind_set_boundary_adversarial",
       "case_pack": "case_packs/v0_251_independent_chat_golden_blind_set_boundary_adversarial_cases.json",
@@ -244,8 +244,8 @@
       "rule_replacement_allowed": false
     },
     "next_stage": {
-      "version": "PSM_V0.252",
-      "objective": "Build a stable internal chat alpha with generating, cancel, timeout, retry, recovery, progressive answer display, hidden debug evidence, and desktop/mobile browser regression.",
+      "version": "PSM_V0.253",
+      "objective": "Replace route labels with executable local state, source/retrieval, code-check, and file-evidence adapters; record provenance and failures without allowing tool output to bypass PSM gating.",
       "blocked": false,
       "requires_user_input": false
     },
@@ -259,10 +259,12 @@
       "candidate_taxonomy": "taxonomy_out/psm_v0.251_candidate_taxonomy.json",
       "candidate_regression_fixtures": "fixture_out/psm_v0.251_candidate_regression_fixtures.json",
       "taxonomy_delta": "taxonomy_delta_out/psm_v0.251_taxonomy_delta.json",
-      "project_status": "project_status_out/psm_v0.251_project_status.json",
+      "project_status": "project_status_out/psm_v0.252_project_status.json",
       "regression": "regression_out/psm_v0.251_regression_check.json",
       "independent_chat_gate": "runtime/v0_251_wave_g_external_semantic_judge.json",
-      "model_selection": "runtime/v0_251_base_upgrade_pairwise_gemini_pro_report.json"
+      "model_selection": "runtime/v0_251_base_upgrade_pairwise_gemini_pro_report.json",
+      "product_ux_gate": "runtime/v0_252_browser_regression/report.json",
+      "product_checkpoint": "runtime/v0_252_product_checkpoint.json"
     },
     "regression": {
       "stem": "psm_v0.251",
@@ -310,6 +312,19 @@
       },
       "rule_replacement_allowed": false,
       "check_version": "psm_v0.251"
+    },
+    "product_ux_gate": {
+      "browser_report": "runtime/v0_252_browser_regression/report.json",
+      "browser_base_url": "http://127.0.0.1:8766",
+      "desktop_passed": true,
+      "mobile_passed": true,
+      "real_backend_passed": true,
+      "selected_model": "qwen3.5:9b",
+      "answer_minimum_80_characters": true,
+      "console_errors": 0,
+      "layout_overflow": 0,
+      "duplicate_user_messages_after_retry": 0,
+      "internal_debug_leakage": false
     }
   },
   "optional_project_status": {

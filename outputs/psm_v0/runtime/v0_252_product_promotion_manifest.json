@@ -1,0 +1,34 @@
+{
+  "schema_version": "psm_v0_252_product_promotion_manifest_v1",
+  "version": "PSM_V0.252",
+  "promoted_at": "2026-07-14",
+  "promoted": true,
+  "core_source_version": "PSM_V0.251",
+  "formal_core_records": 2228,
+  "selected_model": "qwen3.5:9b",
+  "product_gate": {
+    "browser_report": "runtime/v0_252_browser_regression/report.json",
+    "browser_base_url": "http://127.0.0.1:8766",
+    "desktop_passed": true,
+    "mobile_passed": true,
+    "real_backend_passed": true,
+    "selected_model": "qwen3.5:9b",
+    "answer_minimum_80_characters": true,
+    "console_errors": 0,
+    "layout_overflow": 0,
+    "duplicate_user_messages_after_retry": 0,
+    "internal_debug_leakage": false
+  },
+  "boundaries": {
+    "external_user_trial_allowed": false,
+    "internal_local_demo_only": true,
+    "v0_252_promoted": true,
+    "v0_253_route_work_allowed": true
+  },
+  "next_stage": {
+    "version": "PSM_V0.253",
+    "objective": "Replace route labels with executable local state, source/retrieval, code-check, and file-evidence adapters; record provenance and failures without allowing tool output to bypass PSM gating.",
+    "blocked": false,
+    "requires_user_input": false
+  }
+}

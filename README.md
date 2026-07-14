@@ -9,14 +9,15 @@ PSM is an experimental state-first AI control layer. It routes a request through
 - Deterministic state pipeline: `Q -> Omega -> phi -> Delta sigma -> Pi -> eta -> B_sigma -> Sigma+`.
 - Candidate generation adapters, lexical auditing, deterministic gating, failure ledger, and regression artifacts.
 - Local chat alpha backed by Ollama.
-- Current public baseline: `PSM V0.250` (deterministic formal source: `PSM V0.249`).
-- V0.251 remains unpromoted after sealed cross-provider blind waves C-F. Latest wave F passed 12/20; usefulness=0.6000, correctness=0.7750, hallucination control=0.8125, and safety=1.0000. The active repair is a local 9B base-model bakeoff before a fresh wave G.
+- Current public baseline: `PSM V0.252` (formal 2228-record core evidence source: `PSM V0.251`).
+- V0.251's fresh externally authored Wave G passed 20/20 under an independent external semantic judge; usefulness, safety, correctness, relevance, boundary quality, and hallucination control were each 1.0000 on that frozen synthetic blind wave.
+- V0.252 adds a stable internal chat-product gate with cancel, timeout, retry, recovery, progressive display, hidden debug evidence, and desktop/mobile/real-backend browser regression.
 
 This repository is an experimental research and engineering system. It is not a medical, legal, investment, production-release, or external-user authorization system. Passing synthetic regressions does not prove open-domain generalization.
 
 ## Quick start
 
-Requirements: Python 3.11+ and, for generated chat answers, a local Ollama server with `gemma3:4b` or another configured model.
+Requirements: Python 3.11+ and, for generated chat answers, a local Ollama server with `qwen3.5:9b` or another configured model.
 
 ```bash
 make check
@@ -26,6 +27,14 @@ make serve
 Open `http://127.0.0.1:8765/`.
 
 The deterministic pipeline itself uses only the Python standard library. Ollama is optional; the chat app falls back to a deterministic bounded response when the model is unavailable.
+
+Install and run the browser regression harness:
+
+```bash
+make browser-install
+make browser-regression
+PSM_BASE_URL=http://127.0.0.1:8765 make browser-regression-real
+```
 
 Generate a read-only inventory of the local evidence store without moving or deleting artifacts:
 

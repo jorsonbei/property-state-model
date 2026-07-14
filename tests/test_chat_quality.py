@@ -66,6 +66,7 @@ class ChatQualityTests(unittest.TestCase):
         self.assertEqual(result["chat"]["quality_audit"]["status"], "pass")
 
     def test_project_followup_routes_to_frozen_roadmap(self) -> None:
+        context = server.load_project_context()
         result = self.run_offline(
             [
                 {"role": "user", "content": "告诉我当前项目版本。"},
@@ -75,11 +76,13 @@ class ChatQualityTests(unittest.TestCase):
         )
 
         self.assertEqual(result["chat"]["intent"], "roadmap")
-        self.assertIn("取消", result["chat"]["assistant_message"])
-        self.assertIn("错误恢复", result["chat"]["assistant_message"])
-        self.assertIn("移动视口", result["chat"]["assistant_message"])
+        self.assertIn(context["current_version"], result["chat"]["assistant_message"])
+        self.assertIn(context["next_version"], result["chat"]["assistant_message"])
+        self.assertIn(context["next_objective"], result["chat"]["assistant_message"])
+        self.assertIn("provenance", result["chat"]["assistant_message"])
 
     def test_working_chat_does_not_imply_external_release(self) -> None:
+        context = server.load_project_context()
         result = self.run_offline(
             [
                 {"role": "user", "content": "外部试用还没有开放。"},
@@ -90,9 +93,10 @@ class ChatQualityTests(unittest.TestCase):
         answer = result["chat"]["assistant_message"]
 
         self.assertEqual(result["chat"]["intent"], "project_status")
-        self.assertIn("全新盲集", answer)
-        self.assertIn("独立外部语义门已经通过", answer)
-        self.assertIn("错误恢复", answer)
+        self.assertIn("独立聊天盲测", answer)
+        self.assertIn("内部产品交互门已经通过", answer)
+        self.assertIn(context["next_version"], answer)
+        self.assertIn(context["next_objective"], answer)
         self.assertIn("不能证明", answer)
         self.assertIn("外部用户试用仍未开放", answer)
 

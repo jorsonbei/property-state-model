@@ -8,7 +8,7 @@ services:
     environment:
       OLLAMA_BASE_URL: "${OLLAMA_BASE_URL:-http://host.docker.internal:11434}"
       OLLAMA_MODEL: "${OLLAMA_MODEL:-}"
-      PSM_CHAT_TIMEOUT_SECONDS: "${PSM_CHAT_TIMEOUT_SECONDS:-45}"
+      PSM_CHAT_TIMEOUT_SECONDS: "${PSM_CHAT_TIMEOUT_SECONDS:-60}"
       PSM_CHAT_MAX_TOKENS: "${PSM_CHAT_MAX_TOKENS:-}"
     extra_hosts:
       - "host.docker.internal:host-gateway"

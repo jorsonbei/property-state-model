@@ -1,0 +1,40 @@
+{
+  "schema_version": "psm_v0_252_product_checkpoint_v1",
+  "current_promoted_version": "PSM_V0.252",
+  "target_version": "PSM_V0.252",
+  "target_promoted": true,
+  "status": "promoted_v0_253_real_omega_routes_in_progress",
+  "requires_user_input": false,
+  "product_gate": {
+    "browser_report": "runtime/v0_252_browser_regression/report.json",
+    "browser_base_url": "http://127.0.0.1:8766",
+    "desktop_passed": true,
+    "mobile_passed": true,
+    "real_backend_passed": true,
+    "selected_model": "qwen3.5:9b",
+    "answer_minimum_80_characters": true,
+    "console_errors": 0,
+    "layout_overflow": 0,
+    "duplicate_user_messages_after_retry": 0,
+    "internal_debug_leakage": false
+  },
+  "completed_engineering": [
+    "explicit generation phases with elapsed time",
+    "AbortController cancellation and 70-second client timeout",
+    "retry with preserved input and no duplicate user turn",
+    "progressive display after audited answer acceptance",
+    "debug evidence isolated from the main conversation",
+    "desktop and mobile browser regression",
+    "keyboard submission and focus controls",
+    "basic ARIA live regions and accessible labels",
+    "host and Docker real-backend UI smoke tests",
+    "reproducible npm and Makefile browser-test entrypoints"
+  ],
+  "release_boundary": {
+    "external_user_trial_allowed": false,
+    "internal_local_demo_only": true,
+    "v0_252_promoted": true,
+    "v0_253_route_work_allowed": true
+  },
+  "required_decision": "No user decision is currently required. Execute V0.253 real Omega route and tool-evidence work while keeping external user trial and rule replacement closed."
+}

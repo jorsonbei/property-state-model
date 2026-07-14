@@ -94,7 +94,8 @@ class VerifiedKnowledgeTests(unittest.TestCase):
         context = server.load_project_context()
         self.assertEqual(result["chat"]["intent"], "project_status")
         self.assertIn(context["next_version"], answer)
-        self.assertIn("交互稳定性", answer)
+        self.assertIn(context["next_objective"], answer)
+        self.assertIn("真实下一阶段", answer)
         self.assertIn(context["current_version"], answer)
         self.assertNotIn("未知的证据缺口", answer)
 
@@ -104,9 +105,11 @@ class VerifiedKnowledgeTests(unittest.TestCase):
             "review",
         )
         answer = result["chat"]["assistant_message"]
+        context = server.load_project_context()
         self.assertEqual(result["chat"]["intent"], "project_status")
         self.assertIn("没有阻止施工的外部 blocker", answer)
-        self.assertIn("失败恢复", answer)
+        self.assertIn(context["next_version"], answer)
+        self.assertIn(context["next_objective"], answer)
         self.assertIn("不需要用户介入", answer)
         self.assertNotIn("关键材料", answer)
 
