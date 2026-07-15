@@ -1,0 +1,55 @@
+{
+  "schema_version": "psm_v0_263_enrollment_browser_regression_v1",
+  "base_url": "http://127.0.0.1:8765",
+  "passed": true,
+  "human_enrollment_actions_executed": false,
+  "invitation_codes_printed_or_rendered": false,
+  "trial_active": false,
+  "desktop": {
+    "layout": {
+      "scrollWidth": 1440,
+      "innerWidth": 1440,
+      "cardsInsideViewport": true
+    },
+    "consoleErrors": 0,
+    "codeBoundary": {
+      "masked": true,
+      "privateValuesPresentOnlyInOperatorDom": true,
+      "noPrivateValueRendered": true
+    },
+    "publicBoundary": {
+      "publicStatusCode": 200,
+      "publicContainsInvitationCode": false,
+      "publicContainsAuditSecret": false,
+      "invited": 3,
+      "adultVerified": 0,
+      "noticeAcknowledged": 0,
+      "consented": 0,
+      "sessionEnabled": 0,
+      "trialActive": false,
+      "operatorCardCount": 3,
+      "preGateStatusCode": 409,
+      "preGateTrialActive": false
+    }
+  },
+  "mobile": {
+    "layout": {
+      "scrollWidth": 390,
+      "innerWidth": 390,
+      "cardsInsideViewport": true,
+      "visibleCardCount": 3
+    },
+    "consoleErrors": 0
+  },
+  "checks": {
+    "three_pseudonymous_cards": true,
+    "invitation_codes_masked": true,
+    "strict_steps_visible": true,
+    "all_human_counts_zero": true,
+    "first_message_rejected_before_gate": true,
+    "public_status_redacted": true,
+    "desktop_overflow": false,
+    "mobile_overflow": false,
+    "console_errors": 0
+  }
+}

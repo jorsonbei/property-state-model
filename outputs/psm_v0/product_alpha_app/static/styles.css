@@ -129,7 +129,8 @@ h1 {
   gap: 7px;
 }
 
-.metrics-strip span {
+.metrics-strip span,
+.metrics-strip .header-action {
   min-height: 30px;
   display: inline-flex;
   align-items: center;
@@ -140,6 +141,10 @@ h1 {
   color: #405066;
   font-size: 12px;
   font-weight: 680;
+}
+
+.metrics-strip .header-action {
+  text-decoration: none;
 }
 
 .chat-card {

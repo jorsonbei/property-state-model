@@ -1,0 +1,64 @@
+{
+  "schema_version": "psm_v0_263_three_participant_enrollment_contract_v1",
+  "stage_version": "PSM_V0.263",
+  "status": "frozen_pre_enrollment",
+  "authorization": {
+    "participant_count_selected_by_user": true,
+    "selected_at": "2026-07-15",
+    "selection_text": "3人",
+    "selected_participant_count": 3,
+    "does_not_assert_adulthood_presence_or_consent": true
+  },
+  "parent_protocol": {
+    "version": "PSM_V0.262",
+    "path": "benchmarks/v0_262_invite_only_external_trial_protocol.json",
+    "sha256": "e6b0f03e2115f783c6af39d3a7dcc9441a04bc7e936cc3f28e884e6a1acfb6b7"
+  },
+  "cohort": {
+    "participant_count": 3,
+    "pseudonymous_participant_ids": [
+      "P01",
+      "P02",
+      "P03"
+    ],
+    "direct_identity_collection_allowed": false,
+    "invitation_code_storage": "local_private_owner_only",
+    "invitee_binding": "secret_hmac_one_to_one",
+    "public_or_git_invitation_codes_allowed": false
+  },
+  "required_sequence": [
+    "operator_verifies_pre_vetted_adult_invitee",
+    "operator_displays_frozen_notice",
+    "participant_acknowledges_notice",
+    "participant_explicitly_opts_in",
+    "operator_attests_supervision_and_enables_session"
+  ],
+  "activation_gate": {
+    "all_selected_participants_must_complete": true,
+    "minimum_valid_receipts": 3,
+    "maximum_valid_receipts": 3,
+    "first_trial_message_before_gate": "reject",
+    "wrong_invitation_or_out_of_order_action": "reject",
+    "withdrawal_or_revocation": "stop_without_automatic_resume"
+  },
+  "private_storage": {
+    "git_ignored": true,
+    "directory_mode": "0700",
+    "state_file_mode": "0600",
+    "raw_chat_persisted": false,
+    "content_free_metadata_retention_days": 7
+  },
+  "release_boundary": {
+    "participant_count_selected": true,
+    "invitations_preparation_authorized": true,
+    "adult_verification_completed": false,
+    "notice_acknowledgment_completed": false,
+    "explicit_consent_completed": false,
+    "supervised_trial_active": false,
+    "public_service_allowed": false,
+    "privacy_compliance_claimed": false,
+    "training_on_trial_data_allowed": false,
+    "rule_replacement_allowed": false,
+    "external_release_authority": false
+  }
+}

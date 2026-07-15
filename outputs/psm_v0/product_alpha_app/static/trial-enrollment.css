@@ -1,0 +1,332 @@
+.enrollment-shell {
+  width: min(1120px, calc(100vw - 28px));
+  margin: 0 auto;
+  padding: 18px 0 40px;
+  display: grid;
+  gap: 14px;
+}
+
+.enrollment-header {
+  box-shadow: var(--shadow);
+}
+
+.header-action {
+  min-height: 38px;
+  padding: 0 13px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  border: 1px solid var(--line);
+  border-radius: 7px;
+  background: #fff;
+  color: var(--text);
+  font-size: 13px;
+  font-weight: 720;
+  text-decoration: none;
+}
+
+.enrollment-summary {
+  display: grid;
+  grid-template-columns: repeat(5, minmax(0, 1fr));
+  border: 1px solid var(--line);
+  border-radius: 8px;
+  background: var(--surface);
+  box-shadow: var(--shadow);
+  overflow: hidden;
+}
+
+.enrollment-summary div {
+  min-height: 72px;
+  padding: 12px 14px;
+  display: grid;
+  align-content: center;
+  gap: 4px;
+  border-right: 1px solid var(--line);
+}
+
+.enrollment-summary div:last-child {
+  border-right: 0;
+}
+
+.enrollment-summary span,
+.participant-label {
+  color: var(--muted);
+  font-size: 12px;
+  font-weight: 680;
+}
+
+.enrollment-summary strong {
+  font-size: 22px;
+  font-variant-numeric: tabular-nums;
+}
+
+.boundary-band {
+  min-height: 54px;
+  padding: 12px 16px;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  border: 1px solid rgba(184, 121, 19, 0.38);
+  border-radius: 8px;
+  background: #fff9ed;
+  color: #724b0f;
+}
+
+.boundary-band.active {
+  border-color: rgba(15, 155, 142, 0.4);
+  background: var(--green-soft);
+  color: #0b665e;
+}
+
+.boundary-band span {
+  font-size: 13px;
+}
+
+.participant-section,
+.notice-section {
+  padding: 18px;
+  border: 1px solid var(--line);
+  border-radius: 8px;
+  background: var(--surface);
+  box-shadow: var(--shadow);
+}
+
+.section-heading {
+  margin-bottom: 14px;
+  display: flex;
+  justify-content: space-between;
+  gap: 12px;
+  align-items: end;
+}
+
+.section-heading h2 {
+  font-size: 17px;
+}
+
+.section-heading p {
+  margin-top: 4px;
+  color: var(--muted);
+  font-size: 13px;
+}
+
+.participant-grid {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 12px;
+}
+
+.participant-card {
+  min-width: 0;
+  padding: 14px;
+  display: grid;
+  align-content: start;
+  gap: 12px;
+  border: 1px solid var(--line);
+  border-radius: 8px;
+  background: var(--surface-soft);
+}
+
+.participant-head {
+  min-height: 44px;
+  display: flex;
+  justify-content: space-between;
+  align-items: start;
+  gap: 10px;
+}
+
+.participant-head h3 {
+  margin: 2px 0 0;
+  font-size: 20px;
+}
+
+.step-state {
+  padding: 5px 7px;
+  border-radius: 6px;
+  background: var(--blue-soft);
+  color: #2452a8;
+  font-size: 11px;
+  font-weight: 740;
+}
+
+.invitation-row {
+  min-width: 0;
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) auto;
+  gap: 8px;
+}
+
+.invitation-code {
+  min-width: 0;
+  min-height: 36px;
+  padding: 8px;
+  border: 1px solid var(--line);
+  border-radius: 6px;
+  background: #fff;
+  overflow-wrap: anywhere;
+  font-size: 12px;
+}
+
+.icon-button,
+.participant-actions button {
+  min-height: 36px;
+  padding: 0 10px;
+  border: 1px solid var(--line);
+  border-radius: 7px;
+  background: #fff;
+  color: var(--text);
+  font-size: 12px;
+  font-weight: 720;
+}
+
+.step-list {
+  margin: 0;
+  padding: 0;
+  display: grid;
+  grid-template-columns: repeat(5, minmax(0, 1fr));
+  gap: 5px;
+  list-style: none;
+}
+
+.step-list li {
+  min-width: 0;
+  min-height: 42px;
+  padding: 5px 3px;
+  display: grid;
+  place-items: center;
+  border: 1px solid var(--line);
+  border-radius: 6px;
+  background: #fff;
+  color: var(--muted);
+  font-size: 10px;
+  line-height: 1.2;
+  text-align: center;
+  overflow-wrap: anywhere;
+}
+
+.step-list li.complete {
+  border-color: rgba(15, 155, 142, 0.35);
+  background: var(--green-soft);
+  color: #0b665e;
+}
+
+.step-list li.current {
+  border-color: rgba(37, 99, 235, 0.4);
+  background: var(--blue-soft);
+  color: #2452a8;
+}
+
+.attestation-row {
+  min-height: 52px;
+  padding: 9px;
+  display: grid;
+  grid-template-columns: auto minmax(0, 1fr);
+  align-items: start;
+  gap: 8px;
+  border: 1px solid var(--line);
+  border-radius: 7px;
+  background: #fff;
+  font-size: 12px;
+  line-height: 1.42;
+}
+
+.attestation-row input {
+  width: 17px;
+  height: 17px;
+  margin: 0;
+}
+
+.participant-actions {
+  display: flex;
+  gap: 7px;
+  flex-wrap: wrap;
+}
+
+.participant-actions .primary {
+  background: var(--blue);
+  border-color: var(--blue);
+  color: #fff;
+}
+
+.participant-actions .danger {
+  color: #a8342d;
+  border-color: rgba(168, 52, 45, 0.35);
+  background: #fff7f6;
+}
+
+.participant-actions button:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+.action-error {
+  color: #a8342d;
+  font-size: 12px;
+  line-height: 1.4;
+}
+
+#notice-content {
+  max-height: 440px;
+  margin: 0;
+  padding: 16px;
+  overflow: auto;
+  border: 1px solid var(--line);
+  border-radius: 7px;
+  background: var(--surface-soft);
+  color: var(--text);
+  font-family: inherit;
+  font-size: 13px;
+  line-height: 1.65;
+  white-space: pre-wrap;
+  overflow-wrap: anywhere;
+}
+
+@media (max-width: 820px) {
+  .participant-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .enrollment-summary {
+    grid-template-columns: repeat(5, minmax(96px, 1fr));
+    overflow-x: auto;
+  }
+}
+
+@media (max-width: 560px) {
+  .enrollment-shell {
+    width: min(100% - 18px, 1120px);
+    padding-top: 9px;
+  }
+
+  .enrollment-header {
+    align-items: flex-start;
+  }
+
+  .enrollment-summary {
+    grid-template-columns: repeat(5, minmax(0, 1fr));
+    overflow: hidden;
+  }
+
+  .enrollment-summary div {
+    min-height: 64px;
+    padding: 9px 5px;
+  }
+
+  .enrollment-summary span {
+    font-size: 10px;
+    overflow-wrap: anywhere;
+  }
+
+  .enrollment-summary strong {
+    font-size: 19px;
+  }
+
+  .boundary-band {
+    align-items: flex-start;
+    flex-direction: column;
+  }
+
+  .participant-section,
+  .notice-section {
+    padding: 12px;
+  }
+}

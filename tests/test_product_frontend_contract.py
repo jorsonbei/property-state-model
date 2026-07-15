@@ -14,6 +14,9 @@ class ProductFrontendContractTests(unittest.TestCase):
         cls.html = (STATIC / "index.html").read_text(encoding="utf-8")
         cls.javascript = (STATIC / "app.js").read_text(encoding="utf-8")
         cls.css = (STATIC / "styles.css").read_text(encoding="utf-8")
+        cls.enrollment_html = (STATIC / "trial-enrollment.html").read_text(encoding="utf-8")
+        cls.enrollment_javascript = (STATIC / "trial-enrollment.js").read_text(encoding="utf-8")
+        cls.enrollment_css = (STATIC / "trial-enrollment.css").read_text(encoding="utf-8")
 
     def test_request_lifecycle_controls_are_accessible(self) -> None:
         for element_id in (
@@ -61,6 +64,29 @@ class ProductFrontendContractTests(unittest.TestCase):
         self.assertIn("overflow-x: auto", self.css)
         self.assertIn("overflow-wrap: anywhere", self.css)
         self.assertIn("@media (max-width: 640px)", self.css)
+
+    def test_v0_263_enrollment_surface_has_all_human_gates(self) -> None:
+        for marker in (
+            "成年核驗",
+            "展示告知",
+            "參與者確認",
+            "明確同意",
+            "監督會話",
+            "撤回",
+        ):
+            self.assertIn(marker, self.enrollment_html)
+        self.assertIn("/api/trial-enrollment/operator-cards", self.enrollment_javascript)
+        self.assertIn("participant_explicit_opt_in", self.enrollment_javascript)
+        self.assertIn("operator_supervision_attested", self.enrollment_javascript)
+        self.assertIn("••••••••••••", self.enrollment_javascript)
+        self.assertIn('sessionStorage.removeItem("psmTrialInvitationCode")', self.enrollment_javascript)
+        self.assertIn("grid-template-columns: repeat(3, minmax(0, 1fr))", self.enrollment_css)
+
+    def test_trial_chat_mode_hides_developer_debug_and_uses_gated_endpoint(self) -> None:
+        self.assertIn('"/api/trial-chat"', self.javascript)
+        self.assertIn('$("debug-panel").hidden = true', self.javascript)
+        self.assertIn('$("evidence-toggle").hidden = true', self.javascript)
+        self.assertIn("psmTrialInvitationCode", self.javascript)
 
 
 if __name__ == "__main__":

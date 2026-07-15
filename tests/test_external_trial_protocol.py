@@ -96,6 +96,15 @@ class ExternalTrialProtocolTests(unittest.TestCase):
             with self.subTest(prompt=prompt):
                 self.assertFalse(inspect_prompt(prompt, self.protocol)["allowed"])
 
+    def test_direct_name_address_and_identity_labels_are_rejected(self) -> None:
+        for prompt in (
+            "我叫王小明，请记住我。",
+            "家庭地址：金边某街道 10 号",
+            "passport: AB1234567",
+        ):
+            with self.subTest(prompt=prompt):
+                self.assertFalse(inspect_prompt(prompt, self.protocol)["allowed"])
+
     def test_audit_event_retains_hmac_but_no_content(self) -> None:
         prompt = "解释一个低风险物理现象"
         decision = inspect_prompt(prompt, self.protocol)

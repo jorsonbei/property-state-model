@@ -13,7 +13,7 @@ The current project status is `psm_v0.262`. The deterministic formal evidence so
 - Raw participant prompts are retained for zero days and never sent to external APIs; content-free HMAC/operational metadata expires after seven days.
 - The API reservation gate has a USD 20 calendar-month cap; only USD 4 has been reserved for two synthetic protocol reviews.
 - The initial `gpt-5.4` protocol review failed two enrollment/notice controls and is retained. The repaired protocol passes the final 7/7 review with no remaining findings.
-- Next stage: blocked V0.263 enrollment of 3-5 real invited adults. No trial session is active.
+- V0.263 preparation records the user's selection of exactly three participants, generates P01-P03 in owner-only local storage, and passes desktop/mobile and Docker-isolation checks. Human enrollment remains 0/3 and no trial session is active.
 
 ## Run
 
@@ -22,13 +22,18 @@ From the repository root:
 ```bash
 make check
 make serve
+make browser-regression-v263-enrollment
+make enrollment-v263-docker
 ```
+
+The operator enrollment page is `http://127.0.0.1:8765/trial-enrollment`. Use it only with the three invited adults physically present; never enter their direct identity data.
 
 ## Boundaries
 
 - Stable internal local chat and an inactive invite-only trial protocol.
 - Ordinary and raw PSM outputs are not release candidates.
-- No participant is enrolled; external trial and public service remain closed.
+- No participant is enrolled; adult verification, notice acknowledgment, consent, and session enablement remain 0/3. External trial and public service remain closed.
+- Private invitation state is owner-only, ignored by Git, and excluded from Docker.
 - No sensitive or professional-decision data may enter the trial.
 - Rule replacement remains disabled.
 
@@ -37,4 +42,6 @@ make serve
 - `CURRENT_STATUS.md` is the current human recovery point.
 - `project_status_out/psm_v0.262_project_status.json` is the machine status.
 - `runtime/v0_262_external_trial_protocol_checkpoint.json` is the promotion and V0.263 blocker checkpoint.
+- `runtime/v0_263_participant_enrollment_checkpoint.json` is the current human gate.
+- `runtime/v0_263_enrollment_browser_regression/report.json` and `runtime/v0_263_enrollment_docker_boundary.json` are the current engineering evidence.
 - Historical generated evidence remains local and is excluded from Git.

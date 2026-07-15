@@ -1,0 +1,92 @@
+<!doctype html>
+<html lang="zh-Hant">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>物性AI · V0.263 登記</title>
+    <link rel="stylesheet" href="/styles.css" />
+    <link rel="stylesheet" href="/trial-enrollment.css" />
+  </head>
+  <body>
+    <main class="enrollment-shell">
+      <header class="chat-header enrollment-header">
+        <div class="brand-block">
+          <span class="brand-mark">Σ</span>
+          <div>
+            <h1>V0.263 三人登記</h1>
+            <p id="enrollment-connection">本機邀請制 · 試用尚未啟動</p>
+          </div>
+        </div>
+        <a class="header-action" href="/" aria-label="返回物性AI聊天">返回聊天</a>
+      </header>
+
+      <section class="enrollment-summary" aria-label="登記進度">
+        <div><span>受邀</span><strong id="count-invited">3</strong></div>
+        <div><span>成年核驗</span><strong id="count-adult">0</strong></div>
+        <div><span>已確認</span><strong id="count-ack">0</strong></div>
+        <div><span>已同意</span><strong id="count-consent">0</strong></div>
+        <div><span>會話啟用</span><strong id="count-enabled">0</strong></div>
+      </section>
+
+      <section class="boundary-band" id="boundary-band" role="status" aria-live="polite">
+        <strong id="boundary-title">三人全員門控尚未通過</strong>
+        <span id="boundary-detail">第一條真實試用訊息保持拒絕。</span>
+      </section>
+
+      <section class="participant-section">
+        <div class="section-heading">
+          <div>
+            <h2>化名邀請</h2>
+            <p>只使用 P01–P03。不要輸入姓名、聯絡方式或證件資料。</p>
+          </div>
+        </div>
+        <div class="participant-grid" id="participant-grid" aria-live="polite"></div>
+      </section>
+
+      <section class="notice-section" id="notice-section">
+        <div class="section-heading">
+          <div>
+            <h2>凍結告知</h2>
+            <p id="notice-version">psm_v0_262_trial_notice_v1</p>
+          </div>
+        </div>
+        <pre id="notice-content">正在載入告知內容…</pre>
+      </section>
+    </main>
+
+    <template id="participant-template">
+      <article class="participant-card">
+        <div class="participant-head">
+          <div>
+            <span class="participant-label">參與者</span>
+            <h3 class="participant-id">P00</h3>
+          </div>
+          <span class="step-state">等待核驗</span>
+        </div>
+        <div class="invitation-row">
+          <code class="invitation-code">••••••••••••</code>
+          <button class="icon-button reveal-code" type="button" title="顯示或隱藏本機邀請碼" aria-label="顯示或隱藏本機邀請碼">顯示</button>
+        </div>
+        <ol class="step-list">
+          <li data-step="verify_adult">成年核驗</li>
+          <li data-step="display_notice">展示告知</li>
+          <li data-step="acknowledge_notice">參與者確認</li>
+          <li data-step="consent">明確同意</li>
+          <li data-step="enable_session">監督會話</li>
+        </ol>
+        <label class="attestation-row">
+          <input class="attestation" type="checkbox" />
+          <span class="attestation-text"></span>
+        </label>
+        <div class="participant-actions">
+          <button class="primary next-action" type="button" disabled>記錄此步驟</button>
+          <button class="danger revoke-action" type="button" hidden>撤回</button>
+          <button class="primary start-chat" type="button" hidden>進入監督聊天</button>
+        </div>
+        <p class="action-error" role="alert" hidden></p>
+      </article>
+    </template>
+
+    <script src="/trial-enrollment.js"></script>
+  </body>
+</html>

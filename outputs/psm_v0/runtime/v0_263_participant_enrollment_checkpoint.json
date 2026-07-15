@@ -1,0 +1,41 @@
+{
+  "schema_version": "psm_v0_263_participant_enrollment_checkpoint_v1",
+  "current_promoted_version": "PSM_V0.262",
+  "target_version": "PSM_V0.263",
+  "target_promoted": false,
+  "status": "awaiting_three_real_adult_enrollment_sequences",
+  "participant_count_selected": 3,
+  "pseudonymous_invitations_generated": 3,
+  "adult_verified": 0,
+  "notice_acknowledged": 0,
+  "explicitly_consented": 0,
+  "session_enabled": 0,
+  "trial_active": false,
+  "requires_user_input": true,
+  "private_state_committed_to_git": false,
+  "invitation_codes_exposed_in_public_artifacts": false,
+  "completed_engineering": [
+    "three-participant user selection frozen without asserting adulthood or consent",
+    "three unique pseudonymous invitations generated in owner-only local storage",
+    "one-to-one secret-HMAC invitee binding rooted in macOS Keychain",
+    "strict adult, notice, acknowledgment, consent, and supervision state machine",
+    "three-of-three cohort gate before any real trial chat",
+    "sensitive-data detection stops all trial sessions without automatic resume",
+    "participant withdrawal deletes that participant's operational audit events",
+    "desktop and mobile enrollment UI passed masked-code browser regression",
+    "Docker retains the public checkpoint but excludes private enrollment state"
+  ],
+  "evidence": {
+    "browser": "runtime/v0_263_enrollment_browser_regression/report.json",
+    "docker_boundary": "runtime/v0_263_enrollment_docker_boundary.json"
+  },
+  "release_boundary": {
+    "supervised_invite_only_trial_active": false,
+    "public_service_allowed": false,
+    "privacy_compliance_claimed": false,
+    "training_on_trial_data_allowed": false,
+    "rule_replacement_allowed": false,
+    "external_release_authority": false
+  },
+  "required_decision": "三名受邀者到场后，请在本机 V0.263 登记页面逐一完成：操作员线下核验其为成年人、展示告知、由参与者确认并明确同意、操作员确认现场监督。不要向聊天或 GitHub 提交任何姓名、联系方式或证件。"
+}

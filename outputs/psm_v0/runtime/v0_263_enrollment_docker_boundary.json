@@ -1,0 +1,63 @@
+{
+  "schema_version": "psm_v0_263_enrollment_docker_boundary_v1",
+  "passed": true,
+  "checks": {
+    "host_status_available": true,
+    "host_selected_exactly_three": true,
+    "host_three_private_invitations_ready": true,
+    "host_enrollment_interface_ready": true,
+    "host_human_counts_all_zero": true,
+    "host_trial_inactive": true,
+    "host_operator_cards_private_count_three": true,
+    "public_host_status_redacted": true,
+    "public_checkpoint_redacted": true,
+    "private_file_owner_only": true,
+    "private_directory_owner_only": true,
+    "private_runtime_gitignored": true,
+    "private_secrets_absent_from_tracked_files": true,
+    "docker_status_available": true,
+    "docker_retains_public_three_person_checkpoint": true,
+    "docker_private_state_absent": true,
+    "docker_enrollment_api_unavailable": true,
+    "docker_operator_cards_unavailable": true,
+    "docker_trial_chat_rejected": true,
+    "docker_interface_reports_unavailable": true,
+    "docker_trial_inactive": true,
+    "docker_page_contains_no_invitation": true,
+    "docker_localhost_only": true,
+    "target_not_promoted": true,
+    "human_action_still_required": true
+  },
+  "published_port": "127.0.0.1:8766",
+  "tracked_private_secret_hits": 0,
+  "host": {
+    "selected_participant_count": 3,
+    "invitations_generated": 3,
+    "enrollment_interface_ready": true,
+    "trial_active": false,
+    "counts": {
+      "invited": 3,
+      "adult_verified": 0,
+      "notice_displayed": 0,
+      "notice_acknowledged": 0,
+      "consented": 0,
+      "session_enabled": 0,
+      "revoked": 0
+    }
+  },
+  "docker": {
+    "private_state_present": false,
+    "enrollment_api_status": 404,
+    "operator_cards_status": 403,
+    "trial_chat_status": 409,
+    "trial_active": false
+  },
+  "release_boundary": {
+    "supervised_invite_only_trial_active": false,
+    "public_service_allowed": false,
+    "privacy_compliance_claimed": false,
+    "training_on_trial_data_allowed": false,
+    "rule_replacement_allowed": false,
+    "external_release_authority": false
+  }
+}

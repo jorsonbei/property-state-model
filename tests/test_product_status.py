@@ -21,6 +21,9 @@ class ProductStatusTests(unittest.TestCase):
         self.assertEqual(status["internal_trial_decision"], "internal_trial_ready")
         self.assertEqual(status["selected_chat_model"], "qwen3.5:9b")
         self.assertEqual(status["chat_timeout_seconds"], 60)
+        self.assertEqual(status["v0_263_selected_participant_count"], 3)
+        self.assertEqual(status["v0_263_pseudonymous_invitations_generated"], 3)
+        self.assertFalse(status["ready_for_supervised_invite_only_trial"])
 
     def test_v0_262_notice_is_explicitly_inactive(self) -> None:
         notice = load_trial_notice()

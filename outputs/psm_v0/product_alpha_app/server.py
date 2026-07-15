@@ -6,6 +6,8 @@ import mimetypes
 import os
 import re
 import sys
+import threading
+import time
 from http.server import BaseHTTPRequestHandler, ThreadingHTTPServer
 from pathlib import Path
 from urllib.parse import urlparse
@@ -22,6 +24,19 @@ from psm_v0.chat_quality_auditor import audit_chat_answer  # noqa: E402
 from psm_v0.chat_prompt import build_chat_prompt, sanitize_model_answer  # noqa: E402
 from psm_v0.chat_provider import OllamaChatProvider, ProviderRequest  # noqa: E402
 from psm_v0.model_adapter import BuiltinModelAdapter  # noqa: E402
+from psm_v0.external_trial_protocol import inspect_prompt, load_protocol  # noqa: E402
+from psm_v0.participant_enrollment import (  # noqa: E402
+    EnrollmentError,
+    apply_enrollment_action,
+    load_private_state,
+    operator_invitation_cards,
+    public_enrollment_status,
+    record_prompt_audit,
+    stop_enrollment,
+    validate_trial_access,
+    write_private_state,
+    write_public_checkpoint,
+)
 from psm_v0.pipeline import run_pipeline  # noqa: E402
 from psm_v0.psm_gate_controller import apply_psm_gate  # noqa: E402
 from psm_v0.route_executor import execute_route  # noqa: E402
@@ -54,6 +69,15 @@ ROUTE_FAILURE_LEDGER = Path(
         str(PSM_ROOT / "product_alpha_out" / "v0_255_route_failure_ledger.jsonl"),
     )
 )
+ENROLLMENT_STATE_PATH = Path(
+    os.environ.get(
+        "PSM_V0_263_ENROLLMENT_STATE",
+        str(PSM_ROOT / "private_runtime" / "v0_263" / "enrollment_state.json"),
+    )
+)
+ENROLLMENT_PROTOCOL_PATH = PSM_ROOT / "benchmarks" / "v0_262_invite_only_external_trial_protocol.json"
+ENROLLMENT_CHECKPOINT_PATH = PSM_ROOT / "runtime" / "v0_263_participant_enrollment_checkpoint.json"
+ENROLLMENT_LOCK = threading.Lock()
 
 
 def main() -> None:
@@ -76,9 +100,29 @@ class Handler(BaseHTTPRequestHandler):
             self.write_json(load_status_summary())
             return
         if parsed.path == "/api/trial-notice":
-            self.write_json(load_trial_notice())
+            self.write_json(load_trial_notice(), no_store=True)
             return
-        path = STATIC_ROOT / ("index.html" if parsed.path in {"/", ""} else parsed.path.lstrip("/"))
+        if parsed.path == "/api/trial-enrollment":
+            try:
+                self.write_json(load_enrollment_api_status(), no_store=True)
+            except (EnrollmentError, FileNotFoundError) as exc:
+                self.write_json({"error": str(exc), "trial_active": False}, status=404, no_store=True)
+            return
+        if parsed.path == "/api/trial-enrollment/operator-cards":
+            if self.client_address[0] not in {"127.0.0.1", "::1"}:
+                self.write_json({"error": "operator cards are loopback-only"}, status=403, no_store=True)
+                return
+            try:
+                self.write_json(load_operator_cards(), no_store=True)
+            except (EnrollmentError, FileNotFoundError) as exc:
+                self.write_json({"error": str(exc)}, status=404, no_store=True)
+            return
+        static_name = {
+            "": "index.html",
+            "/": "index.html",
+            "/trial-enrollment": "trial-enrollment.html",
+        }.get(parsed.path, parsed.path.lstrip("/"))
+        path = STATIC_ROOT / static_name
         if not path.is_file() or STATIC_ROOT not in path.resolve().parents and path.resolve() != STATIC_ROOT:
             self.send_error(404)
             return
@@ -92,7 +136,12 @@ class Handler(BaseHTTPRequestHandler):
 
     def do_HEAD(self) -> None:  # noqa: N802
         parsed = urlparse(self.path)
-        path = STATIC_ROOT / ("index.html" if parsed.path in {"/", ""} else parsed.path.lstrip("/"))
+        static_name = {
+            "": "index.html",
+            "/": "index.html",
+            "/trial-enrollment": "trial-enrollment.html",
+        }.get(parsed.path, parsed.path.lstrip("/"))
+        path = STATIC_ROOT / static_name
         if not path.is_file() or STATIC_ROOT not in path.resolve().parents and path.resolve() != STATIC_ROOT:
             self.send_error(404)
             return
@@ -104,11 +153,22 @@ class Handler(BaseHTTPRequestHandler):
 
     def do_POST(self) -> None:  # noqa: N802
         parsed = urlparse(self.path)
-        if parsed.path not in {"/api/run", "/api/chat"}:
+        if parsed.path not in {
+            "/api/run",
+            "/api/chat",
+            "/api/trial-enrollment/action",
+            "/api/trial-chat",
+        }:
             self.send_error(404)
             return
         try:
             payload = self.read_json()
+            if parsed.path == "/api/trial-enrollment/action":
+                self.write_json(handle_enrollment_action(payload), no_store=True)
+                return
+            if parsed.path == "/api/trial-chat":
+                self.write_json(run_trial_chat_turn(payload), no_store=True)
+                return
             scenario = str(payload.get("scenario") or "review")
             if parsed.path == "/api/chat":
                 messages = payload.get("messages") if isinstance(payload.get("messages"), list) else []
@@ -123,27 +183,181 @@ class Handler(BaseHTTPRequestHandler):
             if not text:
                 text = SCENARIOS.get(scenario, SCENARIOS["review"])
             self.write_json(run_demo_case(text, scenario))
+        except (EnrollmentError, FileNotFoundError) as exc:
+            self.write_json({"error": str(exc), "trial_active": False}, status=409, no_store=True)
         except Exception as exc:  # pragma: no cover - local demo should surface errors.
-            self.send_response(500)
-            self.send_header("Content-Type", "application/json; charset=utf-8")
-            self.end_headers()
-            self.wfile.write(json.dumps({"error": str(exc)}, ensure_ascii=False).encode("utf-8"))
+            self.write_json({"error": str(exc)}, status=500, no_store=True)
 
     def read_json(self) -> dict:
         length = int(self.headers.get("Content-Length", "0"))
         raw = self.rfile.read(length).decode("utf-8")
         return json.loads(raw) if raw.strip() else {}
 
-    def write_json(self, payload: dict) -> None:
+    def write_json(self, payload: dict, *, status: int = 200, no_store: bool = False) -> None:
         body = json.dumps(payload, ensure_ascii=False, indent=2).encode("utf-8")
-        self.send_response(200)
+        self.send_response(status)
         self.send_header("Content-Type", "application/json; charset=utf-8")
+        if no_store:
+            self.send_header("Cache-Control", "no-store")
         self.send_header("Content-Length", str(len(body)))
         self.end_headers()
         self.wfile.write(body)
 
     def log_message(self, format: str, *args) -> None:  # noqa: A003
         return
+
+
+def load_enrollment_protocol() -> dict:
+    if not ENROLLMENT_PROTOCOL_PATH.exists():
+        raise FileNotFoundError("Frozen V0.262 trial protocol is unavailable.")
+    return load_protocol(ENROLLMENT_PROTOCOL_PATH)
+
+
+def load_enrollment_state() -> tuple[dict, dict]:
+    if not ENROLLMENT_STATE_PATH.exists():
+        raise FileNotFoundError("V0.263 private enrollment has not been prepared on this runtime.")
+    protocol = load_enrollment_protocol()
+    return load_private_state(ENROLLMENT_STATE_PATH, protocol), protocol
+
+
+def load_enrollment_api_status() -> dict:
+    state, _ = load_enrollment_state()
+    status = public_enrollment_status(state)
+    status["notice_version"] = "psm_v0_262_trial_notice_v1"
+    status["notice_url"] = "/api/trial-notice"
+    status["operator_cards_available"] = True
+    status["participant_content_external_api_allowed"] = False
+    status["raw_prompt_server_persistence"] = False
+    return status
+
+
+def load_operator_cards() -> dict:
+    state, _ = load_enrollment_state()
+    return operator_invitation_cards(state)
+
+
+def handle_enrollment_action(payload: dict) -> dict:
+    expected = {"participant_id", "invitation_code", "action", "attestation"}
+    if set(payload) != expected:
+        raise EnrollmentError("enrollment action fields are not closed")
+    with ENROLLMENT_LOCK:
+        state, protocol = load_enrollment_state()
+        updated = apply_enrollment_action(
+            state,
+            participant_id=str(payload["participant_id"]),
+            invitation_code=str(payload["invitation_code"]),
+            action=str(payload["action"]),
+            attestation=str(payload["attestation"]),
+            protocol=protocol,
+        )
+        write_private_state(ENROLLMENT_STATE_PATH, updated, protocol)
+        write_public_checkpoint(ENROLLMENT_CHECKPOINT_PATH, updated)
+    return load_enrollment_api_status()
+
+
+def run_trial_chat_turn(payload: dict) -> dict:
+    allowed = {"participant_id", "invitation_code", "messages", "scenario", "task_state_graph"}
+    required = {"participant_id", "invitation_code", "messages"}
+    if set(payload) - allowed or not required.issubset(payload):
+        raise EnrollmentError("trial chat request fields are not closed")
+    participant_id = str(payload["participant_id"])
+    invitation_code = str(payload["invitation_code"])
+    messages = payload["messages"] if isinstance(payload["messages"], list) else []
+    conversation = normalize_chat_messages(messages)
+    if not conversation or conversation[-1]["role"] != "user":
+        raise EnrollmentError("trial chat requires a current participant message")
+
+    with ENROLLMENT_LOCK:
+        state, protocol = load_enrollment_state()
+        access_errors = validate_trial_access(
+            state,
+            participant_id=participant_id,
+            invitation_code=invitation_code,
+            protocol=protocol,
+        )
+        if access_errors:
+            raise EnrollmentError("trial chat gate rejected the request: " + "; ".join(access_errors))
+
+        user_prompts = [item["content"] for item in conversation if item["role"] == "user"]
+        prompt_decisions = [inspect_prompt(prompt, protocol) for prompt in user_prompts]
+        rejected_index = next(
+            (index for index, decision in enumerate(prompt_decisions) if not decision["allowed"]),
+            None,
+        )
+        if rejected_index is not None:
+            rejected = prompt_decisions[rejected_index]
+            updated = record_prompt_audit(
+                state,
+                participant_id=participant_id,
+                prompt=user_prompts[rejected_index],
+                decision=rejected,
+                latency_ms=0,
+                token_count=0,
+            )
+            updated = stop_enrollment(
+                updated,
+                reason="prohibited_or_unknown_data_detected",
+                protocol=protocol,
+            )
+            write_private_state(ENROLLMENT_STATE_PATH, updated, protocol)
+            write_public_checkpoint(ENROLLMENT_CHECKPOINT_PATH, updated)
+            categories = ", ".join(rejected["categories"])
+            raise EnrollmentError(f"trial prompt contains a prohibited or unknown data class: {categories}")
+
+    started = time.monotonic()
+    result = run_chat_turn(
+        conversation,
+        str(payload.get("scenario") or "review"),
+        previous_graph=(
+            payload.get("task_state_graph")
+            if isinstance(payload.get("task_state_graph"), dict)
+            else None
+        ),
+    )
+    provider = str(result.get("chat", {}).get("generation", {}).get("provider") or "")
+    if provider not in {"ollama", "deterministic", "deterministic_fallback"}:
+        with ENROLLMENT_LOCK:
+            current, protocol = load_enrollment_state()
+            stopped = stop_enrollment(
+                current,
+                reason="participant_content_would_be_sent_to_external_api",
+                protocol=protocol,
+            )
+            write_private_state(ENROLLMENT_STATE_PATH, stopped, protocol)
+            write_public_checkpoint(ENROLLMENT_CHECKPOINT_PATH, stopped)
+        raise EnrollmentError("trial chat attempted an unapproved generation provider")
+    answer = str(result["chat"]["assistant_message"])
+    elapsed_ms = max(0, int((time.monotonic() - started) * 1000))
+    with ENROLLMENT_LOCK:
+        current, protocol = load_enrollment_state()
+        access_errors = validate_trial_access(
+            current,
+            participant_id=participant_id,
+            invitation_code=invitation_code,
+            protocol=protocol,
+        )
+        if access_errors:
+            raise EnrollmentError("trial authorization changed before delivery: " + "; ".join(access_errors))
+        updated = record_prompt_audit(
+            current,
+            participant_id=participant_id,
+            prompt=conversation[-1]["content"],
+            decision=prompt_decisions[-1],
+            latency_ms=elapsed_ms,
+            token_count=max(1, (len(answer) + 3) // 4),
+        )
+        write_private_state(ENROLLMENT_STATE_PATH, updated, protocol)
+    return {
+        "schema_version": "psm_v0_263_trial_chat_response_v1",
+        "chat": {"assistant_message": answer},
+        "trial_session": {
+            "participant_id": participant_id,
+            "supervised_invite_only": True,
+            "raw_prompt_persisted": False,
+            "participant_content_sent_to_external_api": False,
+            "public_service_allowed": False,
+        },
+    }
 
 
 def run_demo_case(text: str, scenario: str) -> dict:
@@ -836,7 +1050,7 @@ def project_status_answer(context: dict, question: str = "") -> str:
         return (
             f"当前没有开放外部用户试用，正式版本仍是 {context['current_version']}。"
             f"当前聊天基座是 {context['selected_model']}。记录中的下一真实动作是："
-            f"{context['required_decision']}"
+            f"完成 {context['next_version']} 的真人门控。{context['required_decision']}"
         )
     if any(marker in question for marker in ("最高优先级", "最高優先級", "优先级最高", "優先級最高", "优先任务", "優先任務")):
         return (
@@ -874,8 +1088,9 @@ def roadmap_answer(context: dict) -> str:
     if context["next_version"] == "PSM V0.263":
         construction = (
             "V0.262 已冻结数据处理与隐私边界、告知同意、7 天删除、本地部署和 API 预算。"
-            "V0.263 不再改写这些协议；施工顺序是安排 3 至 5 名受邀成年人，由操作员线下核验成年，"
-            "在本机生成化名绑定，依次完成告知、确认和明确同意，最后才启用现场监督会话。"
+            "V0.263 的工程准备已完成，参与人数固定为三名，P01-P03 化名邀请已在本机私密区生成。"
+            "剩余顺序是三名本人到场后，由操作员线下核验成年，依次完成告知、确认和明确同意，"
+            "最后才启用现场监督会话。"
             f"当前需要：{context['required_decision']}"
         )
     elif context["stage_blocked"]:
@@ -1497,6 +1712,14 @@ def load_project_context() -> dict:
     )
     checkpoint_path = checkpoint_candidates[0] if checkpoint_candidates else PSM_ROOT / "runtime" / "missing_checkpoint.json"
     checkpoint = load_json(checkpoint_path) if checkpoint_path.exists() else {}
+    if (
+        next_version == "PSM V0.263"
+        and checkpoint.get("participant_count_selected") == 3
+    ):
+        next_objective = (
+            "让三名已选受邀者在场完成成年核验、告知、确认、明确同意和现场监督门控；"
+            "三人全部通过前不得启动第一条试用消息"
+        )
     chat_gate = status.get("independent_chat_gate") or {}
     return {
         "current_version": summary["version"],
@@ -1704,6 +1927,14 @@ def load_status_summary() -> dict:
     candidate_gate = status.get("candidate_gate") or formal_status.get("candidate_gate", {})
     internal_alpha_gate = status.get("internal_alpha_gate") or {}
     external_trial_gate = status.get("external_trial_protocol_gate") or {}
+    enrollment_checkpoint_path = PSM_ROOT / "runtime" / "v0_263_participant_enrollment_checkpoint.json"
+    enrollment_checkpoint = (
+        load_json(enrollment_checkpoint_path) if enrollment_checkpoint_path.exists() else {}
+    )
+    try:
+        live_enrollment = load_enrollment_api_status()
+    except (EnrollmentError, FileNotFoundError):
+        live_enrollment = {}
     target = optional_status.get("targeted_optional_external", {})
     full = optional_status.get("full_required_fault_external", candidate_gate)
     current_version = status["current_version"].replace("psm_v", "PSM V")
@@ -1731,7 +1962,15 @@ def load_status_summary() -> dict:
         "external_trial_participant_maximum": external_trial_gate.get("participant_maximum"),
         "external_trial_metadata_retention_days": external_trial_gate.get("metadata_retention_days"),
         "external_trial_monthly_api_budget_usd": external_trial_gate.get("monthly_api_budget_usd"),
-        "external_trial_participant_enrollment_completed": False,
+        "external_trial_participant_enrollment_completed": live_enrollment.get("trial_active") is True,
+        "v0_263_selected_participant_count": enrollment_checkpoint.get("participant_count_selected", 0),
+        "v0_263_pseudonymous_invitations_generated": enrollment_checkpoint.get("pseudonymous_invitations_generated", 0),
+        "v0_263_enrollment_interface_ready": bool(live_enrollment),
+        "v0_263_adult_verified": (live_enrollment.get("counts") or {}).get("adult_verified", 0),
+        "v0_263_notice_acknowledged": (live_enrollment.get("counts") or {}).get("notice_acknowledged", 0),
+        "v0_263_explicitly_consented": (live_enrollment.get("counts") or {}).get("consented", 0),
+        "v0_263_session_enabled": (live_enrollment.get("counts") or {}).get("session_enabled", 0),
+        "ready_for_supervised_invite_only_trial": live_enrollment.get("trial_active") is True,
         "ready_for_external_user_trial": False,
     }
 

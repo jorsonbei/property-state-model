@@ -50,6 +50,7 @@ __pycache__/
 /outputs/psm_v0/taxonomy_out/
 /outputs/psm_v0/tmp_*/
 /outputs/psm_v0/status_history/
+/outputs/psm_v0/private_runtime/
 
 # Case-pack sources are public; reproducible validation output stays local.
 /outputs/psm_v0/case_packs/*_validation.json

@@ -13,9 +13,19 @@
 9. Retain the initial two-check external review failure, repair both controls, and pass the final 7/7 independent review with no remaining findings.
 10. Keep the trial, public service, professional authority, trial-data training, rule replacement, and release authority inactive.
 
-## V0.263 Enrollment Gate
+## Completed V0.263 Engineering Preparation
 
-V0.263 requires real people and cannot be completed from code alone. The user must arrange 3-5 invited adults who can attend supervised local trial sessions.
+1. Freeze the user's choice of exactly three participants without inferring presence, adulthood, or consent.
+2. Generate three unique local invitations for P01-P03 in owner-only storage backed by a Keychain binding secret.
+3. Implement the strict five-step enrollment state machine and require all three receipts before the first message.
+4. Add a local operator page with masked invitation codes and no direct-identity input fields.
+5. Stop all sessions without automatic resume when sensitive or unknown data is detected; delete a withdrawing participant's operational audit events.
+6. Pass desktop and mobile browser regression with no human action executed and all human counts at zero.
+7. Prove that private invitation material is absent from Git-tracked files and the Docker image; the container cannot access enrollment cards or trial chat.
+
+## V0.263 Human Enrollment Gate
+
+V0.263 now requires the three selected real people and cannot be completed from code alone. All three invited adults must attend a supervised local trial session with the operator physically present.
 
 Do not submit participant names, contact details, identity documents, or other direct identifiers in Codex, GitHub, issue trackers, or project files. The operator verifies adulthood outside the system. The software then creates a local pseudonymous invitation and secret-HMAC binding without storing direct identity.
 
@@ -28,7 +38,9 @@ For each participant, the required order is:
 5. Record explicit consent.
 6. Enable the supervised session only after every prior gate passes.
 
-The first real participant prompt is prohibited until all 3-5 enrollment receipts pass the gate. Any privacy, security, sensitive-data, budget, deletion, supervision, or consent failure stops the trial without automatic resume.
+The first real participant prompt is prohibited until all three enrollment receipts pass the gate. Any privacy, security, sensitive-data, budget, deletion, supervision, or consent failure stops the trial without automatic resume.
+
+Current counts: invited 3; adult verified 0; notice acknowledged 0; explicitly consented 0; session enabled 0. Operator URL: `http://127.0.0.1:8765/trial-enrollment`.
 
 ## Still Closed
 

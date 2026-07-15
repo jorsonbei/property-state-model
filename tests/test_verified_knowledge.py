@@ -109,9 +109,9 @@ class VerifiedKnowledgeTests(unittest.TestCase):
         self.assertEqual(result["chat"]["intent"], "project_status")
         self.assertIn("确实受阻", answer)
         self.assertIn(context["next_version"], answer)
-        self.assertIn("3 至 5 名受邀成年人", answer)
-        self.assertIn("现场监督试用", answer)
-        self.assertIn("不要在聊天或 GitHub 中提交", answer)
+        self.assertIn("三名受邀者到场后", answer)
+        self.assertIn("现场监督", answer)
+        self.assertIn("不要向聊天或 GitHub 提交", answer)
         self.assertIn("需要用户介入", answer)
         self.assertNotIn("关键材料", answer)
 
@@ -151,8 +151,8 @@ class VerifiedKnowledgeTests(unittest.TestCase):
         self.assertIn(context["selected_model"], answer)
         self.assertIn(context["next_version"], answer)
         self.assertIn("外部用户试用", answer)
-        self.assertIn("3 至 5 名受邀成年人", answer)
-        self.assertIn("化名邀请", answer)
+        self.assertIn("三名受邀者到场后", answer)
+        self.assertIn("本机 V0.263 登记页面", answer)
         self.assertIn("明确同意", answer)
         self.assertNotIn("域特定检查", answer)
 

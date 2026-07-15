@@ -16,12 +16,14 @@ const state = {
   taskGraph: null,
   activeRequest: null,
   lastFailed: null,
-  nextMessageId: 1
+  nextMessageId: 1,
+  trialSession: loadTrialSession()
 };
 
 const $ = (id) => document.getElementById(id);
 
 function init() {
+  configureTrialMode();
   loadStatus();
   renderWelcome();
   bindEvents();
@@ -79,13 +81,19 @@ async function loadStatus() {
     $("metric-version").textContent = status.version;
     $("metric-core").textContent = `${status.core_cases} cases`;
     $("metric-risk").textContent = `chat risk ${status.chat_gated_risk ?? status.gated_psm_risky_rows}`;
-    $("metric-trial").textContent = status.ready_for_external_user_trial ? "external open" : "external closed";
+    $("metric-trial").textContent = state.trialSession
+      ? `supervised ${state.trialSession.participantId}`
+      : status.ready_for_external_user_trial ? "external open" : "external closed";
     $("evidence-full").textContent = `${status.full_external_cases} cases`;
     $("evidence-fault").textContent = `${status.full_fault_events} events`;
     $("evidence-ollama").textContent = `${status.targeted_optional_cases} rows`;
     $("evidence-external").textContent = status.ready_for_external_user_trial ? "open" : "closed";
     const model = status.selected_chat_model ? ` · ${status.selected_chat_model}` : "";
-    $("connection").textContent = status.ready_for_stable_internal_chat
+    $("connection").textContent = state.trialSession
+      ? status.ready_for_supervised_invite_only_trial
+        ? `現場監督試用 · ${state.trialSession.participantId}${model}`
+        : `試用門控未通過 · ${state.trialSession.participantId}`
+      : status.ready_for_stable_internal_chat
       ? `內部聊天 Alpha 總門已通過${model}`
       : status.ready_for_internal_chat_demo
       ? `本地正常聊天模式已啟用${model}`
@@ -135,14 +143,23 @@ async function runChat(options = {}) {
   }, REQUEST_TIMEOUT_MS);
 
   try {
-    const response = await fetch("/api/chat", {
+    const endpoint = state.trialSession ? "/api/trial-chat" : "/api/chat";
+    const body = state.trialSession
+      ? {
+          participant_id: state.trialSession.participantId,
+          invitation_code: state.trialSession.invitationCode,
+          messages: conversationMessages(),
+          scenario: state.scenario
+        }
+      : {
+          messages: conversationMessages(),
+          scenario: state.scenario,
+          task_state_graph: state.taskGraph
+        };
+    const response = await fetch(endpoint, {
       method: "POST",
       headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({
-        messages: conversationMessages(),
-        scenario: state.scenario,
-        task_state_graph: state.taskGraph
-      }),
+      body: JSON.stringify(body),
       signal: controller.signal
     });
     const payload = await response.json().catch(() => ({}));
@@ -153,12 +170,14 @@ async function runChat(options = {}) {
     window.clearTimeout(request.timeoutId);
     setRequestPhase("回答已通過邊界檢查，正在顯示");
     $("cancel").hidden = true;
-    renderResult(payload);
-    state.taskGraph = payload.task_state_graph || null;
+    if (!state.trialSession) {
+      renderResult(payload);
+      state.taskGraph = payload.task_state_graph || null;
+    }
     const answer = payload.chat?.assistant_message || "我收到你的問題了，但這次沒有生成有效回答。";
     await pushAssistantProgressively(answer, requestId);
     if (state.activeRequest?.id !== requestId) return;
-    pushHistory(payload);
+    if (!state.trialSession) pushHistory(payload);
     clearRecovery();
     await loadStatus();
   } catch (error) {
@@ -291,9 +310,27 @@ function renderWelcome() {
   const welcome = document.createElement("article");
   welcome.className = "message assistant";
   const body = document.createElement("p");
-  body.textContent = "你好，我是物性AI。你可以像普通聊天一樣直接問我問題。";
+  body.textContent = state.trialSession
+    ? `你好，${state.trialSession.participantId}。這是現場監督的邀請制試用；請勿輸入身份、聯絡、醫療、法律、交易或私人資料。`
+    : "你好，我是物性AI。你可以像普通聊天一樣直接問我問題。";
   welcome.append(messageLabel("物性AI"), body);
   list.appendChild(welcome);
+}
+
+function loadTrialSession() {
+  const participantId = sessionStorage.getItem("psmTrialParticipant") || "";
+  const invitationCode = sessionStorage.getItem("psmTrialInvitationCode") || "";
+  if (!/^P\d{2}$/.test(participantId) || invitationCode.length < 16) return null;
+  return { participantId, invitationCode };
+}
+
+function configureTrialMode() {
+  if (!state.trialSession) return;
+  document.title = `物性AI · ${state.trialSession.participantId}`;
+  $("evidence-toggle").hidden = true;
+  $("debug-panel").hidden = true;
+  document.querySelector(".suggestions").hidden = true;
+  $("enrollment-link").textContent = "返回登記";
 }
 
 function setWaiting() {

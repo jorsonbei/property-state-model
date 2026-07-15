@@ -22,6 +22,7 @@ PSM is an experimental state-first AI control layer. It routes a request through
 - V0.260 completes a frozen internal-readiness review: 2228/2228 formal cases, 20/20 independent blind rows, 13/13 internal Alpha scenarios, zero critical fact hallucinations or safety false negatives, and an `internal_trial_ready` decision limited to local single-user use.
 - V0.261 retains an initial failed OpenAI contract review, repairs the annotation boundary as a closed-world V2 schema, passes ten local mutation checks including nested leaf-type and extra-target rejection with zero candidate leakage or protected backflow, and then passes a five-question `gpt-5.4` external rejudge with no remaining findings. External users and release authority remain closed.
 - V0.262 freezes the approved conservative invite-only trial protocol for 3-5 operator-supervised adults, rejects sensitive and professional-decision prompts, retains no raw participant chat, keeps content out of external APIs, deletes content-free metadata after seven days, and enforces a USD 20 monthly API reservation cap. The initial independent protocol review failed on two enrollment/notice controls; after repair, the final seven-question `gpt-5.4` review passes with no remaining findings. No real participant is enrolled and the trial remains inactive.
+- V0.263 preparation freezes the user's selection of exactly three participants without claiming they are present, adult, or consenting. It generates P01-P03 invitations in owner-only local storage, provides the strict enrollment UI, stops all sessions on sensitive-data detection or withdrawal, and proves that Git and Docker contain no private invitation material. Human enrollment counts remain 0/3 and the trial is inactive.
 
 This repository is an experimental research and engineering system. It is not a medical, legal, investment, production-release, or external-user authorization system. Passing synthetic regressions does not prove open-domain generalization.
 
@@ -67,7 +68,12 @@ make protocol-v262-eval
 make judge-v262-openai
 make promote-v262
 make external-v262-docker
+make prepare-v263
+make browser-regression-v263-enrollment
+make enrollment-v263-docker
 ```
+
+The V0.263 local operator page is `http://127.0.0.1:8765/trial-enrollment`. It is only for use when all three invited adults and the operator are physically present. Do not enter or store names, contact details, identity documents, or other direct identifiers.
 
 Generate a read-only inventory of the local evidence store without moving or deleting artifacts:
 
@@ -84,7 +90,7 @@ make sync-runtime
 docker compose up --build
 ```
 
-Open `http://127.0.0.1:8766/`. Docker publishes only on the local loopback interface, and the container connects to host Ollama through `host.docker.internal`.
+Open `http://127.0.0.1:8766/`. Docker publishes only on the local loopback interface, and the container connects to host Ollama through `host.docker.internal`. The Docker runtime intentionally excludes V0.263 private invitations and cannot perform participant enrollment.
 
 ## Repository map
 
@@ -95,6 +101,7 @@ outputs/psm_v0/cases/              promoted deterministic cases
 outputs/psm_v0/case_packs/         staged adversarial case packs
 outputs/psm_v0/work/               version advancement tooling
 outputs/psm_v0/runtime/            sanitized container/runtime snapshot
+outputs/psm_v0/private_runtime/    ignored owner-only V0.263 enrollment state
 scripts/                            project verification and snapshot tools
 tests/                              public contract tests
 ```

@@ -21,6 +21,9 @@ DIRECT_IDENTIFIER_PATTERNS = (
     re.compile(r"[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}", re.IGNORECASE),
     re.compile(r"(?<!\d)(?:\+?\d[\d -]{7,}\d)(?!\d)"),
     re.compile(r"\b\d{3}-\d{2}-\d{4}\b"),
+    re.compile(r"(?:我叫|姓名|名字是|my name is)\s*[:：]?\s*[\w\u4e00-\u9fff]{2,}", re.IGNORECASE),
+    re.compile(r"(?:住址|家庭地址|精确地址|精確地址|home address)\s*[:：=]", re.IGNORECASE),
+    re.compile(r"(?:身份证|身分證|身份證|passport|government id)\s*[:：=]?\s*[A-Z0-9-]{5,}", re.IGNORECASE),
 )
 SECRET_PATTERNS = (
     re.compile(r"\bsk-(?:proj-)?[A-Za-z0-9_-]{12,}\b"),
