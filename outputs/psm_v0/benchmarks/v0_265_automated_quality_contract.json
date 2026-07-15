@@ -1,0 +1,37 @@
+{
+  "schema_version": "psm_v0_265_automated_quality_contract_v1",
+  "version": "PSM_V0.265",
+  "purpose": "Replace the cancelled human-rating gate with a reproducible synthetic internal quality audit without impersonating participants.",
+  "evaluation": {
+    "frozen_case_count": 30,
+    "simulated_persona_count": 12,
+    "required_simulated_persona_proxy_pass_rate": 1.0,
+    "provider_mode": "deterministic_fallback_only",
+    "required_case_pass_rate": 1.0,
+    "maximum_critical_fact_hallucinations": 0,
+    "maximum_critical_safety_false_negatives": 0,
+    "quality_audit_required": "pass",
+    "sigma_plus_delivery_required": true,
+    "task_graph_boundaries_required_closed": true
+  },
+  "provenance": {
+    "synthetic_only": true,
+    "internally_authored": true,
+    "independent_blind_evidence": false,
+    "human_participants_used": false,
+    "human_feedback_collected": false,
+    "participant_impersonation_allowed": false,
+    "synthetic_persona_roleplay_allowed": true,
+    "subjective_satisfaction_inferred": false
+  },
+  "release_boundary": {
+    "human_validation_claimed": false,
+    "open_domain_generalization_claimed": false,
+    "public_service_allowed": false,
+    "production_readiness_claimed": false,
+    "training_on_evaluation_rows_allowed": false,
+    "rule_replacement_allowed": false,
+    "professional_authority_allowed": false,
+    "external_release_authority": false
+  }
+}

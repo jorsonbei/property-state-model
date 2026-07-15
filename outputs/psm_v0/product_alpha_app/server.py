@@ -38,15 +38,6 @@ from psm_v0.participant_enrollment import (  # noqa: E402
     write_private_state,
     write_public_checkpoint,
 )
-from psm_v0.participant_feedback import (  # noqa: E402
-    FeedbackError,
-    delete_participant_feedback,
-    feedback_token_for_event,
-    load_feedback_state,
-    public_feedback_progress,
-    submit_feedback,
-    write_feedback_state,
-)
 from psm_v0.pipeline import run_pipeline  # noqa: E402
 from psm_v0.psm_gate_controller import apply_psm_gate  # noqa: E402
 from psm_v0.route_executor import execute_route  # noqa: E402
@@ -87,12 +78,6 @@ ENROLLMENT_STATE_PATH = Path(
 )
 ENROLLMENT_PROTOCOL_PATH = PSM_ROOT / "benchmarks" / "v0_262_invite_only_external_trial_protocol.json"
 ENROLLMENT_CHECKPOINT_PATH = PSM_ROOT / "runtime" / "v0_263_participant_enrollment_checkpoint.json"
-FEEDBACK_STATE_PATH = Path(
-    os.environ.get(
-        "PSM_V0_265_FEEDBACK_STATE",
-        str(PSM_ROOT / "private_runtime" / "v0_265" / "feedback_state.json"),
-    )
-)
 ENROLLMENT_LOCK = threading.Lock()
 
 
@@ -108,7 +93,7 @@ def main() -> None:
 
 
 class Handler(BaseHTTPRequestHandler):
-    server_version = "PSMProductAlpha/0.264"
+    server_version = "PSMProductAlpha/0.265"
 
     def do_GET(self) -> None:  # noqa: N802
         parsed = urlparse(self.path)
@@ -131,12 +116,6 @@ class Handler(BaseHTTPRequestHandler):
             try:
                 self.write_json(load_operator_cards(), no_store=True)
             except (EnrollmentError, FileNotFoundError) as exc:
-                self.write_json({"error": str(exc)}, status=404, no_store=True)
-            return
-        if parsed.path == "/api/trial-feedback":
-            try:
-                self.write_json(load_feedback_api_status(), no_store=True)
-            except (EnrollmentError, FeedbackError, FileNotFoundError) as exc:
                 self.write_json({"error": str(exc)}, status=404, no_store=True)
             return
         static_name = {
@@ -180,7 +159,6 @@ class Handler(BaseHTTPRequestHandler):
             "/api/chat",
             "/api/trial-enrollment/action",
             "/api/trial-chat",
-            "/api/trial-feedback",
         }:
             self.send_error(404)
             return
@@ -191,9 +169,6 @@ class Handler(BaseHTTPRequestHandler):
                 return
             if parsed.path == "/api/trial-chat":
                 self.write_json(run_trial_chat_turn(payload), no_store=True)
-                return
-            if parsed.path == "/api/trial-feedback":
-                self.write_json(handle_trial_feedback(payload), no_store=True)
                 return
             scenario = str(payload.get("scenario") or "review")
             if parsed.path == "/api/chat":
@@ -209,7 +184,7 @@ class Handler(BaseHTTPRequestHandler):
             if not text:
                 text = SCENARIOS.get(scenario, SCENARIOS["review"])
             self.write_json(run_demo_case(text, scenario))
-        except (EnrollmentError, FeedbackError, FileNotFoundError) as exc:
+        except (EnrollmentError, FileNotFoundError) as exc:
             self.write_json({"error": str(exc), "trial_active": False}, status=409, no_store=True)
         except Exception as exc:  # pragma: no cover - local demo should surface errors.
             self.write_json({"error": str(exc)}, status=500, no_store=True)
@@ -278,73 +253,7 @@ def handle_enrollment_action(payload: dict) -> dict:
         )
         write_private_state(ENROLLMENT_STATE_PATH, updated, protocol)
         write_public_checkpoint(ENROLLMENT_CHECKPOINT_PATH, updated)
-        if payload["action"] == "revoke" and FEEDBACK_STATE_PATH.exists():
-            feedback = delete_participant_feedback(
-                load_feedback_state(FEEDBACK_STATE_PATH),
-                str(payload["participant_id"]),
-            )
-            write_feedback_state(FEEDBACK_STATE_PATH, feedback)
     return load_enrollment_api_status()
-
-
-def load_feedback_api_status() -> dict:
-    with ENROLLMENT_LOCK:
-        load_enrollment_state()
-        return public_feedback_progress(load_feedback_state(FEEDBACK_STATE_PATH))
-
-
-def handle_trial_feedback(payload: dict) -> dict:
-    expected = {
-        "participant_id",
-        "invitation_code",
-        "feedback_token",
-        "helpfulness",
-        "clarity",
-        "state_alignment",
-        "issue_category",
-    }
-    if set(payload) != expected:
-        raise FeedbackError("trial feedback fields are not closed")
-    participant_id = str(payload["participant_id"])
-    invitation_code = str(payload["invitation_code"])
-    with ENROLLMENT_LOCK:
-        enrollment, protocol = load_enrollment_state()
-        access_errors = validate_trial_access(
-            enrollment,
-            participant_id=participant_id,
-            invitation_code=invitation_code,
-            protocol=protocol,
-        )
-        if access_errors:
-            raise FeedbackError("trial feedback gate rejected the request: " + "; ".join(access_errors))
-        helpfulness = payload["helpfulness"]
-        clarity = payload["clarity"]
-        if (
-            not isinstance(helpfulness, int)
-            or isinstance(helpfulness, bool)
-            or not isinstance(clarity, int)
-            or isinstance(clarity, bool)
-        ):
-            raise FeedbackError("feedback scores must be integers")
-        feedback = submit_feedback(
-            load_feedback_state(FEEDBACK_STATE_PATH),
-            enrollment_state=enrollment,
-            participant_id=participant_id,
-            feedback_token=str(payload["feedback_token"]),
-            helpfulness=helpfulness,
-            clarity=clarity,
-            state_alignment=str(payload["state_alignment"]),
-            issue_category=str(payload["issue_category"]),
-        )
-        write_feedback_state(FEEDBACK_STATE_PATH, feedback)
-    return {
-        "schema_version": "psm_v0_265_trial_feedback_response_v1",
-        "accepted": True,
-        "progress": public_feedback_progress(feedback),
-        "free_text_collected": False,
-        "training_on_feedback_allowed": False,
-        "public_service_allowed": False,
-    }
 
 
 def run_trial_chat_turn(payload: dict) -> dict:
@@ -450,9 +359,7 @@ def run_trial_chat_turn(payload: dict) -> dict:
             "raw_prompt_persisted": False,
             "participant_content_sent_to_external_api": False,
             "public_service_allowed": False,
-            "feedback_token": feedback_token_for_event(updated, event_id),
-            "structured_feedback_required": True,
-            "free_text_feedback_allowed": False,
+            "human_feedback_required": False,
         },
     }
 
@@ -978,14 +885,14 @@ def is_identity_question(text: str) -> bool:
 
 
 def is_chat_capability_question(text: str) -> bool:
-    markers = ["可以聊天吗", "可以聊天嗎", "怎么聊天", "怎麼聊天", "能聊天吗", "能聊天嗎", "聊天功能在哪"]
+    markers = ["可以聊天吗", "可以聊天嗎", "怎么聊天", "怎麼聊天", "能聊天吗", "能聊天嗎", "能正常跟我聊天吗", "能正常跟我聊天嗎", "聊天功能在哪"]
     return any(marker in text for marker in markers)
 
 
 def is_psm_vs_llm_question(text: str) -> bool:
     has_psm = "物性ai" in text or "物性 ai" in text or "物性模型" in text
     has_llm = "普通大模型" in text or "大语言模型" in text or "大語言模型" in text or "llm" in text
-    asks_difference = "区别" in text or "差別" in text or "差异" in text or "不同" in text
+    asks_difference = any(marker in text for marker in ("区别", "差別", "差异", "不同", "多了什么", "多了什麼", "相比"))
     return has_psm and has_llm and asks_difference
 
 
@@ -1147,7 +1054,7 @@ def project_status_answer(context: dict, question: str = "") -> str:
         return (
             f"当前没有开放外部用户试用，正式版本仍是 {context['current_version']}。"
             f"当前聊天基座是 {context['selected_model']}。记录中的下一真实动作是："
-            f"完成 {context['next_version']} 的真人门控。{context['required_decision']}"
+            f"完成 {context['next_version']} 的 {context['next_objective']}。{context['required_decision']}"
         )
     if any(marker in question for marker in ("最高优先级", "最高優先級", "优先级最高", "優先級最高", "优先任务", "優先任務")):
         return (
@@ -1283,6 +1190,17 @@ def roadmap_answer(context: dict) -> str:
 
 
 def project_results_answer(context: dict) -> str:
+    if context["current_version"] == "PSM V0.265":
+        return (
+            "这轮已完成 PSM V0.265 自动质量与多角色模拟试用门：30/30 个冻结场景全部通过，其中 12 个"
+            "模拟角色覆盖首次使用、急躁简答、学生、工程、实验、量化、食物安全、研究质疑、医疗急症、"
+            "法律期限、交易授权压力和理论阅读视角。角色代理量表 12/12 通过，关键事实幻觉和严重安全漏检都是 0。\n\n"
+            "这轮还修复了正常聊天同义问法、过敏请求医疗路由、压缩知识核审计，以及一个会让理论降级回答"
+            "崩溃的缺失函数。真人评分界面、接口和私有状态已经移除，聊天恢复为纯问答。"
+            "这些结果是内部合成角色模拟，不冒充真实参与者，也不代表真人满意度或开放域验证。"
+            f"当前本地聊天模型是 `{context['selected_model']}`。"
+            f"下一步是 {context['next_version']}：{context['next_objective']} 公开服务和外部发布仍关闭。"
+        )
     if context["current_version"] == "PSM V0.262":
         return (
             "这轮已完成 PSM V0.262 邀请制外部试用协议。用户批准的保守边界已经固化为代码门：仅限 3 至 5 名受邀成年人、"
@@ -1701,6 +1619,19 @@ def research_fallback(current: str, conversation: list[dict[str, str]]) -> str:
     return (
         "先把当前结果限定为内部证据，列出数据来源、主要指标、失败项和可能偏差。"
         "要提高声明等级，需要预先固定协议，并在新的独立数据或外部复现中通过验证。"
+    )
+
+
+def theory_fallback(current: str) -> str:
+    folded = current.casefold()
+    if ("物性ai" in folded or "物性 ai" in folded) and any(
+        marker in folded for marker in ("普通大模型", "大语言模型", "大語言模型", "llm")
+    ):
+        return psm_vs_llm_answer()
+    return (
+        "物性论框架先固定问题对象和 Q 核，再依次检查 Ω 风险、φ 状态、Δσ 变化、Π 证据结构、"
+        "η 未知项与 B_sigma 审计，最后只把通过边界的内容交给 Σ+ 表达。"
+        "这是一套内部状态与声明约束方法，不等于外部证明；结论等级仍取决于来源、独立复现和外部验证。"
     )
 
 

@@ -1,0 +1,13 @@
+{
+  "schema_version": "psm_v0_265_automated_quality_checkpoint_v1",
+  "current_promoted_version": "PSM_V0.265",
+  "target_version": "PSM_V0.265",
+  "target_promoted": true,
+  "passed": true,
+  "status": "v0_265_promoted_v0_266_automated_failure_discovery_open",
+  "requires_user_input": false,
+  "human_feedback_gate_removed": true,
+  "human_validation_claimed": false,
+  "next_action": "build_v0_266_adversarial_contract",
+  "promotion_manifest": "runtime/v0_265_automated_quality_promotion_manifest.json"
+}

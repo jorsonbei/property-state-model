@@ -16,7 +16,6 @@ from psm_v0.participant_enrollment import (
     load_private_state,
     write_private_state,
 )
-from psm_v0.participant_feedback import load_feedback_state
 
 
 ROOT = Path(__file__).resolve().parents[1]
@@ -31,13 +30,10 @@ class ParticipantEnrollmentApiTests(unittest.TestCase):
         self.directory = tempfile.TemporaryDirectory()
         self.path = Path(self.directory.name) / "private" / "enrollment.json"
         self.checkpoint_path = Path(self.directory.name) / "runtime" / "checkpoint.json"
-        self.feedback_path = Path(self.directory.name) / "private" / "feedback.json"
         self.original_path = server.ENROLLMENT_STATE_PATH
         self.original_checkpoint_path = server.ENROLLMENT_CHECKPOINT_PATH
-        self.original_feedback_path = server.FEEDBACK_STATE_PATH
         server.ENROLLMENT_STATE_PATH = self.path
         server.ENROLLMENT_CHECKPOINT_PATH = self.checkpoint_path
-        server.FEEDBACK_STATE_PATH = self.feedback_path
         state = initialize_enrollment(
             participant_count=3,
             protocol=self.protocol,
@@ -50,7 +46,6 @@ class ParticipantEnrollmentApiTests(unittest.TestCase):
     def tearDown(self) -> None:
         server.ENROLLMENT_STATE_PATH = self.original_path
         server.ENROLLMENT_CHECKPOINT_PATH = self.original_checkpoint_path
-        server.FEEDBACK_STATE_PATH = self.original_feedback_path
         self.directory.cleanup()
 
     def complete_state(self) -> None:
@@ -137,53 +132,12 @@ class ParticipantEnrollmentApiTests(unittest.TestCase):
         self.assertNotIn("sigma_plus_delivery", result)
         self.assertFalse(result["trial_session"]["raw_prompt_persisted"])
         self.assertFalse(result["trial_session"]["participant_content_sent_to_external_api"])
-        self.assertTrue(result["trial_session"]["structured_feedback_required"])
-        self.assertFalse(result["trial_session"]["free_text_feedback_allowed"])
-        self.assertEqual(len(result["trial_session"]["feedback_token"]), 64)
+        self.assertFalse(result["trial_session"]["human_feedback_required"])
         private_text = self.path.read_text(encoding="utf-8")
         self.assertNotIn(prompt, private_text)
         self.assertNotIn(generated["chat"]["assistant_message"], private_text)
         state = load_private_state(self.path, self.protocol)
         self.assertEqual(len(state["audit_events"]), 1)
-
-    def test_structured_feedback_is_closed_content_free_and_single_use(self) -> None:
-        self.complete_state()
-        generated = {
-            "chat": {
-                "assistant_message": "蓝光在大气中更容易发生散射。",
-                "generation": {"provider": "deterministic"},
-            }
-        }
-        chat_payload = {
-            "participant_id": "P01",
-            "invitation_code": self.codes[0],
-            "messages": [{"role": "user", "content": "为什么天空是蓝色？"}],
-        }
-        with patch.object(server, "run_chat_turn", return_value=generated):
-            chat = server.run_trial_chat_turn(chat_payload)
-        feedback_payload = {
-            "participant_id": "P01",
-            "invitation_code": self.codes[0],
-            "feedback_token": chat["trial_session"]["feedback_token"],
-            "helpfulness": 5,
-            "clarity": 4,
-            "state_alignment": "yes",
-            "issue_category": "none",
-        }
-        result = server.handle_trial_feedback(feedback_payload)
-        self.assertTrue(result["accepted"])
-        self.assertFalse(result["free_text_collected"])
-        self.assertEqual(result["progress"]["participants"][0]["credited"], 1)
-        persisted = self.feedback_path.read_text(encoding="utf-8")
-        self.assertNotIn("为什么天空是蓝色", persisted)
-        self.assertNotIn("蓝光在大气", persisted)
-        self.assertEqual(len(load_feedback_state(self.feedback_path)["feedback_events"]), 1)
-        with self.assertRaisesRegex(ValueError, "already been submitted"):
-            server.handle_trial_feedback(feedback_payload)
-        with self.assertRaisesRegex(ValueError, "fields are not closed"):
-            server.handle_trial_feedback({**feedback_payload, "free_text": "must be rejected"})
-        with self.assertRaisesRegex(ValueError, "must be integers"):
-            server.handle_trial_feedback({**feedback_payload, "feedback_token": "0" * 64, "helpfulness": True})
 
     def test_sensitive_prompt_is_rejected_and_never_reaches_model(self) -> None:
         self.complete_state()

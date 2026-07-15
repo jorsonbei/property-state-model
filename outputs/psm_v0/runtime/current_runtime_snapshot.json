@@ -2,10 +2,10 @@
   "schema_version": "psm_public_runtime_snapshot_v1",
   "project_status": {
     "updated_from_local_artifacts": true,
-    "current_version": "psm_v0.264",
+    "current_version": "psm_v0.265",
     "source_evidence_version": "psm_v0.251",
-    "previous_formal_version": "psm_v0.263",
-    "completed_result": "three_person_content_free_supervised_pilot_complete",
+    "previous_formal_version": "psm_v0.264",
+    "completed_result": "automated_internal_quality_gate_passed_without_human_validation",
     "family": {
       "family_id": "v251_independent_chat_golden_blind_set_boundary_adversarial",
       "case_pack": "case_packs/v0_251_independent_chat_golden_blind_set_boundary_adversarial_cases.json",
@@ -244,10 +244,10 @@
       "rule_replacement_allowed": false
     },
     "next_stage": {
-      "version": "PSM_V0.265",
-      "objective": "Collect structured content-free participant feedback on new supervised low-risk turns. Require three rated turns per participant using fixed helpfulness, clarity, state-alignment, and issue-category fields; allow no free text, direct identity, raw prompt or answer retention, external participant-content calls, automatic training, or public release claims.",
-      "blocked": true,
-      "requires_user_input": true
+      "version": "PSM_V0.266",
+      "objective": "构建来源隔离的合成对抗案例族与变形不变量；保持开发集和评测集分离，禁止角色模拟冒充真人及评测结果回流训练，并继续关闭公开发布和规则替换权限。",
+      "blocked": false,
+      "requires_user_input": false
     },
     "primary_artifacts": {
       "case_pack": "case_packs/v0_251_independent_chat_golden_blind_set_boundary_adversarial_cases.json",
@@ -259,7 +259,7 @@
       "candidate_taxonomy": "taxonomy_out/psm_v0.251_candidate_taxonomy.json",
       "candidate_regression_fixtures": "fixture_out/psm_v0.251_candidate_regression_fixtures.json",
       "taxonomy_delta": "taxonomy_delta_out/psm_v0.251_taxonomy_delta.json",
-      "project_status": "project_status_out/psm_v0.264_project_status.json",
+      "project_status": "project_status_out/psm_v0.265_project_status.json",
       "regression": "regression_out/psm_v0.251_regression_check.json",
       "independent_chat_gate": "runtime/v0_251_wave_g_external_semantic_judge.json",
       "model_selection": "runtime/v0_251_base_upgrade_pairwise_gemini_pro_report.json",
@@ -337,7 +337,14 @@
       "v0_264_browser": "runtime/v0_264_supervised_pilot_browser_regression/report.json",
       "v0_264_docker": "runtime/v0_264_supervised_pilot_docker_boundary.json",
       "v0_264_checkpoint": "runtime/v0_264_supervised_pilot_checkpoint.json",
-      "v0_264_promotion_manifest": "runtime/v0_264_supervised_pilot_promotion_manifest.json"
+      "v0_264_promotion_manifest": "runtime/v0_264_supervised_pilot_promotion_manifest.json",
+      "v0_265_contract": "benchmarks/v0_265_automated_quality_contract.json",
+      "v0_265_report": "runtime/v0_265_automated_quality_report.json",
+      "v0_265_gate": "runtime/v0_265_automated_quality_gate.json",
+      "v0_265_browser": "runtime/v0_265_automated_quality_browser_regression/report.json",
+      "v0_265_docker": "runtime/v0_265_automated_quality_docker_boundary.json",
+      "v0_265_checkpoint": "runtime/v0_265_automated_quality_checkpoint.json",
+      "v0_265_promotion_manifest": "runtime/v0_265_automated_quality_promotion_manifest.json"
     },
     "regression": {
       "stem": "psm_v0.251",
@@ -667,6 +674,23 @@
       "participant_content_external_api_calls": 0,
       "gate_sha256": "2a48d87403c9715e2fe77d9c22f7700deb857670a4b984b6d4ec7e095d7bde0b",
       "contract_sha256": "32f937af055a526bebb18829943a81421326084946e973ecb5acb20a0ab1f1dd"
+    },
+    "v0_265_automated_quality_gate": {
+      "decision": "automated_internal_quality_gate_passed",
+      "passed": true,
+      "cases": 30,
+      "case_passed": 30,
+      "failed": 0,
+      "critical_fact_hallucinations": 0,
+      "critical_safety_false_negatives": 0,
+      "simulated_personas": 12,
+      "simulated_persona_proxy_passed": 12,
+      "synthetic_only": true,
+      "human_participants_used": false,
+      "human_feedback_collected": false,
+      "human_validation_claimed": false,
+      "contract_sha256": "64904679263e01bc9e091a00b304296e68d9fb1aee0d233448d58e72bcfc979f",
+      "gate_sha256": "87c0e29ec75d37aea262ec420b4b63c8f068c1735b0361cb1d4599cfa6205bdb"
     }
   },
   "optional_project_status": {

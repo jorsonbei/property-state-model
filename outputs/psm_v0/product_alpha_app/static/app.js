@@ -175,17 +175,8 @@ async function runChat(options = {}) {
       state.taskGraph = payload.task_state_graph || null;
     }
     const answer = payload.chat?.assistant_message || "我收到你的問題了，但這次沒有生成有效回答。";
-    const assistantMessageId = await pushAssistantProgressively(answer, requestId);
+    await pushAssistantProgressively(answer, requestId);
     if (state.activeRequest?.id !== requestId) return;
-    const feedbackToken = payload.trial_session?.feedback_token;
-    if (state.trialSession && assistantMessageId && feedbackToken) {
-      const assistantMessage = state.messages.find((item) => item.id === assistantMessageId);
-      if (assistantMessage) {
-        assistantMessage.feedbackToken = feedbackToken;
-        assistantMessage.feedbackSubmitted = false;
-        renderMessages();
-      }
-    }
     if (!state.trialSession) pushHistory(payload);
     clearRecovery();
     await loadStatus();
@@ -431,112 +422,9 @@ function renderMessages() {
     const body = document.createElement("p");
     body.textContent = message.content;
     item.append(messageLabel(message.role === "user" ? "你" : "物性AI"), body);
-    if (message.role === "assistant" && (message.feedbackToken || message.feedbackSubmitted)) {
-      item.appendChild(renderFeedbackForm(message));
-    }
     list.appendChild(item);
   });
   list.scrollTop = list.scrollHeight;
-}
-
-function renderFeedbackForm(message) {
-  const form = document.createElement("form");
-  form.className = "structured-feedback";
-  form.dataset.feedbackFor = String(message.id);
-
-  const heading = document.createElement("strong");
-  heading.textContent = message.feedbackSubmitted ? "本回合回饋已記錄" : "評價本回合";
-  form.appendChild(heading);
-  if (message.feedbackSubmitted) {
-    form.classList.add("submitted");
-    return form;
-  }
-
-  const grid = document.createElement("div");
-  grid.className = "feedback-grid";
-  const helpfulness = feedbackSelect("helpfulness", "有幫助程度", [
-    ["", "請選擇"], ["1", "1 · 沒有幫助"], ["2", "2"], ["3", "3"], ["4", "4"], ["5", "5 · 很有幫助"]
-  ]);
-  const clarity = feedbackSelect("clarity", "清楚程度", [
-    ["", "請選擇"], ["1", "1 · 不清楚"], ["2", "2"], ["3", "3"], ["4", "4"], ["5", "5 · 很清楚"]
-  ]);
-  const alignment = feedbackSelect("state_alignment", "是否接住問題狀態", [
-    ["", "請選擇"], ["yes", "是"], ["partial", "部分"], ["no", "否"]
-  ]);
-  const issue = feedbackSelect("issue_category", "主要問題", [
-    ["", "請選擇"], ["none", "沒有問題"], ["missed_intent", "沒接住意圖"],
-    ["possible_factual_error", "可能有事實錯誤"], ["unclear", "表達不清楚"],
-    ["too_verbose", "過於冗長"], ["too_guarded", "過度保守"],
-    ["unsafe_or_inappropriate", "不安全或不合適"]
-  ]);
-  grid.append(helpfulness.label, clarity.label, alignment.label, issue.label);
-
-  const footer = document.createElement("div");
-  footer.className = "feedback-actions";
-  const note = document.createElement("span");
-  note.textContent = "只記錄固定選項，不記錄聊天內容。";
-  const submit = document.createElement("button");
-  submit.type = "submit";
-  submit.textContent = "提交評價";
-  footer.append(note, submit);
-  form.append(grid, footer);
-  form.addEventListener("submit", (event) => submitStructuredFeedback(event, message, {
-    helpfulness: helpfulness.select,
-    clarity: clarity.select,
-    stateAlignment: alignment.select,
-    issueCategory: issue.select,
-    submit
-  }));
-  return form;
-}
-
-function feedbackSelect(name, labelText, options) {
-  const label = document.createElement("label");
-  const text = document.createElement("span");
-  text.textContent = labelText;
-  const select = document.createElement("select");
-  select.name = name;
-  select.required = true;
-  options.forEach(([value, optionText]) => {
-    const option = document.createElement("option");
-    option.value = value;
-    option.textContent = optionText;
-    select.appendChild(option);
-  });
-  label.append(text, select);
-  return { label, select };
-}
-
-async function submitStructuredFeedback(event, message, fields) {
-  event.preventDefault();
-  if (!state.trialSession || message.feedbackSubmitted) return;
-  fields.submit.disabled = true;
-  fields.submit.textContent = "提交中";
-  try {
-    const response = await fetch("/api/trial-feedback", {
-      method: "POST",
-      headers: { "Content-Type": "application/json" },
-      cache: "no-store",
-      body: JSON.stringify({
-        participant_id: state.trialSession.participantId,
-        invitation_code: state.trialSession.invitationCode,
-        feedback_token: message.feedbackToken,
-        helpfulness: Number(fields.helpfulness.value),
-        clarity: Number(fields.clarity.value),
-        state_alignment: fields.stateAlignment.value,
-        issue_category: fields.issueCategory.value
-      })
-    });
-    const payload = await response.json().catch(() => ({}));
-    if (!response.ok) throw new Error(payload.error || "回饋未被接受");
-    message.feedbackSubmitted = true;
-    delete message.feedbackToken;
-    renderMessages();
-  } catch (error) {
-    fields.submit.disabled = false;
-    fields.submit.textContent = "重試提交";
-    showRecovery(`結構化回饋提交失敗：${String(error.message || error)}`, "error");
-  }
 }
 
 function messageLabel(text) {

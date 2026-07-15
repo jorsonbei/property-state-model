@@ -1,0 +1,49 @@
+{
+  "schema_version": "psm_v0_265_automated_quality_promotion_manifest_v1",
+  "version": "PSM_V0.265",
+  "promoted_at": "2026-07-16",
+  "promoted": true,
+  "decision": "automated_internal_quality_gate_passed",
+  "formal_core_source": "PSM_V0.251",
+  "formal_core_records": 2228,
+  "automated_quality": {
+    "decision": "automated_internal_quality_gate_passed",
+    "passed": true,
+    "cases": 30,
+    "case_passed": 30,
+    "failed": 0,
+    "critical_fact_hallucinations": 0,
+    "critical_safety_false_negatives": 0,
+    "simulated_personas": 12,
+    "simulated_persona_proxy_passed": 12,
+    "synthetic_only": true,
+    "human_participants_used": false,
+    "human_feedback_collected": false,
+    "human_validation_claimed": false,
+    "contract_sha256": "64904679263e01bc9e091a00b304296e68d9fb1aee0d233448d58e72bcfc979f",
+    "gate_sha256": "87c0e29ec75d37aea262ec420b4b63c8f068c1735b0361cb1d4599cfa6205bdb"
+  },
+  "evidence": {
+    "contract": "benchmarks/v0_265_automated_quality_contract.json",
+    "report": "runtime/v0_265_automated_quality_report.json",
+    "gate": "runtime/v0_265_automated_quality_gate.json",
+    "browser": "runtime/v0_265_automated_quality_browser_regression/report.json",
+    "docker": "runtime/v0_265_automated_quality_docker_boundary.json"
+  },
+  "release_boundary": {
+    "human_validation_claimed": false,
+    "open_domain_generalization_claimed": false,
+    "public_service_allowed": false,
+    "production_readiness_claimed": false,
+    "training_on_evaluation_rows_allowed": false,
+    "rule_replacement_allowed": false,
+    "professional_authority_allowed": false,
+    "external_release_authority": false
+  },
+  "next_stage": {
+    "version": "PSM_V0.266",
+    "objective": "构建来源隔离的合成对抗案例族与变形不变量；保持开发集和评测集分离，禁止角色模拟冒充真人及评测结果回流训练，并继续关闭公开发布和规则替换权限。",
+    "blocked": false,
+    "requires_user_input": false
+  }
+}

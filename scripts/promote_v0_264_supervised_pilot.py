@@ -73,12 +73,12 @@ def main() -> None:
     target["next_stage"] = {
         "version": "PSM_V0.265",
         "objective": (
-            "Collect structured content-free participant feedback on new supervised low-risk turns. Require three rated turns per "
-            "participant using fixed helpfulness, clarity, state-alignment, and issue-category fields; allow no free text, direct identity, "
-            "raw prompt or answer retention, external participant-content calls, automatic training, or public release claims."
+            "Run a frozen synthetic automated quality audit across conversation, grounded facts, research, theory, and high-risk "
+            "boundaries. Do not use or impersonate human participants, infer subjective satisfaction, train on evaluation rows, "
+            "or claim human validation, open-domain generalization, production readiness, or external release authority."
         ),
-        "blocked": True,
-        "requires_user_input": True,
+        "blocked": False,
+        "requires_user_input": False,
     }
     target.setdefault("primary_artifacts", {}).update({
         "v0_264_contract": "benchmarks/v0_264_supervised_pilot_contract.json",
@@ -113,7 +113,7 @@ def main() -> None:
     checkpoint.update({
         "current_promoted_version": "PSM_V0.264",
         "target_promoted": True,
-        "status": "v0_264_promoted_awaiting_structured_quality_feedback",
+        "status": "v0_264_promoted_v0_265_automated_quality_open",
         "requires_user_input": False,
         "promotion_manifest": str(MANIFEST.relative_to(PSM_ROOT)),
     })

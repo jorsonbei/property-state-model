@@ -1,0 +1,47 @@
+{
+  "schema_version": "psm_v0_265_automated_quality_browser_regression_v1",
+  "base_url": "http://127.0.0.1:8765",
+  "passed": true,
+  "synthetic_questions_only": true,
+  "human_participant_actions_executed": false,
+  "human_feedback_collected": false,
+  "desktop": {
+    "answerContainsProductIdentity": true,
+    "chatLayout": {
+      "scrollWidth": 1440,
+      "innerWidth": 1440,
+      "messageCount": 2
+    },
+    "enrollmentLayout": {
+      "scrollWidth": 1440,
+      "innerWidth": 1440,
+      "cardsInsideViewport": true
+    },
+    "feedbackEndpointStatus": 404,
+    "consoleErrors": 0
+  },
+  "mobile": {
+    "answerContainsProductIdentity": true,
+    "chatLayout": {
+      "scrollWidth": 390,
+      "innerWidth": 390,
+      "messageCount": 2
+    },
+    "enrollmentLayout": {
+      "scrollWidth": 390,
+      "innerWidth": 390,
+      "cardsInsideViewport": true
+    },
+    "feedbackEndpointStatus": 404,
+    "consoleErrors": 0
+  },
+  "checks": {
+    "normal_chat_works": true,
+    "human_feedback_ui_absent": true,
+    "human_feedback_endpoint_absent": true,
+    "v0_264_history_visible": true,
+    "desktop_overflow": false,
+    "mobile_overflow": false,
+    "console_errors": 0
+  }
+}

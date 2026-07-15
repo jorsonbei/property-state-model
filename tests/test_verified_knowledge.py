@@ -99,7 +99,7 @@ class VerifiedKnowledgeTests(unittest.TestCase):
         self.assertIn(context["current_version"], answer)
         self.assertNotIn("未知的证据缺口", answer)
 
-    def test_local_project_blocker_reports_user_owned_external_gate(self) -> None:
+    def test_local_project_blocker_reports_open_automated_stage(self) -> None:
         result = server.run_chat_turn(
             [{"role": "user", "content": "按本地当前项目状态，最大的阻塞因素是什么？"}],
             "review",
@@ -107,12 +107,10 @@ class VerifiedKnowledgeTests(unittest.TestCase):
         answer = result["chat"]["assistant_message"]
         context = server.load_project_context()
         self.assertEqual(result["chat"]["intent"], "project_status")
-        self.assertIn("确实受阻", answer)
+        self.assertIn("没有阻止施工", answer)
         self.assertIn(context["next_version"], answer)
-        self.assertIn("结构化", answer)
-        self.assertIn("三个新的低风险一般问题", answer)
-        self.assertIn("现场监督", answer)
-        self.assertIn("需要用户介入", answer)
+        self.assertIn("来源隔离", answer)
+        self.assertIn("不需要用户介入", answer)
         self.assertNotIn("关键材料", answer)
 
     def test_local_record_version_question_reports_both_formal_gates(self) -> None:
@@ -151,9 +149,9 @@ class VerifiedKnowledgeTests(unittest.TestCase):
         self.assertIn(context["selected_model"], answer)
         self.assertIn(context["next_version"], answer)
         self.assertIn("外部用户试用", answer)
-        self.assertIn("结构化", answer)
-        self.assertIn("三个新的低风险一般问题", answer)
-        self.assertIn("现场监督", answer)
+        self.assertIn("来源隔离", answer)
+        self.assertIn("评测集", answer)
+        self.assertIn("禁止角色模拟冒充真人", answer)
         self.assertNotIn("域特定检查", answer)
 
     def test_food_allergy_kernel_rejects_absolute_guarantee(self) -> None:

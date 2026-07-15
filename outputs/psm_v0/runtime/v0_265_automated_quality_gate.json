@@ -1,0 +1,42 @@
+{
+  "schema_version": "psm_v0_265_automated_quality_gate_v1",
+  "version": "PSM_V0.265-candidate",
+  "passed": true,
+  "decision": "automated_internal_quality_gate_passed",
+  "checks": {
+    "contract_case_count_matches": true,
+    "persona_count_matches": true,
+    "all_persona_proxies_pass": true,
+    "all_frozen_cases_pass": true,
+    "critical_fact_hallucinations_zero": true,
+    "critical_safety_false_negatives_zero": true,
+    "synthetic_provenance_explicit": true,
+    "no_human_participants_or_feedback": true,
+    "no_human_or_external_validation_claim": true,
+    "release_and_training_closed": true
+  },
+  "metrics": {
+    "cases": 30,
+    "passed": 30,
+    "failed": 0,
+    "critical_fact_hallucinations": 0,
+    "critical_safety_false_negatives": 0,
+    "simulated_personas": 12,
+    "simulated_persona_proxy_passed": 12
+  },
+  "evidence": {
+    "contract": "benchmarks/v0_265_automated_quality_contract.json",
+    "contract_sha256": "64904679263e01bc9e091a00b304296e68d9fb1aee0d233448d58e72bcfc979f",
+    "report": "runtime/v0_265_automated_quality_report.json"
+  },
+  "release_boundary": {
+    "human_validation_claimed": false,
+    "open_domain_generalization_claimed": false,
+    "public_service_allowed": false,
+    "production_readiness_claimed": false,
+    "training_on_evaluation_rows_allowed": false,
+    "rule_replacement_allowed": false,
+    "professional_authority_allowed": false,
+    "external_release_authority": false
+  }
+}

@@ -9,7 +9,7 @@ PSM is an experimental state-first AI control layer. It routes a request through
 - Deterministic state pipeline: `Q -> Omega -> phi -> Delta sigma -> Pi -> eta -> B_sigma -> Sigma+`.
 - Candidate generation adapters, lexical auditing, deterministic gating, failure ledger, and regression artifacts.
 - Local chat alpha backed by Ollama.
-- Current public baseline: `PSM V0.264` (formal 2228-record core evidence source: `PSM V0.251`).
+- Current public baseline: `PSM V0.265` (formal 2228-record core evidence source: `PSM V0.251`).
 - V0.251's fresh externally authored Wave G passed 20/20 under an independent external semantic judge; usefulness, safety, correctness, relevance, boundary quality, and hallucination control were each 1.0000 on that frozen synthetic blind wave.
 - V0.252 adds a stable internal chat-product gate with cancel, timeout, retry, recovery, progressive display, hidden debug evidence, and desktop/mobile/real-backend browser regression.
 - V0.253 replaces passive Omega route labels with four executable local/read-only evidence adapters and a fail-closed provenance/failure-ledger contract.
@@ -24,7 +24,7 @@ PSM is an experimental state-first AI control layer. It routes a request through
 - V0.262 freezes the approved conservative invite-only trial protocol for 3-5 operator-supervised adults, rejects sensitive and professional-decision prompts, retains no raw participant chat, keeps content out of external APIs, deletes content-free metadata after seven days, and enforces a USD 20 monthly API reservation cap. The initial independent protocol review failed on two enrollment/notice controls; after repair, the final seven-question `gpt-5.4` review passes with no remaining findings.
 - V0.263 records three complete operator-attested enrollment sequences, three passing private access checks, and the first content-free supervised low-risk session evidence. Desktop/mobile and Docker boundaries pass; invitation values remain outside Git and Docker. This activates only the local supervised invite-only trial, not a public service or privacy-compliance claim.
 - V0.264 completes and promotes the bounded three-person pilot: P01-P03 each reached 3/3 credited low-risk turns, with 20 content-free allowed events, zero raw prompt/answer retention, and zero participant-content external API calls.
-- V0.265 stages fixed-field participant quality feedback on three new supervised answers per participant. Helpfulness, clarity, state alignment, and issue category are collected without free text; current progress is 0/3 for each participant and quality is not yet evaluated.
+- V0.265 replaces the cancelled human-rating gate with 30 frozen synthetic quality cases, including 12 simulated user roles. All 30 cases and all 12 role-proxy rubrics pass, with zero critical factual hallucinations and zero critical safety false negatives. The evidence is synthetic and does not claim real-user satisfaction or human validation.
 
 This repository is an experimental research and engineering system. It is not a medical, legal, investment, production-release, or external-user authorization system. Passing synthetic regressions does not prove open-domain generalization.
 
@@ -75,12 +75,13 @@ make browser-regression-v263-enrollment
 make enrollment-v263-docker
 make pilot-v264-eval
 make pilot-v264-docker
-make feedback-v265-eval
-make browser-regression-v265-feedback
-make feedback-v265-docker
+make quality-v265-eval
+make browser-regression-v265-quality
+make quality-v265-docker
+make promote-v265
 ```
 
-The V0.265 local operator page is `http://127.0.0.1:8765/trial-enrollment`. It shows both completed V0.264 pilot coverage and current V0.265 fixed-feedback progress. It is only for use while the invited adult and operator are physically present. Do not enter or store names, contact details, identity documents, secrets, or medical, legal, and trading-decision data.
+The historical local operator page is `http://127.0.0.1:8765/trial-enrollment`. It displays the completed V0.264 supervised-pilot record. V0.265 no longer collects participant ratings or requires human actions.
 
 Generate a read-only inventory of the local evidence store without moving or deleting artifacts:
 
@@ -97,7 +98,7 @@ make sync-runtime
 docker compose up --build
 ```
 
-Open `http://127.0.0.1:8766/`. Docker publishes only on the local loopback interface, and the container connects to host Ollama through `host.docker.internal`. The Docker runtime intentionally excludes V0.263 private invitations and V0.265 private feedback, so it cannot perform participant enrollment, trial chat, or feedback collection.
+Open `http://127.0.0.1:8766/`. Docker publishes only on the local loopback interface, and the container connects to host Ollama through `host.docker.internal`. The Docker runtime excludes V0.263 private invitations and contains no V0.265 human-feedback module, state, UI, or endpoint.
 
 ## Repository map
 
@@ -108,7 +109,7 @@ outputs/psm_v0/cases/              promoted deterministic cases
 outputs/psm_v0/case_packs/         staged adversarial case packs
 outputs/psm_v0/work/               version advancement tooling
 outputs/psm_v0/runtime/            sanitized container/runtime snapshot
-outputs/psm_v0/private_runtime/    ignored owner-only enrollment and feedback state
+outputs/psm_v0/private_runtime/    ignored owner-only historical enrollment state
 scripts/                            project verification and snapshot tools
 tests/                              public contract tests
 ```
@@ -125,7 +126,7 @@ make judge-v251-external
 
 - Human recovery point: [`outputs/psm_v0/CURRENT_STATUS.md`](outputs/psm_v0/CURRENT_STATUS.md)
 - Architecture: [`outputs/psm_v0/PSM_V0_Blueprint.md`](outputs/psm_v0/PSM_V0_Blueprint.md)
-- Current execution roadmap: [`outputs/psm_v0/roadmap_out/PSM_Structured_Feedback_Roadmap_V0.264_to_V0.265.md`](outputs/psm_v0/roadmap_out/PSM_Structured_Feedback_Roadmap_V0.264_to_V0.265.md)
+- Current execution roadmap: [`outputs/psm_v0/roadmap_out/PSM_Automated_Quality_Roadmap_V0.265_to_V0.266.md`](outputs/psm_v0/roadmap_out/PSM_Automated_Quality_Roadmap_V0.265_to_V0.266.md)
 
 ## Open-source boundary
 

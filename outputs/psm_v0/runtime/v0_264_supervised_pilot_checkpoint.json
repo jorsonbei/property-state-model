@@ -3,7 +3,7 @@
   "current_promoted_version": "PSM_V0.264",
   "target_version": "PSM_V0.264",
   "target_promoted": true,
-  "status": "v0_264_promoted_awaiting_structured_quality_feedback",
+  "status": "v0_264_promoted_v0_265_automated_quality_open",
   "requires_user_input": false,
   "progress": {
     "schema_version": "psm_v0_264_supervised_pilot_progress_v1",
@@ -48,5 +48,6 @@
     "rule_replacement_allowed": false,
     "external_release_authority": false
   },
-  "required_decision": "三名化名参与者均已完成至少三次低风险现场监督会话；可以进入独立质量复核，但仍不得开放公开服务。"
+  "required_decision": "三名化名参与者均已完成至少三次低风险现场监督会话；可以进入独立质量复核，但仍不得开放公开服务。",
+  "promotion_manifest": "runtime/v0_264_supervised_pilot_promotion_manifest.json"
 }

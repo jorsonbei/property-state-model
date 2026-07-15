@@ -41,8 +41,8 @@
   },
   "next_stage": {
     "version": "PSM_V0.265",
-    "objective": "Collect structured content-free participant feedback on new supervised low-risk turns. Require three rated turns per participant using fixed helpfulness, clarity, state-alignment, and issue-category fields; allow no free text, direct identity, raw prompt or answer retention, external participant-content calls, automatic training, or public release claims.",
-    "blocked": true,
-    "requires_user_input": true
+    "objective": "Run a frozen synthetic automated quality audit across conversation, grounded facts, research, theory, and high-risk boundaries. Do not use or impersonate human participants, infer subjective satisfaction, train on evaluation rows, or claim human validation, open-domain generalization, production readiness, or external release authority.",
+    "blocked": false,
+    "requires_user_input": false
   }
 }

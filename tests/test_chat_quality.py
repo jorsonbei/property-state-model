@@ -120,9 +120,9 @@ class ChatQualityTests(unittest.TestCase):
         self.assertIn(context["current_version"], result["chat"]["assistant_message"])
         self.assertIn(context["next_version"], result["chat"]["assistant_message"])
         self.assertIn(context["next_objective"], result["chat"]["assistant_message"])
-        self.assertIn("数据处理", result["chat"]["assistant_message"])
-        self.assertIn("隐私", result["chat"]["assistant_message"])
-        self.assertIn("API", result["chat"]["assistant_message"])
+        self.assertIn("来源隔离", result["chat"]["assistant_message"])
+        self.assertIn("变形不变量", result["chat"]["assistant_message"])
+        self.assertIn("评测集", result["chat"]["assistant_message"])
         self.assertIn("外部", result["chat"]["assistant_message"])
 
     def test_working_chat_does_not_imply_external_release(self) -> None:

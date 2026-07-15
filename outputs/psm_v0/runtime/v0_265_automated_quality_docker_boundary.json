@@ -1,0 +1,26 @@
+{
+  "schema_version": "psm_v0_265_automated_quality_docker_boundary_v1",
+  "passed": true,
+  "checks": {
+    "automated_gate_passed": true,
+    "host_status_available": true,
+    "docker_status_available": true,
+    "human_feedback_endpoint_absent_host": true,
+    "human_feedback_endpoint_absent_docker": true,
+    "human_feedback_module_and_state_absent_docker": true,
+    "external_user_release_closed_host": true,
+    "external_user_release_closed_docker": true,
+    "docker_localhost_only": true
+  },
+  "human_feedback_collected": false,
+  "human_validation_claimed": false,
+  "host": {
+    "version": "PSM V0.265",
+    "feedback_endpoint_status": 404
+  },
+  "docker": {
+    "version": "PSM V0.265",
+    "feedback_endpoint_status": 404,
+    "public_service_allowed": false
+  }
+}

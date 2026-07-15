@@ -49,7 +49,7 @@ def match_verified_knowledge(text: str) -> VerifiedKnowledge | None:
                 "再次无损压缩通常变化不大，还可能因文件头和索引略微变大。用信息论语言近似地说，越难预测、熵越高的数据越难继续压缩，"
                 "不是高熵更容易压缩。"
             ),
-            grounding_facts=("重复模式", "已压缩内容", "高熵数据更难继续压缩"),
+            grounding_facts=("重复模式", "已压缩过的内容", "熵越高的数据越难继续压缩"),
             grounding_sources=("verified_kernel:compression_redundancy_entropy",),
         )
     if _all_groups(
