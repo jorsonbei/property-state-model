@@ -1,0 +1,86 @@
+{
+  "schema_version": "psm_v0_261_openai_external_contract_judge_v1",
+  "version": "PSM_V0.261",
+  "reviewed_at": "2026-07-15T01:22:21.674753+00:00",
+  "provider": "OpenAI",
+  "endpoint": "/v1/responses",
+  "requested_model": "gpt-5.4",
+  "actual_model": "gpt-5.4-2026-03-05",
+  "http_status": 200,
+  "response_status": "completed",
+  "response_id": "resp_0a1615f3979991a3016a56e0bd45b081988dd643a3a95a9b53",
+  "request_id": "req_5a8587ef9bc745bcb223120a4ee1facd",
+  "store": false,
+  "api_key_persisted_in_artifact": false,
+  "package_sha256": "24728bffc8580e456f112cf451b8e7eb37eb7914fc9f78a50cd4343ea8d6f761",
+  "contract_sha256": "f68bebed05480b39d0d5454a1a65b09b2305c3b47f7e59c0e5e7a74abc2b011b",
+  "request_payload_sha256": "c7b34bb69b2ea0b659790c799564723413d51e54193549bd1eb762c808a1b40b",
+  "submission_scope": {
+    "synthetic_only": true,
+    "contains_private_data": false,
+    "contains_user_documents": false,
+    "contains_secrets": false,
+    "external_users_involved": false
+  },
+  "usage": {
+    "input_tokens": 2324,
+    "input_tokens_details": {
+      "cache_write_tokens": 0,
+      "cached_tokens": 0
+    },
+    "output_tokens": 2392,
+    "output_tokens_details": {
+      "reasoning_tokens": 1912
+    },
+    "total_tokens": 4716
+  },
+  "review": {
+    "contract_sha256": "f68bebed05480b39d0d5454a1a65b09b2305c3b47f7e59c0e5e7a74abc2b011b",
+    "verdict": "pass",
+    "failed_checks": [],
+    "critical_findings": [],
+    "recommended_repairs": [],
+    "question_reviews": [
+      {
+        "question": "Does the contract prevent candidate features from reading target or judge fields?",
+        "verdict": "pass",
+        "finding": "Pass. The closed-schema candidate projection is fail-closed, limits exclusive read paths to non-target candidate fields, explicitly makes annotations or derived labels unreadable, rejects unknown fields, and forbids common target/judge aliases in candidate inputs."
+      },
+      {
+        "question": "Does the family/source/time split fail closed on overlap and temporal leakage?",
+        "verdict": "pass",
+        "finding": "Pass. The split policy is explicit and fail-closed: assignment is by source_family/source_id, family and source overlap are disallowed, duplicate cross-split copies are rejected, cross-boundary groups are rejected, unparseable or unassigned timestamps are rejected, and record-order assignment is disallowed."
+      },
+      {
+        "question": "Are annotator disagreements preserved instead of flattened into training truth?",
+        "verdict": "pass",
+        "finding": "Pass. Raw per-annotator records are append-only and immutable, independent annotator identities are required, vote distribution must be preserved and retained in training export, adjudication is separate, and training labels may derive only from unanimous raw train annotations with resolution_threshold set to 1.0."
+      },
+      {
+        "question": "Can any validation, test, blind, or judge-only artifact flow back into training?",
+        "verdict": "pass",
+        "finding": "Pass. The artifact-flow policy allows training features only from train-split candidate projection and labels only from unanimous raw train annotations, explicitly forbids validation/test/blind/judge-only/evaluation/adjudication/model-output origins for all listed training and tuning uses, and rejects unknown origins or uses."
+      },
+      {
+        "question": "Does any field accidentally grant rule replacement or external release authority?",
+        "verdict": "pass",
+        "finding": "Pass. Authority-bearing fields are disallowed in records, override or approval aliases are forbidden, records and annotations are evidence not authority, rule replacement and external release authority are both explicitly denied, and unknown authority is denied."
+      }
+    ]
+  },
+  "gate_checks": {
+    "contract_sha256_match": true,
+    "exact_question_coverage": true,
+    "response_internally_consistent": true,
+    "external_verdict_pass": true
+  },
+  "passed": true,
+  "release_boundary": {
+    "contract_review_only": true,
+    "training_authority": false,
+    "rule_replacement_authority": false,
+    "external_user_trial_allowed": false,
+    "public_service_allowed": false,
+    "external_release_authority": false
+  }
+}

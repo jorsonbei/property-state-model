@@ -1,0 +1,103 @@
+{
+  "schema_version": "psm_v0_261_openai_external_contract_judge_v1",
+  "version": "PSM_V0.261",
+  "reviewed_at": "2026-07-15T01:05:42.953213+00:00",
+  "provider": "OpenAI",
+  "endpoint": "/v1/responses",
+  "requested_model": "gpt-5.4",
+  "actual_model": "gpt-5.4-2026-03-05",
+  "http_status": 200,
+  "response_status": "completed",
+  "response_id": "resp_03dd1534162b1a10016a56dcb62148819abf5c18ed2d5add3f",
+  "request_id": "req_6bb02444c0d14c5e9b711f0b60ea69c2",
+  "store": false,
+  "api_key_persisted_in_artifact": false,
+  "package_sha256": "9f0922af96ff173bec77b4a9b5c7cc814a4274bdff6bc49c743475c39660543f",
+  "contract_sha256": "eac63131e4c0d373e4aa55384610c8c954ca5259da5369fccf3bbdb086fd0aed",
+  "request_payload_sha256": "37334c0160e9a339380bb489f126979f886c9232bd2af25c9df0b2adb312a9ba",
+  "submission_scope": {
+    "synthetic_only": true,
+    "contains_private_data": false,
+    "contains_user_documents": false,
+    "contains_secrets": false,
+    "external_users_involved": false
+  },
+  "usage": {
+    "input_tokens": 986,
+    "input_tokens_details": {
+      "cache_write_tokens": 0,
+      "cached_tokens": 0
+    },
+    "output_tokens": 5264,
+    "output_tokens_details": {
+      "reasoning_tokens": 4117
+    },
+    "total_tokens": 6250
+  },
+  "review": {
+    "contract_sha256": "eac63131e4c0d373e4aa55384610c8c954ca5259da5369fccf3bbdb086fd0aed",
+    "verdict": "fail",
+    "failed_checks": [
+      "Candidate-visible schema is not closed: `annotations` is a required top-level field, but the contract does not explicitly limit candidate reads to `input.request` and `input.evidence`, and alternate target/judge field names are not globally forbidden.",
+      "Temporal split rules are not mutually exclusive: `validation_before: 2026-06-01T00:00:00Z` overlaps the training-eligible period defined by `train_before: 2026-05-01T00:00:00Z` because no validation lower bound or split-precedence rule is specified.",
+      "Disagreement preservation is policy-only, not structural: `annotations` has no required per-annotator schema, and flattened truth could still appear under extra or differently named fields.",
+      "Backflow controls are incomplete: blind/test no-backflow is named, but validation no-backflow is not explicit, and no closed artifact schema prevents judge-only or evaluation artifacts from re-entering training.",
+      "`rule_replacement_allowed: false` and `external_release_authority: false` are not enforced by a closed schema, so extra override or approval fields could still grant those powers."
+    ],
+    "critical_findings": [
+      "The contract is open-world rather than closed-world: it lists required fields and some forbidden candidate input keys, but it does not forbid additional fields or define an exclusive candidate-visible projection. That leaves room for target/judge leakage, disagreement flattening, and authority side channels.",
+      "The split policy does not fail closed on time: validation lacks an explicit lower bound and can overlap records that also satisfy the training cutoff, creating temporal/split leakage ambiguity.",
+      "Protections against backflow and disagreement loss rely on booleans without a fully specified artifact schema, so validation artifacts, hidden consensus labels, or judge-derived signals could still flow into training through unspecified fields."
+    ],
+    "recommended_repairs": [
+      "Define a closed schema at every object level (`additionalProperties: false` equivalent) and explicitly state that candidate-readable data is limited to `source` metadata plus `input.request` and `input.evidence` only.",
+      "Globally ban target/judge/adjudication/consensus/training-truth fields at any path or alias, not just a short list of candidate input key names.",
+      "Make splits mutually exclusive and deterministic: e.g., train `< 2026-05-01T00:00:00Z`, validation `>= 2026-05-01T00:00:00Z` and `< 2026-06-01T00:00:00Z`, test `>= 2026-06-01T00:00:00Z`, with explicit precedence and duplicate handling across splits.",
+      "Specify `annotations` as append-only raw per-annotator records with required annotator-level structure, require preserved vote distributions, and explicitly prohibit any flattened consensus/adjudicated training truth in training-visible artifacts.",
+      "Add explicit `validation_no_backflow: true` semantics and a closed artifact-flow policy stating that validation, test, blind, and judge-only artifacts cannot be used as training inputs, labels, features, tuning signals, or rule-updates.",
+      "Keep rule replacement and external release decisions outside the data contract entirely, or define explicit immutable no-override semantics with no approval/override fields permitted anywhere in the schema."
+    ],
+    "question_reviews": [
+      {
+        "question": "Does the contract prevent candidate features from reading target or judge fields?",
+        "verdict": "fail",
+        "finding": "Fail: `no_target_read`, `judge_only_separate`, and the forbidden-key list are not sufficient because `annotations` is a required top-level field, the contract does not explicitly restrict candidate reads to `input.request` and `input.evidence`, and differently named or nested target/judge fields are not globally disallowed."
+      },
+      {
+        "question": "Does the family/source/time split fail closed on overlap and temporal leakage?",
+        "verdict": "fail",
+        "finding": "Fail: the split windows are not fully disjoint or fully specified. `validation_before: 2026-06-01T00:00:00Z` overlaps records that also satisfy `train_before: 2026-05-01T00:00:00Z` unless an unstated lower bound or precedence rule exists, so the time split does not fail closed."
+      },
+      {
+        "question": "Are annotator disagreements preserved instead of flattened into training truth?",
+        "verdict": "fail",
+        "finding": "Fail: the policy says to preserve vote distribution and avoid unresolved items as training truth, but the contract does not structurally define `annotations` as raw per-annotator records or forbid alternate flattened-truth fields, so disagreement flattening remains possible."
+      },
+      {
+        "question": "Can any validation, test, blind, or judge-only artifact flow back into training?",
+        "verdict": "fail",
+        "finding": "Fail: blind/test no-backflow and judge separation are stated, but validation no-backflow is not explicit, `no_backfit` is not operationally defined here, and the open schema leaves room for evaluation or judge-derived artifacts to re-enter training through unspecified fields."
+      },
+      {
+        "question": "Does any field accidentally grant rule replacement or external release authority?",
+        "verdict": "fail",
+        "finding": "Fail: `rule_replacement_allowed: false` and `external_release_authority: false` are helpful intent flags, but without a closed schema that forbids extra override, approval, or release fields, accidental authority reintroduction is still possible."
+      }
+    ]
+  },
+  "gate_checks": {
+    "contract_sha256_match": true,
+    "exact_question_coverage": true,
+    "response_internally_consistent": true,
+    "external_verdict_pass": false
+  },
+  "passed": false,
+  "release_boundary": {
+    "contract_review_only": true,
+    "training_authority": false,
+    "rule_replacement_authority": false,
+    "external_user_trial_allowed": false,
+    "public_service_allowed": false,
+    "external_release_authority": false
+  }
+}

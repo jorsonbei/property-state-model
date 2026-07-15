@@ -34,6 +34,18 @@ def parse_timestamp(value: str) -> datetime:
 def split_for_timestamp(value: str, contract: dict) -> str:
     policy = contract["split_policy"]
     observed = parse_timestamp(value)
+    windows = policy.get("splits")
+    if windows:
+        matches = []
+        for name in ("train", "validation", "test"):
+            window = windows[name]
+            start = parse_timestamp(window["start_inclusive"]) if window.get("start_inclusive") else None
+            end = parse_timestamp(window["end_exclusive"]) if window.get("end_exclusive") else None
+            if (start is None or observed >= start) and (end is None or observed < end):
+                matches.append(name)
+        if len(matches) != 1:
+            raise ValueError("Timestamp does not map to exactly one protected split.")
+        return matches[0]
     train_before = parse_timestamp(policy["train_before"])
     validation_before = parse_timestamp(policy["validation_before"])
     if observed < train_before:
@@ -87,11 +99,103 @@ def _walk_keys(value: Any) -> Iterable[str]:
 
 
 def validate_candidate_view(view: dict, contract: dict) -> list[str]:
+    if not isinstance(view, dict):
+        return ["top_level.non_object"]
     forbidden = set(contract["record_contract"]["forbidden_candidate_input_keys"])
-    return sorted(forbidden.intersection(_walk_keys(view)))
+    violations = set(forbidden.intersection(_walk_keys(view)))
+    closed = contract.get("closed_schema") or {}
+    projection = closed.get("candidate_projection") or {}
+    if projection:
+        source = view.get("source")
+        input_value = view.get("input")
+        sections = {
+            "top_level": view,
+            "source": source if isinstance(source, dict) else {},
+            "input": input_value if isinstance(input_value, dict) else {},
+        }
+        if not isinstance(source, dict):
+            violations.add("source.non_object")
+        if not isinstance(input_value, dict):
+            violations.add("input.non_object")
+        for name, value in sections.items():
+            allowed = set(projection.get(name) or [])
+            unexpected = set(value) - allowed
+            violations.update(f"{name}.{key}" for key in unexpected)
+        evidence_allowed = set(projection.get("evidence_item") or [])
+        field_types = closed.get("field_types") or {}
+        for section_name, value in (("source", source), ("input", input_value)):
+            if isinstance(value, dict):
+                allowed_types = {
+                    field: expected
+                    for field, expected in (field_types.get(section_name) or {}).items()
+                    if field in set(projection.get(section_name) or [])
+                }
+                _validate_field_types(value, allowed_types, section_name, violations)
+        evidence = input_value.get("evidence") if isinstance(input_value, dict) else None
+        if not isinstance(evidence, list):
+            violations.add("input.evidence.non_list")
+        else:
+            for index, item in enumerate(evidence):
+                if not isinstance(item, dict):
+                    violations.add(f"input.evidence[{index}].non_object")
+                    continue
+                violations.update(
+                    f"input.evidence[{index}].{key}" for key in set(item) - evidence_allowed
+                )
+                _validate_field_types(
+                    item,
+                    field_types.get("evidence_item") or {},
+                    f"input.evidence[{index}]",
+                    violations,
+                )
+    return sorted(violations)
+
+
+def _reject_unexpected_keys(value: Any, allowed: Iterable[str], label: str, errors: list[str]) -> None:
+    if not isinstance(value, dict):
+        errors.append(f"{label}: expected object")
+        return
+    unexpected = set(value) - set(allowed)
+    if unexpected:
+        errors.append(f"{label}: unexpected fields {sorted(unexpected)}")
+
+
+def _matches_type(value: Any, expected: str) -> bool:
+    if expected == "string":
+        return isinstance(value, str)
+    if expected == "boolean":
+        return isinstance(value, bool)
+    if expected == "object":
+        return isinstance(value, dict)
+    if expected == "array_of_objects":
+        return isinstance(value, list) and all(isinstance(item, dict) for item in value)
+    if expected == "array_of_strings":
+        return isinstance(value, list) and all(isinstance(item, str) for item in value)
+    raise ValueError(f"Unsupported closed-schema field type: {expected}")
+
+
+def _validate_field_types(
+    value: dict,
+    expected: dict[str, str],
+    label: str,
+    violations: list[str] | set[str],
+) -> None:
+    for field, expected_type in expected.items():
+        if field not in value:
+            if isinstance(violations, set):
+                violations.add(f"{label}.{field}.missing")
+            else:
+                violations.append(f"{label}.{field}: missing")
+        elif not _matches_type(value[field], expected_type):
+            if isinstance(violations, set):
+                violations.add(f"{label}.{field}.invalid_type")
+            else:
+                violations.append(f"{label}.{field}: expected {expected_type}")
 
 
 def validate_record(record: dict, contract: dict) -> list[str]:
+    if not isinstance(record, dict):
+        return ["<missing>: record must be an object"]
     errors: list[str] = []
     record_id = str(record.get("record_id") or "<missing>")
     required_top = set(contract["record_contract"]["required_top_level"])
@@ -100,6 +204,49 @@ def validate_record(record: dict, contract: dict) -> list[str]:
         return [f"{record_id}: missing top-level fields {sorted(missing_top)}"]
     if record["schema_version"] != RECORD_SCHEMA:
         errors.append(f"{record_id}: unsupported record schema")
+    closed_record = (contract.get("closed_schema") or {}).get("record") or {}
+    field_types = (contract.get("closed_schema") or {}).get("field_types") or {}
+    if closed_record:
+        _reject_unexpected_keys(record, closed_record["top_level"], f"{record_id}.record", errors)
+        _reject_unexpected_keys(record.get("source"), closed_record["source"], f"{record_id}.source", errors)
+        _reject_unexpected_keys(record.get("input"), closed_record["input"], f"{record_id}.input", errors)
+        raw_input = record.get("input")
+        evidence = raw_input.get("evidence") if isinstance(raw_input, dict) else None
+        if not isinstance(evidence, list):
+            errors.append(f"{record_id}.input.evidence: expected list")
+        else:
+            for index, item in enumerate(evidence):
+                _reject_unexpected_keys(
+                    item,
+                    closed_record["evidence_item"],
+                    f"{record_id}.input.evidence[{index}]",
+                    errors,
+                )
+    source = record.get("source")
+    input_value = record.get("input")
+    annotations = record.get("annotations")
+    if not isinstance(source, dict):
+        errors.append(f"{record_id}.source: expected object")
+    if not isinstance(input_value, dict):
+        errors.append(f"{record_id}.input: expected object")
+    if not isinstance(annotations, list):
+        errors.append(f"{record_id}.annotations: expected list")
+    if errors and (not isinstance(source, dict) or not isinstance(input_value, dict) or not isinstance(annotations, list)):
+        return errors
+    assert isinstance(source, dict) and isinstance(input_value, dict) and isinstance(annotations, list)
+    if field_types:
+        _validate_field_types(source, field_types["source"], f"{record_id}.source", errors)
+        _validate_field_types(input_value, field_types["input"], f"{record_id}.input", errors)
+        evidence_items = input_value.get("evidence")
+        if isinstance(evidence_items, list):
+            for index, item in enumerate(evidence_items):
+                if isinstance(item, dict):
+                    _validate_field_types(
+                        item,
+                        field_types["evidence_item"],
+                        f"{record_id}.input.evidence[{index}]",
+                        errors,
+                    )
     for section, required_key in (("source", "required_source"), ("input", "required_input")):
         missing = set(contract["record_contract"][required_key]) - set(record[section])
         if missing:
@@ -108,26 +255,68 @@ def validate_record(record: dict, contract: dict) -> list[str]:
         errors.append(f"{record_id}: private or unclassified data is not allowed in the fixture")
     if record["source"].get("content_sha256") != sha256_value(record["input"]):
         errors.append(f"{record_id}: source content hash does not match input")
-    annotations = record.get("annotations") or []
     minimum = contract["record_contract"]["minimum_independent_annotations"]
     if len(annotations) < minimum:
         errors.append(f"{record_id}: fewer than {minimum} independent annotations")
+    if any(not isinstance(annotation, dict) for annotation in annotations):
+        errors.append(f"{record_id}: every annotation must be an object")
+        return errors
     annotator_ids = [annotation.get("annotator_id") for annotation in annotations]
     if len(set(annotator_ids)) != len(annotator_ids):
         errors.append(f"{record_id}: annotator identities are not independent")
     for annotation in annotations:
-        missing_targets = set(TARGETS) - set(annotation.get("targets") or {})
+        if closed_record:
+            _reject_unexpected_keys(
+                annotation,
+                closed_record["annotation"],
+                f"{record_id}.annotation",
+                errors,
+            )
+            _validate_field_types(
+                annotation,
+                field_types["annotation"],
+                f"{record_id}.annotation",
+                errors,
+            )
+        targets = annotation.get("targets")
+        if not isinstance(targets, dict):
+            errors.append(f"{record_id}: annotation targets must be an object")
+            continue
+        if closed_record:
+            _reject_unexpected_keys(
+                targets,
+                TARGETS,
+                f"{record_id}.annotation.targets",
+                errors,
+            )
+        missing_targets = set(TARGETS) - set(targets)
         if missing_targets:
             errors.append(f"{record_id}: annotation missing targets {sorted(missing_targets)}")
             continue
         for target in TARGETS:
+            if not isinstance(targets[target], dict):
+                errors.append(f"{record_id}: {target} must be an object")
+                continue
             required_fields = set(contract["targets"][target]["required_fields"])
-            missing = required_fields - set(annotation["targets"][target])
+            missing = required_fields - set(targets[target])
             if missing:
                 errors.append(f"{record_id}: {target} missing fields {sorted(missing)}")
-        if annotation["targets"]["omega"].get("risk_level") not in contract["targets"]["omega"]["risk_levels"]:
+            if closed_record:
+                _reject_unexpected_keys(
+                    targets[target],
+                    closed_record["targets"][target],
+                    f"{record_id}.annotation.{target}",
+                    errors,
+                )
+                _validate_field_types(
+                    targets[target],
+                    field_types["targets"][target],
+                    f"{record_id}.annotation.{target}",
+                    errors,
+                )
+        if not isinstance(targets.get("omega"), dict) or targets["omega"].get("risk_level") not in contract["targets"]["omega"]["risk_levels"]:
             errors.append(f"{record_id}: invalid omega risk level")
-        if annotation["targets"]["b_sigma"].get("status") not in contract["targets"]["b_sigma"]["statuses"]:
+        if not isinstance(targets.get("b_sigma"), dict) or targets["b_sigma"].get("status") not in contract["targets"]["b_sigma"]["statuses"]:
             errors.append(f"{record_id}: invalid B_sigma status")
     forbidden = validate_candidate_view(candidate_input_view(record), contract)
     if forbidden:
@@ -252,10 +441,25 @@ def training_export(records: list[dict], contract: dict) -> list[dict]:
     for record in records:
         if not record.get("training_eligible"):
             continue
-        labels = {
-            target: record["consensus"][target]["resolved_value"]
-            for target in TARGETS
-        }
+        strict_provenance = bool(contract.get("artifact_flow_policy"))
+        if strict_provenance:
+            labels = {
+                target: {
+                    "resolved_value": record["consensus"][target]["resolved_value"],
+                    "derivation": "unanimous_raw_train_annotations",
+                    "agreement": record["consensus"][target]["agreement"],
+                    "vote_distribution": record["consensus"][target]["vote_distribution"],
+                    "source_annotation_ids": [
+                        annotation["annotation_id"] for annotation in record["annotations"]
+                    ],
+                }
+                for target in TARGETS
+            }
+        else:
+            labels = {
+                target: record["consensus"][target]["resolved_value"]
+                for target in TARGETS
+            }
         examples.append(
             {
                 "record_id": record["record_id"],
@@ -266,6 +470,9 @@ def training_export(records: list[dict], contract: dict) -> list[dict]:
                     "target_visible_to_feature_encoder": False,
                     "judge_fields_present": False,
                     "shadow_only": True,
+                    "source_origin": "train_only",
+                    "validation_test_blind_judge_backflow": False,
+                    "rule_or_authority_update_allowed": False,
                 },
             }
         )

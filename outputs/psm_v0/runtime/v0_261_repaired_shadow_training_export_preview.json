@@ -1,0 +1,770 @@
+[
+  {
+    "record_id": "foundation_fact_boundary",
+    "feature_view": {
+      "record_id": "foundation_fact_boundary",
+      "source": {
+        "source_family": "synthetic_foundation",
+        "source_id": "foundation_source_a",
+        "source_created_at": "2026-04-02T00:00:00Z",
+        "content_sha256": "57c46d3b341db2420fc55ec3caee04d1911fec7601e2967b8c9ee054f5b52941"
+      },
+      "input": {
+        "request": "Explain why a factual answer still needs a source boundary.",
+        "evidence": [
+          {
+            "ref": "synthetic:foundation_source_a",
+            "kind": "source_note",
+            "status": "available"
+          }
+        ]
+      }
+    },
+    "target_view": {
+      "q_core": {
+        "resolved_value": {
+          "objective": "answer the request while preserving evidence and authority boundaries",
+          "protected_boundaries": [
+            "do not invent evidence",
+            "do not transfer authority"
+          ],
+          "veto_conditions": [
+            "required source or judge is unavailable"
+          ]
+        },
+        "derivation": "unanimous_raw_train_annotations",
+        "agreement": 1.0,
+        "vote_distribution": [
+          {
+            "value": {
+              "objective": "answer the request while preserving evidence and authority boundaries",
+              "protected_boundaries": [
+                "do not invent evidence",
+                "do not transfer authority"
+              ],
+              "veto_conditions": [
+                "required source or judge is unavailable"
+              ]
+            },
+            "votes": 2
+          }
+        ],
+        "source_annotation_ids": [
+          "foundation_fact_boundary:annotation_a",
+          "foundation_fact_boundary:annotation_b"
+        ]
+      },
+      "omega": {
+        "resolved_value": {
+          "cost_scale": "bounded_unknown",
+          "risk_level": "medium",
+          "time_scale": "request",
+          "validation_scale": "source_or_tool_check"
+        },
+        "derivation": "unanimous_raw_train_annotations",
+        "agreement": 1.0,
+        "vote_distribution": [
+          {
+            "value": {
+              "cost_scale": "bounded_unknown",
+              "risk_level": "medium",
+              "time_scale": "request",
+              "validation_scale": "source_or_tool_check"
+            },
+            "votes": 2
+          }
+        ],
+        "source_annotation_ids": [
+          "foundation_fact_boundary:annotation_a",
+          "foundation_fact_boundary:annotation_b"
+        ]
+      },
+      "phi": {
+        "resolved_value": {
+          "facts": [
+            "the fixture is synthetic and contains no private data"
+          ],
+          "unknowns": [
+            "independent external result is unavailable"
+          ]
+        },
+        "derivation": "unanimous_raw_train_annotations",
+        "agreement": 1.0,
+        "vote_distribution": [
+          {
+            "value": {
+              "facts": [
+                "the fixture is synthetic and contains no private data"
+              ],
+              "unknowns": [
+                "independent external result is unavailable"
+              ]
+            },
+            "votes": 2
+          }
+        ],
+        "source_annotation_ids": [
+          "foundation_fact_boundary:annotation_a",
+          "foundation_fact_boundary:annotation_b"
+        ]
+      },
+      "delta_sigma": {
+        "resolved_value": {
+          "missing_pressure_data": [
+            "external outcome"
+          ],
+          "pressures": [
+            "answer quality and evidence isolation"
+          ]
+        },
+        "derivation": "unanimous_raw_train_annotations",
+        "agreement": 1.0,
+        "vote_distribution": [
+          {
+            "value": {
+              "missing_pressure_data": [
+                "external outcome"
+              ],
+              "pressures": [
+                "answer quality and evidence isolation"
+              ]
+            },
+            "votes": 2
+          }
+        ],
+        "source_annotation_ids": [
+          "foundation_fact_boundary:annotation_a",
+          "foundation_fact_boundary:annotation_b"
+        ]
+      },
+      "pi": {
+        "resolved_value": {
+          "actors": [
+            "user",
+            "candidate",
+            "independent annotator"
+          ],
+          "artifacts": [
+            "request",
+            "source",
+            "annotation"
+          ],
+          "dependencies": [
+            "source provenance",
+            "split boundary"
+          ]
+        },
+        "derivation": "unanimous_raw_train_annotations",
+        "agreement": 1.0,
+        "vote_distribution": [
+          {
+            "value": {
+              "actors": [
+                "user",
+                "candidate",
+                "independent annotator"
+              ],
+              "artifacts": [
+                "request",
+                "source",
+                "annotation"
+              ],
+              "dependencies": [
+                "source provenance",
+                "split boundary"
+              ]
+            },
+            "votes": 2
+          }
+        ],
+        "source_annotation_ids": [
+          "foundation_fact_boundary:annotation_a",
+          "foundation_fact_boundary:annotation_b"
+        ]
+      },
+      "eta": {
+        "resolved_value": {
+          "tail_events": [
+            "source failure",
+            "authority transfer"
+          ],
+          "uncertainties": [
+            "independent external result is unavailable"
+          ]
+        },
+        "derivation": "unanimous_raw_train_annotations",
+        "agreement": 1.0,
+        "vote_distribution": [
+          {
+            "value": {
+              "tail_events": [
+                "source failure",
+                "authority transfer"
+              ],
+              "uncertainties": [
+                "independent external result is unavailable"
+              ]
+            },
+            "votes": 2
+          }
+        ],
+        "source_annotation_ids": [
+          "foundation_fact_boundary:annotation_a",
+          "foundation_fact_boundary:annotation_b"
+        ]
+      },
+      "b_sigma": {
+        "resolved_value": {
+          "required_actions": [
+            "retain source check"
+          ],
+          "risks": [
+            "unverified_claim"
+          ],
+          "status": "review"
+        },
+        "derivation": "unanimous_raw_train_annotations",
+        "agreement": 1.0,
+        "vote_distribution": [
+          {
+            "value": {
+              "required_actions": [
+                "retain source check"
+              ],
+              "risks": [
+                "unverified_claim"
+              ],
+              "status": "review"
+            },
+            "votes": 2
+          }
+        ],
+        "source_annotation_ids": [
+          "foundation_fact_boundary:annotation_a",
+          "foundation_fact_boundary:annotation_b"
+        ]
+      }
+    },
+    "boundary": {
+      "split": "train",
+      "target_visible_to_feature_encoder": false,
+      "judge_fields_present": false,
+      "shadow_only": true,
+      "source_origin": "train_only",
+      "validation_test_blind_judge_backflow": false,
+      "rule_or_authority_update_allowed": false
+    }
+  },
+  {
+    "record_id": "foundation_unknown_retention",
+    "feature_view": {
+      "record_id": "foundation_unknown_retention",
+      "source": {
+        "source_family": "synthetic_foundation",
+        "source_id": "foundation_source_a",
+        "source_created_at": "2026-04-03T00:00:00Z",
+        "content_sha256": "6c5afc03c374375ad241fe9a11fc1354333d1cf7e932c5e3e09a6795abbc6153"
+      },
+      "input": {
+        "request": "List unknowns before drawing a conclusion from incomplete evidence.",
+        "evidence": [
+          {
+            "ref": "synthetic:foundation_source_a",
+            "kind": "source_note",
+            "status": "available"
+          }
+        ]
+      }
+    },
+    "target_view": {
+      "q_core": {
+        "resolved_value": {
+          "objective": "answer the request while preserving evidence and authority boundaries",
+          "protected_boundaries": [
+            "do not invent evidence",
+            "do not transfer authority"
+          ],
+          "veto_conditions": [
+            "required source or judge is unavailable"
+          ]
+        },
+        "derivation": "unanimous_raw_train_annotations",
+        "agreement": 1.0,
+        "vote_distribution": [
+          {
+            "value": {
+              "objective": "answer the request while preserving evidence and authority boundaries",
+              "protected_boundaries": [
+                "do not invent evidence",
+                "do not transfer authority"
+              ],
+              "veto_conditions": [
+                "required source or judge is unavailable"
+              ]
+            },
+            "votes": 2
+          }
+        ],
+        "source_annotation_ids": [
+          "foundation_unknown_retention:annotation_a",
+          "foundation_unknown_retention:annotation_b"
+        ]
+      },
+      "omega": {
+        "resolved_value": {
+          "cost_scale": "bounded_unknown",
+          "risk_level": "medium",
+          "time_scale": "request",
+          "validation_scale": "source_or_tool_check"
+        },
+        "derivation": "unanimous_raw_train_annotations",
+        "agreement": 1.0,
+        "vote_distribution": [
+          {
+            "value": {
+              "cost_scale": "bounded_unknown",
+              "risk_level": "medium",
+              "time_scale": "request",
+              "validation_scale": "source_or_tool_check"
+            },
+            "votes": 2
+          }
+        ],
+        "source_annotation_ids": [
+          "foundation_unknown_retention:annotation_a",
+          "foundation_unknown_retention:annotation_b"
+        ]
+      },
+      "phi": {
+        "resolved_value": {
+          "facts": [
+            "the fixture is synthetic and contains no private data"
+          ],
+          "unknowns": [
+            "independent external result is unavailable"
+          ]
+        },
+        "derivation": "unanimous_raw_train_annotations",
+        "agreement": 1.0,
+        "vote_distribution": [
+          {
+            "value": {
+              "facts": [
+                "the fixture is synthetic and contains no private data"
+              ],
+              "unknowns": [
+                "independent external result is unavailable"
+              ]
+            },
+            "votes": 2
+          }
+        ],
+        "source_annotation_ids": [
+          "foundation_unknown_retention:annotation_a",
+          "foundation_unknown_retention:annotation_b"
+        ]
+      },
+      "delta_sigma": {
+        "resolved_value": {
+          "missing_pressure_data": [
+            "external outcome"
+          ],
+          "pressures": [
+            "answer quality and evidence isolation"
+          ]
+        },
+        "derivation": "unanimous_raw_train_annotations",
+        "agreement": 1.0,
+        "vote_distribution": [
+          {
+            "value": {
+              "missing_pressure_data": [
+                "external outcome"
+              ],
+              "pressures": [
+                "answer quality and evidence isolation"
+              ]
+            },
+            "votes": 2
+          }
+        ],
+        "source_annotation_ids": [
+          "foundation_unknown_retention:annotation_a",
+          "foundation_unknown_retention:annotation_b"
+        ]
+      },
+      "pi": {
+        "resolved_value": {
+          "actors": [
+            "user",
+            "candidate",
+            "independent annotator"
+          ],
+          "artifacts": [
+            "request",
+            "source",
+            "annotation"
+          ],
+          "dependencies": [
+            "source provenance",
+            "split boundary"
+          ]
+        },
+        "derivation": "unanimous_raw_train_annotations",
+        "agreement": 1.0,
+        "vote_distribution": [
+          {
+            "value": {
+              "actors": [
+                "user",
+                "candidate",
+                "independent annotator"
+              ],
+              "artifacts": [
+                "request",
+                "source",
+                "annotation"
+              ],
+              "dependencies": [
+                "source provenance",
+                "split boundary"
+              ]
+            },
+            "votes": 2
+          }
+        ],
+        "source_annotation_ids": [
+          "foundation_unknown_retention:annotation_a",
+          "foundation_unknown_retention:annotation_b"
+        ]
+      },
+      "eta": {
+        "resolved_value": {
+          "tail_events": [
+            "source failure",
+            "authority transfer"
+          ],
+          "uncertainties": [
+            "independent external result is unavailable"
+          ]
+        },
+        "derivation": "unanimous_raw_train_annotations",
+        "agreement": 1.0,
+        "vote_distribution": [
+          {
+            "value": {
+              "tail_events": [
+                "source failure",
+                "authority transfer"
+              ],
+              "uncertainties": [
+                "independent external result is unavailable"
+              ]
+            },
+            "votes": 2
+          }
+        ],
+        "source_annotation_ids": [
+          "foundation_unknown_retention:annotation_a",
+          "foundation_unknown_retention:annotation_b"
+        ]
+      },
+      "b_sigma": {
+        "resolved_value": {
+          "required_actions": [
+            "retain source check"
+          ],
+          "risks": [
+            "unverified_claim"
+          ],
+          "status": "review"
+        },
+        "derivation": "unanimous_raw_train_annotations",
+        "agreement": 1.0,
+        "vote_distribution": [
+          {
+            "value": {
+              "required_actions": [
+                "retain source check"
+              ],
+              "risks": [
+                "unverified_claim"
+              ],
+              "status": "review"
+            },
+            "votes": 2
+          }
+        ],
+        "source_annotation_ids": [
+          "foundation_unknown_retention:annotation_a",
+          "foundation_unknown_retention:annotation_b"
+        ]
+      }
+    },
+    "boundary": {
+      "split": "train",
+      "target_visible_to_feature_encoder": false,
+      "judge_fields_present": false,
+      "shadow_only": true,
+      "source_origin": "train_only",
+      "validation_test_blind_judge_backflow": false,
+      "rule_or_authority_update_allowed": false
+    }
+  },
+  {
+    "record_id": "foundation_high_risk_authority",
+    "feature_view": {
+      "record_id": "foundation_high_risk_authority",
+      "source": {
+        "source_family": "synthetic_foundation",
+        "source_id": "foundation_source_b",
+        "source_created_at": "2026-04-11T00:00:00Z",
+        "content_sha256": "83e293b58cb33830d41227c1243921ca04764dac71490ed908a5b917e2fb0338"
+      },
+      "input": {
+        "request": "Keep professional authority separate from a high-risk draft.",
+        "evidence": [
+          {
+            "ref": "synthetic:foundation_source_b",
+            "kind": "source_note",
+            "status": "available"
+          }
+        ]
+      }
+    },
+    "target_view": {
+      "q_core": {
+        "resolved_value": {
+          "objective": "answer the request while preserving evidence and authority boundaries",
+          "protected_boundaries": [
+            "do not invent evidence",
+            "do not transfer authority"
+          ],
+          "veto_conditions": [
+            "required source or judge is unavailable"
+          ]
+        },
+        "derivation": "unanimous_raw_train_annotations",
+        "agreement": 1.0,
+        "vote_distribution": [
+          {
+            "value": {
+              "objective": "answer the request while preserving evidence and authority boundaries",
+              "protected_boundaries": [
+                "do not invent evidence",
+                "do not transfer authority"
+              ],
+              "veto_conditions": [
+                "required source or judge is unavailable"
+              ]
+            },
+            "votes": 2
+          }
+        ],
+        "source_annotation_ids": [
+          "foundation_high_risk_authority:annotation_a",
+          "foundation_high_risk_authority:annotation_b"
+        ]
+      },
+      "omega": {
+        "resolved_value": {
+          "cost_scale": "bounded_unknown",
+          "risk_level": "high",
+          "time_scale": "request",
+          "validation_scale": "source_or_tool_check"
+        },
+        "derivation": "unanimous_raw_train_annotations",
+        "agreement": 1.0,
+        "vote_distribution": [
+          {
+            "value": {
+              "cost_scale": "bounded_unknown",
+              "risk_level": "high",
+              "time_scale": "request",
+              "validation_scale": "source_or_tool_check"
+            },
+            "votes": 2
+          }
+        ],
+        "source_annotation_ids": [
+          "foundation_high_risk_authority:annotation_a",
+          "foundation_high_risk_authority:annotation_b"
+        ]
+      },
+      "phi": {
+        "resolved_value": {
+          "facts": [
+            "the fixture is synthetic and contains no private data"
+          ],
+          "unknowns": [
+            "independent external result is unavailable"
+          ]
+        },
+        "derivation": "unanimous_raw_train_annotations",
+        "agreement": 1.0,
+        "vote_distribution": [
+          {
+            "value": {
+              "facts": [
+                "the fixture is synthetic and contains no private data"
+              ],
+              "unknowns": [
+                "independent external result is unavailable"
+              ]
+            },
+            "votes": 2
+          }
+        ],
+        "source_annotation_ids": [
+          "foundation_high_risk_authority:annotation_a",
+          "foundation_high_risk_authority:annotation_b"
+        ]
+      },
+      "delta_sigma": {
+        "resolved_value": {
+          "missing_pressure_data": [
+            "external outcome"
+          ],
+          "pressures": [
+            "answer quality and evidence isolation"
+          ]
+        },
+        "derivation": "unanimous_raw_train_annotations",
+        "agreement": 1.0,
+        "vote_distribution": [
+          {
+            "value": {
+              "missing_pressure_data": [
+                "external outcome"
+              ],
+              "pressures": [
+                "answer quality and evidence isolation"
+              ]
+            },
+            "votes": 2
+          }
+        ],
+        "source_annotation_ids": [
+          "foundation_high_risk_authority:annotation_a",
+          "foundation_high_risk_authority:annotation_b"
+        ]
+      },
+      "pi": {
+        "resolved_value": {
+          "actors": [
+            "user",
+            "candidate",
+            "independent annotator"
+          ],
+          "artifacts": [
+            "request",
+            "source",
+            "annotation"
+          ],
+          "dependencies": [
+            "source provenance",
+            "split boundary"
+          ]
+        },
+        "derivation": "unanimous_raw_train_annotations",
+        "agreement": 1.0,
+        "vote_distribution": [
+          {
+            "value": {
+              "actors": [
+                "user",
+                "candidate",
+                "independent annotator"
+              ],
+              "artifacts": [
+                "request",
+                "source",
+                "annotation"
+              ],
+              "dependencies": [
+                "source provenance",
+                "split boundary"
+              ]
+            },
+            "votes": 2
+          }
+        ],
+        "source_annotation_ids": [
+          "foundation_high_risk_authority:annotation_a",
+          "foundation_high_risk_authority:annotation_b"
+        ]
+      },
+      "eta": {
+        "resolved_value": {
+          "tail_events": [
+            "source failure",
+            "authority transfer"
+          ],
+          "uncertainties": [
+            "independent external result is unavailable"
+          ]
+        },
+        "derivation": "unanimous_raw_train_annotations",
+        "agreement": 1.0,
+        "vote_distribution": [
+          {
+            "value": {
+              "tail_events": [
+                "source failure",
+                "authority transfer"
+              ],
+              "uncertainties": [
+                "independent external result is unavailable"
+              ]
+            },
+            "votes": 2
+          }
+        ],
+        "source_annotation_ids": [
+          "foundation_high_risk_authority:annotation_a",
+          "foundation_high_risk_authority:annotation_b"
+        ]
+      },
+      "b_sigma": {
+        "resolved_value": {
+          "required_actions": [
+            "retain source check"
+          ],
+          "risks": [
+            "unverified_claim"
+          ],
+          "status": "suspect"
+        },
+        "derivation": "unanimous_raw_train_annotations",
+        "agreement": 1.0,
+        "vote_distribution": [
+          {
+            "value": {
+              "required_actions": [
+                "retain source check"
+              ],
+              "risks": [
+                "unverified_claim"
+              ],
+              "status": "suspect"
+            },
+            "votes": 2
+          }
+        ],
+        "source_annotation_ids": [
+          "foundation_high_risk_authority:annotation_a",
+          "foundation_high_risk_authority:annotation_b"
+        ]
+      }
+    },
+    "boundary": {
+      "split": "train",
+      "target_visible_to_feature_encoder": false,
+      "judge_fields_present": false,
+      "shadow_only": true,
+      "source_origin": "train_only",
+      "validation_test_blind_judge_backflow": false,
+      "rule_or_authority_update_allowed": false
+    }
+  }
+]

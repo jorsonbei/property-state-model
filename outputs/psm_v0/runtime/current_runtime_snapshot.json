@@ -2,10 +2,10 @@
   "schema_version": "psm_public_runtime_snapshot_v1",
   "project_status": {
     "updated_from_local_artifacts": true,
-    "current_version": "psm_v0.260",
+    "current_version": "psm_v0.261",
     "source_evidence_version": "psm_v0.251",
-    "previous_formal_version": "psm_v0.259",
-    "completed_result": "local_single_user_internal_trial_ready",
+    "previous_formal_version": "psm_v0.260",
+    "completed_result": "external_contract_review_passed_after_closed_world_repair",
     "family": {
       "family_id": "v251_independent_chat_golden_blind_set_boundary_adversarial",
       "case_pack": "case_packs/v0_251_independent_chat_golden_blind_set_boundary_adversarial_cases.json",
@@ -244,8 +244,8 @@
       "rule_replacement_allowed": false
     },
     "next_stage": {
-      "version": "PSM_V0.261",
-      "objective": "Define and authorize the post-internal external-validation lane, including external-user scope, privacy and data handling, deployment, budget, and API credentials for the already-authorized synthetic contract judge; do not begin external use or data upload until these user-owned decisions are supplied.",
+      "version": "PSM_V0.262",
+      "objective": "Define and authorize an external-user trial protocol: participant scope, allowed data classes, privacy notice and consent, retention/deletion, deployment mode, budget, incident handling, and explicit stop conditions. Keep external access closed until the user-owned protocol is approved.",
       "blocked": true,
       "requires_user_input": true
     },
@@ -259,7 +259,7 @@
       "candidate_taxonomy": "taxonomy_out/psm_v0.251_candidate_taxonomy.json",
       "candidate_regression_fixtures": "fixture_out/psm_v0.251_candidate_regression_fixtures.json",
       "taxonomy_delta": "taxonomy_delta_out/psm_v0.251_taxonomy_delta.json",
-      "project_status": "project_status_out/psm_v0.260_project_status.json",
+      "project_status": "project_status_out/psm_v0.261_project_status.json",
       "regression": "regression_out/psm_v0.251_regression_check.json",
       "independent_chat_gate": "runtime/v0_251_wave_g_external_semantic_judge.json",
       "model_selection": "runtime/v0_251_base_upgrade_pairwise_gemini_pro_report.json",
@@ -310,7 +310,14 @@
       "internal_readiness_evidence_manifest": "runtime/v0_260_internal_readiness_evidence_manifest.json",
       "internal_readiness_project_verification": "runtime/v0_260_project_verification.json",
       "internal_readiness_residual_risks": "runtime/v0_260_internal_readiness_residual_risks.json",
-      "internal_readiness_checkpoint": "runtime/v0_260_internal_readiness_checkpoint.json"
+      "internal_readiness_checkpoint": "runtime/v0_260_internal_readiness_checkpoint.json",
+      "v0_261_initial_external_review": "runtime/v0_261_openai_external_contract_judge_attempt_1_failed.json",
+      "v0_261_repaired_contract": "benchmarks/v0_261_state_annotation_contract_v2.json",
+      "v0_261_intermediate_external_review": "runtime/v0_261_openai_external_contract_judge_attempt_2_passed_pre_leaf_hardening.json",
+      "v0_261_repair_gate": "runtime/v0_261_annotation_contract_repair_gate.json",
+      "v0_261_external_review_package": "runtime/v0_261_external_contract_review_package.json",
+      "v0_261_final_external_review": "runtime/v0_261_openai_external_contract_judge.json",
+      "v0_261_checkpoint": "runtime/v0_261_external_contract_checkpoint.json"
     },
     "regression": {
       "stem": "psm_v0.251",
@@ -571,6 +578,26 @@
       "evidence_manifest_artifacts": 16,
       "browser_report": "runtime/v0_260_browser_regression/report.json",
       "docker_report": "runtime/v0_260_docker_verification.json"
+    },
+    "external_contract_review_gate": {
+      "decision": "external_contract_review_passed",
+      "passed": true,
+      "provider": "OpenAI",
+      "model": "gpt-5.4-2026-03-05",
+      "initial_external_verdict": "fail",
+      "initial_failed_checks": 5,
+      "intermediate_external_verdict": "pass",
+      "post_pass_leaf_type_hardening": true,
+      "local_repair_gate": "repaired_contract_ready_for_external_rejudge",
+      "mutation_checks_passed": 10,
+      "final_external_verdict": "pass",
+      "final_question_passes": 5,
+      "final_failed_checks": 0,
+      "final_critical_findings": 0,
+      "contract_sha256": "f68bebed05480b39d0d5454a1a65b09b2305c3b47f7e59c0e5e7a74abc2b011b",
+      "synthetic_only": true,
+      "private_data_submitted": false,
+      "secret_persisted": false
     }
   },
   "optional_project_status": {

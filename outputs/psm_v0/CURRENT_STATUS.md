@@ -2,45 +2,48 @@
 
 ## Current Version
 
-`PSM V0.260`
+`PSM V0.261`
 
-The current project status is `psm_v0.260`. V0.260 completes the internal trial readiness review while retaining `psm_v0.251` as the formal 2228-record core evidence source and preserving all V0.255-V0.259 chat, annotation, shadow, calibration, and Sigma+ gates.
+The current project status is `psm_v0.261`. V0.261 completes the authorized synthetic external contract-review loop while retaining `psm_v0.251` as the formal 2228-record core evidence source and preserving the V0.260 local single-user `internal_trial_ready` boundary.
 
 ## Latest Completed Result
 
-- The frozen machine decision is `internal_trial_ready` for local single-user internal use only.
-- Formal core 2228/2228, independent blind semantic gate 20/20, and internal Alpha scenarios 13/13 remain passing.
-- Current project verification passes 114 tests and parses 162 Python sources.
-- Critical fact hallucinations and critical safety false negatives are both 0.
-- The selected local model remains `qwen3.5:9b`, with failure rate 0 and p95 latency 22949 ms below the 60000 ms server timeout.
-- Sigma+ delivery remains 15/15 with 22 strong claims and complete provenance-or-downgrade coverage.
-- Seventeen residual risks remain explicit: 12 open/not-built and 5 bounded/accepted only within the local internal scope.
-- The synthetic non-private V0.256 external contract review is authorized, but it has not been submitted because no external API credential is configured.
-- External users, privacy-compliance claims, public service, professional authority, shadow output control, rule replacement, and external release authority remain closed.
+- The first OpenAI external review completed and returned `fail`, with five failed checks and three critical findings; this failure remains retained as evidence.
+- A closed-world V2 annotation contract now rejects unknown fields at every governed object level and exposes only an exact candidate-readable projection.
+- Train, validation, and test use mutually exclusive time windows; source groups crossing a boundary are rejected.
+- Raw per-annotator votes and source annotation IDs are retained; unresolved records cannot become training truth.
+- Validation, test, blind, judge-only, adjudication, evaluation, and model-output artifacts cannot flow into training, tuning, model selection, prompt/rule updates, or controller updates.
+- Ten local mutation and boundary checks pass with zero candidate-input leaks and zero protected backflow, including nested leaf-type, malformed-object, and extra-target rejection.
+- The final independent `gpt-5.4-2026-03-05` rejudge passes 5/5 questions with zero failed checks, critical findings, or recommended repairs.
+- Current project verification passes 125 tests and parses 169 Python sources.
+- The API credential is retrieved from Keychain and is not persisted in project artifacts.
+- External users, privacy-compliance claims, public service, professional authority, training authority, rule replacement, and external release authority remain closed.
 
 ## Next Stage
 
-`PSM V0.261`
+`PSM V0.262`
 
-Define and authorize the post-internal external-validation lane:
+Define and authorize an external-user trial protocol:
 
-- decide whether to prepare an external-user trial and define its participant scope;
-- define data handling, privacy, retention, and deletion requirements;
+- decide whether to start external-user trial preparation and define participant scope;
+- define allowed data classes and data-processing/privacy requirements;
+- define privacy notice, consent, retention, deletion, and incident handling;
 - choose deployment mode and budget;
-- configure a usable external-model API credential if the authorized synthetic contract judge should be submitted;
-- do not upload data or open external use before those user-owned decisions are supplied.
+- keep external access and public service closed until the user-owned protocol is explicitly approved.
 
 - Blocked: true.
 - Requires user input: true.
 
 ## Recovery Artifacts
 
-- Machine status: `project_status_out/psm_v0.260_project_status.json`.
+- Machine status: `project_status_out/psm_v0.261_project_status.json`.
 - Public runtime snapshot: `runtime/current_runtime_snapshot.json`.
-- Internal readiness checkpoint: `runtime/v0_260_internal_readiness_checkpoint.json`.
-- Internal readiness review: `runtime/v0_260_internal_readiness_review.json`.
-- Evidence manifest: `runtime/v0_260_internal_readiness_evidence_manifest.json`.
-- Residual risks: `runtime/v0_260_internal_readiness_residual_risks.json`.
-- Current execution roadmap: `roadmap_out/PSM_Full_Project_Audit_and_Execution_Roadmap_V0.248_to_V0.260.md`.
+- Initial failed external review: `runtime/v0_261_openai_external_contract_judge_attempt_1_failed.json`.
+- Intermediate passing review before leaf-type hardening: `runtime/v0_261_openai_external_contract_judge_attempt_2_passed_pre_leaf_hardening.json`.
+- Repaired contract: `benchmarks/v0_261_state_annotation_contract_v2.json`.
+- Local repair gate: `runtime/v0_261_annotation_contract_repair_gate.json`.
+- Final passing external review: `runtime/v0_261_openai_external_contract_judge.json`.
+- Promotion checkpoint: `runtime/v0_261_external_contract_checkpoint.json`.
+- Current execution roadmap: `roadmap_out/PSM_External_Validation_Roadmap_V0.261_to_V0.262.md`.
 
 Version history is stored as independent snapshots under `status_history/`; it is never embedded recursively here.

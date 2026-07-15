@@ -1,0 +1,463 @@
+{
+  "schema_version": "psm_v0_261_external_contract_review_package_v1",
+  "version": "PSM_V0.261",
+  "authorization": "authorized_by_user_2026_07_14",
+  "privacy": {
+    "contains_private_data": false,
+    "contains_user_documents": false,
+    "contains_secrets": false,
+    "synthetic_only": true
+  },
+  "submission_status": "ready_for_resubmission_after_failed_external_review",
+  "contract_sha256": "f68bebed05480b39d0d5454a1a65b09b2305c3b47f7e59c0e5e7a74abc2b011b",
+  "contract": {
+    "schema_version": "psm_state_annotation_contract_v2",
+    "version": "PSM_V0.261",
+    "status": "frozen",
+    "purpose": "Closed-world, source-isolated supervision for property-state targets without target read, protected-artifact backflow, hidden disagreement flattening, rule replacement, or release authority.",
+    "targets": {
+      "q_core": {
+        "required_fields": [
+          "objective",
+          "protected_boundaries",
+          "veto_conditions"
+        ],
+        "unknown_policy": "retain_unknown"
+      },
+      "omega": {
+        "required_fields": [
+          "risk_level",
+          "time_scale",
+          "validation_scale",
+          "cost_scale"
+        ],
+        "risk_levels": [
+          "low",
+          "medium",
+          "high",
+          "critical",
+          "unknown"
+        ],
+        "unknown_policy": "retain_unknown"
+      },
+      "phi": {
+        "required_fields": [
+          "facts",
+          "unknowns"
+        ],
+        "unknown_policy": "retain_unknown"
+      },
+      "delta_sigma": {
+        "required_fields": [
+          "pressures",
+          "missing_pressure_data"
+        ],
+        "unknown_policy": "retain_unknown"
+      },
+      "pi": {
+        "required_fields": [
+          "actors",
+          "artifacts",
+          "dependencies"
+        ],
+        "unknown_policy": "retain_unknown"
+      },
+      "eta": {
+        "required_fields": [
+          "uncertainties",
+          "tail_events"
+        ],
+        "unknown_policy": "retain_unknown"
+      },
+      "b_sigma": {
+        "required_fields": [
+          "status",
+          "risks",
+          "required_actions"
+        ],
+        "statuses": [
+          "pass",
+          "review",
+          "suspect",
+          "veto",
+          "unknown"
+        ],
+        "unknown_policy": "retain_unknown"
+      }
+    },
+    "record_contract": {
+      "required_top_level": [
+        "schema_version",
+        "record_id",
+        "source",
+        "input",
+        "annotations"
+      ],
+      "required_source": [
+        "source_family",
+        "source_id",
+        "source_created_at",
+        "content_sha256",
+        "data_class",
+        "contains_private_data"
+      ],
+      "required_input": [
+        "request",
+        "evidence"
+      ],
+      "minimum_independent_annotations": 2,
+      "forbidden_candidate_input_keys": [
+        "annotations",
+        "annotation",
+        "consensus",
+        "adjudication",
+        "expected",
+        "expectation",
+        "judge",
+        "judgment",
+        "judge_labels",
+        "target",
+        "targets",
+        "target_labels",
+        "labels",
+        "ground_truth",
+        "training_truth",
+        "resolved_value",
+        "vote_distribution",
+        "release_approval",
+        "override",
+        "rule_update",
+        "controller_authority"
+      ]
+    },
+    "closed_schema": {
+      "unknown_fields_policy": "reject_at_every_object_level",
+      "aliases_and_nested_side_channels": "denied_by_closed_schema_before_semantic_use",
+      "record": {
+        "top_level": [
+          "schema_version",
+          "record_id",
+          "source",
+          "input",
+          "annotations"
+        ],
+        "source": [
+          "source_family",
+          "source_id",
+          "source_created_at",
+          "content_sha256",
+          "data_class",
+          "contains_private_data"
+        ],
+        "input": [
+          "request",
+          "evidence"
+        ],
+        "evidence_item": [
+          "ref",
+          "kind",
+          "status"
+        ],
+        "annotation": [
+          "annotation_id",
+          "annotator_id",
+          "role",
+          "targets"
+        ],
+        "targets": {
+          "q_core": [
+            "objective",
+            "protected_boundaries",
+            "veto_conditions"
+          ],
+          "omega": [
+            "risk_level",
+            "time_scale",
+            "validation_scale",
+            "cost_scale"
+          ],
+          "phi": [
+            "facts",
+            "unknowns"
+          ],
+          "delta_sigma": [
+            "pressures",
+            "missing_pressure_data"
+          ],
+          "pi": [
+            "actors",
+            "artifacts",
+            "dependencies"
+          ],
+          "eta": [
+            "uncertainties",
+            "tail_events"
+          ],
+          "b_sigma": [
+            "status",
+            "risks",
+            "required_actions"
+          ]
+        }
+      },
+      "candidate_projection": {
+        "unknown_fields_policy": "reject",
+        "top_level": [
+          "record_id",
+          "source",
+          "input"
+        ],
+        "source": [
+          "source_family",
+          "source_id",
+          "source_created_at",
+          "content_sha256"
+        ],
+        "input": [
+          "request",
+          "evidence"
+        ],
+        "evidence_item": [
+          "ref",
+          "kind",
+          "status"
+        ],
+        "exclusive_read_paths": [
+          "record_id",
+          "source.source_family",
+          "source.source_id",
+          "source.source_created_at",
+          "source.content_sha256",
+          "input.request",
+          "input.evidence[].ref",
+          "input.evidence[].kind",
+          "input.evidence[].status"
+        ],
+        "all_other_paths_denied": true,
+        "annotations_or_derived_labels_readable": false
+      },
+      "field_types": {
+        "source": {
+          "source_family": "string",
+          "source_id": "string",
+          "source_created_at": "string",
+          "content_sha256": "string",
+          "data_class": "string",
+          "contains_private_data": "boolean"
+        },
+        "input": {
+          "request": "string",
+          "evidence": "array_of_objects"
+        },
+        "evidence_item": {
+          "ref": "string",
+          "kind": "string",
+          "status": "string"
+        },
+        "annotation": {
+          "annotation_id": "string",
+          "annotator_id": "string",
+          "role": "string",
+          "targets": "object"
+        },
+        "targets": {
+          "q_core": {
+            "objective": "string",
+            "protected_boundaries": "array_of_strings",
+            "veto_conditions": "array_of_strings"
+          },
+          "omega": {
+            "risk_level": "string",
+            "time_scale": "string",
+            "validation_scale": "string",
+            "cost_scale": "string"
+          },
+          "phi": {
+            "facts": "array_of_strings",
+            "unknowns": "array_of_strings"
+          },
+          "delta_sigma": {
+            "pressures": "array_of_strings",
+            "missing_pressure_data": "array_of_strings"
+          },
+          "pi": {
+            "actors": "array_of_strings",
+            "artifacts": "array_of_strings",
+            "dependencies": "array_of_strings"
+          },
+          "eta": {
+            "uncertainties": "array_of_strings",
+            "tail_events": "array_of_strings"
+          },
+          "b_sigma": {
+            "status": "string",
+            "risks": "array_of_strings",
+            "required_actions": "array_of_strings"
+          }
+        }
+      }
+    },
+    "split_policy": {
+      "version": "source_family_time_closed_v2",
+      "assignment_unit": [
+        "source_family",
+        "source_id"
+      ],
+      "interval_semantics": "start_inclusive_end_exclusive",
+      "splits": {
+        "train": {
+          "start_inclusive": null,
+          "end_exclusive": "2026-05-01T00:00:00Z"
+        },
+        "validation": {
+          "start_inclusive": "2026-05-01T00:00:00Z",
+          "end_exclusive": "2026-06-01T00:00:00Z"
+        },
+        "test": {
+          "start_inclusive": "2026-06-01T00:00:00Z",
+          "end_exclusive": null
+        }
+      },
+      "overlap_precedence": "none_reject_if_not_exactly_one",
+      "unparseable_or_unassigned_timestamp": "reject",
+      "group_crosses_time_boundary": "reject_entire_group",
+      "duplicate_seen_across_splits": "reject_all_copies",
+      "family_overlap_allowed": false,
+      "source_overlap_allowed": false,
+      "content_overlap_allowed": false,
+      "near_duplicate_jaccard_threshold": 0.9,
+      "record_order_assignment_allowed": false
+    },
+    "annotation_policy": {
+      "storage": "append_only_raw_per_annotator_records",
+      "required_identity": [
+        "annotation_id",
+        "annotator_id",
+        "role"
+      ],
+      "raw_annotations_immutable_after_capture": true,
+      "independent_annotator_ids_required": true,
+      "hidden_or_flattened_truth_fields_allowed": false,
+      "adjudication_in_record_allowed": false
+    },
+    "disagreement_policy": {
+      "resolution_threshold": 1.0,
+      "resolved_training_label_derivation": "unanimous_raw_train_annotations_only",
+      "unresolved_is_training_truth": false,
+      "adjudication_store": "judge_only_separate_artifact",
+      "preserve_vote_distribution": true,
+      "training_export_retains_vote_distribution": true,
+      "training_export_retains_source_annotation_ids": true
+    },
+    "artifact_flow_policy": {
+      "unknown_origin_or_use": "reject",
+      "allowed_training_feature_origin": "train_split_candidate_projection_only",
+      "allowed_training_label_origin": "unanimous_raw_train_annotations_with_full_derivation_provenance",
+      "forbidden_origins": [
+        "validation",
+        "test",
+        "blind",
+        "judge_only",
+        "adjudication",
+        "evaluation",
+        "model_output"
+      ],
+      "forbidden_uses": [
+        "training_input",
+        "training_label",
+        "feature_engineering",
+        "hyperparameter_tuning",
+        "early_stopping",
+        "model_selection",
+        "prompt_update",
+        "rule_update",
+        "controller_update"
+      ],
+      "validation_no_backflow": true,
+      "test_no_backflow": true,
+      "blind_no_backflow": true,
+      "judge_only_no_backflow": true,
+      "evaluation_metrics_no_backflow": true
+    },
+    "authority_policy": {
+      "records_and_annotations_are_evidence_not_authority": true,
+      "authority_fields_permitted_in_records": false,
+      "override_or_approval_aliases_permitted": false,
+      "rule_replacement_authority": false,
+      "external_release_authority": false,
+      "authority_decisions_location": "separate_user_owned_gate_outside_training_and_annotation_artifacts",
+      "unknown_authority": "deny"
+    },
+    "boundaries": {
+      "no_target_read": true,
+      "no_backfit": true,
+      "validation_no_backflow": true,
+      "blind_and_test_no_backflow": true,
+      "judge_only_no_backflow": true,
+      "judge_only_separate": true,
+      "candidate_shadow_only": true,
+      "rule_replacement_allowed": false,
+      "training_allowed_before_contract_gate": false,
+      "external_release_authority": false
+    },
+    "enforcement": {
+      "record_validator": "psm_v0.state_annotation_contract.validate_record",
+      "candidate_projection_validator": "psm_v0.state_annotation_contract.validate_candidate_view",
+      "split_assignment": "psm_v0.state_annotation_contract.split_for_timestamp",
+      "artifact_export": "psm_v0.state_annotation_contract.training_export",
+      "fail_closed": true
+    }
+  },
+  "repair_provenance": {
+    "previous_contract_sha256": "eac63131e4c0d373e4aa55384610c8c954ca5259da5369fccf3bbdb086fd0aed",
+    "previous_external_review_sha256": "63960b8df0a8f501064ad73b5751c967ab42cd4f7346b8de2910893b2f76107f",
+    "previous_external_verdict": "fail",
+    "failed_findings_addressed": 5,
+    "blind_or_test_evidence_modified": false,
+    "training_started": false
+  },
+  "local_gate_summary": {
+    "passed": true,
+    "checks": {
+      "contract_v2_frozen": true,
+      "closed_schema_enforced": true,
+      "records_valid": true,
+      "candidate_projection_exact": true,
+      "mutations_fail_closed": true,
+      "split_windows_mutually_exclusive": true,
+      "source_family_time_isolation": true,
+      "protected_artifacts_not_exported": true,
+      "unresolved_not_exported": true,
+      "raw_annotation_provenance_retained": true,
+      "artifact_flow_boundaries_retained": true,
+      "validation_test_blind_judge_no_backflow": true,
+      "rule_and_release_authority_closed": true,
+      "training_not_started": true
+    },
+    "metrics": {
+      "records": 8,
+      "independent_annotations": 16,
+      "training_eligible_rows": 3,
+      "protected_rows": 5,
+      "unresolved_records": 3,
+      "candidate_input_leaks": 0,
+      "protected_backflow": 0
+    }
+  },
+  "independent_review_questions": [
+    "Does the contract prevent candidate features from reading target or judge fields?",
+    "Does the family/source/time split fail closed on overlap and temporal leakage?",
+    "Are annotator disagreements preserved instead of flattened into training truth?",
+    "Can any validation, test, blind, or judge-only artifact flow back into training?",
+    "Does any field accidentally grant rule replacement or external release authority?"
+  ],
+  "required_response": {
+    "verdict": [
+      "pass",
+      "fail"
+    ],
+    "failed_checks": "list",
+    "critical_findings": "list",
+    "recommended_repairs": "list"
+  }
+}

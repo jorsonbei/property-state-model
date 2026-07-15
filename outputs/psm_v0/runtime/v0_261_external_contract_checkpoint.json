@@ -1,0 +1,57 @@
+{
+  "schema_version": "psm_v0_261_external_contract_checkpoint_v1",
+  "current_promoted_version": "PSM_V0.261",
+  "target_version": "PSM_V0.261",
+  "target_promoted": true,
+  "status": "blocked_on_v0_262_external_user_trial_scope",
+  "requires_user_input": true,
+  "external_contract_review_gate": {
+    "decision": "external_contract_review_passed",
+    "passed": true,
+    "provider": "OpenAI",
+    "model": "gpt-5.4-2026-03-05",
+    "initial_external_verdict": "fail",
+    "initial_failed_checks": 5,
+    "intermediate_external_verdict": "pass",
+    "post_pass_leaf_type_hardening": true,
+    "local_repair_gate": "repaired_contract_ready_for_external_rejudge",
+    "mutation_checks_passed": 10,
+    "final_external_verdict": "pass",
+    "final_question_passes": 5,
+    "final_failed_checks": 0,
+    "final_critical_findings": 0,
+    "contract_sha256": "f68bebed05480b39d0d5454a1a65b09b2305c3b47f7e59c0e5e7a74abc2b011b",
+    "synthetic_only": true,
+    "private_data_submitted": false,
+    "secret_persisted": false
+  },
+  "completed_engineering": [
+    "OpenAI Responses API external judge with strict structured output, Keychain retrieval, and no secret persistence",
+    "initial external fail retained with five failed checks and three critical findings",
+    "closed-world V2 annotation contract with exact candidate projection and object-level unknown-field rejection",
+    "leaf-type enforcement preventing nested side channels inside otherwise allowed fields",
+    "mutually exclusive train, validation, and test time windows with source-group crossing rejection",
+    "append-only per-annotator provenance and unanimous train-only label derivation",
+    "explicit validation, test, blind, judge-only, evaluation, rule, controller, and authority no-backflow policy",
+    "repaired local gate passed with zero candidate leaks and zero protected backflow",
+    "final independent OpenAI rejudge passed five of five questions with no failures or repairs"
+  ],
+  "integration_evidence": {
+    "browser": "runtime/v0_261_browser_regression/report.json",
+    "docker": "runtime/v0_261_docker_verification.json",
+    "passed": true
+  },
+  "release_boundary": {
+    "stable_internal_local_chat_allowed": true,
+    "external_contract_review_passed": true,
+    "training_started": false,
+    "external_user_trial_allowed": false,
+    "privacy_compliance_claimed": false,
+    "public_service_allowed": false,
+    "medical_legal_trading_authority": false,
+    "rule_replacement_allowed": false,
+    "external_release_authority": false,
+    "v0_261_promoted": true
+  },
+  "required_decision": "PSM V0.262 确实需要用户介入：请决定是否启动外部用户试用准备，并确定参与者范围、允许提交的数据类型、数据处理/隐私要求、隐私告知与同意、保存/删除期限、部署方式与预算。API 已配置且合成契约评审已完成，不再是阻碍；在上述用户决策完成前，外部用户与公开服务保持关闭。"
+}

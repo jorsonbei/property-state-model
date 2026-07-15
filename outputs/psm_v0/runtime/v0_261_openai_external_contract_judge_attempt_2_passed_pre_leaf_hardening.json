@@ -1,0 +1,86 @@
+{
+  "schema_version": "psm_v0_261_openai_external_contract_judge_v1",
+  "version": "PSM_V0.261",
+  "reviewed_at": "2026-07-15T01:10:53.094922+00:00",
+  "provider": "OpenAI",
+  "endpoint": "/v1/responses",
+  "requested_model": "gpt-5.4",
+  "actual_model": "gpt-5.4-2026-03-05",
+  "http_status": 200,
+  "response_status": "completed",
+  "response_id": "resp_041de23f97284424016a56de049f50819a975edcb7915d5f32",
+  "request_id": "req_792549417fa34e86b3ef2411fa58e033",
+  "store": false,
+  "api_key_persisted_in_artifact": false,
+  "package_sha256": "54ddd24ef94ad5dbf075e4466a4ce5440e2c0f931c7b3c471ca73d34e483018a",
+  "contract_sha256": "10330fc4be167f8369138acd9973eadd29b48805db1efbf914ceb9ef9411f69b",
+  "request_payload_sha256": "e2ed8bbea8e9bb59fda4a3a35c807055d86abe6cbbe4b7be00ab2ccd1aded474",
+  "submission_scope": {
+    "synthetic_only": true,
+    "contains_private_data": false,
+    "contains_user_documents": false,
+    "contains_secrets": false,
+    "external_users_involved": false
+  },
+  "usage": {
+    "input_tokens": 2004,
+    "input_tokens_details": {
+      "cache_write_tokens": 0,
+      "cached_tokens": 0
+    },
+    "output_tokens": 3071,
+    "output_tokens_details": {
+      "reasoning_tokens": 2549
+    },
+    "total_tokens": 5075
+  },
+  "review": {
+    "contract_sha256": "10330fc4be167f8369138acd9973eadd29b48805db1efbf914ceb9ef9411f69b",
+    "verdict": "pass",
+    "failed_checks": [],
+    "critical_findings": [],
+    "recommended_repairs": [],
+    "question_reviews": [
+      {
+        "question": "Does the contract prevent candidate features from reading target or judge fields?",
+        "verdict": "pass",
+        "finding": "Pass: closed_schema.candidate_projection limits reads to explicit source and input paths, sets all_other_paths_denied=true, marks annotations_or_derived_labels_readable=false, rejects unknown fields, and record_contract.forbidden_candidate_input_keys blocks target, label, consensus, adjudication, judge, and authority aliases."
+      },
+      {
+        "question": "Does the family/source/time split fail closed on overlap and temporal leakage?",
+        "verdict": "pass",
+        "finding": "Pass: split_policy assigns by source_family/source_id, defines closed time windows, rejects unparseable or unassigned timestamps, disallows family/source/content overlap, rejects duplicates across splits, rejects groups crossing time boundaries, and forbids record-order assignment."
+      },
+      {
+        "question": "Are annotator disagreements preserved instead of flattened into training truth?",
+        "verdict": "pass",
+        "finding": "Pass: raw per-annotator records are append-only and immutable after capture, independent annotator IDs are required, hidden_or_flattened_truth_fields_allowed=false, preserve_vote_distribution=true, resolution_threshold=1.0, unresolved_is_training_truth=false, and training labels are derived only from unanimous raw train annotations with provenance."
+      },
+      {
+        "question": "Can any validation, test, blind, or judge-only artifact flow back into training?",
+        "verdict": "pass",
+        "finding": "Pass: artifact_flow_policy allows training features only from train_split_candidate_projection_only and labels only from unanimous_raw_train_annotations_with_full_derivation_provenance; it explicitly forbids validation, test, blind, judge_only, adjudication, evaluation, and model_output origins for training, tuning, model selection, prompt/rule/controller updates, and rejects unknown origin or use."
+      },
+      {
+        "question": "Does any field accidentally grant rule replacement or external release authority?",
+        "verdict": "pass",
+        "finding": "Pass: authority_policy sets authority_fields_permitted_in_records=false, records_and_annotations_are_evidence_not_authority=true, override_or_approval_aliases_permitted=false, rule_replacement_authority=false, external_release_authority=false, unknown_authority=deny, and places authority decisions in a separate user-owned gate outside training and annotation artifacts."
+      }
+    ]
+  },
+  "gate_checks": {
+    "contract_sha256_match": true,
+    "exact_question_coverage": true,
+    "response_internally_consistent": true,
+    "external_verdict_pass": true
+  },
+  "passed": true,
+  "release_boundary": {
+    "contract_review_only": true,
+    "training_authority": false,
+    "rule_replacement_authority": false,
+    "external_user_trial_allowed": false,
+    "public_service_allowed": false,
+    "external_release_authority": false
+  }
+}

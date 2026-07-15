@@ -1,0 +1,52 @@
+{
+  "schema_version": "psm_v0_261_external_contract_promotion_manifest_v1",
+  "version": "PSM_V0.261",
+  "promoted_at": "2026-07-15",
+  "promoted": true,
+  "decision": "external_contract_review_passed",
+  "formal_core_source": "PSM_V0.251",
+  "formal_core_records": 2228,
+  "external_contract_review_gate": {
+    "decision": "external_contract_review_passed",
+    "passed": true,
+    "provider": "OpenAI",
+    "model": "gpt-5.4-2026-03-05",
+    "initial_external_verdict": "fail",
+    "initial_failed_checks": 5,
+    "intermediate_external_verdict": "pass",
+    "post_pass_leaf_type_hardening": true,
+    "local_repair_gate": "repaired_contract_ready_for_external_rejudge",
+    "mutation_checks_passed": 10,
+    "final_external_verdict": "pass",
+    "final_question_passes": 5,
+    "final_failed_checks": 0,
+    "final_critical_findings": 0,
+    "contract_sha256": "f68bebed05480b39d0d5454a1a65b09b2305c3b47f7e59c0e5e7a74abc2b011b",
+    "synthetic_only": true,
+    "private_data_submitted": false,
+    "secret_persisted": false
+  },
+  "integration_evidence": {
+    "browser": "runtime/v0_261_browser_regression/report.json",
+    "docker": "runtime/v0_261_docker_verification.json",
+    "passed": true
+  },
+  "boundaries": {
+    "stable_internal_local_chat_allowed": true,
+    "external_contract_review_passed": true,
+    "training_started": false,
+    "external_user_trial_allowed": false,
+    "privacy_compliance_claimed": false,
+    "public_service_allowed": false,
+    "medical_legal_trading_authority": false,
+    "rule_replacement_allowed": false,
+    "external_release_authority": false,
+    "v0_261_promoted": true
+  },
+  "next_stage": {
+    "version": "PSM_V0.262",
+    "objective": "Define and authorize an external-user trial protocol: participant scope, allowed data classes, privacy notice and consent, retention/deletion, deployment mode, budget, incident handling, and explicit stop conditions. Keep external access closed until the user-owned protocol is approved.",
+    "blocked": true,
+    "requires_user_input": true
+  }
+}

@@ -1,0 +1,50 @@
+{
+  "schema_version": "psm_v0_261_docker_verification_v1",
+  "passed": true,
+  "checks": {
+    "runtime_current": true,
+    "status_current": true,
+    "internal_chat_retained": true,
+    "external_trial_closed": true,
+    "initial_external_failure_retained": true,
+    "repair_gate_passed": true,
+    "final_external_passed": true,
+    "five_questions_passed": true,
+    "no_final_findings": true,
+    "secret_not_persisted": true,
+    "synthetic_scope_retained": true,
+    "external_authorities_closed": true,
+    "next_stage_blocked_for_user_decision": true,
+    "delivery_api_passed": true,
+    "project_answer_current": true,
+    "graph_boundary_retained": true
+  },
+  "status": {
+    "version": "PSM V0.261",
+    "selected_chat_model": "qwen3.5:9b",
+    "chat_timeout_seconds": 60,
+    "core_cases": 2228,
+    "full_external_cases": 1957,
+    "full_gated_risk": 0,
+    "full_fault_events": 7148,
+    "full_controller_rescues": 1957,
+    "targeted_optional_cases": 18,
+    "ordinary_risky_rows": 6,
+    "raw_psm_risky_rows": 0,
+    "gated_psm_risky_rows": 0,
+    "chat_candidate_cases": 1975,
+    "chat_gated_risk": 0,
+    "ready_for_internal_local_demo": true,
+    "ready_for_internal_chat_demo": true,
+    "ready_for_stable_internal_chat": true,
+    "internal_trial_decision": "internal_trial_ready",
+    "ready_for_external_user_trial": false
+  },
+  "external_review": {
+    "initial_verdict": "fail",
+    "repair_decision": "repaired_contract_ready_for_external_rejudge",
+    "final_verdict": "pass",
+    "question_passes": 5,
+    "contract_sha256": "f68bebed05480b39d0d5454a1a65b09b2305c3b47f7e59c0e5e7a74abc2b011b"
+  }
+}

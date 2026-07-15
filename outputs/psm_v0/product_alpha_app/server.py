@@ -961,6 +961,18 @@ def roadmap_answer(context: dict) -> str:
 
 
 def project_results_answer(context: dict) -> str:
+    if context["current_version"] == "PSM V0.261":
+        return (
+            "这轮已完成 PSM V0.261 合成标注契约的外部独立评审闭环。第一轮 OpenAI 评审明确判定 fail，指出开放字段、"
+            "时间切分歧义、分歧结构、受保护资料回流与权限旁路五类问题；系统保留了失败证据，没有把它包装成通过。\n\n"
+            "随后建立 closed-world V2 契约：候选只可读取明确白名单字段，train/validation/test 使用互斥时间窗，原始逐标注者"
+            "投票与来源被保留，validation/test/blind/judge-only 资料不得用于训练、调参、规则或控制器更新，记录也不能授予"
+            "规则替换或发布权限。本地修复门通过后，`gpt-5.4` 第二轮独立复审 5/5 全部通过，失败项、关键发现和修复建议均为 0。\n\n"
+            "它的作用是把原先主要依靠政策布尔值的边界，升级为代码可强制、可攻击测试、可外部复核的封闭契约。"
+            "这仍只覆盖合成、非私人契约，不代表外部用户、公开服务、专业权限或训练权限已经开放。"
+            f"当前本地聊天基座仍是 `{context['selected_model']}`。"
+            f"下一阶段是 {context['next_version']}，需要你决定：{context['required_decision']}"
+        )
     if context["current_version"] == "PSM V0.260":
         return (
             "这轮已完成 PSM V0.260 内部试用就绪总评审，机器结论是 `internal_trial_ready`，适用范围严格限定为"

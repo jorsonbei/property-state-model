@@ -1,6 +1,6 @@
 {
   "name": "property-state-model-browser-tests",
-  "version": "0.260.0",
+  "version": "0.261.0",
   "private": true,
   "description": "Browser regression harness for the local Property-State Model chat alpha.",
   "scripts": {
