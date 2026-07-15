@@ -4,7 +4,7 @@ services:
       context: .
     image: property-state-model:local
     ports:
-      - "${PSM_DOCKER_PORT:-8766}:8765"
+      - "${PSM_DOCKER_BIND:-127.0.0.1}:${PSM_DOCKER_PORT:-8766}:8765"
     environment:
       OLLAMA_BASE_URL: "${OLLAMA_BASE_URL:-http://host.docker.internal:11434}"
       OLLAMA_MODEL: "${OLLAMA_MODEL:-}"

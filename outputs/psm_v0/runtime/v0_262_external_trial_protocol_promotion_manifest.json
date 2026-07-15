@@ -1,0 +1,53 @@
+{
+  "schema_version": "psm_v0_262_external_trial_protocol_promotion_manifest_v1",
+  "version": "PSM_V0.262",
+  "promoted_at": "2026-07-15",
+  "promoted": true,
+  "decision": "invite_only_trial_protocol_ready",
+  "formal_core_source": "PSM_V0.251",
+  "formal_core_records": 2228,
+  "external_trial_protocol_gate": {
+    "decision": "invite_only_trial_protocol_ready",
+    "passed": true,
+    "approved_plan": "v0_262_conservative_invite_only",
+    "participant_minimum": 3,
+    "participant_maximum": 5,
+    "local_checks_passed": 20,
+    "synthetic_attacks_rejected": 8,
+    "initial_external_verdict": "fail",
+    "initial_external_failed_checks": 2,
+    "final_external_verdict": "pass",
+    "final_external_question_passes": 7,
+    "final_external_findings": 0,
+    "metadata_retention_days": 7,
+    "monthly_api_budget_usd": 20.0,
+    "api_budget_reserved_usd": 4.0,
+    "participant_content_external_calls": 0,
+    "protocol_sha256": "e6b0f03e2115f783c6af39d3a7dcc9441a04bc7e936cc3f28e884e6a1acfb6b7"
+  },
+  "integration_evidence": {
+    "browser": "runtime/v0_262_browser_regression/report.json",
+    "docker": "runtime/v0_262_docker_verification.json",
+    "passed": true
+  },
+  "boundaries": {
+    "stable_internal_local_chat_allowed": true,
+    "invite_only_trial_protocol_ready": true,
+    "real_participant_enrollment_completed": false,
+    "external_user_trial_active": false,
+    "public_service_allowed": false,
+    "privacy_compliance_claimed": false,
+    "production_readiness_claimed": false,
+    "training_on_trial_data_allowed": false,
+    "medical_legal_trading_authority": false,
+    "rule_replacement_allowed": false,
+    "external_release_authority": false,
+    "v0_262_promoted": true
+  },
+  "next_stage": {
+    "version": "PSM_V0.263",
+    "objective": "Enroll three to five real invited adults without collecting direct identity in project artifacts: create local pseudonymous invitations, complete operator adulthood verification, display the frozen notice, record explicit consent, and enable only supervised sessions. Do not activate the trial until every participant passes the enrollment gate.",
+    "blocked": true,
+    "requires_user_input": true
+  }
+}

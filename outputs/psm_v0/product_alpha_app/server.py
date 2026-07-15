@@ -68,12 +68,15 @@ def main() -> None:
 
 
 class Handler(BaseHTTPRequestHandler):
-    server_version = "PSMProductAlpha/0.259"
+    server_version = "PSMProductAlpha/0.262"
 
     def do_GET(self) -> None:  # noqa: N802
         parsed = urlparse(self.path)
         if parsed.path == "/api/status":
             self.write_json(load_status_summary())
+            return
+        if parsed.path == "/api/trial-notice":
+            self.write_json(load_trial_notice())
             return
         path = STATIC_ROOT / ("index.html" if parsed.path in {"/", ""} else parsed.path.lstrip("/"))
         if not path.is_file() or STATIC_ROOT not in path.resolve().parents and path.resolve() != STATIC_ROOT:
@@ -868,7 +871,14 @@ def project_status_answer(context: dict, question: str = "") -> str:
 
 
 def roadmap_answer(context: dict) -> str:
-    if context["stage_blocked"]:
+    if context["next_version"] == "PSM V0.263":
+        construction = (
+            "V0.262 已冻结数据处理与隐私边界、告知同意、7 天删除、本地部署和 API 预算。"
+            "V0.263 不再改写这些协议；施工顺序是安排 3 至 5 名受邀成年人，由操作员线下核验成年，"
+            "在本机生成化名绑定，依次完成告知、确认和明确同意，最后才启用现场监督会话。"
+            f"当前需要：{context['required_decision']}"
+        )
+    elif context["stage_blocked"]:
         construction = (
             "当前内部阶段的工程与评审已经完成，但下一阶段涉及外部范围、数据处理、部署、费用或凭证，"
             "不能由系统自行推定授权。"
@@ -961,6 +971,17 @@ def roadmap_answer(context: dict) -> str:
 
 
 def project_results_answer(context: dict) -> str:
+    if context["current_version"] == "PSM V0.262":
+        return (
+            "这轮已完成 PSM V0.262 邀请制外部试用协议。用户批准的保守边界已经固化为代码门：仅限 3 至 5 名受邀成年人、"
+            "操作员现场监督、成年核验与受邀者 HMAC 绑定、先展示告知再确认和同意，最后才允许第一条消息。\n\n"
+            "本地协议门 20/20 通过，8/8 敏感攻击被拒绝；原始聊天不在服务器落盘，也不发送到外部 API，只保留不含内容的"
+            "HMAC 与运行指标，7 天删除。API 月上限是 20 美元，当前只为两次合成协议评审预留 4 美元。首轮外部评审因成年核验"
+            "和告知顺序不足而 fail，修复后 `gpt-5.4` 复审 7/7 通过，0 未解决发现。\n\n"
+            "它的作用是把外部试用从口头授权变成可停止、可删除、可审计的最小协议。当前仍未招募真实参与者，公开服务、"
+            "隐私合规、专业权限、试用数据训练与发布权限均未开放。"
+            f"本地聊天基座仍是 `{context['selected_model']}`。下一阶段是 {context['next_version']}：{context['required_decision']}"
+        )
     if context["current_version"] == "PSM V0.261":
         return (
             "这轮已完成 PSM V0.261 合成标注契约的外部独立评审闭环。第一轮 OpenAI 评审明确判定 fail，指出开放字段、"
@@ -1463,7 +1484,7 @@ def load_project_context() -> dict:
         formal_version = summary["version"]
     next_version = to_display_version(str(next_stage.get("version") or "未定义"))
     next_objective = humanize_stage_objective(str(next_stage.get("objective") or "完成下一阶段验证"))
-    roadmap_source = "roadmap_out/PSM_Full_Project_Audit_and_Execution_Roadmap_V0.248_to_V0.260.md"
+    roadmap_source = "roadmap_out/PSM_Invite_Only_Trial_Roadmap_V0.262_to_V0.263.md"
     selection_path = PSM_ROOT / "runtime" / "chat_provider_selection.json"
     selection = load_json(selection_path) if selection_path.exists() else {}
     selection_metrics = selection.get("selection_metrics", {})
@@ -1639,6 +1660,11 @@ def humanize_stage_objective(objective: str) -> str:
             "定义内部就绪之后的外部验证阶段，包括外部用户范围、数据与隐私要求、部署、预算和 API 凭证；"
             "这些属于用户授权边界，未决定前不能上传资料或启动外部试用"
         )
+    if "enroll three to five real invited adults" in objective.casefold():
+        return (
+            "在冻结的 V0.262 协议下招募 3 至 5 名真实受邀成年人：只生成本地化名邀请，"
+            "由操作员线下核验成年并完成告知、确认和明确同意；所有人通过门控前不得启动试用"
+        )
     return objective
 
 
@@ -1677,6 +1703,7 @@ def load_status_summary() -> dict:
     readiness = load_json(readiness_path) if readiness_path.exists() else runtime.get("chat_readiness", {})
     candidate_gate = status.get("candidate_gate") or formal_status.get("candidate_gate", {})
     internal_alpha_gate = status.get("internal_alpha_gate") or {}
+    external_trial_gate = status.get("external_trial_protocol_gate") or {}
     target = optional_status.get("targeted_optional_external", {})
     full = optional_status.get("full_required_fault_external", candidate_gate)
     current_version = status["current_version"].replace("psm_v", "PSM V")
@@ -1699,7 +1726,28 @@ def load_status_summary() -> dict:
         "ready_for_internal_chat_demo": readiness.get("ready_for_internal_chat_demo", readiness.get("ready_for_internal_local_demo")),
         "ready_for_stable_internal_chat": internal_alpha_gate.get("decision") == "internal_trial_ready",
         "internal_trial_decision": internal_alpha_gate.get("decision") or "not_evaluated",
-        "ready_for_external_user_trial": readiness.get("ready_for_external_user_trial", False),
+        "ready_for_invite_only_external_trial_protocol": external_trial_gate.get("decision") == "invite_only_trial_protocol_ready",
+        "external_trial_participant_minimum": external_trial_gate.get("participant_minimum"),
+        "external_trial_participant_maximum": external_trial_gate.get("participant_maximum"),
+        "external_trial_metadata_retention_days": external_trial_gate.get("metadata_retention_days"),
+        "external_trial_monthly_api_budget_usd": external_trial_gate.get("monthly_api_budget_usd"),
+        "external_trial_participant_enrollment_completed": False,
+        "ready_for_external_user_trial": False,
+    }
+
+
+def load_trial_notice() -> dict:
+    notice_path = PSM_ROOT / "V0_262_INVITE_ONLY_TRIAL_NOTICE.md"
+    if not notice_path.exists():
+        raise FileNotFoundError("V0.262 trial notice is unavailable.")
+    return {
+        "schema_version": "psm_v0_262_trial_notice_response_v1",
+        "version": "PSM V0.262",
+        "notice_version": "psm_v0_262_trial_notice_v1",
+        "content": notice_path.read_text(encoding="utf-8"),
+        "participant_enrollment_completed": False,
+        "trial_active": False,
+        "public_service_allowed": False,
     }
 
 

@@ -1,0 +1,49 @@
+{
+  "schema_version": "psm_v0_262_external_trial_protocol_gate_v1",
+  "version": "PSM_V0.262-candidate",
+  "passed": true,
+  "decision": "invite_only_trial_protocol_ready",
+  "protocol_sha256": "e6b0f03e2115f783c6af39d3a7dcc9441a04bc7e936cc3f28e884e6a1acfb6b7",
+  "checks": {
+    "protocol_valid": true,
+    "explicit_user_authorization": true,
+    "participant_range_3_to_5": true,
+    "three_valid_adults_can_start": true,
+    "invalid_or_revoked_consent_rejected": true,
+    "safe_low_risk_prompt_allowed": true,
+    "sensitive_and_professional_attacks_rejected": true,
+    "content_free_audit_valid": true,
+    "raw_prompt_not_persisted": true,
+    "participant_content_not_sent_external": true,
+    "seven_day_expiry_operational": true,
+    "two_dollar_review_budget_reserved": true,
+    "exact_twenty_dollar_limit_allowed": true,
+    "projected_budget_overage_rejected": true,
+    "participant_external_api_call_rejected": true,
+    "all_failures_require_stop": true,
+    "docker_bound_to_localhost": true,
+    "notice_covers_consent_deletion_and_external_api": true,
+    "public_and_authority_boundaries_closed": true,
+    "real_participant_enrollment_not_claimed": true
+  },
+  "metrics": {
+    "checks": 20,
+    "attack_prompts": 8,
+    "attack_prompts_rejected": 8,
+    "valid_start_participants": 3,
+    "metadata_retention_days": 7,
+    "monthly_api_budget_usd": 20.0
+  },
+  "release_boundary": {
+    "protocol_preparation_authorized": true,
+    "supervised_invite_only_trial_authorized_after_gate": true,
+    "participant_enrollment_completed": false,
+    "public_service_allowed": false,
+    "privacy_compliance_claimed": false,
+    "production_readiness_claimed": false,
+    "medical_legal_trading_authority": false,
+    "training_on_trial_data_allowed": false,
+    "rule_replacement_allowed": false,
+    "external_release_authority": false
+  }
+}

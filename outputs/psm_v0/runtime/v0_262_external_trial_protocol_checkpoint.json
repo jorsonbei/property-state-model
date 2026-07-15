@@ -1,0 +1,58 @@
+{
+  "schema_version": "psm_v0_262_external_trial_protocol_checkpoint_v1",
+  "current_promoted_version": "PSM_V0.262",
+  "target_version": "PSM_V0.262",
+  "target_promoted": true,
+  "status": "blocked_on_v0_263_real_participant_enrollment",
+  "requires_user_input": true,
+  "external_trial_protocol_gate": {
+    "decision": "invite_only_trial_protocol_ready",
+    "passed": true,
+    "approved_plan": "v0_262_conservative_invite_only",
+    "participant_minimum": 3,
+    "participant_maximum": 5,
+    "local_checks_passed": 20,
+    "synthetic_attacks_rejected": 8,
+    "initial_external_verdict": "fail",
+    "initial_external_failed_checks": 2,
+    "final_external_verdict": "pass",
+    "final_external_question_passes": 7,
+    "final_external_findings": 0,
+    "metadata_retention_days": 7,
+    "monthly_api_budget_usd": 20.0,
+    "api_budget_reserved_usd": 4.0,
+    "participant_content_external_calls": 0,
+    "protocol_sha256": "e6b0f03e2115f783c6af39d3a7dcc9441a04bc7e936cc3f28e884e6a1acfb6b7"
+  },
+  "completed_engineering": [
+    "user-approved conservative protocol for three to five invited adults under operator supervision",
+    "operator-verified adulthood and one-to-one secret-HMAC invitee-to-pseudonym binding",
+    "strict notice-display, acknowledgment, consent, and session-enablement timestamp sequence",
+    "raw participant prompts retained zero days and never sent to external APIs",
+    "content-free salted-HMAC audit events with seven-day metadata expiry and withdrawal deletion",
+    "20 USD calendar-month API reservation gate with participant-content calls prohibited",
+    "sensitive, secret, medical, legal, trading, private-document, and minor prompts rejected",
+    "Docker host publishing bound to 127.0.0.1 instead of all interfaces",
+    "initial external fail retained and final independent review passed seven of seven questions"
+  ],
+  "integration_evidence": {
+    "browser": "runtime/v0_262_browser_regression/report.json",
+    "docker": "runtime/v0_262_docker_verification.json",
+    "passed": true
+  },
+  "release_boundary": {
+    "stable_internal_local_chat_allowed": true,
+    "invite_only_trial_protocol_ready": true,
+    "real_participant_enrollment_completed": false,
+    "external_user_trial_active": false,
+    "public_service_allowed": false,
+    "privacy_compliance_claimed": false,
+    "production_readiness_claimed": false,
+    "training_on_trial_data_allowed": false,
+    "medical_legal_trading_authority": false,
+    "rule_replacement_allowed": false,
+    "external_release_authority": false,
+    "v0_262_promoted": true
+  },
+  "required_decision": "PSM V0.263 需要真实参与者介入：请安排 3 至 5 名受邀成年人进行现场监督试用。不要在聊天或 GitHub 中提交其姓名、联系方式或证件；系统将在本机生成化名邀请，并由操作员线下核验成年、展示告知、收集明确同意后才启用会话。"
+}

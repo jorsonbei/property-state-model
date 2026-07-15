@@ -1,0 +1,163 @@
+{
+  "schema_version": "psm_invite_only_external_trial_protocol_v1",
+  "version": "PSM_V0.262",
+  "status": "frozen",
+  "authorization": {
+    "approved_by_user": true,
+    "approved_at": "2026-07-15",
+    "approved_plan": "v0_262_conservative_invite_only",
+    "approval_text": "批准 V0.262 保守方案"
+  },
+  "trial_scope": {
+    "mode": "operator_supervised_local_invite_only",
+    "participant_minimum": 3,
+    "participant_maximum": 5,
+    "adult_only": true,
+    "automated_recruitment": false,
+    "public_signup": false,
+    "anonymous_public_access": false,
+    "participant_identity": "local_pseudonymous_id_only",
+    "operator_present_required": true,
+    "pre_vetted_adult_invite_list_required": true,
+    "invitee_to_pseudonym_binding": "operator_created_secret_hmac_one_to_one",
+    "self_asserted_adulthood_sufficient": false,
+    "unknown_or_unverified_adulthood": "reject"
+  },
+  "deployment": {
+    "host_bind": "127.0.0.1",
+    "public_internet_exposure": false,
+    "remote_unsupervised_access": false,
+    "authentication_claimed": false,
+    "tenant_isolation_claimed": false,
+    "allowed_session_location": "operator_controlled_device_or_local_network_session_with_operator_present",
+    "fail_closed_if_bind_or_supervision_unknown": true
+  },
+  "data_policy": {
+    "allowed_transient_data": [
+      "low_risk_general_prompt_in_process_memory",
+      "current_browser_session_messages"
+    ],
+    "allowed_persisted_data": [
+      "pseudonymous_participant_id",
+      "consent_receipt",
+      "salted_prompt_hmac",
+      "risk_and_rejection_categories",
+      "latency_and_token_counts",
+      "incident_and_deletion_tombstones"
+    ],
+    "raw_prompt_server_persistence": false,
+    "participant_content_external_api_submission": false,
+    "private_document_uploads": false,
+    "prohibited_data_classes": [
+      "direct_identifiers",
+      "contact_details",
+      "precise_location",
+      "credentials_or_secrets",
+      "financial_account_or_brokerage_data",
+      "medical_records_or_personal_diagnosis",
+      "active_legal_case_or_personal_legal_advice",
+      "personal_trading_or_investment_decisions",
+      "minor_data",
+      "biometric_data",
+      "private_or_unpublished_documents",
+      "special_category_or_highly_sensitive_data"
+    ],
+    "prohibited_request_domains": [
+      "medical_decision",
+      "legal_decision",
+      "trading_decision",
+      "credential_handling",
+      "private_document_processing"
+    ],
+    "unknown_data_class": "reject",
+    "operator_must_interrupt_on_disclosure": true
+  },
+  "consent": {
+    "notice_version": "psm_v0_262_trial_notice_v1",
+    "notice_must_be_displayed_before_acknowledgment": true,
+    "notice_display_timestamp_required": true,
+    "notice_acknowledgment_timestamp_required": true,
+    "explicit_opt_in_before_first_message": true,
+    "adult_confirmation_required": true,
+    "adult_verification_by_operator_required": true,
+    "adult_verification_timestamp_required": true,
+    "pseudonymous_invitation_required": true,
+    "invitee_binding_hmac_required": true,
+    "withdrawal_available_at_any_time": true,
+    "withdrawal_stops_new_processing": true,
+    "withdrawal_triggers_deletion": true,
+    "coercion_or_compensation_claimed": false,
+    "consent_receipt_contains_direct_identity": false,
+    "pre_enrollment_sequence": [
+      "operator_binds_pre_vetted_adult_invitee_to_pseudonym",
+      "operator_verifies_adulthood",
+      "display_notice",
+      "record_notice_acknowledgment",
+      "record_explicit_consent",
+      "enable_session_and_first_message"
+    ],
+    "session_enablement_requires_all_prior_steps": true,
+    "first_message_before_session_enablement": "reject"
+  },
+  "retention": {
+    "raw_prompt_days": 0,
+    "operational_metadata_days": 7,
+    "consent_receipt_days_after_trial_end": 7,
+    "incident_metadata_days": 7,
+    "automatic_expiry_required": true,
+    "manual_deletion_on_withdrawal_required": true,
+    "deletion_tombstone_contains_content": false,
+    "deletion_failure_stops_trial": true
+  },
+  "api_budget": {
+    "currency": "USD",
+    "calendar_month_limit": 20.0,
+    "reservation_before_call_required": true,
+    "projected_over_limit": "reject_before_call",
+    "participant_content_calls_allowed": false,
+    "allowed_external_api_purposes": [
+      "synthetic_protocol_review",
+      "synthetic_safety_evaluation"
+    ],
+    "unknown_cost_or_purpose": "reject"
+  },
+  "stop_conditions": [
+    "missing_invalid_or_revoked_consent",
+    "adult_verification_or_invitee_binding_missing",
+    "notice_not_displayed_acknowledged_and_consented_in_order",
+    "participant_outside_approved_adult_invite_scope",
+    "participant_count_outside_3_to_5",
+    "prohibited_or_unknown_data_detected",
+    "participant_content_would_be_sent_to_external_api",
+    "monthly_api_budget_would_exceed_20_usd",
+    "critical_fact_hallucination",
+    "critical_safety_false_negative",
+    "public_bind_authentication_or_supervision_boundary_failure",
+    "retention_or_deletion_failure",
+    "unresolved_security_or_privacy_incident"
+  ],
+  "incident_protocol": {
+    "immediate_actions": [
+      "stop_current_session",
+      "block_new_trial_sessions",
+      "avoid_reproducing_sensitive_content",
+      "delete_transient_or_persisted_content_when_safe",
+      "retain_content_free_incident_tombstone",
+      "require_operator_review_before_resume"
+    ],
+    "automatic_resume_allowed": false,
+    "external_notification_claimed": false
+  },
+  "release_boundary": {
+    "protocol_preparation_authorized": true,
+    "supervised_invite_only_trial_authorized_after_gate": true,
+    "participant_enrollment_completed": false,
+    "public_service_allowed": false,
+    "privacy_compliance_claimed": false,
+    "production_readiness_claimed": false,
+    "medical_legal_trading_authority": false,
+    "training_on_trial_data_allowed": false,
+    "rule_replacement_allowed": false,
+    "external_release_authority": false
+  }
+}

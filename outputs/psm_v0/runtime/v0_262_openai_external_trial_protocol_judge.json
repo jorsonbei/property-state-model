@@ -1,0 +1,96 @@
+{
+  "schema_version": "psm_v0_262_openai_external_trial_protocol_judge_v1",
+  "version": "PSM_V0.262",
+  "reviewed_at": "2026-07-15T07:39:18.609268+00:00",
+  "provider": "OpenAI",
+  "requested_model": "gpt-5.4",
+  "actual_model": "gpt-5.4-2026-03-05",
+  "endpoint": "/v1/responses",
+  "http_status": 200,
+  "response_status": "completed",
+  "response_id": "resp_07817b77afbe664a016a5739151edc819989f578d69ff2153f",
+  "request_id": "req_7f4d6b3e4f994e78af20d5a72d5b3264",
+  "store": false,
+  "api_key_persisted_in_artifact": false,
+  "package_sha256": "96c66d5747ed78d759ffdd91e1316832cf96ce5ffac17f0c99b02c107c83666f",
+  "protocol_sha256": "e6b0f03e2115f783c6af39d3a7dcc9441a04bc7e936cc3f28e884e6a1acfb6b7",
+  "request_payload_sha256": "528c0dabe1687c822d33af027039fc61954b5484c943005375e82961c640ff42",
+  "submission_scope": {
+    "contains_private_data": false,
+    "contains_user_documents": false,
+    "contains_participant_content": false,
+    "contains_secrets": false,
+    "synthetic_only": true
+  },
+  "usage": {
+    "input_tokens": 1719,
+    "input_tokens_details": {
+      "cache_write_tokens": 0,
+      "cached_tokens": 0
+    },
+    "output_tokens": 2262,
+    "output_tokens_details": {
+      "reasoning_tokens": 1552
+    },
+    "total_tokens": 3981
+  },
+  "review": {
+    "protocol_sha256": "e6b0f03e2115f783c6af39d3a7dcc9441a04bc7e936cc3f28e884e6a1acfb6b7",
+    "verdict": "pass",
+    "failed_checks": [],
+    "critical_findings": [],
+    "recommended_repairs": [],
+    "question_reviews": [
+      {
+        "question": "Does the protocol strictly limit the trial to three to five invited consenting adults under operator supervision?",
+        "verdict": "pass",
+        "finding": "Pass. The frozen protocol limits participation to a pre-vetted adult invite list with participant_minimum 3 and participant_maximum 5, requires operator presence and supervised local use, rejects unknown or unverified adulthood, and requires explicit opt-in consent before first message with session enablement blocked until prior consent steps are completed."
+      },
+      {
+        "question": "Does the protocol minimize retained data and prevent raw participant content from being persisted or sent to external APIs?",
+        "verdict": "pass",
+        "finding": "Pass. Persisted data is narrowly limited to pseudonymous IDs, consent receipts, salted prompt HMACs, risk/rejection categories, token/latency metadata, and content-free incident/deletion tombstones; raw_prompt_server_persistence is false; participant_content_external_api_submission is false; participant_content_calls_allowed is false; and unknown data classes are rejected."
+      },
+      {
+        "question": "Are notice, explicit consent, withdrawal, and deletion requirements fail closed and operationally testable?",
+        "verdict": "pass",
+        "finding": "Pass. The protocol requires notice display before acknowledgment, acknowledgment before explicit consent, timestamps for notice/adult verification/acknowledgment, rejection of any first message before enablement, session enablement only after all prior steps, withdrawal at any time, immediate stop of new processing on withdrawal, and deletion triggered by withdrawal."
+      },
+      {
+        "question": "Does the seven-day retention policy include automatic expiry and a stop condition for deletion failure?",
+        "verdict": "pass",
+        "finding": "Pass. Automatic expiry is required; consent, operational, and incident metadata are limited to 7 days; raw prompts are retained 0 days; deletion tombstones are content-free; deletion_failure_stops_trial is true; and retention_or_deletion_failure is an explicit stop condition."
+      },
+      {
+        "question": "Does the monthly 20 USD API budget reject unknown purposes, participant content, and projected overages before a call?",
+        "verdict": "pass",
+        "finding": "Pass. The protocol sets a 20 USD calendar-month limit, requires reservation before call, rejects unknown cost or purpose, rejects projected over-limit calls before execution, and forbids participant-content calls to external APIs."
+      },
+      {
+        "question": "Does deployment remain non-public and stop on bind, authentication, supervision, security, or privacy boundary failure?",
+        "verdict": "pass",
+        "finding": "Pass. Deployment is restricted to operator-controlled local use with host_bind 127.0.0.1, public_internet_exposure false, remote_unsupervised_access false, fail_closed_if_bind_or_supervision_unknown true, and explicit stop conditions for public bind/authentication/supervision boundary failure and unresolved security or privacy incidents."
+      },
+      {
+        "question": "Does the protocol avoid privacy-compliance, production, professional, training, rule-replacement, or external-release authority claims?",
+        "verdict": "pass",
+        "finding": "Pass. The protocol explicitly disclaims privacy compliance, production readiness, medical/legal/trading authority, training on trial data, rule replacement, public service, and external release authority."
+      }
+    ]
+  },
+  "gate_checks": {
+    "protocol_sha256_match": true,
+    "exact_question_coverage": true,
+    "response_internally_consistent": true,
+    "external_verdict_pass": true
+  },
+  "passed": true,
+  "release_boundary": {
+    "protocol_review_only": true,
+    "participant_content_submitted": false,
+    "participant_enrollment_completed": false,
+    "public_service_allowed": false,
+    "privacy_compliance_claimed": false,
+    "external_release_authority": false
+  }
+}

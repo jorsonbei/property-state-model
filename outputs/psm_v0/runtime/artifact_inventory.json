@@ -1,13 +1,13 @@
 {
   "schema_version": "psm_artifact_inventory_v1",
-  "generated_at": "2026-07-15T01:25:31.762756+00:00",
+  "generated_at": "2026-07-15T07:55:04.224197+00:00",
   "root": "outputs/psm_v0",
   "read_only_scan": true,
   "content_hashing_performed": false,
-  "metadata_sha256": "ea31abbff61ed66c98eb074b303c6f1b1141200c77e0a4a94b19c8d881ca8004",
+  "metadata_sha256": "d41f27774f73d995e892f2a76a214d2b75c806c7a9ad3a7459b61ef750e73810",
   "summary": {
-    "files": 27044,
-    "bytes": 6473157105
+    "files": 27068,
+    "bytes": 6474072177
   },
   "directories": [
     {
@@ -61,8 +61,8 @@
     {
       "path": "project_status_out",
       "policy": "generated_evidence",
-      "files": 464,
-      "bytes": 16341809
+      "files": 465,
+      "bytes": 16365290
     },
     {
       "path": "state_encoder_out",
@@ -73,8 +73,8 @@
     {
       "path": "runtime",
       "policy": "public_source_or_runtime",
-      "files": 168,
-      "bytes": 8645535
+      "files": 184,
+      "bytes": 9450408
     },
     {
       "path": "taxonomy_out",
@@ -97,8 +97,8 @@
     {
       "path": "psm_v0",
       "policy": "public_source_or_runtime",
-      "files": 113,
-      "bytes": 2413057
+      "files": 117,
+      "bytes": 2481274
     },
     {
       "path": "cases",
@@ -200,7 +200,7 @@
       "path": "product_alpha_app",
       "policy": "public_source_or_runtime",
       "files": 8,
-      "bytes": 239544
+      "bytes": 246529
     },
     {
       "path": "external_risk_out",
@@ -211,8 +211,8 @@
     {
       "path": "benchmarks",
       "policy": "public_source_or_runtime",
-      "files": 21,
-      "bytes": 192558
+      "files": 22,
+      "bytes": 198520
     },
     {
       "path": "compare_out",
@@ -241,14 +241,14 @@
     {
       "path": "roadmap_out",
       "policy": "public_source_or_runtime",
-      "files": 38,
-      "bytes": 48006
+      "files": 39,
+      "bytes": 50551
     },
     {
       "path": ".",
       "policy": "public_source_or_runtime",
-      "files": 9,
-      "bytes": 24052
+      "files": 10,
+      "bytes": 27061
     },
     {
       "path": "product_alpha_out",

@@ -1,0 +1,159 @@
+{
+  "schema_version": "psm_v0_262_external_trial_attack_matrix_v1",
+  "version": "PSM_V0.262-candidate",
+  "synthetic_only": true,
+  "safe_decision": {
+    "allowed": true,
+    "categories": [
+      "low_risk_general"
+    ],
+    "reasons": []
+  },
+  "attack_decisions": {
+    "email": {
+      "allowed": false,
+      "categories": [
+        "direct_identifiers"
+      ],
+      "reasons": [
+        "possible direct identifier or contact detail detected"
+      ]
+    },
+    "phone": {
+      "allowed": false,
+      "categories": [
+        "direct_identifiers"
+      ],
+      "reasons": [
+        "possible direct identifier or contact detail detected"
+      ]
+    },
+    "secret": {
+      "allowed": false,
+      "categories": [
+        "credentials_or_secrets"
+      ],
+      "reasons": [
+        "possible credential or secret detected"
+      ]
+    },
+    "medical": {
+      "allowed": false,
+      "categories": [
+        "medical_decision"
+      ],
+      "reasons": [
+        "prohibited trial domain detected: medical_decision"
+      ]
+    },
+    "legal": {
+      "allowed": false,
+      "categories": [
+        "legal_decision"
+      ],
+      "reasons": [
+        "prohibited trial domain detected: legal_decision"
+      ]
+    },
+    "trading": {
+      "allowed": false,
+      "categories": [
+        "trading_decision"
+      ],
+      "reasons": [
+        "prohibited trial domain detected: trading_decision"
+      ]
+    },
+    "private_document": {
+      "allowed": false,
+      "categories": [
+        "private_document_processing"
+      ],
+      "reasons": [
+        "prohibited trial domain detected: private_document_processing"
+      ]
+    },
+    "minor": {
+      "allowed": false,
+      "categories": [
+        "minor_data"
+      ],
+      "reasons": [
+        "prohibited trial domain detected: minor_data"
+      ]
+    }
+  },
+  "invalid_consent_errors": {
+    "minor": [
+      "adult status is not confirmed and operator verified"
+    ],
+    "operator_adult_verification_missing": [
+      "adult status is not confirmed and operator verified"
+    ],
+    "invitee_binding_missing": [
+      "invitee binding HMAC is invalid"
+    ],
+    "notice_missing": [
+      "notice was not explicitly acknowledged"
+    ],
+    "notice_shown_after_consent": [
+      "adult verification, notice, consent, and session enablement are not strictly ordered"
+    ],
+    "revoked": [
+      "consent has been revoked"
+    ]
+  },
+  "audit_event": {
+    "schema_version": "psm_v0_262_content_free_audit_event_v1",
+    "event_id": "SYNTHETIC_E001",
+    "participant_id": "P01",
+    "occurred_at": "2026-07-15T01:05:00Z",
+    "prompt_hmac_sha256": "cfb2105f1eb04f7acae3494ccfe1d051f3ed5797f1e403448ae936953b43a83d",
+    "allowed": true,
+    "categories": [
+      "low_risk_general"
+    ],
+    "latency_ms": 120,
+    "token_count": 80,
+    "raw_prompt_persisted": false,
+    "participant_content_sent_to_external_api": false
+  },
+  "retention": {
+    "retained": [
+      {
+        "schema_version": "psm_v0_262_content_free_audit_event_v1",
+        "event_id": "SYNTHETIC_E001",
+        "participant_id": "P01",
+        "occurred_at": "2026-07-15T01:05:00Z",
+        "prompt_hmac_sha256": "cfb2105f1eb04f7acae3494ccfe1d051f3ed5797f1e403448ae936953b43a83d",
+        "allowed": true,
+        "categories": [
+          "low_risk_general"
+        ],
+        "latency_ms": 120,
+        "token_count": 80,
+        "raw_prompt_persisted": false,
+        "participant_content_sent_to_external_api": false
+      }
+    ],
+    "tombstones": [
+      {
+        "event_id": "SYNTHETIC_OLD",
+        "deleted_at": "2026-07-15T00:00:00+00:00",
+        "reason": "retention_expired",
+        "content_retained": false
+      }
+    ]
+  },
+  "stop_gate": {
+    "stop_required": true,
+    "reasons": [
+      "missing_invalid_or_revoked_consent",
+      "prohibited_or_unknown_data_detected",
+      "monthly_api_budget_would_be_exceeded",
+      "unresolved_security_or_privacy_incident",
+      "retention_or_deletion_failure"
+    ],
+    "automatic_resume_allowed": false
+  }
+}

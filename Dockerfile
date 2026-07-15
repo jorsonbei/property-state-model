@@ -16,6 +16,7 @@ RUN useradd --create-home --uid 10001 psm
 COPY --chown=psm:psm outputs/psm_v0/psm_v0 /app/outputs/psm_v0/psm_v0
 COPY --chown=psm:psm outputs/psm_v0/product_alpha_app /app/outputs/psm_v0/product_alpha_app
 COPY --chown=psm:psm outputs/psm_v0/runtime /app/outputs/psm_v0/runtime
+COPY --chown=psm:psm outputs/psm_v0/V0_262_INVITE_ONLY_TRIAL_NOTICE.md /app/outputs/psm_v0/V0_262_INVITE_ONLY_TRIAL_NOTICE.md
 
 USER psm
 EXPOSE 8765

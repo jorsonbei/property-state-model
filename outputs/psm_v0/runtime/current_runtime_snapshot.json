@@ -2,10 +2,10 @@
   "schema_version": "psm_public_runtime_snapshot_v1",
   "project_status": {
     "updated_from_local_artifacts": true,
-    "current_version": "psm_v0.261",
+    "current_version": "psm_v0.262",
     "source_evidence_version": "psm_v0.251",
-    "previous_formal_version": "psm_v0.260",
-    "completed_result": "external_contract_review_passed_after_closed_world_repair",
+    "previous_formal_version": "psm_v0.261",
+    "completed_result": "invite_only_external_trial_protocol_ready_participants_not_enrolled",
     "family": {
       "family_id": "v251_independent_chat_golden_blind_set_boundary_adversarial",
       "case_pack": "case_packs/v0_251_independent_chat_golden_blind_set_boundary_adversarial_cases.json",
@@ -244,8 +244,8 @@
       "rule_replacement_allowed": false
     },
     "next_stage": {
-      "version": "PSM_V0.262",
-      "objective": "Define and authorize an external-user trial protocol: participant scope, allowed data classes, privacy notice and consent, retention/deletion, deployment mode, budget, incident handling, and explicit stop conditions. Keep external access closed until the user-owned protocol is approved.",
+      "version": "PSM_V0.263",
+      "objective": "Enroll three to five real invited adults without collecting direct identity in project artifacts: create local pseudonymous invitations, complete operator adulthood verification, display the frozen notice, record explicit consent, and enable only supervised sessions. Do not activate the trial until every participant passes the enrollment gate.",
       "blocked": true,
       "requires_user_input": true
     },
@@ -259,7 +259,7 @@
       "candidate_taxonomy": "taxonomy_out/psm_v0.251_candidate_taxonomy.json",
       "candidate_regression_fixtures": "fixture_out/psm_v0.251_candidate_regression_fixtures.json",
       "taxonomy_delta": "taxonomy_delta_out/psm_v0.251_taxonomy_delta.json",
-      "project_status": "project_status_out/psm_v0.261_project_status.json",
+      "project_status": "project_status_out/psm_v0.262_project_status.json",
       "regression": "regression_out/psm_v0.251_regression_check.json",
       "independent_chat_gate": "runtime/v0_251_wave_g_external_semantic_judge.json",
       "model_selection": "runtime/v0_251_base_upgrade_pairwise_gemini_pro_report.json",
@@ -317,7 +317,15 @@
       "v0_261_repair_gate": "runtime/v0_261_annotation_contract_repair_gate.json",
       "v0_261_external_review_package": "runtime/v0_261_external_contract_review_package.json",
       "v0_261_final_external_review": "runtime/v0_261_openai_external_contract_judge.json",
-      "v0_261_checkpoint": "runtime/v0_261_external_contract_checkpoint.json"
+      "v0_261_checkpoint": "runtime/v0_261_external_contract_checkpoint.json",
+      "v0_262_protocol": "benchmarks/v0_262_invite_only_external_trial_protocol.json",
+      "v0_262_trial_notice": "V0_262_INVITE_ONLY_TRIAL_NOTICE.md",
+      "v0_262_local_gate": "runtime/v0_262_external_trial_protocol_gate.json",
+      "v0_262_attack_matrix": "runtime/v0_262_external_trial_attack_matrix.json",
+      "v0_262_budget_ledger": "runtime/v0_262_api_budget_ledger.json",
+      "v0_262_initial_external_review": "runtime/v0_262_openai_external_trial_protocol_judge_attempt_1_failed.json",
+      "v0_262_final_external_review": "runtime/v0_262_openai_external_trial_protocol_judge.json",
+      "v0_262_checkpoint": "runtime/v0_262_external_trial_protocol_checkpoint.json"
     },
     "regression": {
       "stem": "psm_v0.251",
@@ -598,6 +606,25 @@
       "synthetic_only": true,
       "private_data_submitted": false,
       "secret_persisted": false
+    },
+    "external_trial_protocol_gate": {
+      "decision": "invite_only_trial_protocol_ready",
+      "passed": true,
+      "approved_plan": "v0_262_conservative_invite_only",
+      "participant_minimum": 3,
+      "participant_maximum": 5,
+      "local_checks_passed": 20,
+      "synthetic_attacks_rejected": 8,
+      "initial_external_verdict": "fail",
+      "initial_external_failed_checks": 2,
+      "final_external_verdict": "pass",
+      "final_external_question_passes": 7,
+      "final_external_findings": 0,
+      "metadata_retention_days": 7,
+      "monthly_api_budget_usd": 20.0,
+      "api_budget_reserved_usd": 4.0,
+      "participant_content_external_calls": 0,
+      "protocol_sha256": "e6b0f03e2115f783c6af39d3a7dcc9441a04bc7e936cc3f28e884e6a1acfb6b7"
     }
   },
   "optional_project_status": {

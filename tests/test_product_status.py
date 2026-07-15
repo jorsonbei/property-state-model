@@ -4,7 +4,7 @@ import tempfile
 import unittest
 from pathlib import Path
 
-from product_alpha_app.server import load_status_summary, status_version
+from product_alpha_app.server import load_status_summary, load_trial_notice, status_version
 
 
 class ProductStatusTests(unittest.TestCase):
@@ -21,6 +21,14 @@ class ProductStatusTests(unittest.TestCase):
         self.assertEqual(status["internal_trial_decision"], "internal_trial_ready")
         self.assertEqual(status["selected_chat_model"], "qwen3.5:9b")
         self.assertEqual(status["chat_timeout_seconds"], 60)
+
+    def test_v0_262_notice_is_explicitly_inactive(self) -> None:
+        notice = load_trial_notice()
+        self.assertEqual(notice["version"], "PSM V0.262")
+        self.assertIn("3 至 5", notice["content"])
+        self.assertFalse(notice["participant_enrollment_completed"])
+        self.assertFalse(notice["trial_active"])
+        self.assertFalse(notice["public_service_allowed"])
 
 
 if __name__ == "__main__":

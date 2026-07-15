@@ -9,7 +9,7 @@ PSM is an experimental state-first AI control layer. It routes a request through
 - Deterministic state pipeline: `Q -> Omega -> phi -> Delta sigma -> Pi -> eta -> B_sigma -> Sigma+`.
 - Candidate generation adapters, lexical auditing, deterministic gating, failure ledger, and regression artifacts.
 - Local chat alpha backed by Ollama.
-- Current public baseline: `PSM V0.261` (formal 2228-record core evidence source: `PSM V0.251`).
+- Current public baseline: `PSM V0.262` (formal 2228-record core evidence source: `PSM V0.251`).
 - V0.251's fresh externally authored Wave G passed 20/20 under an independent external semantic judge; usefulness, safety, correctness, relevance, boundary quality, and hallucination control were each 1.0000 on that frozen synthetic blind wave.
 - V0.252 adds a stable internal chat-product gate with cancel, timeout, retry, recovery, progressive display, hidden debug evidence, and desktop/mobile/real-backend browser regression.
 - V0.253 replaces passive Omega route labels with four executable local/read-only evidence adapters and a fail-closed provenance/failure-ledger contract.
@@ -21,6 +21,7 @@ PSM is an experimental state-first AI control layer. It routes a request through
 - V0.259 adds a Sigma+ delivery contract that keeps natural answers separate from developer traces, requires provenance or explicit downgrades for strong claims, and retains calibrated shadow observations without granting them output authority.
 - V0.260 completes a frozen internal-readiness review: 2228/2228 formal cases, 20/20 independent blind rows, 13/13 internal Alpha scenarios, zero critical fact hallucinations or safety false negatives, and an `internal_trial_ready` decision limited to local single-user use.
 - V0.261 retains an initial failed OpenAI contract review, repairs the annotation boundary as a closed-world V2 schema, passes ten local mutation checks including nested leaf-type and extra-target rejection with zero candidate leakage or protected backflow, and then passes a five-question `gpt-5.4` external rejudge with no remaining findings. External users and release authority remain closed.
+- V0.262 freezes the approved conservative invite-only trial protocol for 3-5 operator-supervised adults, rejects sensitive and professional-decision prompts, retains no raw participant chat, keeps content out of external APIs, deletes content-free metadata after seven days, and enforces a USD 20 monthly API reservation cap. The initial independent protocol review failed on two enrollment/notice controls; after repair, the final seven-question `gpt-5.4` review passes with no remaining findings. No real participant is enrolled and the trial remains inactive.
 
 This repository is an experimental research and engineering system. It is not a medical, legal, investment, production-release, or external-user authorization system. Passing synthetic regressions does not prove open-domain generalization.
 
@@ -62,6 +63,10 @@ make readiness-v260-docker
 make repair-v261-eval
 make judge-v261-openai
 make external-v261-docker
+make protocol-v262-eval
+make judge-v262-openai
+make promote-v262
+make external-v262-docker
 ```
 
 Generate a read-only inventory of the local evidence store without moving or deleting artifacts:
@@ -79,7 +84,7 @@ make sync-runtime
 docker compose up --build
 ```
 
-Open `http://127.0.0.1:8766/`. The container connects to host Ollama through `host.docker.internal`.
+Open `http://127.0.0.1:8766/`. Docker publishes only on the local loopback interface, and the container connects to host Ollama through `host.docker.internal`.
 
 ## Repository map
 
@@ -106,7 +111,7 @@ make judge-v251-external
 
 - Human recovery point: [`outputs/psm_v0/CURRENT_STATUS.md`](outputs/psm_v0/CURRENT_STATUS.md)
 - Architecture: [`outputs/psm_v0/PSM_V0_Blueprint.md`](outputs/psm_v0/PSM_V0_Blueprint.md)
-- Current execution roadmap: [`outputs/psm_v0/roadmap_out/PSM_External_Validation_Roadmap_V0.261_to_V0.262.md`](outputs/psm_v0/roadmap_out/PSM_External_Validation_Roadmap_V0.261_to_V0.262.md)
+- Current execution roadmap: [`outputs/psm_v0/roadmap_out/PSM_Invite_Only_Trial_Roadmap_V0.262_to_V0.263.md`](outputs/psm_v0/roadmap_out/PSM_Invite_Only_Trial_Roadmap_V0.262_to_V0.263.md)
 
 ## Open-source boundary
 
