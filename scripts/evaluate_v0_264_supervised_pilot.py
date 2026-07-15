@@ -14,6 +14,7 @@ PRIVATE_STATE = PSM_ROOT / "private_runtime" / "v0_263" / "enrollment_state.json
 PROTOCOL = PSM_ROOT / "benchmarks" / "v0_262_invite_only_external_trial_protocol.json"
 OUT = PSM_ROOT / "runtime" / "v0_264_supervised_pilot_gate.json"
 CHECKPOINT = PSM_ROOT / "runtime" / "v0_264_supervised_pilot_checkpoint.json"
+MANIFEST = PSM_ROOT / "runtime" / "v0_264_supervised_pilot_promotion_manifest.json"
 
 
 def read_json(path: Path) -> dict:
@@ -130,12 +131,20 @@ def main() -> None:
         )
         + "。不要输入姓名、联络方式、证件、秘密、医疗、法律或交易决策资料。"
     )
+    promoted = False
+    if MANIFEST.exists():
+        manifest = read_json(MANIFEST)
+        promoted = (
+            manifest.get("schema_version") == "psm_v0_264_supervised_pilot_promotion_manifest_v1"
+            and manifest.get("version") == "PSM_V0.264"
+            and manifest.get("promoted") is True
+        )
     checkpoint = {
         "schema_version": "psm_v0_264_supervised_pilot_checkpoint_v1",
-        "current_promoted_version": "PSM_V0.263",
+        "current_promoted_version": "PSM_V0.264" if promoted else "PSM_V0.263",
         "target_version": "PSM_V0.264",
-        "target_promoted": False,
-        "status": gate["decision"],
+        "target_promoted": promoted,
+        "status": "v0_264_promoted_awaiting_structured_quality_feedback" if promoted else gate["decision"],
         "requires_user_input": not passed,
         "progress": progress,
         "missing_turn_coverage": missing,

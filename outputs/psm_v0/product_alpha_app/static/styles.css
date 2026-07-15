@@ -32,7 +32,8 @@ body {
 }
 
 button,
-textarea {
+textarea,
+select {
   font: inherit;
 }
 
@@ -211,6 +212,80 @@ h1 {
   background: var(--surface-soft);
   color: #405066;
   font-size: 12px;
+}
+
+.structured-feedback {
+  margin-top: 4px;
+  padding-top: 11px;
+  border-top: 1px solid var(--line);
+  display: grid;
+  gap: 10px;
+}
+
+.structured-feedback > strong {
+  font-size: 13px;
+}
+
+.structured-feedback.submitted {
+  color: var(--green);
+}
+
+.feedback-grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 9px;
+}
+
+.feedback-grid label {
+  min-width: 0;
+  display: grid;
+  gap: 5px;
+}
+
+.feedback-grid label > span {
+  color: var(--muted);
+  font-size: 12px;
+  font-weight: 680;
+}
+
+.feedback-grid select {
+  width: 100%;
+  min-width: 0;
+  min-height: 38px;
+  padding: 0 9px;
+  border: 1px solid var(--line);
+  border-radius: 7px;
+  background: #fff;
+  color: var(--text);
+}
+
+.feedback-actions {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 10px;
+}
+
+.feedback-actions span {
+  color: var(--muted);
+  font-size: 11px;
+  font-weight: 500;
+}
+
+.feedback-actions button {
+  min-height: 38px;
+  padding: 0 13px;
+  border: 1px solid var(--green);
+  border-radius: 7px;
+  background: var(--green);
+  color: #fff;
+  font-weight: 720;
+  white-space: nowrap;
+}
+
+.feedback-actions button:disabled {
+  opacity: 0.58;
+  cursor: wait;
 }
 
 .suggestions {
@@ -602,6 +677,15 @@ pre {
 
   .message {
     max-width: 100%;
+  }
+
+  .feedback-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .feedback-actions {
+    align-items: stretch;
+    flex-direction: column;
   }
 
   .composer {

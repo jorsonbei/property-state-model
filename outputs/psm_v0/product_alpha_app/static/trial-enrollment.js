@@ -44,7 +44,7 @@ const ACTION_META = {
 };
 
 const STEP_ORDER = ["verify_adult", "display_notice", "acknowledge_notice", "consent", "enable_session"];
-const state = { status: null, cards: new Map() };
+const state = { status: null, feedback: null, cards: new Map() };
 
 const $ = (id) => document.getElementById(id);
 
@@ -52,19 +52,21 @@ async function init() {
   sessionStorage.removeItem("psmTrialParticipant");
   sessionStorage.removeItem("psmTrialInvitationCode");
   try {
-    const [statusResponse, cardsResponse, noticeResponse] = await Promise.all([
+    const [statusResponse, cardsResponse, noticeResponse, feedbackResponse] = await Promise.all([
       fetch("/api/trial-enrollment", { cache: "no-store" }),
       fetch("/api/trial-enrollment/operator-cards", { cache: "no-store" }),
-      fetch("/api/trial-notice", { cache: "no-store" })
+      fetch("/api/trial-notice", { cache: "no-store" }),
+      fetch("/api/trial-feedback", { cache: "no-store" })
     ]);
-    if (!statusResponse.ok || !cardsResponse.ok || !noticeResponse.ok) {
-      throw new Error("V0.263 本機登記資料不可用");
+    if (!statusResponse.ok || !cardsResponse.ok || !noticeResponse.ok || !feedbackResponse.ok) {
+      throw new Error("V0.265 本機試用資料不可用");
     }
     const cards = await cardsResponse.json();
     state.cards = new Map(cards.participants.map((item) => [item.participant_id, item.invitation_code]));
     const notice = await noticeResponse.json();
     $("notice-content").textContent = notice.content;
     $("notice-version").textContent = notice.notice_version;
+    state.feedback = await feedbackResponse.json();
     render(await statusResponse.json());
   } catch (error) {
     $("boundary-title").textContent = "登記頁面不可用";
@@ -80,17 +82,22 @@ function render(status) {
   $("count-consent").textContent = status.counts.consented;
   $("count-enabled").textContent = status.counts.session_enabled;
   $("count-pilot").textContent = `${status.pilot_progress.completed_participants}/3`;
+  $("count-feedback").textContent = `${state.feedback?.completed_participants || 0}/3`;
   $("enrollment-connection").textContent = status.trial_active
     ? "本機邀請制 · 監督試用已啟動"
     : "本機邀請制 · 試用尚未啟動";
   $("boundary-band").classList.toggle("active", status.trial_active);
   $("boundary-title").textContent = status.trial_active
-    ? "三人全員門控已通過"
+    ? state.feedback?.coverage_gate_passed
+      ? "三人結構化回饋門已通過"
+      : "V0.264 已完成，V0.265 正在收集回饋"
     : status.stopped
     ? "試用已停止"
     : "三人全員門控尚未通過";
   $("boundary-detail").textContent = status.trial_active
-    ? "僅允許三名已登記參與者在操作員現場監督下聊天。"
+    ? state.feedback?.coverage_gate_passed
+      ? "每位參與者已完成三次固定選項品質評價；仍不代表可公開發布。"
+      : "每位參與者需對三個新的低風險回答提交固定選項評價，全程保持現場監督。"
     : status.stopped
     ? "撤回或邊界事件已阻止自動恢復。"
     : "第一條真實試用訊息保持拒絕。";
@@ -108,9 +115,13 @@ function renderParticipant(participant, status) {
   const pilot = status.pilot_progress.participants.find(
     (item) => item.participant_id === participant.participant_id
   );
+  const feedback = state.feedback?.participants?.find(
+    (item) => item.participant_id === participant.participant_id
+  );
   card.dataset.participantId = participant.participant_id;
   card.querySelector(".participant-id").textContent = participant.participant_id;
   card.querySelector(".pilot-turns").textContent = `${pilot.credited_turns}/${pilot.required_turns}`;
+  card.querySelector(".feedback-turns").textContent = `${feedback?.credited || 0}/${feedback?.required || 3}`;
   card.querySelector(".step-state").textContent = meta.state;
   const codeElement = card.querySelector(".invitation-code");
   codeElement.dataset.value = code;

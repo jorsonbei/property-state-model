@@ -3,7 +3,7 @@
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <title>物性AI · V0.264 監督試用</title>
+    <title>物性AI · V0.265 品質回饋</title>
     <link rel="stylesheet" href="/styles.css" />
     <link rel="stylesheet" href="/trial-enrollment.css" />
   </head>
@@ -13,8 +13,8 @@
         <div class="brand-block">
           <span class="brand-mark">Σ</span>
           <div>
-            <h1>V0.264 三人監督試用</h1>
-            <p id="enrollment-connection">本機邀請制 · 試用尚未啟動</p>
+            <h1>V0.265 三人品質回饋</h1>
+            <p id="enrollment-connection">本機邀請制 · 正在載入試用狀態</p>
           </div>
         </div>
         <a class="header-action" href="/" aria-label="返回物性AI聊天">返回聊天</a>
@@ -27,6 +27,7 @@
         <div><span>已同意</span><strong id="count-consent">0</strong></div>
         <div><span>會話啟用</span><strong id="count-enabled">0</strong></div>
         <div><span>試用達標</span><strong id="count-pilot">0/3</strong></div>
+        <div><span>回饋達標</span><strong id="count-feedback">0/3</strong></div>
       </section>
 
       <section class="boundary-band" id="boundary-band" role="status" aria-live="polite">
@@ -78,6 +79,10 @@
         <div class="pilot-progress" aria-label="低風險會話進度">
           <span>低風險會話</span>
           <strong class="pilot-turns">0/3</strong>
+        </div>
+        <div class="pilot-progress feedback-progress" aria-label="結構化品質回饋進度">
+          <span>品質回饋</span>
+          <strong class="feedback-turns">0/3</strong>
         </div>
         <label class="attestation-row">
           <input class="attestation" type="checkbox" />

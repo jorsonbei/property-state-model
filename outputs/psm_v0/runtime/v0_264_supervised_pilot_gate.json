@@ -1,8 +1,8 @@
 {
   "schema_version": "psm_v0_264_supervised_pilot_gate_v1",
   "version": "PSM_V0.264",
-  "passed": false,
-  "decision": "blocked_on_real_participant_turn_coverage",
+  "passed": true,
+  "decision": "three_person_supervised_pilot_complete",
   "checks": {
     "contract_schema_valid": true,
     "parent_v0_263_promoted": true,
@@ -14,57 +14,44 @@
     "audit_events_content_free": true,
     "no_rejected_or_prohibited_events": true,
     "all_observed_events_low_risk_general": true,
-    "all_three_participants_meet_three_turn_minimum": false,
+    "all_three_participants_meet_three_turn_minimum": true,
     "release_authority_remains_closed": true
   },
   "progress": {
     "schema_version": "psm_v0_264_supervised_pilot_progress_v1",
     "required_turns_per_participant": 3,
-    "completed_participants": 1,
+    "completed_participants": 3,
     "participant_count": 3,
-    "total_observed_low_risk_turns": 6,
-    "gate_passed": false,
+    "total_observed_low_risk_turns": 20,
+    "gate_passed": true,
     "participants": [
       {
         "participant_id": "P01",
-        "observed_turns": 6,
+        "observed_turns": 14,
         "credited_turns": 3,
         "required_turns": 3,
         "complete": true
       },
       {
         "participant_id": "P02",
-        "observed_turns": 0,
-        "credited_turns": 0,
+        "observed_turns": 3,
+        "credited_turns": 3,
         "required_turns": 3,
-        "complete": false
+        "complete": true
       },
       {
         "participant_id": "P03",
-        "observed_turns": 0,
-        "credited_turns": 0,
+        "observed_turns": 3,
+        "credited_turns": 3,
         "required_turns": 3,
-        "complete": false
+        "complete": true
       }
     ]
   },
-  "missing_turn_coverage": [
-    {
-      "participant_id": "P02",
-      "credited_turns": 0,
-      "required_turns": 3,
-      "remaining_turns": 3
-    },
-    {
-      "participant_id": "P03",
-      "credited_turns": 0,
-      "required_turns": 3,
-      "remaining_turns": 3
-    }
-  ],
+  "missing_turn_coverage": [],
   "aggregate_evidence": {
-    "content_free_events": 6,
-    "allowed_low_risk_events": 6,
+    "content_free_events": 20,
+    "allowed_low_risk_events": 20,
     "rejected_events": 0,
     "raw_prompts_persisted": 0,
     "participant_content_external_api_calls": 0

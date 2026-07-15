@@ -90,6 +90,18 @@ class ProductFrontendContractTests(unittest.TestCase):
         self.assertIn('$("evidence-toggle").hidden = true', self.javascript)
         self.assertIn("psmTrialInvitationCode", self.javascript)
 
+    def test_v0_265_feedback_surface_uses_fixed_fields_only(self) -> None:
+        self.assertIn('"/api/trial-feedback"', self.javascript)
+        self.assertIn('"helpfulness"', self.javascript)
+        self.assertIn('"clarity"', self.javascript)
+        self.assertIn('"state_alignment"', self.javascript)
+        self.assertIn('"issue_category"', self.javascript)
+        self.assertIn("只記錄固定選項，不記錄聊天內容", self.javascript)
+        self.assertNotIn('name = "free_text"', self.javascript)
+        self.assertIn('id="count-feedback"', self.enrollment_html)
+        self.assertIn("feedback-turns", self.enrollment_javascript)
+        self.assertIn('fetch("/api/trial-feedback"', self.enrollment_javascript)
+
 
 if __name__ == "__main__":
     unittest.main()

@@ -1,4 +1,4 @@
-# 物性AI Chat Alpha 0.262 / V0.263 Enrollment Preparation
+# 物性AI Chat Alpha 0.264 / V0.265 Structured Feedback
 
 Local normal-chat demo backed by the latest PSM pipeline status.
 
@@ -23,14 +23,15 @@ http://127.0.0.1:8765/trial-enrollment
 Boundary:
 
 - Internal local chat demo only.
-- The normal chat remains an internal local demo. The separate invite-only trial stays inactive until all three selected participants complete the supervised enrollment gate.
+- The normal chat remains an internal local demo. The invite-only trial is active only for P01-P03 under physical operator supervision.
+- V0.265 feedback is fixed-field and content-free: no free text, identity, raw prompt, raw answer, or external participant-content call.
 - Not medical, legal, trading, or production release authority.
 - Session memory is not consent or release authority.
 - Rule replacement remains off.
 
 Verified scope:
 
-- `/api/status` reports the latest promoted project status, currently `PSM V0.262`, plus the live V0.263 enrollment counts.
+- `/api/status` reports the latest promoted project status, currently `PSM V0.264`, plus the live enrollment counts.
 - `/api/status` exposes `internal_trial_ready` separately from the still-closed external-user gate.
 - `/api/chat` preserves user and assistant roles across multi-turn history.
 - Project status and roadmap answers are grounded in the local structured status.
@@ -51,7 +52,8 @@ Verified scope:
 - V0.259 returns a `sigma_plus_delivery` packet with a natural `user_view` and a developer-only trace containing statement coverage, provenance, tools, failures, judges, state, and calibrated shadow observations.
 - V0.260 confirms `internal_trial_ready` for local single-user use after replaying core, blind, Alpha, model, Sigma+, browser, Docker, failure-ledger, and residual-risk evidence.
 - V0.261 repairs and independently revalidates the external annotation contract; V0.262 freezes and independently passes the conservative three-to-five-person invite-only trial protocol.
-- V0.263 preparation fixes the selected cohort at three, generates owner-only P01-P03 invitations, exposes no direct-identity inputs, requires the strict five-step enrollment sequence, and keeps trial chat closed until all three pass.
+- V0.263 fixes and completes the selected three-person enrollment sequence; V0.264 completes three credited low-risk turns for each participant.
+- V0.265 adds four fixed feedback fields under each new supervised answer and publishes only redacted aggregate progress.
 - Sensitive or unknown participant data stops the entire trial without automatic resume. Raw prompts and answers are never persisted or submitted to external APIs.
 
 Browser regression:
@@ -68,4 +70,7 @@ make encoder-v257-eval
 make calibrate-v258-eval
 make sigma-v259-eval
 make readiness-v260-review
+make feedback-v265-eval
+make browser-regression-v265-feedback
+make feedback-v265-docker
 ```

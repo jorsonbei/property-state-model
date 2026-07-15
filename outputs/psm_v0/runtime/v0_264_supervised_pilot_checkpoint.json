@@ -1,55 +1,42 @@
 {
   "schema_version": "psm_v0_264_supervised_pilot_checkpoint_v1",
-  "current_promoted_version": "PSM_V0.263",
+  "current_promoted_version": "PSM_V0.264",
   "target_version": "PSM_V0.264",
-  "target_promoted": false,
-  "status": "blocked_on_real_participant_turn_coverage",
-  "requires_user_input": true,
+  "target_promoted": true,
+  "status": "v0_264_promoted_awaiting_structured_quality_feedback",
+  "requires_user_input": false,
   "progress": {
     "schema_version": "psm_v0_264_supervised_pilot_progress_v1",
     "required_turns_per_participant": 3,
-    "completed_participants": 1,
+    "completed_participants": 3,
     "participant_count": 3,
-    "total_observed_low_risk_turns": 6,
-    "gate_passed": false,
+    "total_observed_low_risk_turns": 20,
+    "gate_passed": true,
     "participants": [
       {
         "participant_id": "P01",
-        "observed_turns": 6,
+        "observed_turns": 14,
         "credited_turns": 3,
         "required_turns": 3,
         "complete": true
       },
       {
         "participant_id": "P02",
-        "observed_turns": 0,
-        "credited_turns": 0,
+        "observed_turns": 3,
+        "credited_turns": 3,
         "required_turns": 3,
-        "complete": false
+        "complete": true
       },
       {
         "participant_id": "P03",
-        "observed_turns": 0,
-        "credited_turns": 0,
+        "observed_turns": 3,
+        "credited_turns": 3,
         "required_turns": 3,
-        "complete": false
+        "complete": true
       }
     ]
   },
-  "missing_turn_coverage": [
-    {
-      "participant_id": "P02",
-      "credited_turns": 0,
-      "required_turns": 3,
-      "remaining_turns": 3
-    },
-    {
-      "participant_id": "P03",
-      "credited_turns": 0,
-      "required_turns": 3,
-      "remaining_turns": 3
-    }
-  ],
+  "missing_turn_coverage": [],
   "private_state_committed_to_git": false,
   "raw_chat_content_committed_to_git": false,
   "release_boundary": {
@@ -61,5 +48,5 @@
     "rule_replacement_allowed": false,
     "external_release_authority": false
   },
-  "required_decision": "V0.264 需要真实参与者继续现场监督试用：P02 还需 3 次低风险一般问题；P03 还需 3 次低风险一般问题。不要输入姓名、联络方式、证件、秘密、医疗、法律或交易决策资料。"
+  "required_decision": "三名化名参与者均已完成至少三次低风险现场监督会话；可以进入独立质量复核，但仍不得开放公开服务。"
 }

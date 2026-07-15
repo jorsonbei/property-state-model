@@ -1,0 +1,52 @@
+{
+  "schema_version": "psm_v0_265_structured_feedback_contract_v1",
+  "version": "PSM_V0.265",
+  "parent_promotion": {
+    "path": "runtime/v0_264_supervised_pilot_promotion_manifest.json",
+    "canonical_sha256": "2fc17bb6cc353ecc8ac52d04de231b11eb8d574cc808f27e8eeb94271202ab9e"
+  },
+  "scope": {
+    "participant_ids": ["P01", "P02", "P03"],
+    "required_rated_turns_per_participant": 3,
+    "new_supervised_low_risk_turn_required": true,
+    "eligible_turn_not_before_utc": "2026-07-15T10:31:00+00:00",
+    "operator_physical_supervision_required": true
+  },
+  "fields": {
+    "helpfulness": [1, 2, 3, 4, 5],
+    "clarity": [1, 2, 3, 4, 5],
+    "state_alignment": ["yes", "partial", "no"],
+    "issue_category": [
+      "none",
+      "missed_intent",
+      "possible_factual_error",
+      "unclear",
+      "too_verbose",
+      "too_guarded",
+      "unsafe_or_inappropriate"
+    ],
+    "free_text_allowed": false
+  },
+  "retention": {
+    "structured_feedback_days": 7,
+    "raw_prompt_days": 0,
+    "raw_answer_days": 0,
+    "withdrawal_deletes_participant_feedback": true
+  },
+  "quality_gate": {
+    "median_helpfulness_minimum": 4,
+    "median_clarity_minimum": 4,
+    "minimum_yes_or_partial_alignment_ratio": 0.6666666667,
+    "maximum_no_alignment_events": 0,
+    "maximum_severe_issue_events": 0
+  },
+  "release_boundary": {
+    "feedback_is_subjective_pilot_signal_only": true,
+    "public_service_allowed": false,
+    "privacy_compliance_claimed": false,
+    "production_readiness_claimed": false,
+    "training_on_feedback_allowed": false,
+    "rule_replacement_allowed": false,
+    "external_release_authority": false
+  }
+}

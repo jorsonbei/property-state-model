@@ -1,0 +1,61 @@
+{
+  "schema_version": "psm_v0_264_supervised_pilot_browser_regression_v1",
+  "base_url": "http://127.0.0.1:8765",
+  "passed": true,
+  "participant_chat_messages_sent": false,
+  "invitation_codes_printed_or_rendered": false,
+  "desktop": {
+    "publicStatus": {
+      "statusCode": 200,
+      "privateFieldPresent": false,
+      "trialActive": true,
+      "stopped": false,
+      "completedParticipants": 3,
+      "gatePassed": true,
+      "creditedTurns": [
+        3,
+        3,
+        3
+      ],
+      "publicServiceAllowed": false
+    },
+    "layout": {
+      "scrollWidth": 1440,
+      "innerWidth": 1440,
+      "cardsInsideViewport": true
+    },
+    "consoleErrors": 0
+  },
+  "mobile": {
+    "publicStatus": {
+      "statusCode": 200,
+      "privateFieldPresent": false,
+      "trialActive": true,
+      "stopped": false,
+      "completedParticipants": 3,
+      "gatePassed": true,
+      "creditedTurns": [
+        3,
+        3,
+        3
+      ],
+      "publicServiceAllowed": false
+    },
+    "layout": {
+      "scrollWidth": 390,
+      "innerWidth": 390,
+      "cardsInsideViewport": true
+    },
+    "consoleErrors": 0
+  },
+  "checks": {
+    "all_three_participants_credited_three_turns": true,
+    "public_progress_gate_passed": true,
+    "invitation_codes_masked": true,
+    "public_status_redacted": true,
+    "public_service_closed": true,
+    "desktop_overflow": false,
+    "mobile_overflow": false,
+    "console_errors": 0
+  }
+}

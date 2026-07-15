@@ -1,0 +1,79 @@
+{
+  "schema_version": "psm_v0_265_structured_feedback_browser_regression_v1",
+  "base_url": "http://127.0.0.1:8765",
+  "passed": true,
+  "human_participant_actions_executed": false,
+  "backend_feedback_submitted": false,
+  "invitation_codes_printed_or_rendered": false,
+  "desktop_enrollment": {
+    "publicProgress": {
+      "status": 200,
+      "completedParticipants": 0,
+      "totalFeedbackEvents": 0,
+      "coverageGatePassed": false,
+      "participantProgress": [
+        "0/3",
+        "0/3",
+        "0/3"
+      ],
+      "privateMaterialPresent": false,
+      "publicServiceAllowed": false
+    },
+    "layout": {
+      "scrollWidth": 1440,
+      "innerWidth": 1440,
+      "cardsInsideViewport": true
+    },
+    "consoleErrors": 0
+  },
+  "mobile_enrollment": {
+    "publicProgress": {
+      "status": 200,
+      "completedParticipants": 0,
+      "totalFeedbackEvents": 0,
+      "coverageGatePassed": false,
+      "participantProgress": [
+        "0/3",
+        "0/3",
+        "0/3"
+      ],
+      "privateMaterialPresent": false,
+      "publicServiceAllowed": false
+    },
+    "layout": {
+      "scrollWidth": 390,
+      "innerWidth": 390,
+      "cardsInsideViewport": true
+    },
+    "consoleErrors": 0
+  },
+  "desktop_feedback": {
+    "layout": {
+      "scrollWidth": 1280,
+      "innerWidth": 1280
+    },
+    "consoleErrors": 0,
+    "fixedFieldCount": 4,
+    "freeTextFieldPresent": false
+  },
+  "mobile_feedback": {
+    "layout": {
+      "scrollWidth": 390,
+      "innerWidth": 390
+    },
+    "consoleErrors": 0,
+    "fixedFieldCount": 4,
+    "freeTextFieldPresent": false
+  },
+  "checks": {
+    "v0_264_pilot_complete": true,
+    "v0_265_feedback_progress_zero_of_three": true,
+    "fixed_feedback_fields": 4,
+    "free_text_field_present": false,
+    "public_progress_redacted": true,
+    "public_service_closed": true,
+    "desktop_overflow": false,
+    "mobile_overflow": false,
+    "console_errors": 0
+  }
+}

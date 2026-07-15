@@ -2,10 +2,10 @@
   "schema_version": "psm_public_runtime_snapshot_v1",
   "project_status": {
     "updated_from_local_artifacts": true,
-    "current_version": "psm_v0.263",
+    "current_version": "psm_v0.264",
     "source_evidence_version": "psm_v0.251",
-    "previous_formal_version": "psm_v0.262",
-    "completed_result": "three_person_supervised_trial_enrollment_completed",
+    "previous_formal_version": "psm_v0.263",
+    "completed_result": "three_person_content_free_supervised_pilot_complete",
     "family": {
       "family_id": "v251_independent_chat_golden_blind_set_boundary_adversarial",
       "case_pack": "case_packs/v0_251_independent_chat_golden_blind_set_boundary_adversarial_cases.json",
@@ -244,8 +244,8 @@
       "rule_replacement_allowed": false
     },
     "next_stage": {
-      "version": "PSM_V0.264",
-      "objective": "Run a bounded supervised pilot across all three enrolled pseudonymous participants. Require at least three low-risk general turns per participant, retain only content-free seven-day operational metadata, collect no direct identity or raw chat content, and stop without automatic resume on any prohibited, privacy, consent, supervision, or provider-boundary event.",
+      "version": "PSM_V0.265",
+      "objective": "Collect structured content-free participant feedback on new supervised low-risk turns. Require three rated turns per participant using fixed helpfulness, clarity, state-alignment, and issue-category fields; allow no free text, direct identity, raw prompt or answer retention, external participant-content calls, automatic training, or public release claims.",
       "blocked": true,
       "requires_user_input": true
     },
@@ -259,7 +259,7 @@
       "candidate_taxonomy": "taxonomy_out/psm_v0.251_candidate_taxonomy.json",
       "candidate_regression_fixtures": "fixture_out/psm_v0.251_candidate_regression_fixtures.json",
       "taxonomy_delta": "taxonomy_delta_out/psm_v0.251_taxonomy_delta.json",
-      "project_status": "project_status_out/psm_v0.263_project_status.json",
+      "project_status": "project_status_out/psm_v0.264_project_status.json",
       "regression": "regression_out/psm_v0.251_regression_check.json",
       "independent_chat_gate": "runtime/v0_251_wave_g_external_semantic_judge.json",
       "model_selection": "runtime/v0_251_base_upgrade_pairwise_gemini_pro_report.json",
@@ -331,7 +331,13 @@
       "v0_263_completed_browser": "runtime/v0_263_completed_enrollment_browser_regression/report.json",
       "v0_263_completed_docker": "runtime/v0_263_completed_enrollment_docker_boundary.json",
       "v0_263_checkpoint": "runtime/v0_263_participant_enrollment_checkpoint.json",
-      "v0_263_promotion_manifest": "runtime/v0_263_enrollment_promotion_manifest.json"
+      "v0_263_promotion_manifest": "runtime/v0_263_enrollment_promotion_manifest.json",
+      "v0_264_contract": "benchmarks/v0_264_supervised_pilot_contract.json",
+      "v0_264_gate": "runtime/v0_264_supervised_pilot_gate.json",
+      "v0_264_browser": "runtime/v0_264_supervised_pilot_browser_regression/report.json",
+      "v0_264_docker": "runtime/v0_264_supervised_pilot_docker_boundary.json",
+      "v0_264_checkpoint": "runtime/v0_264_supervised_pilot_checkpoint.json",
+      "v0_264_promotion_manifest": "runtime/v0_264_supervised_pilot_promotion_manifest.json"
     },
     "regression": {
       "stem": "psm_v0.251",
@@ -643,6 +649,24 @@
       "raw_prompts_persisted": 0,
       "participant_content_external_api_calls": 0,
       "completion_gate_sha256": "315423634502502e3be45694163e361a112365626a6d2987fea83037dcd2cedf"
+    },
+    "v0_264_supervised_pilot_gate": {
+      "decision": "three_person_supervised_pilot_complete",
+      "passed": true,
+      "participant_count": 3,
+      "required_turns_per_participant": 3,
+      "completed_participants": 3,
+      "total_content_free_low_risk_events": 20,
+      "credited_turns": [
+        3,
+        3,
+        3
+      ],
+      "rejected_events": 0,
+      "raw_prompts_persisted": 0,
+      "participant_content_external_api_calls": 0,
+      "gate_sha256": "2a48d87403c9715e2fe77d9c22f7700deb857670a4b984b6d4ec7e095d7bde0b",
+      "contract_sha256": "32f937af055a526bebb18829943a81421326084946e973ecb5acb20a0ab1f1dd"
     }
   },
   "optional_project_status": {

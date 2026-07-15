@@ -1,0 +1,48 @@
+{
+  "schema_version": "psm_v0_264_supervised_pilot_promotion_manifest_v1",
+  "version": "PSM_V0.264",
+  "promoted_at": "2026-07-15",
+  "promoted": true,
+  "decision": "three_person_supervised_pilot_complete",
+  "formal_core_source": "PSM_V0.251",
+  "formal_core_records": 2228,
+  "pilot_gate": {
+    "decision": "three_person_supervised_pilot_complete",
+    "passed": true,
+    "participant_count": 3,
+    "required_turns_per_participant": 3,
+    "completed_participants": 3,
+    "total_content_free_low_risk_events": 20,
+    "credited_turns": [
+      3,
+      3,
+      3
+    ],
+    "rejected_events": 0,
+    "raw_prompts_persisted": 0,
+    "participant_content_external_api_calls": 0,
+    "gate_sha256": "2a48d87403c9715e2fe77d9c22f7700deb857670a4b984b6d4ec7e095d7bde0b",
+    "contract_sha256": "32f937af055a526bebb18829943a81421326084946e973ecb5acb20a0ab1f1dd"
+  },
+  "evidence": {
+    "contract": "benchmarks/v0_264_supervised_pilot_contract.json",
+    "gate": "runtime/v0_264_supervised_pilot_gate.json",
+    "browser": "runtime/v0_264_supervised_pilot_browser_regression/report.json",
+    "docker": "runtime/v0_264_supervised_pilot_docker_boundary.json"
+  },
+  "release_boundary": {
+    "supervised_invite_only_trial_active": true,
+    "public_service_allowed": false,
+    "privacy_compliance_claimed": false,
+    "production_readiness_claimed": false,
+    "training_on_trial_data_allowed": false,
+    "rule_replacement_allowed": false,
+    "external_release_authority": false
+  },
+  "next_stage": {
+    "version": "PSM_V0.265",
+    "objective": "Collect structured content-free participant feedback on new supervised low-risk turns. Require three rated turns per participant using fixed helpfulness, clarity, state-alignment, and issue-category fields; allow no free text, direct identity, raw prompt or answer retention, external participant-content calls, automatic training, or public release claims.",
+    "blocked": true,
+    "requires_user_input": true
+  }
+}

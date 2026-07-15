@@ -1,0 +1,85 @@
+{
+  "schema_version": "psm_v0_265_structured_feedback_gate_v1",
+  "version": "PSM_V0.265",
+  "parent_version": "PSM_V0.264",
+  "decision": "awaiting_structured_participant_feedback",
+  "passed": false,
+  "checks": {
+    "parent_v0_264_promoted": true,
+    "parent_manifest_hash_locked": true,
+    "feedback_state_valid": true,
+    "feedback_state_private_only": true,
+    "retention_seven_days": true,
+    "new_turn_boundary_locked": true,
+    "fixed_fields_only": true,
+    "raw_content_not_persisted": true,
+    "participant_content_external_calls_zero": true,
+    "browser_evidence_passed_without_participant_impersonation": true,
+    "docker_private_state_boundary_passed": true,
+    "three_rated_turns_per_participant": false,
+    "quality_thresholds_passed": false
+  },
+  "progress": {
+    "schema_version": "psm_v0_265_feedback_progress_v1",
+    "required_feedback_per_participant": 3,
+    "completed_participants": 0,
+    "participant_count": 3,
+    "total_feedback_events": 0,
+    "coverage_gate_passed": false,
+    "participants": [
+      {
+        "participant_id": "P01",
+        "submitted": 0,
+        "credited": 0,
+        "required": 3,
+        "complete": false
+      },
+      {
+        "participant_id": "P02",
+        "submitted": 0,
+        "credited": 0,
+        "required": 3,
+        "complete": false
+      },
+      {
+        "participant_id": "P03",
+        "submitted": 0,
+        "credited": 0,
+        "required": 3,
+        "complete": false
+      }
+    ],
+    "release_boundary": {
+      "public_service_allowed": false,
+      "training_on_feedback_allowed": false,
+      "external_release_authority": false
+    }
+  },
+  "quality": {
+    "evaluated": false,
+    "passed": false,
+    "median_helpfulness": null,
+    "median_clarity": null,
+    "yes_or_partial_alignment_ratio": null,
+    "no_alignment_events": 0,
+    "severe_issue_events": 0,
+    "threshold_checks": null
+  },
+  "privacy_evidence": {
+    "feedback_events": 0,
+    "free_text_events": 0,
+    "raw_prompt_events": 0,
+    "raw_answer_events": 0,
+    "participant_content_external_api_calls": 0,
+    "validation_errors": []
+  },
+  "release_boundary": {
+    "feedback_is_subjective_pilot_signal_only": true,
+    "public_service_allowed": false,
+    "privacy_compliance_claimed": false,
+    "production_readiness_claimed": false,
+    "training_on_feedback_allowed": false,
+    "rule_replacement_allowed": false,
+    "external_release_authority": false
+  }
+}

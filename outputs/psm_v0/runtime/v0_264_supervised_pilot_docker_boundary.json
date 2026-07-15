@@ -1,0 +1,34 @@
+{
+  "schema_version": "psm_v0_264_supervised_pilot_docker_boundary_v1",
+  "passed": true,
+  "checks": {
+    "host_status_available": true,
+    "host_pilot_gate_passed": true,
+    "host_public_service_closed": true,
+    "private_values_absent_from_tracked_files": true,
+    "docker_status_available": true,
+    "docker_private_state_absent": true,
+    "docker_enrollment_api_unavailable": true,
+    "docker_trial_chat_rejected": true,
+    "docker_public_service_closed": true,
+    "docker_localhost_only": true
+  },
+  "tracked_private_secret_hits": 0,
+  "host": {
+    "version": "PSM V0.264",
+    "completed_participants": 3,
+    "credited_turns": [
+      3,
+      3,
+      3
+    ],
+    "pilot_gate_passed": true
+  },
+  "docker": {
+    "version": "PSM V0.264",
+    "private_state_present": false,
+    "enrollment_api_status": 404,
+    "trial_chat_status": 409,
+    "public_service_allowed": false
+  }
+}

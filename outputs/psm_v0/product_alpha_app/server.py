@@ -5,6 +5,7 @@ import json
 import mimetypes
 import os
 import re
+import secrets
 import sys
 import threading
 import time
@@ -36,6 +37,15 @@ from psm_v0.participant_enrollment import (  # noqa: E402
     validate_trial_access,
     write_private_state,
     write_public_checkpoint,
+)
+from psm_v0.participant_feedback import (  # noqa: E402
+    FeedbackError,
+    delete_participant_feedback,
+    feedback_token_for_event,
+    load_feedback_state,
+    public_feedback_progress,
+    submit_feedback,
+    write_feedback_state,
 )
 from psm_v0.pipeline import run_pipeline  # noqa: E402
 from psm_v0.psm_gate_controller import apply_psm_gate  # noqa: E402
@@ -77,6 +87,12 @@ ENROLLMENT_STATE_PATH = Path(
 )
 ENROLLMENT_PROTOCOL_PATH = PSM_ROOT / "benchmarks" / "v0_262_invite_only_external_trial_protocol.json"
 ENROLLMENT_CHECKPOINT_PATH = PSM_ROOT / "runtime" / "v0_263_participant_enrollment_checkpoint.json"
+FEEDBACK_STATE_PATH = Path(
+    os.environ.get(
+        "PSM_V0_265_FEEDBACK_STATE",
+        str(PSM_ROOT / "private_runtime" / "v0_265" / "feedback_state.json"),
+    )
+)
 ENROLLMENT_LOCK = threading.Lock()
 
 
@@ -92,7 +108,7 @@ def main() -> None:
 
 
 class Handler(BaseHTTPRequestHandler):
-    server_version = "PSMProductAlpha/0.263"
+    server_version = "PSMProductAlpha/0.264"
 
     def do_GET(self) -> None:  # noqa: N802
         parsed = urlparse(self.path)
@@ -115,6 +131,12 @@ class Handler(BaseHTTPRequestHandler):
             try:
                 self.write_json(load_operator_cards(), no_store=True)
             except (EnrollmentError, FileNotFoundError) as exc:
+                self.write_json({"error": str(exc)}, status=404, no_store=True)
+            return
+        if parsed.path == "/api/trial-feedback":
+            try:
+                self.write_json(load_feedback_api_status(), no_store=True)
+            except (EnrollmentError, FeedbackError, FileNotFoundError) as exc:
                 self.write_json({"error": str(exc)}, status=404, no_store=True)
             return
         static_name = {
@@ -158,6 +180,7 @@ class Handler(BaseHTTPRequestHandler):
             "/api/chat",
             "/api/trial-enrollment/action",
             "/api/trial-chat",
+            "/api/trial-feedback",
         }:
             self.send_error(404)
             return
@@ -168,6 +191,9 @@ class Handler(BaseHTTPRequestHandler):
                 return
             if parsed.path == "/api/trial-chat":
                 self.write_json(run_trial_chat_turn(payload), no_store=True)
+                return
+            if parsed.path == "/api/trial-feedback":
+                self.write_json(handle_trial_feedback(payload), no_store=True)
                 return
             scenario = str(payload.get("scenario") or "review")
             if parsed.path == "/api/chat":
@@ -183,7 +209,7 @@ class Handler(BaseHTTPRequestHandler):
             if not text:
                 text = SCENARIOS.get(scenario, SCENARIOS["review"])
             self.write_json(run_demo_case(text, scenario))
-        except (EnrollmentError, FileNotFoundError) as exc:
+        except (EnrollmentError, FeedbackError, FileNotFoundError) as exc:
             self.write_json({"error": str(exc), "trial_active": False}, status=409, no_store=True)
         except Exception as exc:  # pragma: no cover - local demo should surface errors.
             self.write_json({"error": str(exc)}, status=500, no_store=True)
@@ -252,7 +278,73 @@ def handle_enrollment_action(payload: dict) -> dict:
         )
         write_private_state(ENROLLMENT_STATE_PATH, updated, protocol)
         write_public_checkpoint(ENROLLMENT_CHECKPOINT_PATH, updated)
+        if payload["action"] == "revoke" and FEEDBACK_STATE_PATH.exists():
+            feedback = delete_participant_feedback(
+                load_feedback_state(FEEDBACK_STATE_PATH),
+                str(payload["participant_id"]),
+            )
+            write_feedback_state(FEEDBACK_STATE_PATH, feedback)
     return load_enrollment_api_status()
+
+
+def load_feedback_api_status() -> dict:
+    with ENROLLMENT_LOCK:
+        load_enrollment_state()
+        return public_feedback_progress(load_feedback_state(FEEDBACK_STATE_PATH))
+
+
+def handle_trial_feedback(payload: dict) -> dict:
+    expected = {
+        "participant_id",
+        "invitation_code",
+        "feedback_token",
+        "helpfulness",
+        "clarity",
+        "state_alignment",
+        "issue_category",
+    }
+    if set(payload) != expected:
+        raise FeedbackError("trial feedback fields are not closed")
+    participant_id = str(payload["participant_id"])
+    invitation_code = str(payload["invitation_code"])
+    with ENROLLMENT_LOCK:
+        enrollment, protocol = load_enrollment_state()
+        access_errors = validate_trial_access(
+            enrollment,
+            participant_id=participant_id,
+            invitation_code=invitation_code,
+            protocol=protocol,
+        )
+        if access_errors:
+            raise FeedbackError("trial feedback gate rejected the request: " + "; ".join(access_errors))
+        helpfulness = payload["helpfulness"]
+        clarity = payload["clarity"]
+        if (
+            not isinstance(helpfulness, int)
+            or isinstance(helpfulness, bool)
+            or not isinstance(clarity, int)
+            or isinstance(clarity, bool)
+        ):
+            raise FeedbackError("feedback scores must be integers")
+        feedback = submit_feedback(
+            load_feedback_state(FEEDBACK_STATE_PATH),
+            enrollment_state=enrollment,
+            participant_id=participant_id,
+            feedback_token=str(payload["feedback_token"]),
+            helpfulness=helpfulness,
+            clarity=clarity,
+            state_alignment=str(payload["state_alignment"]),
+            issue_category=str(payload["issue_category"]),
+        )
+        write_feedback_state(FEEDBACK_STATE_PATH, feedback)
+    return {
+        "schema_version": "psm_v0_265_trial_feedback_response_v1",
+        "accepted": True,
+        "progress": public_feedback_progress(feedback),
+        "free_text_collected": False,
+        "training_on_feedback_allowed": False,
+        "public_service_allowed": False,
+    }
 
 
 def run_trial_chat_turn(payload: dict) -> dict:
@@ -338,6 +430,7 @@ def run_trial_chat_turn(payload: dict) -> dict:
         )
         if access_errors:
             raise EnrollmentError("trial authorization changed before delivery: " + "; ".join(access_errors))
+        event_id = f"trial-{secrets.token_hex(8)}"
         updated = record_prompt_audit(
             current,
             participant_id=participant_id,
@@ -345,6 +438,7 @@ def run_trial_chat_turn(payload: dict) -> dict:
             decision=prompt_decisions[-1],
             latency_ms=elapsed_ms,
             token_count=max(1, (len(answer) + 3) // 4),
+            event_id=event_id,
         )
         write_private_state(ENROLLMENT_STATE_PATH, updated, protocol)
     return {
@@ -356,6 +450,9 @@ def run_trial_chat_turn(payload: dict) -> dict:
             "raw_prompt_persisted": False,
             "participant_content_sent_to_external_api": False,
             "public_service_allowed": False,
+            "feedback_token": feedback_token_for_event(updated, event_id),
+            "structured_feedback_required": True,
+            "free_text_feedback_allowed": False,
         },
     }
 
@@ -1825,6 +1922,12 @@ def to_display_version(version: str) -> str:
 
 
 def humanize_stage_objective(objective: str) -> str:
+    if "structured content-free participant feedback" in objective.casefold():
+        return (
+            "在现场监督下收集三名参与者对新低风险回答的结构化质量回馈，每人三次；"
+            "为保护隐私只保留固定评分，不收集自由文字、身份或聊天原文，不把参与者内容提交外部 API，"
+            "也不用于自动训练或公开发布"
+        )
     if "chat-quality" in objective or "assistant-turn history" in objective:
         return (
             "建立聊天回答质量与事实落地边界，补齐项目进度、路线图、助手历史、"
