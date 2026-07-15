@@ -2,7 +2,7 @@ PYTHON ?= python3
 NPM ?= npm
 PSM_ROOT := outputs/psm_v0
 
-.PHONY: check test serve inventory sync-runtime route-v253-eval route-v253-docker state-v254-eval state-v254-docker alpha-v255-eval alpha-v255-docker annotation-v256-eval annotation-v256-docker encoder-v257-eval encoder-v257-docker calibrate-v258-eval calibrate-v258-docker sigma-v259-eval sigma-v259-docker readiness-v260-review readiness-v260-docker repair-v261-eval judge-v261-openai promote-v261 external-v261-docker protocol-v262-eval judge-v262-openai promote-v262 external-v262-docker prepare-v263 enrollment-v263-docker browser-install browser-regression browser-regression-real browser-regression-v253 browser-regression-v254 browser-regression-v255 browser-regression-v256 browser-regression-v257 browser-regression-v258 browser-regression-v259 browser-regression-v260 browser-regression-v261 browser-regression-v262 browser-regression-v263-enrollment judge-v251-external judge-v251-external-c judge-v251-external-d judge-v251-external-e judge-v251-external-f judge-v251-external-g docker-config docker-build docker-up
+.PHONY: check test serve inventory sync-runtime route-v253-eval route-v253-docker state-v254-eval state-v254-docker alpha-v255-eval alpha-v255-docker annotation-v256-eval annotation-v256-docker encoder-v257-eval encoder-v257-docker calibrate-v258-eval calibrate-v258-docker sigma-v259-eval sigma-v259-docker readiness-v260-review readiness-v260-docker repair-v261-eval judge-v261-openai promote-v261 external-v261-docker protocol-v262-eval judge-v262-openai promote-v262 external-v262-docker prepare-v263 enrollment-v263-eval enrollment-v263-docker enrollment-v263-completed-docker promote-v263 pilot-v264-eval browser-install browser-regression browser-regression-real browser-regression-v253 browser-regression-v254 browser-regression-v255 browser-regression-v256 browser-regression-v257 browser-regression-v258 browser-regression-v259 browser-regression-v260 browser-regression-v261 browser-regression-v262 browser-regression-v263-enrollment browser-regression-v263-completed judge-v251-external judge-v251-external-c judge-v251-external-d judge-v251-external-e judge-v251-external-f judge-v251-external-g docker-config docker-build docker-up
 
 check:
 	$(PYTHON) scripts/verify_project.py
@@ -94,8 +94,20 @@ external-v262-docker:
 prepare-v263:
 	PYTHONPATH=$(PSM_ROOT) $(PYTHON) scripts/prepare_v0_263_participant_enrollment.py
 
+enrollment-v263-eval:
+	PYTHONPATH=$(PSM_ROOT) $(PYTHON) scripts/evaluate_v0_263_completed_enrollment.py
+
 enrollment-v263-docker:
 	$(PYTHON) scripts/verify_v0_263_enrollment_boundary.py
+
+enrollment-v263-completed-docker:
+	$(PYTHON) scripts/verify_v0_263_completed_enrollment_docker.py
+
+promote-v263:
+	PYTHONPATH=$(PSM_ROOT) $(PYTHON) scripts/promote_v0_263_participant_enrollment.py
+
+pilot-v264-eval:
+	PYTHONPATH=$(PSM_ROOT) $(PYTHON) scripts/evaluate_v0_264_supervised_pilot.py
 
 browser-install:
 	$(NPM) install
@@ -196,6 +208,10 @@ browser-regression-v262:
 browser-regression-v263-enrollment:
 	PSM_BASE_URL=$${PSM_BASE_URL:-http://127.0.0.1:8765} \
 	node scripts/browser_regression_v263_enrollment.cjs
+
+browser-regression-v263-completed:
+	PSM_BASE_URL=$${PSM_BASE_URL:-http://127.0.0.1:8765} \
+	node scripts/browser_regression_v263_completed_enrollment.cjs
 
 judge-v251-external: judge-v251-external-c judge-v251-external-d judge-v251-external-e judge-v251-external-f judge-v251-external-g
 

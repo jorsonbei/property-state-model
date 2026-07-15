@@ -9,7 +9,7 @@ PSM is an experimental state-first AI control layer. It routes a request through
 - Deterministic state pipeline: `Q -> Omega -> phi -> Delta sigma -> Pi -> eta -> B_sigma -> Sigma+`.
 - Candidate generation adapters, lexical auditing, deterministic gating, failure ledger, and regression artifacts.
 - Local chat alpha backed by Ollama.
-- Current public baseline: `PSM V0.262` (formal 2228-record core evidence source: `PSM V0.251`).
+- Current public baseline: `PSM V0.263` (formal 2228-record core evidence source: `PSM V0.251`).
 - V0.251's fresh externally authored Wave G passed 20/20 under an independent external semantic judge; usefulness, safety, correctness, relevance, boundary quality, and hallucination control were each 1.0000 on that frozen synthetic blind wave.
 - V0.252 adds a stable internal chat-product gate with cancel, timeout, retry, recovery, progressive display, hidden debug evidence, and desktop/mobile/real-backend browser regression.
 - V0.253 replaces passive Omega route labels with four executable local/read-only evidence adapters and a fail-closed provenance/failure-ledger contract.
@@ -21,8 +21,9 @@ PSM is an experimental state-first AI control layer. It routes a request through
 - V0.259 adds a Sigma+ delivery contract that keeps natural answers separate from developer traces, requires provenance or explicit downgrades for strong claims, and retains calibrated shadow observations without granting them output authority.
 - V0.260 completes a frozen internal-readiness review: 2228/2228 formal cases, 20/20 independent blind rows, 13/13 internal Alpha scenarios, zero critical fact hallucinations or safety false negatives, and an `internal_trial_ready` decision limited to local single-user use.
 - V0.261 retains an initial failed OpenAI contract review, repairs the annotation boundary as a closed-world V2 schema, passes ten local mutation checks including nested leaf-type and extra-target rejection with zero candidate leakage or protected backflow, and then passes a five-question `gpt-5.4` external rejudge with no remaining findings. External users and release authority remain closed.
-- V0.262 freezes the approved conservative invite-only trial protocol for 3-5 operator-supervised adults, rejects sensitive and professional-decision prompts, retains no raw participant chat, keeps content out of external APIs, deletes content-free metadata after seven days, and enforces a USD 20 monthly API reservation cap. The initial independent protocol review failed on two enrollment/notice controls; after repair, the final seven-question `gpt-5.4` review passes with no remaining findings. No real participant is enrolled and the trial remains inactive.
-- V0.263 preparation freezes the user's selection of exactly three participants without claiming they are present, adult, or consenting. It generates P01-P03 invitations in owner-only local storage, provides the strict enrollment UI, stops all sessions on sensitive-data detection or withdrawal, and proves that Git and Docker contain no private invitation material. Human enrollment counts remain 0/3 and the trial is inactive.
+- V0.262 freezes the approved conservative invite-only trial protocol for 3-5 operator-supervised adults, rejects sensitive and professional-decision prompts, retains no raw participant chat, keeps content out of external APIs, deletes content-free metadata after seven days, and enforces a USD 20 monthly API reservation cap. The initial independent protocol review failed on two enrollment/notice controls; after repair, the final seven-question `gpt-5.4` review passes with no remaining findings.
+- V0.263 records three complete operator-attested enrollment sequences, three passing private access checks, and the first content-free supervised low-risk session evidence. Desktop/mobile and Docker boundaries pass; invitation values remain outside Git and Docker. This activates only the local supervised invite-only trial, not a public service or privacy-compliance claim.
+- V0.264 is staged as a bounded three-person pilot. Each pseudonymous participant must complete at least three low-risk general turns; current progress is available on the local operator page without storing raw prompts or answers.
 
 This repository is an experimental research and engineering system. It is not a medical, legal, investment, production-release, or external-user authorization system. Passing synthetic regressions does not prove open-domain generalization.
 
@@ -73,7 +74,7 @@ make browser-regression-v263-enrollment
 make enrollment-v263-docker
 ```
 
-The V0.263 local operator page is `http://127.0.0.1:8765/trial-enrollment`. It is only for use when all three invited adults and the operator are physically present. Do not enter or store names, contact details, identity documents, or other direct identifiers.
+The V0.264 local operator page is `http://127.0.0.1:8765/trial-enrollment`. It shows each pseudonymous participant's `x/3` low-risk turn progress. It is only for use while the invited adult and operator are physically present. Do not enter or store names, contact details, identity documents, secrets, or medical, legal, and trading-decision data.
 
 Generate a read-only inventory of the local evidence store without moving or deleting artifacts:
 
@@ -118,7 +119,7 @@ make judge-v251-external
 
 - Human recovery point: [`outputs/psm_v0/CURRENT_STATUS.md`](outputs/psm_v0/CURRENT_STATUS.md)
 - Architecture: [`outputs/psm_v0/PSM_V0_Blueprint.md`](outputs/psm_v0/PSM_V0_Blueprint.md)
-- Current execution roadmap: [`outputs/psm_v0/roadmap_out/PSM_Invite_Only_Trial_Roadmap_V0.262_to_V0.263.md`](outputs/psm_v0/roadmap_out/PSM_Invite_Only_Trial_Roadmap_V0.262_to_V0.263.md)
+- Current execution roadmap: [`outputs/psm_v0/roadmap_out/PSM_Supervised_Pilot_Roadmap_V0.263_to_V0.264.md`](outputs/psm_v0/roadmap_out/PSM_Supervised_Pilot_Roadmap_V0.263_to_V0.264.md)
 
 ## Open-source boundary
 

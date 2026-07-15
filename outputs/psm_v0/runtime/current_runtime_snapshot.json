@@ -2,10 +2,10 @@
   "schema_version": "psm_public_runtime_snapshot_v1",
   "project_status": {
     "updated_from_local_artifacts": true,
-    "current_version": "psm_v0.262",
+    "current_version": "psm_v0.263",
     "source_evidence_version": "psm_v0.251",
-    "previous_formal_version": "psm_v0.261",
-    "completed_result": "invite_only_external_trial_protocol_ready_participants_not_enrolled",
+    "previous_formal_version": "psm_v0.262",
+    "completed_result": "three_person_supervised_trial_enrollment_completed",
     "family": {
       "family_id": "v251_independent_chat_golden_blind_set_boundary_adversarial",
       "case_pack": "case_packs/v0_251_independent_chat_golden_blind_set_boundary_adversarial_cases.json",
@@ -244,8 +244,8 @@
       "rule_replacement_allowed": false
     },
     "next_stage": {
-      "version": "PSM_V0.263",
-      "objective": "Enroll three to five real invited adults without collecting direct identity in project artifacts: create local pseudonymous invitations, complete operator adulthood verification, display the frozen notice, record explicit consent, and enable only supervised sessions. Do not activate the trial until every participant passes the enrollment gate.",
+      "version": "PSM_V0.264",
+      "objective": "Run a bounded supervised pilot across all three enrolled pseudonymous participants. Require at least three low-risk general turns per participant, retain only content-free seven-day operational metadata, collect no direct identity or raw chat content, and stop without automatic resume on any prohibited, privacy, consent, supervision, or provider-boundary event.",
       "blocked": true,
       "requires_user_input": true
     },
@@ -259,7 +259,7 @@
       "candidate_taxonomy": "taxonomy_out/psm_v0.251_candidate_taxonomy.json",
       "candidate_regression_fixtures": "fixture_out/psm_v0.251_candidate_regression_fixtures.json",
       "taxonomy_delta": "taxonomy_delta_out/psm_v0.251_taxonomy_delta.json",
-      "project_status": "project_status_out/psm_v0.262_project_status.json",
+      "project_status": "project_status_out/psm_v0.263_project_status.json",
       "regression": "regression_out/psm_v0.251_regression_check.json",
       "independent_chat_gate": "runtime/v0_251_wave_g_external_semantic_judge.json",
       "model_selection": "runtime/v0_251_base_upgrade_pairwise_gemini_pro_report.json",
@@ -325,7 +325,13 @@
       "v0_262_budget_ledger": "runtime/v0_262_api_budget_ledger.json",
       "v0_262_initial_external_review": "runtime/v0_262_openai_external_trial_protocol_judge_attempt_1_failed.json",
       "v0_262_final_external_review": "runtime/v0_262_openai_external_trial_protocol_judge.json",
-      "v0_262_checkpoint": "runtime/v0_262_external_trial_protocol_checkpoint.json"
+      "v0_262_checkpoint": "runtime/v0_262_external_trial_protocol_checkpoint.json",
+      "v0_263_selection_contract": "benchmarks/v0_263_three_participant_enrollment_contract.json",
+      "v0_263_completion_gate": "runtime/v0_263_completed_enrollment_gate.json",
+      "v0_263_completed_browser": "runtime/v0_263_completed_enrollment_browser_regression/report.json",
+      "v0_263_completed_docker": "runtime/v0_263_completed_enrollment_docker_boundary.json",
+      "v0_263_checkpoint": "runtime/v0_263_participant_enrollment_checkpoint.json",
+      "v0_263_promotion_manifest": "runtime/v0_263_enrollment_promotion_manifest.json"
     },
     "regression": {
       "stem": "psm_v0.251",
@@ -625,6 +631,18 @@
       "api_budget_reserved_usd": 4.0,
       "participant_content_external_calls": 0,
       "protocol_sha256": "e6b0f03e2115f783c6af39d3a7dcc9441a04bc7e936cc3f28e884e6a1acfb6b7"
+    },
+    "v0_263_enrollment_gate": {
+      "decision": "three_person_supervised_enrollment_complete",
+      "passed": true,
+      "selected_participants": 3,
+      "completed_receipts": 3,
+      "private_access_checks_passed": 3,
+      "content_free_session_events_at_promotion": 6,
+      "participants_with_session_events_at_promotion": 1,
+      "raw_prompts_persisted": 0,
+      "participant_content_external_api_calls": 0,
+      "completion_gate_sha256": "315423634502502e3be45694163e361a112365626a6d2987fea83037dcd2cedf"
     }
   },
   "optional_project_status": {

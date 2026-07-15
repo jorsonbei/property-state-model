@@ -1,0 +1,99 @@
+{
+  "schema_version": "psm_v0_263_completed_enrollment_browser_regression_v1",
+  "base_url": "http://127.0.0.1:8765",
+  "passed": true,
+  "human_enrollment_actions_executed": false,
+  "participant_chat_messages_sent": false,
+  "invitation_codes_printed_or_rendered": false,
+  "trial_active": true,
+  "desktop": {
+    "layout": {
+      "scrollWidth": 1440,
+      "innerWidth": 1440,
+      "cardsInsideViewport": true
+    },
+    "consoleErrors": 0,
+    "codeBoundary": {
+      "masked": true,
+      "privateValuesPresentOnlyInOperatorDom": true,
+      "noPrivateValueRendered": true
+    },
+    "publicBoundary": {
+      "statusCode": 200,
+      "containsInvitationCode": false,
+      "containsAuditSecret": false,
+      "counts": {
+        "invited": 3,
+        "adult_verified": 3,
+        "notice_displayed": 3,
+        "notice_acknowledged": 3,
+        "consented": 3,
+        "session_enabled": 3,
+        "revoked": 0
+      },
+      "trialActive": true,
+      "stopped": false,
+      "publicServiceAllowed": false,
+      "pilotProgress": {
+        "completedParticipants": 1,
+        "gatePassed": false,
+        "creditedTurns": [
+          3,
+          0,
+          0
+        ]
+      }
+    }
+  },
+  "mobile": {
+    "layout": {
+      "scrollWidth": 390,
+      "innerWidth": 390,
+      "cardsInsideViewport": true
+    },
+    "consoleErrors": 0,
+    "codeBoundary": {
+      "masked": true,
+      "privateValuesPresentOnlyInOperatorDom": true,
+      "noPrivateValueRendered": true
+    },
+    "publicBoundary": {
+      "statusCode": 200,
+      "containsInvitationCode": false,
+      "containsAuditSecret": false,
+      "counts": {
+        "invited": 3,
+        "adult_verified": 3,
+        "notice_displayed": 3,
+        "notice_acknowledged": 3,
+        "consented": 3,
+        "session_enabled": 3,
+        "revoked": 0
+      },
+      "trialActive": true,
+      "stopped": false,
+      "publicServiceAllowed": false,
+      "pilotProgress": {
+        "completedParticipants": 1,
+        "gatePassed": false,
+        "creditedTurns": [
+          3,
+          0,
+          0
+        ]
+      }
+    }
+  },
+  "checks": {
+    "three_completed_pseudonymous_cards": true,
+    "invitation_codes_masked": true,
+    "three_supervised_chat_entry_buttons_visible": true,
+    "all_human_counts_three": true,
+    "public_status_redacted": true,
+    "public_service_closed": true,
+    "v0_264_progress_visible": true,
+    "desktop_overflow": false,
+    "mobile_overflow": false,
+    "console_errors": 0
+  }
+}

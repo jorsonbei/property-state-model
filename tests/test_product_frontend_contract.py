@@ -79,6 +79,8 @@ class ProductFrontendContractTests(unittest.TestCase):
         self.assertIn("participant_explicit_opt_in", self.enrollment_javascript)
         self.assertIn("operator_supervision_attested", self.enrollment_javascript)
         self.assertIn("••••••••••••", self.enrollment_javascript)
+        self.assertIn("pilot_progress", self.enrollment_javascript)
+        self.assertIn("低風險會話", self.enrollment_html)
         self.assertIn('sessionStorage.removeItem("psmTrialInvitationCode")', self.enrollment_javascript)
         self.assertIn("grid-template-columns: repeat(3, minmax(0, 1fr))", self.enrollment_css)
 

@@ -1,0 +1,81 @@
+{
+  "schema_version": "psm_v0_264_supervised_pilot_gate_v1",
+  "version": "PSM_V0.264",
+  "passed": false,
+  "decision": "blocked_on_real_participant_turn_coverage",
+  "checks": {
+    "contract_schema_valid": true,
+    "parent_v0_263_promoted": true,
+    "parent_promotion_hash_locked": true,
+    "private_state_valid": true,
+    "exact_frozen_three_person_scope": true,
+    "operator_supervised_trial_active": true,
+    "audit_events_schema_valid": true,
+    "audit_events_content_free": true,
+    "no_rejected_or_prohibited_events": true,
+    "all_observed_events_low_risk_general": true,
+    "all_three_participants_meet_three_turn_minimum": false,
+    "release_authority_remains_closed": true
+  },
+  "progress": {
+    "schema_version": "psm_v0_264_supervised_pilot_progress_v1",
+    "required_turns_per_participant": 3,
+    "completed_participants": 1,
+    "participant_count": 3,
+    "total_observed_low_risk_turns": 6,
+    "gate_passed": false,
+    "participants": [
+      {
+        "participant_id": "P01",
+        "observed_turns": 6,
+        "credited_turns": 3,
+        "required_turns": 3,
+        "complete": true
+      },
+      {
+        "participant_id": "P02",
+        "observed_turns": 0,
+        "credited_turns": 0,
+        "required_turns": 3,
+        "complete": false
+      },
+      {
+        "participant_id": "P03",
+        "observed_turns": 0,
+        "credited_turns": 0,
+        "required_turns": 3,
+        "complete": false
+      }
+    ]
+  },
+  "missing_turn_coverage": [
+    {
+      "participant_id": "P02",
+      "credited_turns": 0,
+      "required_turns": 3,
+      "remaining_turns": 3
+    },
+    {
+      "participant_id": "P03",
+      "credited_turns": 0,
+      "required_turns": 3,
+      "remaining_turns": 3
+    }
+  ],
+  "aggregate_evidence": {
+    "content_free_events": 6,
+    "allowed_low_risk_events": 6,
+    "rejected_events": 0,
+    "raw_prompts_persisted": 0,
+    "participant_content_external_api_calls": 0
+  },
+  "release_boundary": {
+    "supervised_invite_only_trial_active": true,
+    "public_service_allowed": false,
+    "privacy_compliance_claimed": false,
+    "production_readiness_claimed": false,
+    "training_on_trial_data_allowed": false,
+    "rule_replacement_allowed": false,
+    "external_release_authority": false
+  }
+}

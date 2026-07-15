@@ -3,7 +3,7 @@
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <title>物性AI · V0.263 登記</title>
+    <title>物性AI · V0.264 監督試用</title>
     <link rel="stylesheet" href="/styles.css" />
     <link rel="stylesheet" href="/trial-enrollment.css" />
   </head>
@@ -13,7 +13,7 @@
         <div class="brand-block">
           <span class="brand-mark">Σ</span>
           <div>
-            <h1>V0.263 三人登記</h1>
+            <h1>V0.264 三人監督試用</h1>
             <p id="enrollment-connection">本機邀請制 · 試用尚未啟動</p>
           </div>
         </div>
@@ -26,6 +26,7 @@
         <div><span>已確認</span><strong id="count-ack">0</strong></div>
         <div><span>已同意</span><strong id="count-consent">0</strong></div>
         <div><span>會話啟用</span><strong id="count-enabled">0</strong></div>
+        <div><span>試用達標</span><strong id="count-pilot">0/3</strong></div>
       </section>
 
       <section class="boundary-band" id="boundary-band" role="status" aria-live="polite">
@@ -74,6 +75,10 @@
           <li data-step="consent">明確同意</li>
           <li data-step="enable_session">監督會話</li>
         </ol>
+        <div class="pilot-progress" aria-label="低風險會話進度">
+          <span>低風險會話</span>
+          <strong class="pilot-turns">0/3</strong>
+        </div>
         <label class="attestation-row">
           <input class="attestation" type="checkbox" />
           <span class="attestation-text"></span>

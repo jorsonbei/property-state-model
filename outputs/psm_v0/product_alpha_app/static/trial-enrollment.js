@@ -79,6 +79,7 @@ function render(status) {
   $("count-ack").textContent = status.counts.notice_acknowledged;
   $("count-consent").textContent = status.counts.consented;
   $("count-enabled").textContent = status.counts.session_enabled;
+  $("count-pilot").textContent = `${status.pilot_progress.completed_participants}/3`;
   $("enrollment-connection").textContent = status.trial_active
     ? "本機邀請制 · 監督試用已啟動"
     : "本機邀請制 · 試用尚未啟動";
@@ -104,8 +105,12 @@ function renderParticipant(participant, status) {
   const card = fragment.querySelector(".participant-card");
   const code = state.cards.get(participant.participant_id) || "";
   const meta = ACTION_META[participant.current_step];
+  const pilot = status.pilot_progress.participants.find(
+    (item) => item.participant_id === participant.participant_id
+  );
   card.dataset.participantId = participant.participant_id;
   card.querySelector(".participant-id").textContent = participant.participant_id;
+  card.querySelector(".pilot-turns").textContent = `${pilot.credited_turns}/${pilot.required_turns}`;
   card.querySelector(".step-state").textContent = meta.state;
   const codeElement = card.querySelector(".invitation-code");
   codeElement.dataset.value = code;

@@ -1,0 +1,51 @@
+{
+  "schema_version": "psm_v0_263_completed_enrollment_docker_boundary_v1",
+  "passed": true,
+  "checks": {
+    "host_status_available": true,
+    "host_completed_three_person_gate": true,
+    "host_public_service_still_closed": true,
+    "public_checkpoint_redacted": true,
+    "private_runtime_gitignored": true,
+    "private_values_absent_from_tracked_files": true,
+    "docker_status_available": true,
+    "docker_private_state_absent": true,
+    "docker_enrollment_api_unavailable": true,
+    "docker_operator_cards_unavailable": true,
+    "docker_trial_chat_rejected": true,
+    "docker_supervised_trial_inactive": true,
+    "docker_public_service_closed": true,
+    "docker_localhost_only": true
+  },
+  "published_port": "127.0.0.1:8766",
+  "tracked_private_secret_hits": 0,
+  "host": {
+    "version": "PSM V0.263",
+    "counts": {
+      "invited": 3,
+      "adult_verified": 3,
+      "notice_displayed": 3,
+      "notice_acknowledged": 3,
+      "consented": 3,
+      "session_enabled": 3,
+      "revoked": 0
+    },
+    "trial_active": true
+  },
+  "docker": {
+    "version": "PSM V0.263",
+    "private_state_present": false,
+    "enrollment_api_status": 404,
+    "operator_cards_status": 403,
+    "trial_chat_status": 409,
+    "trial_active": false
+  },
+  "release_boundary": {
+    "supervised_invite_only_trial_active": true,
+    "public_service_allowed": false,
+    "privacy_compliance_claimed": false,
+    "training_on_trial_data_allowed": false,
+    "rule_replacement_allowed": false,
+    "external_release_authority": false
+  }
+}

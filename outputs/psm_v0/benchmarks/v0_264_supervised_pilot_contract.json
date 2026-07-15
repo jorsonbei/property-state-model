@@ -1,0 +1,44 @@
+{
+  "schema_version": "psm_v0_264_supervised_pilot_contract_v1",
+  "version": "PSM_V0.264",
+  "parent_promotion": {
+    "path": "runtime/v0_263_enrollment_promotion_manifest.json",
+    "canonical_sha256": "6dce3b98206ea8c8d78887ebc9e033dc4b93813d936dcd2a7135c537b5ac4641"
+  },
+  "scope": {
+    "participant_ids": ["P01", "P02", "P03"],
+    "required_allowed_low_risk_turns_per_participant": 3,
+    "operator_physical_supervision_required": true,
+    "unsupervised_or_remote_access_allowed": false
+  },
+  "data_boundary": {
+    "direct_identity_collection_allowed": false,
+    "raw_prompt_retention_days": 0,
+    "raw_answer_retention_days": 0,
+    "content_free_operational_metadata_days": 7,
+    "participant_content_external_api_allowed": false,
+    "trial_data_training_allowed": false
+  },
+  "admission": {
+    "allowed_categories": ["low_risk_general"],
+    "prohibited_or_unknown_data_stops_all_sessions": true,
+    "automatic_resume_allowed": false,
+    "revocation_deletes_participant_operational_events": true
+  },
+  "promotion_gate": {
+    "all_three_participants_meet_turn_minimum": true,
+    "rejected_or_prohibited_events": 0,
+    "raw_prompts_persisted": 0,
+    "participant_content_external_api_calls": 0,
+    "stopped": false
+  },
+  "release_boundary": {
+    "supervised_invite_only_trial_active": true,
+    "public_service_allowed": false,
+    "privacy_compliance_claimed": false,
+    "production_readiness_claimed": false,
+    "training_on_trial_data_allowed": false,
+    "rule_replacement_allowed": false,
+    "external_release_authority": false
+  }
+}

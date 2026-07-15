@@ -92,7 +92,7 @@ def main() -> None:
 
 
 class Handler(BaseHTTPRequestHandler):
-    server_version = "PSMProductAlpha/0.262"
+    server_version = "PSMProductAlpha/0.263"
 
     def do_GET(self) -> None:  # noqa: N802
         parsed = urlparse(self.path)
@@ -1699,7 +1699,8 @@ def load_project_context() -> dict:
         formal_version = summary["version"]
     next_version = to_display_version(str(next_stage.get("version") or "未定义"))
     next_objective = humanize_stage_objective(str(next_stage.get("objective") or "完成下一阶段验证"))
-    roadmap_source = "roadmap_out/PSM_Invite_Only_Trial_Roadmap_V0.262_to_V0.263.md"
+    roadmap_candidates = sorted((PSM_ROOT / "roadmap_out").glob("PSM_*_Roadmap_*.md"))
+    roadmap_source = str(roadmap_candidates[-1].relative_to(PSM_ROOT)) if roadmap_candidates else "CURRENT_STATUS.md"
     selection_path = PSM_ROOT / "runtime" / "chat_provider_selection.json"
     selection = load_json(selection_path) if selection_path.exists() else {}
     selection_metrics = selection.get("selection_metrics", {})
@@ -1731,9 +1732,15 @@ def load_project_context() -> dict:
         "next_objective": next_objective,
         "selected_model": str(selection.get("selected_model") or "未选择"),
         "model_mean_score": float(selection_metrics.get("mean_score") or 0.0),
-        "stage_blocked": bool(checkpoint.get("requires_user_input", False)) or str(checkpoint.get("status") or "").startswith("blocked_"),
+        "stage_blocked": (
+            bool(next_stage.get("blocked", False))
+            or bool(checkpoint.get("requires_user_input", False))
+            or str(checkpoint.get("status") or "").startswith("blocked_")
+        ),
         "checkpoint_status": str(checkpoint.get("status") or "unknown"),
-        "requires_user_input": bool(checkpoint.get("requires_user_input", False)),
+        "requires_user_input": bool(
+            next_stage.get("requires_user_input", checkpoint.get("requires_user_input", False))
+        ),
         "chat_gate_passed": bool(chat_gate.get("passed", False)),
         "required_decision": str(
             checkpoint.get("required_decision") or "完成下一阶段独立验证"
@@ -1888,6 +1895,12 @@ def humanize_stage_objective(objective: str) -> str:
             "在冻结的 V0.262 协议下招募 3 至 5 名真实受邀成年人：只生成本地化名邀请，"
             "由操作员线下核验成年并完成告知、确认和明确同意；所有人通过门控前不得启动试用"
         )
+    if "bounded supervised pilot" in objective.casefold():
+        return (
+            "执行三人受控监督试用：每位化名参与者至少完成三次低风险一般问题，"
+            "只保留七天内容为空的运行元数据，不收集身份或原始聊天内容，不得将参与者内容发送外部 API；"
+            "任何隐私、同意、监督、禁区或提供方边界事件都立即停止且不得自动恢复"
+        )
     return objective
 
 
@@ -1979,13 +1992,18 @@ def load_trial_notice() -> dict:
     notice_path = PSM_ROOT / "V0_262_INVITE_ONLY_TRIAL_NOTICE.md"
     if not notice_path.exists():
         raise FileNotFoundError("V0.262 trial notice is unavailable.")
+    try:
+        enrollment = load_enrollment_api_status()
+    except (EnrollmentError, FileNotFoundError):
+        enrollment = {}
+    trial_active = enrollment.get("trial_active") is True
     return {
         "schema_version": "psm_v0_262_trial_notice_response_v1",
         "version": "PSM V0.262",
         "notice_version": "psm_v0_262_trial_notice_v1",
         "content": notice_path.read_text(encoding="utf-8"),
-        "participant_enrollment_completed": False,
-        "trial_active": False,
+        "participant_enrollment_completed": trial_active,
+        "trial_active": trial_active,
         "public_service_allowed": False,
     }
 

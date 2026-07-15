@@ -266,6 +266,46 @@ def current_step(participant: dict) -> str:
     return "ready"
 
 
+def supervised_pilot_progress(state: dict, *, required_turns_per_participant: int = 3) -> dict:
+    participants = state.get("participants") or []
+    counts = {item.get("participant_id"): 0 for item in participants}
+    for event in state.get("audit_events") or []:
+        participant_id = event.get("participant_id")
+        if (
+            participant_id in counts
+            and event.get("allowed") is True
+            and event.get("categories") == ["low_risk_general"]
+            and event.get("raw_prompt_persisted") is False
+            and event.get("participant_content_sent_to_external_api") is False
+        ):
+            counts[participant_id] += 1
+    participant_progress = [
+        {
+            "participant_id": item["participant_id"],
+            "observed_turns": counts[item["participant_id"]],
+            "credited_turns": min(counts[item["participant_id"]], required_turns_per_participant),
+            "required_turns": required_turns_per_participant,
+            "complete": counts[item["participant_id"]] >= required_turns_per_participant,
+        }
+        for item in participants
+    ]
+    completed = sum(item["complete"] for item in participant_progress)
+    return {
+        "schema_version": "psm_v0_264_supervised_pilot_progress_v1",
+        "required_turns_per_participant": required_turns_per_participant,
+        "completed_participants": completed,
+        "participant_count": len(participants),
+        "total_observed_low_risk_turns": sum(counts.values()),
+        "gate_passed": (
+            len(participants) == 3
+            and completed == 3
+            and state.get("trial_active") is True
+            and state.get("stopped") is False
+        ),
+        "participants": participant_progress,
+    }
+
+
 def public_enrollment_status(state: dict) -> dict:
     participants = state.get("participants") or []
     counts = {
@@ -300,6 +340,7 @@ def public_enrollment_status(state: dict) -> dict:
             }
             for item in participants
         ],
+        "pilot_progress": supervised_pilot_progress(state),
         "release_boundary": {
             "supervised_invite_only_trial_active": state.get("trial_active") is True,
             "public_service_allowed": False,
@@ -311,7 +352,7 @@ def public_enrollment_status(state: dict) -> dict:
     }
 
 
-def build_enrollment_checkpoint(state: dict) -> dict:
+def build_enrollment_checkpoint(state: dict, *, promoted: bool = False) -> dict:
     public = public_enrollment_status(state)
     trial_active = public["trial_active"]
     stopped = public["stopped"]
@@ -322,11 +363,18 @@ def build_enrollment_checkpoint(state: dict) -> dict:
             "不要在聊天或 GitHub 中提交参与者身份或敏感资料。"
         )
     elif trial_active:
-        status = "supervised_trial_active_awaiting_first_session"
-        required_decision = (
-            "三人门控已通过。只允许三名已登记参与者在操作员现场监督下使用试用聊天；"
-            "下一步是记录首轮低风险会话证据，不得开放公开服务。"
-        )
+        if promoted:
+            status = "v0_263_promoted_supervised_pilot_active"
+            required_decision = (
+                "V0.263 三人登记与首轮低风险会话证据已通过。继续 V0.264 受控试用时，"
+                "仍只允许三名已登记参与者在操作员现场监督下使用；不得开放公开服务。"
+            )
+        else:
+            status = "supervised_trial_active_awaiting_first_session"
+            required_decision = (
+                "三人门控已通过。只允许三名已登记参与者在操作员现场监督下使用试用聊天；"
+                "下一步是记录首轮低风险会话证据，不得开放公开服务。"
+            )
     else:
         status = "awaiting_three_real_adult_enrollment_sequences"
         required_decision = (
@@ -335,9 +383,9 @@ def build_enrollment_checkpoint(state: dict) -> dict:
         )
     return {
         "schema_version": CHECKPOINT_SCHEMA,
-        "current_promoted_version": "PSM_V0.262",
+        "current_promoted_version": "PSM_V0.263" if promoted else "PSM_V0.262",
         "target_version": "PSM_V0.263",
-        "target_promoted": False,
+        "target_promoted": promoted,
         "status": status,
         "participant_count_selected": public["participant_count"],
         "pseudonymous_invitations_generated": public["counts"]["invited"],
@@ -363,6 +411,16 @@ def build_enrollment_checkpoint(state: dict) -> dict:
         "evidence": {
             "browser": "runtime/v0_263_enrollment_browser_regression/report.json",
             "docker_boundary": "runtime/v0_263_enrollment_docker_boundary.json",
+            **(
+                {
+                    "completion_gate": "runtime/v0_263_completed_enrollment_gate.json",
+                    "completed_browser": "runtime/v0_263_completed_enrollment_browser_regression/report.json",
+                    "completed_docker_boundary": "runtime/v0_263_completed_enrollment_docker_boundary.json",
+                    "promotion_manifest": "runtime/v0_263_enrollment_promotion_manifest.json",
+                }
+                if promoted
+                else {}
+            ),
         },
         "release_boundary": public["release_boundary"],
         "required_decision": required_decision,
@@ -370,7 +428,19 @@ def build_enrollment_checkpoint(state: dict) -> dict:
 
 
 def write_public_checkpoint(path: Path, state: dict) -> None:
-    checkpoint = build_enrollment_checkpoint(state)
+    manifest_path = path.with_name("v0_263_enrollment_promotion_manifest.json")
+    promoted = False
+    if manifest_path.exists():
+        try:
+            manifest = json.loads(manifest_path.read_text(encoding="utf-8"))
+            promoted = (
+                manifest.get("schema_version") == "psm_v0_263_enrollment_promotion_manifest_v1"
+                and manifest.get("version") == "PSM_V0.263"
+                and manifest.get("promoted") is True
+            )
+        except (OSError, json.JSONDecodeError):
+            promoted = False
+    checkpoint = build_enrollment_checkpoint(state, promoted=promoted)
     serialized = json.dumps(checkpoint, ensure_ascii=False, indent=2) + "\n"
     if any(
         secret in serialized

@@ -1,0 +1,40 @@
+{
+  "schema_version": "psm_v0_263_enrollment_promotion_manifest_v1",
+  "version": "PSM_V0.263",
+  "promoted_at": "2026-07-15",
+  "promoted": true,
+  "decision": "three_person_supervised_enrollment_complete",
+  "formal_core_source": "PSM_V0.251",
+  "formal_core_records": 2228,
+  "enrollment_gate": {
+    "decision": "three_person_supervised_enrollment_complete",
+    "passed": true,
+    "selected_participants": 3,
+    "completed_receipts": 3,
+    "private_access_checks_passed": 3,
+    "content_free_session_events_at_promotion": 6,
+    "participants_with_session_events_at_promotion": 1,
+    "raw_prompts_persisted": 0,
+    "participant_content_external_api_calls": 0,
+    "completion_gate_sha256": "315423634502502e3be45694163e361a112365626a6d2987fea83037dcd2cedf"
+  },
+  "evidence": {
+    "completion_gate": "runtime/v0_263_completed_enrollment_gate.json",
+    "browser": "runtime/v0_263_completed_enrollment_browser_regression/report.json",
+    "docker_boundary": "runtime/v0_263_completed_enrollment_docker_boundary.json"
+  },
+  "release_boundary": {
+    "supervised_invite_only_trial_active": true,
+    "public_service_allowed": false,
+    "privacy_compliance_claimed": false,
+    "training_on_trial_data_allowed": false,
+    "rule_replacement_allowed": false,
+    "external_release_authority": false
+  },
+  "next_stage": {
+    "version": "PSM_V0.264",
+    "objective": "Run a bounded supervised pilot across all three enrolled pseudonymous participants. Require at least three low-risk general turns per participant, retain only content-free seven-day operational metadata, collect no direct identity or raw chat content, and stop without automatic resume on any prohibited, privacy, consent, supervision, or provider-boundary event.",
+    "blocked": true,
+    "requires_user_input": true
+  }
+}

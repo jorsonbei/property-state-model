@@ -109,9 +109,10 @@ class VerifiedKnowledgeTests(unittest.TestCase):
         self.assertEqual(result["chat"]["intent"], "project_status")
         self.assertIn("确实受阻", answer)
         self.assertIn(context["next_version"], answer)
-        self.assertIn("三名受邀者到场后", answer)
+        self.assertIn("P02", answer)
+        self.assertIn("P03", answer)
+        self.assertIn("3 次低风险一般问题", answer)
         self.assertIn("现场监督", answer)
-        self.assertIn("不要向聊天或 GitHub 提交", answer)
         self.assertIn("需要用户介入", answer)
         self.assertNotIn("关键材料", answer)
 
@@ -151,9 +152,10 @@ class VerifiedKnowledgeTests(unittest.TestCase):
         self.assertIn(context["selected_model"], answer)
         self.assertIn(context["next_version"], answer)
         self.assertIn("外部用户试用", answer)
-        self.assertIn("三名受邀者到场后", answer)
-        self.assertIn("本机 V0.263 登记页面", answer)
-        self.assertIn("明确同意", answer)
+        self.assertIn("P02", answer)
+        self.assertIn("P03", answer)
+        self.assertIn("3 次低风险一般问题", answer)
+        self.assertIn("现场监督", answer)
         self.assertNotIn("域特定检查", answer)
 
     def test_food_allergy_kernel_rejects_absolute_guarantee(self) -> None:

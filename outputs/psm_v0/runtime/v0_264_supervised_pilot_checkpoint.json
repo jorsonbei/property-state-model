@@ -1,0 +1,65 @@
+{
+  "schema_version": "psm_v0_264_supervised_pilot_checkpoint_v1",
+  "current_promoted_version": "PSM_V0.263",
+  "target_version": "PSM_V0.264",
+  "target_promoted": false,
+  "status": "blocked_on_real_participant_turn_coverage",
+  "requires_user_input": true,
+  "progress": {
+    "schema_version": "psm_v0_264_supervised_pilot_progress_v1",
+    "required_turns_per_participant": 3,
+    "completed_participants": 1,
+    "participant_count": 3,
+    "total_observed_low_risk_turns": 6,
+    "gate_passed": false,
+    "participants": [
+      {
+        "participant_id": "P01",
+        "observed_turns": 6,
+        "credited_turns": 3,
+        "required_turns": 3,
+        "complete": true
+      },
+      {
+        "participant_id": "P02",
+        "observed_turns": 0,
+        "credited_turns": 0,
+        "required_turns": 3,
+        "complete": false
+      },
+      {
+        "participant_id": "P03",
+        "observed_turns": 0,
+        "credited_turns": 0,
+        "required_turns": 3,
+        "complete": false
+      }
+    ]
+  },
+  "missing_turn_coverage": [
+    {
+      "participant_id": "P02",
+      "credited_turns": 0,
+      "required_turns": 3,
+      "remaining_turns": 3
+    },
+    {
+      "participant_id": "P03",
+      "credited_turns": 0,
+      "required_turns": 3,
+      "remaining_turns": 3
+    }
+  ],
+  "private_state_committed_to_git": false,
+  "raw_chat_content_committed_to_git": false,
+  "release_boundary": {
+    "supervised_invite_only_trial_active": true,
+    "public_service_allowed": false,
+    "privacy_compliance_claimed": false,
+    "production_readiness_claimed": false,
+    "training_on_trial_data_allowed": false,
+    "rule_replacement_allowed": false,
+    "external_release_authority": false
+  },
+  "required_decision": "V0.264 需要真实参与者继续现场监督试用：P02 还需 3 次低风险一般问题；P03 还需 3 次低风险一般问题。不要输入姓名、联络方式、证件、秘密、医疗、法律或交易决策资料。"
+}

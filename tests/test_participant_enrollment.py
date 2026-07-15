@@ -19,6 +19,7 @@ from psm_v0.participant_enrollment import (
     public_enrollment_status,
     record_prompt_audit,
     stop_enrollment,
+    supervised_pilot_progress,
     validate_trial_access,
     write_private_state,
     write_public_checkpoint,
@@ -227,6 +228,28 @@ class ParticipantEnrollmentTests(unittest.TestCase):
         self.assertNotIn("answer", serialized)
         self.assertFalse(event["raw_prompt_persisted"])
         self.assertFalse(event["participant_content_sent_to_external_api"])
+
+    def test_v0_264_progress_requires_three_content_free_low_risk_turns_each(self) -> None:
+        state = self.new_state()
+        for index, participant_id in enumerate(("P01", "P02", "P03")):
+            state = self.complete_participant(state, participant_id, 1 + index * 10)
+        for participant_id, turns in (("P01", 4), ("P02", 3), ("P03", 2)):
+            for turn in range(turns):
+                state = record_prompt_audit(
+                    state,
+                    participant_id=participant_id,
+                    prompt=f"低风险一般问题 {participant_id} {turn}",
+                    decision=inspect_prompt("为什么天空是蓝色？", self.protocol),
+                    latency_ms=10,
+                    token_count=4,
+                    occurred_at=self.prepared_at + timedelta(hours=2, minutes=turn),
+                    event_id=f"trial-{participant_id}-{turn}",
+                )
+        progress = supervised_pilot_progress(state)
+        self.assertFalse(progress["gate_passed"])
+        self.assertEqual(progress["completed_participants"], 2)
+        self.assertEqual(progress["participants"][0]["credited_turns"], 3)
+        self.assertEqual(progress["participants"][2]["credited_turns"], 2)
 
 
 if __name__ == "__main__":

@@ -1,17 +1,17 @@
 {
   "schema_version": "psm_v0_263_participant_enrollment_checkpoint_v1",
-  "current_promoted_version": "PSM_V0.262",
+  "current_promoted_version": "PSM_V0.263",
   "target_version": "PSM_V0.263",
-  "target_promoted": false,
-  "status": "awaiting_three_real_adult_enrollment_sequences",
+  "target_promoted": true,
+  "status": "v0_263_promoted_supervised_pilot_active",
   "participant_count_selected": 3,
   "pseudonymous_invitations_generated": 3,
-  "adult_verified": 0,
-  "notice_acknowledged": 0,
-  "explicitly_consented": 0,
-  "session_enabled": 0,
-  "trial_active": false,
-  "requires_user_input": true,
+  "adult_verified": 3,
+  "notice_acknowledged": 3,
+  "explicitly_consented": 3,
+  "session_enabled": 3,
+  "trial_active": true,
+  "requires_user_input": false,
   "private_state_committed_to_git": false,
   "invitation_codes_exposed_in_public_artifacts": false,
   "completed_engineering": [
@@ -27,15 +27,19 @@
   ],
   "evidence": {
     "browser": "runtime/v0_263_enrollment_browser_regression/report.json",
-    "docker_boundary": "runtime/v0_263_enrollment_docker_boundary.json"
+    "docker_boundary": "runtime/v0_263_enrollment_docker_boundary.json",
+    "completion_gate": "runtime/v0_263_completed_enrollment_gate.json",
+    "completed_browser": "runtime/v0_263_completed_enrollment_browser_regression/report.json",
+    "completed_docker_boundary": "runtime/v0_263_completed_enrollment_docker_boundary.json",
+    "promotion_manifest": "runtime/v0_263_enrollment_promotion_manifest.json"
   },
   "release_boundary": {
-    "supervised_invite_only_trial_active": false,
+    "supervised_invite_only_trial_active": true,
     "public_service_allowed": false,
     "privacy_compliance_claimed": false,
     "training_on_trial_data_allowed": false,
     "rule_replacement_allowed": false,
     "external_release_authority": false
   },
-  "required_decision": "三名受邀者到场后，请在本机 V0.263 登记页面逐一完成：操作员线下核验其为成年人、展示告知、由参与者确认并明确同意、操作员确认现场监督。不要向聊天或 GitHub 提交任何姓名、联系方式或证件。"
+  "required_decision": "V0.263 三人登记与首轮低风险会话证据已通过。继续 V0.264 受控试用时，仍只允许三名已登记参与者在操作员现场监督下使用；不得开放公开服务。"
 }

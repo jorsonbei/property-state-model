@@ -27,7 +27,7 @@
 
 .enrollment-summary {
   display: grid;
-  grid-template-columns: repeat(5, minmax(0, 1fr));
+  grid-template-columns: repeat(6, minmax(0, 1fr));
   border: 1px solid var(--line);
   border-radius: 8px;
   background: var(--surface);
@@ -229,6 +229,26 @@
   line-height: 1.42;
 }
 
+.pilot-progress {
+  min-height: 38px;
+  padding: 8px 10px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 8px;
+  border: 1px solid var(--line);
+  border-radius: 7px;
+  background: #fff;
+  color: var(--muted);
+  font-size: 12px;
+}
+
+.pilot-progress strong {
+  color: var(--text);
+  font-size: 15px;
+  font-variant-numeric: tabular-nums;
+}
+
 .attestation-row input {
   width: 17px;
   height: 17px;
@@ -286,7 +306,7 @@
   }
 
   .enrollment-summary {
-    grid-template-columns: repeat(5, minmax(96px, 1fr));
+    grid-template-columns: repeat(6, minmax(96px, 1fr));
     overflow-x: auto;
   }
 }
