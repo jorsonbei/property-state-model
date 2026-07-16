@@ -1,0 +1,15 @@
+{
+  "schema_version": "psm_v0_272_long_context_state_errata_v1",
+  "source_contract": "benchmarks/v0_272_long_context_state_contract.json",
+  "source_contract_unchanged": true,
+  "created_after_initial_run": true,
+  "corrections": [
+    {
+      "case_id": "long_three_step_edit",
+      "field": "expected_domain",
+      "before": "general",
+      "after": "writing",
+      "reason": "Editing a formatted three-step plan is a writing operation; the initial general-domain label was a contract annotation error, not a product failure."
+    }
+  ]
+}

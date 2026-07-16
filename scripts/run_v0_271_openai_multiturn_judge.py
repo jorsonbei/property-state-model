@@ -44,7 +44,12 @@ def main() -> None:
     print(f"verdict: {result['review']['verdict']}")
     print(f"model: {result['actual_model']}")
     print(f"usage: {result['usage'].get('total_tokens', 0)} tokens")
-    print(f"result: {args.out.relative_to(ROOT)}")
+    resolved_out = args.out.resolve()
+    try:
+        display_out = resolved_out.relative_to(ROOT)
+    except ValueError:
+        display_out = resolved_out
+    print(f"result: {display_out}")
     if not result["passed"]:
         raise SystemExit(1)
 

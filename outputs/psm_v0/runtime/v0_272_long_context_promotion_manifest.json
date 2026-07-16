@@ -1,0 +1,53 @@
+{
+  "schema_version": "psm_v0_272_long_context_promotion_manifest_v1",
+  "version": "PSM_V0.272",
+  "promoted_at": "2026-07-16",
+  "promoted": true,
+  "decision": "long_context_state_continuity_gate_passed",
+  "formal_core_source": "PSM_V0.251",
+  "formal_core_records": 2228,
+  "long_context_state": {
+    "decision": "long_context_state_continuity_gate_passed",
+    "passed": true,
+    "cases": 10,
+    "cases_passed": 10,
+    "families": 5,
+    "initial_failure_count": 10,
+    "assistant_history_contamination": 0,
+    "stale_state_violations": 0,
+    "total_duration_ms": 147,
+    "transparent_errata_count": 1,
+    "docker_failures_retained": 1,
+    "synthetic_only": true,
+    "human_validation_claimed": false,
+    "evaluation_rows_used_for_training": false,
+    "contract_sha256": "b4cc6bd3eb137292ca538741e0d9f0ab73bba2f4f8daccf96a91cf9220447820",
+    "errata_sha256": "91e15cf870aa922ad0d69ac51f022ae832ade1f3d6cafbd670fb4a9c1f8cb6f4",
+    "gate_sha256": "60a5d93abdc06356578f2f5397bf2d9e4cf28583d0c72a6ce062b6aca3c303f2"
+  },
+  "evidence": {
+    "contract": "benchmarks/v0_272_long_context_state_contract.json",
+    "errata": "benchmarks/v0_272_long_context_state_errata.json",
+    "report": "runtime/v0_272_long_context_state_report.json",
+    "gate": "runtime/v0_272_long_context_state_gate.json",
+    "initial_failure_ledger": "runtime/v0_272_long_context_initial_failure_ledger.json",
+    "browser": "runtime/v0_272_long_context_browser_regression/report.json",
+    "docker_attempt_1_failed": "runtime/v0_272_long_context_docker_attempt_1_failed.json",
+    "docker": "runtime/v0_272_long_context_docker_boundary.json"
+  },
+  "release_boundary": {
+    "open_domain_generalization_claimed": false,
+    "public_service_allowed": false,
+    "production_readiness_claimed": false,
+    "training_on_evaluation_rows_allowed": false,
+    "rule_replacement_allowed": false,
+    "professional_authority_allowed": false,
+    "external_release_authority": false
+  },
+  "next_stage": {
+    "version": "PSM_V0.273",
+    "objective": "对冻结的 V0.272 长对话状态回答执行来源隔离的独立外部语义裁判，重点检查用户事实权威、最新更正、未解任务、跨轮约束与持续话题切换；只提交合成问答，不提交规则、私有资料或训练字段。",
+    "blocked": false,
+    "requires_user_input": false
+  }
+}

@@ -1,0 +1,19 @@
+{
+  "schema_version": "psm_v0_273_external_long_context_checkpoint_v1",
+  "current_promoted_version": "PSM_V0.272",
+  "target_version": "PSM_V0.273",
+  "target_promoted": false,
+  "passed": false,
+  "status": "blocked_external_long_context_judge_monthly_api_budget_exhausted",
+  "requires_user_input": true,
+  "next_action": "await_additional_v0_273_external_judge_budget_authorization",
+  "review_payload_sha256": "ecc229f2d23bfdebc5c040affda04efb2f844bbd599935254f9d9e41ed53b971",
+  "reserved_month_usd": 24.0,
+  "monthly_limit_usd": 24.0,
+  "additional_authorization_required_usd": 4.0,
+  "participant_content_calls": 0,
+  "package_gate_passed": true,
+  "required_decision": "批准额外 4 美元 OpenAI 合成长对话独立评审预算，或停止 V0.273 外部评审。",
+  "review_package": "runtime/v0_273_external_long_context_review_package.json",
+  "package_gate": "runtime/v0_273_external_long_context_package_gate.json"
+}

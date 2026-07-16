@@ -1,0 +1,20 @@
+{
+  "schema_version": "psm_v0_273_external_long_context_package_gate_v1",
+  "passed": true,
+  "checks": {
+    "source_v0_272_passed": true,
+    "exact_item_count": true,
+    "exact_family_coverage": true,
+    "minimum_seven_messages_per_item": true,
+    "payload_hash_locked": true,
+    "privacy_boundary_closed": true,
+    "prohibited_material_absent": true,
+    "external_api_call_disabled": true,
+    "monthly_budget_fully_reserved": true,
+    "participant_content_calls_zero": true,
+    "release_boundary_closed": true
+  },
+  "prohibited_material_found": [],
+  "review_payload_sha256": "ecc229f2d23bfdebc5c040affda04efb2f844bbd599935254f9d9e41ed53b971",
+  "authorization": "not_authorized_monthly_budget_exhausted"
+}

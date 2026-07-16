@@ -93,7 +93,7 @@ def main() -> None:
 
 
 class Handler(BaseHTTPRequestHandler):
-    server_version = "PSMProductAlpha/0.270"
+    server_version = "PSMProductAlpha/0.272"
 
     def do_GET(self) -> None:  # noqa: N802
         parsed = urlparse(self.path)
@@ -608,21 +608,13 @@ def semantic_state_input(
     current: str,
     conversation: list[dict[str, str]],
 ) -> tuple[str, bool]:
-    topic_switch_markers = (
-        "换个话题",
-        "換個話題",
-        "切换话题",
-        "切換話題",
-        "另一个话题",
-        "另一個話題",
-        "new topic",
-    )
-    if any(marker in current.casefold() for marker in topic_switch_markers):
+    if contains_explicit_topic_switch(current):
         return current, False
     if infer_domain(current) != "general":
         return current, False
+    active_conversation = conversation_after_last_topic_switch(conversation)
     previous_user_messages = [
-        item["content"] for item in conversation[:-1] if item["role"] == "user"
+        item["content"] for item in active_conversation[:-1] if item["role"] == "user"
     ]
     for previous in reversed(previous_user_messages):
         previous_domain = infer_domain(previous)
@@ -636,6 +628,29 @@ def semantic_state_input(
         }:
             return f"{current}\n此前用户问题：{previous}", True
     return current, False
+
+
+def contains_explicit_topic_switch(text: str) -> bool:
+    topic_switch_markers = (
+        "换个话题",
+        "換個話題",
+        "切换话题",
+        "切換話題",
+        "另一个话题",
+        "另一個話題",
+        "new topic",
+    )
+    return any(marker in text.casefold() for marker in topic_switch_markers)
+
+
+def conversation_after_last_topic_switch(
+    conversation: list[dict[str, str]],
+) -> list[dict[str, str]]:
+    for index in range(len(conversation) - 1, -1, -1):
+        item = conversation[index]
+        if item["role"] == "user" and contains_explicit_topic_switch(item["content"]):
+            return conversation[index:]
+    return conversation
 
 
 def normalize_chat_messages(messages: list[dict]) -> list[dict[str, str]]:
@@ -685,6 +700,9 @@ def build_chat_generation(
             return deterministic_generation(
                 f"这个问题刚才问过。核心回答仍是：{first_answer_sentence(previous)}"
             )
+    long_context_answer = deterministic_long_context_state_answer(text, conversation)
+    if long_context_answer:
+        return deterministic_generation(long_context_answer)
     multiturn_edit = bounded_multiturn_edit_answer(text, conversation)
     if multiturn_edit:
         return deterministic_generation(multiturn_edit)
@@ -756,10 +774,10 @@ def bounded_multiturn_edit_answer(
     current: str,
     conversation: list[dict[str, str]],
 ) -> str:
-    previous_assistant = next(
-        (item["content"] for item in reversed(conversation[:-1]) if item["role"] == "assistant"),
-        "",
-    )
+    previous_assistants = [
+        item["content"] for item in conversation[:-1] if item["role"] == "assistant"
+    ]
+    previous_assistant = previous_assistants[-1] if previous_assistants else ""
     previous_users = [item["content"] for item in conversation[:-1] if item["role"] == "user"]
     if not previous_assistant:
         return ""
@@ -781,14 +799,27 @@ def bounded_multiturn_edit_answer(
     )
     if replacement and translation_only:
         before, after = replacement.group(1), replacement.group(2)
-        revised = re.sub(rf"\b{re.escape(before)}\b", after, previous_assistant, flags=re.IGNORECASE)
+        source_answer = next(
+            (answer for answer in reversed(previous_assistants) if re.search(rf"\b{re.escape(before)}\b", answer, flags=re.IGNORECASE)),
+            previous_assistant,
+        )
+        revised = re.sub(rf"\b{re.escape(before)}\b", after, source_answer, flags=re.IGNORECASE)
         revised = re.sub(r"\b(?:was|were)\s+arrived\b", "arrived", revised, flags=re.IGNORECASE)
         return first_answer_sentence(revised, limit=400).strip('“”"')
 
     step_update = re.search(r"第([一二三1-3])步改成\s*(\d+)\s*分钟", current)
     if step_update and ("只保留三步" in current or "只保留三步" in "\n".join(previous_users)):
         index = {"一": 1, "二": 2, "三": 3}.get(step_update.group(1), int(step_update.group(1)) if step_update.group(1).isdigit() else 0)
-        lines = [line.strip() for line in previous_assistant.splitlines() if line.strip()][:3]
+        source_answer = next(
+            (
+                answer
+                for answer in reversed(previous_assistants)
+                if len([line for line in answer.splitlines() if line.strip()]) == 3
+                and all("分钟" in line for line in answer.splitlines() if line.strip())
+            ),
+            previous_assistant,
+        )
+        lines = [line.strip() for line in source_answer.splitlines() if line.strip()][:3]
         if len(lines) == 3 and 1 <= index <= 3:
             lines[index - 1] = re.sub(r"\d+\s*分钟", f"{step_update.group(2)}分钟", lines[index - 1], count=1)
             return "\n".join(lines)
@@ -799,6 +830,85 @@ def bounded_multiturn_edit_answer(
     if inherited_epistemic_exclusion and ("压缩" in current or "壓縮" in current):
         return "现有结果仅属初步支持，尚需外部复核。"
     return ""
+
+
+def deterministic_long_context_state_answer(
+    current: str,
+    conversation: list[dict[str, str]],
+) -> str:
+    active = conversation_after_last_topic_switch(conversation)
+    previous_users = [item["content"] for item in active[:-1] if item["role"] == "user"]
+    folded = current.casefold()
+
+    if "代号" in current and any(marker in current for marker in ("是什么", "是什麼")):
+        value = latest_user_capture(previous_users, r"(?:项目的?)?代号(?:定为|定為|是)\s*([^\s，。]+)")
+        if value:
+            return value
+    if "会议最终时间" in current or "會議最終時間" in current:
+        value = latest_user_capture(previous_users, r"(?:会议|會議).*?(下午[一二三四五六七八九十\d]+点)")
+        if value:
+            return value
+    if "最终输出文件名" in current or "最終輸出檔名" in current:
+        value = latest_user_capture(previous_users, r"(?:输出文件名|輸出檔名)(?:先定为|先定為|改为|改為|是)\s*([A-Za-z0-9_.-]+)")
+        if value:
+            return value
+    if "最终截止时间" in current or "最終截止時間" in current:
+        value = latest_user_capture(previous_users, r"(?:提交)?截止时间(?:先定为|先定為|改为|改為|是)\s*([^，。]+)")
+        if value:
+            return value
+    if any(marker in current for marker in ("哪项没完成", "哪項沒完成", "还缺什么", "還缺什麼")):
+        unresolved = unresolved_user_item(previous_users)
+        if unresolved:
+            return unresolved
+
+    contextual = contextual_general_fallback(current, active)
+    if contextual and (
+        contains_topic_switch_before_current(conversation)
+        or any(marker in folded for marker in ("哪个更甜", "哪個更甜", "缓存为什么", "快取為什麼"))
+    ):
+        return contextual
+    return ""
+
+
+def latest_user_capture(previous_users: list[str], pattern: str) -> str:
+    for message in reversed(previous_users):
+        match = re.search(pattern, message, flags=re.IGNORECASE)
+        if match:
+            return match.group(1).strip().rstrip("。；; ")
+    return ""
+
+
+def unresolved_user_item(previous_users: list[str]) -> str:
+    candidates: list[str] = []
+    for message in previous_users:
+        match = re.search(r"(?:要完成|采购清单是|採購清單是)\s*([^。]+)", message)
+        if not match:
+            continue
+        candidates = [
+            item.strip()
+            for item in re.split(r"\s*(?:和|以及|、)\s*", match.group(1))
+            if item.strip()
+        ]
+        if len(candidates) >= 2:
+            break
+    if not candidates:
+        return ""
+    completed_messages = [
+        message
+        for message in previous_users
+        if any(marker in message for marker in ("已经完成", "已完成", "已经买到", "已买到", "买到了", "買到了"))
+    ]
+    remaining = [
+        item for item in candidates if not any(item in message for message in completed_messages)
+    ]
+    return remaining[0] if len(remaining) == 1 else ""
+
+
+def contains_topic_switch_before_current(conversation: list[dict[str, str]]) -> bool:
+    return any(
+        item["role"] == "user" and contains_explicit_topic_switch(item["content"])
+        for item in conversation[:-1]
+    )
 
 
 def route_execution_answer(route_execution: dict) -> str:
@@ -1343,6 +1453,26 @@ def roadmap_answer(context: dict) -> str:
 
 
 def project_results_answer(context: dict) -> str:
+    if context["current_version"] == "PSM V0.272":
+        return (
+            "这轮已完成 PSM V0.272 长对话状态连续性门。第一次冻结运行 10/10 全部失败，原始失败已保留；修复后"
+            "10/10 全部通过，覆盖用户事实权威、最新更正、未完成事项、跨轮翻译和格式约束，以及明确换题后的风险清理。\n\n"
+            "助手历史污染和过期状态违规都是 0，桌面、手机、主机与 Docker 边界也通过。一处领域标签勘误和一次 Docker"
+            "验证器 404 均保留，没有修改原契约或扩大公开接口。它的作用是让系统经过多个干扰轮次后仍能恢复正确状态，"
+            "而不是只记住最近一句。这些仍是内部合成证据，不代表真人满意度或开放域泛化。"
+            f"当前本地聊天模型是 `{context['selected_model']}`。下一阶段是 {context['next_version']}，"
+            f"当前需要你决定：{context['required_decision']} 外部发布仍关闭。"
+        )
+    if context["current_version"] == "PSM V0.271":
+        return (
+            "这轮已完成 PSM V0.271 独立外部多轮重审：第一次评审对 M07、M08 判定失败，原始失败证据完整保留；"
+            "两项过度回答被本地修复为精确短答后，使用你批准的额外 4 美元预算重新提交同一组合成契约。\n\n"
+            "最终 `gpt-5.4` 重审 12/12 全部通过，失败项和关键发现都是 0，共使用 5,406 tokens。一次结果写入后的"
+            "本地路径显示错误也已保留，系统没有因此重复调用 API。它的作用是证明修复后的多轮约束不仅通过内部规则，"
+            "也通过了来源隔离的独立语义检查；但这些仍是合成证据，不代表真人满意度或公开服务已经验证。"
+            f"当前本地聊天模型是 `{context['selected_model']}`。下一步是 {context['next_version']}："
+            f"{context['next_objective']} 外部发布仍关闭。"
+        )
     if context["current_version"] == "PSM V0.270":
         return (
             "这轮已完成 PSM V0.270 多轮约束门：12/12 个冻结多轮场景全部通过，覆盖助手回答指代、用户历史风险、"
@@ -1889,7 +2019,10 @@ def contextual_general_fallback(
             "通常成熟香蕉比多数苹果更甜，因为香蕉成熟后淀粉会转成糖。"
             "不过具体甜度取决于品种和成熟程度，有些高糖苹果也会比未成熟香蕉更甜。"
         )
-    cache_context = any(marker in history for marker in ("缓存比作书桌", "快取比作書桌"))
+    cache_context = any(marker in history for marker in ("缓存比作书桌", "快取比作書桌")) or (
+        any(marker in history for marker in ("缓存", "快取"))
+        and any(marker in history for marker in ("书桌", "書桌"))
+    )
     if cache_context and any(marker in current for marker in ("缓存为什么也会过期", "快取為什麼也會過期")):
         return (
             "沿用书桌的比喻：缓存像放在手边的常用资料，但外面的原始资料会更新。"

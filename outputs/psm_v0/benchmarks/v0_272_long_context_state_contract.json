@@ -1,0 +1,213 @@
+{
+  "schema_version": "psm_v0_272_long_context_state_contract_v1",
+  "version": "PSM_V0.272-candidate",
+  "frozen_at": "2026-07-16",
+  "objective": "Preserve user facts, latest corrections, unresolved work, output constraints, and topic-switch boundaries across intervening turns.",
+  "provider_mode": "deterministic_state_continuity_with_generation_provider_disabled",
+  "provenance": {
+    "author": "internal_contract_author",
+    "synthetic_only": true,
+    "created_before_first_run": true,
+    "contains_private_or_participant_data": false
+  },
+  "source_isolation": {
+    "evaluation_rows_used_for_training": false,
+    "evaluation_rows_used_for_prompt_tuning_before_first_run": false,
+    "failure_findings_used_for_rule_changes_before_initial_ledger": false,
+    "blind_or_evaluation_backflow_allowed": false
+  },
+  "release_boundary": {
+    "open_domain_generalization_claimed": false,
+    "public_service_allowed": false,
+    "production_readiness_claimed": false,
+    "training_on_evaluation_rows_allowed": false,
+    "rule_replacement_allowed": false,
+    "professional_authority_allowed": false,
+    "external_release_authority": false
+  },
+  "evaluation": {
+    "frozen_case_count": 10,
+    "families": [
+      "user_fact_authority",
+      "latest_correction",
+      "unresolved_task",
+      "constraint_persistence",
+      "topic_switch_cleanup"
+    ],
+    "cases_per_family": 2,
+    "minimum_history_messages": 7,
+    "maximum_assistant_history_contamination": 0,
+    "maximum_stale_state_violations": 0
+  },
+  "cases": [
+    {
+      "id": "long_user_project_code",
+      "family": "user_fact_authority",
+      "messages": [
+        {"role": "user", "content": "这个项目的代号定为松塔。"},
+        {"role": "assistant", "content": "已记录项目代号为松塔。"},
+        {"role": "user", "content": "界面先采用深色模式。"},
+        {"role": "assistant", "content": "可以，先采用深色模式。"},
+        {"role": "user", "content": "日志保留七天。"},
+        {"role": "assistant", "content": "已记录日志保留七天。"},
+        {"role": "user", "content": "回到最开始的项目设定：代号是什么？只给代号。"}
+      ],
+      "expected_domain": "general",
+      "expected_exact": "松塔",
+      "required_all": ["松塔"],
+      "forbidden": ["深色", "七天", "无法可靠回答"]
+    },
+    {
+      "id": "assistant_cannot_override_user_time",
+      "family": "user_fact_authority",
+      "messages": [
+        {"role": "user", "content": "会议最终时间是下午三点。"},
+        {"role": "assistant", "content": "好的，会议最终时间是下午两点。"},
+        {"role": "user", "content": "议程第一项是接口状态。"},
+        {"role": "assistant", "content": "已记录议程第一项。"},
+        {"role": "user", "content": "参会人暂时不变。"},
+        {"role": "assistant", "content": "明白，参会人暂时不变。"},
+        {"role": "user", "content": "以用户原话为准，会议最终时间是什么？只给时间。"}
+      ],
+      "expected_domain": "general",
+      "expected_exact": "下午三点",
+      "required_all": ["下午三点"],
+      "forbidden": ["下午两点", "无法可靠回答"]
+    },
+    {
+      "id": "latest_filename_correction",
+      "family": "latest_correction",
+      "messages": [
+        {"role": "user", "content": "输出文件名先定为 alpha.md。"},
+        {"role": "assistant", "content": "已记录 alpha.md。"},
+        {"role": "user", "content": "更正：输出文件名改为 beta.md，alpha.md 作废。"},
+        {"role": "assistant", "content": "已更正为 beta.md。"},
+        {"role": "user", "content": "文件内容使用中文。"},
+        {"role": "assistant", "content": "好的，文件内容使用中文。"},
+        {"role": "user", "content": "最终输出文件名是什么？只给文件名。"}
+      ],
+      "expected_domain": "general",
+      "expected_exact": "beta.md",
+      "required_all": ["beta.md"],
+      "forbidden": ["alpha.md", "无法可靠回答"]
+    },
+    {
+      "id": "latest_deadline_correction",
+      "family": "latest_correction",
+      "messages": [
+        {"role": "user", "content": "提交截止时间先定为本周五。"},
+        {"role": "assistant", "content": "已记录本周五。"},
+        {"role": "user", "content": "更正：截止时间改为下周一，本周五作废。"},
+        {"role": "assistant", "content": "已更正为下周一。"},
+        {"role": "user", "content": "提交方式仍然是在线上传。"},
+        {"role": "assistant", "content": "明白，提交方式不变。"},
+        {"role": "user", "content": "最终截止时间是什么？只给时间。"}
+      ],
+      "expected_domain": "general",
+      "expected_exact": "下周一",
+      "required_all": ["下周一"],
+      "forbidden": ["本周五", "无法可靠回答"]
+    },
+    {
+      "id": "unresolved_document_task",
+      "family": "unresolved_task",
+      "messages": [
+        {"role": "user", "content": "今天要完成接口回归和更新文档。"},
+        {"role": "assistant", "content": "已记录两项任务。"},
+        {"role": "user", "content": "接口回归已经完成。"},
+        {"role": "assistant", "content": "接口回归已标记完成。"},
+        {"role": "user", "content": "明天上午再开一次短会。"},
+        {"role": "assistant", "content": "已记录短会安排。"},
+        {"role": "user", "content": "原来两项任务中还有哪项没完成？只给事项。"}
+      ],
+      "expected_domain": "general",
+      "expected_exact": "更新文档",
+      "required_all": ["更新文档"],
+      "forbidden": ["接口回归", "短会", "无法可靠回答"]
+    },
+    {
+      "id": "unresolved_purchase_task",
+      "family": "unresolved_task",
+      "messages": [
+        {"role": "user", "content": "采购清单是电池和连接线。"},
+        {"role": "assistant", "content": "已记录电池和连接线。"},
+        {"role": "user", "content": "连接线已经买到了。"},
+        {"role": "assistant", "content": "连接线已标记完成。"},
+        {"role": "user", "content": "发票稍后整理。"},
+        {"role": "assistant", "content": "好的，发票稍后整理。"},
+        {"role": "user", "content": "采购清单里还缺什么？只给物品。"}
+      ],
+      "expected_domain": "general",
+      "expected_exact": "电池",
+      "required_all": ["电池"],
+      "forbidden": ["连接线", "发票", "无法可靠回答"]
+    },
+    {
+      "id": "long_translation_only_edit",
+      "family": "constraint_persistence",
+      "messages": [
+        {"role": "user", "content": "把“包裹已安全送达”翻译成英文，只给译文。"},
+        {"role": "assistant", "content": "The package was delivered safely."},
+        {"role": "user", "content": "接下来我会改一个词。"},
+        {"role": "assistant", "content": "好的，请说明要修改的词。"},
+        {"role": "user", "content": "其他格式要求都保持不变。"},
+        {"role": "assistant", "content": "明白，保持原格式要求。"},
+        {"role": "user", "content": "把 delivered 改成 arrived，其他约束不变。"}
+      ],
+      "expected_domain": "writing",
+      "expected_exact": "The package arrived safely.",
+      "required_all": ["The package arrived safely."],
+      "forbidden": ["好的", "译文", "delivered"]
+    },
+    {
+      "id": "long_three_step_edit",
+      "family": "constraint_persistence",
+      "messages": [
+        {"role": "user", "content": "给我三步复习计划，每步写时间，只保留三步。"},
+        {"role": "assistant", "content": "1. 20分钟复习公式。\n2. 40分钟做题。\n3. 30分钟整理错题。"},
+        {"role": "user", "content": "计划主题仍然是物理。"},
+        {"role": "assistant", "content": "明白，主题保持为物理。"},
+        {"role": "user", "content": "第一步和第三步不用改。"},
+        {"role": "assistant", "content": "好的，只修改第二步。"},
+        {"role": "user", "content": "把第二步改成50分钟，仍然只保留三步。"}
+      ],
+      "expected_domain": "general",
+      "expected_exact": "1. 20分钟复习公式。\n2. 50分钟做题。\n3. 30分钟整理错题。",
+      "required_all": ["20分钟", "50分钟", "30分钟"],
+      "forbidden": ["40分钟"],
+      "max_nonempty_lines": 3
+    },
+    {
+      "id": "persistent_medical_topic_switch",
+      "family": "topic_switch_cleanup",
+      "messages": [
+        {"role": "user", "content": "我刚才胸痛并且出冷汗。"},
+        {"role": "assistant", "content": "这属于急症风险，应立即联系当地急救。"},
+        {"role": "user", "content": "换个话题：现在只比较苹果和香蕉的口感。"},
+        {"role": "assistant", "content": "苹果偏脆，成熟香蕉偏软。"},
+        {"role": "user", "content": "先不讨论营养。"},
+        {"role": "assistant", "content": "好的，只比较口感。"},
+        {"role": "user", "content": "它们通常哪个更甜？"}
+      ],
+      "expected_domain": "general",
+      "required_all": ["香蕉", "甜"],
+      "forbidden": ["胸痛", "急救", "医生", "医疗"]
+    },
+    {
+      "id": "persistent_trading_topic_switch",
+      "family": "topic_switch_cleanup",
+      "messages": [
+        {"role": "user", "content": "这个交易策略还没做滑点测试。"},
+        {"role": "assistant", "content": "不能据此直接实盘。"},
+        {"role": "user", "content": "换个话题：用书桌来比喻缓存。"},
+        {"role": "assistant", "content": "缓存像放在书桌手边的常用资料。"},
+        {"role": "user", "content": "继续沿用这个比喻。"},
+        {"role": "assistant", "content": "好的，继续沿用书桌比喻。"},
+        {"role": "user", "content": "缓存为什么也会过期？"}
+      ],
+      "expected_domain": "general",
+      "required_all": ["缓存", "更新", "过期"],
+      "forbidden": ["滑点", "实盘", "交易", "回撤"]
+    }
+  ]
+}

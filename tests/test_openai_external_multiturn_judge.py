@@ -86,17 +86,27 @@ class OpenAIExternalMultiturnJudgeTests(unittest.TestCase):
         with self.assertRaises(ValueError):
             validate_external_review(review, value)
 
-    def test_external_failure_is_retained_and_local_repairs_are_not_mislabeled(self) -> None:
+    def test_external_failure_is_retained_before_passing_rejudge(self) -> None:
         judge = json.loads((PSM_ROOT / "runtime" / "v0_271_openai_external_multiturn_judge.json").read_text(encoding="utf-8"))
         repair = json.loads((PSM_ROOT / "runtime" / "v0_271_external_multiturn_repair_report.json").read_text(encoding="utf-8"))
         repaired = json.loads((PSM_ROOT / "runtime" / "v0_271_external_multiturn_repaired_candidate.json").read_text(encoding="utf-8"))
+        rejudge_package = json.loads((PSM_ROOT / "runtime" / "v0_271_external_multiturn_rejudge_package.json").read_text(encoding="utf-8"))
+        rejudge = json.loads((PSM_ROOT / "runtime" / "v0_271_openai_external_multiturn_rejudge.json").read_text(encoding="utf-8"))
+        gate = json.loads((PSM_ROOT / "runtime" / "v0_271_external_multiturn_gate.json").read_text(encoding="utf-8"))
         checkpoint = json.loads((PSM_ROOT / "runtime" / "v0_271_external_multiturn_checkpoint.json").read_text(encoding="utf-8"))
         self.assertFalse(judge["passed"])
         self.assertEqual(judge["review"]["failed_item_ids"], ["M07", "M08"])
         self.assertTrue(repair["passed"])
         self.assertFalse(repair["external_rejudge_completed"])
         self.assertEqual(repaired["budget"]["maximum_api_calls"], 0)
-        self.assertTrue(checkpoint["requires_user_input"])
+        validate_review_package(rejudge_package)
+        self.assertEqual(rejudge_package["budget"]["maximum_api_calls"], 1)
+        self.assertTrue(rejudge["passed"])
+        self.assertEqual(rejudge["review"]["failed_item_ids"], [])
+        self.assertEqual(len(rejudge["review"]["item_reviews"]), 12)
+        self.assertTrue(gate["passed"])
+        self.assertTrue(checkpoint["target_promoted"])
+        self.assertFalse(checkpoint["requires_user_input"])
 
 
 if __name__ == "__main__":

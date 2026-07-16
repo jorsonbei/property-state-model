@@ -1,0 +1,14 @@
+{
+  "schema_version": "psm_v0_272_long_context_docker_attempt_failure_v1",
+  "attempt": 1,
+  "passed": false,
+  "failure_stage": "runtime_evidence_visibility_check",
+  "failure_type": "verifier_requested_non_public_runtime_http_route",
+  "http_status": 404,
+  "product_chat_failure": false,
+  "container_health_failure": false,
+  "source_contract_changed": false,
+  "product_answer_changed_after_failure": false,
+  "repair": "Use docker compose exec for the existing read-only in-container runtime evidence check and verify the published loopback port directly.",
+  "release_boundary": "No runtime artifact HTTP route was added; the server public surface remains unchanged."
+}

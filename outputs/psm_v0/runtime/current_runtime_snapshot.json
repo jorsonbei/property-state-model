@@ -2,10 +2,10 @@
   "schema_version": "psm_public_runtime_snapshot_v1",
   "project_status": {
     "updated_from_local_artifacts": true,
-    "current_version": "psm_v0.270",
+    "current_version": "psm_v0.272",
     "source_evidence_version": "psm_v0.251",
-    "previous_formal_version": "psm_v0.269",
-    "completed_result": "multiturn_reference_correction_and_constraint_gate_passed_after_retained_failures",
+    "previous_formal_version": "psm_v0.271",
+    "completed_result": "long_context_state_continuity_and_conflict_recovery_gate_passed_after_retained_failures",
     "family": {
       "family_id": "v251_independent_chat_golden_blind_set_boundary_adversarial",
       "case_pack": "case_packs/v0_251_independent_chat_golden_blind_set_boundary_adversarial_cases.json",
@@ -244,10 +244,10 @@
       "rule_replacement_allowed": false
     },
     "next_stage": {
-      "version": "PSM_V0.271",
-      "objective": "对冻结的 V0.270 多轮回答执行来源隔离的独立外部语义裁判，重点检查助手历史污染、话题切换、用户更正优先级与跨轮约束保持；只提交合成问答，不提交规则、私有资料或训练字段。",
-      "blocked": false,
-      "requires_user_input": false
+      "version": "PSM_V0.273",
+      "objective": "对冻结的 V0.272 长对话状态回答执行来源隔离的独立外部语义裁判，重点检查用户事实权威、最新更正、未解任务、跨轮约束与持续话题切换；只提交合成问答，不提交规则、私有资料或训练字段。",
+      "blocked": true,
+      "requires_user_input": true
     },
     "primary_artifacts": {
       "case_pack": "case_packs/v0_251_independent_chat_golden_blind_set_boundary_adversarial_cases.json",
@@ -259,7 +259,7 @@
       "candidate_taxonomy": "taxonomy_out/psm_v0.251_candidate_taxonomy.json",
       "candidate_regression_fixtures": "fixture_out/psm_v0.251_candidate_regression_fixtures.json",
       "taxonomy_delta": "taxonomy_delta_out/psm_v0.251_taxonomy_delta.json",
-      "project_status": "project_status_out/psm_v0.270_project_status.json",
+      "project_status": "project_status_out/psm_v0.272_project_status.json",
       "regression": "regression_out/psm_v0.251_regression_check.json",
       "independent_chat_gate": "runtime/v0_251_wave_g_external_semantic_judge.json",
       "model_selection": "runtime/v0_251_base_upgrade_pairwise_gemini_pro_report.json",
@@ -401,7 +401,33 @@
       "v0_270_browser_attempts_failed": "runtime/v0_270_browser_attempts_failed.json",
       "v0_270_docker": "runtime/v0_270_multiturn_docker_boundary.json",
       "v0_270_checkpoint": "runtime/v0_270_multiturn_constraint_checkpoint.json",
-      "v0_270_promotion_manifest": "runtime/v0_270_multiturn_promotion_manifest.json"
+      "v0_270_promotion_manifest": "runtime/v0_270_multiturn_promotion_manifest.json",
+      "v0_271_original_package": "runtime/v0_271_external_multiturn_review_package.json",
+      "v0_271_original_package_gate": "runtime/v0_271_external_multiturn_package_gate.json",
+      "v0_271_original_external_failure": "runtime/v0_271_openai_external_multiturn_judge.json",
+      "v0_271_repair_report": "runtime/v0_271_external_multiturn_repair_report.json",
+      "v0_271_repaired_candidate": "runtime/v0_271_external_multiturn_repaired_candidate.json",
+      "v0_271_rejudge_package": "runtime/v0_271_external_multiturn_rejudge_package.json",
+      "v0_271_rejudge_package_gate": "runtime/v0_271_external_multiturn_rejudge_package_gate.json",
+      "v0_271_external_rejudge": "runtime/v0_271_openai_external_multiturn_rejudge.json",
+      "v0_271_runner_failure": "runtime/v0_271_rejudge_runner_attempt_1_failed.json",
+      "v0_271_gate": "runtime/v0_271_external_multiturn_gate.json",
+      "v0_271_budget": "runtime/v0_267_api_budget_ledger.json",
+      "v0_271_checkpoint": "runtime/v0_271_external_multiturn_checkpoint.json",
+      "v0_271_promotion_manifest": "runtime/v0_271_external_multiturn_promotion_manifest.json",
+      "v0_272_contract": "benchmarks/v0_272_long_context_state_contract.json",
+      "v0_272_errata": "benchmarks/v0_272_long_context_state_errata.json",
+      "v0_272_report": "runtime/v0_272_long_context_state_report.json",
+      "v0_272_gate": "runtime/v0_272_long_context_state_gate.json",
+      "v0_272_initial_failure_ledger": "runtime/v0_272_long_context_initial_failure_ledger.json",
+      "v0_272_browser": "runtime/v0_272_long_context_browser_regression/report.json",
+      "v0_272_docker_attempt_1_failed": "runtime/v0_272_long_context_docker_attempt_1_failed.json",
+      "v0_272_docker": "runtime/v0_272_long_context_docker_boundary.json",
+      "v0_272_checkpoint": "runtime/v0_272_long_context_state_checkpoint.json",
+      "v0_272_promotion_manifest": "runtime/v0_272_long_context_promotion_manifest.json",
+      "v0_273_external_package": "runtime/v0_273_external_long_context_review_package.json",
+      "v0_273_external_package_gate": "runtime/v0_273_external_long_context_package_gate.json",
+      "v0_273_checkpoint": "runtime/v0_273_external_long_context_checkpoint.json"
     },
     "regression": {
       "stem": "psm_v0.251",
@@ -849,6 +875,56 @@
       "contract_sha256": "1bfa35f3206c52a80545811bf7e62a1e4cc5be31f5717d5d582df3dc020c7f2c",
       "errata_sha256": "1f56d591059be7dc2f6f41534d8b99810e3e6e89f11c8cd16951f931a39a5c1b",
       "gate_sha256": "16d5981dcd0008c7358fe78c9a1a4dee6af8e6c2118e60e11ee09ec221eb311d"
+    },
+    "v0_271_external_multiturn_gate": {
+      "decision": "independent_external_multiturn_rejudge_passed_after_retained_failure_and_local_repair",
+      "passed": true,
+      "provider": "OpenAI",
+      "model": "gpt-5.4-2026-03-05",
+      "items": 12,
+      "items_passed": 12,
+      "final_failed_items": 0,
+      "final_critical_findings": 0,
+      "original_failed_items_retained": [
+        "M07",
+        "M08"
+      ],
+      "local_repairs": [
+        "M07",
+        "M08"
+      ],
+      "rejudge_total_tokens": 5406,
+      "runner_failures_retained": 1,
+      "api_retries_after_pass": 0,
+      "base_budget_usd": 20.0,
+      "user_approved_extension_usd": 4.0,
+      "reserved_monthly_budget_usd": 24.0,
+      "participant_content_calls": 0,
+      "synthetic_only": true,
+      "training_feedback_written": false,
+      "human_validation_claimed": false,
+      "package_sha256": "871dc120c954f7ab8de7dfe067a0e7b3237c1fcca6ad47a2aea62b259e5c2795",
+      "judge_sha256": "5e734d285489a53c83171d1e7a3090155845f0b29be5c7f541c0fe1f69a4c3f4",
+      "gate_sha256": "53314a5070dfc07b99753c528191b55ac190e7e55b0434a02e8a657bcc0803d2"
+    },
+    "v0_272_long_context_state_gate": {
+      "decision": "long_context_state_continuity_gate_passed",
+      "passed": true,
+      "cases": 10,
+      "cases_passed": 10,
+      "families": 5,
+      "initial_failure_count": 10,
+      "assistant_history_contamination": 0,
+      "stale_state_violations": 0,
+      "total_duration_ms": 147,
+      "transparent_errata_count": 1,
+      "docker_failures_retained": 1,
+      "synthetic_only": true,
+      "human_validation_claimed": false,
+      "evaluation_rows_used_for_training": false,
+      "contract_sha256": "b4cc6bd3eb137292ca538741e0d9f0ab73bba2f4f8daccf96a91cf9220447820",
+      "errata_sha256": "91e15cf870aa922ad0d69ac51f022ae832ade1f3d6cafbd670fb4a9c1f8cb6f4",
+      "gate_sha256": "60a5d93abdc06356578f2f5397bf2d9e4cf28583d0c72a6ce062b6aca3c303f2"
     }
   },
   "optional_project_status": {

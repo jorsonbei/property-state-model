@@ -1,0 +1,22 @@
+{
+  "schema_version": "psm_v0_271_external_multiturn_rejudge_package_gate_v1",
+  "passed": true,
+  "checks": {
+    "prior_external_failure_retained": true,
+    "local_repairs_pass": true,
+    "prior_budget_is_closed": true,
+    "prior_checkpoint_is_blocked": true,
+    "repaired_answers_are_direct": true,
+    "review_payload_hash_unchanged_from_repaired_candidate": true,
+    "synthetic_privacy_boundary_closed": true,
+    "release_boundary_closed": true,
+    "single_rejudge_call_authorized": true,
+    "additional_budget_exactly_four_usd": true,
+    "participant_content_calls_zero": true,
+    "prohibited_material_absent": true
+  },
+  "prohibited_material_found": [],
+  "review_payload_sha256": "f9c90c05bd156d42893d6c27e3ba2021308e52c8c634499b30cac8d4ecaa7fec",
+  "authorization": "approved_by_user_2026_07_16_additional_usd_4_synthetic_rejudge",
+  "budget_extension_scope": "synthetic_multiturn_rejudge_only"
+}

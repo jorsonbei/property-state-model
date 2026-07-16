@@ -1,0 +1,18 @@
+{
+  "schema_version": "psm_v0_271_rejudge_runner_failure_v1",
+  "attempt": 1,
+  "passed": false,
+  "occurred_at": "2026-07-16T00:52:52.354323+00:00",
+  "failure_stage": "post_write_result_path_display",
+  "failure_type": "relative_output_path_not_resolved_before_relative_to",
+  "external_call_completed": true,
+  "external_http_status": 200,
+  "external_result_artifact_written": true,
+  "external_result_passed": true,
+  "external_result": "runtime/v0_271_openai_external_multiturn_rejudge.json",
+  "api_retry_allowed": false,
+  "api_retry_executed": false,
+  "product_answer_changed": false,
+  "repair": "Resolve the output path before rendering a repository-relative display path.",
+  "evidence_boundary": "This is a local runner reporting failure after the independent external result was already written; it is not an external judge failure and does not authorize another API call."
+}

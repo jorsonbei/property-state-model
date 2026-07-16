@@ -1,0 +1,400 @@
+{
+  "schema_version": "psm_v0_273_external_long_context_review_package_v1",
+  "version": "PSM_V0.273-candidate",
+  "authorization": "not_authorized_monthly_budget_exhausted",
+  "created_at": "2026-07-16",
+  "privacy": {
+    "synthetic_only": true,
+    "contains_private_data": false,
+    "contains_user_documents": false,
+    "contains_participant_content": false,
+    "contains_secrets": false,
+    "contains_local_paths": false,
+    "contains_candidate_rules": false,
+    "contains_hidden_labels": false,
+    "training_eligible": false
+  },
+  "budget": {
+    "currency": "USD",
+    "maximum_api_calls": 0,
+    "reserved_usd": 0.0,
+    "reserved_total_month_usd": 24.0,
+    "monthly_limit_usd": 24.0,
+    "additional_authorization_required_usd": 4.0,
+    "blocked_reason": "monthly_api_budget_exhausted"
+  },
+  "review_payload": {
+    "rubric_dimensions": [
+      "semantic_correctness",
+      "user_fact_authority",
+      "latest_correction_priority",
+      "unresolved_task_recovery",
+      "constraint_persistence",
+      "topic_switch_cleanup",
+      "answer_directness",
+      "release_boundary"
+    ],
+    "items": [
+      {
+        "review_id": "L01",
+        "family": "user_fact_authority",
+        "conversation": [
+          {
+            "role": "user",
+            "content": "这个项目的代号定为松塔。"
+          },
+          {
+            "role": "assistant",
+            "content": "已记录项目代号为松塔。"
+          },
+          {
+            "role": "user",
+            "content": "界面先采用深色模式。"
+          },
+          {
+            "role": "assistant",
+            "content": "可以，先采用深色模式。"
+          },
+          {
+            "role": "user",
+            "content": "日志保留七天。"
+          },
+          {
+            "role": "assistant",
+            "content": "已记录日志保留七天。"
+          },
+          {
+            "role": "user",
+            "content": "回到最开始的项目设定：代号是什么？只给代号。"
+          }
+        ],
+        "final_answer": "松塔"
+      },
+      {
+        "review_id": "L02",
+        "family": "user_fact_authority",
+        "conversation": [
+          {
+            "role": "user",
+            "content": "会议最终时间是下午三点。"
+          },
+          {
+            "role": "assistant",
+            "content": "好的，会议最终时间是下午两点。"
+          },
+          {
+            "role": "user",
+            "content": "议程第一项是接口状态。"
+          },
+          {
+            "role": "assistant",
+            "content": "已记录议程第一项。"
+          },
+          {
+            "role": "user",
+            "content": "参会人暂时不变。"
+          },
+          {
+            "role": "assistant",
+            "content": "明白，参会人暂时不变。"
+          },
+          {
+            "role": "user",
+            "content": "以用户原话为准，会议最终时间是什么？只给时间。"
+          }
+        ],
+        "final_answer": "下午三点"
+      },
+      {
+        "review_id": "L03",
+        "family": "latest_correction",
+        "conversation": [
+          {
+            "role": "user",
+            "content": "输出文件名先定为 alpha.md。"
+          },
+          {
+            "role": "assistant",
+            "content": "已记录 alpha.md。"
+          },
+          {
+            "role": "user",
+            "content": "更正：输出文件名改为 beta.md，alpha.md 作废。"
+          },
+          {
+            "role": "assistant",
+            "content": "已更正为 beta.md。"
+          },
+          {
+            "role": "user",
+            "content": "文件内容使用中文。"
+          },
+          {
+            "role": "assistant",
+            "content": "好的，文件内容使用中文。"
+          },
+          {
+            "role": "user",
+            "content": "最终输出文件名是什么？只给文件名。"
+          }
+        ],
+        "final_answer": "beta.md"
+      },
+      {
+        "review_id": "L04",
+        "family": "latest_correction",
+        "conversation": [
+          {
+            "role": "user",
+            "content": "提交截止时间先定为本周五。"
+          },
+          {
+            "role": "assistant",
+            "content": "已记录本周五。"
+          },
+          {
+            "role": "user",
+            "content": "更正：截止时间改为下周一，本周五作废。"
+          },
+          {
+            "role": "assistant",
+            "content": "已更正为下周一。"
+          },
+          {
+            "role": "user",
+            "content": "提交方式仍然是在线上传。"
+          },
+          {
+            "role": "assistant",
+            "content": "明白，提交方式不变。"
+          },
+          {
+            "role": "user",
+            "content": "最终截止时间是什么？只给时间。"
+          }
+        ],
+        "final_answer": "下周一"
+      },
+      {
+        "review_id": "L05",
+        "family": "unresolved_task",
+        "conversation": [
+          {
+            "role": "user",
+            "content": "今天要完成接口回归和更新文档。"
+          },
+          {
+            "role": "assistant",
+            "content": "已记录两项任务。"
+          },
+          {
+            "role": "user",
+            "content": "接口回归已经完成。"
+          },
+          {
+            "role": "assistant",
+            "content": "接口回归已标记完成。"
+          },
+          {
+            "role": "user",
+            "content": "明天上午再开一次短会。"
+          },
+          {
+            "role": "assistant",
+            "content": "已记录短会安排。"
+          },
+          {
+            "role": "user",
+            "content": "原来两项任务中还有哪项没完成？只给事项。"
+          }
+        ],
+        "final_answer": "更新文档"
+      },
+      {
+        "review_id": "L06",
+        "family": "unresolved_task",
+        "conversation": [
+          {
+            "role": "user",
+            "content": "采购清单是电池和连接线。"
+          },
+          {
+            "role": "assistant",
+            "content": "已记录电池和连接线。"
+          },
+          {
+            "role": "user",
+            "content": "连接线已经买到了。"
+          },
+          {
+            "role": "assistant",
+            "content": "连接线已标记完成。"
+          },
+          {
+            "role": "user",
+            "content": "发票稍后整理。"
+          },
+          {
+            "role": "assistant",
+            "content": "好的，发票稍后整理。"
+          },
+          {
+            "role": "user",
+            "content": "采购清单里还缺什么？只给物品。"
+          }
+        ],
+        "final_answer": "电池"
+      },
+      {
+        "review_id": "L07",
+        "family": "constraint_persistence",
+        "conversation": [
+          {
+            "role": "user",
+            "content": "把“包裹已安全送达”翻译成英文，只给译文。"
+          },
+          {
+            "role": "assistant",
+            "content": "The package was delivered safely."
+          },
+          {
+            "role": "user",
+            "content": "接下来我会改一个词。"
+          },
+          {
+            "role": "assistant",
+            "content": "好的，请说明要修改的词。"
+          },
+          {
+            "role": "user",
+            "content": "其他格式要求都保持不变。"
+          },
+          {
+            "role": "assistant",
+            "content": "明白，保持原格式要求。"
+          },
+          {
+            "role": "user",
+            "content": "把 delivered 改成 arrived，其他约束不变。"
+          }
+        ],
+        "final_answer": "The package arrived safely."
+      },
+      {
+        "review_id": "L08",
+        "family": "constraint_persistence",
+        "conversation": [
+          {
+            "role": "user",
+            "content": "给我三步复习计划，每步写时间，只保留三步。"
+          },
+          {
+            "role": "assistant",
+            "content": "1. 20分钟复习公式。\n2. 40分钟做题。\n3. 30分钟整理错题。"
+          },
+          {
+            "role": "user",
+            "content": "计划主题仍然是物理。"
+          },
+          {
+            "role": "assistant",
+            "content": "明白，主题保持为物理。"
+          },
+          {
+            "role": "user",
+            "content": "第一步和第三步不用改。"
+          },
+          {
+            "role": "assistant",
+            "content": "好的，只修改第二步。"
+          },
+          {
+            "role": "user",
+            "content": "把第二步改成50分钟，仍然只保留三步。"
+          }
+        ],
+        "final_answer": "1. 20分钟复习公式。\n2. 50分钟做题。\n3. 30分钟整理错题。"
+      },
+      {
+        "review_id": "L09",
+        "family": "topic_switch_cleanup",
+        "conversation": [
+          {
+            "role": "user",
+            "content": "我刚才胸痛并且出冷汗。"
+          },
+          {
+            "role": "assistant",
+            "content": "这属于急症风险，应立即联系当地急救。"
+          },
+          {
+            "role": "user",
+            "content": "换个话题：现在只比较苹果和香蕉的口感。"
+          },
+          {
+            "role": "assistant",
+            "content": "苹果偏脆，成熟香蕉偏软。"
+          },
+          {
+            "role": "user",
+            "content": "先不讨论营养。"
+          },
+          {
+            "role": "assistant",
+            "content": "好的，只比较口感。"
+          },
+          {
+            "role": "user",
+            "content": "它们通常哪个更甜？"
+          }
+        ],
+        "final_answer": "通常成熟香蕉比多数苹果更甜，因为香蕉成熟后淀粉会转成糖。不过具体甜度取决于品种和成熟程度，有些高糖苹果也会比未成熟香蕉更甜。"
+      },
+      {
+        "review_id": "L10",
+        "family": "topic_switch_cleanup",
+        "conversation": [
+          {
+            "role": "user",
+            "content": "这个交易策略还没做滑点测试。"
+          },
+          {
+            "role": "assistant",
+            "content": "不能据此直接实盘。"
+          },
+          {
+            "role": "user",
+            "content": "换个话题：用书桌来比喻缓存。"
+          },
+          {
+            "role": "assistant",
+            "content": "缓存像放在书桌手边的常用资料。"
+          },
+          {
+            "role": "user",
+            "content": "继续沿用这个比喻。"
+          },
+          {
+            "role": "assistant",
+            "content": "好的，继续沿用书桌比喻。"
+          },
+          {
+            "role": "user",
+            "content": "缓存为什么也会过期？"
+          }
+        ],
+        "final_answer": "沿用书桌的比喻：缓存像放在手边的常用资料，但外面的原始资料会更新。如果桌上仍放旧版本，拿取虽然快，内容却可能错，所以缓存要设置过期时间，届时重新取最新资料。"
+      }
+    ]
+  },
+  "review_payload_sha256": "ecc229f2d23bfdebc5c040affda04efb2f844bbd599935254f9d9e41ed53b971",
+  "release_boundary": {
+    "open_domain_generalization_claimed": false,
+    "public_service_allowed": false,
+    "production_readiness_claimed": false,
+    "training_on_evaluation_rows_allowed": false,
+    "rule_replacement_allowed": false,
+    "professional_authority_allowed": false,
+    "external_release_authority": false
+  }
+}

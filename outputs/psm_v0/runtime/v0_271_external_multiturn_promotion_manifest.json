@@ -1,0 +1,68 @@
+{
+  "schema_version": "psm_v0_271_external_multiturn_promotion_manifest_v1",
+  "version": "PSM_V0.271",
+  "promoted_at": "2026-07-16",
+  "promoted": true,
+  "decision": "independent_external_multiturn_rejudge_passed_after_retained_failure_and_local_repair",
+  "formal_core_source": "PSM_V0.251",
+  "formal_core_records": 2228,
+  "external_multiturn": {
+    "decision": "independent_external_multiturn_rejudge_passed_after_retained_failure_and_local_repair",
+    "passed": true,
+    "provider": "OpenAI",
+    "model": "gpt-5.4-2026-03-05",
+    "items": 12,
+    "items_passed": 12,
+    "final_failed_items": 0,
+    "final_critical_findings": 0,
+    "original_failed_items_retained": [
+      "M07",
+      "M08"
+    ],
+    "local_repairs": [
+      "M07",
+      "M08"
+    ],
+    "rejudge_total_tokens": 5406,
+    "runner_failures_retained": 1,
+    "api_retries_after_pass": 0,
+    "base_budget_usd": 20.0,
+    "user_approved_extension_usd": 4.0,
+    "reserved_monthly_budget_usd": 24.0,
+    "participant_content_calls": 0,
+    "synthetic_only": true,
+    "training_feedback_written": false,
+    "human_validation_claimed": false,
+    "package_sha256": "871dc120c954f7ab8de7dfe067a0e7b3237c1fcca6ad47a2aea62b259e5c2795",
+    "judge_sha256": "5e734d285489a53c83171d1e7a3090155845f0b29be5c7f541c0fe1f69a4c3f4",
+    "gate_sha256": "53314a5070dfc07b99753c528191b55ac190e7e55b0434a02e8a657bcc0803d2"
+  },
+  "evidence": {
+    "original_package": "runtime/v0_271_external_multiturn_review_package.json",
+    "original_package_gate": "runtime/v0_271_external_multiturn_package_gate.json",
+    "original_failure": "runtime/v0_271_openai_external_multiturn_judge.json",
+    "repair": "runtime/v0_271_external_multiturn_repair_report.json",
+    "repaired_candidate": "runtime/v0_271_external_multiturn_repaired_candidate.json",
+    "rejudge_package": "runtime/v0_271_external_multiturn_rejudge_package.json",
+    "rejudge_package_gate": "runtime/v0_271_external_multiturn_rejudge_package_gate.json",
+    "rejudge": "runtime/v0_271_openai_external_multiturn_rejudge.json",
+    "runner_failure": "runtime/v0_271_rejudge_runner_attempt_1_failed.json",
+    "final_gate": "runtime/v0_271_external_multiturn_gate.json",
+    "budget": "runtime/v0_267_api_budget_ledger.json"
+  },
+  "release_boundary": {
+    "open_domain_generalization_claimed": false,
+    "public_service_allowed": false,
+    "production_readiness_claimed": false,
+    "training_on_evaluation_rows_allowed": false,
+    "rule_replacement_allowed": false,
+    "professional_authority_allowed": false,
+    "external_release_authority": false
+  },
+  "next_stage": {
+    "version": "PSM_V0.272",
+    "objective": "冻结长对话状态连续性与冲突恢复契约，验证用户事实、明确更正、未解事项和输出约束经过多个干扰轮次后仍可恢复；助手历史不得升级为用户事实，旧风险不得跨越明确话题切换。",
+    "blocked": false,
+    "requires_user_input": false
+  }
+}

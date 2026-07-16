@@ -1,0 +1,357 @@
+{
+  "schema_version": "psm_v0_272_long_context_state_report_v1",
+  "version": "PSM_V0.272-candidate",
+  "contract_sha256": "b4cc6bd3eb137292ca538741e0d9f0ab73bba2f4f8daccf96a91cf9220447820",
+  "errata_sha256": "91e15cf870aa922ad0d69ac51f022ae832ade1f3d6cafbd670fb4a9c1f8cb6f4",
+  "effective_contract_sha256": "a5796767ff2675ea3b428edf43bc90f114150b3cceb024368d8b88c46fce99d5",
+  "provenance": {
+    "author": "internal_contract_author",
+    "synthetic_only": true,
+    "created_before_first_run": true,
+    "contains_private_or_participant_data": false
+  },
+  "provider_mode": "deterministic_state_continuity_with_generation_provider_disabled",
+  "passed": true,
+  "summary": {
+    "cases": 10,
+    "passed": 10,
+    "failed": 0,
+    "assistant_history_contamination": 0,
+    "stale_state_violations": 0,
+    "total_duration_ms": 147,
+    "families": {
+      "user_fact_authority": {
+        "cases": 2,
+        "passed": 2
+      },
+      "latest_correction": {
+        "cases": 2,
+        "passed": 2
+      },
+      "unresolved_task": {
+        "cases": 2,
+        "passed": 2
+      },
+      "constraint_persistence": {
+        "cases": 2,
+        "passed": 2
+      },
+      "topic_switch_cleanup": {
+        "cases": 2,
+        "passed": 2
+      }
+    }
+  },
+  "rows": [
+    {
+      "case_id": "long_user_project_code",
+      "family": "user_fact_authority",
+      "passed": true,
+      "checks": {
+        "domain_matches": true,
+        "exact_answer_matches_when_frozen": true,
+        "required_markers_present": true,
+        "stale_or_forbidden_state_absent": true,
+        "line_constraint_met": true,
+        "deterministic_generation_completed": true,
+        "quality_audit_passed": true,
+        "sigma_plus_delivery_passed": true,
+        "long_history_retained": true,
+        "assistant_history_excluded_from_state_audit": true,
+        "release_boundary_closed": true
+      },
+      "answer": "松塔",
+      "actual_domain": "general",
+      "actual_risk": "medium",
+      "missing_required_markers": [],
+      "forbidden_found": [],
+      "generation": {
+        "status": "success",
+        "provider": "deterministic",
+        "model": null,
+        "error": null
+      },
+      "history_messages": 7,
+      "duration_ms": 29
+    },
+    {
+      "case_id": "assistant_cannot_override_user_time",
+      "family": "user_fact_authority",
+      "passed": true,
+      "checks": {
+        "domain_matches": true,
+        "exact_answer_matches_when_frozen": true,
+        "required_markers_present": true,
+        "stale_or_forbidden_state_absent": true,
+        "line_constraint_met": true,
+        "deterministic_generation_completed": true,
+        "quality_audit_passed": true,
+        "sigma_plus_delivery_passed": true,
+        "long_history_retained": true,
+        "assistant_history_excluded_from_state_audit": true,
+        "release_boundary_closed": true
+      },
+      "answer": "下午三点",
+      "actual_domain": "general",
+      "actual_risk": "medium",
+      "missing_required_markers": [],
+      "forbidden_found": [],
+      "generation": {
+        "status": "success",
+        "provider": "deterministic",
+        "model": null,
+        "error": null
+      },
+      "history_messages": 7,
+      "duration_ms": 14
+    },
+    {
+      "case_id": "latest_filename_correction",
+      "family": "latest_correction",
+      "passed": true,
+      "checks": {
+        "domain_matches": true,
+        "exact_answer_matches_when_frozen": true,
+        "required_markers_present": true,
+        "stale_or_forbidden_state_absent": true,
+        "line_constraint_met": true,
+        "deterministic_generation_completed": true,
+        "quality_audit_passed": true,
+        "sigma_plus_delivery_passed": true,
+        "long_history_retained": true,
+        "assistant_history_excluded_from_state_audit": true,
+        "release_boundary_closed": true
+      },
+      "answer": "beta.md",
+      "actual_domain": "general",
+      "actual_risk": "medium",
+      "missing_required_markers": [],
+      "forbidden_found": [],
+      "generation": {
+        "status": "success",
+        "provider": "deterministic",
+        "model": null,
+        "error": null
+      },
+      "history_messages": 7,
+      "duration_ms": 13
+    },
+    {
+      "case_id": "latest_deadline_correction",
+      "family": "latest_correction",
+      "passed": true,
+      "checks": {
+        "domain_matches": true,
+        "exact_answer_matches_when_frozen": true,
+        "required_markers_present": true,
+        "stale_or_forbidden_state_absent": true,
+        "line_constraint_met": true,
+        "deterministic_generation_completed": true,
+        "quality_audit_passed": true,
+        "sigma_plus_delivery_passed": true,
+        "long_history_retained": true,
+        "assistant_history_excluded_from_state_audit": true,
+        "release_boundary_closed": true
+      },
+      "answer": "下周一",
+      "actual_domain": "general",
+      "actual_risk": "medium",
+      "missing_required_markers": [],
+      "forbidden_found": [],
+      "generation": {
+        "status": "success",
+        "provider": "deterministic",
+        "model": null,
+        "error": null
+      },
+      "history_messages": 7,
+      "duration_ms": 13
+    },
+    {
+      "case_id": "unresolved_document_task",
+      "family": "unresolved_task",
+      "passed": true,
+      "checks": {
+        "domain_matches": true,
+        "exact_answer_matches_when_frozen": true,
+        "required_markers_present": true,
+        "stale_or_forbidden_state_absent": true,
+        "line_constraint_met": true,
+        "deterministic_generation_completed": true,
+        "quality_audit_passed": true,
+        "sigma_plus_delivery_passed": true,
+        "long_history_retained": true,
+        "assistant_history_excluded_from_state_audit": true,
+        "release_boundary_closed": true
+      },
+      "answer": "更新文档",
+      "actual_domain": "general",
+      "actual_risk": "medium",
+      "missing_required_markers": [],
+      "forbidden_found": [],
+      "generation": {
+        "status": "success",
+        "provider": "deterministic",
+        "model": null,
+        "error": null
+      },
+      "history_messages": 7,
+      "duration_ms": 13
+    },
+    {
+      "case_id": "unresolved_purchase_task",
+      "family": "unresolved_task",
+      "passed": true,
+      "checks": {
+        "domain_matches": true,
+        "exact_answer_matches_when_frozen": true,
+        "required_markers_present": true,
+        "stale_or_forbidden_state_absent": true,
+        "line_constraint_met": true,
+        "deterministic_generation_completed": true,
+        "quality_audit_passed": true,
+        "sigma_plus_delivery_passed": true,
+        "long_history_retained": true,
+        "assistant_history_excluded_from_state_audit": true,
+        "release_boundary_closed": true
+      },
+      "answer": "电池",
+      "actual_domain": "general",
+      "actual_risk": "medium",
+      "missing_required_markers": [],
+      "forbidden_found": [],
+      "generation": {
+        "status": "success",
+        "provider": "deterministic",
+        "model": null,
+        "error": null
+      },
+      "history_messages": 7,
+      "duration_ms": 13
+    },
+    {
+      "case_id": "long_translation_only_edit",
+      "family": "constraint_persistence",
+      "passed": true,
+      "checks": {
+        "domain_matches": true,
+        "exact_answer_matches_when_frozen": true,
+        "required_markers_present": true,
+        "stale_or_forbidden_state_absent": true,
+        "line_constraint_met": true,
+        "deterministic_generation_completed": true,
+        "quality_audit_passed": true,
+        "sigma_plus_delivery_passed": true,
+        "long_history_retained": true,
+        "assistant_history_excluded_from_state_audit": true,
+        "release_boundary_closed": true
+      },
+      "answer": "The package arrived safely.",
+      "actual_domain": "writing",
+      "actual_risk": "low",
+      "missing_required_markers": [],
+      "forbidden_found": [],
+      "generation": {
+        "status": "success",
+        "provider": "deterministic",
+        "model": null,
+        "error": null
+      },
+      "history_messages": 7,
+      "duration_ms": 14
+    },
+    {
+      "case_id": "long_three_step_edit",
+      "family": "constraint_persistence",
+      "passed": true,
+      "checks": {
+        "domain_matches": true,
+        "exact_answer_matches_when_frozen": true,
+        "required_markers_present": true,
+        "stale_or_forbidden_state_absent": true,
+        "line_constraint_met": true,
+        "deterministic_generation_completed": true,
+        "quality_audit_passed": true,
+        "sigma_plus_delivery_passed": true,
+        "long_history_retained": true,
+        "assistant_history_excluded_from_state_audit": true,
+        "release_boundary_closed": true
+      },
+      "answer": "1. 20分钟复习公式。\n2. 50分钟做题。\n3. 30分钟整理错题。",
+      "actual_domain": "writing",
+      "actual_risk": "low",
+      "missing_required_markers": [],
+      "forbidden_found": [],
+      "generation": {
+        "status": "success",
+        "provider": "deterministic",
+        "model": null,
+        "error": null
+      },
+      "history_messages": 7,
+      "duration_ms": 12
+    },
+    {
+      "case_id": "persistent_medical_topic_switch",
+      "family": "topic_switch_cleanup",
+      "passed": true,
+      "checks": {
+        "domain_matches": true,
+        "exact_answer_matches_when_frozen": true,
+        "required_markers_present": true,
+        "stale_or_forbidden_state_absent": true,
+        "line_constraint_met": true,
+        "deterministic_generation_completed": true,
+        "quality_audit_passed": true,
+        "sigma_plus_delivery_passed": true,
+        "long_history_retained": true,
+        "assistant_history_excluded_from_state_audit": true,
+        "release_boundary_closed": true
+      },
+      "answer": "通常成熟香蕉比多数苹果更甜，因为香蕉成熟后淀粉会转成糖。不过具体甜度取决于品种和成熟程度，有些高糖苹果也会比未成熟香蕉更甜。",
+      "actual_domain": "general",
+      "actual_risk": "medium",
+      "missing_required_markers": [],
+      "forbidden_found": [],
+      "generation": {
+        "status": "success",
+        "provider": "deterministic",
+        "model": null,
+        "error": null
+      },
+      "history_messages": 7,
+      "duration_ms": 13
+    },
+    {
+      "case_id": "persistent_trading_topic_switch",
+      "family": "topic_switch_cleanup",
+      "passed": true,
+      "checks": {
+        "domain_matches": true,
+        "exact_answer_matches_when_frozen": true,
+        "required_markers_present": true,
+        "stale_or_forbidden_state_absent": true,
+        "line_constraint_met": true,
+        "deterministic_generation_completed": true,
+        "quality_audit_passed": true,
+        "sigma_plus_delivery_passed": true,
+        "long_history_retained": true,
+        "assistant_history_excluded_from_state_audit": true,
+        "release_boundary_closed": true
+      },
+      "answer": "沿用书桌的比喻：缓存像放在手边的常用资料，但外面的原始资料会更新。如果桌上仍放旧版本，拿取虽然快，内容却可能错，所以缓存要设置过期时间，届时重新取最新资料。",
+      "actual_domain": "general",
+      "actual_risk": "medium",
+      "missing_required_markers": [],
+      "forbidden_found": [],
+      "generation": {
+        "status": "success",
+        "provider": "deterministic",
+        "model": null,
+        "error": null
+      },
+      "history_messages": 7,
+      "duration_ms": 13
+    }
+  ]
+}

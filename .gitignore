@@ -65,3 +65,5 @@ __pycache__/
 !/outputs/psm_v0/roadmap_out/PSM_Supervised_Pilot_Roadmap_V0.263_to_V0.264.md
 !/outputs/psm_v0/roadmap_out/PSM_Automated_Quality_Roadmap_V0.265_to_V0.266.md
 !/outputs/psm_v0/roadmap_out/PSM_V0.270_to_V0.271_External_Multiturn_Roadmap.md
+!/outputs/psm_v0/roadmap_out/PSM_V0.271_to_V0.272_Long_Context_State_Roadmap.md
+!/outputs/psm_v0/roadmap_out/PSM_V0.272_to_V0.273_External_Long_Context_Roadmap.md

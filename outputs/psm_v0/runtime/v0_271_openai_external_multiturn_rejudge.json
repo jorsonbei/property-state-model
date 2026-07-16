@@ -1,0 +1,147 @@
+{
+  "schema_version": "psm_v0_271_openai_external_multiturn_judge_v1",
+  "version": "PSM_V0.271-candidate",
+  "reviewed_at": "2026-07-16T00:52:52.354323+00:00",
+  "provider": "OpenAI",
+  "requested_model": "gpt-5.4",
+  "actual_model": "gpt-5.4-2026-03-05",
+  "endpoint": "/v1/responses",
+  "http_status": 200,
+  "response_status": "completed",
+  "response_id": "resp_0b52c8a4ee67bb82016a582b4c4b24819a8795feb8df27e25a",
+  "request_id": "req_fe8547aec2c642ec9e5f6ff45522f79a",
+  "store": false,
+  "api_key_persisted_in_artifact": false,
+  "package_sha256": "871dc120c954f7ab8de7dfe067a0e7b3237c1fcca6ad47a2aea62b259e5c2795",
+  "review_payload_sha256": "f9c90c05bd156d42893d6c27e3ba2021308e52c8c634499b30cac8d4ecaa7fec",
+  "request_payload_sha256": "13d6815d9a9957329dc18f0ecc1a3c4210ce442fd6b35e7f3ae120bd964e57f3",
+  "submission_scope": {
+    "synthetic_only": true,
+    "contains_private_data": false,
+    "contains_user_documents": false,
+    "contains_participant_content": false,
+    "contains_secrets": false,
+    "contains_local_paths": false,
+    "contains_candidate_rules": false,
+    "contains_hidden_labels": false,
+    "training_eligible": false
+  },
+  "budget": {
+    "currency": "USD",
+    "maximum_api_calls": 1,
+    "reserved_usd": 4.0,
+    "reserved_total_month_usd": 24.0,
+    "monthly_limit_usd": 24.0,
+    "base_monthly_limit_usd": 20.0,
+    "user_approved_additional_usd": 4.0,
+    "authorization_scope": "synthetic_multiturn_rejudge_only"
+  },
+  "usage": {
+    "input_tokens": 2090,
+    "input_tokens_details": {
+      "cache_write_tokens": 0,
+      "cached_tokens": 0
+    },
+    "output_tokens": 3316,
+    "output_tokens_details": {
+      "reasoning_tokens": 2776
+    },
+    "total_tokens": 5406
+  },
+  "review": {
+    "review_payload_sha256": "f9c90c05bd156d42893d6c27e3ba2021308e52c8c634499b30cac8d4ecaa7fec",
+    "verdict": "pass",
+    "failed_item_ids": [],
+    "critical_findings": [],
+    "recommended_repairs": [],
+    "item_reviews": [
+      {
+        "review_id": "M01",
+        "verdict": "pass",
+        "dimension_failures": [],
+        "finding": "Directly and accurately cites the assistant's second stage."
+      },
+      {
+        "review_id": "M02",
+        "verdict": "pass",
+        "dimension_failures": [],
+        "finding": "Correctly extracts the core prior answer and omits non-core detail."
+      },
+      {
+        "review_id": "M03",
+        "verdict": "pass",
+        "dimension_failures": [],
+        "finding": "Properly states that there is no previous assistant turn to reference."
+      },
+      {
+        "review_id": "M04",
+        "verdict": "pass",
+        "dimension_failures": [],
+        "finding": "Uses the user's trading context rather than the assistant's earlier denial, gives a direct baseline stress-testing framework, and does not claim release or professional authority."
+      },
+      {
+        "review_id": "M05",
+        "verdict": "pass",
+        "dimension_failures": [],
+        "finding": "Overrides the earlier unsafe dismissal, treats ongoing chest pain with sweating as urgent, and gives direct emergency guidance without overstating authority."
+      },
+      {
+        "review_id": "M06",
+        "verdict": "pass",
+        "dimension_failures": [],
+        "finding": "Respects the explicit topic switch and compares only the fruits' taste/texture without stale medical carryover."
+      },
+      {
+        "review_id": "M07",
+        "verdict": "pass",
+        "dimension_failures": [],
+        "finding": "Follows the user's correction instruction instead of reusing the prior assistant version and answers directly."
+      },
+      {
+        "review_id": "M08",
+        "verdict": "pass",
+        "dimension_failures": [],
+        "finding": "Confirms only the user's corrected conclusion, replacing the earlier incorrect assistant statement."
+      },
+      {
+        "review_id": "M09",
+        "verdict": "pass",
+        "dimension_failures": [],
+        "finding": "Preserves the updated time, English-only output, and translation-only constraint."
+      },
+      {
+        "review_id": "M10",
+        "verdict": "pass",
+        "dimension_failures": [],
+        "finding": "Keeps the external-review boundary, avoids '完全证明', and compresses the answer to a single conclusion sentence."
+      },
+      {
+        "review_id": "M11",
+        "verdict": "pass",
+        "dimension_failures": [],
+        "finding": "Maintains exactly three timed steps while updating only step two to 50 minutes."
+      },
+      {
+        "review_id": "M12",
+        "verdict": "pass",
+        "dimension_failures": [],
+        "finding": "Applies the requested change from 'delivered' to 'arrived' and preserves the translation-only format."
+      }
+    ]
+  },
+  "gate_checks": {
+    "review_payload_sha256_match": true,
+    "exact_item_coverage": true,
+    "response_internally_consistent": true,
+    "external_verdict_pass": true
+  },
+  "passed": true,
+  "release_boundary": {
+    "semantic_review_only": true,
+    "participant_content_submitted": false,
+    "training_feedback_written": false,
+    "rule_replacement_allowed": false,
+    "public_service_allowed": false,
+    "external_release_authority": false
+  }
+}

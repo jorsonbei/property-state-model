@@ -2,7 +2,7 @@ PYTHON ?= python3
 NPM ?= npm
 PSM_ROOT := outputs/psm_v0
 
-.PHONY: check test serve inventory sync-runtime route-v253-eval route-v253-docker state-v254-eval state-v254-docker alpha-v255-eval alpha-v255-docker annotation-v256-eval annotation-v256-docker encoder-v257-eval encoder-v257-docker calibrate-v258-eval calibrate-v258-docker sigma-v259-eval sigma-v259-docker readiness-v260-review readiness-v260-docker repair-v261-eval judge-v261-openai promote-v261 external-v261-docker protocol-v262-eval judge-v262-openai promote-v262 external-v262-docker prepare-v263 enrollment-v263-eval enrollment-v263-docker enrollment-v263-completed-docker promote-v263 pilot-v264-eval pilot-v264-docker promote-v264 quality-v265-eval quality-v265-docker promote-v265 adversarial-v266-eval adversarial-v266-docker promote-v266 prepare-v267 repair-v267-external judge-v267-openai external-v267-docker promote-v267 task-v268-eval task-v268-docker promote-v268 stability-v269-eval stability-v269-docker promote-v269 multiturn-v270-eval multiturn-v270-docker promote-v270 prepare-v271 judge-v271-openai repair-v271-local browser-install browser-regression browser-regression-real browser-regression-v253 browser-regression-v254 browser-regression-v255 browser-regression-v256 browser-regression-v257 browser-regression-v258 browser-regression-v259 browser-regression-v260 browser-regression-v261 browser-regression-v262 browser-regression-v263-enrollment browser-regression-v263-completed browser-regression-v264-completed browser-regression-v265-quality browser-regression-v266-adversarial browser-regression-v267-external browser-regression-v268-task browser-regression-v269-stability browser-regression-v270-multiturn judge-v251-external judge-v251-external-c judge-v251-external-d judge-v251-external-e judge-v251-external-f judge-v251-external-g docker-config docker-build docker-up
+.PHONY: check test serve inventory sync-runtime route-v253-eval route-v253-docker state-v254-eval state-v254-docker alpha-v255-eval alpha-v255-docker annotation-v256-eval annotation-v256-docker encoder-v257-eval encoder-v257-docker calibrate-v258-eval calibrate-v258-docker sigma-v259-eval sigma-v259-docker readiness-v260-review readiness-v260-docker repair-v261-eval judge-v261-openai promote-v261 external-v261-docker protocol-v262-eval judge-v262-openai promote-v262 external-v262-docker prepare-v263 enrollment-v263-eval enrollment-v263-docker enrollment-v263-completed-docker promote-v263 pilot-v264-eval pilot-v264-docker promote-v264 quality-v265-eval quality-v265-docker promote-v265 adversarial-v266-eval adversarial-v266-docker promote-v266 prepare-v267 repair-v267-external judge-v267-openai external-v267-docker promote-v267 task-v268-eval task-v268-docker promote-v268 stability-v269-eval stability-v269-docker promote-v269 multiturn-v270-eval multiturn-v270-docker promote-v270 prepare-v271 judge-v271-openai repair-v271-local authorize-v271-rejudge rejudge-v271-openai finalize-v271 promote-v271 long-context-v272-eval long-context-v272-docker promote-v272 prepare-v273 browser-install browser-regression browser-regression-real browser-regression-v253 browser-regression-v254 browser-regression-v255 browser-regression-v256 browser-regression-v257 browser-regression-v258 browser-regression-v259 browser-regression-v260 browser-regression-v261 browser-regression-v262 browser-regression-v263-enrollment browser-regression-v263-completed browser-regression-v264-completed browser-regression-v265-quality browser-regression-v266-adversarial browser-regression-v267-external browser-regression-v268-task browser-regression-v269-stability browser-regression-v270-multiturn browser-regression-v272-long-context judge-v251-external judge-v251-external-c judge-v251-external-d judge-v251-external-e judge-v251-external-f judge-v251-external-g docker-config docker-build docker-up
 
 check:
 	$(PYTHON) scripts/verify_project.py
@@ -184,6 +184,32 @@ judge-v271-openai:
 repair-v271-local:
 	PYTHONPATH=$(PSM_ROOT) $(PYTHON) scripts/evaluate_v0_271_external_findings_repair.py
 
+authorize-v271-rejudge:
+	PYTHONPATH=$(PSM_ROOT) $(PYTHON) scripts/authorize_v0_271_external_multiturn_rejudge.py
+
+rejudge-v271-openai:
+	PYTHONPATH=$(PSM_ROOT) $(PYTHON) scripts/run_v0_271_openai_multiturn_judge.py \
+		--package $(PSM_ROOT)/runtime/v0_271_external_multiturn_rejudge_package.json \
+		--out $(PSM_ROOT)/runtime/v0_271_openai_external_multiturn_rejudge.json
+
+finalize-v271:
+	$(PYTHON) scripts/finalize_v0_271_external_multiturn_rejudge.py
+
+promote-v271:
+	$(PYTHON) scripts/promote_v0_271_external_multiturn.py
+
+long-context-v272-eval:
+	PYTHONPATH=$(PSM_ROOT) $(PYTHON) scripts/evaluate_v0_272_long_context_state.py
+
+long-context-v272-docker:
+	$(PYTHON) scripts/verify_v0_272_long_context_docker.py
+
+promote-v272:
+	$(PYTHON) scripts/promote_v0_272_long_context_state.py
+
+prepare-v273:
+	PYTHONPATH=$(PSM_ROOT) $(PYTHON) scripts/build_v0_273_external_long_context_package.py
+
 browser-install:
 	$(NPM) install
 	$(NPM) exec playwright install chromium
@@ -315,6 +341,10 @@ browser-regression-v269-stability:
 browser-regression-v270-multiturn:
 	PSM_BASE_URL=$${PSM_BASE_URL:-http://127.0.0.1:8765} \
 	node scripts/browser_regression_v270_multiturn.cjs
+
+browser-regression-v272-long-context:
+	PSM_BASE_URL=$${PSM_BASE_URL:-http://127.0.0.1:8765} \
+	node scripts/browser_regression_v272_long_context.cjs
 
 judge-v251-external: judge-v251-external-c judge-v251-external-d judge-v251-external-e judge-v251-external-f judge-v251-external-g
 

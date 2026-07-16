@@ -1,0 +1,246 @@
+{
+  "schema_version": "psm_v0_272_long_context_initial_failure_ledger_v1",
+  "version": "PSM_V0.272-candidate",
+  "frozen_at": "2026-07-16",
+  "contract_sha256": "b4cc6bd3eb137292ca538741e0d9f0ab73bba2f4f8daccf96a91cf9220447820",
+  "first_run_completed_before_candidate_changes": true,
+  "append_only": true,
+  "initial_failure_count": 10,
+  "initial_failures": [
+    {
+      "case_id": "long_user_project_code",
+      "family": "user_fact_authority",
+      "failed_checks": [
+        "exact_answer_matches_when_frozen",
+        "required_markers_present",
+        "deterministic_generation_completed"
+      ],
+      "actual_domain": "general",
+      "actual_risk": "medium",
+      "missing_required_markers": [
+        "松塔"
+      ],
+      "forbidden_found": [],
+      "answer": "本地生成模型这次没有返回有效内容，因此我不能可靠回答“回到最开始的项目设定：代号是什么？只给代号。”。你可以重试；当前状态链和安全边界仍然有效。",
+      "generation": {
+        "status": "degraded",
+        "provider": "deterministic_fallback",
+        "model": null,
+        "error": "URLError: <urlopen error [Errno 61] Connection refused>"
+      }
+    },
+    {
+      "case_id": "assistant_cannot_override_user_time",
+      "family": "user_fact_authority",
+      "failed_checks": [
+        "exact_answer_matches_when_frozen",
+        "required_markers_present",
+        "deterministic_generation_completed"
+      ],
+      "actual_domain": "general",
+      "actual_risk": "medium",
+      "missing_required_markers": [
+        "下午三点"
+      ],
+      "forbidden_found": [],
+      "answer": "本地生成模型这次没有返回有效内容，因此我不能可靠回答“以用户原话为准，会议最终时间是什么？只给时间。”。你可以重试；当前状态链和安全边界仍然有效。",
+      "generation": {
+        "status": "degraded",
+        "provider": "deterministic_fallback",
+        "model": null,
+        "error": "URLError: <urlopen error [Errno 61] Connection refused>"
+      }
+    },
+    {
+      "case_id": "latest_filename_correction",
+      "family": "latest_correction",
+      "failed_checks": [
+        "exact_answer_matches_when_frozen",
+        "required_markers_present",
+        "deterministic_generation_completed"
+      ],
+      "actual_domain": "general",
+      "actual_risk": "medium",
+      "missing_required_markers": [
+        "beta.md"
+      ],
+      "forbidden_found": [],
+      "answer": "本地生成模型这次没有返回有效内容，因此我不能可靠回答“最终输出文件名是什么？只给文件名。”。你可以重试；当前状态链和安全边界仍然有效。",
+      "generation": {
+        "status": "degraded",
+        "provider": "deterministic_fallback",
+        "model": null,
+        "error": "URLError: <urlopen error [Errno 61] Connection refused>"
+      }
+    },
+    {
+      "case_id": "latest_deadline_correction",
+      "family": "latest_correction",
+      "failed_checks": [
+        "exact_answer_matches_when_frozen",
+        "required_markers_present",
+        "deterministic_generation_completed"
+      ],
+      "actual_domain": "general",
+      "actual_risk": "medium",
+      "missing_required_markers": [
+        "下周一"
+      ],
+      "forbidden_found": [],
+      "answer": "本地生成模型这次没有返回有效内容，因此我不能可靠回答“最终截止时间是什么？只给时间。”。你可以重试；当前状态链和安全边界仍然有效。",
+      "generation": {
+        "status": "degraded",
+        "provider": "deterministic_fallback",
+        "model": null,
+        "error": "URLError: <urlopen error [Errno 61] Connection refused>"
+      }
+    },
+    {
+      "case_id": "unresolved_document_task",
+      "family": "unresolved_task",
+      "failed_checks": [
+        "exact_answer_matches_when_frozen",
+        "required_markers_present",
+        "deterministic_generation_completed"
+      ],
+      "actual_domain": "general",
+      "actual_risk": "medium",
+      "missing_required_markers": [
+        "更新文档"
+      ],
+      "forbidden_found": [],
+      "answer": "本地生成模型这次没有返回有效内容，因此我不能可靠回答“原来两项任务中还有哪项没完成？只给事项。”。你可以重试；当前状态链和安全边界仍然有效。",
+      "generation": {
+        "status": "degraded",
+        "provider": "deterministic_fallback",
+        "model": null,
+        "error": "URLError: <urlopen error [Errno 61] Connection refused>"
+      }
+    },
+    {
+      "case_id": "unresolved_purchase_task",
+      "family": "unresolved_task",
+      "failed_checks": [
+        "exact_answer_matches_when_frozen",
+        "required_markers_present",
+        "deterministic_generation_completed"
+      ],
+      "actual_domain": "general",
+      "actual_risk": "medium",
+      "missing_required_markers": [
+        "电池"
+      ],
+      "forbidden_found": [],
+      "answer": "本地生成模型这次没有返回有效内容，因此我不能可靠回答“采购清单里还缺什么？只给物品。”。你可以重试；当前状态链和安全边界仍然有效。",
+      "generation": {
+        "status": "degraded",
+        "provider": "deterministic_fallback",
+        "model": null,
+        "error": "URLError: <urlopen error [Errno 61] Connection refused>"
+      }
+    },
+    {
+      "case_id": "long_translation_only_edit",
+      "family": "constraint_persistence",
+      "failed_checks": [
+        "exact_answer_matches_when_frozen",
+        "required_markers_present",
+        "quality_audit_passed",
+        "sigma_plus_delivery_passed"
+      ],
+      "actual_domain": "writing",
+      "actual_risk": "low",
+      "missing_required_markers": [
+        "The package arrived safely."
+      ],
+      "forbidden_found": [],
+      "answer": "明白，保持原格式要求。",
+      "generation": {
+        "status": "success",
+        "provider": "deterministic",
+        "model": null,
+        "error": null
+      }
+    },
+    {
+      "case_id": "long_three_step_edit",
+      "family": "constraint_persistence",
+      "failed_checks": [
+        "domain_matches",
+        "exact_answer_matches_when_frozen",
+        "required_markers_present",
+        "deterministic_generation_completed"
+      ],
+      "actual_domain": "writing",
+      "actual_risk": "low",
+      "missing_required_markers": [
+        "20分钟",
+        "30分钟"
+      ],
+      "forbidden_found": [],
+      "answer": "可以。我会按你的目标来写，并避免把没有验证的内容写成定论。你这句话的核心需求是：把第二步改成50分钟，仍然只保留三步。",
+      "generation": {
+        "status": "degraded",
+        "provider": "deterministic_fallback",
+        "model": null,
+        "error": "URLError: <urlopen error [Errno 61] Connection refused>"
+      }
+    },
+    {
+      "case_id": "persistent_medical_topic_switch",
+      "family": "topic_switch_cleanup",
+      "failed_checks": [
+        "domain_matches",
+        "required_markers_present",
+        "stale_or_forbidden_state_absent",
+        "deterministic_generation_completed"
+      ],
+      "actual_domain": "medical",
+      "actual_risk": "critical",
+      "missing_required_markers": [
+        "香蕉",
+        "甜"
+      ],
+      "forbidden_found": [
+        "胸痛",
+        "急救",
+        "医生"
+      ],
+      "answer": "我可以帮你判断信息是否完整，但不能在聊天中替代医生诊断。如果出现胸痛、呼吸困难、意识异常、大量出血或症状迅速恶化，请立即联系当地急救。其余情况请说明症状、开始时间、严重程度、年龄、既往病史和正在使用的药物，我会帮你整理就医重点。",
+      "generation": {
+        "status": "degraded",
+        "provider": "deterministic_fallback",
+        "model": null,
+        "error": "URLError: <urlopen error [Errno 61] Connection refused>"
+      }
+    },
+    {
+      "case_id": "persistent_trading_topic_switch",
+      "family": "topic_switch_cleanup",
+      "failed_checks": [
+        "domain_matches",
+        "required_markers_present",
+        "stale_or_forbidden_state_absent",
+        "deterministic_generation_completed"
+      ],
+      "actual_domain": "trading",
+      "actual_risk": "critical",
+      "missing_required_markers": [
+        "缓存",
+        "更新",
+        "过期"
+      ],
+      "forbidden_found": [
+        "滑点",
+        "回撤"
+      ],
+      "answer": "先把滑点设成基准值的 1 倍、2 倍和 3 倍，并同时提高佣金、价差和成交延迟；每个情景重算净收益、最大回撤、成交率和容量。若收益消失或回撤越过预设门槛就记为失败，不进入模拟盘。",
+      "generation": {
+        "status": "degraded",
+        "provider": "deterministic_fallback",
+        "model": null,
+        "error": "URLError: <urlopen error [Errno 61] Connection refused>"
+      }
+    }
+  ]
+}

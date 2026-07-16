@@ -1,4 +1,4 @@
-# 物性AI Chat Alpha 0.270 / Multi-turn Constraints
+# 物性AI Chat Alpha 0.272 / Long-context State Continuity
 
 Local normal-chat demo backed by the latest PSM pipeline status.
 
@@ -24,14 +24,14 @@ Boundary:
 
 - Internal local chat demo only.
 - The normal chat remains an internal local demo. The completed V0.264 invite-only trial remains historical evidence.
-- V0.270 uses frozen synthetic multi-turn cases; it collects no human ratings and claims no human validation.
+- V0.272 uses frozen synthetic long-context cases; it collects no human ratings and claims no human validation.
 - Not medical, legal, trading, or production release authority.
 - Session memory is not consent or release authority.
 - Rule replacement remains off.
 
 Verified scope:
 
-- `/api/status` reports the latest promoted project status, currently `PSM V0.270`, plus the historical enrollment counts.
+- `/api/status` reports the latest promoted project status, currently `PSM V0.272`, plus the historical enrollment counts.
 - `/api/status` exposes `internal_trial_ready` separately from the still-closed external-user gate.
 - `/api/chat` preserves user and assistant roles across multi-turn history.
 - Project status and roadmap answers are grounded in the local structured status.
@@ -59,7 +59,9 @@ Verified scope:
 - V0.268 retains five initial task failures and three transparent errata, then passes 21/21 translation, rewriting, extraction, comparison, summarization, planning, and explanation tasks.
 - V0.269 passes 21/21 repeated task runs plus cancel, timeout, retry, offline, empty-response, browser, and Docker recovery gates.
 - V0.270 retains five initial failures, then passes 12/12 multi-turn reference, topic-switch, correction-priority, and constraint-persistence cases.
-- V0.271 remains unpromoted after an external M07/M08 failure; both are repaired locally, but the monthly API budget blocks rejudging.
+- V0.271 retains the initial external M07/M08 failure and passes the separately authorized 12/12 independent rejudge after local repair.
+- V0.272 retains a 0/10 first run and then passes 10/10 long-context state cases plus browser and Docker boundaries.
+- V0.273 is package-ready but has zero authorized API calls while the USD 24/24 synthetic budget is fully reserved.
 - Sensitive or unknown participant data stops the entire trial without automatic resume. Raw prompts and answers are never persisted or submitted to external APIs.
 
 Browser regression:
