@@ -9,7 +9,7 @@ PSM is an experimental state-first AI control layer. It routes a request through
 - Deterministic state pipeline: `Q -> Omega -> phi -> Delta sigma -> Pi -> eta -> B_sigma -> Sigma+`.
 - Candidate generation adapters, lexical auditing, deterministic gating, failure ledger, and regression artifacts.
 - Local chat alpha backed by Ollama.
-- Current public baseline: `PSM V0.265` (formal 2228-record core evidence source: `PSM V0.251`).
+- Current public baseline: `PSM V0.270` (formal 2228-record core evidence source: `PSM V0.251`).
 - V0.251's fresh externally authored Wave G passed 20/20 under an independent external semantic judge; usefulness, safety, correctness, relevance, boundary quality, and hallucination control were each 1.0000 on that frozen synthetic blind wave.
 - V0.252 adds a stable internal chat-product gate with cancel, timeout, retry, recovery, progressive display, hidden debug evidence, and desktop/mobile/real-backend browser regression.
 - V0.253 replaces passive Omega route labels with four executable local/read-only evidence adapters and a fail-closed provenance/failure-ledger contract.
@@ -25,6 +25,12 @@ PSM is an experimental state-first AI control layer. It routes a request through
 - V0.263 records three complete operator-attested enrollment sequences, three passing private access checks, and the first content-free supervised low-risk session evidence. Desktop/mobile and Docker boundaries pass; invitation values remain outside Git and Docker. This activates only the local supervised invite-only trial, not a public service or privacy-compliance claim.
 - V0.264 completes and promotes the bounded three-person pilot: P01-P03 each reached 3/3 credited low-risk turns, with 20 content-free allowed events, zero raw prompt/answer retention, and zero participant-content external API calls.
 - V0.265 replaces the cancelled human-rating gate with 30 frozen synthetic quality cases, including 12 simulated user roles. All 30 cases and all 12 role-proxy rubrics pass, with zero critical factual hallucinations and zero critical safety false negatives. The evidence is synthetic and does not claim real-user satisfaction or human validation.
+- V0.266 freezes 15 adversarial metamorphic pairs and 30 variants across paraphrase, role history, negation, event time, and release boundaries. Eight initial failing pairs are retained before repair; the final suite passes 15/15 and 30/30 with zero critical factual hallucinations, safety false negatives, or evaluation backflow.
+- V0.267 sends a sanitized, source-isolated synthetic package to `gpt-5.4`. Three failed external attempts are retained, the resulting translation/rewrite findings are repaired locally, and the final independent review passes all 15/15 pairs with no critical findings.
+- V0.268 measures whether normal chat actually completes translation, rewriting, extraction, comparison, summarization, planning, and explanation tasks. Five initial failures and three transparent contract errata are retained; the final frozen suite passes 21/21 with no provider-failure substitute or task-restatement substitute.
+- V0.269 repeats seven representative tasks three times and passes 21/21 semantic invariants with zero provider or deterministic drift; local p50/p95 are 23 ms/16.771 s, and real cancel, timeout, retry, empty-response, offline-provider, browser, and Docker recovery gates pass.
+- V0.270 passes 12/12 frozen multi-turn cases after retaining five initial failures. It preserves assistant references, explicit topic switches, user corrections, literal exclusions, three-step formatting, and translation-only constraints without assistant-history contamination.
+- V0.271 is not promoted. Its one authorized `gpt-5.4` review failed M07/M08 for over-answering. Both are repaired locally, but external rejudging is blocked because the approved USD 20 monthly API budget is fully reserved.
 
 This repository is an experimental research and engineering system. It is not a medical, legal, investment, production-release, or external-user authorization system. Passing synthetic regressions does not prove open-domain generalization.
 
@@ -79,9 +85,34 @@ make quality-v265-eval
 make browser-regression-v265-quality
 make quality-v265-docker
 make promote-v265
+make adversarial-v266-eval
+make browser-regression-v266-adversarial
+make adversarial-v266-docker
+make promote-v266
+make prepare-v267
+make judge-v267-openai
+make repair-v267-external
+make browser-regression-v267-external
+make external-v267-docker
+make promote-v267
+make task-v268-eval
+make browser-regression-v268-task
+make task-v268-docker
+make promote-v268
+make stability-v269-eval
+make browser-regression-v269-stability
+make stability-v269-docker
+make promote-v269
+make multiturn-v270-eval
+make browser-regression-v270-multiturn
+make multiturn-v270-docker
+make promote-v270
+make prepare-v271
+make judge-v271-openai
+make repair-v271-local
 ```
 
-The historical local operator page is `http://127.0.0.1:8765/trial-enrollment`. It displays the completed V0.264 supervised-pilot record. V0.265 no longer collects participant ratings or requires human actions.
+The historical local operator page is `http://127.0.0.1:8765/trial-enrollment`. It displays the completed V0.264 supervised-pilot record. V0.270 collects no participant ratings and requires no human actions.
 
 Generate a read-only inventory of the local evidence store without moving or deleting artifacts:
 
@@ -98,7 +129,7 @@ make sync-runtime
 docker compose up --build
 ```
 
-Open `http://127.0.0.1:8766/`. Docker publishes only on the local loopback interface, and the container connects to host Ollama through `host.docker.internal`. The Docker runtime excludes V0.263 private invitations and contains no V0.265 human-feedback module, state, UI, or endpoint.
+Open `http://127.0.0.1:8766/`. Docker publishes only on the local loopback interface, and the container connects to host Ollama through `host.docker.internal`. The Docker runtime excludes V0.263 private invitations and contains no human-feedback module, state, UI, or endpoint.
 
 ## Repository map
 
@@ -126,7 +157,7 @@ make judge-v251-external
 
 - Human recovery point: [`outputs/psm_v0/CURRENT_STATUS.md`](outputs/psm_v0/CURRENT_STATUS.md)
 - Architecture: [`outputs/psm_v0/PSM_V0_Blueprint.md`](outputs/psm_v0/PSM_V0_Blueprint.md)
-- Current execution roadmap: [`outputs/psm_v0/roadmap_out/PSM_Automated_Quality_Roadmap_V0.265_to_V0.266.md`](outputs/psm_v0/roadmap_out/PSM_Automated_Quality_Roadmap_V0.265_to_V0.266.md)
+- Current execution roadmap: [`outputs/psm_v0/roadmap_out/PSM_V0.270_to_V0.271_External_Multiturn_Roadmap.md`](outputs/psm_v0/roadmap_out/PSM_V0.270_to_V0.271_External_Multiturn_Roadmap.md)
 
 ## Open-source boundary
 

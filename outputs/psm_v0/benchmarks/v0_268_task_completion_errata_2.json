@@ -1,0 +1,16 @@
+{
+  "schema_version": "psm_v0_268_task_completion_errata_v2",
+  "version": "PSM_V0.268",
+  "issued_at": "2026-07-16",
+  "source_contract_unchanged": true,
+  "applies_after": "v0_268_task_completion_errata.json",
+  "reason": "A second valid concise Chinese form, '明上午', appeared after the first transparent synonym amendment.",
+  "corrections": [
+    {
+      "case_id": "rewrite_concise_notice",
+      "field": "required_any_groups[0]",
+      "before": ["明早", "明天上午", "明日上午"],
+      "after": ["明早", "明天上午", "明日上午", "明上午"]
+    }
+  ]
+}

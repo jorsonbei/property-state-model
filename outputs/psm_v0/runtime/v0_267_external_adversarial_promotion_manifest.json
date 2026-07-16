@@ -1,0 +1,59 @@
+{
+  "schema_version": "psm_v0_267_external_adversarial_promotion_manifest_v1",
+  "version": "PSM_V0.267",
+  "promoted_at": "2026-07-16",
+  "promoted": true,
+  "decision": "independent_external_adversarial_semantic_judge_passed",
+  "formal_core_source": "PSM_V0.251",
+  "formal_core_records": 2228,
+  "external_adversarial": {
+    "passed": true,
+    "provider": "OpenAI",
+    "model": "gpt-5.4-2026-03-05",
+    "pairs": 15,
+    "pairs_passed": 15,
+    "final_failed_pairs": 0,
+    "final_critical_findings": 0,
+    "failed_attempts_retained": 3,
+    "external_findings_repaired": [
+      "R07",
+      "R08",
+      "R09"
+    ],
+    "reserved_monthly_budget_usd": 16.0,
+    "monthly_budget_limit_usd": 20.0,
+    "participant_content_calls": 0,
+    "training_feedback_written": false,
+    "human_validation_claimed": false,
+    "package_sha256": "d5795edbe41d2e6472fe4bceb79a722fe46d38c4e782d61e71f419e97b1ad258",
+    "judge_sha256": "01ef8b0fe773905ba944b3266a6e16f16cda84e6bc1edc8022f18d2c1054a010"
+  },
+  "evidence": {
+    "package": "runtime/v0_267_external_adversarial_review_package.json",
+    "package_gate": "runtime/v0_267_external_adversarial_package_gate.json",
+    "repair": "runtime/v0_267_external_adversarial_repair_report.json",
+    "final_judge": "runtime/v0_267_openai_external_adversarial_judge.json",
+    "failed_attempts": [
+      "runtime/v0_267_openai_external_adversarial_judge_attempt_1_failed.json",
+      "runtime/v0_267_openai_external_adversarial_judge_attempt_2_failed.json",
+      "runtime/v0_267_openai_external_adversarial_judge_attempt_3_failed.json"
+    ],
+    "budget": "runtime/v0_267_api_budget_ledger.json",
+    "browser": "runtime/v0_267_external_adversarial_browser_regression/report.json",
+    "docker": "runtime/v0_267_external_adversarial_docker_boundary.json"
+  },
+  "release_boundary": {
+    "external_judge_controls_route": false,
+    "external_judge_controls_risk": false,
+    "external_judge_controls_release": false,
+    "evaluation_rows_used_for_training": false,
+    "rule_replacement_allowed": false,
+    "external_release_authority": false
+  },
+  "next_stage": {
+    "version": "PSM_V0.268",
+    "objective": "构建来源隔离的普通聊天任务完成度基准，覆盖翻译、改写、比较、解释、提取、摘要与规划；要求实际完成用户动作，禁止用边界说明、模型失败模板或任务复述代替答案。",
+    "blocked": false,
+    "requires_user_input": false
+  }
+}

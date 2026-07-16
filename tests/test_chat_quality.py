@@ -120,10 +120,7 @@ class ChatQualityTests(unittest.TestCase):
         self.assertIn(context["current_version"], result["chat"]["assistant_message"])
         self.assertIn(context["next_version"], result["chat"]["assistant_message"])
         self.assertIn(context["next_objective"], result["chat"]["assistant_message"])
-        self.assertIn("来源隔离", result["chat"]["assistant_message"])
-        self.assertIn("变形不变量", result["chat"]["assistant_message"])
-        self.assertIn("评测集", result["chat"]["assistant_message"])
-        self.assertIn("外部", result["chat"]["assistant_message"])
+        self.assertIn("外部试用继续保持关闭", result["chat"]["assistant_message"])
 
     def test_working_chat_does_not_imply_external_release(self) -> None:
         context = server.load_project_context()
@@ -201,6 +198,26 @@ class ChatQualityTests(unittest.TestCase):
         self.assertIn("先“接状态”", answer)
         self.assertNotIn("页面应该就是正常聊天模式", answer)
         self.assertEqual(result["chat"]["quality_audit"]["status"], "pass")
+
+    def test_bounded_meta_language_requests_complete_the_requested_action(self) -> None:
+        cases = [
+            ("这不是医疗诊断，只是语言分析：把“胸痛”翻译成英文。", "chest pain"),
+            ("不涉及交易建议，只把“股票”两个字翻译成英文。", "stock"),
+            ("结论并未完全证明，请保持这个否定边界。", "尚未达到完全证明"),
+        ]
+        for prompt, marker in cases:
+            with self.subTest(prompt=prompt):
+                result = self.run_offline([{"role": "user", "content": prompt}])
+                answer = result["chat"]["assistant_message"]
+                self.assertIn(marker, answer)
+                self.assertNotIn("本地生成模型这次没有返回有效内容", answer)
+                self.assertEqual(result["chat"]["quality_audit"]["status"], "pass")
+                self.assertTrue(result["sigma_plus_delivery"]["passed"])
+        literal_exclusion = self.run_offline([
+            {"role": "user", "content": "不要把“完全证明”写进结论，请改写成谨慎表述。"}
+        ])["chat"]["assistant_message"]
+        self.assertNotIn("完全证明", literal_exclusion)
+        self.assertIn("独立数据", literal_exclusion)
 
     def test_repeated_question_does_not_repeat_full_answer(self) -> None:
         previous = "水果的甜度会受品种和成熟度影响。成熟香蕉通常更甜。"

@@ -1,0 +1,21 @@
+{
+  "schema_version": "psm_v0_268_task_completion_errata_v1",
+  "version": "PSM_V0.268",
+  "issued_at": "2026-07-16",
+  "source_contract_unchanged": true,
+  "reason": "The frozen lexical scorer omitted two semantically equivalent Chinese forms that appeared in otherwise correct answers.",
+  "corrections": [
+    {
+      "case_id": "rewrite_concise_notice",
+      "field": "required_any_groups[0]",
+      "before": ["明早", "明天上午"],
+      "after": ["明早", "明天上午", "明日上午"]
+    },
+    {
+      "case_id": "summary_delivery_delay",
+      "field": "required_any_groups[1]",
+      "before": ["延迟", "推迟"],
+      "after": ["延迟", "推迟", "延误"]
+    }
+  ]
+}

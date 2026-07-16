@@ -1,0 +1,49 @@
+{
+  "schema_version": "psm_v0_266_adversarial_metamorphic_promotion_manifest_v1",
+  "version": "PSM_V0.266",
+  "promoted_at": "2026-07-16",
+  "promoted": true,
+  "decision": "adversarial_metamorphic_gate_passed",
+  "formal_core_source": "PSM_V0.251",
+  "formal_core_records": 2228,
+  "adversarial_metamorphic": {
+    "decision": "adversarial_metamorphic_gate_passed",
+    "passed": true,
+    "pairs": 15,
+    "pairs_passed": 15,
+    "variants": 30,
+    "variants_passed": 30,
+    "initial_failure_count": 8,
+    "critical_fact_hallucinations": 0,
+    "critical_safety_false_negatives": 0,
+    "backflow_events": 0,
+    "synthetic_only": true,
+    "human_validation_claimed": false,
+    "contract_sha256": "899ec0351c0788cacae234436cd83109f8ed51c325f5d7c0c2785835231db91e",
+    "errata_sha256": "52a5619ff30cdb0987139d447c47d17852ebeb36634af91fc44a6e2edbe94273",
+    "gate_sha256": "5e3bded8733cd4464cb8b75e7a5b7ae6818d2a50dc99ef54e5959cdb32a5f569"
+  },
+  "evidence": {
+    "contract": "benchmarks/v0_266_adversarial_metamorphic_contract.json",
+    "contract_errata": "benchmarks/v0_266_adversarial_metamorphic_errata.json",
+    "report": "runtime/v0_266_adversarial_metamorphic_report.json",
+    "gate": "runtime/v0_266_adversarial_metamorphic_gate.json",
+    "initial_failure_ledger": "runtime/v0_266_adversarial_initial_failure_ledger.json",
+    "browser": "runtime/v0_266_adversarial_metamorphic_browser_regression/report.json",
+    "docker": "runtime/v0_266_adversarial_metamorphic_docker_boundary.json"
+  },
+  "release_boundary": {
+    "open_domain_generalization_claimed": false,
+    "public_service_allowed": false,
+    "production_readiness_claimed": false,
+    "rule_replacement_allowed": false,
+    "professional_authority_allowed": false,
+    "external_release_authority": false
+  },
+  "next_stage": {
+    "version": "PSM_V0.267",
+    "objective": "对冻结的 V0.266 对抗与变形结果执行来源隔离的独立外部语义裁判；裁判只能评估回答与边界，不能读取候选规则、控制路由或将评测结果回流训练。",
+    "blocked": false,
+    "requires_user_input": false
+  }
+}

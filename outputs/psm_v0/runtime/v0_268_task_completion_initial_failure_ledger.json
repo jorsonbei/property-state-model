@@ -1,0 +1,126 @@
+{
+  "schema_version": "psm_v0_268_task_completion_initial_failure_ledger_v1",
+  "version": "PSM_V0.268-candidate",
+  "frozen_at": "2026-07-16",
+  "contract_sha256": "3a446a58c41408b8baed2bd7216ea25fe668d29941eb97637657fc7dd448a167",
+  "first_run_completed_before_candidate_changes": true,
+  "append_only": true,
+  "initial_failure_count": 5,
+  "initial_failures": [
+    {
+      "case_id": "rewrite_professional_tone",
+      "family": "rewriting",
+      "failed_checks": [
+        "length_constraint_met"
+      ],
+      "missing_required_markers": [],
+      "missing_required_groups": [],
+      "forbidden_found": [],
+      "answer": "建议改为：“该方案在部分环节存在优化空间，建议结合具体场景进一步评估可行性。”此表述既指出了改进方向，又避免了直接否定，保持了专业与尊重。若需更具体，可补充：“方案整体框架可行，但在细节执行层面需补充数据验证与风险预案，建议迭代完善后推进。”请确认是否需针对特定领域（如技术、商务）调整措辞。",
+      "generation": {
+        "status": "success",
+        "provider": "ollama",
+        "model": "qwen3.5:9b",
+        "error": null
+      }
+    },
+    {
+      "case_id": "rewrite_concise_notice",
+      "family": "rewriting",
+      "failed_checks": [
+        "required_markers_present"
+      ],
+      "missing_required_markers": [],
+      "missing_required_groups": [
+        [
+          "明早",
+          "明天上午"
+        ]
+      ],
+      "forbidden_found": [],
+      "answer": "天气原因，会议推迟至明日上午。",
+      "generation": {
+        "status": "success",
+        "provider": "ollama",
+        "model": "qwen3.5:9b",
+        "error": null
+      }
+    },
+    {
+      "case_id": "summary_delivery_delay",
+      "family": "summarization",
+      "failed_checks": [
+        "required_markers_present",
+        "length_constraint_met"
+      ],
+      "missing_required_markers": [],
+      "missing_required_groups": [
+        [
+          "延迟",
+          "推迟"
+        ]
+      ],
+      "forbidden_found": [],
+      "answer": "供应商因暴雨延误两天，团队已调整排期并通知客户新交付日期。\n\n注：此总结基于您提供的信息，若涉及合同违约条款或赔偿计算，需核对原始协议及当地法律，不能直接视为已完成的合规动作。\n\n这是带边界的解释，不能替代真实审批或外部验证。",
+      "generation": {
+        "status": "success",
+        "provider": "ollama",
+        "model": "qwen3.5:9b",
+        "error": null
+      }
+    },
+    {
+      "case_id": "summary_research_boundary",
+      "family": "summarization",
+      "failed_checks": [
+        "required_markers_present",
+        "provider_or_kernel_completed"
+      ],
+      "missing_required_markers": [],
+      "missing_required_groups": [
+        [
+          "内部实验",
+          "实验"
+        ],
+        [
+          "样本",
+          "小"
+        ],
+        [
+          "独立复现",
+          "初步证据"
+        ]
+      ],
+      "forbidden_found": [],
+      "answer": "这次证据路线没有完成，状态为 `not_executed`：当前没有适用的本地证据适配器或可核验来源。我不会把缺失、冲突或失败的工具结果包装成已经核验的结论。",
+      "generation": {
+        "status": "degraded",
+        "provider": "deterministic",
+        "model": null,
+        "error": null
+      }
+    },
+    {
+      "case_id": "plan_dinner_30min",
+      "family": "planning",
+      "failed_checks": [
+        "required_markers_present"
+      ],
+      "missing_required_markers": [],
+      "missing_required_groups": [
+        [
+          "分钟",
+          "min"
+        ]
+      ],
+      "forbidden_found": [],
+      "answer": "结论：三步安排如下。第一步备料：选速成食材（如冷冻蔬菜、罐头或半成品），洗净切配并分装，同时预热锅具或烤箱。第二步烹饪：按食谱顺序操作，优先处理耗时项（如炖煮），同步进行简单翻炒或加热，全程监控火候避免溢出。第三步清理：趁热清洗锅具，台面湿布擦拭，厨余分类丢弃，垃圾袋封口。\n\n注意：具体食材需确认无过敏原；若涉及特殊饮食需求或医疗限制，请以专业建议为准。本方案为通用指导，非医疗或法律建议。",
+      "generation": {
+        "status": "success",
+        "provider": "ollama",
+        "model": "qwen3.5:9b",
+        "error": null
+      }
+    }
+  ]
+}

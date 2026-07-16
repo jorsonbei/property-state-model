@@ -1,0 +1,69 @@
+{
+  "schema_version": "psm_v0_269_task_stability_contract_v1",
+  "version": "PSM_V0.269",
+  "frozen_at": "2026-07-16",
+  "purpose": "Measure repeated semantic stability, local latency, and fail-closed recovery without opening release authority.",
+  "replay": {
+    "source_contract": "benchmarks/v0_268_task_completion_contract.json",
+    "repetitions_per_case": 3,
+    "selected_case_ids": [
+      "translation_chest_pain",
+      "rewrite_literal_exclusion",
+      "extract_names",
+      "compare_apple_banana",
+      "summary_research_boundary",
+      "plan_study_three_steps",
+      "explain_metal_touch"
+    ],
+    "expected_families": 7,
+    "expected_runs": 21,
+    "deterministic_case_ids": [
+      "translation_chest_pain",
+      "rewrite_literal_exclusion",
+      "summary_research_boundary",
+      "explain_metal_touch"
+    ],
+    "maximum_semantic_failures": 0,
+    "maximum_provider_drift_events": 0,
+    "deterministic_exact_stability_required": true
+  },
+  "performance_budget": {
+    "p50_max_ms": 7000,
+    "p95_max_ms": 20000,
+    "single_run_max_ms": 30000,
+    "scope": "this_machine_local_qwen_and_deterministic_kernels"
+  },
+  "recovery_contract": {
+    "provider_unavailable_must_be_visible": true,
+    "empty_provider_answer_must_be_visible": true,
+    "deterministic_kernel_must_bypass_provider_failure": true,
+    "cancel_must_abort_delivery": true,
+    "timeout_must_abort_delivery": true,
+    "retry_must_preserve_original_input": true,
+    "maximum_recovery_failures": 0
+  },
+  "source_isolation": {
+    "evaluation_rows_used_for_training": false,
+    "timings_used_for_training": false,
+    "failure_findings_used_for_prompt_tuning_before_first_run": false,
+    "blind_or_evaluation_backflow_allowed": false
+  },
+  "provenance": {
+    "synthetic_only": true,
+    "internally_authored": true,
+    "independent_blind_evidence": false,
+    "human_participants_used": false,
+    "human_feedback_collected": false,
+    "human_validation_claimed": false
+  },
+  "release_boundary": {
+    "cross_hardware_performance_claimed": false,
+    "open_domain_generalization_claimed": false,
+    "public_service_allowed": false,
+    "production_readiness_claimed": false,
+    "training_on_evaluation_rows_allowed": false,
+    "rule_replacement_allowed": false,
+    "professional_authority_allowed": false,
+    "external_release_authority": false
+  }
+}

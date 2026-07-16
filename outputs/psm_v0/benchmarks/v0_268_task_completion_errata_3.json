@@ -1,0 +1,22 @@
+{
+  "schema_version": "psm_v0_268_task_completion_errata_v3",
+  "version": "PSM_V0.268",
+  "issued_at": "2026-07-16",
+  "source_contract_unchanged": true,
+  "applies_after": "v0_268_task_completion_errata_2.json",
+  "reason": "The lexical scorer omitted '改至' as a valid reschedule verb and clock ranges as valid per-step time assignments.",
+  "corrections": [
+    {
+      "case_id": "rewrite_concise_notice",
+      "field": "required_any_groups[1]",
+      "before": ["延期", "推迟", "改期"],
+      "after": ["延期", "推迟", "改期", "改至"]
+    },
+    {
+      "case_id": "plan_study_three_steps",
+      "field": "required_any_groups[0]",
+      "before": ["分钟", "min"],
+      "after": ["分钟", "min", "20:00", "20：00"]
+    }
+  ]
+}

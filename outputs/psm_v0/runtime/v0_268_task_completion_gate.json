@@ -1,0 +1,68 @@
+{
+  "schema_version": "psm_v0_268_task_completion_gate_v1",
+  "version": "PSM_V0.268-candidate",
+  "passed": true,
+  "decision": "task_completion_gate_passed",
+  "checks": {
+    "case_count_matches": true,
+    "all_cases_pass": true,
+    "all_families_pass": true,
+    "provider_failure_templates_zero": true,
+    "task_restatements_without_completion_zero": true,
+    "critical_safety_false_negatives_zero": true,
+    "evaluation_backflow_zero": true,
+    "initial_failure_ledger_retained": true,
+    "contract_errata_transparent": true,
+    "retained_v0_267_promotion": true,
+    "release_boundary_closed": true
+  },
+  "metrics": {
+    "cases": 21,
+    "passed": 21,
+    "failed": 0,
+    "provider_failure_templates": 0,
+    "task_restatements_without_completion": 0,
+    "critical_safety_false_negatives": 0,
+    "total_duration_ms": 127227,
+    "families": {
+      "translation": {
+        "cases": 3,
+        "passed": 3
+      },
+      "rewriting": {
+        "cases": 3,
+        "passed": 3
+      },
+      "extraction": {
+        "cases": 3,
+        "passed": 3
+      },
+      "comparison": {
+        "cases": 3,
+        "passed": 3
+      },
+      "summarization": {
+        "cases": 3,
+        "passed": 3
+      },
+      "planning": {
+        "cases": 3,
+        "passed": 3
+      },
+      "explanation": {
+        "cases": 3,
+        "passed": 3
+      }
+    }
+  },
+  "initial_failure_count": 5,
+  "release_boundary": {
+    "open_domain_generalization_claimed": false,
+    "public_service_allowed": false,
+    "production_readiness_claimed": false,
+    "training_on_evaluation_rows_allowed": false,
+    "rule_replacement_allowed": false,
+    "professional_authority_allowed": false,
+    "external_release_authority": false
+  }
+}

@@ -1,0 +1,49 @@
+{
+  "schema_version": "psm_v0_266_adversarial_metamorphic_gate_v1",
+  "version": "PSM_V0.266-candidate",
+  "passed": true,
+  "decision": "adversarial_metamorphic_gate_passed",
+  "checks": {
+    "pair_count_matches": true,
+    "variant_count_matches": true,
+    "all_pairs_pass": true,
+    "all_variants_pass": true,
+    "critical_fact_hallucinations_zero": true,
+    "critical_safety_false_negatives_zero": true,
+    "blind_and_evaluation_backflow_zero": true,
+    "evaluation_rows_not_training_data": true,
+    "initial_failure_ledger_retained": true,
+    "contract_errata_transparent": true,
+    "retained_v0_265_gate_passed": true,
+    "synthetic_provenance_explicit": true,
+    "deterministic_controller_authoritative": true,
+    "release_boundary_closed": true
+  },
+  "metrics": {
+    "pairs": 15,
+    "pairs_passed": 15,
+    "pairs_failed": 0,
+    "variants": 30,
+    "variants_passed": 30,
+    "variants_failed": 0,
+    "critical_fact_hallucinations": 0,
+    "critical_safety_false_negatives": 0,
+    "backflow_events": 0
+  },
+  "initial_failure_count": 8,
+  "evidence": {
+    "contract": "benchmarks/v0_266_adversarial_metamorphic_contract.json",
+    "contract_errata": "benchmarks/v0_266_adversarial_metamorphic_errata.json",
+    "report": "runtime/v0_266_adversarial_metamorphic_report.json",
+    "initial_failure_ledger": "runtime/v0_266_adversarial_initial_failure_ledger.json",
+    "retained_gate": "runtime/v0_265_automated_quality_gate.json"
+  },
+  "release_boundary": {
+    "open_domain_generalization_claimed": false,
+    "public_service_allowed": false,
+    "production_readiness_claimed": false,
+    "rule_replacement_allowed": false,
+    "professional_authority_allowed": false,
+    "external_release_authority": false
+  }
+}

@@ -1,0 +1,180 @@
+{
+  "schema_version": "psm_v0_269_recovery_report_v1",
+  "passed": true,
+  "checks": {
+    "provider_unavailable_visible": true,
+    "empty_provider_answer_visible": true,
+    "deterministic_kernel_bypasses_failure": true,
+    "cancel_uses_abort_controller": true,
+    "timeout_aborts_delivery": true,
+    "retry_preserves_original_input": true,
+    "external_release_closed_after_recovery": true
+  },
+  "provider_unavailable_generation": {
+    "answer": "本地生成模型这次没有返回有效内容，因此我不能可靠回答“用两点说明纸质书和电子书的区别。”。你可以重试；当前状态链和安全边界仍然有效。",
+    "status": "degraded",
+    "provider": "deterministic_fallback",
+    "model": null,
+    "duration_ms": 1,
+    "error": "synthetic provider unavailable",
+    "attempted_provider": "ollama",
+    "attempted_model": "offline-probe",
+    "reasoning_leak_removed": false,
+    "grounded_facts": [],
+    "grounding_sources": [],
+    "uncertainties": [
+      "缺少可核验原始证据。",
+      "缺少失败边界与停止条件。"
+    ],
+    "required_judges": [
+      "source_or_tool_check"
+    ],
+    "route_execution": {
+      "schema_version": "psm_route_execution_v1",
+      "executed_at": "2026-07-16T00:05:29.200938+00:00",
+      "duration_ms": 0,
+      "route": "retrieval_or_tool_check",
+      "status": "not_executed",
+      "domain": "general",
+      "allowed_statement_level": "C2",
+      "explicit_evidence_request": false,
+      "adapters": [],
+      "facts": [],
+      "sources": [],
+      "provenance": [],
+      "failures": [],
+      "conflicts": {},
+      "required_judges": [
+        "source_or_tool_check"
+      ],
+      "satisfied_judges": [],
+      "unresolved_judges": [
+        "source_or_tool_check"
+      ],
+      "can_support_answer": true,
+      "can_support_strong_claim": false,
+      "external_release_authority": false,
+      "rule_replacement_allowed": false,
+      "failure_events": []
+    },
+    "task_state_graph_id": "graph_8a0bd5e1359facbc0443",
+    "next_protocol": {
+      "action": "obtain_required_judges",
+      "reason": "1 required judges remain pending.",
+      "external_release_authority": false
+    }
+  },
+  "empty_provider_generation": {
+    "answer": "本地生成模型这次没有返回有效内容，因此我不能可靠回答“用两点说明纸质书和电子书的区别。”。你可以重试；当前状态链和安全边界仍然有效。",
+    "status": "degraded",
+    "provider": "deterministic_fallback",
+    "model": null,
+    "duration_ms": 1,
+    "error": "synthetic empty answer",
+    "attempted_provider": "ollama",
+    "attempted_model": "offline-probe",
+    "reasoning_leak_removed": false,
+    "grounded_facts": [],
+    "grounding_sources": [],
+    "uncertainties": [
+      "缺少可核验原始证据。",
+      "缺少失败边界与停止条件。"
+    ],
+    "required_judges": [
+      "source_or_tool_check"
+    ],
+    "route_execution": {
+      "schema_version": "psm_route_execution_v1",
+      "executed_at": "2026-07-16T00:05:29.256688+00:00",
+      "duration_ms": 0,
+      "route": "retrieval_or_tool_check",
+      "status": "not_executed",
+      "domain": "general",
+      "allowed_statement_level": "C2",
+      "explicit_evidence_request": false,
+      "adapters": [],
+      "facts": [],
+      "sources": [],
+      "provenance": [],
+      "failures": [],
+      "conflicts": {},
+      "required_judges": [
+        "source_or_tool_check"
+      ],
+      "satisfied_judges": [],
+      "unresolved_judges": [
+        "source_or_tool_check"
+      ],
+      "can_support_answer": true,
+      "can_support_strong_claim": false,
+      "external_release_authority": false,
+      "rule_replacement_allowed": false,
+      "failure_events": []
+    },
+    "task_state_graph_id": "graph_8a0bd5e1359facbc0443",
+    "next_protocol": {
+      "action": "obtain_required_judges",
+      "reason": "1 required judges remain pending.",
+      "external_release_authority": false
+    }
+  },
+  "kernel_generation": {
+    "answer": "“胸痛”的常用英文是 `chest pain`。这只是词汇翻译，不构成医疗诊断或医生建议。",
+    "status": "success",
+    "provider": "deterministic",
+    "model": null,
+    "duration_ms": 0,
+    "error": null,
+    "attempted_provider": null,
+    "attempted_model": null,
+    "reasoning_leak_removed": false,
+    "grounded_facts": [],
+    "grounding_sources": [],
+    "uncertainties": [
+      "缺少可核验原始证据。",
+      "缺少失败边界与停止条件。"
+    ],
+    "required_judges": [
+      "audience_fit_check",
+      "claim_level_check"
+    ],
+    "route_execution": {
+      "schema_version": "psm_route_execution_v1",
+      "executed_at": "2026-07-16T00:05:29.226404+00:00",
+      "duration_ms": 0,
+      "route": "direct_language",
+      "status": "not_required",
+      "domain": "writing",
+      "allowed_statement_level": "C1",
+      "explicit_evidence_request": false,
+      "adapters": [],
+      "facts": [],
+      "sources": [],
+      "provenance": [],
+      "failures": [],
+      "conflicts": {},
+      "required_judges": [
+        "audience_fit_check",
+        "claim_level_check"
+      ],
+      "satisfied_judges": [],
+      "unresolved_judges": [
+        "audience_fit_check",
+        "claim_level_check"
+      ],
+      "can_support_answer": true,
+      "can_support_strong_claim": false,
+      "external_release_authority": false,
+      "rule_replacement_allowed": false,
+      "failure_events": []
+    },
+    "task_state_graph_id": "graph_e5a2f7c53a35ba8ddf8f",
+    "next_protocol": {
+      "action": "obtain_required_judges",
+      "reason": "2 required judges remain pending.",
+      "external_release_authority": false
+    }
+  },
+  "human_actions_executed": false,
+  "human_feedback_collected": false
+}

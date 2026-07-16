@@ -1,0 +1,65 @@
+{
+  "schema_version": "psm_v0_267_api_budget_ledger_v1",
+  "month": "2026-07",
+  "limit_usd": "20.00",
+  "reservations": [
+    {
+      "schema_version": "psm_v0_262_api_budget_reservation_v1",
+      "reservation_id": "V0_262_PROTOCOL_REVIEW_ATTEMPT_1",
+      "occurred_at": "2026-07-15T00:00:00Z",
+      "purpose": "synthetic_protocol_review",
+      "reserved_cost_usd": "2.00",
+      "contains_participant_content": false
+    },
+    {
+      "schema_version": "psm_v0_262_api_budget_reservation_v1",
+      "reservation_id": "V0_262_PROTOCOL_REVIEW_ATTEMPT_2",
+      "occurred_at": "2026-07-15T00:05:00Z",
+      "purpose": "synthetic_protocol_review",
+      "reserved_cost_usd": "2.00",
+      "contains_participant_content": false
+    },
+    {
+      "schema_version": "psm_v0_262_api_budget_reservation_v1",
+      "reservation_id": "V0_267_EXTERNAL_ADVERSARIAL_REVIEW_ATTEMPT_1",
+      "occurred_at": "2026-07-16T00:00:00Z",
+      "purpose": "synthetic_safety_evaluation",
+      "reserved_cost_usd": "3.00",
+      "contains_participant_content": false
+    },
+    {
+      "schema_version": "psm_v0_262_api_budget_reservation_v1",
+      "reservation_id": "V0_267_EXTERNAL_ADVERSARIAL_REVIEW_ATTEMPT_2",
+      "occurred_at": "2026-07-16T00:10:00Z",
+      "purpose": "synthetic_safety_evaluation",
+      "reserved_cost_usd": "3.00",
+      "contains_participant_content": false
+    },
+    {
+      "schema_version": "psm_v0_262_api_budget_reservation_v1",
+      "reservation_id": "V0_267_EXTERNAL_ADVERSARIAL_REVIEW_ATTEMPT_3",
+      "occurred_at": "2026-07-16T00:20:00Z",
+      "purpose": "synthetic_safety_evaluation",
+      "reserved_cost_usd": "3.00",
+      "contains_participant_content": false
+    },
+    {
+      "schema_version": "psm_v0_262_api_budget_reservation_v1",
+      "reservation_id": "V0_267_EXTERNAL_ADVERSARIAL_REVIEW_ATTEMPT_4",
+      "occurred_at": "2026-07-16T00:30:00Z",
+      "purpose": "synthetic_safety_evaluation",
+      "reserved_cost_usd": "3.00",
+      "contains_participant_content": false
+    },
+    {
+      "schema_version": "psm_v0_262_api_budget_reservation_v1",
+      "reservation_id": "V0_271_EXTERNAL_MULTITURN_REVIEW_ATTEMPT_1",
+      "occurred_at": "2026-07-16T01:00:00Z",
+      "purpose": "synthetic_multiturn_semantic_review",
+      "reserved_cost_usd": "4.00",
+      "contains_participant_content": false
+    }
+  ],
+  "reserved_usd": "20.00",
+  "participant_content_calls": 0
+}

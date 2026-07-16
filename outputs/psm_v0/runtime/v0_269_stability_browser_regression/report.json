@@ -1,0 +1,33 @@
+{
+  "schema_version": "psm_v0_269_stability_browser_regression_v1",
+  "base_url": "http://127.0.0.1:8765",
+  "passed": true,
+  "synthetic_questions_only": true,
+  "human_participant_actions_executed": false,
+  "human_feedback_collected": false,
+  "cancellation": {
+    "cancelledWithoutDelivery": true,
+    "inputPreserved": true,
+    "retrySucceeded": true,
+    "externalReleaseClosed": true,
+    "consoleErrors": 0
+  },
+  "timeout": {
+    "timeoutStoppedDelivery": true,
+    "inputPreserved": true,
+    "retrySucceeded": true,
+    "horizontalOverflow": false,
+    "consoleErrors": 0
+  },
+  "checks": {
+    "cancellation_stops_delivery": true,
+    "cancellation_input_preserved": true,
+    "cancellation_retry_succeeds": true,
+    "timeout_stops_delivery": true,
+    "timeout_input_preserved": true,
+    "timeout_retry_succeeds": true,
+    "external_release_closed": true,
+    "mobile_no_overflow": true,
+    "console_errors_zero": true
+  }
+}

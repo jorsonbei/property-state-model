@@ -1,0 +1,58 @@
+{
+  "schema_version": "psm_v0_269_task_stability_promotion_manifest_v1",
+  "version": "PSM_V0.269",
+  "promoted_at": "2026-07-16",
+  "promoted": true,
+  "decision": "task_stability_gate_passed",
+  "formal_core_source": "PSM_V0.251",
+  "formal_core_records": 2228,
+  "task_stability": {
+    "decision": "task_stability_gate_passed",
+    "passed": true,
+    "selected_cases": 7,
+    "families": 7,
+    "runs": 21,
+    "passed_runs": 21,
+    "failed_runs": 0,
+    "provider_drift_events": 0,
+    "deterministic_drift_events": 0,
+    "recovery_failures": 0,
+    "p50_ms": 23,
+    "p95_ms": 16771,
+    "max_ms": 16841,
+    "total_ms": 100904,
+    "initial_failure_count": 0,
+    "synthetic_only": true,
+    "human_validation_claimed": false,
+    "contract_sha256": "0582fd77f9bdf4984d0f4815fd88b4e70fd5ee6bdc45961171640d0b8ebeab32",
+    "gate_sha256": "d923e6f728318204a97cd0ac7ff31f29b6d20248365fd3eceb64247e5fee8665"
+  },
+  "evidence": {
+    "contract": "benchmarks/v0_269_task_stability_contract.json",
+    "report": "runtime/v0_269_task_stability_report.json",
+    "gate": "runtime/v0_269_task_stability_gate.json",
+    "recovery": "runtime/v0_269_recovery_report.json",
+    "initial_failure_ledger": "runtime/v0_269_task_stability_initial_failure_ledger.json",
+    "browser": "runtime/v0_269_stability_browser_regression/report.json",
+    "browser_attempt_1_failed": "runtime/v0_269_stability_browser_regression/report_attempt_1_failed.json",
+    "browser_harness_errata": "benchmarks/v0_269_browser_harness_errata.json",
+    "docker": "runtime/v0_269_task_stability_docker_boundary.json",
+    "docker_attempt_1_failed": "runtime/v0_269_task_stability_docker_attempt_1_failed.json"
+  },
+  "release_boundary": {
+    "cross_hardware_performance_claimed": false,
+    "open_domain_generalization_claimed": false,
+    "public_service_allowed": false,
+    "production_readiness_claimed": false,
+    "training_on_evaluation_rows_allowed": false,
+    "rule_replacement_allowed": false,
+    "professional_authority_allowed": false,
+    "external_release_authority": false
+  },
+  "next_stage": {
+    "version": "PSM_V0.270",
+    "objective": "建立普通聊天的多轮指代、约束累积与更正恢复基准：冻结多轮对话图，验证助手只使用用户历史和已交付回答，不让隐藏审计文本、错误助手陈述或过期约束覆盖当前意图。",
+    "blocked": false,
+    "requires_user_input": false
+  }
+}

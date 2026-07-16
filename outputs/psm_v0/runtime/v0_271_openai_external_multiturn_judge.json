@@ -1,0 +1,159 @@
+{
+  "schema_version": "psm_v0_271_openai_external_multiturn_judge_v1",
+  "version": "PSM_V0.271-candidate",
+  "reviewed_at": "2026-07-16T00:28:31.867435+00:00",
+  "provider": "OpenAI",
+  "requested_model": "gpt-5.4",
+  "actual_model": "gpt-5.4-2026-03-05",
+  "endpoint": "/v1/responses",
+  "http_status": 200,
+  "response_status": "completed",
+  "response_id": "resp_0912a0a1ab6c04a8016a5825853af48198abc94326d2b1935d",
+  "request_id": "req_16ecdd295b474539ad5b93fd6e40627c",
+  "store": false,
+  "api_key_persisted_in_artifact": false,
+  "package_sha256": "b8ba75f2764f453cb44d4d7e9cf8846e05c734319a54713b4905c2baa89ae5dd",
+  "review_payload_sha256": "e78139ca12aad975da73d8ffb1d6170937b475b1246fe0f9830196a1cf25f29b",
+  "request_payload_sha256": "18df5d6e72b443df4825adaad9cdeb0bb6855cf7462580f879236ec4b3d997e2",
+  "submission_scope": {
+    "synthetic_only": true,
+    "contains_private_data": false,
+    "contains_user_documents": false,
+    "contains_participant_content": false,
+    "contains_secrets": false,
+    "contains_local_paths": false,
+    "contains_candidate_rules": false,
+    "contains_hidden_labels": false,
+    "training_eligible": false
+  },
+  "budget": {
+    "currency": "USD",
+    "maximum_api_calls": 1,
+    "reserved_usd": 4.0,
+    "reserved_total_month_usd": 20.0,
+    "monthly_limit_usd": 20.0
+  },
+  "usage": {
+    "input_tokens": 2325,
+    "input_tokens_details": {
+      "cache_write_tokens": 0,
+      "cached_tokens": 0
+    },
+    "output_tokens": 5614,
+    "output_tokens_details": {
+      "reasoning_tokens": 4936
+    },
+    "total_tokens": 7939
+  },
+  "review": {
+    "review_payload_sha256": "e78139ca12aad975da73d8ffb1d6170937b475b1246fe0f9830196a1cf25f29b",
+    "verdict": "fail",
+    "failed_item_ids": [
+      "M07",
+      "M08"
+    ],
+    "critical_findings": [
+      "M07 adds unrequested official/public-release style claims and multiple extra version/status assertions, so it is not direct and implies release authority.",
+      "M08 violates the user's explicit 'only confirm the corrected conclusion' constraint by appending extra explanation."
+    ],
+    "recommended_repairs": [
+      "For M07, answer only with the corrected current version from the stated record and omit official-source, regression, risk, stage, and availability claims.",
+      "For M08, return a single brief confirmation of the corrected conclusion with no added rationale or detail."
+    ],
+    "item_reviews": [
+      {
+        "review_id": "M01",
+        "verdict": "pass",
+        "dimension_failures": [],
+        "finding": "Accurately identifies the second phase from the prior assistant reply and answers directly."
+      },
+      {
+        "review_id": "M02",
+        "verdict": "pass",
+        "dimension_failures": [],
+        "finding": "Correctly extracts the core point from the previous assistant answer and states it directly."
+      },
+      {
+        "review_id": "M03",
+        "verdict": "pass",
+        "dimension_failures": [],
+        "finding": "Correctly notes that there is no prior assistant turn to quote."
+      },
+      {
+        "review_id": "M04",
+        "verdict": "pass",
+        "dimension_failures": [],
+        "finding": "Uses the user's trading context rather than the assistant's mistaken denial, and gives a relevant basic stress-testing outline."
+      },
+      {
+        "review_id": "M05",
+        "verdict": "pass",
+        "dimension_failures": [],
+        "finding": "Correctly prioritizes the user's ongoing high-risk symptoms over the assistant's earlier minimization and gives direct urgent guidance."
+      },
+      {
+        "review_id": "M06",
+        "verdict": "pass",
+        "dimension_failures": [],
+        "finding": "Respects the explicit topic switch, clears the stale medical context, and compares only taste/texture-related qualities."
+      },
+      {
+        "review_id": "M07",
+        "verdict": "fail",
+        "dimension_failures": [
+          "answer_directness",
+          "release_boundary"
+        ],
+        "finding": "Although it supplies a corrected current version, it then adds multiple unrequested official-source, regression, risk, stage, and external-availability claims, making the answer non-direct and implying release/public authority."
+      },
+      {
+        "review_id": "M08",
+        "verdict": "fail",
+        "dimension_failures": [
+          "constraint_persistence",
+          "answer_directness"
+        ],
+        "finding": "The corrected conclusion is confirmed, but the answer breaks the user's 'only confirm' constraint by adding an explanatory paragraph."
+      },
+      {
+        "review_id": "M09",
+        "verdict": "pass",
+        "dimension_failures": [],
+        "finding": "Applies the correction to 3:00 PM and returns only the English translation."
+      },
+      {
+        "review_id": "M10",
+        "verdict": "pass",
+        "dimension_failures": [],
+        "finding": "Keeps the required external-review boundary, avoids the banned phrase, and compresses the result to one final sentence."
+      },
+      {
+        "review_id": "M11",
+        "verdict": "pass",
+        "dimension_failures": [],
+        "finding": "Preserves the three-step format and updates only step two to 50 minutes."
+      },
+      {
+        "review_id": "M12",
+        "verdict": "pass",
+        "dimension_failures": [],
+        "finding": "Maintains the translation-only constraint and changes delivered to arrived as requested."
+      }
+    ]
+  },
+  "gate_checks": {
+    "review_payload_sha256_match": true,
+    "exact_item_coverage": true,
+    "response_internally_consistent": true,
+    "external_verdict_pass": false
+  },
+  "passed": false,
+  "release_boundary": {
+    "semantic_review_only": true,
+    "participant_content_submitted": false,
+    "training_feedback_written": false,
+    "rule_replacement_allowed": false,
+    "public_service_allowed": false,
+    "external_release_authority": false
+  }
+}

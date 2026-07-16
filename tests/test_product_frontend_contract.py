@@ -95,7 +95,8 @@ class ProductFrontendContractTests(unittest.TestCase):
         self.assertNotIn("/api/trial-feedback", self.enrollment_javascript)
         self.assertNotIn("structured-feedback", self.javascript)
         self.assertNotIn('id="count-feedback"', self.enrollment_html)
-        self.assertIn("合成自动质量审计", self.enrollment_javascript)
+        self.assertIn("不收集真人评分", self.enrollment_javascript)
+        self.assertIn("公开发布边界仍关闭", self.enrollment_javascript)
 
 
 if __name__ == "__main__":

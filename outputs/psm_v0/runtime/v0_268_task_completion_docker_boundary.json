@@ -1,0 +1,25 @@
+{
+  "schema_version": "psm_v0_268_task_completion_docker_boundary_v1",
+  "passed": true,
+  "checks": {
+    "task_completion_gate_passed": true,
+    "host_and_docker_status_available": true,
+    "epistemic_summary_host": true,
+    "epistemic_summary_docker": true,
+    "task_report_in_docker": true,
+    "external_user_release_closed_host": true,
+    "external_user_release_closed_docker": true,
+    "docker_localhost_only": true
+  },
+  "human_feedback_collected": false,
+  "human_validation_claimed": false,
+  "evaluation_rows_used_for_training": false,
+  "host": {
+    "version": "PSM V0.267",
+    "release_open": false
+  },
+  "docker": {
+    "version": "PSM V0.267",
+    "release_open": false
+  }
+}

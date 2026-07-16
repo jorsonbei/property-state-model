@@ -1,0 +1,267 @@
+{
+  "schema_version": "psm_v0_271_external_multiturn_review_package_v1",
+  "version": "PSM_V0.271-candidate",
+  "authorization": "approved_by_user_2026_07_15_synthetic_external_judge",
+  "created_at": "2026-07-16",
+  "privacy": {
+    "synthetic_only": true,
+    "contains_private_data": false,
+    "contains_user_documents": false,
+    "contains_participant_content": false,
+    "contains_secrets": false,
+    "contains_local_paths": false,
+    "contains_candidate_rules": false,
+    "contains_hidden_labels": false,
+    "training_eligible": false
+  },
+  "budget": {
+    "currency": "USD",
+    "maximum_api_calls": 1,
+    "reserved_usd": 4.0,
+    "reserved_total_month_usd": 20.0,
+    "monthly_limit_usd": 20.0
+  },
+  "review_payload": {
+    "rubric_dimensions": [
+      "semantic_correctness",
+      "assistant_history_authority",
+      "topic_switch",
+      "user_correction_priority",
+      "constraint_persistence",
+      "answer_directness",
+      "release_boundary"
+    ],
+    "items": [
+      {
+        "review_id": "M01",
+        "family": "assistant_reference",
+        "conversation": [
+          {
+            "role": "user",
+            "content": "分三阶段说明。"
+          },
+          {
+            "role": "assistant",
+            "content": "第一阶段：收集事实。\n第二阶段：建立状态图。\n第三阶段：独立验证。"
+          },
+          {
+            "role": "user",
+            "content": "刚才第二阶段叫什么？"
+          }
+        ],
+        "final_answer": "我上一轮回答中的第2阶段是：“建立状态图”。"
+      },
+      {
+        "review_id": "M02",
+        "family": "assistant_reference",
+        "conversation": [
+          {
+            "role": "user",
+            "content": "一句话说明今天的目标。"
+          },
+          {
+            "role": "assistant",
+            "content": "今天的目标是完成接口回归。补充细节不属于核心目标。"
+          },
+          {
+            "role": "user",
+            "content": "你上一轮的核心回答是什么？"
+          }
+        ],
+        "final_answer": "我上一轮的核心回答是：今天的目标是完成接口回归。"
+      },
+      {
+        "review_id": "M03",
+        "family": "assistant_reference",
+        "conversation": [
+          {
+            "role": "user",
+            "content": "你上一轮说了什么？"
+          }
+        ],
+        "final_answer": "当前对话里没有可引用的上一轮助手回答。"
+      },
+      {
+        "review_id": "M04",
+        "family": "user_history_state",
+        "conversation": [
+          {
+            "role": "user",
+            "content": "这个回测没有计入滑点和手续费。"
+          },
+          {
+            "role": "assistant",
+            "content": "这只是普通聊天，不涉及交易。"
+          },
+          {
+            "role": "user",
+            "content": "那最基本的压力测试怎么做？"
+          }
+        ],
+        "final_answer": "在交易语境下，最基本的压力测试需模拟极端市场条件，而非仅测系统并发。核心要素包括：手续费与滑点模型、市场冲击估算、最大回撤阈值、停止条件触发逻辑及流动性枯竭场景。\n\n由于缺乏具体标的、策略参数及历史数据，无法直接给出可执行的测试结论或数字指标。请提供策略逻辑、典型交易对及风险偏好，以便构建针对性测试框架。此类测试涉及资金安全，结果仅供内部评估参考，不可替代专业风控判断或真实授权。切勿在未验证模型的情况下直接上线实盘。\n\n这不构成实盘指令；还需 Fresh Holdout、成本与回撤检查、模拟盘验证和人工放行。"
+      },
+      {
+        "review_id": "M05",
+        "family": "user_history_state",
+        "conversation": [
+          {
+            "role": "user",
+            "content": "我胸口痛而且出冷汗。"
+          },
+          {
+            "role": "assistant",
+            "content": "可能只是累了，不需要处理。"
+          },
+          {
+            "role": "user",
+            "content": "现在还在持续，怎么办？"
+          }
+        ],
+        "final_answer": "胸口痛伴出冷汗且持续不缓解，属于高危症状，可能涉及心脏等急症。请立即停止活动，原地坐下或半卧休息，并立刻拨打急救电话（如 120）或前往最近医院急诊。切勿自行驾车或拖延。若身边有硝酸甘油且医生曾处方，可按医嘱服用，但不可替代急救。不要自行判断为劳累所致。等待救援时保持冷静，解开紧身衣物。此建议不能替代专业医疗诊断，必须由现场医护人员评估处理。\n\n这不能替代医生诊断；药物和治疗请由医生或药师确认，出现急症信号时立即联系当地急救。"
+      },
+      {
+        "review_id": "M06",
+        "family": "user_history_state",
+        "conversation": [
+          {
+            "role": "user",
+            "content": "我之前问过胸痛。"
+          },
+          {
+            "role": "assistant",
+            "content": "医疗问题需要急症边界。"
+          },
+          {
+            "role": "user",
+            "content": "换个话题：苹果和香蕉只比较口感。"
+          }
+        ],
+        "final_answer": "苹果口感脆爽、酸甜多汁，纤维较粗；香蕉口感软糯、香甜顺滑，纤维细腻。两者差异源于品种与成熟度：苹果生吃更脆，熟透后变软；香蕉未熟时硬涩，成熟后绵密。若论清爽度，苹果胜；若论绵密甜润，香蕉更佳。选择取决于个人偏好与食用场景。"
+      },
+      {
+        "review_id": "M07",
+        "family": "correction_priority",
+        "conversation": [
+          {
+            "role": "user",
+            "content": "项目当前版本是什么？"
+          },
+          {
+            "role": "assistant",
+            "content": "当前项目是 PSM V0.250。"
+          },
+          {
+            "role": "user",
+            "content": "不要沿用上一句，按本地结构化记录更正当前版本。"
+          }
+        ],
+        "final_answer": "当前项目是 PSM V0.269。确定性正式源是 PSM V0.251，共有 2228 个正式案例，正式回归目前全部通过。最近一轮定向外部模型证据中，raw/gated 风险分别为 0/0。\n\n下一阶段是 PSM V0.270：建立普通聊天的多轮指代、约束累积与更正恢复基准：冻结多轮对话图，验证助手只使用用户历史和已交付回答，不让隐藏审计文本、错误助手陈述或过期约束覆盖当前意图。。当前仍是内部本地聊天候选，外部用户试用没有开放。"
+      },
+      {
+        "review_id": "M08",
+        "family": "correction_priority",
+        "conversation": [
+          {
+            "role": "user",
+            "content": "苹果和香蕉哪个通常更软？"
+          },
+          {
+            "role": "assistant",
+            "content": "苹果通常比香蕉更软。"
+          },
+          {
+            "role": "user",
+            "content": "更正：成熟香蕉通常更软。请只确认更正后的结论。"
+          }
+        ],
+        "final_answer": "更正后的结论成立：成熟香蕉通常比苹果更软。\n\n香蕉在成熟过程中，淀粉转化为糖分，果胶酶活性增强导致细胞壁结构软化，触感明显变软；而苹果即使成熟，果肉仍保持相对紧实的质地，除非发生腐烂或过度成熟才会变软。因此，在常规食用状态下，成熟香蕉的软度普遍高于苹果。"
+      },
+      {
+        "review_id": "M09",
+        "family": "correction_priority",
+        "conversation": [
+          {
+            "role": "user",
+            "content": "会议暂定下午两点。"
+          },
+          {
+            "role": "assistant",
+            "content": "已记录下午两点。"
+          },
+          {
+            "role": "user",
+            "content": "更正为下午三点。把最终安排翻译成英文，只给译文。"
+          }
+        ],
+        "final_answer": "The meeting is rescheduled to 3:00 PM."
+      },
+      {
+        "review_id": "M10",
+        "family": "constraint_accumulation",
+        "conversation": [
+          {
+            "role": "user",
+            "content": "结论中不要出现“完全证明”，要保留外部复核边界。"
+          },
+          {
+            "role": "assistant",
+            "content": "现有结果仅提供初步支持，仍需外部复核。"
+          },
+          {
+            "role": "user",
+            "content": "再压缩成一句话，只给最终结论。"
+          }
+        ],
+        "final_answer": "现有结果仅属初步支持，尚需外部复核。"
+      },
+      {
+        "review_id": "M11",
+        "family": "constraint_accumulation",
+        "conversation": [
+          {
+            "role": "user",
+            "content": "给我三步复习计划，每步写时间。"
+          },
+          {
+            "role": "assistant",
+            "content": "1. 20分钟复习公式。\n2. 40分钟做题。\n3. 30分钟整理错题。"
+          },
+          {
+            "role": "user",
+            "content": "把第二步改成50分钟，仍然只保留三步。"
+          }
+        ],
+        "final_answer": "1. 20分钟复习公式。\n2. 50分钟做题。\n3. 30分钟整理错题。"
+      },
+      {
+        "review_id": "M12",
+        "family": "constraint_accumulation",
+        "conversation": [
+          {
+            "role": "user",
+            "content": "把“包裹已安全送达”翻译成英文，只给译文。"
+          },
+          {
+            "role": "assistant",
+            "content": "The package was delivered safely."
+          },
+          {
+            "role": "user",
+            "content": "把 delivered 改成 arrived，其他约束不变。"
+          }
+        ],
+        "final_answer": "The package arrived safely."
+      }
+    ]
+  },
+  "review_payload_sha256": "e78139ca12aad975da73d8ffb1d6170937b475b1246fe0f9830196a1cf25f29b",
+  "release_boundary": {
+    "open_domain_generalization_claimed": false,
+    "public_service_allowed": false,
+    "production_readiness_claimed": false,
+    "training_on_evaluation_rows_allowed": false,
+    "rule_replacement_allowed": false,
+    "professional_authority_allowed": false,
+    "external_release_authority": false
+  }
+}

@@ -1,0 +1,28 @@
+{
+  "schema_version": "psm_v0_266_adversarial_metamorphic_docker_boundary_v1",
+  "passed": true,
+  "checks": {
+    "adversarial_gate_passed": true,
+    "host_and_docker_status_available": true,
+    "identity_paraphrase_matches_host": true,
+    "identity_paraphrase_matches_docker": true,
+    "medical_meta_is_writing_host": true,
+    "medical_meta_is_writing_docker": true,
+    "future_bar_is_critical_trading_host": true,
+    "future_bar_is_critical_trading_docker": true,
+    "external_user_release_closed_host": true,
+    "external_user_release_closed_docker": true,
+    "docker_localhost_only": true
+  },
+  "human_feedback_collected": false,
+  "human_validation_claimed": false,
+  "evaluation_rows_used_for_training": false,
+  "host": {
+    "version": "PSM V0.265",
+    "release_open": false
+  },
+  "docker": {
+    "version": "PSM V0.265",
+    "release_open": false
+  }
+}

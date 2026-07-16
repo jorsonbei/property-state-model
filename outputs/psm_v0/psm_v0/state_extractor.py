@@ -1,5 +1,6 @@
 from __future__ import annotations
 
+import re
 from datetime import datetime, timezone
 from uuid import uuid4
 
@@ -61,7 +62,7 @@ DOMAIN_KEYWORDS = {
         "真实性争议",
         "真實性爭議",
     ],
-    "trading": ["交易", "股票", "期货", "期貨", "实盘", "實盤", "模拟盘", "模擬盤", "回测", "回測", "盈亏", "盈虧", "止损", "止損", "回撤", "滑点", "滑點", "手续费", "手續費", "因子"],
+    "trading": ["交易", "股票", "期货", "期貨", "实盘", "實盤", "模拟盘", "模擬盤", "回测", "回測", "backtest", "lookahead", "前视偏差", "前視偏差", "未来函数", "未來函數", "交易信号", "交易訊號", "成交", "k线", "k線", "未来 bar", "未來 bar", "盈亏", "盈虧", "止损", "止損", "回撤", "滑点", "滑點", "手续费", "手續費", "因子"],
     "code_engineering": ["代码", "代碼", "程序", "程式", "上线", "上線", "生产环境", "生產環境", "bug", "数据库", "資料庫", "python", "api", "go live", "production"],
     "wuxing_theory": ["物性论", "物性論", "物性AI", "物性 AI", "物性模型", "物性项目", "物性項目", "Q 核", "Q核", "Ω", "Δσ", "Π", "B_σ", "Σ+", "NoTargetRead", "judge-only", "外部世界等价读取", "外部世界等價讀取", "global equivalence"],
     "research": ["研究", "论文", "論文", "实验", "實驗", "数据集", "數據集", "原始数据", "原始數據", "样本", "樣本", "引用", "公式", "推导", "推導", "复演", "復演", "后验拟合", "後驗擬合", "过拟合", "過擬合", "预注册", "預註冊", "盲测", "盲測", "盲集", "holdout", "NoBackfit", "Fresh Holdout", "fully proved"],
@@ -70,8 +71,53 @@ DOMAIN_KEYWORDS = {
 }
 
 DOMAIN_META_OR_NEGATION = {
-    "trading": ["不涉及交易", "不涉及交易建议", "和交易无关", "不做交易建议", "不给交易建议"],
+    "medical": ["这不是医疗诊断", "這不是醫療診斷", "不是医疗诊断", "不是醫療診斷", "不需要医生建议", "不需要醫生建議", "不涉及医疗建议", "不涉及醫療建議", "不做医疗建议", "不做醫療建議"],
+    "trading": ["不涉及交易", "不涉及交易建议", "不涉及交易建議", "和交易无关", "和交易無關", "不做交易建议", "不做交易建議", "不给交易建议", "不給交易建議"],
 }
+
+META_LANGUAGE_TERMS = [
+    "语言分析",
+    "語言分析",
+    "词汇翻译",
+    "詞彙翻譯",
+    "翻译成英文",
+    "翻譯成英文",
+    "的英文",
+    "的中文",
+    "几个字",
+    "幾個字",
+    "字符数",
+    "字元數",
+    "总结",
+    "總結",
+    "概括",
+    "摘要",
+    "改写",
+    "改寫",
+    "改成",
+    "润色",
+    "潤色",
+    "翻译",
+    "翻譯",
+    "把这句话压缩",
+    "把這句話壓縮",
+]
+
+META_LANGUAGE_TASK_PATTERNS = [
+    r"(?:^|[：:，,。！？!?])(?:请|請|帮我|幫我|只做|只是|把|將|将|从|從|一句话|一句話).{0,24}(?:总结|總結|概括|摘要|改写|改寫|改成|润色|潤色|翻译|翻譯|提取|压缩|壓縮)",
+    r"(?:^|[：:，,。！？!?])用(?:一句话|一句話|两点|兩點).{0,12}(?:总结|總結|概括)",
+    r"^(?:总结|總結|概括|摘要|改写|改寫|润色|潤色|翻译|翻譯|提取)",
+    r"^(?:再|继续|繼續).{0,12}(?:总结|總結|概括|摘要|改写|改寫|润色|潤色|翻译|翻譯|压缩|壓縮)",
+]
+
+SOURCE_VERIFICATION_TERMS = [
+    "来源核验",
+    "來源核驗",
+    "来源查证",
+    "來源查證",
+    "来源验证",
+    "來源驗證",
+]
 
 RESEARCH_ACTIVITY_TERMS = [
     "论文",
@@ -251,14 +297,32 @@ def _filter_domain_meta_or_negation(text: str, domain: str) -> str:
     return filtered
 
 
+def _semantic_domain_text(text: str) -> str:
+    filtered = text
+    for domain in DOMAIN_META_OR_NEGATION:
+        filtered = _filter_domain_meta_or_negation(filtered, domain)
+    if _is_meta_language_task(filtered):
+        filtered = re.sub(r"[\"'“‘][^\"'”’]{1,80}[\"'”’]", "", filtered)
+    return filtered
+
+
+def _is_meta_language_task(text: str) -> bool:
+    if _contains_any(text, SOURCE_VERIFICATION_TERMS):
+        return False
+    return any(re.search(pattern, text, flags=re.IGNORECASE) for pattern in META_LANGUAGE_TASK_PATTERNS)
+
+
 def infer_domain(text: str) -> str:
-    if _contains_any(text, DOMAIN_KEYWORDS["wuxing_theory"]) and _contains_any(
-        text,
+    semantic_text = _semantic_domain_text(text)
+    if _is_meta_language_task(semantic_text):
+        return "writing"
+    if _contains_any(semantic_text, DOMAIN_KEYWORDS["wuxing_theory"]) and _contains_any(
+        semantic_text,
         RESEARCH_ACTIVITY_TERMS,
     ):
         return "research"
     for domain, keywords in DOMAIN_KEYWORDS.items():
-        if _contains_any(_filter_domain_meta_or_negation(text, domain), keywords):
+        if _contains_any(_filter_domain_meta_or_negation(semantic_text, domain), keywords):
             return domain
     return "general"
 
@@ -298,6 +362,9 @@ def infer_unknowns(domain: str) -> list[str]:
 def infer_risk_level(domain: str, text: str) -> str:
     if domain in {"medical", "legal", "trading"}:
         return "critical"
+    if domain == "writing":
+        return "low"
+    semantic_text = _semantic_domain_text(text)
     critical_terms = [
         "实盘",
         "實盤",
@@ -313,16 +380,15 @@ def infer_risk_level(domain: str, text: str) -> str:
         "绕过权限",
         "读取用户数据库",
         "越权",
+        "production",
     ]
     high_terms = ["现金流", "現金流", "科研", "论文", "論文", "实验", "實驗", "代码", "代碼", "投资", "投資", "交易", "公司", "团队", "團隊"]
-    if _contains_any(text, critical_terms):
+    if _contains_any(semantic_text, critical_terms):
         return "critical"
     if domain in {"business_decision", "code_engineering", "research", "wuxing_theory"}:
         return "high"
-    if _contains_any(text, high_terms):
+    if _contains_any(semantic_text, high_terms):
         return "high"
-    if domain == "writing":
-        return "low"
     return "medium"
 
 

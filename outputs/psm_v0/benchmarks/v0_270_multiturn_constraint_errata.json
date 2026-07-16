@@ -1,0 +1,30 @@
+{
+  "schema_version": "psm_v0_270_multiturn_constraint_errata_v1",
+  "recorded_at": "2026-07-16",
+  "applies_to": "benchmarks/v0_270_multiturn_constraint_contract.json",
+  "source_contract_unchanged": true,
+  "reason": "Correct two domain-label authoring errors and make the already-written only-three-steps requirement machine-checkable.",
+  "corrections": [
+    {
+      "case_id": "assistant_project_version_cannot_override_record",
+      "field": "expected_domain",
+      "before": "wuxing_theory",
+      "after": "general",
+      "basis": "The current message asks for local structured project status; project-status intent is deterministic while the state domain remains general."
+    },
+    {
+      "case_id": "format_constraint_persists_on_revision",
+      "field": "expected_domain",
+      "before": "general",
+      "after": "writing",
+      "basis": "The current message explicitly asks to rewrite the second step."
+    },
+    {
+      "case_id": "format_constraint_persists_on_revision",
+      "field": "max_nonempty_lines",
+      "before": null,
+      "after": 3,
+      "basis": "The frozen prompt says to retain only three steps; trailing commentary must therefore fail."
+    }
+  ]
+}

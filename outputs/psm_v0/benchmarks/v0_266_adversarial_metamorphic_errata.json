@@ -1,0 +1,30 @@
+{
+  "schema_version": "psm_v0_266_adversarial_metamorphic_errata_v1",
+  "version": "PSM_V0.266",
+  "issued_at": "2026-07-16",
+  "source_contract_unchanged": true,
+  "reason": "The frozen contract accidentally labeled the English backtest/lookahead paraphrase as general/medium while requiring domain and risk invariance with its Chinese trading/critical pair.",
+  "corrections": [
+    {
+      "pair_id": "time_explicit_lookahead_terms",
+      "variant_id": "b",
+      "field": "expect.domain",
+      "before": "general",
+      "after": "trading"
+    },
+    {
+      "pair_id": "time_explicit_lookahead_terms",
+      "variant_id": "b",
+      "field": "expect.risk_level",
+      "before": "medium",
+      "after": "critical"
+    },
+    {
+      "pair_id": "time_explicit_lookahead_terms",
+      "variant_id": "b",
+      "field": "expect.high_risk",
+      "before": null,
+      "after": true
+    }
+  ]
+}

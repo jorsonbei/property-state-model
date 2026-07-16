@@ -1,4 +1,4 @@
-# 物性AI Chat Alpha 0.265 / Automated Persona Quality
+# 物性AI Chat Alpha 0.270 / Multi-turn Constraints
 
 Local normal-chat demo backed by the latest PSM pipeline status.
 
@@ -24,14 +24,14 @@ Boundary:
 
 - Internal local chat demo only.
 - The normal chat remains an internal local demo. The completed V0.264 invite-only trial remains historical evidence.
-- V0.265 uses frozen synthetic cases and simulated personas; it collects no human ratings and claims no human validation.
+- V0.270 uses frozen synthetic multi-turn cases; it collects no human ratings and claims no human validation.
 - Not medical, legal, trading, or production release authority.
 - Session memory is not consent or release authority.
 - Rule replacement remains off.
 
 Verified scope:
 
-- `/api/status` reports the latest promoted project status, currently `PSM V0.265`, plus the historical enrollment counts.
+- `/api/status` reports the latest promoted project status, currently `PSM V0.270`, plus the historical enrollment counts.
 - `/api/status` exposes `internal_trial_ready` separately from the still-closed external-user gate.
 - `/api/chat` preserves user and assistant roles across multi-turn history.
 - Project status and roadmap answers are grounded in the local structured status.
@@ -54,6 +54,12 @@ Verified scope:
 - V0.261 repairs and independently revalidates the external annotation contract; V0.262 freezes and independently passes the conservative three-to-five-person invite-only trial protocol.
 - V0.263 fixes and completes the selected three-person enrollment sequence; V0.264 completes three credited low-risk turns for each participant.
 - V0.265 removes the feedback fields and endpoint, then validates 30 synthetic cases and 12 simulated roles under an explicit synthetic-only boundary.
+- V0.266 preserves eight initial failures, then passes 15/15 adversarial pairs and 30/30 variants with deterministic rules and release boundaries retained.
+- V0.267 retains three failed external reviews, repairs the resulting findings, then passes the final 15/15 independent semantic review.
+- V0.268 retains five initial task failures and three transparent errata, then passes 21/21 translation, rewriting, extraction, comparison, summarization, planning, and explanation tasks.
+- V0.269 passes 21/21 repeated task runs plus cancel, timeout, retry, offline, empty-response, browser, and Docker recovery gates.
+- V0.270 retains five initial failures, then passes 12/12 multi-turn reference, topic-switch, correction-priority, and constraint-persistence cases.
+- V0.271 remains unpromoted after an external M07/M08 failure; both are repaired locally, but the monthly API budget blocks rejudging.
 - Sensitive or unknown participant data stops the entire trial without automatic resume. Raw prompts and answers are never persisted or submitted to external APIs.
 
 Browser regression:
@@ -74,4 +80,12 @@ make quality-v265-eval
 make browser-regression-v265-quality
 make quality-v265-docker
 make promote-v265
+make adversarial-v266-eval
+make browser-regression-v266-adversarial
+make adversarial-v266-docker
+make promote-v266
+make task-v268-eval
+make browser-regression-v268-task
+make task-v268-docker
+make promote-v268
 ```

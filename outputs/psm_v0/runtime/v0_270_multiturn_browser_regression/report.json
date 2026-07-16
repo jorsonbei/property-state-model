@@ -1,0 +1,35 @@
+{
+  "schema_version": "psm_v0_270_multiturn_browser_regression_v1",
+  "base_url": "http://127.0.0.1:8765",
+  "passed": true,
+  "synthetic_questions_only": true,
+  "human_participant_actions_executed": false,
+  "human_feedback_collected": false,
+  "desktop": {
+    "uiReferencePassed": true,
+    "explicitTopicSwitchPassed": true,
+    "versionCorrectionDirect": true,
+    "externalReleaseClosed": true,
+    "horizontalOverflow": false,
+    "consoleErrors": 0
+  },
+  "mobile": {
+    "threeStepConstraintPassed": true,
+    "translationOnlyConstraintPassed": true,
+    "factCorrectionDirect": true,
+    "horizontalOverflow": false,
+    "consoleErrors": 0
+  },
+  "checks": {
+    "ui_reference_passed": true,
+    "explicit_topic_switch_passed": true,
+    "version_correction_direct": true,
+    "three_step_constraint_passed": true,
+    "translation_only_constraint_passed": true,
+    "fact_correction_direct": true,
+    "external_release_closed": true,
+    "desktop_no_overflow": true,
+    "mobile_no_overflow": true,
+    "console_errors_zero": true
+  }
+}

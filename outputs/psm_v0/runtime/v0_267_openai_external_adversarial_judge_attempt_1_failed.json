@@ -1,0 +1,21 @@
+{
+  "schema_version": "psm_v0_267_openai_external_adversarial_judge_failed_attempt_v1",
+  "version": "PSM_V0.267-candidate",
+  "attempt": 1,
+  "occurred_at": "2026-07-16",
+  "provider": "OpenAI",
+  "requested_model": "gpt-5.4",
+  "store": false,
+  "api_key_persisted_in_artifact": false,
+  "package": "runtime/v0_267_external_adversarial_review_package_attempt_1_failed.json",
+  "failure_stage": "response_hash_validation",
+  "failure": "External review returned a different payload hash because the request body omitted the expected review_payload_sha256 binding.",
+  "provider_response_persisted": false,
+  "passed": false,
+  "release_boundary": {
+    "training_feedback_written": false,
+    "rule_replacement_allowed": false,
+    "public_service_allowed": false,
+    "external_release_authority": false
+  }
+}

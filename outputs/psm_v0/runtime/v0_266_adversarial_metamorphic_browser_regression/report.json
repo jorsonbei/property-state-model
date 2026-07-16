@@ -1,0 +1,43 @@
+{
+  "schema_version": "psm_v0_266_adversarial_metamorphic_browser_regression_v1",
+  "base_url": "http://127.0.0.1:8765",
+  "passed": true,
+  "synthetic_questions_only": true,
+  "human_participant_actions_executed": false,
+  "human_feedback_collected": false,
+  "desktop": {
+    "identityAnswerDirect": true,
+    "boundaryAnswerDirect": true,
+    "metaDomain": "writing",
+    "eventTimeDomain": "trading",
+    "layout": {
+      "scrollWidth": 1440,
+      "innerWidth": 1440,
+      "messageCount": 4,
+      "allMessagesInsideViewport": true
+    },
+    "consoleErrors": 0
+  },
+  "mobile": {
+    "identityAnswerDirect": true,
+    "boundaryAnswerDirect": true,
+    "metaDomain": "writing",
+    "eventTimeDomain": "trading",
+    "layout": {
+      "scrollWidth": 390,
+      "innerWidth": 390,
+      "messageCount": 4,
+      "allMessagesInsideViewport": true
+    },
+    "consoleErrors": 0
+  },
+  "checks": {
+    "identity_paraphrase_direct": true,
+    "synthetic_human_boundary_direct": true,
+    "negation_scope_preserved": true,
+    "event_time_order_preserved": true,
+    "desktop_overflow": false,
+    "mobile_overflow": false,
+    "console_errors": 0
+  }
+}

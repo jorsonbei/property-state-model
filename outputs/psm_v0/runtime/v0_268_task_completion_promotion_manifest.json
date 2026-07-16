@@ -1,0 +1,60 @@
+{
+  "schema_version": "psm_v0_268_task_completion_promotion_manifest_v1",
+  "version": "PSM_V0.268",
+  "promoted_at": "2026-07-16",
+  "promoted": true,
+  "decision": "task_completion_gate_passed",
+  "formal_core_source": "PSM_V0.251",
+  "formal_core_records": 2228,
+  "task_completion": {
+    "decision": "task_completion_gate_passed",
+    "passed": true,
+    "cases": 21,
+    "cases_passed": 21,
+    "families": 7,
+    "families_passed": 7,
+    "initial_failure_count": 5,
+    "transparent_errata_count": 3,
+    "provider_failure_templates": 0,
+    "task_restatements_without_completion": 0,
+    "critical_safety_false_negatives": 0,
+    "total_duration_ms": 127227,
+    "synthetic_only": true,
+    "human_validation_claimed": false,
+    "contract_sha256": "3a446a58c41408b8baed2bd7216ea25fe668d29941eb97637657fc7dd448a167",
+    "errata_sha256": [
+      "22d20e7a4119476114989f4ffefff6c7b0169a18a73643205e8ac052b6e6ca68",
+      "e2d57c96cd601bcdfe43c8eed151ea2f9ec3af9266089a6ce5cac315ba1081e9",
+      "9687b630a2ab878f5c588bf2f053831d8b1611b8ae7b24068ad03152c367de45"
+    ],
+    "gate_sha256": "f001dc560be2e45a88b6150d4295d1c7d1f5b884d37f3fe4108a4d51c99cd69a"
+  },
+  "evidence": {
+    "contract": "benchmarks/v0_268_task_completion_contract.json",
+    "contract_errata": [
+      "benchmarks/v0_268_task_completion_errata.json",
+      "benchmarks/v0_268_task_completion_errata_2.json",
+      "benchmarks/v0_268_task_completion_errata_3.json"
+    ],
+    "report": "runtime/v0_268_task_completion_report.json",
+    "gate": "runtime/v0_268_task_completion_gate.json",
+    "initial_failure_ledger": "runtime/v0_268_task_completion_initial_failure_ledger.json",
+    "browser": "runtime/v0_268_task_completion_browser_regression/report.json",
+    "docker": "runtime/v0_268_task_completion_docker_boundary.json"
+  },
+  "release_boundary": {
+    "open_domain_generalization_claimed": false,
+    "public_service_allowed": false,
+    "production_readiness_claimed": false,
+    "training_on_evaluation_rows_allowed": false,
+    "rule_replacement_allowed": false,
+    "professional_authority_allowed": false,
+    "external_release_authority": false
+  },
+  "next_stage": {
+    "version": "PSM_V0.269",
+    "objective": "建立本地模型任务完成度的重复稳定性与性能预算：对冻结任务执行多轮重复回放，测量输出不变量、p50/p95 延迟、超时、取消、重试与降级恢复；任何失败模板、任务漂移或发布边界变化均阻止晋升。",
+    "blocked": false,
+    "requires_user_input": false
+  }
+}

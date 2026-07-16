@@ -95,9 +95,16 @@ def match_verified_knowledge(text: str) -> VerifiedKnowledge | None:
             grounding_facts=("随机化单位", "处理污染", "用户或账号 ID"),
             grounding_sources=("verified_kernel:experiment_unit_cross_device_contamination",),
         )
-    if _any(folded, ("未来函数", "lookahead", "前视偏差")) or _all_groups(
+    if (
+        _any(folded, ("未来函数", "未來函數", "lookahead", "前视偏差", "前視偏差"))
+        or _all_groups(
         folded,
         (("收盘", "收盤"), ("当天最高价", "當天最高價", "当天最低价", "當天最低價"), ("回测", "回測")),
+        )
+        or _all_groups(
+            folded,
+            (("未来 bar", "未來 bar", "更晚k线", "更晚 k线", "更晚k線", "更晚 k線"), ("更早", "先前", "旧信号", "舊訊號")),
+        )
     ):
         return VerifiedKnowledge(
             kernel_id="event_time_no_lookahead",

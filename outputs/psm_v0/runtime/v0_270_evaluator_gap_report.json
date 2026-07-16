@@ -1,0 +1,12 @@
+{
+  "schema_version": "psm_v0_270_evaluator_gap_report_v1",
+  "recorded_at": "2026-07-16",
+  "passed": false,
+  "case_id": "format_constraint_persists_on_revision",
+  "gap": "The first evaluator checked required step markers but did not reject explanatory text after the requested three-step output.",
+  "observed_nonempty_lines": 4,
+  "required_max_nonempty_lines": 3,
+  "source_contract_changed": false,
+  "product_code_changed_before_recording": false,
+  "repair": "A transparent erratum adds max_nonempty_lines=3 and the evaluator enforces it."
+}

@@ -1,0 +1,40 @@
+{
+  "schema_version": "psm_v0_268_task_completion_browser_regression_v1",
+  "base_url": "http://127.0.0.1:8765",
+  "passed": true,
+  "synthetic_questions_only": true,
+  "human_participant_actions_executed": false,
+  "human_feedback_collected": false,
+  "desktop": {
+    "literalExclusionPreserved": true,
+    "epistemicSummaryPreserved": true,
+    "externalReleaseClosed": true,
+    "layout": {
+      "scrollWidth": 1440,
+      "innerWidth": 1440,
+      "messageCount": 4,
+      "allMessagesInsideViewport": true
+    },
+    "consoleErrors": 0
+  },
+  "mobile": {
+    "literalExclusionPreserved": true,
+    "epistemicSummaryPreserved": true,
+    "externalReleaseClosed": true,
+    "layout": {
+      "scrollWidth": 390,
+      "innerWidth": 390,
+      "messageCount": 4,
+      "allMessagesInsideViewport": true
+    },
+    "consoleErrors": 0
+  },
+  "checks": {
+    "literal_exclusion_preserved": true,
+    "epistemic_summary_preserved": true,
+    "external_release_closed": true,
+    "desktop_overflow": false,
+    "mobile_overflow": false,
+    "console_errors": 0
+  }
+}

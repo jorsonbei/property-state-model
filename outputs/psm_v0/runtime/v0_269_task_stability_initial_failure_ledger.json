@@ -1,0 +1,10 @@
+{
+  "schema_version": "psm_v0_269_task_stability_initial_failure_ledger_v1",
+  "version": "PSM_V0.269-candidate",
+  "frozen_at": "2026-07-16",
+  "contract_sha256": "0582fd77f9bdf4984d0f4815fd88b4e70fd5ee6bdc45961171640d0b8ebeab32",
+  "first_run_completed_before_candidate_changes": true,
+  "append_only": true,
+  "initial_failure_count": 0,
+  "initial_failures": []
+}

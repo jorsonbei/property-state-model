@@ -1,0 +1,11 @@
+{
+  "schema_version": "psm_v0_270_multiturn_constraint_checkpoint_v1",
+  "current_promoted_version": "PSM_V0.270",
+  "target_version": "PSM_V0.270",
+  "target_promoted": true,
+  "passed": true,
+  "status": "v0_270_promoted_v0_271_external_multiturn_judge_open",
+  "requires_user_input": false,
+  "next_action": "build_v0_271_external_multiturn_review_package",
+  "promotion_manifest": "runtime/v0_270_multiturn_promotion_manifest.json"
+}

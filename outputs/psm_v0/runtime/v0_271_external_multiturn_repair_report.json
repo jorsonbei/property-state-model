@@ -1,0 +1,60 @@
+{
+  "schema_version": "psm_v0_271_external_multiturn_repair_report_v1",
+  "version": "PSM_V0.271-candidate",
+  "passed": true,
+  "external_failed_item_ids": [
+    "M07",
+    "M08"
+  ],
+  "external_failure_retained": true,
+  "failed_items_repaired_locally": [
+    "M07",
+    "M08"
+  ],
+  "rows": [
+    {
+      "review_id": "M07",
+      "passed": true,
+      "checks": {
+        "exact_direct_answer": true,
+        "quality_audit_passed": true,
+        "sigma_plus_delivery_passed": true,
+        "external_release_closed": true,
+        "rule_replacement_closed": true
+      },
+      "original_answer": "当前项目是 PSM V0.269。确定性正式源是 PSM V0.251，共有 2228 个正式案例，正式回归目前全部通过。最近一轮定向外部模型证据中，raw/gated 风险分别为 0/0。\n\n下一阶段是 PSM V0.270：建立普通聊天的多轮指代、约束累积与更正恢复基准：冻结多轮对话图，验证助手只使用用户历史和已交付回答，不让隐藏审计文本、错误助手陈述或过期约束覆盖当前意图。。当前仍是内部本地聊天候选，外部用户试用没有开放。",
+      "repaired_answer": "当前项目版本是 PSM V0.270。",
+      "expected_answer": "当前项目版本是 PSM V0.270。",
+      "generation": {
+        "status": "success",
+        "provider": "deterministic",
+        "model": null,
+        "error": null
+      }
+    },
+    {
+      "review_id": "M08",
+      "passed": true,
+      "checks": {
+        "exact_direct_answer": true,
+        "quality_audit_passed": true,
+        "sigma_plus_delivery_passed": true,
+        "external_release_closed": true,
+        "rule_replacement_closed": true
+      },
+      "original_answer": "更正后的结论成立：成熟香蕉通常比苹果更软。\n\n香蕉在成熟过程中，淀粉转化为糖分，果胶酶活性增强导致细胞壁结构软化，触感明显变软；而苹果即使成熟，果肉仍保持相对紧实的质地，除非发生腐烂或过度成熟才会变软。因此，在常规食用状态下，成熟香蕉的软度普遍高于苹果。",
+      "repaired_answer": "成熟香蕉通常更软。",
+      "expected_answer": "成熟香蕉通常更软。",
+      "generation": {
+        "status": "success",
+        "provider": "deterministic",
+        "model": null,
+        "error": null
+      }
+    }
+  ],
+  "human_feedback_collected": false,
+  "evaluation_rows_used_for_training": false,
+  "external_rejudge_completed": false,
+  "external_rejudge_blocker": "monthly_api_budget_exhausted"
+}

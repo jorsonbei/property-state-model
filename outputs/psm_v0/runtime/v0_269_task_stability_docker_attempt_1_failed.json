@@ -1,0 +1,12 @@
+{
+  "schema_version": "psm_v0_269_task_stability_docker_failed_attempt_v1",
+  "attempt": 1,
+  "recorded_at": "2026-07-16",
+  "passed": false,
+  "failure_class": "container_startup_readiness_race",
+  "error": "http.client.RemoteDisconnected: Remote end closed connection without response",
+  "product_answer_evaluated": false,
+  "product_code_changed_after_failure": false,
+  "repair": "Bounded endpoint-readiness retry in the Docker verifier; ten attempts at 0.5 second intervals.",
+  "release_boundary_changed": false
+}

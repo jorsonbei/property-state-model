@@ -1,0 +1,578 @@
+{
+  "schema_version": "psm_v0_269_task_stability_report_v1",
+  "version": "PSM_V0.269-candidate",
+  "contract_sha256": "0582fd77f9bdf4984d0f4815fd88b4e70fd5ee6bdc45961171640d0b8ebeab32",
+  "source_contract_sha256": "f867ea4409910c65c6af3986af3e01918698d39ed895a6497b027e7456bea9b6",
+  "provenance": {
+    "synthetic_only": true,
+    "internally_authored": true,
+    "independent_blind_evidence": false,
+    "human_participants_used": false,
+    "human_feedback_collected": false,
+    "human_validation_claimed": false
+  },
+  "summary": {
+    "selected_cases": 7,
+    "families": 7,
+    "runs": 21,
+    "passed_runs": 21,
+    "failed_runs": 0,
+    "provider_drift_events": 0,
+    "deterministic_drift_events": 0,
+    "recovery_failures": 0,
+    "p50_ms": 23,
+    "p95_ms": 16771,
+    "max_ms": 16841,
+    "total_ms": 100904
+  },
+  "provider_drift": [],
+  "deterministic_drift": [],
+  "rows": [
+    {
+      "case_id": "translation_chest_pain",
+      "family": "translation",
+      "repetition": 1,
+      "passed": true,
+      "checks": {
+        "required_markers_present": true,
+        "forbidden_outputs_absent": true,
+        "length_constraint_met": true,
+        "provider_or_kernel_completed": true,
+        "quality_audit_passed": true,
+        "sigma_plus_delivery_passed": true,
+        "release_boundary_closed": true
+      },
+      "missing_required_markers": [],
+      "missing_required_groups": [],
+      "forbidden_found": [],
+      "answer": "“胸痛”的常用英文是 `chest pain`。这只是词汇翻译，不构成医疗诊断或医生建议。",
+      "generation": {
+        "status": "success",
+        "provider": "deterministic",
+        "model": null,
+        "error": null
+      },
+      "duration_ms": 14
+    },
+    {
+      "case_id": "translation_chest_pain",
+      "family": "translation",
+      "repetition": 2,
+      "passed": true,
+      "checks": {
+        "required_markers_present": true,
+        "forbidden_outputs_absent": true,
+        "length_constraint_met": true,
+        "provider_or_kernel_completed": true,
+        "quality_audit_passed": true,
+        "sigma_plus_delivery_passed": true,
+        "release_boundary_closed": true
+      },
+      "missing_required_markers": [],
+      "missing_required_groups": [],
+      "forbidden_found": [],
+      "answer": "“胸痛”的常用英文是 `chest pain`。这只是词汇翻译，不构成医疗诊断或医生建议。",
+      "generation": {
+        "status": "success",
+        "provider": "deterministic",
+        "model": null,
+        "error": null
+      },
+      "duration_ms": 11
+    },
+    {
+      "case_id": "translation_chest_pain",
+      "family": "translation",
+      "repetition": 3,
+      "passed": true,
+      "checks": {
+        "required_markers_present": true,
+        "forbidden_outputs_absent": true,
+        "length_constraint_met": true,
+        "provider_or_kernel_completed": true,
+        "quality_audit_passed": true,
+        "sigma_plus_delivery_passed": true,
+        "release_boundary_closed": true
+      },
+      "missing_required_markers": [],
+      "missing_required_groups": [],
+      "forbidden_found": [],
+      "answer": "“胸痛”的常用英文是 `chest pain`。这只是词汇翻译，不构成医疗诊断或医生建议。",
+      "generation": {
+        "status": "success",
+        "provider": "deterministic",
+        "model": null,
+        "error": null
+      },
+      "duration_ms": 10
+    },
+    {
+      "case_id": "rewrite_literal_exclusion",
+      "family": "rewriting",
+      "repetition": 1,
+      "passed": true,
+      "checks": {
+        "required_markers_present": true,
+        "forbidden_outputs_absent": true,
+        "length_constraint_met": true,
+        "provider_or_kernel_completed": true,
+        "quality_audit_passed": true,
+        "sigma_plus_delivery_passed": true,
+        "release_boundary_closed": true
+      },
+      "missing_required_markers": [],
+      "missing_required_groups": [],
+      "forbidden_found": [],
+      "answer": "可以改为：“现有结果仅提供初步支持，结论仍需独立数据与外部复核。”",
+      "generation": {
+        "status": "success",
+        "provider": "deterministic",
+        "model": null,
+        "error": null
+      },
+      "duration_ms": 11
+    },
+    {
+      "case_id": "rewrite_literal_exclusion",
+      "family": "rewriting",
+      "repetition": 2,
+      "passed": true,
+      "checks": {
+        "required_markers_present": true,
+        "forbidden_outputs_absent": true,
+        "length_constraint_met": true,
+        "provider_or_kernel_completed": true,
+        "quality_audit_passed": true,
+        "sigma_plus_delivery_passed": true,
+        "release_boundary_closed": true
+      },
+      "missing_required_markers": [],
+      "missing_required_groups": [],
+      "forbidden_found": [],
+      "answer": "可以改为：“现有结果仅提供初步支持，结论仍需独立数据与外部复核。”",
+      "generation": {
+        "status": "success",
+        "provider": "deterministic",
+        "model": null,
+        "error": null
+      },
+      "duration_ms": 12
+    },
+    {
+      "case_id": "rewrite_literal_exclusion",
+      "family": "rewriting",
+      "repetition": 3,
+      "passed": true,
+      "checks": {
+        "required_markers_present": true,
+        "forbidden_outputs_absent": true,
+        "length_constraint_met": true,
+        "provider_or_kernel_completed": true,
+        "quality_audit_passed": true,
+        "sigma_plus_delivery_passed": true,
+        "release_boundary_closed": true
+      },
+      "missing_required_markers": [],
+      "missing_required_groups": [],
+      "forbidden_found": [],
+      "answer": "可以改为：“现有结果仅提供初步支持，结论仍需独立数据与外部复核。”",
+      "generation": {
+        "status": "success",
+        "provider": "deterministic",
+        "model": null,
+        "error": null
+      },
+      "duration_ms": 11
+    },
+    {
+      "case_id": "extract_names",
+      "family": "extraction",
+      "repetition": 1,
+      "passed": true,
+      "checks": {
+        "required_markers_present": true,
+        "forbidden_outputs_absent": true,
+        "length_constraint_met": true,
+        "provider_or_kernel_completed": true,
+        "quality_audit_passed": true,
+        "sigma_plus_delivery_passed": true,
+        "release_boundary_closed": true
+      },
+      "missing_required_markers": [],
+      "missing_required_groups": [],
+      "forbidden_found": [],
+      "answer": "李明，王芳，陈杰",
+      "generation": {
+        "status": "success",
+        "provider": "ollama",
+        "model": "qwen3.5:9b",
+        "error": null
+      },
+      "duration_ms": 13237
+    },
+    {
+      "case_id": "extract_names",
+      "family": "extraction",
+      "repetition": 2,
+      "passed": true,
+      "checks": {
+        "required_markers_present": true,
+        "forbidden_outputs_absent": true,
+        "length_constraint_met": true,
+        "provider_or_kernel_completed": true,
+        "quality_audit_passed": true,
+        "sigma_plus_delivery_passed": true,
+        "release_boundary_closed": true
+      },
+      "missing_required_markers": [],
+      "missing_required_groups": [],
+      "forbidden_found": [],
+      "answer": "李明，王芳，陈杰",
+      "generation": {
+        "status": "success",
+        "provider": "ollama",
+        "model": "qwen3.5:9b",
+        "error": null
+      },
+      "duration_ms": 3412
+    },
+    {
+      "case_id": "extract_names",
+      "family": "extraction",
+      "repetition": 3,
+      "passed": true,
+      "checks": {
+        "required_markers_present": true,
+        "forbidden_outputs_absent": true,
+        "length_constraint_met": true,
+        "provider_or_kernel_completed": true,
+        "quality_audit_passed": true,
+        "sigma_plus_delivery_passed": true,
+        "release_boundary_closed": true
+      },
+      "missing_required_markers": [],
+      "missing_required_groups": [],
+      "forbidden_found": [],
+      "answer": "李明，王芳，陈杰",
+      "generation": {
+        "status": "success",
+        "provider": "ollama",
+        "model": "qwen3.5:9b",
+        "error": null
+      },
+      "duration_ms": 3425
+    },
+    {
+      "case_id": "compare_apple_banana",
+      "family": "comparison",
+      "repetition": 1,
+      "passed": true,
+      "checks": {
+        "required_markers_present": true,
+        "forbidden_outputs_absent": true,
+        "length_constraint_met": true,
+        "provider_or_kernel_completed": true,
+        "quality_audit_passed": true,
+        "sigma_plus_delivery_passed": true,
+        "release_boundary_closed": true
+      },
+      "missing_required_markers": [],
+      "missing_required_groups": [],
+      "forbidden_found": [],
+      "answer": "苹果口感脆爽，带酸甜味，熟透后变软；香蕉初食微涩，成熟后软糯香甜。保存上，苹果宜冷藏或阴凉处，能放较久；香蕉怕冷，室温存放，成熟后需尽快食用或冷藏延缓变黑。两者都需避免挤压和乙烯气体影响。",
+      "generation": {
+        "status": "success",
+        "provider": "ollama",
+        "model": "qwen3.5:9b",
+        "error": null
+      },
+      "duration_ms": 9951
+    },
+    {
+      "case_id": "compare_apple_banana",
+      "family": "comparison",
+      "repetition": 2,
+      "passed": true,
+      "checks": {
+        "required_markers_present": true,
+        "forbidden_outputs_absent": true,
+        "length_constraint_met": true,
+        "provider_or_kernel_completed": true,
+        "quality_audit_passed": true,
+        "sigma_plus_delivery_passed": true,
+        "release_boundary_closed": true
+      },
+      "missing_required_markers": [],
+      "missing_required_groups": [],
+      "forbidden_found": [],
+      "answer": "苹果口感脆爽，带酸甜味，熟透后变软；香蕉初食微涩，成熟后软糯香甜。保存上，苹果宜冷藏或阴凉处，能放较久；香蕉怕冷，室温存放，成熟后需尽快食用或冷藏延缓变黑。两者都需避免挤压和乙烯气体影响。",
+      "generation": {
+        "status": "success",
+        "provider": "ollama",
+        "model": "qwen3.5:9b",
+        "error": null
+      },
+      "duration_ms": 9979
+    },
+    {
+      "case_id": "compare_apple_banana",
+      "family": "comparison",
+      "repetition": 3,
+      "passed": true,
+      "checks": {
+        "required_markers_present": true,
+        "forbidden_outputs_absent": true,
+        "length_constraint_met": true,
+        "provider_or_kernel_completed": true,
+        "quality_audit_passed": true,
+        "sigma_plus_delivery_passed": true,
+        "release_boundary_closed": true
+      },
+      "missing_required_markers": [],
+      "missing_required_groups": [],
+      "forbidden_found": [],
+      "answer": "苹果口感脆爽，带酸甜味，熟透后变软；香蕉初食微涩，成熟后软糯香甜。保存上，苹果宜冷藏或阴凉处，能放较久；香蕉怕冷，室温存放，成熟后需尽快食用或冷藏延缓变黑。两者都需避免挤压和乙烯气体影响。",
+      "generation": {
+        "status": "success",
+        "provider": "ollama",
+        "model": "qwen3.5:9b",
+        "error": null
+      },
+      "duration_ms": 10537
+    },
+    {
+      "case_id": "summary_research_boundary",
+      "family": "summarization",
+      "repetition": 1,
+      "passed": true,
+      "checks": {
+        "required_markers_present": true,
+        "forbidden_outputs_absent": true,
+        "length_constraint_met": true,
+        "provider_or_kernel_completed": true,
+        "quality_audit_passed": true,
+        "sigma_plus_delivery_passed": true,
+        "release_boundary_closed": true
+      },
+      "missing_required_markers": [],
+      "missing_required_groups": [],
+      "forbidden_found": [],
+      "answer": "内部实验支持该假设，但样本较小且尚无独立复现，因此目前只能视为初步证据。",
+      "generation": {
+        "status": "success",
+        "provider": "deterministic",
+        "model": null,
+        "error": null
+      },
+      "duration_ms": 23
+    },
+    {
+      "case_id": "summary_research_boundary",
+      "family": "summarization",
+      "repetition": 2,
+      "passed": true,
+      "checks": {
+        "required_markers_present": true,
+        "forbidden_outputs_absent": true,
+        "length_constraint_met": true,
+        "provider_or_kernel_completed": true,
+        "quality_audit_passed": true,
+        "sigma_plus_delivery_passed": true,
+        "release_boundary_closed": true
+      },
+      "missing_required_markers": [],
+      "missing_required_groups": [],
+      "forbidden_found": [],
+      "answer": "内部实验支持该假设，但样本较小且尚无独立复现，因此目前只能视为初步证据。",
+      "generation": {
+        "status": "success",
+        "provider": "deterministic",
+        "model": null,
+        "error": null
+      },
+      "duration_ms": 14
+    },
+    {
+      "case_id": "summary_research_boundary",
+      "family": "summarization",
+      "repetition": 3,
+      "passed": true,
+      "checks": {
+        "required_markers_present": true,
+        "forbidden_outputs_absent": true,
+        "length_constraint_met": true,
+        "provider_or_kernel_completed": true,
+        "quality_audit_passed": true,
+        "sigma_plus_delivery_passed": true,
+        "release_boundary_closed": true
+      },
+      "missing_required_markers": [],
+      "missing_required_groups": [],
+      "forbidden_found": [],
+      "answer": "内部实验支持该假设，但样本较小且尚无独立复现，因此目前只能视为初步证据。",
+      "generation": {
+        "status": "success",
+        "provider": "deterministic",
+        "model": null,
+        "error": null
+      },
+      "duration_ms": 14
+    },
+    {
+      "case_id": "plan_study_three_steps",
+      "family": "planning",
+      "repetition": 1,
+      "passed": true,
+      "checks": {
+        "required_markers_present": true,
+        "forbidden_outputs_absent": true,
+        "length_constraint_met": true,
+        "provider_or_kernel_completed": true,
+        "quality_audit_passed": true,
+        "sigma_plus_delivery_passed": true,
+        "release_boundary_closed": true
+      },
+      "missing_required_markers": [],
+      "missing_required_groups": [],
+      "forbidden_found": [],
+      "answer": "1. 20:00-20:30：快速回顾核心公式与定理，建立知识框架。\n2. 20:30-21:30：针对薄弱点做专项练习，限时完成典型题型。\n3. 21:30-22:00：整理错题与关键步骤，制定明日复习重点。\n\n此计划基于时间管理原则，旨在平衡输入与输出。若遇到具体题目卡壳，建议标记后跳过，留到最后统一解决，避免单点阻塞影响整体进度。请根据实际掌握程度灵活调整各阶段时长。",
+      "generation": {
+        "status": "success",
+        "provider": "ollama",
+        "model": "qwen3.5:9b",
+        "error": null
+      },
+      "duration_ms": 16771
+    },
+    {
+      "case_id": "plan_study_three_steps",
+      "family": "planning",
+      "repetition": 2,
+      "passed": true,
+      "checks": {
+        "required_markers_present": true,
+        "forbidden_outputs_absent": true,
+        "length_constraint_met": true,
+        "provider_or_kernel_completed": true,
+        "quality_audit_passed": true,
+        "sigma_plus_delivery_passed": true,
+        "release_boundary_closed": true
+      },
+      "missing_required_markers": [],
+      "missing_required_groups": [],
+      "forbidden_found": [],
+      "answer": "1. 20:00-20:30：快速回顾核心公式与定理，建立知识框架。\n2. 20:30-21:30：针对薄弱点做专项练习，限时完成典型题型。\n3. 21:30-22:00：整理错题与关键步骤，制定明日复习重点。\n\n此计划基于时间管理原则，旨在平衡输入与输出。若遇到具体题目卡壳，建议标记后跳过，留到最后统一解决，避免单点阻塞影响整体进度。请根据实际掌握程度灵活调整各阶段时长。",
+      "generation": {
+        "status": "success",
+        "provider": "ollama",
+        "model": "qwen3.5:9b",
+        "error": null
+      },
+      "duration_ms": 16841
+    },
+    {
+      "case_id": "plan_study_three_steps",
+      "family": "planning",
+      "repetition": 3,
+      "passed": true,
+      "checks": {
+        "required_markers_present": true,
+        "forbidden_outputs_absent": true,
+        "length_constraint_met": true,
+        "provider_or_kernel_completed": true,
+        "quality_audit_passed": true,
+        "sigma_plus_delivery_passed": true,
+        "release_boundary_closed": true
+      },
+      "missing_required_markers": [],
+      "missing_required_groups": [],
+      "forbidden_found": [],
+      "answer": "1. 20:00-20:30：快速回顾核心公式与定理，建立知识框架。\n2. 20:30-21:30：针对薄弱点做专项练习，限时完成典型题型。\n3. 21:30-22:00：整理错题与关键步骤，制定明日复习重点。\n\n此计划基于时间管理原则，旨在平衡输入与输出。若遇到具体题目卡壳，建议标记后跳过，留到最后统一解决，避免单点阻塞影响整体进度。请根据实际掌握程度灵活调整各阶段时长。",
+      "generation": {
+        "status": "success",
+        "provider": "ollama",
+        "model": "qwen3.5:9b",
+        "error": null
+      },
+      "duration_ms": 16530
+    },
+    {
+      "case_id": "explain_metal_touch",
+      "family": "explanation",
+      "repetition": 1,
+      "passed": true,
+      "checks": {
+        "required_markers_present": true,
+        "forbidden_outputs_absent": true,
+        "length_constraint_met": true,
+        "provider_or_kernel_completed": true,
+        "quality_audit_passed": true,
+        "sigma_plus_delivery_passed": true,
+        "release_boundary_closed": true
+      },
+      "missing_required_markers": [],
+      "missing_required_groups": [],
+      "forbidden_found": [],
+      "answer": "即使金属和木材温度相同，金属摸起来通常更冷，也不是因为它辐射更多冷量。人的冷热感觉主要取决于皮肤热量流失的速度：金属导热率和热效应率较高，能更快把手上的热传走，皮肤温度下降更快；木材导热较慢，接触面附近很快被手加热，所以感觉没那么冷。如果两者都高于皮肤温度，方向会反过来，金属往往会显得更烫。",
+      "generation": {
+        "status": "success",
+        "provider": "deterministic",
+        "model": null,
+        "error": null
+      },
+      "duration_ms": 61
+    },
+    {
+      "case_id": "explain_metal_touch",
+      "family": "explanation",
+      "repetition": 2,
+      "passed": true,
+      "checks": {
+        "required_markers_present": true,
+        "forbidden_outputs_absent": true,
+        "length_constraint_met": true,
+        "provider_or_kernel_completed": true,
+        "quality_audit_passed": true,
+        "sigma_plus_delivery_passed": true,
+        "release_boundary_closed": true
+      },
+      "missing_required_markers": [],
+      "missing_required_groups": [],
+      "forbidden_found": [],
+      "answer": "即使金属和木材温度相同，金属摸起来通常更冷，也不是因为它辐射更多冷量。人的冷热感觉主要取决于皮肤热量流失的速度：金属导热率和热效应率较高，能更快把手上的热传走，皮肤温度下降更快；木材导热较慢，接触面附近很快被手加热，所以感觉没那么冷。如果两者都高于皮肤温度，方向会反过来，金属往往会显得更烫。",
+      "generation": {
+        "status": "success",
+        "provider": "deterministic",
+        "model": null,
+        "error": null
+      },
+      "duration_ms": 17
+    },
+    {
+      "case_id": "explain_metal_touch",
+      "family": "explanation",
+      "repetition": 3,
+      "passed": true,
+      "checks": {
+        "required_markers_present": true,
+        "forbidden_outputs_absent": true,
+        "length_constraint_met": true,
+        "provider_or_kernel_completed": true,
+        "quality_audit_passed": true,
+        "sigma_plus_delivery_passed": true,
+        "release_boundary_closed": true
+      },
+      "missing_required_markers": [],
+      "missing_required_groups": [],
+      "forbidden_found": [],
+      "answer": "即使金属和木材温度相同，金属摸起来通常更冷，也不是因为它辐射更多冷量。人的冷热感觉主要取决于皮肤热量流失的速度：金属导热率和热效应率较高，能更快把手上的热传走，皮肤温度下降更快；木材导热较慢，接触面附近很快被手加热，所以感觉没那么冷。如果两者都高于皮肤温度，方向会反过来，金属往往会显得更烫。",
+      "generation": {
+        "status": "success",
+        "provider": "deterministic",
+        "model": null,
+        "error": null
+      },
+      "duration_ms": 23
+    }
+  ]
+}

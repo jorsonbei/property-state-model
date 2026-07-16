@@ -1,0 +1,11 @@
+{
+  "schema_version": "psm_v0_268_task_completion_checkpoint_v1",
+  "current_promoted_version": "PSM_V0.268",
+  "target_version": "PSM_V0.268",
+  "target_promoted": true,
+  "passed": true,
+  "status": "v0_268_promoted_v0_269_stability_and_performance_open",
+  "requires_user_input": false,
+  "next_action": "freeze_v0_269_stability_and_performance_contract",
+  "promotion_manifest": "runtime/v0_268_task_completion_promotion_manifest.json"
+}

@@ -1,0 +1,10 @@
+{
+  "schema_version": "psm_v0_269_browser_harness_errata_v1",
+  "recorded_at": "2026-07-16",
+  "applies_to": "scripts/browser_regression_v269_stability_recovery.cjs",
+  "source_task_contract_unchanged": true,
+  "product_code_unchanged": true,
+  "failed_attempt_retained": "runtime/v0_269_stability_browser_regression/report_attempt_1_failed.json",
+  "defect": "The aggregate gate treated horizontalOverflow=false as a failing boolean even though false means the viewport has no overflow.",
+  "correction": "Expose mobile_no_overflow as the logical negation of horizontalOverflow so every aggregate check has true-is-pass semantics."
+}

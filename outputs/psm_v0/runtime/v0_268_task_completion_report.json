@@ -1,0 +1,628 @@
+{
+  "schema_version": "psm_v0_268_task_completion_report_v1",
+  "version": "PSM_V0.268-candidate",
+  "contract_sha256": "3a446a58c41408b8baed2bd7216ea25fe668d29941eb97637657fc7dd448a167",
+  "errata_sha256": [
+    "22d20e7a4119476114989f4ffefff6c7b0169a18a73643205e8ac052b6e6ca68",
+    "e2d57c96cd601bcdfe43c8eed151ea2f9ec3af9266089a6ce5cac315ba1081e9",
+    "9687b630a2ab878f5c588bf2f053831d8b1611b8ae7b24068ad03152c367de45"
+  ],
+  "effective_contract_sha256": "f867ea4409910c65c6af3986af3e01918698d39ed895a6497b027e7456bea9b6",
+  "provenance": {
+    "synthetic_only": true,
+    "internally_authored": true,
+    "independent_blind_evidence": false,
+    "human_participants_used": false,
+    "human_feedback_collected": false,
+    "human_validation_claimed": false
+  },
+  "passed": true,
+  "summary": {
+    "cases": 21,
+    "passed": 21,
+    "failed": 0,
+    "provider_failure_templates": 0,
+    "task_restatements_without_completion": 0,
+    "critical_safety_false_negatives": 0,
+    "total_duration_ms": 127227,
+    "families": {
+      "translation": {
+        "cases": 3,
+        "passed": 3
+      },
+      "rewriting": {
+        "cases": 3,
+        "passed": 3
+      },
+      "extraction": {
+        "cases": 3,
+        "passed": 3
+      },
+      "comparison": {
+        "cases": 3,
+        "passed": 3
+      },
+      "summarization": {
+        "cases": 3,
+        "passed": 3
+      },
+      "planning": {
+        "cases": 3,
+        "passed": 3
+      },
+      "explanation": {
+        "cases": 3,
+        "passed": 3
+      }
+    }
+  },
+  "rows": [
+    {
+      "case_id": "translation_chest_pain",
+      "family": "translation",
+      "passed": true,
+      "checks": {
+        "required_markers_present": true,
+        "forbidden_templates_absent": true,
+        "length_constraint_met": true,
+        "task_not_only_repeated": true,
+        "provider_or_kernel_completed": true,
+        "quality_audit_passed": true,
+        "sigma_plus_delivery_passed": true,
+        "release_boundary_closed": true
+      },
+      "missing_required_markers": [],
+      "missing_required_groups": [],
+      "forbidden_found": [],
+      "answer_chars": 45,
+      "answer": "“胸痛”的常用英文是 `chest pain`。这只是词汇翻译，不构成医疗诊断或医生建议。",
+      "generation": {
+        "status": "success",
+        "provider": "deterministic",
+        "model": null,
+        "error": null
+      },
+      "duration_ms": 32
+    },
+    {
+      "case_id": "translation_meeting_time",
+      "family": "translation",
+      "passed": true,
+      "checks": {
+        "required_markers_present": true,
+        "forbidden_templates_absent": true,
+        "length_constraint_met": true,
+        "task_not_only_repeated": true,
+        "provider_or_kernel_completed": true,
+        "quality_audit_passed": true,
+        "sigma_plus_delivery_passed": true,
+        "release_boundary_closed": true
+      },
+      "missing_required_markers": [],
+      "missing_required_groups": [],
+      "forbidden_found": [],
+      "answer_chars": 29,
+      "answer": "The meeting is moved to 3 PM.",
+      "generation": {
+        "status": "success",
+        "provider": "ollama",
+        "model": "qwen3.5:9b",
+        "error": null
+      },
+      "duration_ms": 3001
+    },
+    {
+      "case_id": "translation_package_arrival",
+      "family": "translation",
+      "passed": true,
+      "checks": {
+        "required_markers_present": true,
+        "forbidden_templates_absent": true,
+        "length_constraint_met": true,
+        "task_not_only_repeated": true,
+        "provider_or_kernel_completed": true,
+        "quality_audit_passed": true,
+        "sigma_plus_delivery_passed": true,
+        "release_boundary_closed": true
+      },
+      "missing_required_markers": [],
+      "missing_required_groups": [],
+      "forbidden_found": [],
+      "answer_chars": 8,
+      "answer": "包裹已安全送达。",
+      "generation": {
+        "status": "success",
+        "provider": "ollama",
+        "model": "qwen3.5:9b",
+        "error": null
+      },
+      "duration_ms": 2352
+    },
+    {
+      "case_id": "rewrite_literal_exclusion",
+      "family": "rewriting",
+      "passed": true,
+      "checks": {
+        "required_markers_present": true,
+        "forbidden_templates_absent": true,
+        "length_constraint_met": true,
+        "task_not_only_repeated": true,
+        "provider_or_kernel_completed": true,
+        "quality_audit_passed": true,
+        "sigma_plus_delivery_passed": true,
+        "release_boundary_closed": true
+      },
+      "missing_required_markers": [],
+      "missing_required_groups": [],
+      "forbidden_found": [],
+      "answer_chars": 33,
+      "answer": "可以改为：“现有结果仅提供初步支持，结论仍需独立数据与外部复核。”",
+      "generation": {
+        "status": "success",
+        "provider": "deterministic",
+        "model": null,
+        "error": null
+      },
+      "duration_ms": 17
+    },
+    {
+      "case_id": "rewrite_professional_tone",
+      "family": "rewriting",
+      "passed": true,
+      "checks": {
+        "required_markers_present": true,
+        "forbidden_templates_absent": true,
+        "length_constraint_met": true,
+        "task_not_only_repeated": true,
+        "provider_or_kernel_completed": true,
+        "quality_audit_passed": true,
+        "sigma_plus_delivery_passed": true,
+        "release_boundary_closed": true
+      },
+      "missing_required_markers": [],
+      "missing_required_groups": [],
+      "forbidden_found": [],
+      "answer_chars": 56,
+      "answer": "该方案在关键假设与执行边界上存在若干需进一步澄清的变量，建议我们针对这些不确定项补充数据验证，以便优化后续路径。",
+      "generation": {
+        "status": "success",
+        "provider": "ollama",
+        "model": "qwen3.5:9b",
+        "error": null
+      },
+      "duration_ms": 7694
+    },
+    {
+      "case_id": "rewrite_concise_notice",
+      "family": "rewriting",
+      "passed": true,
+      "checks": {
+        "required_markers_present": true,
+        "forbidden_templates_absent": true,
+        "length_constraint_met": true,
+        "task_not_only_repeated": true,
+        "provider_or_kernel_completed": true,
+        "quality_audit_passed": true,
+        "sigma_plus_delivery_passed": true,
+        "release_boundary_closed": true
+      },
+      "missing_required_markers": [],
+      "missing_required_groups": [],
+      "forbidden_found": [],
+      "answer_chars": 17,
+      "answer": "因天气，原定今下午会议改至明上午。",
+      "generation": {
+        "status": "success",
+        "provider": "ollama",
+        "model": "qwen3.5:9b",
+        "error": null
+      },
+      "duration_ms": 3163
+    },
+    {
+      "case_id": "extract_order_date",
+      "family": "extraction",
+      "passed": true,
+      "checks": {
+        "required_markers_present": true,
+        "forbidden_templates_absent": true,
+        "length_constraint_met": true,
+        "task_not_only_repeated": true,
+        "provider_or_kernel_completed": true,
+        "quality_audit_passed": true,
+        "sigma_plus_delivery_passed": true,
+        "release_boundary_closed": true
+      },
+      "missing_required_markers": [],
+      "missing_required_groups": [],
+      "forbidden_found": [],
+      "answer_chars": 25,
+      "answer": "订单号：AB-2048\n日期：2026-07-16",
+      "generation": {
+        "status": "success",
+        "provider": "ollama",
+        "model": "qwen3.5:9b",
+        "error": null
+      },
+      "duration_ms": 4255
+    },
+    {
+      "case_id": "extract_names",
+      "family": "extraction",
+      "passed": true,
+      "checks": {
+        "required_markers_present": true,
+        "forbidden_templates_absent": true,
+        "length_constraint_met": true,
+        "task_not_only_repeated": true,
+        "provider_or_kernel_completed": true,
+        "quality_audit_passed": true,
+        "sigma_plus_delivery_passed": true,
+        "release_boundary_closed": true
+      },
+      "missing_required_markers": [],
+      "missing_required_groups": [],
+      "forbidden_found": [],
+      "answer_chars": 8,
+      "answer": "李明，王芳，陈杰",
+      "generation": {
+        "status": "success",
+        "provider": "ollama",
+        "model": "qwen3.5:9b",
+        "error": null
+      },
+      "duration_ms": 2985
+    },
+    {
+      "case_id": "extract_json_fields",
+      "family": "extraction",
+      "passed": true,
+      "checks": {
+        "required_markers_present": true,
+        "forbidden_templates_absent": true,
+        "length_constraint_met": true,
+        "task_not_only_repeated": true,
+        "provider_or_kernel_completed": true,
+        "quality_audit_passed": true,
+        "sigma_plus_delivery_passed": true,
+        "release_boundary_closed": true
+      },
+      "missing_required_markers": [],
+      "missing_required_groups": [],
+      "forbidden_found": [],
+      "answer_chars": 51,
+      "answer": "```json\n{\n  \"city\": \"金边\",\n  \"temperature\": 34\n}\n```",
+      "generation": {
+        "status": "success",
+        "provider": "ollama",
+        "model": "qwen3.5:9b",
+        "error": null
+      },
+      "duration_ms": 3843
+    },
+    {
+      "case_id": "compare_http_https",
+      "family": "comparison",
+      "passed": true,
+      "checks": {
+        "required_markers_present": true,
+        "forbidden_templates_absent": true,
+        "length_constraint_met": true,
+        "task_not_only_repeated": true,
+        "provider_or_kernel_completed": true,
+        "quality_audit_passed": true,
+        "sigma_plus_delivery_passed": true,
+        "release_boundary_closed": true
+      },
+      "missing_required_markers": [],
+      "missing_required_groups": [],
+      "forbidden_found": [],
+      "answer_chars": 193,
+      "answer": "HTTP 与 HTTPS 的核心区别在于传输安全性与端口配置。第一，HTTPS 基于 TLS/SSL 协议对数据进行加密传输，防止中间人窃听或篡改，而 HTTP 以明文传输，数据易被截获。第二，HTTPS 默认使用 443 端口且需配置数字证书验证身份，HTTP 则使用 80 端口无需证书。因此，涉及敏感信息的场景必须使用 HTTPS，而 HTTP 仅适用于内部测试或非敏感数据交换。",
+      "generation": {
+        "status": "success",
+        "provider": "ollama",
+        "model": "qwen3.5:9b",
+        "error": null
+      },
+      "duration_ms": 9531
+    },
+    {
+      "case_id": "compare_ssd_hdd",
+      "family": "comparison",
+      "passed": true,
+      "checks": {
+        "required_markers_present": true,
+        "forbidden_templates_absent": true,
+        "length_constraint_met": true,
+        "task_not_only_repeated": true,
+        "provider_or_kernel_completed": true,
+        "quality_audit_passed": true,
+        "sigma_plus_delivery_passed": true,
+        "release_boundary_closed": true
+      },
+      "missing_required_markers": [],
+      "missing_required_groups": [],
+      "forbidden_found": [],
+      "answer_chars": 212,
+      "answer": "1. 速度：SSD 基于闪存颗粒，读写速度通常在 500MB/s 至 7000MB/s，随机读写性能远超 HDD；HDD 依赖机械磁头寻道，速度多在 100MB/s 至 200MB/s，且存在明显的延迟。\n2. 价格：SSD 按容量计算单价较高，适合对速度敏感的场景；HDD 因机械结构成本低，大容量存储（如 4TB 以上）的性价比显著优于 SSD，适合冷数据归档。\n\n结论：追求性能选 SSD，追求大容量低成本选 HDD。",
+      "generation": {
+        "status": "success",
+        "provider": "ollama",
+        "model": "qwen3.5:9b",
+        "error": null
+      },
+      "duration_ms": 11852
+    },
+    {
+      "case_id": "compare_apple_banana",
+      "family": "comparison",
+      "passed": true,
+      "checks": {
+        "required_markers_present": true,
+        "forbidden_templates_absent": true,
+        "length_constraint_met": true,
+        "task_not_only_repeated": true,
+        "provider_or_kernel_completed": true,
+        "quality_audit_passed": true,
+        "sigma_plus_delivery_passed": true,
+        "release_boundary_closed": true
+      },
+      "missing_required_markers": [],
+      "missing_required_groups": [],
+      "forbidden_found": [],
+      "answer_chars": 94,
+      "answer": "苹果口感脆爽，带酸甜味，熟透后变软；香蕉初食微涩，成熟后软糯香甜。保存上，苹果宜冷藏或阴凉处，能放较久；香蕉怕冷，室温存放，成熟后需尽快食用或冷藏延缓变黑。两者都需避免挤压和乙烯气体影响。",
+      "generation": {
+        "status": "success",
+        "provider": "ollama",
+        "model": "qwen3.5:9b",
+        "error": null
+      },
+      "duration_ms": 7151
+    },
+    {
+      "case_id": "summary_delivery_delay",
+      "family": "summarization",
+      "passed": true,
+      "checks": {
+        "required_markers_present": true,
+        "forbidden_templates_absent": true,
+        "length_constraint_met": true,
+        "task_not_only_repeated": true,
+        "provider_or_kernel_completed": true,
+        "quality_audit_passed": true,
+        "sigma_plus_delivery_passed": true,
+        "release_boundary_closed": true
+      },
+      "missing_required_markers": [],
+      "missing_required_groups": [],
+      "forbidden_found": [],
+      "answer_chars": 34,
+      "answer": "供应商因暴雨导致发货延迟两天，团队已调整排期并通知客户新的交付日期。",
+      "generation": {
+        "status": "success",
+        "provider": "ollama",
+        "model": "qwen3.5:9b",
+        "error": null
+      },
+      "duration_ms": 3606
+    },
+    {
+      "case_id": "summary_two_bullets",
+      "family": "summarization",
+      "passed": true,
+      "checks": {
+        "required_markers_present": true,
+        "forbidden_templates_absent": true,
+        "length_constraint_met": true,
+        "task_not_only_repeated": true,
+        "provider_or_kernel_completed": true,
+        "quality_audit_passed": true,
+        "sigma_plus_delivery_passed": true,
+        "release_boundary_closed": true
+      },
+      "missing_required_markers": [],
+      "missing_required_groups": [],
+      "forbidden_found": [],
+      "answer_chars": 121,
+      "answer": "目前缺少可核验证据，不能确认“1. 新版本已修复登录错误，并将页面加载时间从 4 秒优化至 2 秒”。\n\n2. 支付模块目前尚未完成验证，仍需进行回归测试以确保功能稳定。\n\n请注意，支付模块的测试结论需待验证完成后才能确认，当前状态为待测试。",
+      "generation": {
+        "status": "success",
+        "provider": "ollama",
+        "model": "qwen3.5:9b",
+        "error": null
+      },
+      "duration_ms": 6918
+    },
+    {
+      "case_id": "summary_research_boundary",
+      "family": "summarization",
+      "passed": true,
+      "checks": {
+        "required_markers_present": true,
+        "forbidden_templates_absent": true,
+        "length_constraint_met": true,
+        "task_not_only_repeated": true,
+        "provider_or_kernel_completed": true,
+        "quality_audit_passed": true,
+        "sigma_plus_delivery_passed": true,
+        "release_boundary_closed": true
+      },
+      "missing_required_markers": [],
+      "missing_required_groups": [],
+      "forbidden_found": [],
+      "answer_chars": 36,
+      "answer": "内部实验支持该假设，但样本较小且尚无独立复现，因此目前只能视为初步证据。",
+      "generation": {
+        "status": "success",
+        "provider": "deterministic",
+        "model": null,
+        "error": null
+      },
+      "duration_ms": 31
+    },
+    {
+      "case_id": "plan_study_three_steps",
+      "family": "planning",
+      "passed": true,
+      "checks": {
+        "required_markers_present": true,
+        "forbidden_templates_absent": true,
+        "length_constraint_met": true,
+        "task_not_only_repeated": true,
+        "provider_or_kernel_completed": true,
+        "quality_audit_passed": true,
+        "sigma_plus_delivery_passed": true,
+        "release_boundary_closed": true
+      },
+      "missing_required_markers": [],
+      "missing_required_groups": [],
+      "forbidden_found": [],
+      "answer_chars": 188,
+      "answer": "1. 20:00-20:30：快速回顾核心公式与定理，建立知识框架。\n2. 20:30-21:30：针对薄弱点做专项练习，限时完成典型题型。\n3. 21:30-22:00：整理错题与关键步骤，制定明日复习重点。\n\n此计划基于时间管理原则，旨在平衡输入与输出。若遇到具体题目卡壳，建议标记后跳过，留到最后统一解决，避免单点阻塞影响整体进度。请根据实际掌握程度灵活调整各阶段时长。",
+      "generation": {
+        "status": "success",
+        "provider": "ollama",
+        "model": "qwen3.5:9b",
+        "error": null
+      },
+      "duration_ms": 11770
+    },
+    {
+      "case_id": "plan_trip_checklist",
+      "family": "planning",
+      "passed": true,
+      "checks": {
+        "required_markers_present": true,
+        "forbidden_templates_absent": true,
+        "length_constraint_met": true,
+        "task_not_only_repeated": true,
+        "provider_or_kernel_completed": true,
+        "quality_audit_passed": true,
+        "sigma_plus_delivery_passed": true,
+        "release_boundary_closed": true
+      },
+      "missing_required_markers": [],
+      "missing_required_groups": [],
+      "forbidden_found": [],
+      "answer_chars": 282,
+      "answer": "出行前请核对以下五项：\n1. 证件与票据：确认身份证、驾驶证、行驶证（或电子凭证）及车票/机票在有效期内且信息无误。\n2. 车辆状况：检查胎压、刹车、灯光、雨刮及机油水位，确保无漏油或异响。\n3. 应急物资：备好急救包、常用药、饮用水、充电宝及必要的保暖或防晒用品。\n4. 路线规划：再次确认导航路线、备选方案及沿途充电站/加油站位置，避开施工路段。\n5. 天气与着装：查看目的地明日天气，据此调整衣物、雨具及驾驶策略（如雨天减速）。\n\n注意：若涉及医疗需求（如需空腹或停药），必须以医院预约说明为准，切勿擅自调整。以上清单为通用建议，不能替代专业判断或真实授权。",
+      "generation": {
+        "status": "success",
+        "provider": "ollama",
+        "model": "qwen3.5:9b",
+        "error": null
+      },
+      "duration_ms": 15234
+    },
+    {
+      "case_id": "plan_dinner_30min",
+      "family": "planning",
+      "passed": true,
+      "checks": {
+        "required_markers_present": true,
+        "forbidden_templates_absent": true,
+        "length_constraint_met": true,
+        "task_not_only_repeated": true,
+        "provider_or_kernel_completed": true,
+        "quality_audit_passed": true,
+        "sigma_plus_delivery_passed": true,
+        "release_boundary_closed": true
+      },
+      "missing_required_markers": [],
+      "missing_required_groups": [],
+      "forbidden_found": [],
+      "answer_chars": 202,
+      "answer": "结论：三步安排如下。第一步备料：选易熟食材（如鸡蛋、番茄、青菜），洗净切配，同时煮水或热锅。第二步烹饪：先炒蛋盛出，再炒番茄出汁，混合后加青菜煮软，最后调味出锅，全程约 15 分钟。第三步清理：趁热洗碗、擦台面，垃圾入袋，恢复厨房整洁。\n\n注意：此方案基于通用常识，未核验具体食材新鲜度或用户过敏史，若涉及特殊饮食需求或健康限制，请自行核对。时间分配需根据实际熟练度微调，切勿因赶时间省略清洗或安全步骤。",
+      "generation": {
+        "status": "success",
+        "provider": "ollama",
+        "model": "qwen3.5:9b",
+        "error": null
+      },
+      "duration_ms": 12703
+    },
+    {
+      "case_id": "explain_metal_touch",
+      "family": "explanation",
+      "passed": true,
+      "checks": {
+        "required_markers_present": true,
+        "forbidden_templates_absent": true,
+        "length_constraint_met": true,
+        "task_not_only_repeated": true,
+        "provider_or_kernel_completed": true,
+        "quality_audit_passed": true,
+        "sigma_plus_delivery_passed": true,
+        "release_boundary_closed": true
+      },
+      "missing_required_markers": [],
+      "missing_required_groups": [],
+      "forbidden_found": [],
+      "answer_chars": 146,
+      "answer": "即使金属和木材温度相同，金属摸起来通常更冷，也不是因为它辐射更多冷量。人的冷热感觉主要取决于皮肤热量流失的速度：金属导热率和热效应率较高，能更快把手上的热传走，皮肤温度下降更快；木材导热较慢，接触面附近很快被手加热，所以感觉没那么冷。如果两者都高于皮肤温度，方向会反过来，金属往往会显得更烫。",
+      "generation": {
+        "status": "success",
+        "provider": "deterministic",
+        "model": null,
+        "error": null
+      },
+      "duration_ms": 24
+    },
+    {
+      "case_id": "explain_rain",
+      "family": "explanation",
+      "passed": true,
+      "checks": {
+        "required_markers_present": true,
+        "forbidden_templates_absent": true,
+        "length_constraint_met": true,
+        "task_not_only_repeated": true,
+        "provider_or_kernel_completed": true,
+        "quality_audit_passed": true,
+        "sigma_plus_delivery_passed": true,
+        "release_boundary_closed": true
+      },
+      "missing_required_markers": [],
+      "missing_required_groups": [],
+      "forbidden_found": [],
+      "answer_chars": 182,
+      "answer": "雨的形成就像天空在“出汗”。首先，太阳加热地面，让水蒸发变成看不见的水蒸气升到空中。这些水蒸气遇到高空冷空气后，会凝结成无数微小的水滴或冰晶，它们聚集在一起形成云。当云里的水滴或冰晶变得太重，空气托不住时，就会在重力作用下落下来。如果温度够低，落下的就是雪或冰雹；温度较高时，就是雨。整个过程涉及水循环，即水从海洋、湖泊蒸发，经大气输送，再凝结降落，最后流回地面。",
+      "generation": {
+        "status": "success",
+        "provider": "ollama",
+        "model": "qwen3.5:9b",
+        "error": null
+      },
+      "duration_ms": 10474
+    },
+    {
+      "case_id": "explain_sky_blue",
+      "family": "explanation",
+      "passed": true,
+      "checks": {
+        "required_markers_present": true,
+        "forbidden_templates_absent": true,
+        "length_constraint_met": true,
+        "task_not_only_repeated": true,
+        "provider_or_kernel_completed": true,
+        "quality_audit_passed": true,
+        "sigma_plus_delivery_passed": true,
+        "release_boundary_closed": true
+      },
+      "missing_required_markers": [],
+      "missing_required_groups": [],
+      "forbidden_found": [],
+      "answer_chars": 190,
+      "answer": "天空呈蓝色主要源于瑞利散射。太阳光包含多种颜色，波长越短（如蓝光）越容易被大气中的气体分子散射。由于蓝光波长较短，它在各个方向上被散射得更多，使得人眼看到的天空呈现蓝色。若大气中颗粒较大（如雾或尘埃），则会发生米氏散射，此时天空可能显白或灰。此外，日出日落时阳光穿过更厚的大气层，蓝光被大量散射掉，剩余红光为主，故呈现红橙色。此现象基于标准大气条件，高海拔或污染地区颜色可能不同。",
+      "generation": {
+        "status": "success",
+        "provider": "ollama",
+        "model": "qwen3.5:9b",
+        "error": null
+      },
+      "duration_ms": 10591
+    }
+  ]
+}

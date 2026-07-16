@@ -1,0 +1,117 @@
+{
+  "schema_version": "psm_v0_270_multiturn_initial_failure_ledger_v1",
+  "version": "PSM_V0.270-candidate",
+  "frozen_at": "2026-07-16",
+  "contract_sha256": "1bfa35f3206c52a80545811bf7e62a1e4cc5be31f5717d5d582df3dc020c7f2c",
+  "first_run_completed_before_candidate_changes": true,
+  "append_only": true,
+  "initial_failure_count": 5,
+  "initial_failures": [
+    {
+      "case_id": "explicit_topic_switch_clears_old_risk",
+      "family": "user_history_state",
+      "failed_checks": [
+        "domain_matches",
+        "risk_matches_when_frozen",
+        "forbidden_or_stale_outputs_absent"
+      ],
+      "actual_domain": "medical",
+      "actual_risk": "critical",
+      "missing_required_markers": [],
+      "missing_required_groups": [],
+      "forbidden_found": [
+        "医生",
+        "急救"
+      ],
+      "answer": "苹果口感脆爽、酸甜多汁，纤维较粗；香蕉口感软糯、香甜顺滑，纤维细腻。两者差异源于果肉结构与糖分分布：苹果细胞壁含较多果胶，咀嚼时有明显颗粒感；香蕉成熟后淀粉转化为糖，质地绵密。若追求清爽解腻选苹果，需软糯饱腹感选香蕉。注意苹果冷藏后风味更佳，香蕉室温存放更宜食用。\n\n这不能替代医生诊断；药物和治疗请由医生或药师确认，出现急症信号时立即联系当地急救。",
+      "generation": {
+        "status": "success",
+        "provider": "ollama",
+        "model": "qwen3.5:9b",
+        "error": null
+      }
+    },
+    {
+      "case_id": "assistant_project_version_cannot_override_record",
+      "family": "correction_priority",
+      "failed_checks": [
+        "domain_matches"
+      ],
+      "actual_domain": "general",
+      "actual_risk": "medium",
+      "missing_required_markers": [],
+      "missing_required_groups": [],
+      "forbidden_found": [],
+      "answer": "当前项目是 PSM V0.269。确定性正式源是 PSM V0.251，共有 2228 个正式案例，正式回归目前全部通过。最近一轮定向外部模型证据中，raw/gated 风险分别为 0/0。\n\n下一阶段是 PSM V0.270：建立普通聊天的多轮指代、约束累积与更正恢复基准：冻结多轮对话图，验证助手只使用用户历史和已交付回答，不让隐藏审计文本、错误助手陈述或过期约束覆盖当前意图。。当前仍是内部本地聊天候选，外部用户试用没有开放。",
+      "generation": {
+        "status": "success",
+        "provider": "deterministic",
+        "model": null,
+        "error": null
+      }
+    },
+    {
+      "case_id": "literal_exclusion_persists_on_shortening",
+      "family": "constraint_accumulation",
+      "failed_checks": [
+        "domain_matches",
+        "quality_audit_passed",
+        "sigma_plus_delivery_passed"
+      ],
+      "actual_domain": "general",
+      "actual_risk": "medium",
+      "missing_required_markers": [],
+      "missing_required_groups": [],
+      "forbidden_found": [],
+      "answer": "现有结果仅提供初步支持，仍需外部复核。",
+      "generation": {
+        "status": "success",
+        "provider": "ollama",
+        "model": "qwen3.5:9b",
+        "error": null
+      }
+    },
+    {
+      "case_id": "format_constraint_persists_on_revision",
+      "family": "constraint_accumulation",
+      "failed_checks": [
+        "domain_matches"
+      ],
+      "actual_domain": "writing",
+      "actual_risk": "low",
+      "missing_required_markers": [],
+      "missing_required_groups": [],
+      "forbidden_found": [],
+      "answer": "1. 20 分钟复习公式。\n2. 50 分钟做题。\n3. 30 分钟整理错题。\n\n已按您的要求将第二步调整为 50 分钟，全程保持三步结构。若需进一步细化各阶段的具体任务或调整总时长，请随时告知。",
+      "generation": {
+        "status": "success",
+        "provider": "ollama",
+        "model": "qwen3.5:9b",
+        "error": null
+      }
+    },
+    {
+      "case_id": "translation_only_constraint_persists",
+      "family": "constraint_accumulation",
+      "failed_checks": [
+        "forbidden_or_stale_outputs_absent",
+        "length_constraint_met"
+      ],
+      "actual_domain": "writing",
+      "actual_risk": "low",
+      "missing_required_markers": [],
+      "missing_required_groups": [],
+      "forbidden_found": [
+        "delivered",
+        "译文"
+      ],
+      "answer": "The package was arrived safely.\n\n注：语法上\"arrived\"作谓语时通常需搭配助动词（如 was arrived at），若仅替换单词而不调整结构，原句存在语法瑕疵。建议改为\"The package arrived safely\"或\"The package was delivered safely\"。如需严格遵循“只给译文”且保留原句结构，则上述翻译符合字面替换要求，但请注意其非标准用法。",
+      "generation": {
+        "status": "success",
+        "provider": "ollama",
+        "model": "qwen3.5:9b",
+        "error": null
+      }
+    }
+  ]
+}

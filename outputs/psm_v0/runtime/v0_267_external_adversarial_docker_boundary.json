@@ -1,0 +1,28 @@
+{
+  "schema_version": "psm_v0_267_external_adversarial_docker_boundary_v1",
+  "passed": true,
+  "checks": {
+    "external_judge_passed": true,
+    "package_gate_passed": true,
+    "host_and_docker_status_available": true,
+    "translation_direct_host": true,
+    "translation_direct_docker": true,
+    "literal_exclusion_host": true,
+    "literal_exclusion_docker": true,
+    "external_judge_evidence_in_docker": true,
+    "external_user_release_closed_host": true,
+    "external_user_release_closed_docker": true,
+    "docker_localhost_only": true
+  },
+  "human_feedback_collected": false,
+  "human_validation_claimed": false,
+  "evaluation_rows_used_for_training": false,
+  "host": {
+    "version": "PSM V0.266",
+    "release_open": false
+  },
+  "docker": {
+    "version": "PSM V0.266",
+    "release_open": false
+  }
+}

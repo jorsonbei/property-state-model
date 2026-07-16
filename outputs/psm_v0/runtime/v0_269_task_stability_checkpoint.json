@@ -1,0 +1,11 @@
+{
+  "schema_version": "psm_v0_269_task_stability_checkpoint_v1",
+  "current_promoted_version": "PSM_V0.269",
+  "target_version": "PSM_V0.269",
+  "target_promoted": true,
+  "passed": true,
+  "status": "v0_269_promoted_v0_270_multiturn_constraint_graph_open",
+  "requires_user_input": false,
+  "next_action": "freeze_v0_270_multiturn_constraint_contract",
+  "promotion_manifest": "runtime/v0_269_task_stability_promotion_manifest.json"
+}

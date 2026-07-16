@@ -1,0 +1,27 @@
+{
+  "schema_version": "psm_v0_270_multiturn_docker_boundary_v1",
+  "passed": true,
+  "checks": {
+    "multiturn_gate_passed": true,
+    "host_and_docker_status_available": true,
+    "three_step_revision_host": true,
+    "three_step_revision_docker": true,
+    "direct_version_correction_host": true,
+    "direct_version_correction_docker": true,
+    "multiturn_report_in_docker": true,
+    "external_user_release_closed_host": true,
+    "external_user_release_closed_docker": true,
+    "docker_localhost_only": true
+  },
+  "human_feedback_collected": false,
+  "human_validation_claimed": false,
+  "evaluation_rows_used_for_training": false,
+  "host": {
+    "version": "PSM V0.270",
+    "release_open": false
+  },
+  "docker": {
+    "version": "PSM V0.270",
+    "release_open": false
+  }
+}

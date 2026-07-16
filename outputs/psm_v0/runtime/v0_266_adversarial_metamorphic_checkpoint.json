@@ -1,0 +1,10 @@
+{
+  "schema_version": "psm_v0_266_adversarial_metamorphic_checkpoint_v1",
+  "current_promoted_version": "PSM_V0.266",
+  "target_version": "PSM_V0.266",
+  "target_promoted": true,
+  "passed": true,
+  "status": "v0_266_promoted_v0_267_external_semantic_judge_open",
+  "requires_user_input": false,
+  "next_action": "build_v0_267_external_semantic_judge_contract"
+}

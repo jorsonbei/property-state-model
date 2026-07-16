@@ -1,0 +1,36 @@
+{
+  "schema_version": "psm_v0_267_external_adversarial_package_gate_v1",
+  "version": "PSM_V0.267-candidate",
+  "passed": true,
+  "decision": "external_adversarial_package_ready",
+  "checks": {
+    "v0_266_promoted": true,
+    "fifteen_pairs_and_thirty_variants": true,
+    "answer_order_blinded": true,
+    "private_or_participant_data_absent": true,
+    "secrets_and_local_paths_absent": true,
+    "candidate_rules_and_hidden_labels_absent": true,
+    "training_backflow_closed": true,
+    "external_findings_repaired": true,
+    "failed_and_repair_call_budgets_reserved": true,
+    "external_authority_closed": true
+  },
+  "review_payload_sha256": "1db36283c9eb77f1f2a410aa05751375bd55245efd1bd5d664528f5efa14e3cd",
+  "package_sha256": "d5795edbe41d2e6472fe4bceb79a722fe46d38c4e782d61e71f419e97b1ad258",
+  "budget": {
+    "currency": "USD",
+    "maximum_api_calls": 1,
+    "maximum_output_tokens": 12000,
+    "reserved_usd": 3.0,
+    "reserved_total_month_usd": 16.0,
+    "monthly_limit_usd": 20.0
+  },
+  "release_boundary": {
+    "external_judge_controls_route": false,
+    "external_judge_controls_risk": false,
+    "external_judge_controls_release": false,
+    "evaluation_rows_used_for_training": false,
+    "rule_replacement_allowed": false,
+    "external_release_authority": false
+  }
+}

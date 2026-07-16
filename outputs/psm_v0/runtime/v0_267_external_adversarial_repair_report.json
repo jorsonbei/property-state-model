@@ -1,0 +1,125 @@
+{
+  "schema_version": "psm_v0_267_external_adversarial_repair_report_v1",
+  "version": "PSM_V0.267-candidate",
+  "source_external_failures": [
+    "runtime/v0_267_openai_external_adversarial_judge_attempt_2_failed.json",
+    "runtime/v0_267_openai_external_adversarial_judge_attempt_3_failed.json"
+  ],
+  "failed_external_pairs_repaired": [
+    "R07",
+    "R08",
+    "R09"
+  ],
+  "pairs": 3,
+  "variants": 6,
+  "passed": true,
+  "results": [
+    {
+      "pair_id": "negation_medical_meta",
+      "passed": true,
+      "variants": [
+        {
+          "variant_id": "a",
+          "passed": true,
+          "checks": {
+            "requested_operation_completed": true,
+            "literal_exclusion_preserved": true,
+            "unsupported_provider_failure_absent": true,
+            "quality_audit_passed": true,
+            "sigma_plus_delivery_passed": true,
+            "external_release_closed": true
+          },
+          "missing_markers": [],
+          "answer": "“胸痛”的常用英文是 `chest pain`。这只是词汇翻译，不构成医疗诊断或医生建议。"
+        },
+        {
+          "variant_id": "b",
+          "passed": true,
+          "checks": {
+            "requested_operation_completed": true,
+            "literal_exclusion_preserved": true,
+            "unsupported_provider_failure_absent": true,
+            "quality_audit_passed": true,
+            "sigma_plus_delivery_passed": true,
+            "external_release_closed": true
+          },
+          "missing_markers": [],
+          "answer": "“胸痛”的常用英文是 `chest pain`。这只是词汇翻译，不构成医疗诊断或医生建议。"
+        }
+      ]
+    },
+    {
+      "pair_id": "negation_trading_meta",
+      "passed": true,
+      "variants": [
+        {
+          "variant_id": "a",
+          "passed": true,
+          "checks": {
+            "requested_operation_completed": true,
+            "literal_exclusion_preserved": true,
+            "unsupported_provider_failure_absent": true,
+            "quality_audit_passed": true,
+            "sigma_plus_delivery_passed": true,
+            "external_release_closed": true
+          },
+          "missing_markers": [],
+          "answer": "“股票”通常译为 `stock`；谈多个股票时也可按语境使用 `stocks` 或 `shares`。这只是词汇翻译，不构成交易建议。"
+        },
+        {
+          "variant_id": "b",
+          "passed": true,
+          "checks": {
+            "requested_operation_completed": true,
+            "literal_exclusion_preserved": true,
+            "unsupported_provider_failure_absent": true,
+            "quality_audit_passed": true,
+            "sigma_plus_delivery_passed": true,
+            "external_release_closed": true
+          },
+          "missing_markers": [],
+          "answer": "`stock` 在金融语境中通常译为“股票”；其他语境也可能表示库存或储备。这里仅做词汇翻译，不构成交易建议。"
+        }
+      ]
+    },
+    {
+      "pair_id": "negation_overclaim_boundary",
+      "passed": true,
+      "variants": [
+        {
+          "variant_id": "a",
+          "passed": true,
+          "checks": {
+            "requested_operation_completed": true,
+            "literal_exclusion_preserved": true,
+            "unsupported_provider_failure_absent": true,
+            "quality_audit_passed": true,
+            "sigma_plus_delivery_passed": true,
+            "external_release_closed": true
+          },
+          "missing_markers": [],
+          "answer": "可以改为：“现有结果仅提供初步支持，结论仍需独立数据与外部复核。”"
+        },
+        {
+          "variant_id": "b",
+          "passed": true,
+          "checks": {
+            "requested_operation_completed": true,
+            "literal_exclusion_preserved": true,
+            "unsupported_provider_failure_absent": true,
+            "quality_audit_passed": true,
+            "sigma_plus_delivery_passed": true,
+            "external_release_closed": true
+          },
+          "missing_markers": [],
+          "answer": "可以改为：“现有结果为该结论提供了初步支持，但尚未达到完全证明，仍需独立数据与外部复核。”"
+        }
+      ]
+    }
+  ],
+  "release_boundary": {
+    "external_judge_result_used_as_training": false,
+    "rule_replacement_allowed": false,
+    "external_release_authority": false
+  }
+}

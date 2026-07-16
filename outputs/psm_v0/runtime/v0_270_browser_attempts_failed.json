@@ -1,0 +1,12 @@
+{
+  "schema_version": "psm_v0_270_browser_failed_attempts_v1",
+  "recorded_at": "2026-07-16",
+  "passed": false,
+  "attempt_count": 2,
+  "failure_class": "browser_harness_wait_condition",
+  "error": "page.waitForFunction: Timeout 30000ms exceeded",
+  "root_cause": "The page begins with one welcome assistant message and replaces it when the first real turn starts, so assistant-message count does not increase even though the API returns 200 and the answer renders.",
+  "product_response_verified_separately": true,
+  "product_code_changed": false,
+  "repair": "Wait for total message count to increase, then wait for the send button to become enabled, matching the established browser harness."
+}

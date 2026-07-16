@@ -1,0 +1,53 @@
+{
+  "schema_version": "psm_v0_270_multiturn_promotion_manifest_v1",
+  "version": "PSM_V0.270",
+  "promoted_at": "2026-07-16",
+  "promoted": true,
+  "decision": "multiturn_constraint_gate_passed",
+  "formal_core_source": "PSM_V0.251",
+  "formal_core_records": 2228,
+  "multiturn_constraints": {
+    "decision": "multiturn_constraint_gate_passed",
+    "passed": true,
+    "cases": 12,
+    "cases_passed": 12,
+    "families": 4,
+    "initial_failure_count": 5,
+    "assistant_history_contamination": 0,
+    "stale_constraint_violations": 0,
+    "total_duration_ms": 85832,
+    "transparent_errata_count": 3,
+    "evaluator_gaps_retained": 1,
+    "synthetic_only": true,
+    "human_validation_claimed": false,
+    "contract_sha256": "1bfa35f3206c52a80545811bf7e62a1e4cc5be31f5717d5d582df3dc020c7f2c",
+    "errata_sha256": "1f56d591059be7dc2f6f41534d8b99810e3e6e89f11c8cd16951f931a39a5c1b",
+    "gate_sha256": "16d5981dcd0008c7358fe78c9a1a4dee6af8e6c2118e60e11ee09ec221eb311d"
+  },
+  "evidence": {
+    "contract": "benchmarks/v0_270_multiturn_constraint_contract.json",
+    "errata": "benchmarks/v0_270_multiturn_constraint_errata.json",
+    "report": "runtime/v0_270_multiturn_constraint_report.json",
+    "gate": "runtime/v0_270_multiturn_constraint_gate.json",
+    "initial_failure_ledger": "runtime/v0_270_multiturn_initial_failure_ledger.json",
+    "evaluator_gap": "runtime/v0_270_evaluator_gap_report.json",
+    "browser": "runtime/v0_270_multiturn_browser_regression/report.json",
+    "browser_attempts_failed": "runtime/v0_270_browser_attempts_failed.json",
+    "docker": "runtime/v0_270_multiturn_docker_boundary.json"
+  },
+  "release_boundary": {
+    "open_domain_generalization_claimed": false,
+    "public_service_allowed": false,
+    "production_readiness_claimed": false,
+    "training_on_evaluation_rows_allowed": false,
+    "rule_replacement_allowed": false,
+    "professional_authority_allowed": false,
+    "external_release_authority": false
+  },
+  "next_stage": {
+    "version": "PSM_V0.271",
+    "objective": "对冻结的 V0.270 多轮回答执行来源隔离的独立外部语义裁判，重点检查助手历史污染、话题切换、用户更正优先级与跨轮约束保持；只提交合成问答，不提交规则、私有资料或训练字段。",
+    "blocked": false,
+    "requires_user_input": false
+  }
+}

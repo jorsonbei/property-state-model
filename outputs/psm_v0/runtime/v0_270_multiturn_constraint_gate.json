@@ -1,0 +1,54 @@
+{
+  "schema_version": "psm_v0_270_multiturn_constraint_gate_v1",
+  "version": "PSM_V0.270-candidate",
+  "passed": true,
+  "decision": "multiturn_constraint_gate_passed",
+  "checks": {
+    "case_count_matches": true,
+    "all_cases_pass": true,
+    "all_families_pass": true,
+    "assistant_history_contamination_zero": true,
+    "stale_constraint_violations_zero": true,
+    "initial_failure_ledger_retained": true,
+    "contract_errata_transparent": true,
+    "retained_v0_269_promotion": true,
+    "evaluation_backflow_zero": true,
+    "release_boundary_closed": true
+  },
+  "metrics": {
+    "cases": 12,
+    "passed": 12,
+    "failed": 0,
+    "assistant_history_contamination": 0,
+    "stale_constraint_violations": 0,
+    "total_duration_ms": 85832,
+    "families": {
+      "assistant_reference": {
+        "cases": 3,
+        "passed": 3
+      },
+      "user_history_state": {
+        "cases": 3,
+        "passed": 3
+      },
+      "correction_priority": {
+        "cases": 3,
+        "passed": 3
+      },
+      "constraint_accumulation": {
+        "cases": 3,
+        "passed": 3
+      }
+    }
+  },
+  "initial_failure_count": 5,
+  "release_boundary": {
+    "open_domain_generalization_claimed": false,
+    "public_service_allowed": false,
+    "production_readiness_claimed": false,
+    "training_on_evaluation_rows_allowed": false,
+    "rule_replacement_allowed": false,
+    "professional_authority_allowed": false,
+    "external_release_authority": false
+  }
+}

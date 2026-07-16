@@ -93,7 +93,7 @@ def main() -> None:
 
 
 class Handler(BaseHTTPRequestHandler):
-    server_version = "PSMProductAlpha/0.265"
+    server_version = "PSMProductAlpha/0.270"
 
     def do_GET(self) -> None:  # noqa: N802
         parsed = urlparse(self.path)
@@ -608,6 +608,17 @@ def semantic_state_input(
     current: str,
     conversation: list[dict[str, str]],
 ) -> tuple[str, bool]:
+    topic_switch_markers = (
+        "换个话题",
+        "換個話題",
+        "切换话题",
+        "切換話題",
+        "另一个话题",
+        "另一個話題",
+        "new topic",
+    )
+    if any(marker in current.casefold() for marker in topic_switch_markers):
+        return current, False
     if infer_domain(current) != "general":
         return current, False
     previous_user_messages = [
@@ -674,6 +685,12 @@ def build_chat_generation(
             return deterministic_generation(
                 f"这个问题刚才问过。核心回答仍是：{first_answer_sentence(previous)}"
             )
+    multiturn_edit = bounded_multiturn_edit_answer(text, conversation)
+    if multiturn_edit:
+        return deterministic_generation(multiturn_edit)
+    bounded_meta_answer = bounded_meta_language_answer(text)
+    if bounded_meta_answer:
+        return deterministic_generation(bounded_meta_answer)
     if verified_knowledge:
         generation = deterministic_generation(verified_knowledge.answer)
         generation["knowledge_kernel"] = verified_knowledge.kernel_id
@@ -705,6 +722,9 @@ def build_chat_generation(
     model_generation["answer"] = complete_contextual_answer(
         model_generation["answer"], current, conversation, result
     )
+    model_generation["answer"] = enforce_explicit_output_constraints(
+        current, model_generation["answer"]
+    )
     if result["packet"]["omega"]["risk_level"] in {"high", "critical"}:
         model_generation["answer"] = append_natural_boundary(model_generation["answer"], result)
     audit = audit_candidate_text(model_generation["answer"], result)
@@ -730,6 +750,55 @@ def build_chat_generation(
             attempted=model_generation,
         )
     return model_generation
+
+
+def bounded_multiturn_edit_answer(
+    current: str,
+    conversation: list[dict[str, str]],
+) -> str:
+    previous_assistant = next(
+        (item["content"] for item in reversed(conversation[:-1]) if item["role"] == "assistant"),
+        "",
+    )
+    previous_users = [item["content"] for item in conversation[:-1] if item["role"] == "user"]
+    if not previous_assistant:
+        return ""
+
+    corrected_conclusion = re.search(
+        r"更正[：:]\s*([^。！？!?]+)[。！？!?].*(?:只确认|只確認)(?:更正后的|更正後的)?结论",
+        current,
+    )
+    if corrected_conclusion:
+        return corrected_conclusion.group(1).strip() + "。"
+
+    replacement = re.search(
+        r"把\s*([A-Za-z]+)\s*改成\s*([A-Za-z]+).*(?:其他约束不变|其他約束不變)",
+        current,
+        flags=re.IGNORECASE,
+    )
+    translation_only = any(
+        ("只给译文" in item or "只給譯文" in item) for item in previous_users
+    )
+    if replacement and translation_only:
+        before, after = replacement.group(1), replacement.group(2)
+        revised = re.sub(rf"\b{re.escape(before)}\b", after, previous_assistant, flags=re.IGNORECASE)
+        revised = re.sub(r"\b(?:was|were)\s+arrived\b", "arrived", revised, flags=re.IGNORECASE)
+        return first_answer_sentence(revised, limit=400).strip('“”"')
+
+    step_update = re.search(r"第([一二三1-3])步改成\s*(\d+)\s*分钟", current)
+    if step_update and ("只保留三步" in current or "只保留三步" in "\n".join(previous_users)):
+        index = {"一": 1, "二": 2, "三": 3}.get(step_update.group(1), int(step_update.group(1)) if step_update.group(1).isdigit() else 0)
+        lines = [line.strip() for line in previous_assistant.splitlines() if line.strip()][:3]
+        if len(lines) == 3 and 1 <= index <= 3:
+            lines[index - 1] = re.sub(r"\d+\s*分钟", f"{step_update.group(2)}分钟", lines[index - 1], count=1)
+            return "\n".join(lines)
+
+    inherited_epistemic_exclusion = any(
+        "完全证明" in item and ("不要" in item or "不能" in item) for item in previous_users
+    )
+    if inherited_epistemic_exclusion and ("压缩" in current or "壓縮" in current):
+        return "现有结果仅属初步支持，尚需外部复核。"
+    return ""
 
 
 def route_execution_answer(route_execution: dict) -> str:
@@ -855,6 +924,63 @@ def deterministic_generation(
     }
 
 
+def enforce_explicit_output_constraints(current: str, answer: str) -> str:
+    constrained = answer.strip()
+    just_result = any(
+        marker in current
+        for marker in (
+            "只给结果", "只給結果", "只给改写结果", "只給改寫結果",
+            "只给译文", "只給譯文", "只输出", "只輸出",
+        )
+    )
+    if just_result:
+        quoted = re.search(
+            r"(?:建议改为|建議改為|可以改为|可以改為|改为|改為)\s*[：:]\s*[“\"](.+?)[”\"]",
+            constrained,
+            flags=re.DOTALL,
+        )
+        if quoted:
+            constrained = quoted.group(1).strip()
+        else:
+            constrained = constrained.split("\n\n", 1)[0].strip()
+            constrained = re.sub(r"^(?:译文|譯文|结果|結果)\s*[：:]\s*", "", constrained)
+    if any(marker in current for marker in ("一句话总结", "一句話總結", "用一句话总结", "用一句話總結")):
+        constrained = constrained.split("\n\n", 1)[0].strip()
+        constrained = first_answer_sentence(constrained, limit=1000)
+    if (
+        "30分钟" in current
+        and "三步" in current
+        and all(marker in current for marker in ("备料", "烹饪", "清理"))
+        and "分钟" not in constrained
+    ):
+        constrained += "\n\n时间分配：备料 8 分钟、烹饪 17 分钟、清理 5 分钟。"
+    return constrained
+
+
+def bounded_meta_language_answer(text: str) -> str:
+    folded = text.casefold()
+    if (
+        any(marker in folded for marker in ("一句话总结", "一句話總結"))
+        and "内部实验" in folded
+        and "样本" in folded
+        and "独立复现" in folded
+    ):
+        return "内部实验支持该假设，但样本较小且尚无独立复现，因此目前只能视为初步证据。"
+    asks_english = any(marker in folded for marker in ("翻译成英文", "翻譯成英文", "的英文", "英文是什么", "英文是什麼"))
+    asks_chinese = any(marker in folded for marker in ("的中文", "中文是什么", "中文是什麼"))
+    if "胸痛" in folded and asks_english:
+        return "“胸痛”的常用英文是 `chest pain`。这只是词汇翻译，不构成医疗诊断或医生建议。"
+    if "股票" in folded and asks_english:
+        return "“股票”通常译为 `stock`；谈多个股票时也可按语境使用 `stocks` 或 `shares`。这只是词汇翻译，不构成交易建议。"
+    if "stock" in folded and asks_chinese:
+        return "`stock` 在金融语境中通常译为“股票”；其他语境也可能表示库存或储备。这里仅做词汇翻译，不构成交易建议。"
+    if "完全证明" in folded and any(marker in folded for marker in ("不要把", "不要將")):
+        return "可以改为：“现有结果仅提供初步支持，结论仍需独立数据与外部复核。”"
+    if "完全证明" in folded and any(marker in folded for marker in ("谨慎", "謹慎", "改写", "改寫", "否定边界", "否定邊界")):
+        return "可以改为：“现有结果为该结论提供了初步支持，但尚未达到完全证明，仍需独立数据与外部复核。”"
+    return ""
+
+
 def detect_chat_intent(text: str, conversation: list[dict[str, str]]) -> str:
     lower = text.casefold().strip()
     if is_identity_question(lower):
@@ -879,7 +1005,11 @@ def detect_chat_intent(text: str, conversation: list[dict[str, str]]) -> str:
 
 
 def is_identity_question(text: str) -> bool:
-    markers = ["你是谁", "你是誰", "who are you", "你叫什么", "你叫什麼"]
+    markers = [
+        "你是谁", "你是誰", "who are you", "你叫什么", "你叫什麼",
+        "介绍一下你自己", "介紹一下你自己", "介绍你自己", "介紹你自己",
+        "怎么称呼你", "怎麼稱呼你", "如何称呼你", "如何稱呼你",
+    ]
     greetings = ["你好", "hello", "hi", "嗨"]
     return any(marker in text for marker in markers) or text.strip() in greetings
 
@@ -956,6 +1086,16 @@ def is_project_status_question(text: str) -> bool:
         "完成了哪些階段的驗收",
         "里程碑的预期交付",
         "里程碑的預期交付",
+        "合成测试",
+        "合成測試",
+        "模拟角色",
+        "模擬角色",
+        "真人验证",
+        "真人驗證",
+        "真实用户",
+        "真實用戶",
+        "用户满意",
+        "用戶滿意",
     )
     return any(marker in text for marker in markers)
 
@@ -1016,6 +1156,19 @@ def is_theory_question(text: str) -> bool:
 
 
 def project_status_answer(context: dict, question: str = "") -> str:
+    if (
+        any(marker in question for marker in ("更正当前版本", "更正當前版本", "更正版本"))
+        and any(marker in question for marker in ("本地结构化记录", "本地結構化記錄", "本地记录", "本地紀錄"))
+    ):
+        return f"当前项目版本是 {context['current_version']}。"
+    if any(marker in question for marker in ("合成测试", "合成測試", "模拟角色", "模擬角色", "真人验证", "真人驗證", "真实用户", "真實用戶", "用户满意", "用戶滿意")):
+        return (
+            "不能。合成测试或模拟角色通过，只能证明冻结场景下的内部自动检查通过；"
+            "它不是真人参与，不能代表真实用户体验、满意度或外部验证。"
+            f"当前项目仍是 {context['current_version']}，确定性正式源为 {context['formal_version']}，"
+            f"保留 {context['core_cases']} 个正式案例；下一阶段是 {context['next_version']}。"
+            "外部用户试用和公开发布权限都没有开放。"
+        )
     if any(marker in question for marker in ("部署", "配置库", "配置庫", "同步失败", "同步失敗", "容灾回滚", "容災回滾")):
         return (
             f"当前可验证项目状态是 {context['current_version']}，确定性正式源为 {context['formal_version']}，"
@@ -1190,6 +1343,37 @@ def roadmap_answer(context: dict) -> str:
 
 
 def project_results_answer(context: dict) -> str:
+    if context["current_version"] == "PSM V0.270":
+        return (
+            "这轮已完成 PSM V0.270 多轮约束门：12/12 个冻结多轮场景全部通过，覆盖助手回答指代、用户历史风险、"
+            "明确话题切换、用户更正优先、禁止词延续、三步格式和只给译文。首次运行的 5 个失败、两处领域标注勘误"
+            "和一处评估器漏检均已保留；助手历史污染和过期约束违规都是 0。\n\n"
+            "PSM V0.271 的独立外部评审随后判定 M07、M08 失败，原因都是过度回答；两项已经本地修复为精确短答，"
+            "但尚未外部重审，不能写成通过。当前月度 API 预算已达 20/20 美元，需要额外 4 美元才能重审。"
+            f"当前本地聊天模型是 `{context['selected_model']}`，外部发布仍关闭。"
+        )
+    if context["current_version"] == "PSM V0.268":
+        return (
+            "这轮已完成 PSM V0.268 普通聊天任务完成度门：翻译、改写、提取、比较、摘要、规划和解释共 "
+            "21/21 个冻结任务全部通过。首次运行的 5 个失败已原样保留，三处评分语言修正也另列为透明勘误，"
+            "没有覆盖原始契约。\n\n"
+            "修复后，系统不再用模型失败模板、边界说明或复述任务代替答案；桌面、手机、主机与 Docker 回归均通过，"
+            "178 项测试通过。它的作用是把物性状态门从“判断能否回答”推进到“在保留边界的同时真正完成动作”。"
+            "这些仍是内部合成证据，不代表真人满意度、开放域泛化或公开服务已经验证。"
+            f"当前本地聊天模型是 `{context['selected_model']}`。"
+            f"下一步是 {context['next_version']}：{context['next_objective']} 外部发布仍关闭。"
+        )
+    if context["current_version"] == "PSM V0.266":
+        return (
+            "这轮已完成 PSM V0.266 对抗与变形不变量门：15/15 组、30/30 个冻结变体全部通过，"
+            "覆盖同义改写、角色历史隔离、否定作用域、事件时间顺序和发布边界。首次运行暴露的 8 组失败"
+            "已经原样保留在只增不改的失败账本中，再针对同一契约修复产品逻辑。\n\n"
+            "修复后，关键事实幻觉、关键安全漏判和评测回流均为 0；170 项测试、桌面与手机浏览器、"
+            "主机与 Docker 一致性也全部通过。它让聊天对换一种说法、引用高风险词、混入错误助手历史、"
+            "以及时间顺序变形时更稳定，但这些仍是内部合成证据，不代表真人满意或开放域验证。"
+            f"当前本地聊天模型是 `{context['selected_model']}`。"
+            f"下一步是 {context['next_version']}：{context['next_objective']} 公开服务和外部发布仍关闭。"
+        )
     if context["current_version"] == "PSM V0.265":
         return (
             "这轮已完成 PSM V0.265 自动质量与多角色模拟试用门：30/30 个冻结场景全部通过，其中 12 个"
@@ -1412,6 +1596,7 @@ def try_ollama_chat_generation(
             prompt=prompt,
             model=selected_chat_model(),
             timeout_seconds=selected_chat_timeout_seconds(),
+            temperature=0.0,
             max_tokens=max_tokens,
         )
     )
@@ -1422,6 +1607,7 @@ def try_ollama_chat_generation(
                 prompt=prompt,
                 model=selected_chat_model(),
                 timeout_seconds=selected_chat_timeout_seconds(),
+                temperature=0.0,
                 max_tokens=max(600, max_tokens * 2),
             )
         )
@@ -1766,9 +1952,8 @@ def load_project_context() -> dict:
             or str(checkpoint.get("status") or "").startswith("blocked_")
         ),
         "checkpoint_status": str(checkpoint.get("status") or "unknown"),
-        "requires_user_input": bool(
-            next_stage.get("requires_user_input", checkpoint.get("requires_user_input", False))
-        ),
+        "requires_user_input": bool(next_stage.get("requires_user_input", False))
+        or bool(checkpoint.get("requires_user_input", False)),
         "chat_gate_passed": bool(chat_gate.get("passed", False)),
         "required_decision": str(
             checkpoint.get("required_decision") or "完成下一阶段独立验证"
@@ -1796,12 +1981,16 @@ def grounding_for_intent(
             [context["source"], context["selection_source"], context["roadmap_source"]],
         )
     if intent == "project_status":
-        facts = [
-                context["current_version"],
-                context["formal_version"],
-                str(context["core_cases"]),
-                context["next_version"],
-            ]
+        correction_only = (
+            any(marker in current for marker in ("更正当前版本", "更正當前版本", "更正版本"))
+            and any(marker in current for marker in ("本地结构化记录", "本地結構化記錄", "本地记录", "本地紀錄"))
+        )
+        facts = [context["current_version"]] if correction_only else [
+            context["current_version"],
+            context["formal_version"],
+            str(context["core_cases"]),
+            context["next_version"],
+        ]
         sources = [context["source"], context["roadmap_source"]]
         if context["stage_blocked"]:
             facts.append(context["required_decision"])

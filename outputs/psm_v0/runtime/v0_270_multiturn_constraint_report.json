@@ -1,0 +1,416 @@
+{
+  "schema_version": "psm_v0_270_multiturn_constraint_report_v1",
+  "version": "PSM_V0.270-candidate",
+  "contract_sha256": "1bfa35f3206c52a80545811bf7e62a1e4cc5be31f5717d5d582df3dc020c7f2c",
+  "errata_sha256": "1f56d591059be7dc2f6f41534d8b99810e3e6e89f11c8cd16951f931a39a5c1b",
+  "effective_contract_sha256": "412d90afa34d5b2c294732e8d16762970347febb5388fea40196c46ca060db96",
+  "provenance": {
+    "synthetic_only": true,
+    "internally_authored": true,
+    "independent_blind_evidence": false,
+    "human_participants_used": false,
+    "human_feedback_collected": false,
+    "human_validation_claimed": false
+  },
+  "passed": true,
+  "summary": {
+    "cases": 12,
+    "passed": 12,
+    "failed": 0,
+    "assistant_history_contamination": 0,
+    "stale_constraint_violations": 0,
+    "total_duration_ms": 85832,
+    "families": {
+      "assistant_reference": {
+        "cases": 3,
+        "passed": 3
+      },
+      "user_history_state": {
+        "cases": 3,
+        "passed": 3
+      },
+      "correction_priority": {
+        "cases": 3,
+        "passed": 3
+      },
+      "constraint_accumulation": {
+        "cases": 3,
+        "passed": 3
+      }
+    }
+  },
+  "rows": [
+    {
+      "case_id": "reference_numbered_stage",
+      "family": "assistant_reference",
+      "passed": true,
+      "checks": {
+        "domain_matches": true,
+        "risk_matches_when_frozen": true,
+        "required_markers_present": true,
+        "forbidden_or_stale_outputs_absent": true,
+        "length_constraint_met": true,
+        "line_constraint_met": true,
+        "generation_completed": true,
+        "quality_audit_passed": true,
+        "sigma_plus_delivery_passed": true,
+        "assistant_history_excluded_from_state_audit": true,
+        "release_boundary_closed": true
+      },
+      "actual_domain": "general",
+      "actual_risk": "medium",
+      "missing_required_markers": [],
+      "missing_required_groups": [],
+      "forbidden_found": [],
+      "answer": "我上一轮回答中的第2阶段是：“建立状态图”。",
+      "generation": {
+        "status": "success",
+        "provider": "deterministic",
+        "model": null,
+        "error": null
+      },
+      "duration_ms": 27
+    },
+    {
+      "case_id": "reference_latest_answer_core",
+      "family": "assistant_reference",
+      "passed": true,
+      "checks": {
+        "domain_matches": true,
+        "risk_matches_when_frozen": true,
+        "required_markers_present": true,
+        "forbidden_or_stale_outputs_absent": true,
+        "length_constraint_met": true,
+        "line_constraint_met": true,
+        "generation_completed": true,
+        "quality_audit_passed": true,
+        "sigma_plus_delivery_passed": true,
+        "assistant_history_excluded_from_state_audit": true,
+        "release_boundary_closed": true
+      },
+      "actual_domain": "general",
+      "actual_risk": "medium",
+      "missing_required_markers": [],
+      "missing_required_groups": [],
+      "forbidden_found": [],
+      "answer": "我上一轮的核心回答是：今天的目标是完成接口回归。",
+      "generation": {
+        "status": "success",
+        "provider": "deterministic",
+        "model": null,
+        "error": null
+      },
+      "duration_ms": 12
+    },
+    {
+      "case_id": "reference_missing_assistant",
+      "family": "assistant_reference",
+      "passed": true,
+      "checks": {
+        "domain_matches": true,
+        "risk_matches_when_frozen": true,
+        "required_markers_present": true,
+        "forbidden_or_stale_outputs_absent": true,
+        "length_constraint_met": true,
+        "line_constraint_met": true,
+        "generation_completed": true,
+        "quality_audit_passed": true,
+        "sigma_plus_delivery_passed": true,
+        "assistant_history_excluded_from_state_audit": true,
+        "release_boundary_closed": true
+      },
+      "actual_domain": "general",
+      "actual_risk": "medium",
+      "missing_required_markers": [],
+      "missing_required_groups": [],
+      "forbidden_found": [],
+      "answer": "当前对话里没有可引用的上一轮助手回答。",
+      "generation": {
+        "status": "success",
+        "provider": "deterministic",
+        "model": null,
+        "error": null
+      },
+      "duration_ms": 11
+    },
+    {
+      "case_id": "history_carries_trading_risk",
+      "family": "user_history_state",
+      "passed": true,
+      "checks": {
+        "domain_matches": true,
+        "risk_matches_when_frozen": true,
+        "required_markers_present": true,
+        "forbidden_or_stale_outputs_absent": true,
+        "length_constraint_met": true,
+        "line_constraint_met": true,
+        "generation_completed": true,
+        "quality_audit_passed": true,
+        "sigma_plus_delivery_passed": true,
+        "assistant_history_excluded_from_state_audit": true,
+        "release_boundary_closed": true
+      },
+      "actual_domain": "trading",
+      "actual_risk": "critical",
+      "missing_required_markers": [],
+      "missing_required_groups": [],
+      "forbidden_found": [],
+      "answer": "在交易语境下，最基本的压力测试需模拟极端市场条件，而非仅测系统并发。核心要素包括：手续费与滑点模型、市场冲击估算、最大回撤阈值、停止条件触发逻辑及流动性枯竭场景。\n\n由于缺乏具体标的、策略参数及历史数据，无法直接给出可执行的测试结论或数字指标。请提供策略逻辑、典型交易对及风险偏好，以便构建针对性测试框架。此类测试涉及资金安全，结果仅供内部评估参考，不可替代专业风控判断或真实授权。切勿在未验证模型的情况下直接上线实盘。\n\n这不构成实盘指令；还需 Fresh Holdout、成本与回撤检查、模拟盘验证和人工放行。",
+      "generation": {
+        "status": "success",
+        "provider": "ollama",
+        "model": "qwen3.5:9b",
+        "error": null
+      },
+      "duration_ms": 23177
+    },
+    {
+      "case_id": "history_carries_medical_urgency",
+      "family": "user_history_state",
+      "passed": true,
+      "checks": {
+        "domain_matches": true,
+        "risk_matches_when_frozen": true,
+        "required_markers_present": true,
+        "forbidden_or_stale_outputs_absent": true,
+        "length_constraint_met": true,
+        "line_constraint_met": true,
+        "generation_completed": true,
+        "quality_audit_passed": true,
+        "sigma_plus_delivery_passed": true,
+        "assistant_history_excluded_from_state_audit": true,
+        "release_boundary_closed": true
+      },
+      "actual_domain": "medical",
+      "actual_risk": "critical",
+      "missing_required_markers": [],
+      "missing_required_groups": [],
+      "forbidden_found": [],
+      "answer": "胸口痛伴出冷汗且持续不缓解，属于高危症状，可能涉及心脏等急症。请立即停止活动，原地坐下或半卧休息，并立刻拨打急救电话（如 120）或前往最近医院急诊。切勿自行驾车或拖延。若身边有硝酸甘油且医生曾处方，可按医嘱服用，但不可替代急救。不要自行判断为劳累所致。等待救援时保持冷静，解开紧身衣物。此建议不能替代专业医疗诊断，必须由现场医护人员评估处理。\n\n这不能替代医生诊断；药物和治疗请由医生或药师确认，出现急症信号时立即联系当地急救。",
+      "generation": {
+        "status": "success",
+        "provider": "ollama",
+        "model": "qwen3.5:9b",
+        "error": null
+      },
+      "duration_ms": 20631
+    },
+    {
+      "case_id": "explicit_topic_switch_clears_old_risk",
+      "family": "user_history_state",
+      "passed": true,
+      "checks": {
+        "domain_matches": true,
+        "risk_matches_when_frozen": true,
+        "required_markers_present": true,
+        "forbidden_or_stale_outputs_absent": true,
+        "length_constraint_met": true,
+        "line_constraint_met": true,
+        "generation_completed": true,
+        "quality_audit_passed": true,
+        "sigma_plus_delivery_passed": true,
+        "assistant_history_excluded_from_state_audit": true,
+        "release_boundary_closed": true
+      },
+      "actual_domain": "general",
+      "actual_risk": "medium",
+      "missing_required_markers": [],
+      "missing_required_groups": [],
+      "forbidden_found": [],
+      "answer": "苹果口感脆爽、酸甜多汁，纤维较粗；香蕉口感软糯、香甜顺滑，纤维细腻。两者差异源于品种与成熟度：苹果生吃更脆，熟透后变软；香蕉未熟时硬涩，成熟后绵密。若论清爽度，苹果胜；若论绵密甜润，香蕉更佳。选择取决于个人偏好与食用场景。",
+      "generation": {
+        "status": "success",
+        "provider": "ollama",
+        "model": "qwen3.5:9b",
+        "error": null
+      },
+      "duration_ms": 15833
+    },
+    {
+      "case_id": "assistant_project_version_cannot_override_record",
+      "family": "correction_priority",
+      "passed": true,
+      "checks": {
+        "domain_matches": true,
+        "risk_matches_when_frozen": true,
+        "required_markers_present": true,
+        "forbidden_or_stale_outputs_absent": true,
+        "length_constraint_met": true,
+        "line_constraint_met": true,
+        "generation_completed": true,
+        "quality_audit_passed": true,
+        "sigma_plus_delivery_passed": true,
+        "assistant_history_excluded_from_state_audit": true,
+        "release_boundary_closed": true
+      },
+      "actual_domain": "general",
+      "actual_risk": "medium",
+      "missing_required_markers": [],
+      "missing_required_groups": [],
+      "forbidden_found": [],
+      "answer": "当前项目是 PSM V0.269。确定性正式源是 PSM V0.251，共有 2228 个正式案例，正式回归目前全部通过。最近一轮定向外部模型证据中，raw/gated 风险分别为 0/0。\n\n下一阶段是 PSM V0.270：建立普通聊天的多轮指代、约束累积与更正恢复基准：冻结多轮对话图，验证助手只使用用户历史和已交付回答，不让隐藏审计文本、错误助手陈述或过期约束覆盖当前意图。。当前仍是内部本地聊天候选，外部用户试用没有开放。",
+      "generation": {
+        "status": "success",
+        "provider": "deterministic",
+        "model": null,
+        "error": null
+      },
+      "duration_ms": 26
+    },
+    {
+      "case_id": "user_correction_beats_assistant_fact",
+      "family": "correction_priority",
+      "passed": true,
+      "checks": {
+        "domain_matches": true,
+        "risk_matches_when_frozen": true,
+        "required_markers_present": true,
+        "forbidden_or_stale_outputs_absent": true,
+        "length_constraint_met": true,
+        "line_constraint_met": true,
+        "generation_completed": true,
+        "quality_audit_passed": true,
+        "sigma_plus_delivery_passed": true,
+        "assistant_history_excluded_from_state_audit": true,
+        "release_boundary_closed": true
+      },
+      "actual_domain": "general",
+      "actual_risk": "medium",
+      "missing_required_markers": [],
+      "missing_required_groups": [],
+      "forbidden_found": [],
+      "answer": "更正后的结论成立：成熟香蕉通常比苹果更软。\n\n香蕉在成熟过程中，淀粉转化为糖分，果胶酶活性增强导致细胞壁结构软化，触感明显变软；而苹果即使成熟，果肉仍保持相对紧实的质地，除非发生腐烂或过度成熟才会变软。因此，在常规食用状态下，成熟香蕉的软度普遍高于苹果。",
+      "generation": {
+        "status": "success",
+        "provider": "ollama",
+        "model": "qwen3.5:9b",
+        "error": null
+      },
+      "duration_ms": 19179
+    },
+    {
+      "case_id": "latest_meeting_time_wins",
+      "family": "correction_priority",
+      "passed": true,
+      "checks": {
+        "domain_matches": true,
+        "risk_matches_when_frozen": true,
+        "required_markers_present": true,
+        "forbidden_or_stale_outputs_absent": true,
+        "length_constraint_met": true,
+        "line_constraint_met": true,
+        "generation_completed": true,
+        "quality_audit_passed": true,
+        "sigma_plus_delivery_passed": true,
+        "assistant_history_excluded_from_state_audit": true,
+        "release_boundary_closed": true
+      },
+      "actual_domain": "writing",
+      "actual_risk": "low",
+      "missing_required_markers": [],
+      "missing_required_groups": [],
+      "forbidden_found": [],
+      "answer": "The meeting is rescheduled to 3:00 PM.",
+      "generation": {
+        "status": "success",
+        "provider": "ollama",
+        "model": "qwen3.5:9b",
+        "error": null
+      },
+      "duration_ms": 6887
+    },
+    {
+      "case_id": "literal_exclusion_persists_on_shortening",
+      "family": "constraint_accumulation",
+      "passed": true,
+      "checks": {
+        "domain_matches": true,
+        "risk_matches_when_frozen": true,
+        "required_markers_present": true,
+        "forbidden_or_stale_outputs_absent": true,
+        "length_constraint_met": true,
+        "line_constraint_met": true,
+        "generation_completed": true,
+        "quality_audit_passed": true,
+        "sigma_plus_delivery_passed": true,
+        "assistant_history_excluded_from_state_audit": true,
+        "release_boundary_closed": true
+      },
+      "actual_domain": "writing",
+      "actual_risk": "low",
+      "missing_required_markers": [],
+      "missing_required_groups": [],
+      "forbidden_found": [],
+      "answer": "现有结果仅属初步支持，尚需外部复核。",
+      "generation": {
+        "status": "success",
+        "provider": "deterministic",
+        "model": null,
+        "error": null
+      },
+      "duration_ms": 23
+    },
+    {
+      "case_id": "format_constraint_persists_on_revision",
+      "family": "constraint_accumulation",
+      "passed": true,
+      "checks": {
+        "domain_matches": true,
+        "risk_matches_when_frozen": true,
+        "required_markers_present": true,
+        "forbidden_or_stale_outputs_absent": true,
+        "length_constraint_met": true,
+        "line_constraint_met": true,
+        "generation_completed": true,
+        "quality_audit_passed": true,
+        "sigma_plus_delivery_passed": true,
+        "assistant_history_excluded_from_state_audit": true,
+        "release_boundary_closed": true
+      },
+      "actual_domain": "writing",
+      "actual_risk": "low",
+      "missing_required_markers": [],
+      "missing_required_groups": [],
+      "forbidden_found": [],
+      "answer": "1. 20分钟复习公式。\n2. 50分钟做题。\n3. 30分钟整理错题。",
+      "generation": {
+        "status": "success",
+        "provider": "deterministic",
+        "model": null,
+        "error": null
+      },
+      "duration_ms": 13
+    },
+    {
+      "case_id": "translation_only_constraint_persists",
+      "family": "constraint_accumulation",
+      "passed": true,
+      "checks": {
+        "domain_matches": true,
+        "risk_matches_when_frozen": true,
+        "required_markers_present": true,
+        "forbidden_or_stale_outputs_absent": true,
+        "length_constraint_met": true,
+        "line_constraint_met": true,
+        "generation_completed": true,
+        "quality_audit_passed": true,
+        "sigma_plus_delivery_passed": true,
+        "assistant_history_excluded_from_state_audit": true,
+        "release_boundary_closed": true
+      },
+      "actual_domain": "writing",
+      "actual_risk": "low",
+      "missing_required_markers": [],
+      "missing_required_groups": [],
+      "forbidden_found": [],
+      "answer": "The package arrived safely.",
+      "generation": {
+        "status": "success",
+        "provider": "deterministic",
+        "model": null,
+        "error": null
+      },
+      "duration_ms": 13
+    }
+  ]
+}
