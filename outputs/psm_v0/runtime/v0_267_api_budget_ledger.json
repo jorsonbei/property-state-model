@@ -1,7 +1,7 @@
 {
   "schema_version": "psm_v0_267_api_budget_ledger_v1",
   "month": "2026-07",
-  "limit_usd": "28.00",
+  "limit_usd": "32.00",
   "reservations": [
     {
       "schema_version": "psm_v0_262_api_budget_reservation_v1",
@@ -76,11 +76,21 @@
       "reserved_cost_usd": "4.00",
       "contains_participant_content": false,
       "authorization_scope": "user_approved_v0_273_review_only"
+    },
+    {
+      "schema_version": "psm_v0_262_api_budget_reservation_v1",
+      "reservation_id": "V0_275_EXTERNAL_OPEN_CONTEXT_REVIEW_ATTEMPT_1",
+      "occurred_at": "2026-07-16T02:28:58.150988+00:00",
+      "purpose": "synthetic_open_context_semantic_review",
+      "reserved_cost_usd": "4.00",
+      "contains_participant_content": false,
+      "authorization_scope": "user_approved_v0_275_review_only"
     }
   ],
-  "reserved_usd": "28.00",
+  "reserved_usd": "32.00",
   "participant_content_calls": 0,
   "base_limit_usd": "20.00",
   "user_approved_rejudge_extension_usd": "4.00",
-  "user_approved_v0_273_extension_usd": "4.00"
+  "user_approved_v0_273_extension_usd": "4.00",
+  "user_approved_v0_275_extension_usd": "4.00"
 }

@@ -7,6 +7,7 @@ from pathlib import Path
 
 from psm_v0.openai_external_open_context_judge import (
     APPROVED_AUTHORIZATION,
+    build_markdown_report,
     build_request_payload,
     review_open_context_package,
     validate_review_package,
@@ -91,6 +92,25 @@ class OpenAIExternalOpenContextJudgeTests(unittest.TestCase):
         value["budget"]["monthly_limit_usd"] = 36.0
         with self.assertRaises(ValueError):
             validate_review_package(value, require_authorization=True)
+
+    def test_external_failure_and_local_repairs_are_distinct_states(self) -> None:
+        judge_path = PSM_ROOT / "runtime" / "v0_275_openai_external_open_context_judge.json"
+        repair_path = PSM_ROOT / "runtime" / "v0_275_external_open_context_repair_report.json"
+        gate_path = PSM_ROOT / "runtime" / "v0_275_external_open_context_repair_gate.json"
+        if not judge_path.exists() or not repair_path.exists() or not gate_path.exists():
+            self.skipTest("V0.275 external result and local repair artifacts are not built yet.")
+        judge = json.loads(judge_path.read_text(encoding="utf-8"))
+        repair = json.loads(repair_path.read_text(encoding="utf-8"))
+        gate = json.loads(gate_path.read_text(encoding="utf-8"))
+        self.assertFalse(judge["passed"])
+        self.assertEqual(judge["review"]["failed_item_ids"], ["O01", "O02", "O10"])
+        markdown = build_markdown_report(judge)
+        self.assertIn(judge["review"]["review_payload_sha256"], markdown)
+        self.assertTrue(repair["passed"])
+        self.assertEqual(repair["failed_items_repaired_locally"], ["O01", "O02", "O10"])
+        self.assertFalse(repair["external_rejudge_completed"])
+        self.assertTrue(gate["passed"])
+        self.assertFalse(gate["external_rejudge_completed"])
 
 
 if __name__ == "__main__":

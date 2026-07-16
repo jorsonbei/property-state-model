@@ -1,0 +1,27 @@
+{
+  "schema_version": "psm_v0_275_external_open_context_repair_report_v1",
+  "version": "PSM_V0.275-rejudge-candidate",
+  "passed": true,
+  "external_failure_retained": true,
+  "failed_items_repaired_locally": [
+    "O01",
+    "O02",
+    "O10"
+  ],
+  "repairs": {
+    "O01": "Return only the recalled user label.",
+    "O02": "Return only the recalled venue.",
+    "O10": "Keep the kitchen analogy plain and remove internal or release language."
+  },
+  "local_contract_cases_passed": 10,
+  "external_rejudge_completed": false,
+  "release_boundary": {
+    "human_validation_claimed": false,
+    "open_domain_generalization_claimed": false,
+    "production_readiness_claimed": false,
+    "public_service_allowed": false,
+    "professional_authority_allowed": false,
+    "rule_replacement_allowed": false,
+    "external_release_authority": false
+  }
+}

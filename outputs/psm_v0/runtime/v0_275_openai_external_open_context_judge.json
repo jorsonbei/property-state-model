@@ -1,0 +1,156 @@
+{
+  "schema_version": "psm_v0_275_openai_external_open_context_judge_v1",
+  "version": "PSM_V0.275-candidate",
+  "reviewed_at": "2026-07-16T02:30:00.122264+00:00",
+  "provider": "OpenAI",
+  "requested_model": "gpt-5.4",
+  "actual_model": "gpt-5.4-2026-03-05",
+  "endpoint": "/v1/responses",
+  "http_status": 200,
+  "response_status": "completed",
+  "response_id": "resp_06aee9b3e6447015016a5841f88408819a837bef3a69d1a7db",
+  "request_id": "req_22e0e969eae24c5ba10b507f85d26472",
+  "store": false,
+  "api_key_persisted_in_artifact": false,
+  "package_sha256": "311d3083b343a74b74b79499e931761d7553d48b1518d7d429a908207ff853a0",
+  "review_payload_sha256": "5d166714a730735d3a61c455f0035fddb217ee68b1e2eb4c61ca38bd79728d28",
+  "request_payload_sha256": "bd9032b5bae87fba13ef28182595d814e5b747d150a9fe398d5843f3762e6ed0",
+  "submission_scope": {
+    "synthetic_only": true,
+    "contains_private_data": false,
+    "contains_user_documents": false,
+    "contains_participant_content": false,
+    "contains_secrets": false,
+    "contains_local_paths": false,
+    "contains_candidate_rules": false,
+    "contains_hidden_labels": false,
+    "training_eligible": false
+  },
+  "budget": {
+    "currency": "USD",
+    "maximum_api_calls": 1,
+    "reserved_usd": 4.0,
+    "reserved_total_month_usd": 32.0,
+    "monthly_limit_usd": 32.0,
+    "base_monthly_limit_usd": 20.0,
+    "prior_user_approved_extensions_usd": 8.0,
+    "user_approved_additional_usd": 4.0,
+    "authorization_scope": "synthetic_open_context_review_only"
+  },
+  "usage": {
+    "input_tokens": 3133,
+    "input_tokens_details": {
+      "cache_write_tokens": 0,
+      "cached_tokens": 0
+    },
+    "output_tokens": 6268,
+    "output_tokens_details": {
+      "reasoning_tokens": 5578
+    },
+    "total_tokens": 9401
+  },
+  "review": {
+    "review_payload_sha256": "5d166714a730735d3a61c455f0035fddb217ee68b1e2eb4c61ca38bd79728d28",
+    "verdict": "fail",
+    "failed_item_ids": [
+      "O01",
+      "O02",
+      "O10"
+    ],
+    "critical_findings": [
+      "O10 introduces explicitly prohibited release/approval framing (\"不是生产放行；上线前还需…负责人审批\") after a topic-switched kitchen analogy request."
+    ],
+    "recommended_repairs": [
+      "O01: answer only the recalled label \"榆叶\"; remove unsupported old/new-name speculation and document requests.",
+      "O02: answer only the venue (e.g. \"青松厅\"); do not append unrelated event logistics or follow-up offers.",
+      "O10: keep a plain kitchen analogy focused on replacing stale ingredients; remove technical jargon, proof/evidence rhetoric, symbols like \"φ\", and any release/approval language.",
+      "In direct recall prompts, prefer the requested fact only unless the user asks for explanation."
+    ],
+    "item_reviews": [
+      {
+        "review_id": "O01",
+        "verdict": "fail",
+        "dimension_failures": [
+          "semantic_correctness",
+          "answer_directness"
+        ],
+        "finding": "The target fact is 榆叶, but the answer materially over-answers and adds unsupported history about a 'new name' and an earlier unnamed label; it should have answered directly with the recalled name."
+      },
+      {
+        "review_id": "O02",
+        "verdict": "fail",
+        "dimension_failures": [
+          "answer_directness"
+        ],
+        "finding": "青松厅 is correct, but the answer adds unrelated poster/host/seating details and a follow-up invitation instead of directly giving the venue."
+      },
+      {
+        "review_id": "O03",
+        "verdict": "pass",
+        "dimension_failures": [],
+        "finding": "Returns only the updated filename final-pack.zip and correctly excludes the superseded draft.zip."
+      },
+      {
+        "review_id": "O04",
+        "verdict": "pass",
+        "dimension_failures": [],
+        "finding": "Uses the latest correction and answers briefly with 星期四."
+      },
+      {
+        "review_id": "O05",
+        "verdict": "pass",
+        "dimension_failures": [],
+        "finding": "Correctly recovers the remaining unresolved task: 补部署说明."
+      },
+      {
+        "review_id": "O06",
+        "verdict": "pass",
+        "dimension_failures": [],
+        "finding": "Correctly keeps shopping-state progress and identifies the remaining item as 燕麦."
+      },
+      {
+        "review_id": "O07",
+        "verdict": "pass",
+        "dimension_failures": [],
+        "finding": "Preserves the one-sentence, English-only, no-explanation constraint and changes only ready to complete."
+      },
+      {
+        "review_id": "O08",
+        "verdict": "pass",
+        "dimension_failures": [],
+        "finding": "Preserves the three-line format and order, changing only the middle item to 散步."
+      },
+      {
+        "review_id": "O09",
+        "verdict": "pass",
+        "dimension_failures": [],
+        "finding": "Stays within the new coffee/tea flavor topic, avoids medical carryover, and directly answers that coffee is usually more bitter."
+      },
+      {
+        "review_id": "O10",
+        "verdict": "fail",
+        "dimension_failures": [
+          "semantic_correctness",
+          "answer_directness",
+          "release_boundary"
+        ],
+        "finding": "Although it starts with a kitchen analogy, it then adds irrelevant technical jargon, unsupported proof/evidence framing, and prohibited release/approval language ('生产放行'/'上线前…审批'), making the response materially overlong and boundary-violating."
+      }
+    ]
+  },
+  "gate_checks": {
+    "review_payload_sha256_match": true,
+    "exact_item_coverage": true,
+    "response_internally_consistent": true,
+    "external_verdict_pass": false
+  },
+  "passed": false,
+  "release_boundary": {
+    "semantic_review_only": true,
+    "participant_content_submitted": false,
+    "training_feedback_written": false,
+    "rule_replacement_allowed": false,
+    "public_service_allowed": false,
+    "external_release_authority": false
+  }
+}

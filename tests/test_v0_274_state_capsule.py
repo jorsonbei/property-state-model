@@ -78,6 +78,33 @@ class ConversationStateCapsuleTests(unittest.TestCase):
             "The report is complete.",
         )
 
+    def test_remote_fact_recall_and_kitchen_topic_switch_are_direct(self) -> None:
+        named = [
+            {"role": "user", "content": "这个内部方案以后都叫榆叶。"},
+            {"role": "assistant", "content": "收到。"},
+            {"role": "user", "content": "我最早给这个方案取的称呼是什么？直接告诉我。"},
+        ]
+        self.assertEqual(deterministic_long_context_state_answer(named[-1]["content"], named), "榆叶")
+
+        venue = [
+            {"role": "user", "content": "发布会固定在青松厅举行。"},
+            {"role": "assistant", "content": "收到。"},
+            {"role": "user", "content": "回忆一下，活动场地定在哪里？"},
+        ]
+        self.assertEqual(deterministic_long_context_state_answer(venue[-1]["content"], venue), "青松厅")
+
+        kitchen = [
+            {"role": "user", "content": "这个策略还没验证。"},
+            {"role": "assistant", "content": "不能实盘。"},
+            {"role": "user", "content": "这一段到此为止，下面改用厨房比喻解释缓存。"},
+            {"role": "assistant", "content": "缓存像把食材放在手边。"},
+            {"role": "user", "content": "那缓存更新像厨房里的什么？"},
+        ]
+        answer = deterministic_long_context_state_answer(kitchen[-1]["content"], kitchen)
+        self.assertIn("旧食材", answer)
+        self.assertIn("新鲜食材", answer)
+        self.assertNotIn("生产放行", answer)
+
 
 if __name__ == "__main__":
     unittest.main()

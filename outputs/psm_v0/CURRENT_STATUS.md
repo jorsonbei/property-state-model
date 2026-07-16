@@ -17,19 +17,22 @@ V0.274 is promoted. The formal 2228-record evidence core remains `PSM V0.251`; V
 - Participant-content API calls, human feedback, and evaluation-to-training backflow remain 0.
 - Public service and external release remain closed.
 
-## V0.275 Prepared Stage
+## V0.275 External Review And Repair Stage
 
-- A sanitized 10-item synthetic open-context review package passes its local package gate.
-- Review families: remote user facts, latest corrections, unresolved work, constraint persistence, and natural topic-switch cleanup.
-- Private data, participant content, user documents, secrets, local paths, candidate rules, hidden labels, and training fields: absent.
-- Authorized API calls: 0.
-- July synthetic API ledger: USD 28 reserved / USD 28 limit.
-- Required decision: approve an additional USD 4 for one synthetic V0.275 external review, or stop the external review stage.
+- The sanitized 10-item package passed its local gate and was submitted once under the approved USD 4 extension.
+- OpenAI `gpt-5.4-2026-03-05` returned FAIL after 9,401 tokens; O01, O02, and O10 failed.
+- O01/O02 recalled the right facts but over-answered. O10 leaked internal/release language into a topic-switched kitchen analogy.
+- The original external failure and critical finding remain retained.
+- Local repairs changed only O01, O02, and O10; the other seven answers remain unchanged.
+- The repaired local contract passes 10/10 with zero stale-state violations and zero missing capsules.
+- External rejudge completed: false. Authorized rejudge calls: 0.
+- July synthetic API ledger: USD 32 reserved / USD 32 limit.
+- Required decision: approve an additional USD 4 for one synthetic V0.275 external rejudge, or stop the external rejudge stage.
 
 ## Evidence Boundary
 
 - V0.274 evidence is internally authored and synthetic; it is not human or independent external evidence.
-- The final V0.273 judgment is independent semantic review of synthetic content only.
+- The final V0.273 judgment passed independently; the first V0.275 judgment independently failed and remains unclosed.
 - Human participants, human feedback, participant-content API calls, and evaluation-to-training backflow: 0.
 - Deterministic rules remain authoritative; shadow models cannot control route, risk, release, or professional action.
 - Public service, production readiness, rule replacement, professional authority, and external release authority: false.
@@ -52,6 +55,7 @@ V0.274 is promoted. The formal 2228-record evidence core remains `PSM V0.251`; V
 - V0.274 contract/report/gate: `benchmarks/v0_274_open_context_generalization_contract.json`, `runtime/v0_274_open_context_generalization_report.json`, `runtime/v0_274_open_context_generalization_gate.json`.
 - V0.274 failures/browser/Docker/manifest: `runtime/v0_274_open_context_initial_failure_ledger.json`, `runtime/v0_274_open_context_browser_regression/report.json`, `runtime/v0_274_open_context_docker_boundary.json`, `runtime/v0_274_open_context_generalization_promotion_manifest.json`.
 - V0.275 package/gate/checkpoint: `runtime/v0_275_external_open_context_review_package.json`, `runtime/v0_275_external_open_context_package_gate.json`, `runtime/v0_275_external_open_context_checkpoint.json`.
+- V0.275 failed judge/local repairs: `runtime/v0_275_openai_external_open_context_judge.json`, `runtime/v0_275_external_open_context_repair_report.json`, `runtime/v0_275_external_open_context_repaired_candidate.json`, `runtime/v0_275_external_open_context_repair_gate.json`.
 - Current roadmap: `roadmap_out/PSM_V0.274_to_V0.275_External_Open_Context_Roadmap.md`.
 
 Version history remains in independent snapshots under `status_history/`; it is not embedded recursively here.

@@ -872,6 +872,14 @@ def deterministic_long_context_state_answer(
         value = latest_user_capture(previous_users, r"(?:项目的?)?代号(?:定为|定為|是)\s*([^\s，。]+)")
         if value:
             return value
+    if any(marker in current for marker in ("取的称呼是什么", "取的稱呼是什麼", "称呼是什么", "稱呼是什麼")):
+        value = latest_user_capture(previous_users, r"(?:以后都叫|以後都叫|称为|稱為)\s*([^\s，。]+)")
+        if value:
+            return value
+    if any(marker in current for marker in ("场地定在哪里", "場地定在哪裡", "活动场地", "活動場地")):
+        value = latest_user_capture(previous_users, r"(?:固定在|定在|安排在)\s*([^，。]+?)(?:举行|舉行|$)")
+        if value:
+            return value
     if "会议最终时间" in current or "會議最終時間" in current:
         value = latest_user_capture(previous_users, r"(?:会议|會議).*?(下午[一二三四五六七八九十\d]+点)")
         if value:
@@ -1510,9 +1518,11 @@ def project_results_answer(context: dict) -> str:
             "加入只读取当前话题段用户原话的状态胶囊，并扩展更正、未完成事项与约束继承后，最终 10/10 全部通过。\n\n"
             "过期状态违规从 6 降为 0，状态胶囊缺失从 10 降为 0；桌面、手机、主机与 Docker 边界也通过。"
             "它的作用是让本地模型不只依赖最近八则消息，而能在自然追问中恢复远距事实，同时防止助手历史覆盖用户事实。"
-            "这些仍是内部合成证据，不代表真人满意度、生产就绪或开放域有效性。"
-            f"当前本地聊天模型是 `{context['selected_model']}`。下一阶段是 {context['next_version']}："
-            f"{context['next_objective']} 外部发布仍关闭。"
+            "这些仍是内部合成证据，不代表真人满意度、生产就绪或开放域有效性。\n\n"
+            "V0.275 首次独立外部评审随后判定 O01、O02、O10 失败：两个回忆回答过度，厨房比喻泄漏内部与发布语言。"
+            "三项已本地修复，其他七项保持不变，但尚未完成外部重审，不能写成通过。"
+            f"当前本地聊天模型是 `{context['selected_model']}`。下一阶段仍是 {context['next_version']}，"
+            f"需要你决定：{context['required_decision']} 外部发布仍关闭。"
         )
     if context["current_version"] == "PSM V0.273":
         return (
@@ -2105,6 +2115,12 @@ def contextual_general_fallback(
             "沿用书桌的比喻：缓存像放在手边的常用资料，但外面的原始资料会更新。"
             "如果桌上仍放旧版本，拿取虽然快，内容却可能错，所以缓存要设置过期时间，届时重新取最新资料。"
         )
+    kitchen_cache_context = (
+        any(marker in history for marker in ("厨房比喻", "廚房比喻", "厨房里的", "廚房裡的"))
+        and any(marker in history + current for marker in ("缓存", "快取"))
+    )
+    if kitchen_cache_context and any(marker in current for marker in ("缓存更新", "快取更新")):
+        return "缓存更新就像把厨房里过期或变质的旧食材撤下，换成新鲜食材，避免继续用旧东西做错菜。"
     return ""
 
 

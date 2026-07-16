@@ -1,11 +1,10 @@
 {
   "schema_version": "psm_v0_274_open_context_generalization_checkpoint_v1",
-  "current_promoted_version": "PSM_V0.274",
+  "current_promoted_version": "PSM_V0.273",
   "target_version": "PSM_V0.274",
-  "target_promoted": true,
+  "target_promoted": false,
   "passed": true,
-  "status": "v0_274_promoted_v0_275_external_open_context_review_open",
+  "status": "open_context_generalization_gate_passed",
   "requires_user_input": false,
-  "next_action": "build_v0_275_external_open_context_review_package",
-  "promotion_manifest": "runtime/v0_274_open_context_generalization_promotion_manifest.json"
+  "next_action": "run_v0_274_browser_and_docker_boundaries"
 }

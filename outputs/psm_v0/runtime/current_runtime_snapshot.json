@@ -248,7 +248,7 @@
       "objective": "对冻结的 V0.274 开放式长对话回答执行来源隔离的独立外部语义评审，检查未见改写、远距事实、最新更正、未完成事项、约束继承和自然换题；只提交合成问答，不提交规则、私人资料或训练字段。",
       "blocked": true,
       "requires_user_input": true,
-      "required_decision": "批准额外 4 美元 OpenAI 合成开放式长对话独立评审预算，或停止 V0.275 外部评审。"
+      "required_decision": "V0.275 首次外部评审判定 O01、O02、O10 失败；三项已本地修复。批准额外 4 美元 OpenAI 合成开放式长对话重审预算，或停止 V0.275 外部重审。"
     },
     "primary_artifacts": {
       "case_pack": "case_packs/v0_251_independent_chat_golden_blind_set_boundary_adversarial_cases.json",

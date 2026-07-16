@@ -1,0 +1,22 @@
+{
+  "schema_version": "psm_v0_275_external_open_context_authorization_gate_v1",
+  "passed": true,
+  "checks": {
+    "prepared_package_gate_passed": true,
+    "prepared_payload_hash_retained": true,
+    "prior_budget_closed": true,
+    "prior_checkpoint_blocked": true,
+    "single_external_call_authorized": true,
+    "additional_budget_exactly_four_usd": true,
+    "effective_limit_exactly_thirty_two_usd": true,
+    "participant_content_calls_zero": true,
+    "privacy_boundary_closed": true,
+    "release_boundary_closed": true,
+    "prohibited_material_absent": true
+  },
+  "authorization": "approved_by_user_additional_usd_4_v0_275_synthetic_open_context_judge",
+  "authorization_scope": "one_synthetic_open_context_semantic_review_only",
+  "review_payload_sha256": "5d166714a730735d3a61c455f0035fddb217ee68b1e2eb4c61ca38bd79728d28",
+  "authorized_package_sha256": "311d3083b343a74b74b79499e931761d7553d48b1518d7d429a908207ff853a0",
+  "prohibited_material_found": []
+}

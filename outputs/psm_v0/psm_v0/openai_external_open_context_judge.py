@@ -236,3 +236,41 @@ def review_open_context_package(
             "external_release_authority": False,
         },
     }
+
+
+def build_markdown_report(result: dict) -> str:
+    review = result["review"]
+    review_payload_sha256 = result.get("review_payload_sha256") or review["review_payload_sha256"]
+    lines = [
+        "# PSM V0.275 OpenAI External Open-context Review",
+        "",
+        f"- Passed: `{result['passed']}`",
+        f"- Verdict: `{review['verdict']}`",
+        f"- Actual model: `{result.get('actual_model')}`",
+        f"- Review payload SHA-256: `{review_payload_sha256}`",
+        f"- Total tokens: `{result.get('usage', {}).get('total_tokens', 0)}`",
+        f"- Failed item IDs: `{review['failed_item_ids']}`",
+        "",
+        "## Item Reviews",
+        "",
+    ]
+    for item in review["item_reviews"]:
+        dimensions = ", ".join(item["dimension_failures"]) or "none"
+        lines.append(
+            f"- `{item['review_id']}`: **{item['verdict'].upper()}**; "
+            f"dimension failures: `{dimensions}`; {item['finding']}"
+        )
+    lines.extend([
+        "",
+        "## Critical Findings",
+        "",
+        *([f"- {item}" for item in review["critical_findings"]] or ["- None."]),
+        "",
+        "## Recommended Repairs",
+        "",
+        *([f"- {item}" for item in review["recommended_repairs"]] or ["- None."]),
+        "",
+        "This independent review covers only the authorized synthetic open-context package. It does not authorize participant submission, training use, rule replacement, public service, or external release.",
+        "",
+    ])
+    return "\n".join(lines)

@@ -1,0 +1,568 @@
+{
+  "schema_version": "psm_v0_275_external_open_context_review_package_v1",
+  "version": "PSM_V0.275-candidate",
+  "authorization": "approved_by_user_additional_usd_4_v0_275_synthetic_open_context_judge",
+  "authorization_scope": "one_synthetic_open_context_semantic_review_only",
+  "source_version": "PSM_V0.274",
+  "source_contract": "benchmarks/v0_274_open_context_generalization_contract.json",
+  "source_report": "runtime/v0_274_open_context_generalization_report.json",
+  "source_gate": "runtime/v0_274_open_context_generalization_gate.json",
+  "review_payload": {
+    "rubric_dimensions": [
+      "semantic_correctness",
+      "remote_user_fact",
+      "latest_correction_priority",
+      "unresolved_work_recovery",
+      "constraint_persistence",
+      "topic_switch_cleanup",
+      "answer_directness",
+      "release_boundary"
+    ],
+    "items": [
+      {
+        "review_id": "O01",
+        "family": "remote_user_fact",
+        "conversation": [
+          {
+            "role": "user",
+            "content": "这个内部方案以后都叫榆叶。"
+          },
+          {
+            "role": "assistant",
+            "content": "记住了，内部称呼是榆叶。"
+          },
+          {
+            "role": "user",
+            "content": "界面暂时用浅色。"
+          },
+          {
+            "role": "assistant",
+            "content": "好的。"
+          },
+          {
+            "role": "user",
+            "content": "日志按天归档。"
+          },
+          {
+            "role": "assistant",
+            "content": "已记录。"
+          },
+          {
+            "role": "user",
+            "content": "首页不放横幅。"
+          },
+          {
+            "role": "assistant",
+            "content": "明白。"
+          },
+          {
+            "role": "user",
+            "content": "按钮文案稍后定。"
+          },
+          {
+            "role": "assistant",
+            "content": "可以。"
+          },
+          {
+            "role": "user",
+            "content": "我最早给这个方案取的称呼是什么？直接告诉我。"
+          }
+        ],
+        "final_answer": "根据当前对话记录，你最早给这个方案取的称呼是“榆叶”。这是你在后续指令中明确指出的新名称，但并未提及该名称之前的旧称。若需确认更早的命名，请提供相关背景或文档。"
+      },
+      {
+        "review_id": "O02",
+        "family": "remote_user_fact",
+        "conversation": [
+          {
+            "role": "user",
+            "content": "发布会固定在青松厅举行。"
+          },
+          {
+            "role": "assistant",
+            "content": "发布会地点是青松厅。"
+          },
+          {
+            "role": "user",
+            "content": "灯光方案周三确认。"
+          },
+          {
+            "role": "assistant",
+            "content": "收到。"
+          },
+          {
+            "role": "user",
+            "content": "海报先不印。"
+          },
+          {
+            "role": "assistant",
+            "content": "明白。"
+          },
+          {
+            "role": "user",
+            "content": "主持人名单晚些给。"
+          },
+          {
+            "role": "assistant",
+            "content": "好的。"
+          },
+          {
+            "role": "user",
+            "content": "座位按到场顺序。"
+          },
+          {
+            "role": "assistant",
+            "content": "已记录。"
+          },
+          {
+            "role": "user",
+            "content": "回忆一下，活动场地定在哪里？"
+          }
+        ],
+        "final_answer": "根据现有记录，活动场地已固定在青松厅举行。此前关于海报暂不印刷、主持人名单稍后提供、座位按到场顺序安排等事项均已确认。若需进一步确认场地细节或调整，请随时告知。"
+      },
+      {
+        "review_id": "O03",
+        "family": "latest_correction",
+        "conversation": [
+          {
+            "role": "user",
+            "content": "导出包暂时命名为 draft.zip。"
+          },
+          {
+            "role": "assistant",
+            "content": "已记录 draft.zip。"
+          },
+          {
+            "role": "user",
+            "content": "名称更新为 final-pack.zip，前一个名字不要再用。"
+          },
+          {
+            "role": "assistant",
+            "content": "已更新。"
+          },
+          {
+            "role": "user",
+            "content": "压缩级别用默认值。"
+          },
+          {
+            "role": "assistant",
+            "content": "好的。"
+          },
+          {
+            "role": "user",
+            "content": "校验文件放在同目录。"
+          },
+          {
+            "role": "assistant",
+            "content": "明白。"
+          },
+          {
+            "role": "user",
+            "content": "下载页稍后再做。"
+          },
+          {
+            "role": "assistant",
+            "content": "可以。"
+          },
+          {
+            "role": "user",
+            "content": "现在应该交付哪个压缩包？只写名称。"
+          }
+        ],
+        "final_answer": "final-pack.zip"
+      },
+      {
+        "review_id": "O04",
+        "family": "latest_correction",
+        "conversation": [
+          {
+            "role": "user",
+            "content": "评审原本排在星期二。"
+          },
+          {
+            "role": "assistant",
+            "content": "评审安排在星期二。"
+          },
+          {
+            "role": "user",
+            "content": "改期到星期四，星期二的安排取消。"
+          },
+          {
+            "role": "assistant",
+            "content": "已改到星期四。"
+          },
+          {
+            "role": "user",
+            "content": "材料提前一天发。"
+          },
+          {
+            "role": "assistant",
+            "content": "收到。"
+          },
+          {
+            "role": "user",
+            "content": "参会链接保持不变。"
+          },
+          {
+            "role": "assistant",
+            "content": "好的。"
+          },
+          {
+            "role": "user",
+            "content": "记录人仍由小组指定。"
+          },
+          {
+            "role": "assistant",
+            "content": "明白。"
+          },
+          {
+            "role": "user",
+            "content": "最终哪一天评审？简短回答。"
+          }
+        ],
+        "final_answer": "星期四"
+      },
+      {
+        "review_id": "O05",
+        "family": "unresolved_work",
+        "conversation": [
+          {
+            "role": "user",
+            "content": "今天两件正事：修搜索页，再补部署说明。"
+          },
+          {
+            "role": "assistant",
+            "content": "记下了两项。"
+          },
+          {
+            "role": "user",
+            "content": "搜索页已经修完。"
+          },
+          {
+            "role": "assistant",
+            "content": "搜索页已完成。"
+          },
+          {
+            "role": "user",
+            "content": "午餐改到一点。"
+          },
+          {
+            "role": "assistant",
+            "content": "好的。"
+          },
+          {
+            "role": "user",
+            "content": "下午先开十分钟短会。"
+          },
+          {
+            "role": "assistant",
+            "content": "已记录。"
+          },
+          {
+            "role": "user",
+            "content": "晚上不加班。"
+          },
+          {
+            "role": "assistant",
+            "content": "明白。"
+          },
+          {
+            "role": "user",
+            "content": "那两件正事还剩哪一件？"
+          }
+        ],
+        "final_answer": "补部署说明"
+      },
+      {
+        "review_id": "O06",
+        "family": "unresolved_work",
+        "conversation": [
+          {
+            "role": "user",
+            "content": "出门前要买燕麦、牛奶。"
+          },
+          {
+            "role": "assistant",
+            "content": "购物项是燕麦和牛奶。"
+          },
+          {
+            "role": "user",
+            "content": "牛奶刚买好了。"
+          },
+          {
+            "role": "assistant",
+            "content": "牛奶已完成。"
+          },
+          {
+            "role": "user",
+            "content": "回家顺便取快递。"
+          },
+          {
+            "role": "assistant",
+            "content": "收到。"
+          },
+          {
+            "role": "user",
+            "content": "晚饭不做汤。"
+          },
+          {
+            "role": "assistant",
+            "content": "明白。"
+          },
+          {
+            "role": "user",
+            "content": "购物袋放门边。"
+          },
+          {
+            "role": "assistant",
+            "content": "好的。"
+          },
+          {
+            "role": "user",
+            "content": "购物方面还漏了什么？"
+          }
+        ],
+        "final_answer": "燕麦"
+      },
+      {
+        "review_id": "O07",
+        "family": "constraint_persistence",
+        "conversation": [
+          {
+            "role": "user",
+            "content": "把“报告已经准备好”译成英文，回答里不要加解释。"
+          },
+          {
+            "role": "assistant",
+            "content": "The report is ready."
+          },
+          {
+            "role": "user",
+            "content": "稍后只改一个词。"
+          },
+          {
+            "role": "assistant",
+            "content": "明白。"
+          },
+          {
+            "role": "user",
+            "content": "标点样式保持。"
+          },
+          {
+            "role": "assistant",
+            "content": "好的。"
+          },
+          {
+            "role": "user",
+            "content": "不要添加中文说明。"
+          },
+          {
+            "role": "assistant",
+            "content": "收到。"
+          },
+          {
+            "role": "user",
+            "content": "输出仍旧只有一句。"
+          },
+          {
+            "role": "assistant",
+            "content": "明白。"
+          },
+          {
+            "role": "user",
+            "content": "把 ready 换成 complete，照旧交付。"
+          }
+        ],
+        "final_answer": "The report is complete."
+      },
+      {
+        "review_id": "O08",
+        "family": "constraint_persistence",
+        "conversation": [
+          {
+            "role": "user",
+            "content": "列三项晨间安排，每项单独一行：喝水、拉伸、读书。不要解释。"
+          },
+          {
+            "role": "assistant",
+            "content": "喝水\n拉伸\n读书"
+          },
+          {
+            "role": "user",
+            "content": "顺序先不动。"
+          },
+          {
+            "role": "assistant",
+            "content": "好的。"
+          },
+          {
+            "role": "user",
+            "content": "仍然保持三行。"
+          },
+          {
+            "role": "assistant",
+            "content": "明白。"
+          },
+          {
+            "role": "user",
+            "content": "第一项不用改。"
+          },
+          {
+            "role": "assistant",
+            "content": "收到。"
+          },
+          {
+            "role": "user",
+            "content": "第三项也不用改。"
+          },
+          {
+            "role": "assistant",
+            "content": "好的。"
+          },
+          {
+            "role": "user",
+            "content": "只把中间那项换成散步，其他照旧。"
+          }
+        ],
+        "final_answer": "喝水\n散步\n读书"
+      },
+      {
+        "review_id": "O09",
+        "family": "topic_switch_cleanup",
+        "conversation": [
+          {
+            "role": "user",
+            "content": "我出现呼吸困难和胸口压迫感。"
+          },
+          {
+            "role": "assistant",
+            "content": "这可能需要立即联系当地急救。"
+          },
+          {
+            "role": "user",
+            "content": "接下来不谈健康问题了，改聊咖啡和茶的味道。"
+          },
+          {
+            "role": "assistant",
+            "content": "咖啡常有烘焙苦香，茶的香气更轻。"
+          },
+          {
+            "role": "user",
+            "content": "只谈日常风味。"
+          },
+          {
+            "role": "assistant",
+            "content": "好的。"
+          },
+          {
+            "role": "user",
+            "content": "不比较提神效果。"
+          },
+          {
+            "role": "assistant",
+            "content": "明白。"
+          },
+          {
+            "role": "user",
+            "content": "先说入口感觉。"
+          },
+          {
+            "role": "assistant",
+            "content": "可以。"
+          },
+          {
+            "role": "user",
+            "content": "哪一种通常更苦？"
+          }
+        ],
+        "final_answer": "咖啡通常比茶更苦。这主要源于烘焙程度：深烘焙会生成更多苦味物质，而浅烘焙则保留更多酸香。茶若未泡好或浓度过高也会苦涩，但日常饮用中，咖啡的苦味更为普遍且明显。茶的风味更偏向清淡、回甘，除非是特定品种或过度萃取。入口时，咖啡的苦感直接且持久，茶则较柔和。"
+      },
+      {
+        "review_id": "O10",
+        "family": "topic_switch_cleanup",
+        "conversation": [
+          {
+            "role": "user",
+            "content": "这个策略还没有做样本外验证。"
+          },
+          {
+            "role": "assistant",
+            "content": "因此不能直接用于实盘。"
+          },
+          {
+            "role": "user",
+            "content": "这一段到此为止，下面改用厨房比喻解释缓存。"
+          },
+          {
+            "role": "assistant",
+            "content": "缓存像把常用食材放在手边。"
+          },
+          {
+            "role": "user",
+            "content": "继续这个厨房比喻。"
+          },
+          {
+            "role": "assistant",
+            "content": "好的。"
+          },
+          {
+            "role": "user",
+            "content": "不要讲计算机代码。"
+          },
+          {
+            "role": "assistant",
+            "content": "明白。"
+          },
+          {
+            "role": "user",
+            "content": "重点说为什么要替换旧内容。"
+          },
+          {
+            "role": "assistant",
+            "content": "可以。"
+          },
+          {
+            "role": "user",
+            "content": "那缓存更新像厨房里的什么？"
+          }
+        ],
+        "final_answer": "缓存更新好比厨房里把快过期的食材或变质的调料撤下，换入新鲜原料。\n\n这并非单纯增加库存，而是为了维持“可用食材”清单的准确性。\n\n若不及时替换，旧内容会误导烹饪（如用错调料导致菜品失败），甚至引发食品安全风险（如食用变质食物）。\n\n替换的核心在于消除“未知项”和“边界擦除”，确保当前状态画像（φ）真实反映可用资源。\n\n目前缺少可核验证据，不能确认“在厨房场景中，这意味着必须依据最新检查（如保质期标签）果断更新，而非依赖模糊记忆”。\n\n任何关于“无需更新”的假设都需被证伪，因为环境（食材新鲜度）时刻在变。\n\n这是工程建议，不是生产放行；上线前还需测试、监控、回滚演练和负责人审批。"
+      }
+    ]
+  },
+  "review_payload_sha256": "5d166714a730735d3a61c455f0035fddb217ee68b1e2eb4c61ca38bd79728d28",
+  "privacy": {
+    "synthetic_only": true,
+    "contains_private_data": false,
+    "contains_user_documents": false,
+    "contains_participant_content": false,
+    "contains_secrets": false,
+    "contains_local_paths": false,
+    "contains_candidate_rules": false,
+    "contains_hidden_labels": false,
+    "training_eligible": false
+  },
+  "budget": {
+    "currency": "USD",
+    "maximum_api_calls": 1,
+    "reserved_usd": 4.0,
+    "reserved_total_month_usd": 32.0,
+    "monthly_limit_usd": 32.0,
+    "base_monthly_limit_usd": 20.0,
+    "prior_user_approved_extensions_usd": 8.0,
+    "user_approved_additional_usd": 4.0,
+    "authorization_scope": "synthetic_open_context_review_only"
+  },
+  "release_boundary": {
+    "human_validation_claimed": false,
+    "open_domain_generalization_claimed": false,
+    "production_readiness_claimed": false,
+    "public_service_allowed": false,
+    "professional_authority_allowed": false,
+    "rule_replacement_allowed": false,
+    "external_release_authority": false
+  },
+  "authorized_at": "2026-07-16T02:28:58.150313+00:00",
+  "source_prepared_package": "runtime/v0_275_external_open_context_review_package.json"
+}
