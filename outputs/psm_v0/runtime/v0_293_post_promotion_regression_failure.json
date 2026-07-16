@@ -1,0 +1,10 @@
+{
+  "schema_version": "psm_v0_293_post_promotion_regression_failure_v1",
+  "version": "PSM_V0.293",
+  "retained": true,
+  "failed_test": "test_project_results_come_from_provider_selection",
+  "failure": "The V0.293 project-results answer omitted the selected local model from structured project context.",
+  "concurrency_gate_affected": false,
+  "repair": "Restore context.selected_model in the V0.293 results answer and rerun the full regression before finalizing artifacts.",
+  "external_release_authority": false
+}

@@ -1,0 +1,49 @@
+{
+  "schema_version": "psm_v0_293_backpressure_browser_regression_v1",
+  "version": "PSM_V0.293-candidate",
+  "base_url": "http://127.0.0.1:8765",
+  "passed": true,
+  "synthetic_only": true,
+  "queue_enabled": false,
+  "network_token_streaming_claimed": false,
+  "browser_chat_persisted": false,
+  "human_feedback_collected": false,
+  "external_release_authority": false,
+  "desktop": {
+    "capacityUiMs": 231,
+    "saturated": {
+      "promptValue": "请为一个新的本地资料项目拟定名称、架构和执行阶段。",
+      "feedback": "目前同時處理的回答已滿。你的問題已保留，請稍後重試。",
+      "retryVisible": true,
+      "runDisabled": false,
+      "userMessages": 1,
+      "assistantMessages": 0
+    },
+    "recovered": {
+      "answer": "nonempty",
+      "userMessages": 1,
+      "assistantMessages": 1,
+      "feedbackHidden": true,
+      "scrollWidth": 1440,
+      "innerWidth": 1440
+    },
+    "expectedCapacityConsoleEvents": 1,
+    "unexpectedConsoleErrors": 0
+  },
+  "mobile": {
+    "scrollWidth": 390,
+    "innerWidth": 390,
+    "runVisible": true,
+    "horizontalOverflow": false,
+    "consoleErrors": 0
+  },
+  "checks": {
+    "capacity_message_visible_under_one_second": true,
+    "rejected_prompt_preserved": true,
+    "rejected_candidate_not_displayed": true,
+    "retry_after_capacity_completes_single_turn": true,
+    "mobile_no_overflow": true,
+    "expected_capacity_console_event_classified": true,
+    "unexpected_console_errors_zero": true
+  }
+}

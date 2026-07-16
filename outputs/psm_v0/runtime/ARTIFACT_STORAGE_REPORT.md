@@ -1,10 +1,10 @@
 # PSM Artifact Storage Report
 
-- Generated at: `2026-07-16T11:03:07.473816+00:00`
+- Generated at: `2026-07-16T11:15:06.154008+00:00`
 - Read-only scan: `true`
-- Files: 27461
+- Files: 27474
 - Total size: 6.037 GiB
-- Metadata digest: `77be356b8f320d929a32a4de8bad5de7a9c60386ffef586fb87dba7b76164286`
+- Metadata digest: `6da135ad689b9e240bff416ed369ce7dea8e4df1aa40224c6d69003eca70a255`
 - Content hashing: disabled to avoid rereading the multi-gigabyte evidence store.
 - Deletion or movement performed: none.
 
@@ -20,8 +20,8 @@
 | `candidate_external_reaudit_out` | `generated_evidence` | 330 | 0.104 GiB |
 | `shadow_out` | `generated_evidence` | 432 | 0.065 GiB |
 | `case_packs` | `public_source_or_runtime` | 347 | 0.017 GiB |
-| `project_status_out` | `generated_evidence` | 495 | 0.017 GiB |
-| `runtime` | `public_source_or_runtime` | 451 | 0.013 GiB |
+| `project_status_out` | `generated_evidence` | 496 | 0.017 GiB |
+| `runtime` | `public_source_or_runtime` | 462 | 0.014 GiB |
 | `state_encoder_out` | `generated_evidence` | 60 | 0.011 GiB |
 | `taxonomy_out` | `generated_evidence` | 216 | 0.007 GiB |
 | `taxonomy_external_out` | `generated_evidence` | 222 | 0.004 GiB |
@@ -37,7 +37,7 @@
 | `release_out` | `generated_evidence` | 206 | 0.001 GiB |
 | `status_history` | `local_archive` | 6 | 0.001 GiB |
 | `expansion_out` | `generated_evidence` | 206 | 0.001 GiB |
-| `benchmarks` | `public_source_or_runtime` | 46 | 0.000 GiB |
+| `benchmarks` | `public_source_or_runtime` | 47 | 0.000 GiB |
 | `regression_out` | `generated_evidence` | 342 | 0.000 GiB |
 | `fixtures_out` | `generated_evidence` | 140 | 0.000 GiB |
 | `regression_external_out` | `generated_evidence` | 222 | 0.000 GiB |

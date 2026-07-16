@@ -96,6 +96,7 @@ CHAT_CANCEL_LOCK = threading.Lock()
 CHAT_CANCEL_EVENTS: dict[str, dict] = {}
 CHAT_CANCEL_MAX_ENTRIES = 128
 CHAT_CANCEL_TTL_SECONDS = 300
+CHAT_CONCURRENCY_LIMIT = 4
 CHAT_REQUEST_PATTERN = re.compile(r"^[A-Za-z0-9_-]{16,80}$")
 SERVER_INSTANCE_ID = secrets.token_urlsafe(16)
 CLIENT_CONTINUITY_EVENTS = {"active", "reset", "reload"}
@@ -120,9 +121,18 @@ class ChatCancelled(Exception):
 
 
 class ChatRequestError(ValueError):
-    def __init__(self, message: str, status: int) -> None:
+    def __init__(
+        self,
+        message: str,
+        status: int,
+        code: str,
+        *,
+        retry_after_seconds: int | None = None,
+    ) -> None:
         super().__init__(message)
         self.status = status
+        self.code = code
+        self.retry_after_seconds = retry_after_seconds
 
 
 def prune_chat_cancel_events(now: float) -> None:
@@ -138,13 +148,29 @@ def prune_chat_cancel_events(now: float) -> None:
 
 def register_chat_request(request_id: str) -> threading.Event:
     if not CHAT_REQUEST_PATTERN.fullmatch(request_id):
-        raise ChatRequestError("invalid chat request_id", 400)
+        raise ChatRequestError("invalid chat request_id", 400, "invalid_request_id")
     with CHAT_CANCEL_LOCK:
         prune_chat_cancel_events(time.monotonic())
         if request_id in CHAT_CANCEL_EVENTS:
-            raise ChatRequestError("duplicate active chat request_id", 409)
+            raise ChatRequestError(
+                "duplicate active chat request_id",
+                409,
+                "duplicate_request_id",
+            )
+        if len(CHAT_CANCEL_EVENTS) >= CHAT_CONCURRENCY_LIMIT:
+            raise ChatRequestError(
+                "active chat capacity reached",
+                503,
+                "chat_capacity_reached",
+                retry_after_seconds=1,
+            )
         if len(CHAT_CANCEL_EVENTS) >= CHAT_CANCEL_MAX_ENTRIES:
-            raise ChatRequestError("chat cancellation registry is at capacity", 503)
+            raise ChatRequestError(
+                "chat cancellation registry is at capacity",
+                503,
+                "chat_registry_capacity_reached",
+                retry_after_seconds=1,
+            )
         event = threading.Event()
         CHAT_CANCEL_EVENTS[request_id] = {
             "event": event,
@@ -155,7 +181,7 @@ def register_chat_request(request_id: str) -> threading.Event:
 
 def cancel_chat_request(request_id: str) -> dict:
     if not CHAT_REQUEST_PATTERN.fullmatch(request_id):
-        raise ChatRequestError("invalid chat request_id", 400)
+        raise ChatRequestError("invalid chat request_id", 400, "invalid_request_id")
     with CHAT_CANCEL_LOCK:
         prune_chat_cancel_events(time.monotonic())
         entry = CHAT_CANCEL_EVENTS.get(request_id)
@@ -166,6 +192,10 @@ def cancel_chat_request(request_id: str) -> dict:
             "accepted": True,
             "active": entry is not None,
         }
+
+
+def server_chat_request_id() -> str:
+    return f"server_{secrets.token_urlsafe(24)}"
 
 
 def unregister_chat_request(
@@ -270,8 +300,8 @@ class Handler(BaseHTTPRequestHandler):
                 return
             scenario = str(payload.get("scenario") or "review")
             if parsed.path == "/api/chat":
-                request_id = str(payload.get("request_id") or "")
-                cancel_event = register_chat_request(request_id) if request_id else None
+                request_id = str(payload.get("request_id") or "") or server_chat_request_id()
+                cancel_event = register_chat_request(request_id)
                 messages = payload.get("messages") if isinstance(payload.get("messages"), list) else []
                 previous_graph = (
                     payload.get("task_state_graph")
@@ -299,8 +329,7 @@ class Handler(BaseHTTPRequestHandler):
                     raise_if_chat_cancelled(cancel_event, request_id)
                     self.write_json(result, no_store=True)
                 finally:
-                    if request_id:
-                        unregister_chat_request(request_id, cancel_event)
+                    unregister_chat_request(request_id, cancel_event)
                 return
             text = str(payload.get("text") or "").strip()
             if not text:
@@ -313,7 +342,10 @@ class Handler(BaseHTTPRequestHandler):
                 no_store=True,
             )
         except ChatRequestError as exc:
-            self.write_json({"error": str(exc)}, status=exc.status, no_store=True)
+            error_payload = {"error": exc.code, "message": str(exc)}
+            if exc.retry_after_seconds is not None:
+                error_payload["retry_after_seconds"] = exc.retry_after_seconds
+            self.write_json(error_payload, status=exc.status, no_store=True)
         except (EnrollmentError, FileNotFoundError) as exc:
             self.write_json({"error": str(exc), "trial_active": False}, status=409, no_store=True)
         except Exception as exc:  # pragma: no cover - local demo should surface errors.
@@ -1889,6 +1921,18 @@ def roadmap_answer(context: dict) -> str:
 
 
 def project_results_answer(context: dict) -> str:
+    if context["current_version"] == "PSM V0.293":
+        return (
+            "目前已完成到 PSM V0.293。服务端最多接受 4 个同时在途聊天，不建立隐式队列；"
+            "4 个主机/Docker 并发波次中的第 5 个请求都快速返回 `503 chat_capacity_reached`，"
+            "重複 request_id 都返回 `409 duplicate_request_id`，没有驱逐既有任务。\n\n"
+            "共 16 个在途请求全部可取消并返回 499。主机/Docker 最慢容量拒绝为 1.14/32.62 毫秒，"
+            "最慢四路取消风暴为 31.61/59.7 毫秒；重复取消幂等，容量随后恢复。"
+            "浏览器在 231 毫秒内显示可重试的容量提示，释放容量后仍保持一问一答；252 项回归通过。\n\n"
+            "登记表仍不保存 prompt、answer、session_id 或私人资料，外部发布保持关闭。"
+            f"当前本地聊天模型是 `{context['selected_model']}`。"
+            f"下一阶段是 {context['next_version']}：{context['next_objective']}"
+        )
     if context["current_version"] == "PSM V0.292":
         return (
             "目前已完成到 PSM V0.292。主机与 Docker 各完成 3 次真实服务端取消，6/6 都返回"
@@ -2902,6 +2946,8 @@ def load_status_summary() -> dict:
         "persistent_conversation_memory_enabled": False,
         "selected_chat_model": selected_chat_model(),
         "chat_timeout_seconds": selected_chat_timeout_seconds(),
+        "chat_concurrency_limit": CHAT_CONCURRENCY_LIMIT,
+        "chat_queue_enabled": False,
         "core_cases": status["core_metrics"]["state_records"],
         "full_external_cases": full.get("holdout_cases"),
         "full_gated_risk": full.get("required_gated_psm_unsafe_or_risky"),

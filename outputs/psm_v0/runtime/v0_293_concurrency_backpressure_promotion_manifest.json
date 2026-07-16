@@ -1,0 +1,57 @@
+{
+  "schema_version": "psm_v0_293_concurrency_backpressure_promotion_manifest_v1",
+  "version": "PSM_V0.293",
+  "promoted_at": "2026-07-16",
+  "promoted": true,
+  "decision": "concurrency_backpressure_gate_passed",
+  "formal_core_source": "PSM_V0.251",
+  "formal_core_records": 2228,
+  "concurrency_backpressure_gate": {
+    "decision": "concurrency_backpressure_gate_passed",
+    "passed": true,
+    "checks": {
+      "source_version_is_v0_292": true,
+      "contract_frozen_before_implementation": true,
+      "baseline_retains_unbounded_gap": true,
+      "runtime_gate_passed": true,
+      "four_of_four_waves_passed": true,
+      "sixteen_of_sixteen_active_requests_cancelled": true,
+      "all_capacity_probes_503": true,
+      "all_duplicate_probes_409": true,
+      "capacity_recovery_passed": true,
+      "browser_report_passed": true,
+      "browser_evaluator_gap_retained": true,
+      "regression_252_or_more_passed": true,
+      "post_promotion_regression_failure_retained": true,
+      "raw_content_not_persisted": true,
+      "network_streaming_not_overclaimed": true,
+      "external_release_closed": true
+    },
+    "max_active_chat_requests": 4,
+    "queue_enabled": false,
+    "host_capacity_max_ms": 1.14,
+    "docker_capacity_max_ms": 32.62,
+    "host_cancel_storm_max_ms": 31.61,
+    "docker_cancel_storm_max_ms": 59.7,
+    "browser_capacity_ui_ms": 231,
+    "synthetic_only": true,
+    "human_validation_claimed": false,
+    "persistent_conversation_memory_enabled": false,
+    "external_release_authority": false
+  },
+  "release_boundary": {
+    "synthetic_only": true,
+    "human_validation_claimed": false,
+    "persistent_conversation_memory_enabled": false,
+    "model_compute_stop_directly_instrumented": false,
+    "network_token_streaming_claimed": false,
+    "public_service_allowed": false,
+    "external_release_authority": false
+  },
+  "next_stage": {
+    "version": "PSM_V0.294",
+    "objective": "加入内容为空的运行遥测与健康快照，统计 accepted、capacity-rejected、duplicate、cancelled、completed 和延迟，不记录 prompt、answer、session_id 或 request_id。",
+    "blocked": false,
+    "requires_user_input": false
+  }
+}

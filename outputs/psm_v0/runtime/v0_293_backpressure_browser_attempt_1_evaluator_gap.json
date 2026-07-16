@@ -1,0 +1,10 @@
+{
+  "schema_version": "psm_v0_293_backpressure_browser_attempt_1_evaluator_gap_v1",
+  "version": "PSM_V0.293-candidate",
+  "retained": true,
+  "product_failure": false,
+  "failed_assumption": "A protocol-required HTTP 503 capacity response would produce zero Chromium resource console events.",
+  "observed": "Chromium emitted one Failed to load resource event for the expected 503 after the UI correctly handled the structured response.",
+  "repair": "Classify the expected 503 resource event separately and require zero unexpected console errors.",
+  "external_release_authority": false
+}

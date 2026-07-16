@@ -644,3 +644,21 @@ regression-v292:
 
 promote-v292:
 	$(PYTHON) scripts/promote_v0_292_server_cancel.py
+
+.PHONY: build-v293 concurrency-v293-eval browser-v293-backpressure regression-v293 promote-v293
+
+build-v293:
+	$(PYTHON) scripts/build_v0_293_concurrency_contract.py
+
+concurrency-v293-eval:
+	PYTHONPATH=$(PSM_ROOT) $(PYTHON) scripts/evaluate_v0_293_concurrency_backpressure.py
+
+browser-v293-backpressure:
+	PSM_BASE_URL=$${PSM_BASE_URL:-http://127.0.0.1:8765} \
+	node scripts/browser_regression_v293_backpressure.cjs
+
+regression-v293:
+	PYTHONPATH=$(PSM_ROOT) $(PYTHON) scripts/run_v0_293_regression.py
+
+promote-v293:
+	$(PYTHON) scripts/promote_v0_293_concurrency_backpressure.py

@@ -43,6 +43,8 @@ class ProductFrontendContractTests(unittest.TestCase):
         self.assertIn("request_id: requestId", self.javascript)
         self.assertIn("serverCancelAcknowledged", self.javascript)
         self.assertIn("state.lastServerCancel", self.javascript)
+        self.assertIn('error.code === "chat_capacity_reached"', self.javascript)
+        self.assertIn("目前同時處理的回答已滿", self.javascript)
         self.assertIn("retryLastTurn", self.javascript)
         self.assertIn("discardUnansweredFailedTurn", self.javascript)
         self.assertIn("pushAssistantProgressively", self.javascript)

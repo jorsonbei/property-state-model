@@ -1,0 +1,19 @@
+{
+  "schema_version": "psm_v0_293_concurrency_backpressure_gate_v1",
+  "decision": "concurrency_backpressure_gate_passed",
+  "passed": true,
+  "checks": {
+    "contract_frozen": true,
+    "host_passed": true,
+    "docker_passed": true,
+    "four_waves_passed": true,
+    "sixteen_active_requests_cancelled": true,
+    "capacity_probe_content_not_persisted": true,
+    "external_release_closed": true
+  },
+  "host_capacity_max_ms": 1.14,
+  "docker_capacity_max_ms": 32.62,
+  "host_cancel_storm_max_ms": 31.61,
+  "docker_cancel_storm_max_ms": 59.7,
+  "external_release_authority": false
+}

@@ -2,9 +2,9 @@
 
 ## Current Version
 
-`PSM V0.292`
+`PSM V0.293`
 
-V0.292 is promoted. The deterministic 2228-record formal evidence source remains `PSM V0.251`; V0.283-V0.292 add continuity recovery, independent semantic review, runtime/browser parity, latency measurement, and server-cancel evidence without changing that formal core.
+V0.293 is promoted. The deterministic 2228-record formal evidence source remains `PSM V0.251`; V0.283-V0.293 add continuity recovery, independent semantic review, runtime parity, server cancellation, and bounded backpressure without changing that formal core.
 
 ## Latest Results
 
@@ -18,6 +18,7 @@ V0.292 is promoted. The deterministic 2228-record formal evidence source remains
 - V0.290 records deterministic recovery/identity P95 below 38 ms. Normal local-model generation succeeds 6/6 with fallback 0; host P50/P95 is 16.4/16.7 seconds and Docker P50/P95 is 13.4/16.7 seconds.
 - V0.291 passes real-browser staged progress, cancellation, prompt preservation, retry, and single-turn integrity. Observed client cancellation is 37 ms. Server-side inference cancellation and network streaming are explicitly not claimed.
 - V0.292 passes 6/6 active server cancellations across host and Docker. Maximum observed chat-worker stop time is 38.49/276.25 ms; both runtimes complete a normal Ollama retry afterward. Desktop/mobile server acknowledgements, no-partial-answer, single-turn retry, no-overflow, zero-console-error, 249/249 regression, and zero disk-sentinel gates pass.
+- V0.293 passes four host/Docker concurrency waves: 16/16 active requests cancel, every fifth request receives structured 503, every duplicate ID receives 409, repeat cancel is idempotent, and capacity recovers. Maximum capacity response is 1.14/32.62 ms; maximum four-way cancel storm is 31.61/59.7 ms. Browser recovery and 252/252 regression pass.
 
 ## Token Authority
 
@@ -38,11 +39,12 @@ V0.292 is promoted. The deterministic 2228-record formal evidence source remains
 - Page reset, reload, server restart, and expiry intentionally discard rolling memory and require restatement for prior-reference questions.
 - Client cancel closes the server-owned Ollama HTTP connection and stops the chat worker. Direct model-kernel/GPU stop instrumentation remains unclaimed.
 - Raw Ollama chunks stay server-buffered until complete-answer review; network token streaming is not enabled.
+- Active chat limit: four. Queue: disabled. Capacity overflow never evicts an in-flight request.
 - Human validation, public service, production readiness, rule replacement, professional authority, and external release authority: false.
 
 ## Recovery Artifacts
 
-- Machine status: `project_status_out/psm_v0.292_project_status.json`.
+- Machine status: `project_status_out/psm_v0.293_project_status.json`.
 - Public runtime snapshot: `runtime/current_runtime_snapshot.json`.
 - V0.283 restart recovery: `runtime/v0_283_restart_recovery_gate.json`, `runtime/v0_283_controlled_restart_boundary.json`, `runtime/v0_283_restart_recovery_browser_regression/report.json`.
 - V0.284 external review: `runtime/v0_284_openai_external_restart_recovery_judge.json`, `runtime/v0_284_external_restart_recovery_gate.json`.
@@ -54,9 +56,10 @@ V0.292 is promoted. The deterministic 2228-record formal evidence source remains
 - V0.290 latency: `benchmarks/v0_290_latency_budget_contract.json`, `runtime/v0_290_latency_budget_report.json`.
 - V0.291 cancel/retry: `runtime/v0_291_cancel_retry_browser_regression/report.json`, `runtime/v0_291_cancel_retry_checkpoint.json`.
 - V0.292 server cancel: `benchmarks/v0_292_server_cancel_contract.json`, `runtime/v0_292_server_cancel_runtime_report.json`, `runtime/v0_292_server_cancel_browser_regression/report.json`.
+- V0.293 backpressure: `benchmarks/v0_293_concurrency_backpressure_contract.json`, `runtime/v0_293_concurrency_backpressure_report.json`, `runtime/v0_293_backpressure_browser_regression/report.json`.
 
 ## Next Stage
 
-`PSM V0.293` freezes and validates concurrency capacity, backpressure, duplicate request IDs, cancellation storms, and disconnect races. It requires no user input and grants no external release authority.
+`PSM V0.294` adds content-free operational telemetry for accepted, rejected, duplicate, cancelled, and completed requests plus latency buckets. It requires no user input and grants no external release authority.
 
 Version history remains in independent snapshots under `status_history/`; it is not embedded recursively here.

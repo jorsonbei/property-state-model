@@ -173,7 +173,12 @@ async function runChat(options = {}) {
       signal: controller.signal
     });
     const payload = await response.json().catch(() => ({}));
-    if (!response.ok) throw new Error(payload.error || `chat failed (${response.status})`);
+    if (!response.ok) {
+      const error = new Error(payload.message || payload.error || `chat failed (${response.status})`);
+      error.code = payload.error || "chat_failed";
+      error.retryAfterSeconds = payload.retry_after_seconds || null;
+      throw error;
+    }
     if (state.activeRequest?.id !== requestId) return;
 
     request.canCancel = false;
@@ -193,7 +198,8 @@ async function runChat(options = {}) {
     await loadStatus();
   } catch (error) {
     if (state.activeRequest?.id !== requestId) return;
-    const reason = request.reason || (error.name === "AbortError" ? "cancelled" : "error");
+    const reason = request.reason
+      || (error.name === "AbortError" ? "cancelled" : error.code === "chat_capacity_reached" ? "capacity" : "error");
     state.lastFailed = { text, userMessageId, reason };
     $("prompt").value = text;
     autoResizePrompt();
@@ -201,6 +207,8 @@ async function runChat(options = {}) {
       showRecovery("回答超過 70 秒，已停止等待。你的問題已保留，可以重試。", "timeout");
     } else if (reason === "cancelled") {
       showRecovery("已取消這次生成。你的問題已保留，可以重試。", "cancelled");
+    } else if (reason === "capacity") {
+      showRecovery("目前同時處理的回答已滿。你的問題已保留，請稍後重試。", "error");
     } else {
       showRecovery(`本地聊天請求失敗：${String(error.message || error)}。你的問題已保留。`, "error");
     }

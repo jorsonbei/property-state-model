@@ -1,0 +1,10 @@
+{
+  "schema_version": "psm_v0_293_concurrency_backpressure_checkpoint_v1",
+  "current_promoted_version": "PSM_V0.293",
+  "target_promoted": true,
+  "status": "v0_293_promoted_v0_294_content_free_telemetry_open",
+  "promotion_manifest": "runtime/v0_293_concurrency_backpressure_promotion_manifest.json",
+  "requires_user_input": false,
+  "next_action": "build_v0_294_content_free_telemetry_contract",
+  "required_decision": "无。"
+}

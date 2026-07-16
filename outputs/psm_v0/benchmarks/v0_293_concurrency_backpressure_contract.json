@@ -1,0 +1,47 @@
+{
+  "schema_version": "psm_v0_293_concurrency_backpressure_contract_v1",
+  "version": "PSM_V0.293-candidate",
+  "frozen_before_implementation": true,
+  "admission": {
+    "max_active_chat_requests": 4,
+    "queue_enabled": false,
+    "capacity_status": 503,
+    "capacity_error": "chat_capacity_reached",
+    "capacity_retry_after_seconds": 1,
+    "capacity_response_limit_ms": 500,
+    "active_request_eviction_allowed": false,
+    "missing_client_request_id": "server_generated_bounded_id"
+  },
+  "identity": {
+    "duplicate_active_request_status": 409,
+    "duplicate_active_request_error": "duplicate_request_id",
+    "invalid_request_status": 400,
+    "invalid_request_error": "invalid_request_id",
+    "request_id_contains_prompt_or_private_data": false
+  },
+  "cancel_storm": {
+    "all_four_active_requests_cancellable": true,
+    "cancel_endpoint_idempotent_for_unknown_or_completed_id": true,
+    "cancelled_chat_status": 499,
+    "partial_answer_released": false,
+    "cancel_to_worker_stop_limit_ms": 2000,
+    "registry_empty_after_cleanup": true
+  },
+  "runtime": {
+    "host_required": true,
+    "docker_required": true,
+    "waves_per_runtime": 2,
+    "active_requests_per_wave": 4,
+    "capacity_probes_per_wave": 1,
+    "duplicate_probes_per_wave": 1
+  },
+  "release_boundary": {
+    "synthetic_only": true,
+    "human_validation_claimed": false,
+    "persistent_conversation_memory_enabled": false,
+    "model_compute_stop_directly_instrumented": false,
+    "network_token_streaming_claimed": false,
+    "public_service_allowed": false,
+    "external_release_authority": false
+  }
+}

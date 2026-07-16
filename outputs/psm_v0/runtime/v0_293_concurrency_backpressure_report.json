@@ -1,0 +1,499 @@
+{
+  "schema_version": "psm_v0_293_concurrency_backpressure_report_v1",
+  "version": "PSM_V0.293-candidate",
+  "contract": "benchmarks/v0_293_concurrency_backpressure_contract.json",
+  "runtimes": [
+    {
+      "runtime_id": "host",
+      "base_url": "http://127.0.0.1:8765",
+      "version": "PSM V0.292",
+      "waves": [
+        {
+          "wave": 1,
+          "request_ids": [
+            "chat_v293_host_1_0_c9a9807b7d4146d29e8832a075b9c38b",
+            "chat_v293_host_1_1_b1fe209d4ff442558e7d3a2b6ae7f885",
+            "chat_v293_host_1_2_727ae4ac6aef44b49d3d4d1c04dfc396",
+            "chat_v293_host_1_3_9f8edd7eb83146379131b5cf7e90e044"
+          ],
+          "duplicate_probe": {
+            "status": 409,
+            "body": {
+              "error": "duplicate_request_id",
+              "message": "duplicate active chat request_id"
+            },
+            "duration_ms": 3.0
+          },
+          "capacity_probe": {
+            "status": 503,
+            "body": {
+              "error": "chat_capacity_reached",
+              "message": "active chat capacity reached",
+              "retry_after_seconds": 1
+            },
+            "duration_ms": 1.14
+          },
+          "cancel_results": [
+            {
+              "status": 200,
+              "body": {
+                "request_id": "chat_v293_host_1_0_c9a9807b7d4146d29e8832a075b9c38b",
+                "accepted": true,
+                "active": true
+              }
+            },
+            {
+              "status": 200,
+              "body": {
+                "request_id": "chat_v293_host_1_1_b1fe209d4ff442558e7d3a2b6ae7f885",
+                "accepted": true,
+                "active": true
+              }
+            },
+            {
+              "status": 200,
+              "body": {
+                "request_id": "chat_v293_host_1_2_727ae4ac6aef44b49d3d4d1c04dfc396",
+                "accepted": true,
+                "active": true
+              }
+            },
+            {
+              "status": 200,
+              "body": {
+                "request_id": "chat_v293_host_1_3_9f8edd7eb83146379131b5cf7e90e044",
+                "accepted": true,
+                "active": true
+              }
+            }
+          ],
+          "chat_results": [
+            {
+              "status": 499,
+              "body": {
+                "error": "chat_cancelled",
+                "request_id": "chat_v293_host_1_0_c9a9807b7d4146d29e8832a075b9c38b"
+              },
+              "duration_ms": 1018.58
+            },
+            {
+              "status": 499,
+              "body": {
+                "error": "chat_cancelled",
+                "request_id": "chat_v293_host_1_1_b1fe209d4ff442558e7d3a2b6ae7f885"
+              },
+              "duration_ms": 1036.17
+            },
+            {
+              "status": 499,
+              "body": {
+                "error": "chat_cancelled",
+                "request_id": "chat_v293_host_1_2_727ae4ac6aef44b49d3d4d1c04dfc396"
+              },
+              "duration_ms": 1030.24
+            },
+            {
+              "status": 499,
+              "body": {
+                "error": "chat_cancelled",
+                "request_id": "chat_v293_host_1_3_9f8edd7eb83146379131b5cf7e90e044"
+              },
+              "duration_ms": 1037.56
+            }
+          ],
+          "cancel_storm_stop_ms": 31.61,
+          "recovery_status": 200,
+          "checks": {
+            "duplicate_rejected_409": true,
+            "duplicate_fast": true,
+            "capacity_rejected_503": true,
+            "capacity_retry_hint_exact": true,
+            "capacity_fast": true,
+            "all_active_cancels_acknowledged": true,
+            "all_workers_stopped": true,
+            "all_chat_responses_cancelled": true,
+            "cancel_storm_within_limit": true,
+            "repeat_cancel_idempotent": true,
+            "capacity_recovers": true
+          },
+          "passed": true
+        },
+        {
+          "wave": 2,
+          "request_ids": [
+            "chat_v293_host_2_0_8c0fbe0017ab4e6fbbbaa5ffaab01995",
+            "chat_v293_host_2_1_943f2d3cd114438c95cf84319284c22d",
+            "chat_v293_host_2_2_187d534e540249f2a12853eedbefea00",
+            "chat_v293_host_2_3_f998160172be46f188c3012778886833"
+          ],
+          "duplicate_probe": {
+            "status": 409,
+            "body": {
+              "error": "duplicate_request_id",
+              "message": "duplicate active chat request_id"
+            },
+            "duration_ms": 3.18
+          },
+          "capacity_probe": {
+            "status": 503,
+            "body": {
+              "error": "chat_capacity_reached",
+              "message": "active chat capacity reached",
+              "retry_after_seconds": 1
+            },
+            "duration_ms": 1.0
+          },
+          "cancel_results": [
+            {
+              "status": 200,
+              "body": {
+                "request_id": "chat_v293_host_2_0_8c0fbe0017ab4e6fbbbaa5ffaab01995",
+                "accepted": true,
+                "active": true
+              }
+            },
+            {
+              "status": 200,
+              "body": {
+                "request_id": "chat_v293_host_2_1_943f2d3cd114438c95cf84319284c22d",
+                "accepted": true,
+                "active": true
+              }
+            },
+            {
+              "status": 200,
+              "body": {
+                "request_id": "chat_v293_host_2_2_187d534e540249f2a12853eedbefea00",
+                "accepted": true,
+                "active": true
+              }
+            },
+            {
+              "status": 200,
+              "body": {
+                "request_id": "chat_v293_host_2_3_f998160172be46f188c3012778886833",
+                "accepted": true,
+                "active": true
+              }
+            }
+          ],
+          "chat_results": [
+            {
+              "status": 499,
+              "body": {
+                "error": "chat_cancelled",
+                "request_id": "chat_v293_host_2_0_8c0fbe0017ab4e6fbbbaa5ffaab01995"
+              },
+              "duration_ms": 1026.26
+            },
+            {
+              "status": 499,
+              "body": {
+                "error": "chat_cancelled",
+                "request_id": "chat_v293_host_2_1_943f2d3cd114438c95cf84319284c22d"
+              },
+              "duration_ms": 1015.2
+            },
+            {
+              "status": 499,
+              "body": {
+                "error": "chat_cancelled",
+                "request_id": "chat_v293_host_2_2_187d534e540249f2a12853eedbefea00"
+              },
+              "duration_ms": 1022.49
+            },
+            {
+              "status": 499,
+              "body": {
+                "error": "chat_cancelled",
+                "request_id": "chat_v293_host_2_3_f998160172be46f188c3012778886833"
+              },
+              "duration_ms": 1025.75
+            }
+          ],
+          "cancel_storm_stop_ms": 16.58,
+          "recovery_status": 200,
+          "checks": {
+            "duplicate_rejected_409": true,
+            "duplicate_fast": true,
+            "capacity_rejected_503": true,
+            "capacity_retry_hint_exact": true,
+            "capacity_fast": true,
+            "all_active_cancels_acknowledged": true,
+            "all_workers_stopped": true,
+            "all_chat_responses_cancelled": true,
+            "cancel_storm_within_limit": true,
+            "repeat_cancel_idempotent": true,
+            "capacity_recovers": true
+          },
+          "passed": true
+        }
+      ],
+      "max_capacity_response_ms": 1.14,
+      "max_cancel_storm_stop_ms": 31.61,
+      "checks": {
+        "status_available": true,
+        "source_version_valid": true,
+        "concurrency_limit_exposed": true,
+        "queue_disabled": true,
+        "all_waves_pass": true,
+        "external_release_closed": true
+      },
+      "passed": true
+    },
+    {
+      "runtime_id": "docker",
+      "base_url": "http://127.0.0.1:8766",
+      "version": "PSM V0.292",
+      "waves": [
+        {
+          "wave": 1,
+          "request_ids": [
+            "chat_v293_docker_1_0_cc8b9eb75c4d4048a4a5d3ac9cb71b4e",
+            "chat_v293_docker_1_1_567d08cbbc994e7a8707546a6702be7a",
+            "chat_v293_docker_1_2_2dd055383048471799a572b1c4f4b489",
+            "chat_v293_docker_1_3_aa1bef525feb4294a7538437338e9ca9"
+          ],
+          "duplicate_probe": {
+            "status": 409,
+            "body": {
+              "error": "duplicate_request_id",
+              "message": "duplicate active chat request_id"
+            },
+            "duration_ms": 135.54
+          },
+          "capacity_probe": {
+            "status": 503,
+            "body": {
+              "error": "chat_capacity_reached",
+              "message": "active chat capacity reached",
+              "retry_after_seconds": 1
+            },
+            "duration_ms": 32.62
+          },
+          "cancel_results": [
+            {
+              "status": 200,
+              "body": {
+                "request_id": "chat_v293_docker_1_0_cc8b9eb75c4d4048a4a5d3ac9cb71b4e",
+                "accepted": true,
+                "active": true
+              }
+            },
+            {
+              "status": 200,
+              "body": {
+                "request_id": "chat_v293_docker_1_1_567d08cbbc994e7a8707546a6702be7a",
+                "accepted": true,
+                "active": true
+              }
+            },
+            {
+              "status": 200,
+              "body": {
+                "request_id": "chat_v293_docker_1_2_2dd055383048471799a572b1c4f4b489",
+                "accepted": true,
+                "active": true
+              }
+            },
+            {
+              "status": 200,
+              "body": {
+                "request_id": "chat_v293_docker_1_3_aa1bef525feb4294a7538437338e9ca9",
+                "accepted": true,
+                "active": true
+              }
+            }
+          ],
+          "chat_results": [
+            {
+              "status": 499,
+              "body": {
+                "error": "chat_cancelled",
+                "request_id": "chat_v293_docker_1_0_cc8b9eb75c4d4048a4a5d3ac9cb71b4e"
+              },
+              "duration_ms": 1228.23
+            },
+            {
+              "status": 499,
+              "body": {
+                "error": "chat_cancelled",
+                "request_id": "chat_v293_docker_1_1_567d08cbbc994e7a8707546a6702be7a"
+              },
+              "duration_ms": 1228.37
+            },
+            {
+              "status": 499,
+              "body": {
+                "error": "chat_cancelled",
+                "request_id": "chat_v293_docker_1_2_2dd055383048471799a572b1c4f4b489"
+              },
+              "duration_ms": 1229.35
+            },
+            {
+              "status": 499,
+              "body": {
+                "error": "chat_cancelled",
+                "request_id": "chat_v293_docker_1_3_aa1bef525feb4294a7538437338e9ca9"
+              },
+              "duration_ms": 1231.33
+            }
+          ],
+          "cancel_storm_stop_ms": 59.7,
+          "recovery_status": 200,
+          "checks": {
+            "duplicate_rejected_409": true,
+            "duplicate_fast": true,
+            "capacity_rejected_503": true,
+            "capacity_retry_hint_exact": true,
+            "capacity_fast": true,
+            "all_active_cancels_acknowledged": true,
+            "all_workers_stopped": true,
+            "all_chat_responses_cancelled": true,
+            "cancel_storm_within_limit": true,
+            "repeat_cancel_idempotent": true,
+            "capacity_recovers": true
+          },
+          "passed": true
+        },
+        {
+          "wave": 2,
+          "request_ids": [
+            "chat_v293_docker_2_0_b48d2c7ad0fa4e41bf7a04c3d066501f",
+            "chat_v293_docker_2_1_d081d9c15624483aa913e9c4a0257c08",
+            "chat_v293_docker_2_2_020811a9b6b84a939d83a7ea2d25d95d",
+            "chat_v293_docker_2_3_c275cab4bf06487d887f834c76fdbfb7"
+          ],
+          "duplicate_probe": {
+            "status": 409,
+            "body": {
+              "error": "duplicate_request_id",
+              "message": "duplicate active chat request_id"
+            },
+            "duration_ms": 475.54
+          },
+          "capacity_probe": {
+            "status": 503,
+            "body": {
+              "error": "chat_capacity_reached",
+              "message": "active chat capacity reached",
+              "retry_after_seconds": 1
+            },
+            "duration_ms": 30.75
+          },
+          "cancel_results": [
+            {
+              "status": 200,
+              "body": {
+                "request_id": "chat_v293_docker_2_0_b48d2c7ad0fa4e41bf7a04c3d066501f",
+                "accepted": true,
+                "active": true
+              }
+            },
+            {
+              "status": 200,
+              "body": {
+                "request_id": "chat_v293_docker_2_1_d081d9c15624483aa913e9c4a0257c08",
+                "accepted": true,
+                "active": true
+              }
+            },
+            {
+              "status": 200,
+              "body": {
+                "request_id": "chat_v293_docker_2_2_020811a9b6b84a939d83a7ea2d25d95d",
+                "accepted": true,
+                "active": true
+              }
+            },
+            {
+              "status": 200,
+              "body": {
+                "request_id": "chat_v293_docker_2_3_c275cab4bf06487d887f834c76fdbfb7",
+                "accepted": true,
+                "active": true
+              }
+            }
+          ],
+          "chat_results": [
+            {
+              "status": 499,
+              "body": {
+                "error": "chat_cancelled",
+                "request_id": "chat_v293_docker_2_0_b48d2c7ad0fa4e41bf7a04c3d066501f"
+              },
+              "duration_ms": 1570.76
+            },
+            {
+              "status": 499,
+              "body": {
+                "error": "chat_cancelled",
+                "request_id": "chat_v293_docker_2_1_d081d9c15624483aa913e9c4a0257c08"
+              },
+              "duration_ms": 1556.09
+            },
+            {
+              "status": 499,
+              "body": {
+                "error": "chat_cancelled",
+                "request_id": "chat_v293_docker_2_2_020811a9b6b84a939d83a7ea2d25d95d"
+              },
+              "duration_ms": 1570.7
+            },
+            {
+              "status": 499,
+              "body": {
+                "error": "chat_cancelled",
+                "request_id": "chat_v293_docker_2_3_c275cab4bf06487d887f834c76fdbfb7"
+              },
+              "duration_ms": 1561.3
+            }
+          ],
+          "cancel_storm_stop_ms": 47.55,
+          "recovery_status": 200,
+          "checks": {
+            "duplicate_rejected_409": true,
+            "duplicate_fast": true,
+            "capacity_rejected_503": true,
+            "capacity_retry_hint_exact": true,
+            "capacity_fast": true,
+            "all_active_cancels_acknowledged": true,
+            "all_workers_stopped": true,
+            "all_chat_responses_cancelled": true,
+            "cancel_storm_within_limit": true,
+            "repeat_cancel_idempotent": true,
+            "capacity_recovers": true
+          },
+          "passed": true
+        }
+      ],
+      "max_capacity_response_ms": 32.62,
+      "max_cancel_storm_stop_ms": 59.7,
+      "checks": {
+        "status_available": true,
+        "source_version_valid": true,
+        "concurrency_limit_exposed": true,
+        "queue_disabled": true,
+        "all_waves_pass": true,
+        "external_release_closed": true
+      },
+      "passed": true
+    }
+  ],
+  "disk_sentinel_hits": [],
+  "checks": {
+    "contract_frozen": true,
+    "host_passed": true,
+    "docker_passed": true,
+    "four_waves_passed": true,
+    "sixteen_active_requests_cancelled": true,
+    "capacity_probe_content_not_persisted": true,
+    "external_release_closed": true
+  },
+  "passed": true,
+  "synthetic_only": true,
+  "human_validation_claimed": false,
+  "persistent_conversation_memory_enabled": false,
+  "network_token_streaming_claimed": false,
+  "external_release_authority": false
+}

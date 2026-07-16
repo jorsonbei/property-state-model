@@ -1,0 +1,17 @@
+{
+  "schema_version": "psm_v0_293_concurrency_backpressure_baseline_v1",
+  "source_version": "PSM_V0.292",
+  "captured_before_implementation": true,
+  "observed": {
+    "server_owned_cancel_available": true,
+    "registry_hard_max_entries": 128,
+    "operational_active_chat_limit": null,
+    "capacity_error_code_frozen": false,
+    "duplicate_error_code_frozen": false,
+    "missing_request_id_participates_in_admission": false,
+    "concurrent_cancel_storm_runtime_evidence": false
+  },
+  "baseline_decision": "single_request_cancel_passed_concurrent_admission_unbounded",
+  "target_contract": "benchmarks/v0_293_concurrency_backpressure_contract.json",
+  "external_release_authority": false
+}
