@@ -1,6 +1,52 @@
 from __future__ import annotations
 
+import hashlib
+import json
 import re
+
+
+TOPIC_SWITCH_MARKERS = (
+    "换个话题",
+    "換個話題",
+    "切换话题",
+    "切換話題",
+    "另一个话题",
+    "另一個話題",
+    "new topic",
+    "改聊",
+    "改談",
+    "下面改用",
+    "接下来不谈",
+    "接下來不談",
+    "这一段到此为止",
+    "這一段到此為止",
+)
+
+
+def build_conversation_state_capsule(conversation: list[dict[str, str]]) -> dict:
+    switch_index = 0
+    for index in range(len(conversation) - 1, -1, -1):
+        item = conversation[index]
+        if item.get("role") == "user" and any(
+            marker in str(item.get("content") or "").casefold()
+            for marker in TOPIC_SWITCH_MARKERS
+        ):
+            switch_index = index
+            break
+    active = conversation[switch_index:]
+    user_statements = [
+        str(item.get("content") or "").strip()[:500]
+        for item in active
+        if item.get("role") == "user" and str(item.get("content") or "").strip()
+    ][-12:]
+    canonical = json.dumps(user_statements, ensure_ascii=False, separators=(",", ":"))
+    return {
+        "user_authoritative": True,
+        "topic_switch_applied": switch_index > 0,
+        "active_user_statements": len(user_statements),
+        "user_statements": user_statements,
+        "sha256": hashlib.sha256(canonical.encode("utf-8")).hexdigest(),
+    }
 
 
 def build_chat_prompt(
@@ -15,9 +61,25 @@ def build_chat_prompt(
     route = result["route"]
     bsigma = result["bsigma_audit"]
     role_labels = {"user": "用户", "assistant": "助手"}
+    state_capsule = build_conversation_state_capsule(conversation)
+    active_start = 0
+    if state_capsule["topic_switch_applied"]:
+        for index in range(len(conversation) - 1, -1, -1):
+            item = conversation[index]
+            if item.get("role") == "user" and any(
+                marker in str(item.get("content") or "").casefold()
+                for marker in TOPIC_SWITCH_MARKERS
+            ):
+                active_start = index
+                break
+    active_conversation = conversation[active_start:]
     recent = "\n".join(
-        f"{role_labels[item['role']]}：{item['content']}" for item in conversation[-8:]
+        f"{role_labels[item['role']]}：{item['content']}" for item in active_conversation[-8:]
     )
+    capsule_text = "\n".join(
+        f"U{index}：{statement}"
+        for index, statement in enumerate(state_capsule["user_statements"], start=1)
+    ) or "无"
     required_judges = ", ".join(route["required_judges"]) or "无强制外部裁判"
     execution = route_execution or {}
     executed_facts = " | ".join(
@@ -44,6 +106,8 @@ def build_chat_prompt(
             "用户要求绝对保证、绝不失败或零风险时，要直接说明无法保证，再提供降低失败概率和验证风险的做法。涉及食物过敏时必须考虑配料标签和交叉接触。",
             "医疗检查准备必须以医院的预约说明为准；未确认已经安排检查时，不要擅自要求停药、禁水或长时间空腹。",
             "多轮问题必须使用前文给出的对象、材料和约束，不要把当前追问当成无上下文的新问题。",
+            "状态胶囊只包含当前话题段的用户原话，权威高于助手历史：按时间顺序理解，用户后来的明确更正覆盖旧值；从任务清单中扣除用户已明确完成的事项；‘照旧’或‘其他不变’继承用户先前给出的格式约束。",
+            "发生明确话题切换后，不得把旧话题的对象、风险或边界带入新话题；只使用状态胶囊中的当前话题段。",
             "回答前重新检查用户问题中的每一个明确要求；有多个问题、限制或输出格式时要逐项覆盖，并在结束前给出具体结论或下一步。",
             "科学解释要沿用用户已给出的正确前提，不要为了流畅改写成相反机制；例如水结冰是形成较疏松的开放晶格，不是晶格被破坏。",
             "如果问题是普通闲聊、写作、解释、计划、代码思路，则直接帮助用户。",
@@ -54,6 +118,9 @@ def build_chat_prompt(
             "",
             "当前用户问题：",
             current,
+            "",
+            "当前话题的用户权威状态胶囊（只用于回答，不要复述标签）：",
+            capsule_text,
             "",
             "内部状态，只用于把握风险，不要原样输出：",
             f"- domain: {packet['domain']}",

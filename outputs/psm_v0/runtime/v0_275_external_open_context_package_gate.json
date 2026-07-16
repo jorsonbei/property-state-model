@@ -1,0 +1,22 @@
+{
+  "schema_version": "psm_v0_275_external_open_context_package_gate_v1",
+  "passed": true,
+  "checks": {
+    "source_v0_274_promoted": true,
+    "source_v0_274_gate_passed": true,
+    "exact_item_count": true,
+    "exact_family_coverage": true,
+    "minimum_eleven_messages_per_item": true,
+    "all_source_rows_passed": true,
+    "payload_hash_locked": true,
+    "privacy_boundary_closed": true,
+    "prohibited_material_absent": true,
+    "external_api_call_disabled": true,
+    "monthly_budget_fully_reserved": true,
+    "participant_content_calls_zero": true,
+    "release_boundary_closed": true
+  },
+  "prohibited_material_found": [],
+  "review_payload_sha256": "5d166714a730735d3a61c455f0035fddb217ee68b1e2eb4c61ca38bd79728d28",
+  "authorization": "not_authorized_monthly_budget_exhausted"
+}

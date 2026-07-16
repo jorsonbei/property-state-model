@@ -1,0 +1,415 @@
+{
+  "schema_version": "psm_v0_274_open_context_generalization_report_v1",
+  "version": "PSM_V0.274-candidate",
+  "contract_sha256": "c88db15f6a62ea4b24a3d9e4ab16887f6067e369621894156bbd4671de7c8b6e",
+  "provenance": {
+    "author": "internal_contract_author",
+    "synthetic_only": true,
+    "created_before_first_run": true,
+    "contains_private_or_participant_data": false
+  },
+  "provider_mode": "local_qwen_generation_with_user_authoritative_state_capsule",
+  "passed": true,
+  "summary": {
+    "cases": 10,
+    "passed": 10,
+    "failed": 0,
+    "stale_state_violations": 0,
+    "capsule_missing": 0,
+    "total_duration_ms": 82498,
+    "families": {
+      "remote_user_fact": {
+        "cases": 2,
+        "passed": 2
+      },
+      "latest_correction": {
+        "cases": 2,
+        "passed": 2
+      },
+      "unresolved_work": {
+        "cases": 2,
+        "passed": 2
+      },
+      "constraint_persistence": {
+        "cases": 2,
+        "passed": 2
+      },
+      "topic_switch_cleanup": {
+        "cases": 2,
+        "passed": 2
+      }
+    }
+  },
+  "rows": [
+    {
+      "case_id": "open_remote_codename",
+      "family": "remote_user_fact",
+      "passed": true,
+      "checks": {
+        "required_markers_present": true,
+        "stale_or_forbidden_state_absent": true,
+        "maximum_line_constraint_met": true,
+        "exact_line_constraint_met": true,
+        "generation_completed": true,
+        "local_generation_or_state_resolution": true,
+        "user_authoritative_state_capsule_present": true,
+        "state_capsule_has_remote_history": true,
+        "quality_audit_passed": true,
+        "sigma_plus_delivery_passed": true,
+        "long_history_retained": true,
+        "assistant_history_excluded_from_state_audit": true,
+        "release_boundary_closed": true
+      },
+      "answer": "根据当前对话记录，你最早给这个方案取的称呼是“榆叶”。这是你在后续指令中明确指出的新名称，但并未提及该名称之前的旧称。若需确认更早的命名，请提供相关背景或文档。",
+      "missing_required_markers": [],
+      "forbidden_found": [],
+      "generation": {
+        "status": "success",
+        "provider": "ollama",
+        "model": "qwen3.5:9b",
+        "error": null,
+        "state_capsule": {
+          "user_authoritative": true,
+          "topic_switch_applied": false,
+          "active_user_statements": 6,
+          "sha256": "920a45a6e74954982b32de0e63ac8dde19f2db759c70b2a5f32d4f07dd5f49b0"
+        }
+      },
+      "history_messages": 11,
+      "duration_ms": 13161
+    },
+    {
+      "case_id": "open_remote_room",
+      "family": "remote_user_fact",
+      "passed": true,
+      "checks": {
+        "required_markers_present": true,
+        "stale_or_forbidden_state_absent": true,
+        "maximum_line_constraint_met": true,
+        "exact_line_constraint_met": true,
+        "generation_completed": true,
+        "local_generation_or_state_resolution": true,
+        "user_authoritative_state_capsule_present": true,
+        "state_capsule_has_remote_history": true,
+        "quality_audit_passed": true,
+        "sigma_plus_delivery_passed": true,
+        "long_history_retained": true,
+        "assistant_history_excluded_from_state_audit": true,
+        "release_boundary_closed": true
+      },
+      "answer": "根据现有记录，活动场地已固定在青松厅举行。此前关于海报暂不印刷、主持人名单稍后提供、座位按到场顺序安排等事项均已确认。若需进一步确认场地细节或调整，请随时告知。",
+      "missing_required_markers": [],
+      "forbidden_found": [],
+      "generation": {
+        "status": "success",
+        "provider": "ollama",
+        "model": "qwen3.5:9b",
+        "error": null,
+        "state_capsule": {
+          "user_authoritative": true,
+          "topic_switch_applied": false,
+          "active_user_statements": 6,
+          "sha256": "a5e4a24af11157704b9bd4f80a8a5fbd5bca3284bb176312c8a6cc6f23369e9a"
+        }
+      },
+      "history_messages": 11,
+      "duration_ms": 15195
+    },
+    {
+      "case_id": "open_latest_export_name",
+      "family": "latest_correction",
+      "passed": true,
+      "checks": {
+        "required_markers_present": true,
+        "stale_or_forbidden_state_absent": true,
+        "maximum_line_constraint_met": true,
+        "exact_line_constraint_met": true,
+        "generation_completed": true,
+        "local_generation_or_state_resolution": true,
+        "user_authoritative_state_capsule_present": true,
+        "state_capsule_has_remote_history": true,
+        "quality_audit_passed": true,
+        "sigma_plus_delivery_passed": true,
+        "long_history_retained": true,
+        "assistant_history_excluded_from_state_audit": true,
+        "release_boundary_closed": true
+      },
+      "answer": "final-pack.zip",
+      "missing_required_markers": [],
+      "forbidden_found": [],
+      "generation": {
+        "status": "success",
+        "provider": "ollama",
+        "model": "qwen3.5:9b",
+        "error": null,
+        "state_capsule": {
+          "user_authoritative": true,
+          "topic_switch_applied": false,
+          "active_user_statements": 6,
+          "sha256": "444df03a1d98aeed5db621af8c9deacb84bcec4465abed3cf6d7ac23e6c449dc"
+        }
+      },
+      "history_messages": 11,
+      "duration_ms": 8931
+    },
+    {
+      "case_id": "open_latest_review_day",
+      "family": "latest_correction",
+      "passed": true,
+      "checks": {
+        "required_markers_present": true,
+        "stale_or_forbidden_state_absent": true,
+        "maximum_line_constraint_met": true,
+        "exact_line_constraint_met": true,
+        "generation_completed": true,
+        "local_generation_or_state_resolution": true,
+        "user_authoritative_state_capsule_present": true,
+        "state_capsule_has_remote_history": true,
+        "quality_audit_passed": true,
+        "sigma_plus_delivery_passed": true,
+        "long_history_retained": true,
+        "assistant_history_excluded_from_state_audit": true,
+        "release_boundary_closed": true
+      },
+      "answer": "星期四",
+      "missing_required_markers": [],
+      "forbidden_found": [],
+      "generation": {
+        "status": "success",
+        "provider": "deterministic",
+        "model": null,
+        "error": null,
+        "state_capsule": {
+          "user_authoritative": true,
+          "topic_switch_applied": false,
+          "active_user_statements": 6,
+          "sha256": "68fdeb2e52fabd46a1f67fb7ce85f7060ea8eb14f773c121aead39c0a5b067df"
+        }
+      },
+      "history_messages": 11,
+      "duration_ms": 159
+    },
+    {
+      "case_id": "open_unresolved_design",
+      "family": "unresolved_work",
+      "passed": true,
+      "checks": {
+        "required_markers_present": true,
+        "stale_or_forbidden_state_absent": true,
+        "maximum_line_constraint_met": true,
+        "exact_line_constraint_met": true,
+        "generation_completed": true,
+        "local_generation_or_state_resolution": true,
+        "user_authoritative_state_capsule_present": true,
+        "state_capsule_has_remote_history": true,
+        "quality_audit_passed": true,
+        "sigma_plus_delivery_passed": true,
+        "long_history_retained": true,
+        "assistant_history_excluded_from_state_audit": true,
+        "release_boundary_closed": true
+      },
+      "answer": "补部署说明",
+      "missing_required_markers": [],
+      "forbidden_found": [],
+      "generation": {
+        "status": "success",
+        "provider": "deterministic",
+        "model": null,
+        "error": null,
+        "state_capsule": {
+          "user_authoritative": true,
+          "topic_switch_applied": false,
+          "active_user_statements": 6,
+          "sha256": "aeb5d468345fa1c90dbf37f33079d541bb8bf4cb3c028ab1358ad3b0d7d8d01b"
+        }
+      },
+      "history_messages": 11,
+      "duration_ms": 35
+    },
+    {
+      "case_id": "open_unresolved_purchase",
+      "family": "unresolved_work",
+      "passed": true,
+      "checks": {
+        "required_markers_present": true,
+        "stale_or_forbidden_state_absent": true,
+        "maximum_line_constraint_met": true,
+        "exact_line_constraint_met": true,
+        "generation_completed": true,
+        "local_generation_or_state_resolution": true,
+        "user_authoritative_state_capsule_present": true,
+        "state_capsule_has_remote_history": true,
+        "quality_audit_passed": true,
+        "sigma_plus_delivery_passed": true,
+        "long_history_retained": true,
+        "assistant_history_excluded_from_state_audit": true,
+        "release_boundary_closed": true
+      },
+      "answer": "燕麦",
+      "missing_required_markers": [],
+      "forbidden_found": [],
+      "generation": {
+        "status": "success",
+        "provider": "deterministic",
+        "model": null,
+        "error": null,
+        "state_capsule": {
+          "user_authoritative": true,
+          "topic_switch_applied": false,
+          "active_user_statements": 6,
+          "sha256": "6d0d4371e36331a14a516ab648feb89a2f508b546f636e905d8477a3f797a004"
+        }
+      },
+      "history_messages": 11,
+      "duration_ms": 34
+    },
+    {
+      "case_id": "open_translation_edit",
+      "family": "constraint_persistence",
+      "passed": true,
+      "checks": {
+        "required_markers_present": true,
+        "stale_or_forbidden_state_absent": true,
+        "maximum_line_constraint_met": true,
+        "exact_line_constraint_met": true,
+        "generation_completed": true,
+        "local_generation_or_state_resolution": true,
+        "user_authoritative_state_capsule_present": true,
+        "state_capsule_has_remote_history": true,
+        "quality_audit_passed": true,
+        "sigma_plus_delivery_passed": true,
+        "long_history_retained": true,
+        "assistant_history_excluded_from_state_audit": true,
+        "release_boundary_closed": true
+      },
+      "answer": "The report is complete.",
+      "missing_required_markers": [],
+      "forbidden_found": [],
+      "generation": {
+        "status": "success",
+        "provider": "deterministic",
+        "model": null,
+        "error": null,
+        "state_capsule": {
+          "user_authoritative": true,
+          "topic_switch_applied": false,
+          "active_user_statements": 6,
+          "sha256": "0c3cf80592300309e86e4c3c71a4c49e89b43c27ccf88ab541386ac2d796a863"
+        }
+      },
+      "history_messages": 11,
+      "duration_ms": 28
+    },
+    {
+      "case_id": "open_list_edit",
+      "family": "constraint_persistence",
+      "passed": true,
+      "checks": {
+        "required_markers_present": true,
+        "stale_or_forbidden_state_absent": true,
+        "maximum_line_constraint_met": true,
+        "exact_line_constraint_met": true,
+        "generation_completed": true,
+        "local_generation_or_state_resolution": true,
+        "user_authoritative_state_capsule_present": true,
+        "state_capsule_has_remote_history": true,
+        "quality_audit_passed": true,
+        "sigma_plus_delivery_passed": true,
+        "long_history_retained": true,
+        "assistant_history_excluded_from_state_audit": true,
+        "release_boundary_closed": true
+      },
+      "answer": "喝水\n散步\n读书",
+      "missing_required_markers": [],
+      "forbidden_found": [],
+      "generation": {
+        "status": "success",
+        "provider": "ollama",
+        "model": "qwen3.5:9b",
+        "error": null,
+        "state_capsule": {
+          "user_authoritative": true,
+          "topic_switch_applied": false,
+          "active_user_statements": 6,
+          "sha256": "bbe5e7f91d51fa62f7a7832871ba407a90198ee4ee7a8d0a0bfcef1bbf9c326e"
+        }
+      },
+      "history_messages": 11,
+      "duration_ms": 8558
+    },
+    {
+      "case_id": "open_medical_topic_change",
+      "family": "topic_switch_cleanup",
+      "passed": true,
+      "checks": {
+        "required_markers_present": true,
+        "stale_or_forbidden_state_absent": true,
+        "maximum_line_constraint_met": true,
+        "exact_line_constraint_met": true,
+        "generation_completed": true,
+        "local_generation_or_state_resolution": true,
+        "user_authoritative_state_capsule_present": true,
+        "state_capsule_has_remote_history": true,
+        "quality_audit_passed": true,
+        "sigma_plus_delivery_passed": true,
+        "long_history_retained": true,
+        "assistant_history_excluded_from_state_audit": true,
+        "release_boundary_closed": true
+      },
+      "answer": "咖啡通常比茶更苦。这主要源于烘焙程度：深烘焙会生成更多苦味物质，而浅烘焙则保留更多酸香。茶若未泡好或浓度过高也会苦涩，但日常饮用中，咖啡的苦味更为普遍且明显。茶的风味更偏向清淡、回甘，除非是特定品种或过度萃取。入口时，咖啡的苦感直接且持久，茶则较柔和。",
+      "missing_required_markers": [],
+      "forbidden_found": [],
+      "generation": {
+        "status": "success",
+        "provider": "ollama",
+        "model": "qwen3.5:9b",
+        "error": null,
+        "state_capsule": {
+          "user_authoritative": true,
+          "topic_switch_applied": true,
+          "active_user_statements": 5,
+          "sha256": "9c06d8187f860cc009cc98e87eb53e7563ce1d7e6956de1de0ffa39b7d81ea24"
+        }
+      },
+      "history_messages": 11,
+      "duration_ms": 15975
+    },
+    {
+      "case_id": "open_trading_topic_change",
+      "family": "topic_switch_cleanup",
+      "passed": true,
+      "checks": {
+        "required_markers_present": true,
+        "stale_or_forbidden_state_absent": true,
+        "maximum_line_constraint_met": true,
+        "exact_line_constraint_met": true,
+        "generation_completed": true,
+        "local_generation_or_state_resolution": true,
+        "user_authoritative_state_capsule_present": true,
+        "state_capsule_has_remote_history": true,
+        "quality_audit_passed": true,
+        "sigma_plus_delivery_passed": true,
+        "long_history_retained": true,
+        "assistant_history_excluded_from_state_audit": true,
+        "release_boundary_closed": true
+      },
+      "answer": "缓存更新好比厨房里把快过期的食材或变质的调料撤下，换入新鲜原料。\n\n这并非单纯增加库存，而是为了维持“可用食材”清单的准确性。\n\n若不及时替换，旧内容会误导烹饪（如用错调料导致菜品失败），甚至引发食品安全风险（如食用变质食物）。\n\n替换的核心在于消除“未知项”和“边界擦除”，确保当前状态画像（φ）真实反映可用资源。\n\n目前缺少可核验证据，不能确认“在厨房场景中，这意味着必须依据最新检查（如保质期标签）果断更新，而非依赖模糊记忆”。\n\n任何关于“无需更新”的假设都需被证伪，因为环境（食材新鲜度）时刻在变。\n\n这是工程建议，不是生产放行；上线前还需测试、监控、回滚演练和负责人审批。",
+      "missing_required_markers": [],
+      "forbidden_found": [],
+      "generation": {
+        "status": "success",
+        "provider": "ollama",
+        "model": "qwen3.5:9b",
+        "error": null,
+        "state_capsule": {
+          "user_authoritative": true,
+          "topic_switch_applied": true,
+          "active_user_statements": 5,
+          "sha256": "e03f76bc35ff70672306fde6f63d326920995913a917f24979627679c0b95667"
+        }
+      },
+      "history_messages": 11,
+      "duration_ms": 20422
+    }
+  ]
+}

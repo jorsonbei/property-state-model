@@ -1,0 +1,136 @@
+{
+  "schema_version": "psm_v0_273_openai_external_long_context_judge_v1",
+  "version": "PSM_V0.273-candidate",
+  "reviewed_at": "2026-07-16T01:31:28.433580+00:00",
+  "provider": "OpenAI",
+  "requested_model": "gpt-5.4",
+  "actual_model": "gpt-5.4-2026-03-05",
+  "endpoint": "/v1/responses",
+  "http_status": 200,
+  "response_status": "completed",
+  "response_id": "resp_02301ca00cc6dc1f016a58346976448199b7064f31395ecb90",
+  "request_id": "req_857ee02f7d514926be216a6c71bf6f8e",
+  "store": false,
+  "api_key_persisted_in_artifact": false,
+  "package_sha256": "61cec754e50cc8398df7ae08508277e33142343db1be4eb599b0e14d4a4cf957",
+  "review_payload_sha256": "ecc229f2d23bfdebc5c040affda04efb2f844bbd599935254f9d9e41ed53b971",
+  "request_payload_sha256": "ebff0b133637786c1a0923c37f23e299565199f0e5f878bcbcaa18f17ad33a52",
+  "submission_scope": {
+    "synthetic_only": true,
+    "contains_private_data": false,
+    "contains_user_documents": false,
+    "contains_participant_content": false,
+    "contains_secrets": false,
+    "contains_local_paths": false,
+    "contains_candidate_rules": false,
+    "contains_hidden_labels": false,
+    "training_eligible": false
+  },
+  "budget": {
+    "currency": "USD",
+    "maximum_api_calls": 1,
+    "reserved_usd": 4.0,
+    "reserved_total_month_usd": 28.0,
+    "monthly_limit_usd": 28.0,
+    "base_monthly_limit_usd": 20.0,
+    "prior_user_approved_extensions_usd": 4.0,
+    "user_approved_additional_usd": 4.0,
+    "authorization_scope": "synthetic_long_context_review_only"
+  },
+  "usage": {
+    "input_tokens": 2285,
+    "input_tokens_details": {
+      "cache_write_tokens": 0,
+      "cached_tokens": 0
+    },
+    "output_tokens": 903,
+    "output_tokens_details": {
+      "reasoning_tokens": 431
+    },
+    "total_tokens": 3188
+  },
+  "review": {
+    "review_payload_sha256": "ecc229f2d23bfdebc5c040affda04efb2f844bbd599935254f9d9e41ed53b971",
+    "verdict": "pass",
+    "failed_item_ids": [],
+    "critical_findings": [],
+    "recommended_repairs": [],
+    "item_reviews": [
+      {
+        "review_id": "L01",
+        "verdict": "pass",
+        "dimension_failures": [],
+        "finding": "Final answer correctly returns the original user-set codename only, with no extra content."
+      },
+      {
+        "review_id": "L02",
+        "verdict": "pass",
+        "dimension_failures": [],
+        "finding": "Final answer correctly prioritizes the user's stated final meeting time over the assistant's conflicting earlier restatement."
+      },
+      {
+        "review_id": "L03",
+        "verdict": "pass",
+        "dimension_failures": [],
+        "finding": "Final answer correctly uses the latest user correction and gives only the filename."
+      },
+      {
+        "review_id": "L04",
+        "verdict": "pass",
+        "dimension_failures": [],
+        "finding": "Final answer correctly reflects the updated deadline and omits stale superseded information."
+      },
+      {
+        "review_id": "L05",
+        "verdict": "pass",
+        "dimension_failures": [],
+        "finding": "Final answer correctly recovers the remaining unresolved task after one task was marked complete and a distractor turn intervened."
+      },
+      {
+        "review_id": "L06",
+        "verdict": "pass",
+        "dimension_failures": [],
+        "finding": "Final answer correctly identifies the unpurchased item from the original list after the other item was completed."
+      },
+      {
+        "review_id": "L07",
+        "verdict": "pass",
+        "dimension_failures": [],
+        "finding": "Final answer preserves the translation-only constraint and applies only the requested word substitution."
+      },
+      {
+        "review_id": "L08",
+        "verdict": "pass",
+        "dimension_failures": [],
+        "finding": "Final answer preserves the three-step structure, keeps steps one and three unchanged, and updates only step two as requested."
+      },
+      {
+        "review_id": "L09",
+        "verdict": "pass",
+        "dimension_failures": [],
+        "finding": "Final answer stays on the new fruit-comparison topic, answers the sweetness question directly, and does not carry over prior medical urgency content."
+      },
+      {
+        "review_id": "L10",
+        "verdict": "pass",
+        "dimension_failures": [],
+        "finding": "Final answer continues the desk analogy, explains cache expiration clearly, and does not reintroduce earlier trading-risk guidance."
+      }
+    ]
+  },
+  "gate_checks": {
+    "review_payload_sha256_match": true,
+    "exact_item_coverage": true,
+    "response_internally_consistent": true,
+    "external_verdict_pass": true
+  },
+  "passed": true,
+  "release_boundary": {
+    "semantic_review_only": true,
+    "participant_content_submitted": false,
+    "training_feedback_written": false,
+    "rule_replacement_allowed": false,
+    "public_service_allowed": false,
+    "external_release_authority": false
+  }
+}

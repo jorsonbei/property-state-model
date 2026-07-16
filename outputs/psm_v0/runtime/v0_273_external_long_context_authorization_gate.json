@@ -1,0 +1,22 @@
+{
+  "schema_version": "psm_v0_273_external_long_context_authorization_gate_v1",
+  "passed": true,
+  "checks": {
+    "prepared_package_gate_passed": true,
+    "prepared_payload_hash_retained": true,
+    "prior_budget_closed": true,
+    "prior_checkpoint_blocked": true,
+    "single_external_call_authorized": true,
+    "additional_budget_exactly_four_usd": true,
+    "effective_limit_exactly_twenty_eight_usd": true,
+    "participant_content_calls_zero": true,
+    "privacy_boundary_closed": true,
+    "release_boundary_closed": true,
+    "prohibited_material_absent": true
+  },
+  "authorization": "approved_by_user_additional_usd_4_v0_273_synthetic_long_context_judge",
+  "authorization_scope": "one_synthetic_long_context_semantic_review_only",
+  "review_payload_sha256": "ecc229f2d23bfdebc5c040affda04efb2f844bbd599935254f9d9e41ed53b971",
+  "authorized_package_sha256": "61cec754e50cc8398df7ae08508277e33142343db1be4eb599b0e14d4a4cf957",
+  "prohibited_material_found": []
+}

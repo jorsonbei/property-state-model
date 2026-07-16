@@ -1,0 +1,48 @@
+{
+  "schema_version": "psm_v0_274_open_context_generalization_promotion_manifest_v1",
+  "version": "PSM_V0.274",
+  "promoted_at": "2026-07-16",
+  "promoted": true,
+  "decision": "open_context_generalization_gate_passed",
+  "formal_core_source": "PSM_V0.251",
+  "formal_core_records": 2228,
+  "open_context_generalization": {
+    "decision": "open_context_generalization_gate_passed",
+    "passed": true,
+    "cases": 10,
+    "cases_passed": 10,
+    "families": 5,
+    "initial_failure_count": 10,
+    "state_capsule_missing": 0,
+    "stale_state_violations": 0,
+    "total_duration_ms": 82498,
+    "synthetic_only": true,
+    "human_validation_claimed": false,
+    "evaluation_rows_used_for_training": false,
+    "contract_sha256": "c88db15f6a62ea4b24a3d9e4ab16887f6067e369621894156bbd4671de7c8b6e",
+    "gate_sha256": "b8a8a30d51016088eb1572b0c8074e1b7cde26c5c1b6380759677cb1b9ba3deb"
+  },
+  "evidence": {
+    "contract": "benchmarks/v0_274_open_context_generalization_contract.json",
+    "report": "runtime/v0_274_open_context_generalization_report.json",
+    "gate": "runtime/v0_274_open_context_generalization_gate.json",
+    "initial_failure_ledger": "runtime/v0_274_open_context_initial_failure_ledger.json",
+    "browser": "runtime/v0_274_open_context_browser_regression/report.json",
+    "docker": "runtime/v0_274_open_context_docker_boundary.json"
+  },
+  "release_boundary": {
+    "open_domain_generalization_claimed": false,
+    "public_service_allowed": false,
+    "production_readiness_claimed": false,
+    "training_on_evaluation_rows_allowed": false,
+    "rule_replacement_allowed": false,
+    "professional_authority_allowed": false,
+    "external_release_authority": false
+  },
+  "next_stage": {
+    "version": "PSM_V0.275",
+    "objective": "对冻结的 V0.274 开放式长对话回答执行来源隔离的独立外部语义评审，检查未见改写、远距事实、最新更正、未完成事项、约束继承和自然换题；只提交合成问答，不提交规则、私人资料或训练字段。",
+    "blocked": false,
+    "requires_user_input": false
+  }
+}

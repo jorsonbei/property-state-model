@@ -9,7 +9,7 @@ PSM is an experimental state-first AI control layer. It routes a request through
 - Deterministic state pipeline: `Q -> Omega -> phi -> Delta sigma -> Pi -> eta -> B_sigma -> Sigma+`.
 - Candidate generation adapters, lexical auditing, deterministic gating, failure ledger, and regression artifacts.
 - Local chat alpha backed by Ollama.
-- Current public baseline: `PSM V0.272` (formal 2228-record core evidence source: `PSM V0.251`).
+- Current public baseline: `PSM V0.274` (formal 2228-record core evidence source: `PSM V0.251`).
 - V0.251's fresh externally authored Wave G passed 20/20 under an independent external semantic judge; usefulness, safety, correctness, relevance, boundary quality, and hallucination control were each 1.0000 on that frozen synthetic blind wave.
 - V0.252 adds a stable internal chat-product gate with cancel, timeout, retry, recovery, progressive display, hidden debug evidence, and desktop/mobile/real-backend browser regression.
 - V0.253 replaces passive Omega route labels with four executable local/read-only evidence adapters and a fail-closed provenance/failure-ledger contract.
@@ -31,7 +31,7 @@ PSM is an experimental state-first AI control layer. It routes a request through
 - V0.269 repeats seven representative tasks three times and passes 21/21 semantic invariants with zero provider or deterministic drift; local p50/p95 are 23 ms/16.771 s, and real cancel, timeout, retry, empty-response, offline-provider, browser, and Docker recovery gates pass.
 - V0.270 passes 12/12 frozen multi-turn cases after retaining five initial failures. It preserves assistant references, explicit topic switches, user corrections, literal exclusions, three-step formatting, and translation-only constraints without assistant-history contamination.
 - V0.271 retains its first `gpt-5.4` failure on M07/M08, repairs both over-answers locally, and then passes a separately authorized 12/12 independent rejudge with zero failed items or critical findings. The one post-write runner reporting failure is retained and did not trigger an API retry. The evidence is synthetic and grants no external release authority.
-- V0.272 retains a 0/10 first long-context run, repairs user-fact authority, latest-correction recovery, unresolved work, cross-turn constraints, and persistent topic-switch cleanup, then passes 10/10 with zero assistant-history contamination or stale-state violations. Desktop/mobile and host/Docker boundaries pass; one contract-label erratum and one failed Docker verifier attempt remain retained.
+- V0.274 retains a 0/10 first open-context run, adds a user-authoritative state capsule and broader correction, unresolved-work, constraint-inheritance, and topic-switch handling, then passes 10/10 with zero stale-state violations. Desktop/mobile and host/Docker boundaries pass; V0.273 also independently passed 10/10 with one authorized external call.
 - V0.273 is prepared but not authorized: its sanitized ten-item external review package passes the local privacy and source-isolation gate, while the July synthetic API ledger remains fully reserved at USD 24/24.
 
 This repository is an experimental research and engineering system. It is not a medical, legal, investment, production-release, or external-user authorization system. Passing synthetic regressions does not prove open-domain generalization.
@@ -123,7 +123,7 @@ make promote-v272
 make prepare-v273
 ```
 
-The historical local operator page is `http://127.0.0.1:8765/trial-enrollment`. It displays the completed V0.264 supervised-pilot record. V0.272 collects no participant ratings and requires no human actions.
+The historical local operator page is `http://127.0.0.1:8765/trial-enrollment`. It displays the completed V0.264 supervised-pilot record. V0.274 collects no participant ratings and requires no human actions.
 
 Generate a read-only inventory of the local evidence store without moving or deleting artifacts:
 
@@ -168,7 +168,7 @@ make judge-v251-external
 
 - Human recovery point: [`outputs/psm_v0/CURRENT_STATUS.md`](outputs/psm_v0/CURRENT_STATUS.md)
 - Architecture: [`outputs/psm_v0/PSM_V0_Blueprint.md`](outputs/psm_v0/PSM_V0_Blueprint.md)
-- Current execution roadmap: [`outputs/psm_v0/roadmap_out/PSM_V0.272_to_V0.273_External_Long_Context_Roadmap.md`](outputs/psm_v0/roadmap_out/PSM_V0.272_to_V0.273_External_Long_Context_Roadmap.md)
+- Current execution roadmap: [`outputs/psm_v0/roadmap_out/PSM_V0.274_to_V0.275_External_Open_Context_Roadmap.md`](outputs/psm_v0/roadmap_out/PSM_V0.274_to_V0.275_External_Open_Context_Roadmap.md)
 
 ## Open-source boundary
 

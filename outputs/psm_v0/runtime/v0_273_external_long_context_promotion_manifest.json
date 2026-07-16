@@ -1,0 +1,56 @@
+{
+  "schema_version": "psm_v0_273_external_long_context_promotion_manifest_v1",
+  "version": "PSM_V0.273",
+  "promoted_at": "2026-07-16",
+  "promoted": true,
+  "decision": "external_long_context_semantic_review_passed",
+  "formal_core_source": "PSM_V0.251",
+  "formal_core_records": 2228,
+  "external_long_context_review": {
+    "decision": "external_long_context_semantic_review_passed",
+    "passed": true,
+    "items": 10,
+    "items_passed": 10,
+    "families": 5,
+    "failed_item_ids": [],
+    "critical_findings": [],
+    "recommended_repairs": [],
+    "actual_model": "gpt-5.4-2026-03-05",
+    "total_tokens": 3188,
+    "review_payload_sha256": "ecc229f2d23bfdebc5c040affda04efb2f844bbd599935254f9d9e41ed53b971",
+    "participant_content_calls": 0,
+    "synthetic_only": true,
+    "human_validation_claimed": false,
+    "evaluation_rows_used_for_training": false,
+    "external_release_authority": false
+  },
+  "evidence": {
+    "prepared_package": "runtime/v0_273_external_long_context_review_package.json",
+    "prepared_gate": "runtime/v0_273_external_long_context_package_gate.json",
+    "authorized_package": "runtime/v0_273_external_long_context_authorized_review_package.json",
+    "authorization_gate": "runtime/v0_273_external_long_context_authorization_gate.json",
+    "external_judge": "runtime/v0_273_openai_external_long_context_judge.json",
+    "external_judge_markdown": "runtime/v0_273_openai_external_long_context_judge.md",
+    "final_gate": "runtime/v0_273_external_long_context_gate.json",
+    "budget_ledger": "runtime/v0_267_api_budget_ledger.json"
+  },
+  "file_sha256": {
+    "external_judge": "dbd150073fc21f4cd3183739dd66e47b4217f85d6ba50e99d7574a071e2993d9",
+    "external_judge_markdown": "5e1109ad1625fe95fb92197511aa7ea2c305fb4246f25e482c47e9aaa572d863",
+    "final_gate": "6c77ff48f97d095717e1a20f959080e47e4f9d0e9c8a29fd22a4b23b01616e52"
+  },
+  "release_boundary": {
+    "semantic_review_only": true,
+    "participant_content_submitted": false,
+    "training_feedback_written": false,
+    "rule_replacement_allowed": false,
+    "public_service_allowed": false,
+    "external_release_authority": false
+  },
+  "next_stage": {
+    "version": "PSM_V0.274",
+    "objective": "建立开放式长对话泛化门：对同一状态约束生成未见过的改写、插入噪声和自然追问，验证状态胶囊能够驱动正常聊天而非只命中固定模板；本地模型只负责语言生成，不得控制风险、路由或发布边界。",
+    "blocked": false,
+    "requires_user_input": false
+  }
+}

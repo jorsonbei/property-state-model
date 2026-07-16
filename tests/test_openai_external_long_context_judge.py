@@ -97,15 +97,19 @@ class OpenAIExternalLongContextJudgeTests(unittest.TestCase):
         self.assertNotIn("sk-test-secret", json.dumps(result))
         self.assertFalse(result["release_boundary"]["external_release_authority"])
 
-    def test_coverage_contradiction_and_budget_checkpoint_fail_closed(self) -> None:
+    def test_coverage_contradiction_and_promoted_checkpoint_fail_closed(self) -> None:
         value = authorized_package()
         review = passing_review(value)
         review["item_reviews"][0]["review_id"] = "wrong"
         with self.assertRaises(ValueError):
             validate_external_review(review, value)
         checkpoint = json.loads((PSM_ROOT / "runtime" / "v0_273_external_long_context_checkpoint.json").read_text(encoding="utf-8"))
-        self.assertTrue(checkpoint["requires_user_input"])
-        self.assertFalse(checkpoint["target_promoted"])
+        final_gate = json.loads((PSM_ROOT / "runtime" / "v0_273_external_long_context_gate.json").read_text(encoding="utf-8"))
+        prepared = json.loads(PACKAGE_PATH.read_text(encoding="utf-8"))
+        self.assertFalse(checkpoint["requires_user_input"])
+        self.assertTrue(checkpoint["target_promoted"])
+        self.assertTrue(final_gate["passed"])
+        self.assertEqual(prepared["budget"]["maximum_api_calls"], 0)
         self.assertEqual(checkpoint["additional_authorization_required_usd"], 4.0)
         self.assertEqual(checkpoint["participant_content_calls"], 0)
 

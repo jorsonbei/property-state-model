@@ -1,0 +1,41 @@
+{
+  "schema_version": "psm_v0_273_external_long_context_gate_v1",
+  "passed": true,
+  "decision": "external_long_context_semantic_review_passed",
+  "checks": {
+    "source_version_is_v0_272": true,
+    "prepared_package_gate_passed": true,
+    "authorization_gate_passed": true,
+    "prepared_payload_hash_retained": true,
+    "authorized_package_hash_match": true,
+    "external_review_passed": true,
+    "external_review_exact_ten_items": true,
+    "external_review_all_items_passed": true,
+    "external_review_has_no_failed_ids": true,
+    "external_review_has_no_critical_findings": true,
+    "external_review_requires_no_repairs": true,
+    "single_budget_reservation_retained": true,
+    "budget_exactly_twenty_eight_usd": true,
+    "participant_content_calls_zero": true,
+    "release_boundary_closed": true
+  },
+  "review_payload_sha256": "ecc229f2d23bfdebc5c040affda04efb2f844bbd599935254f9d9e41ed53b971",
+  "authorized_package_sha256": "61cec754e50cc8398df7ae08508277e33142343db1be4eb599b0e14d4a4cf957",
+  "external_review_sha256": "e1f4b3b7b0cb793288b7cf2ee3b72c6523e713e7468d4fdad73d772b7d9da677",
+  "actual_model": "gpt-5.4-2026-03-05",
+  "usage": {
+    "input_tokens": 2285,
+    "input_tokens_details": {
+      "cache_write_tokens": 0,
+      "cached_tokens": 0
+    },
+    "output_tokens": 903,
+    "output_tokens_details": {
+      "reasoning_tokens": 431
+    },
+    "total_tokens": 3188
+  },
+  "failed_item_ids": [],
+  "critical_findings": [],
+  "recommended_repairs": []
+}

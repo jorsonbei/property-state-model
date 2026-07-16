@@ -1,0 +1,238 @@
+{
+  "schema_version": "psm_v0_274_open_context_generalization_contract_v1",
+  "version": "PSM_V0.274-candidate",
+  "frozen_at": "2026-07-16",
+  "objective": "Verify that user-authoritative state survives unseen wording, long distractor spans, natural follow-ups, and topic changes when the local model generates the final answer.",
+  "provider_mode": "local_qwen_generation_with_user_authoritative_state_capsule",
+  "provenance": {
+    "author": "internal_contract_author",
+    "synthetic_only": true,
+    "created_before_first_run": true,
+    "contains_private_or_participant_data": false
+  },
+  "source_isolation": {
+    "evaluation_rows_used_for_training": false,
+    "evaluation_rows_used_for_model_fine_tuning": false,
+    "evaluation_rows_used_for_prompt_changes_before_initial_ledger": false,
+    "failure_findings_used_for_repairs_before_initial_ledger": false,
+    "blind_or_evaluation_backflow_allowed": false
+  },
+  "release_boundary": {
+    "open_domain_generalization_claimed": false,
+    "public_service_allowed": false,
+    "production_readiness_claimed": false,
+    "training_on_evaluation_rows_allowed": false,
+    "rule_replacement_allowed": false,
+    "professional_authority_allowed": false,
+    "external_release_authority": false
+  },
+  "evaluation": {
+    "frozen_case_count": 10,
+    "families": [
+      "remote_user_fact",
+      "latest_correction",
+      "unresolved_work",
+      "constraint_persistence",
+      "topic_switch_cleanup"
+    ],
+    "cases_per_family": 2,
+    "minimum_history_messages": 11,
+    "required_local_model": "qwen3.5:9b",
+    "maximum_stale_state_violations": 0
+  },
+  "cases": [
+    {
+      "id": "open_remote_codename",
+      "family": "remote_user_fact",
+      "messages": [
+        {"role": "user", "content": "这个内部方案以后都叫榆叶。"},
+        {"role": "assistant", "content": "记住了，内部称呼是榆叶。"},
+        {"role": "user", "content": "界面暂时用浅色。"},
+        {"role": "assistant", "content": "好的。"},
+        {"role": "user", "content": "日志按天归档。"},
+        {"role": "assistant", "content": "已记录。"},
+        {"role": "user", "content": "首页不放横幅。"},
+        {"role": "assistant", "content": "明白。"},
+        {"role": "user", "content": "按钮文案稍后定。"},
+        {"role": "assistant", "content": "可以。"},
+        {"role": "user", "content": "我最早给这个方案取的称呼是什么？直接告诉我。"}
+      ],
+      "required_all": ["榆叶"],
+      "forbidden": ["不知道", "无法", "浅色", "日志"]
+    },
+    {
+      "id": "open_remote_room",
+      "family": "remote_user_fact",
+      "messages": [
+        {"role": "user", "content": "发布会固定在青松厅举行。"},
+        {"role": "assistant", "content": "发布会地点是青松厅。"},
+        {"role": "user", "content": "灯光方案周三确认。"},
+        {"role": "assistant", "content": "收到。"},
+        {"role": "user", "content": "海报先不印。"},
+        {"role": "assistant", "content": "明白。"},
+        {"role": "user", "content": "主持人名单晚些给。"},
+        {"role": "assistant", "content": "好的。"},
+        {"role": "user", "content": "座位按到场顺序。"},
+        {"role": "assistant", "content": "已记录。"},
+        {"role": "user", "content": "回忆一下，活动场地定在哪里？"}
+      ],
+      "required_all": ["青松厅"],
+      "forbidden": ["不知道", "无法", "周三"]
+    },
+    {
+      "id": "open_latest_export_name",
+      "family": "latest_correction",
+      "messages": [
+        {"role": "user", "content": "导出包暂时命名为 draft.zip。"},
+        {"role": "assistant", "content": "已记录 draft.zip。"},
+        {"role": "user", "content": "名称更新为 final-pack.zip，前一个名字不要再用。"},
+        {"role": "assistant", "content": "已更新。"},
+        {"role": "user", "content": "压缩级别用默认值。"},
+        {"role": "assistant", "content": "好的。"},
+        {"role": "user", "content": "校验文件放在同目录。"},
+        {"role": "assistant", "content": "明白。"},
+        {"role": "user", "content": "下载页稍后再做。"},
+        {"role": "assistant", "content": "可以。"},
+        {"role": "user", "content": "现在应该交付哪个压缩包？只写名称。"}
+      ],
+      "required_all": ["final-pack.zip"],
+      "forbidden": ["draft.zip", "不知道", "无法"],
+      "max_nonempty_lines": 1
+    },
+    {
+      "id": "open_latest_review_day",
+      "family": "latest_correction",
+      "messages": [
+        {"role": "user", "content": "评审原本排在星期二。"},
+        {"role": "assistant", "content": "评审安排在星期二。"},
+        {"role": "user", "content": "改期到星期四，星期二的安排取消。"},
+        {"role": "assistant", "content": "已改到星期四。"},
+        {"role": "user", "content": "材料提前一天发。"},
+        {"role": "assistant", "content": "收到。"},
+        {"role": "user", "content": "参会链接保持不变。"},
+        {"role": "assistant", "content": "好的。"},
+        {"role": "user", "content": "记录人仍由小组指定。"},
+        {"role": "assistant", "content": "明白。"},
+        {"role": "user", "content": "最终哪一天评审？简短回答。"}
+      ],
+      "required_all": ["星期四"],
+      "forbidden": ["星期二", "不知道", "无法"]
+    },
+    {
+      "id": "open_unresolved_design",
+      "family": "unresolved_work",
+      "messages": [
+        {"role": "user", "content": "今天两件正事：修搜索页，再补部署说明。"},
+        {"role": "assistant", "content": "记下了两项。"},
+        {"role": "user", "content": "搜索页已经修完。"},
+        {"role": "assistant", "content": "搜索页已完成。"},
+        {"role": "user", "content": "午餐改到一点。"},
+        {"role": "assistant", "content": "好的。"},
+        {"role": "user", "content": "下午先开十分钟短会。"},
+        {"role": "assistant", "content": "已记录。"},
+        {"role": "user", "content": "晚上不加班。"},
+        {"role": "assistant", "content": "明白。"},
+        {"role": "user", "content": "那两件正事还剩哪一件？"}
+      ],
+      "required_all": ["部署说明"],
+      "forbidden": ["修搜索页", "午餐", "不知道", "无法"]
+    },
+    {
+      "id": "open_unresolved_purchase",
+      "family": "unresolved_work",
+      "messages": [
+        {"role": "user", "content": "出门前要买燕麦、牛奶。"},
+        {"role": "assistant", "content": "购物项是燕麦和牛奶。"},
+        {"role": "user", "content": "牛奶刚买好了。"},
+        {"role": "assistant", "content": "牛奶已完成。"},
+        {"role": "user", "content": "回家顺便取快递。"},
+        {"role": "assistant", "content": "收到。"},
+        {"role": "user", "content": "晚饭不做汤。"},
+        {"role": "assistant", "content": "明白。"},
+        {"role": "user", "content": "购物袋放门边。"},
+        {"role": "assistant", "content": "好的。"},
+        {"role": "user", "content": "购物方面还漏了什么？"}
+      ],
+      "required_all": ["燕麦"],
+      "forbidden": ["牛奶", "快递", "不知道", "无法"]
+    },
+    {
+      "id": "open_translation_edit",
+      "family": "constraint_persistence",
+      "messages": [
+        {"role": "user", "content": "把“报告已经准备好”译成英文，回答里不要加解释。"},
+        {"role": "assistant", "content": "The report is ready."},
+        {"role": "user", "content": "稍后只改一个词。"},
+        {"role": "assistant", "content": "明白。"},
+        {"role": "user", "content": "标点样式保持。"},
+        {"role": "assistant", "content": "好的。"},
+        {"role": "user", "content": "不要添加中文说明。"},
+        {"role": "assistant", "content": "收到。"},
+        {"role": "user", "content": "输出仍旧只有一句。"},
+        {"role": "assistant", "content": "明白。"},
+        {"role": "user", "content": "把 ready 换成 complete，照旧交付。"}
+      ],
+      "required_all": ["The report is complete."],
+      "forbidden": ["ready", "译文", "翻译", "好的"],
+      "max_nonempty_lines": 1
+    },
+    {
+      "id": "open_list_edit",
+      "family": "constraint_persistence",
+      "messages": [
+        {"role": "user", "content": "列三项晨间安排，每项单独一行：喝水、拉伸、读书。不要解释。"},
+        {"role": "assistant", "content": "喝水\n拉伸\n读书"},
+        {"role": "user", "content": "顺序先不动。"},
+        {"role": "assistant", "content": "好的。"},
+        {"role": "user", "content": "仍然保持三行。"},
+        {"role": "assistant", "content": "明白。"},
+        {"role": "user", "content": "第一项不用改。"},
+        {"role": "assistant", "content": "收到。"},
+        {"role": "user", "content": "第三项也不用改。"},
+        {"role": "assistant", "content": "好的。"},
+        {"role": "user", "content": "只把中间那项换成散步，其他照旧。"}
+      ],
+      "required_all": ["喝水", "散步", "读书"],
+      "forbidden": ["拉伸", "解释"],
+      "exact_nonempty_lines": 3
+    },
+    {
+      "id": "open_medical_topic_change",
+      "family": "topic_switch_cleanup",
+      "messages": [
+        {"role": "user", "content": "我出现呼吸困难和胸口压迫感。"},
+        {"role": "assistant", "content": "这可能需要立即联系当地急救。"},
+        {"role": "user", "content": "接下来不谈健康问题了，改聊咖啡和茶的味道。"},
+        {"role": "assistant", "content": "咖啡常有烘焙苦香，茶的香气更轻。"},
+        {"role": "user", "content": "只谈日常风味。"},
+        {"role": "assistant", "content": "好的。"},
+        {"role": "user", "content": "不比较提神效果。"},
+        {"role": "assistant", "content": "明白。"},
+        {"role": "user", "content": "先说入口感觉。"},
+        {"role": "assistant", "content": "可以。"},
+        {"role": "user", "content": "哪一种通常更苦？"}
+      ],
+      "required_all": ["咖啡", "苦"],
+      "forbidden": ["胸", "呼吸困难", "急救", "医生", "医疗"]
+    },
+    {
+      "id": "open_trading_topic_change",
+      "family": "topic_switch_cleanup",
+      "messages": [
+        {"role": "user", "content": "这个策略还没有做样本外验证。"},
+        {"role": "assistant", "content": "因此不能直接用于实盘。"},
+        {"role": "user", "content": "这一段到此为止，下面改用厨房比喻解释缓存。"},
+        {"role": "assistant", "content": "缓存像把常用食材放在手边。"},
+        {"role": "user", "content": "继续这个厨房比喻。"},
+        {"role": "assistant", "content": "好的。"},
+        {"role": "user", "content": "不要讲计算机代码。"},
+        {"role": "assistant", "content": "明白。"},
+        {"role": "user", "content": "重点说为什么要替换旧内容。"},
+        {"role": "assistant", "content": "可以。"},
+        {"role": "user", "content": "那缓存更新像厨房里的什么？"}
+      ],
+      "required_all": ["食材", "新", "旧"],
+      "forbidden": ["实盘", "策略", "样本外", "交易", "回撤"]
+    }
+  ]
+}

@@ -1,0 +1,57 @@
+{
+  "schema_version": "psm_v0_274_open_context_generalization_gate_v1",
+  "version": "PSM_V0.274-candidate",
+  "passed": true,
+  "decision": "open_context_generalization_gate_passed",
+  "checks": {
+    "case_count_matches": true,
+    "all_cases_pass": true,
+    "all_families_pass": true,
+    "state_capsule_present_for_all": true,
+    "stale_state_violations_zero": true,
+    "initial_failure_ledger_retained": true,
+    "retained_v0_273_promotion": true,
+    "evaluation_backflow_zero": true,
+    "release_boundary_closed": true
+  },
+  "metrics": {
+    "cases": 10,
+    "passed": 10,
+    "failed": 0,
+    "stale_state_violations": 0,
+    "capsule_missing": 0,
+    "total_duration_ms": 82498,
+    "families": {
+      "remote_user_fact": {
+        "cases": 2,
+        "passed": 2
+      },
+      "latest_correction": {
+        "cases": 2,
+        "passed": 2
+      },
+      "unresolved_work": {
+        "cases": 2,
+        "passed": 2
+      },
+      "constraint_persistence": {
+        "cases": 2,
+        "passed": 2
+      },
+      "topic_switch_cleanup": {
+        "cases": 2,
+        "passed": 2
+      }
+    }
+  },
+  "initial_failure_count": 10,
+  "release_boundary": {
+    "open_domain_generalization_claimed": false,
+    "public_service_allowed": false,
+    "production_readiness_claimed": false,
+    "training_on_evaluation_rows_allowed": false,
+    "rule_replacement_allowed": false,
+    "professional_authority_allowed": false,
+    "external_release_authority": false
+  }
+}

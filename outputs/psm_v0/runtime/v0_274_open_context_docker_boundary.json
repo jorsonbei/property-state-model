@@ -1,0 +1,29 @@
+{
+  "schema_version": "psm_v0_274_open_context_docker_boundary_v1",
+  "passed": true,
+  "checks": {
+    "open_context_gate_passed": true,
+    "all_ten_cases_passed": true,
+    "host_and_docker_status_available": true,
+    "host_and_docker_versions_match": true,
+    "unresolved_work_host": true,
+    "unresolved_work_docker": true,
+    "host_state_capsule_present": true,
+    "docker_state_capsule_present": true,
+    "open_context_report_in_docker": true,
+    "external_user_release_closed_host": true,
+    "external_user_release_closed_docker": true,
+    "docker_localhost_only": true
+  },
+  "human_feedback_collected": false,
+  "human_validation_claimed": false,
+  "evaluation_rows_used_for_training": false,
+  "host": {
+    "version": "PSM V0.274",
+    "release_open": false
+  },
+  "docker": {
+    "version": "PSM V0.274",
+    "release_open": false
+  }
+}

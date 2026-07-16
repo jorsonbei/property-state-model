@@ -1,0 +1,239 @@
+{
+  "schema_version": "psm_v0_274_open_context_initial_failure_ledger_v1",
+  "version": "PSM_V0.274-candidate",
+  "frozen_at": "2026-07-16",
+  "contract_sha256": "c88db15f6a62ea4b24a3d9e4ab16887f6067e369621894156bbd4671de7c8b6e",
+  "first_run_completed_before_candidate_changes": true,
+  "append_only": true,
+  "initial_failure_count": 10,
+  "initial_failures": [
+    {
+      "case_id": "open_remote_codename",
+      "family": "remote_user_fact",
+      "failed_checks": [
+        "required_markers_present",
+        "stale_or_forbidden_state_absent",
+        "user_authoritative_state_capsule_present",
+        "state_capsule_has_remote_history"
+      ],
+      "missing_required_markers": [
+        "榆叶"
+      ],
+      "forbidden_found": [
+        "无法",
+        "日志"
+      ],
+      "answer": "无法直接告知您最早给该方案取的称呼。\n\n当前对话记录中仅包含“日志按天归档”、“首页不放横幅”、“按钮文案稍后定”等执行细节，并未提及方案的初始命名。若该名称存在于您之前的独立文档、邮件或更早的对话中，请提供相关上下文或文件，以便我协助检索。若确认为当前会话内的信息缺失，则需您补充该名称或确认是否需重新拟定。",
+      "generation": {
+        "status": "success",
+        "provider": "ollama",
+        "model": "qwen3.5:9b",
+        "error": null,
+        "state_capsule": null
+      }
+    },
+    {
+      "case_id": "open_remote_room",
+      "family": "remote_user_fact",
+      "failed_checks": [
+        "required_markers_present",
+        "stale_or_forbidden_state_absent",
+        "user_authoritative_state_capsule_present",
+        "state_capsule_has_remote_history"
+      ],
+      "missing_required_markers": [
+        "青松厅"
+      ],
+      "forbidden_found": [
+        "无法"
+      ],
+      "answer": "目前对话记录中未提及活动场地的具体信息，属于未知项。\n\n请提供场地名称或相关线索（如预订确认单、会议通知等）。若需临时确定，建议优先核查内部日程表或联系行政/后勤部门确认。在未获取确切来源前，无法给出具体地点，避免误导后续安排。",
+      "generation": {
+        "status": "success",
+        "provider": "ollama",
+        "model": "qwen3.5:9b",
+        "error": null,
+        "state_capsule": null
+      }
+    },
+    {
+      "case_id": "open_latest_export_name",
+      "family": "latest_correction",
+      "failed_checks": [
+        "required_markers_present",
+        "stale_or_forbidden_state_absent",
+        "user_authoritative_state_capsule_present",
+        "state_capsule_has_remote_history"
+      ],
+      "missing_required_markers": [
+        "final-pack.zip"
+      ],
+      "forbidden_found": [
+        "无法"
+      ],
+      "answer": "无法确定具体名称。当前对话中未定义待交付文件的来源、生成规则或命名约定。请补充文件生成逻辑、输入数据特征或明确任务目标，以便推导正确文件名。若涉及外部系统，需确认接口返回的标识符。",
+      "generation": {
+        "status": "success",
+        "provider": "ollama",
+        "model": "qwen3.5:9b",
+        "error": null,
+        "state_capsule": null
+      }
+    },
+    {
+      "case_id": "open_latest_review_day",
+      "family": "latest_correction",
+      "failed_checks": [
+        "required_markers_present",
+        "stale_or_forbidden_state_absent",
+        "user_authoritative_state_capsule_present",
+        "state_capsule_has_remote_history"
+      ],
+      "missing_required_markers": [
+        "星期四"
+      ],
+      "forbidden_found": [
+        "无法"
+      ],
+      "answer": "根据当前对话上下文，尚未明确最终评审的具体日期。此前仅确认了材料提前一天发送、参会链接及记录人安排，未提及评审日期的变更或确认。\n\n请提供会议日程、邮件通知或相关文档以核实确切日期。若无法立即获取，建议联系会议组织者确认。",
+      "generation": {
+        "status": "success",
+        "provider": "ollama",
+        "model": "qwen3.5:9b",
+        "error": null,
+        "state_capsule": null
+      }
+    },
+    {
+      "case_id": "open_unresolved_design",
+      "family": "unresolved_work",
+      "failed_checks": [
+        "required_markers_present",
+        "stale_or_forbidden_state_absent",
+        "user_authoritative_state_capsule_present",
+        "state_capsule_has_remote_history"
+      ],
+      "missing_required_markers": [
+        "部署说明"
+      ],
+      "forbidden_found": [
+        "无法"
+      ],
+      "answer": "无法确定具体是哪一件。当前对话中未记录“两件正事”的具体内容、名称或进度，缺乏必要的对象与材料信息。\n\n请补充这两件事的具体事项，或指出其中一件已完成，以便我准确识别剩余项并协助推进。若涉及外部信息，请提供相关来源或上下文。",
+      "generation": {
+        "status": "success",
+        "provider": "ollama",
+        "model": "qwen3.5:9b",
+        "error": null,
+        "state_capsule": null
+      }
+    },
+    {
+      "case_id": "open_unresolved_purchase",
+      "family": "unresolved_work",
+      "failed_checks": [
+        "required_markers_present",
+        "stale_or_forbidden_state_absent",
+        "user_authoritative_state_capsule_present",
+        "state_capsule_has_remote_history"
+      ],
+      "missing_required_markers": [
+        "燕麦"
+      ],
+      "forbidden_found": [
+        "无法"
+      ],
+      "answer": "购物清单中未提及具体物品，无法判断遗漏项。需结合您近期的生活需求（如日用品、食材、清洁用品等）或特定场景（如节日、待客）来补充。若需生成建议清单，请提供大致预算、人数及偏好；若仅需提醒，可列出常见易忘项（如垃圾袋、电池、特定药品等）供您核对。请补充具体需求或场景，以便精准回答。",
+      "generation": {
+        "status": "success",
+        "provider": "ollama",
+        "model": "qwen3.5:9b",
+        "error": null,
+        "state_capsule": null
+      }
+    },
+    {
+      "case_id": "open_translation_edit",
+      "family": "constraint_persistence",
+      "failed_checks": [
+        "required_markers_present",
+        "user_authoritative_state_capsule_present",
+        "state_capsule_has_remote_history"
+      ],
+      "missing_required_markers": [
+        "The report is complete."
+      ],
+      "forbidden_found": [],
+      "answer": "complete",
+      "generation": {
+        "status": "success",
+        "provider": "ollama",
+        "model": "qwen3.5:9b",
+        "error": null,
+        "state_capsule": null
+      }
+    },
+    {
+      "case_id": "open_list_edit",
+      "family": "constraint_persistence",
+      "failed_checks": [
+        "required_markers_present",
+        "exact_line_constraint_met",
+        "user_authoritative_state_capsule_present",
+        "state_capsule_has_remote_history"
+      ],
+      "missing_required_markers": [
+        "喝水",
+        "读书"
+      ],
+      "forbidden_found": [],
+      "answer": "中间项已替换为“散步”，其余两项保持不变。具体方案为：第一项维持原状，中间项改为散步，第三项维持原状。若需补充具体活动内容或时长，请提供更多信息以便完善计划。",
+      "generation": {
+        "status": "success",
+        "provider": "ollama",
+        "model": "qwen3.5:9b",
+        "error": null,
+        "state_capsule": null
+      }
+    },
+    {
+      "case_id": "open_medical_topic_change",
+      "family": "topic_switch_cleanup",
+      "failed_checks": [
+        "user_authoritative_state_capsule_present",
+        "state_capsule_has_remote_history"
+      ],
+      "missing_required_markers": [],
+      "forbidden_found": [],
+      "answer": "茶通常比咖啡更苦。咖啡的苦味主要来自烘焙产生的美拉德反应和焦糖化，属于熟成后的焦苦；而茶的苦味源于茶多酚（儿茶素）和咖啡碱，属于植物防御性的生涩苦。若冲泡过浓或水温过高，茶的苦味会显著增强，且这种苦味往往伴随收敛感（涩），入口时舌头会感到紧缩。相比之下，咖啡的苦味通常更醇厚、圆润，且常伴随烘焙带来的坚果或巧克力香气，苦后易回甘。因此，在同等浓度下，未发酵或半发酵的茶类（如绿茶、乌龙茶）入口的苦涩感通常比深度烘焙的咖啡更直接、更尖锐。",
+      "generation": {
+        "status": "success",
+        "provider": "ollama",
+        "model": "qwen3.5:9b",
+        "error": null,
+        "state_capsule": null
+      }
+    },
+    {
+      "case_id": "open_trading_topic_change",
+      "family": "topic_switch_cleanup",
+      "failed_checks": [
+        "required_markers_present",
+        "user_authoritative_state_capsule_present",
+        "state_capsule_has_remote_history"
+      ],
+      "missing_required_markers": [
+        "旧"
+      ],
+      "forbidden_found": [],
+      "answer": "缓存更新像厨房里的“替换快用完的调料”或“把切好的菜重新摆盘”。当某种食材（数据）快用完或变质（过期）时，必须及时换新的，否则做菜（处理请求）就会缺料或味道不对。这能避免厨师（系统）反复去仓库（数据库）取货，既省时间又减少拥堵。但要注意，新换的调料必须确认是同一品牌口味（数据一致性），不能随便拿错东西混用，否则整道菜会出问题。\n\n这是工程建议，不是生产放行；上线前还需测试、监控、回滚演练和负责人审批。",
+      "generation": {
+        "status": "success",
+        "provider": "ollama",
+        "model": "qwen3.5:9b",
+        "error": null,
+        "state_capsule": null
+      }
+    }
+  ]
+}

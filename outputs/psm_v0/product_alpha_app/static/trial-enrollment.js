@@ -90,7 +90,7 @@ function render(status) {
     ? "試用已停止"
     : "三人全員門控尚未通過";
   $("boundary-detail").textContent = status.trial_active
-    ? "V0.272 已完成合成长对话状态验证，不收集真人评分；公开发布边界仍关闭。"
+    ? "V0.274 已完成合成开放式长对话验证，不收集真人评分；公开发布边界仍关闭。"
     : status.stopped
     ? "撤回或邊界事件已阻止自動恢復。"
     : "第一條真實試用訊息保持拒絕。";

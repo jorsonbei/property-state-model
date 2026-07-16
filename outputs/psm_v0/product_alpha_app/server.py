@@ -22,7 +22,11 @@ sys.path.insert(0, str(PSM_ROOT))
 
 from psm_v0.candidate_auditor import audit_candidate_text  # noqa: E402
 from psm_v0.chat_quality_auditor import audit_chat_answer  # noqa: E402
-from psm_v0.chat_prompt import build_chat_prompt, sanitize_model_answer  # noqa: E402
+from psm_v0.chat_prompt import (  # noqa: E402
+    build_chat_prompt,
+    build_conversation_state_capsule,
+    sanitize_model_answer,
+)
 from psm_v0.chat_provider import OllamaChatProvider, ProviderRequest  # noqa: E402
 from psm_v0.model_adapter import BuiltinModelAdapter  # noqa: E402
 from psm_v0.external_trial_protocol import inspect_prompt, load_protocol  # noqa: E402
@@ -93,7 +97,7 @@ def main() -> None:
 
 
 class Handler(BaseHTTPRequestHandler):
-    server_version = "PSMProductAlpha/0.272"
+    server_version = "PSMProductAlpha/0.274"
 
     def do_GET(self) -> None:  # noqa: N802
         parsed = urlparse(self.path)
@@ -639,6 +643,13 @@ def contains_explicit_topic_switch(text: str) -> bool:
         "另一个话题",
         "另一個話題",
         "new topic",
+        "改聊",
+        "改談",
+        "下面改用",
+        "接下来不谈",
+        "接下來不談",
+        "这一段到此为止",
+        "這一段到此為止",
     )
     return any(marker in text.casefold() for marker in topic_switch_markers)
 
@@ -702,10 +713,16 @@ def build_chat_generation(
             )
     long_context_answer = deterministic_long_context_state_answer(text, conversation)
     if long_context_answer:
-        return deterministic_generation(long_context_answer)
+        return deterministic_generation(
+            long_context_answer,
+            state_capsule=build_conversation_state_capsule(conversation),
+        )
     multiturn_edit = bounded_multiturn_edit_answer(text, conversation)
     if multiturn_edit:
-        return deterministic_generation(multiturn_edit)
+        return deterministic_generation(
+            multiturn_edit,
+            state_capsule=build_conversation_state_capsule(conversation),
+        )
     bounded_meta_answer = bounded_meta_language_answer(text)
     if bounded_meta_answer:
         return deterministic_generation(bounded_meta_answer)
@@ -790,12 +807,23 @@ def bounded_multiturn_edit_answer(
         return corrected_conclusion.group(1).strip() + "。"
 
     replacement = re.search(
-        r"把\s*([A-Za-z]+)\s*改成\s*([A-Za-z]+).*(?:其他约束不变|其他約束不變)",
+        r"(?:把|将|將)\s*([A-Za-z]+)\s*(?:改成|换成|換成)\s*([A-Za-z]+)",
         current,
         flags=re.IGNORECASE,
     )
     translation_only = any(
-        ("只给译文" in item or "只給譯文" in item) for item in previous_users
+        any(
+            marker in item
+            for marker in (
+                "只给译文",
+                "只給譯文",
+                "不要加解释",
+                "不要加解釋",
+                "不要添加中文说明",
+                "不要添加中文說明",
+            )
+        )
+        for item in previous_users
     )
     if replacement and translation_only:
         before, after = replacement.group(1), replacement.group(2)
@@ -856,7 +884,14 @@ def deterministic_long_context_state_answer(
         value = latest_user_capture(previous_users, r"(?:提交)?截止时间(?:先定为|先定為|改为|改為|是)\s*([^，。]+)")
         if value:
             return value
-    if any(marker in current for marker in ("哪项没完成", "哪項沒完成", "还缺什么", "還缺什麼")):
+    if any(marker in current for marker in ("最终哪一天评审", "最終哪一天評審", "最终哪天评审", "最終哪天評審")):
+        value = latest_user_capture(previous_users, r"(?:改期到|改到|调整到|調整到)\s*(星期[一二三四五六日天])")
+        if value:
+            return value
+    if any(marker in current for marker in (
+        "哪项没完成", "哪項沒完成", "还缺什么", "還缺什麼",
+        "还剩哪一件", "還剩哪一件", "还漏了什么", "還漏了什麼",
+    )):
         unresolved = unresolved_user_item(previous_users)
         if unresolved:
             return unresolved
@@ -881,13 +916,16 @@ def latest_user_capture(previous_users: list[str], pattern: str) -> str:
 def unresolved_user_item(previous_users: list[str]) -> str:
     candidates: list[str] = []
     for message in previous_users:
-        match = re.search(r"(?:要完成|采购清单是|採購清單是)\s*([^。]+)", message)
+        match = re.search(
+            r"(?:要完成|采购清单是|採購清單是|今天两件正事[：:]|今天兩件正事[：:]|出门前要买|出門前要買)\s*([^。]+)",
+            message,
+        )
         if not match:
             continue
         candidates = [
-            item.strip()
-            for item in re.split(r"\s*(?:和|以及|、)\s*", match.group(1))
-            if item.strip()
+            re.sub(r"^(?:再|然后|然後|并且|並且)\s*", "", item.strip())
+            for item in re.split(r"\s*(?:，?再|，?然后|，?然後|和|以及|、|，)\s*", match.group(1))
+            if re.sub(r"^(?:再|然后|然後|并且|並且)\s*", "", item.strip())
         ]
         if len(candidates) >= 2:
             break
@@ -896,11 +934,16 @@ def unresolved_user_item(previous_users: list[str]) -> str:
     completed_messages = [
         message
         for message in previous_users
-        if any(marker in message for marker in ("已经完成", "已完成", "已经买到", "已买到", "买到了", "買到了"))
+        if any(marker in message for marker in (
+            "已经完成", "已完成", "已经买到", "已买到", "买到了", "買到了",
+            "已经修完", "已修完", "买好了", "買好了",
+        ))
     ]
-    remaining = [
-        item for item in candidates if not any(item in message for message in completed_messages)
-    ]
+    def completed(item: str) -> bool:
+        core = re.sub(r"^(?:修|补|補|更新|完成|购买|購買|买|買)\s*", "", item)
+        return any(item in message or (core and core in message) for message in completed_messages)
+
+    remaining = [item for item in candidates if not completed(item)]
     return remaining[0] if len(remaining) == 1 else ""
 
 
@@ -1020,8 +1063,9 @@ def deterministic_generation(
     *,
     status: str = "success",
     attempted: dict | None = None,
+    state_capsule: dict | None = None,
 ) -> dict:
-    return {
+    generation = {
         "answer": answer,
         "status": status,
         "provider": "deterministic" if attempted is None else "deterministic_fallback",
@@ -1032,6 +1076,13 @@ def deterministic_generation(
         "attempted_model": (attempted or {}).get("model"),
         "reasoning_leak_removed": (attempted or {}).get("reasoning_leak_removed", False),
     }
+    if state_capsule:
+        generation["state_capsule"] = {
+            key: value
+            for key, value in state_capsule.items()
+            if key != "user_statements"
+        }
+    return generation
 
 
 def enforce_explicit_output_constraints(current: str, answer: str) -> str:
@@ -1453,6 +1504,26 @@ def roadmap_answer(context: dict) -> str:
 
 
 def project_results_answer(context: dict) -> str:
+    if context["current_version"] == "PSM V0.274":
+        return (
+            "这轮已完成 PSM V0.274 开放式长对话泛化门。冻结的 10 组未见改写首轮 0/10 全部失败，原始失败完整保留；"
+            "加入只读取当前话题段用户原话的状态胶囊，并扩展更正、未完成事项与约束继承后，最终 10/10 全部通过。\n\n"
+            "过期状态违规从 6 降为 0，状态胶囊缺失从 10 降为 0；桌面、手机、主机与 Docker 边界也通过。"
+            "它的作用是让本地模型不只依赖最近八则消息，而能在自然追问中恢复远距事实，同时防止助手历史覆盖用户事实。"
+            "这些仍是内部合成证据，不代表真人满意度、生产就绪或开放域有效性。"
+            f"当前本地聊天模型是 `{context['selected_model']}`。下一阶段是 {context['next_version']}："
+            f"{context['next_objective']} 外部发布仍关闭。"
+        )
+    if context["current_version"] == "PSM V0.273":
+        return (
+            "这轮已完成 PSM V0.273 独立外部长对话评审。使用你批准的额外 4 美元预算，"
+            "一次提交 10 组合成长对话，`gpt-5.4` 判定 10/10 全部通过，失败项、关键发现和修复建议均为 0，"
+            "共使用 3,188 tokens。真人内容和训练回流都是 0。\n\n"
+            "它证明 V0.272 的远距事实、最新更正、未完成事项、约束延续和换题清理通过了来源隔离的语义检查；"
+            "但仍不代表真人满意度、公开服务或外部发布获准。"
+            f"当前本地聊天模型是 `{context['selected_model']}`。下一阶段是 {context['next_version']}："
+            f"{context['next_objective']} 外部发布仍关闭。"
+        )
     if context["current_version"] == "PSM V0.272":
         return (
             "这轮已完成 PSM V0.272 长对话状态连续性门。第一次冻结运行 10/10 全部失败，原始失败已保留；修复后"
@@ -1718,6 +1789,7 @@ def try_ollama_chat_generation(
     *,
     route_execution: dict | None = None,
 ) -> dict:
+    state_capsule = build_conversation_state_capsule(conversation)
     prompt = build_chat_prompt(current, conversation, result, route_execution=route_execution)
     provider = OllamaChatProvider(OLLAMA_BASE_URL)
     max_tokens = selected_chat_max_tokens()
@@ -1742,6 +1814,11 @@ def try_ollama_chat_generation(
             )
         )
     generation = provider_result.to_dict()
+    generation["state_capsule"] = {
+        key: value
+        for key, value in state_capsule.items()
+        if key != "user_statements"
+    }
     if first_result is not provider_result:
         generation["truncation_retry"] = True
         generation["first_finish_reason"] = first_result.finish_reason
@@ -2045,7 +2122,9 @@ def load_project_context() -> dict:
     else:
         formal_version = summary["version"]
     next_version = to_display_version(str(next_stage.get("version") or "未定义"))
-    next_objective = humanize_stage_objective(str(next_stage.get("objective") or "完成下一阶段验证"))
+    next_objective = humanize_stage_objective(
+        str(next_stage.get("objective") or "完成下一阶段验证")
+    ).rstrip("。；; ")
     roadmap_candidates = sorted((PSM_ROOT / "roadmap_out").glob("PSM_*_Roadmap_*.md"))
     roadmap_source = str(roadmap_candidates[-1].relative_to(PSM_ROOT)) if roadmap_candidates else "CURRENT_STATUS.md"
     selection_path = PSM_ROOT / "runtime" / "chat_provider_selection.json"

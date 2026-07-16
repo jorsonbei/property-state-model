@@ -1,6 +1,6 @@
-# PSM V0.272 Core Workspace
+# PSM V0.274 Core Workspace
 
-The current promoted project status is `psm_v0.272`. The deterministic formal evidence source remains `psm_v0.251` with 2228 records. V0.272 adds deterministic long-context state continuity without changing the formal core.
+The current promoted project status is `psm_v0.274`. The deterministic formal evidence source remains `psm_v0.251` with 2228 records. V0.274 adds a user-authoritative open-context state capsule without changing the formal core.
 
 ## Latest Result
 
@@ -9,7 +9,7 @@ The current promoted project status is `psm_v0.272`. The deterministic formal ev
 - Assistant-history contamination and stale-constraint violations are zero.
 - 189 tests, desktop/mobile browser regression, and host/Docker parity pass after local V0.271 repairs.
 - V0.271 retains the original M07/M08 external failure, then passes a user-approved 12/12 `gpt-5.4` rejudge after local repair, with zero critical findings and no API retry after the retained runner display failure.
-- V0.272 retains a 0/10 first run, then passes 10/10 across five long-context state families with zero assistant-history contamination and stale-state violations; browser and Docker boundaries pass.
+- V0.274 retains a 0/10 first run, then passes 10/10 unseen open-context conversations with zero stale-state violations and no missing state capsules; browser and Docker boundaries pass.
 - V0.273 has a sanitized ten-item package with zero authorized calls; the USD 24/24 synthetic API budget blocks external submission.
 
 ## Run
@@ -37,7 +37,7 @@ The normal chat is `http://127.0.0.1:8765/`. The historical operator page at `/t
 
 ## Boundaries
 
-- V0.272 evidence is internally authored and synthetic; it is not human evidence.
+- V0.274 evidence is internally authored and synthetic; it is not human evidence.
 - The failed V0.271 review, local repairs, and passing external rejudge remain distinct evidence states.
 - Evaluation rows cannot become training truth or grant rule-replacement authority.
 - Public service, production readiness, professional action, privacy-compliance claims, and external release authority remain closed.
@@ -45,6 +45,6 @@ The normal chat is `http://127.0.0.1:8765/`. The historical operator page at `/t
 ## Recovery
 
 - `CURRENT_STATUS.md` is the human recovery point.
-- `project_status_out/psm_v0.272_project_status.json` is the promoted machine status.
+- `project_status_out/psm_v0.274_project_status.json` is the promoted machine status.
 - `runtime/v0_273_external_long_context_checkpoint.json` records the active external-review budget blocker.
-- `roadmap_out/PSM_V0.272_to_V0.273_External_Long_Context_Roadmap.md` is the active roadmap.
+- `roadmap_out/PSM_V0.274_to_V0.275_External_Open_Context_Roadmap.md` is the active roadmap.

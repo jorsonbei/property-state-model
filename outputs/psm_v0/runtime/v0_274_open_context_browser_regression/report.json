@@ -1,0 +1,31 @@
+{
+  "schema_version": "psm_v0_274_open_context_browser_regression_v1",
+  "base_url": "http://127.0.0.1:8765",
+  "passed": true,
+  "synthetic_questions_only": true,
+  "human_participant_actions_executed": false,
+  "human_feedback_collected": false,
+  "desktop": {
+    "remoteFactPassed": true,
+    "topicSwitchPassed": true,
+    "externalReleaseClosed": true,
+    "horizontalOverflow": false,
+    "consoleErrors": 0
+  },
+  "mobile": {
+    "translationPassed": true,
+    "unresolvedWorkPassed": true,
+    "horizontalOverflow": false,
+    "consoleErrors": 0
+  },
+  "checks": {
+    "remote_user_fact_passed": true,
+    "natural_topic_switch_passed": true,
+    "inherited_translation_constraint_passed": true,
+    "unresolved_work_passed": true,
+    "external_release_closed": true,
+    "desktop_no_overflow": true,
+    "mobile_no_overflow": true,
+    "console_errors_zero": true
+  }
+}

@@ -1,0 +1,19 @@
+{
+  "schema_version": "psm_v0_275_external_open_context_checkpoint_v1",
+  "current_promoted_version": "PSM_V0.274",
+  "target_version": "PSM_V0.275",
+  "target_promoted": false,
+  "passed": false,
+  "status": "blocked_external_open_context_judge_monthly_api_budget_exhausted",
+  "requires_user_input": true,
+  "next_action": "await_additional_v0_275_external_judge_budget_authorization",
+  "review_payload_sha256": "5d166714a730735d3a61c455f0035fddb217ee68b1e2eb4c61ca38bd79728d28",
+  "reserved_month_usd": 28.0,
+  "monthly_limit_usd": 28.0,
+  "additional_authorization_required_usd": 4.0,
+  "participant_content_calls": 0,
+  "package_gate_passed": true,
+  "required_decision": "批准额外 4 美元 OpenAI 合成开放式长对话独立评审预算，或停止 V0.275 外部评审。",
+  "review_package": "runtime/v0_275_external_open_context_review_package.json",
+  "package_gate": "runtime/v0_275_external_open_context_package_gate.json"
+}

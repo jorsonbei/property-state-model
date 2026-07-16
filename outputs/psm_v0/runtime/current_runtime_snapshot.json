@@ -2,10 +2,10 @@
   "schema_version": "psm_public_runtime_snapshot_v1",
   "project_status": {
     "updated_from_local_artifacts": true,
-    "current_version": "psm_v0.272",
+    "current_version": "psm_v0.274",
     "source_evidence_version": "psm_v0.251",
-    "previous_formal_version": "psm_v0.271",
-    "completed_result": "long_context_state_continuity_and_conflict_recovery_gate_passed_after_retained_failures",
+    "previous_formal_version": "psm_v0.273",
+    "completed_result": "open_context_user_authoritative_state_capsule_gate_passed_after_retained_failures",
     "family": {
       "family_id": "v251_independent_chat_golden_blind_set_boundary_adversarial",
       "case_pack": "case_packs/v0_251_independent_chat_golden_blind_set_boundary_adversarial_cases.json",
@@ -244,10 +244,11 @@
       "rule_replacement_allowed": false
     },
     "next_stage": {
-      "version": "PSM_V0.273",
-      "objective": "对冻结的 V0.272 长对话状态回答执行来源隔离的独立外部语义裁判，重点检查用户事实权威、最新更正、未解任务、跨轮约束与持续话题切换；只提交合成问答，不提交规则、私有资料或训练字段。",
+      "version": "PSM_V0.275",
+      "objective": "对冻结的 V0.274 开放式长对话回答执行来源隔离的独立外部语义评审，检查未见改写、远距事实、最新更正、未完成事项、约束继承和自然换题；只提交合成问答，不提交规则、私人资料或训练字段。",
       "blocked": true,
-      "requires_user_input": true
+      "requires_user_input": true,
+      "required_decision": "批准额外 4 美元 OpenAI 合成开放式长对话独立评审预算，或停止 V0.275 外部评审。"
     },
     "primary_artifacts": {
       "case_pack": "case_packs/v0_251_independent_chat_golden_blind_set_boundary_adversarial_cases.json",
@@ -259,7 +260,7 @@
       "candidate_taxonomy": "taxonomy_out/psm_v0.251_candidate_taxonomy.json",
       "candidate_regression_fixtures": "fixture_out/psm_v0.251_candidate_regression_fixtures.json",
       "taxonomy_delta": "taxonomy_delta_out/psm_v0.251_taxonomy_delta.json",
-      "project_status": "project_status_out/psm_v0.272_project_status.json",
+      "project_status": "project_status_out/psm_v0.274_project_status.json",
       "regression": "regression_out/psm_v0.251_regression_check.json",
       "independent_chat_gate": "runtime/v0_251_wave_g_external_semantic_judge.json",
       "model_selection": "runtime/v0_251_base_upgrade_pairwise_gemini_pro_report.json",
@@ -427,7 +428,22 @@
       "v0_272_promotion_manifest": "runtime/v0_272_long_context_promotion_manifest.json",
       "v0_273_external_package": "runtime/v0_273_external_long_context_review_package.json",
       "v0_273_external_package_gate": "runtime/v0_273_external_long_context_package_gate.json",
-      "v0_273_checkpoint": "runtime/v0_273_external_long_context_checkpoint.json"
+      "v0_273_checkpoint": "runtime/v0_273_external_long_context_checkpoint.json",
+      "v0_273_prepared_package": "runtime/v0_273_external_long_context_review_package.json",
+      "v0_273_prepared_gate": "runtime/v0_273_external_long_context_package_gate.json",
+      "v0_273_authorized_package": "runtime/v0_273_external_long_context_authorized_review_package.json",
+      "v0_273_authorization_gate": "runtime/v0_273_external_long_context_authorization_gate.json",
+      "v0_273_external_judge": "runtime/v0_273_openai_external_long_context_judge.json",
+      "v0_273_gate": "runtime/v0_273_external_long_context_gate.json",
+      "v0_273_promotion_manifest": "runtime/v0_273_external_long_context_promotion_manifest.json",
+      "v0_274_contract": "benchmarks/v0_274_open_context_generalization_contract.json",
+      "v0_274_report": "runtime/v0_274_open_context_generalization_report.json",
+      "v0_274_gate": "runtime/v0_274_open_context_generalization_gate.json",
+      "v0_274_initial_failure_ledger": "runtime/v0_274_open_context_initial_failure_ledger.json",
+      "v0_274_browser": "runtime/v0_274_open_context_browser_regression/report.json",
+      "v0_274_docker": "runtime/v0_274_open_context_docker_boundary.json",
+      "v0_274_checkpoint": "runtime/v0_274_open_context_generalization_checkpoint.json",
+      "v0_274_promotion_manifest": "runtime/v0_274_open_context_generalization_promotion_manifest.json"
     },
     "regression": {
       "stem": "psm_v0.251",
@@ -925,6 +941,40 @@
       "contract_sha256": "b4cc6bd3eb137292ca538741e0d9f0ab73bba2f4f8daccf96a91cf9220447820",
       "errata_sha256": "91e15cf870aa922ad0d69ac51f022ae832ade1f3d6cafbd670fb4a9c1f8cb6f4",
       "gate_sha256": "60a5d93abdc06356578f2f5397bf2d9e4cf28583d0c72a6ce062b6aca3c303f2"
+    },
+    "v0_273_external_long_context_gate": {
+      "decision": "external_long_context_semantic_review_passed",
+      "passed": true,
+      "items": 10,
+      "items_passed": 10,
+      "families": 5,
+      "failed_item_ids": [],
+      "critical_findings": [],
+      "recommended_repairs": [],
+      "actual_model": "gpt-5.4-2026-03-05",
+      "total_tokens": 3188,
+      "review_payload_sha256": "ecc229f2d23bfdebc5c040affda04efb2f844bbd599935254f9d9e41ed53b971",
+      "participant_content_calls": 0,
+      "synthetic_only": true,
+      "human_validation_claimed": false,
+      "evaluation_rows_used_for_training": false,
+      "external_release_authority": false
+    },
+    "v0_274_open_context_generalization_gate": {
+      "decision": "open_context_generalization_gate_passed",
+      "passed": true,
+      "cases": 10,
+      "cases_passed": 10,
+      "families": 5,
+      "initial_failure_count": 10,
+      "state_capsule_missing": 0,
+      "stale_state_violations": 0,
+      "total_duration_ms": 82498,
+      "synthetic_only": true,
+      "human_validation_claimed": false,
+      "evaluation_rows_used_for_training": false,
+      "contract_sha256": "c88db15f6a62ea4b24a3d9e4ab16887f6067e369621894156bbd4671de7c8b6e",
+      "gate_sha256": "b8a8a30d51016088eb1572b0c8074e1b7cde26c5c1b6380759677cb1b9ba3deb"
     }
   },
   "optional_project_status": {
