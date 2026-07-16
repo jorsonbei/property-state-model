@@ -1,0 +1,44 @@
+name: ci
+
+on:
+  push:
+  pull_request:
+
+permissions:
+  contents: read
+
+jobs:
+  python:
+    runs-on: ubuntu-latest
+    strategy:
+      fail-fast: false
+      matrix:
+        python-version: ["3.11", "3.12"]
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: ${{ matrix.python-version }}
+      - name: Verify project
+        run: make check
+
+  container:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Build image
+        run: docker build --tag property-state-model:ci .
+      - name: Start synthetic-only container
+        run: docker run --detach --name psm-ci --publish 127.0.0.1:18765:8765 property-state-model:ci
+      - name: Verify health, boundary, and non-root runtime
+        run: |
+          for attempt in $(seq 1 30); do
+            curl --fail --silent http://127.0.0.1:18765/api/health >/dev/null && break
+            sleep 1
+          done
+          curl --fail --silent http://127.0.0.1:18765/api/status | python -c 'import json,sys; data=json.load(sys.stdin); assert data["ready_for_external_user_trial"] is False; assert data["human_participant_workflow_enabled"] is False; assert data["ready_for_supervised_invite_only_trial"] is False; assert data["external_trial_participant_maximum"] == 0'
+          test "$(docker exec psm-ci id -u)" = "10001"
+          docker exec psm-ci test ! -e /app/outputs/psm_v0/V0_262_INVITE_ONLY_TRIAL_NOTICE.md
+      - name: Stop container
+        if: always()
+        run: docker rm --force psm-ci || true
