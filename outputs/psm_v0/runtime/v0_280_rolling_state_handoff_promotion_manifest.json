@@ -1,0 +1,56 @@
+{
+  "schema_version": "psm_v0_280_rolling_state_handoff_promotion_manifest_v1",
+  "version": "PSM_V0.280",
+  "promoted_at": "2026-07-16",
+  "promoted": true,
+  "decision": "rolling_state_handoff_gate_passed",
+  "formal_core_source": "PSM_V0.251",
+  "formal_core_records": 2228,
+  "rolling_state_handoff": {
+    "decision": "rolling_state_handoff_gate_passed",
+    "passed": true,
+    "cases": 4,
+    "cases_passed": 4,
+    "families": 4,
+    "initial_window_truncation_failures": 4,
+    "window_messages": 120,
+    "maximum_effective_context_messages": 122,
+    "maximum_rolling_user_statements": 20,
+    "rolling_recovery_failures": 0,
+    "stale_state_violations": 0,
+    "ephemeral_idle_seconds": 1800,
+    "maximum_sessions": 64,
+    "disk_persistence_of_user_statements": false,
+    "synthetic_only": true,
+    "human_validation_claimed": false,
+    "evaluation_rows_used_for_training": false,
+    "contract_sha256": "41bff7c753615245232c1bf0aa05951fbac6ed231ea5d8d9b46399209e4f9389",
+    "gate_sha256": "f485ae07c783c955efb911525dacb8d2a46c2308f853096dfac3b3d941e9b3c1"
+  },
+  "evidence": {
+    "contract": "benchmarks/v0_280_rolling_state_handoff_contract.json",
+    "initial_failure_ledger": "runtime/v0_280_window_truncation_initial_failure_ledger.json",
+    "report": "runtime/v0_280_rolling_state_handoff_report.json",
+    "gate": "runtime/v0_280_rolling_state_handoff_gate.json",
+    "docker": "runtime/v0_280_rolling_state_handoff_docker_boundary.json"
+  },
+  "privacy": {
+    "disk_persistence_of_user_statements_allowed": false,
+    "ephemeral_memory_only": true,
+    "maximum_session_idle_seconds": 1800,
+    "maximum_sessions": 64
+  },
+  "release_boundary": {
+    "human_validation_claimed": false,
+    "production_readiness_claimed": false,
+    "public_service_allowed": false,
+    "rule_replacement_allowed": false,
+    "external_release_authority": false
+  },
+  "next_stage": {
+    "version": "PSM_V0.281",
+    "objective": "对跨窗口滚动状态恢复执行来源隔离的独立外部语义评审，并验证会话过期、重置与并发隔离边界。",
+    "blocked": false,
+    "requires_user_input": false
+  }
+}

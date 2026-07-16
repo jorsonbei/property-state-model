@@ -16,6 +16,8 @@ from psm_v0.openai_external_contract_judge import (
 PACKAGE_SCHEMA = "psm_v0_275_external_open_context_review_package_v1"
 PREPARED_AUTHORIZATION = "not_authorized_monthly_budget_exhausted"
 APPROVED_AUTHORIZATION = "approved_by_user_additional_usd_4_v0_275_synthetic_open_context_judge"
+APPROVED_REJUDGE_AUTHORIZATION = "approved_by_user_2026_07_16_additional_usd_4_v0_275_synthetic_open_context_rejudge"
+APPROVED_AUTONOMOUS_TOKEN_AUTHORIZATION = "approved_by_user_up_to_1000000_tokens_v0_275_synthetic_external_judge"
 EXPECTED_ITEMS = 10
 DIMENSIONS = (
     "semantic_correctness",
@@ -50,13 +52,33 @@ def validate_review_package(package: dict, *, require_authorization: bool = Fals
     if budget.get("currency") != "USD":
         raise ValueError("V0.275 external package currency is invalid.")
     if require_authorization:
-        if package.get("authorization") != APPROVED_AUTHORIZATION:
+        authorization = package.get("authorization")
+        expected_monthly_total = {
+            APPROVED_AUTHORIZATION: 32.0,
+            APPROVED_REJUDGE_AUTHORIZATION: 36.0,
+        }.get(authorization)
+        if authorization == APPROVED_AUTONOMOUS_TOKEN_AUTHORIZATION:
+            observed_tokens = int(budget.get("observed_tokens_before", -1))
+            maximum_call_tokens = int(budget.get("maximum_call_tokens", -1))
+            reserved_total_tokens = int(budget.get("reserved_total_tokens", -1))
+            if not (
+                budget.get("maximum_api_calls") == 1
+                and float(budget.get("reserved_usd", -1)) == 0.0
+                and int(budget.get("token_authority_limit", 0)) == 1_000_000
+                and observed_tokens >= 0
+                and maximum_call_tokens == 12_000
+                and reserved_total_tokens == observed_tokens + maximum_call_tokens
+                and reserved_total_tokens <= 1_000_000
+                and budget.get("approval_required") is False
+            ):
+                raise ValueError("V0.275 autonomous token authorization is invalid.")
+        elif expected_monthly_total is None:
             raise ValueError("V0.275 external open-context review is not authorized.")
-        if not (
+        elif not (
             budget.get("maximum_api_calls") == 1
             and float(budget.get("reserved_usd", 0)) == 4.0
-            and float(budget.get("reserved_total_month_usd", 0)) == 32.0
-            and float(budget.get("monthly_limit_usd", 0)) == 32.0
+            and float(budget.get("reserved_total_month_usd", 0)) == expected_monthly_total
+            and float(budget.get("monthly_limit_usd", 0)) == expected_monthly_total
         ):
             raise ValueError("V0.275 authorized call budget is invalid.")
     else:

@@ -1,0 +1,24 @@
+{
+  "schema_version": "psm_v0_275_external_open_context_review_attempt_3_package_gate_v1",
+  "passed": true,
+  "checks": {
+    "original_external_failure_retained": true,
+    "first_external_rejudge_failure_retained": true,
+    "second_local_repair_gate_passed": true,
+    "repaired_payload_hash_retained": true,
+    "prior_checkpoint_requires_old_budget_decision": true,
+    "single_call_authorized": true,
+    "token_authority_exactly_one_million": true,
+    "call_reservation_exactly_twelve_thousand": true,
+    "reserved_total_within_token_authority": true,
+    "approval_not_required_within_authority": true,
+    "privacy_boundary_closed": true,
+    "release_boundary_closed": true,
+    "prohibited_material_absent": true
+  },
+  "authorization": "approved_by_user_up_to_1000000_tokens_v0_275_synthetic_external_judge",
+  "authorization_scope": "synthetic_external_judging_within_1000000_token_authority",
+  "review_payload_sha256": "6db0978f57a38de7c629569af519b4499092da143e85afc4d487f7dc0b0e8d2a",
+  "authorized_package_sha256": "fdf2a7e1c48563be716101639dfad96a527aef99320dc93d267172f3635eea3e",
+  "prohibited_material_found": []
+}

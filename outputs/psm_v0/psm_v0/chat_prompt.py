@@ -21,6 +21,80 @@ TOPIC_SWITCH_MARKERS = (
     "这一段到此为止",
     "這一段到此為止",
 )
+CAPSULE_COMPRESSION_THRESHOLD = 12
+CAPSULE_MAX_USER_STATEMENTS = 20
+CAPSULE_RECENT_USER_STATEMENTS = 8
+DURABLE_STATE_MARKERS = (
+    "代号",
+    "代號",
+    "称呼",
+    "稱呼",
+    "固定在",
+    "定在",
+    "安排在",
+    "文件名",
+    "檔名",
+    "截止",
+    "改为",
+    "改為",
+    "改成",
+    "换成",
+    "換成",
+    "改期",
+    "取消",
+    "清单",
+    "清單",
+    "两件正事",
+    "兩件正事",
+    "已经完成",
+    "已完成",
+    "已经修完",
+    "已修完",
+    "已经买到",
+    "已買到",
+    "买到了",
+    "買到了",
+    "未完成",
+    "还没",
+    "還沒",
+    "只写",
+    "只寫",
+    "只给",
+    "只給",
+    "不要",
+    "格式",
+    "照旧",
+    "照舊",
+    "其他不变",
+    "其他不變",
+    "译成",
+    "譯成",
+)
+
+
+def _is_durable_user_statement(statement: str) -> bool:
+    folded = statement.casefold()
+    return any(marker in folded for marker in (*TOPIC_SWITCH_MARKERS, *DURABLE_STATE_MARKERS))
+
+
+def _compress_user_statements(statements: list[str]) -> list[str]:
+    if len(statements) <= CAPSULE_COMPRESSION_THRESHOLD:
+        return statements[-CAPSULE_COMPRESSION_THRESHOLD:]
+    recent_start = max(0, len(statements) - CAPSULE_RECENT_USER_STATEMENTS)
+    recent_indices = list(range(recent_start, len(statements)))
+    durable_indices = [
+        index
+        for index, statement in enumerate(statements[:recent_start])
+        if _is_durable_user_statement(statement)
+    ]
+    available = CAPSULE_MAX_USER_STATEMENTS - len(recent_indices)
+    if len(durable_indices) > available:
+        if available <= 1:
+            durable_indices = durable_indices[:available]
+        else:
+            durable_indices = [durable_indices[0], *durable_indices[-(available - 1):]]
+    selected_indices = sorted({*durable_indices, *recent_indices})
+    return [statements[index] for index in selected_indices]
 
 
 def build_conversation_state_capsule(conversation: list[dict[str, str]]) -> dict:
@@ -34,16 +108,23 @@ def build_conversation_state_capsule(conversation: list[dict[str, str]]) -> dict
             switch_index = index
             break
     active = conversation[switch_index:]
-    user_statements = [
+    source_user_statements = [
         str(item.get("content") or "").strip()[:500]
         for item in active
         if item.get("role") == "user" and str(item.get("content") or "").strip()
-    ][-12:]
+    ]
+    user_statements = _compress_user_statements(source_user_statements)
     canonical = json.dumps(user_statements, ensure_ascii=False, separators=(",", ":"))
     return {
         "user_authoritative": True,
         "topic_switch_applied": switch_index > 0,
         "active_user_statements": len(user_statements),
+        "source_user_statements": len(source_user_statements),
+        "retained_user_statements": len(user_statements),
+        "dropped_user_statements": len(source_user_statements) - len(user_statements),
+        "compression_applied": len(source_user_statements) > CAPSULE_COMPRESSION_THRESHOLD,
+        "compression_strategy": "durable_state_plus_recent",
+        "maximum_retained_user_statements": CAPSULE_MAX_USER_STATEMENTS,
         "user_statements": user_statements,
         "sha256": hashlib.sha256(canonical.encode("utf-8")).hexdigest(),
     }

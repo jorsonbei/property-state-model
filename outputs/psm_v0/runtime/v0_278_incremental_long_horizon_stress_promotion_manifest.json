@@ -1,0 +1,53 @@
+{
+  "schema_version": "psm_v0_278_incremental_long_horizon_stress_promotion_manifest_v1",
+  "version": "PSM_V0.278",
+  "promoted_at": "2026-07-16",
+  "promoted": true,
+  "decision": "incremental_long_horizon_stress_gate_passed",
+  "formal_core_source": "PSM_V0.251",
+  "formal_core_records": 2228,
+  "incremental_long_horizon_stress": {
+    "decision": "incremental_long_horizon_stress_gate_passed",
+    "passed": true,
+    "cases": 10,
+    "cases_passed": 10,
+    "families": 5,
+    "message_levels": [
+      81,
+      119
+    ],
+    "maximum_messages": 119,
+    "historical_window_baseline_failures": 10,
+    "compression_missing": 0,
+    "capsule_recovery_failures": 0,
+    "stale_state_violations": 0,
+    "total_duration_ms": 210,
+    "p95_duration_ms": 30,
+    "maximum_retained_user_statements": 20,
+    "synthetic_only": true,
+    "human_validation_claimed": false,
+    "evaluation_rows_used_for_training": false,
+    "contract_sha256": "6c5e54665de755ec5ce099fbeeba0a9cd9731a9fe15e503725c33c80ff28cf94",
+    "gate_sha256": "266c5100659fd414ca3ad986531e7738e39633138bacf2457cbade8d88447f93"
+  },
+  "evidence": {
+    "contract": "benchmarks/v0_278_incremental_long_horizon_stress_contract.json",
+    "report": "runtime/v0_278_incremental_long_horizon_stress_report.json",
+    "gate": "runtime/v0_278_incremental_long_horizon_stress_gate.json",
+    "docker": "runtime/v0_278_incremental_long_horizon_stress_docker_boundary.json"
+  },
+  "release_boundary": {
+    "human_validation_claimed": false,
+    "open_domain_generalization_claimed": false,
+    "production_readiness_claimed": false,
+    "public_service_allowed": false,
+    "rule_replacement_allowed": false,
+    "external_release_authority": false
+  },
+  "next_stage": {
+    "version": "PSM_V0.279",
+    "objective": "对冻结的 81 与 119 消息压力测试执行来源隔离的独立外部语义评审，只提交合成长对话与最终答案。",
+    "blocked": false,
+    "requires_user_input": false
+  }
+}

@@ -1,0 +1,52 @@
+{
+  "schema_version": "psm_v0_276_long_horizon_state_compression_promotion_manifest_v1",
+  "version": "PSM_V0.276",
+  "promoted_at": "2026-07-16",
+  "promoted": true,
+  "decision": "long_horizon_state_compression_gate_passed",
+  "formal_core_source": "PSM_V0.251",
+  "formal_core_records": 2228,
+  "long_horizon_state_compression": {
+    "decision": "long_horizon_state_compression_gate_passed",
+    "passed": true,
+    "cases": 10,
+    "cases_passed": 10,
+    "families": 5,
+    "initial_failure_count": 10,
+    "evaluator_gap_failures_retained": 10,
+    "historical_window_baseline_failures": 10,
+    "compression_missing": 0,
+    "capsule_recovery_failures": 0,
+    "stale_state_violations": 0,
+    "total_duration_ms": 264,
+    "maximum_input_messages": 47,
+    "maximum_retained_user_statements": 20,
+    "synthetic_only": true,
+    "human_validation_claimed": false,
+    "evaluation_rows_used_for_training": false,
+    "contract_sha256": "0e9a9fb2597f36d669860f8e26fe4b1195988b69abc84b3c325e342a84ac3a0c",
+    "gate_sha256": "5719315279bf4b1b59919468e0da5c2edb72da66537906cc9e01795271246d07"
+  },
+  "evidence": {
+    "contract": "benchmarks/v0_276_long_horizon_state_compression_contract.json",
+    "report": "runtime/v0_276_long_horizon_state_compression_report.json",
+    "gate": "runtime/v0_276_long_horizon_state_compression_gate.json",
+    "initial_failure_ledger": "runtime/v0_276_long_horizon_state_compression_initial_failure_ledger.json",
+    "evaluator_gap": "runtime/v0_276_long_horizon_state_compression_evaluator_gap_report.json",
+    "docker": "runtime/v0_276_long_horizon_state_compression_docker_boundary.json"
+  },
+  "release_boundary": {
+    "human_validation_claimed": false,
+    "open_domain_generalization_claimed": false,
+    "production_readiness_claimed": false,
+    "public_service_allowed": false,
+    "rule_replacement_allowed": false,
+    "external_release_authority": false
+  },
+  "next_stage": {
+    "version": "PSM_V0.277",
+    "objective": "对冻结的 V0.276 长时程对话答案和状态恢复结果执行来源隔离的独立外部语义评审；只提交合成长对话与最终答案，不提交规则、私人资料、状态标签或训练字段。",
+    "blocked": false,
+    "requires_user_input": false
+  }
+}

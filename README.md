@@ -9,7 +9,7 @@ PSM is an experimental state-first AI control layer. It routes a request through
 - Deterministic state pipeline: `Q -> Omega -> phi -> Delta sigma -> Pi -> eta -> B_sigma -> Sigma+`.
 - Candidate generation adapters, lexical auditing, deterministic gating, failure ledger, and regression artifacts.
 - Local chat alpha backed by Ollama.
-- Current public baseline: `PSM V0.274` (formal 2228-record core evidence source: `PSM V0.251`).
+- Current public baseline: `PSM V0.282` (formal 2228-record core evidence source: `PSM V0.251`).
 - V0.251's fresh externally authored Wave G passed 20/20 under an independent external semantic judge; usefulness, safety, correctness, relevance, boundary quality, and hallucination control were each 1.0000 on that frozen synthetic blind wave.
 - V0.252 adds a stable internal chat-product gate with cancel, timeout, retry, recovery, progressive display, hidden debug evidence, and desktop/mobile/real-backend browser regression.
 - V0.253 replaces passive Omega route labels with four executable local/read-only evidence adapters and a fail-closed provenance/failure-ledger contract.
@@ -32,7 +32,10 @@ PSM is an experimental state-first AI control layer. It routes a request through
 - V0.270 passes 12/12 frozen multi-turn cases after retaining five initial failures. It preserves assistant references, explicit topic switches, user corrections, literal exclusions, three-step formatting, and translation-only constraints without assistant-history contamination.
 - V0.271 retains its first `gpt-5.4` failure on M07/M08, repairs both over-answers locally, and then passes a separately authorized 12/12 independent rejudge with zero failed items or critical findings. The one post-write runner reporting failure is retained and did not trigger an API retry. The evidence is synthetic and grants no external release authority.
 - V0.274 retains a 0/10 first open-context run, adds a user-authoritative state capsule and broader correction, unresolved-work, constraint-inheritance, and topic-switch handling, then passes 10/10 with zero stale-state violations. Desktop/mobile and host/Docker boundaries pass; V0.273 also independently passed 10/10 with one authorized external call.
-- V0.275 retains its first independent external FAIL on O01, O02, and O10 after one authorized call. Local repairs now pass the frozen 10/10 contract and change only those three answers, but V0.275 remains unpromoted until a separately authorized external rejudge passes.
+- V0.275 retains two independent failed reviews, repairs O01/O02/O09/O10 locally, and then passes a third 10/10 `gpt-5.4` review with zero critical findings. Synthetic external judging is now governed by a cumulative 1,000,000-token user authorization.
+- V0.276-V0.279 extend durable state recovery from 43 to 119 messages. The V0.276 baseline failed 10/10; final local gates pass 10/10, and two source-isolated external reviews pass 10/10. The 81/119-message stress P95 is 30 ms.
+- V0.280 adds rolling state handoff after the original fact exits the 120-message product window. The retained truncation baseline failed 4/4; final local and host/Docker gates pass 4/4 while keeping at most 20 user statements in ephemeral memory for 30 minutes, with no user-statement disk persistence.
+- V0.281 passes 11 session isolation, expiry, replay, and capacity checks plus a 4/4 independent external semantic review. V0.282 passes a real Playwright desktop/mobile lifecycle regression: the cross-window answer is visible, reset/reload rotate sessions, layout overflow is zero, and browser console errors are zero.
 
 This repository is an experimental research and engineering system. It is not a medical, legal, investment, production-release, or external-user authorization system. Passing synthetic regressions does not prove open-domain generalization.
 
@@ -121,6 +124,20 @@ make browser-regression-v272-long-context
 make long-context-v272-docker
 make promote-v272
 make prepare-v273
+make build-v276
+make long-horizon-v276-eval
+make prepare-v277
+make judge-v277-openai
+make build-v278
+make stress-v278-eval
+make prepare-v279
+make judge-v279-openai
+make build-v280
+make rolling-v280-eval
+make isolation-v281-eval
+make prepare-v281
+make judge-v281-openai
+make browser-v282-rolling
 ```
 
 The historical local operator page is `http://127.0.0.1:8765/trial-enrollment`. It displays the completed V0.264 supervised-pilot record. V0.274 collects no participant ratings and requires no human actions.
@@ -168,7 +185,7 @@ make judge-v251-external
 
 - Human recovery point: [`outputs/psm_v0/CURRENT_STATUS.md`](outputs/psm_v0/CURRENT_STATUS.md)
 - Architecture: [`outputs/psm_v0/PSM_V0_Blueprint.md`](outputs/psm_v0/PSM_V0_Blueprint.md)
-- Current execution roadmap: [`outputs/psm_v0/roadmap_out/PSM_V0.274_to_V0.275_External_Open_Context_Roadmap.md`](outputs/psm_v0/roadmap_out/PSM_V0.274_to_V0.275_External_Open_Context_Roadmap.md)
+- Current execution roadmap: [`outputs/psm_v0/roadmap_out/PSM_V0.282_to_V0.283_Restart_Recovery_Roadmap.md`](outputs/psm_v0/roadmap_out/PSM_V0.282_to_V0.283_Restart_Recovery_Roadmap.md)
 
 ## Open-source boundary
 

@@ -1,0 +1,43 @@
+{
+  "schema_version": "psm_v0_280_rolling_state_handoff_gate_v1",
+  "version": "PSM_V0.280-candidate",
+  "passed": true,
+  "decision": "rolling_state_handoff_gate_passed",
+  "checks": {
+    "case_count_matches": true,
+    "all_cases_pass": true,
+    "initial_baseline_failures_retained": true,
+    "rolling_state_applied_for_all": true,
+    "rolling_recovery_failures_zero": true,
+    "stale_state_violations_zero": true,
+    "retained_v0_279_promotion": true,
+    "disk_persistence_disabled": true,
+    "ephemeral_memory_bounded": true,
+    "evaluation_backflow_zero": true,
+    "release_boundary_closed": true
+  },
+  "metrics": {
+    "cases": 4,
+    "passed": 4,
+    "failed": 0,
+    "initial_baseline_failures": 4,
+    "rolling_state_missing": 0,
+    "rolling_recovery_failures": 0,
+    "stale_state_violations": 0,
+    "total_duration_ms": 108,
+    "maximum_effective_context_messages": 122
+  },
+  "privacy": {
+    "disk_persistence_of_user_statements_allowed": false,
+    "ephemeral_memory_only": true,
+    "maximum_session_idle_seconds": 1800,
+    "maximum_sessions": 64
+  },
+  "release_boundary": {
+    "human_validation_claimed": false,
+    "production_readiness_claimed": false,
+    "public_service_allowed": false,
+    "rule_replacement_allowed": false,
+    "external_release_authority": false
+  }
+}

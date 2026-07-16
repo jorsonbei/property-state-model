@@ -1,0 +1,12 @@
+{
+  "schema_version": "psm_v0_278_incremental_long_horizon_stress_checkpoint_v1",
+  "current_promoted_version": "PSM_V0.278",
+  "target_version": "PSM_V0.278",
+  "target_promoted": true,
+  "passed": true,
+  "status": "v0_278_promoted_v0_279_external_stress_review_open",
+  "requires_user_input": false,
+  "next_action": "build_v0_279_external_stress_review_package",
+  "promotion_manifest": "runtime/v0_278_incremental_long_horizon_stress_promotion_manifest.json",
+  "required_decision": "无；合成外部评审可在 1,000,000-token 授权内自动执行。"
+}

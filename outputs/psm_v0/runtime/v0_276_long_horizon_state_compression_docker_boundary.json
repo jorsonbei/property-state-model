@@ -1,0 +1,31 @@
+{
+  "schema_version": "psm_v0_276_long_horizon_state_compression_docker_boundary_v1",
+  "passed": true,
+  "checks": {
+    "long_horizon_gate_passed": true,
+    "all_ten_cases_passed": true,
+    "host_and_docker_versions_are_v0_275": true,
+    "remote_fact_host": true,
+    "remote_fact_docker": true,
+    "host_retains_long_history": true,
+    "docker_retains_long_history": true,
+    "host_compression_applied": true,
+    "docker_compression_applied": true,
+    "public_capsules_hide_raw_user_state": true,
+    "frontend_retains_120_messages": true,
+    "long_horizon_report_in_docker": true,
+    "external_user_release_closed": true,
+    "docker_localhost_only": true
+  },
+  "human_feedback_collected": false,
+  "human_validation_claimed": false,
+  "evaluation_rows_used_for_training": false,
+  "host": {
+    "version": "PSM V0.275",
+    "history_messages": 43
+  },
+  "docker": {
+    "version": "PSM V0.275",
+    "history_messages": 43
+  }
+}

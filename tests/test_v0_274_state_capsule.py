@@ -105,6 +105,44 @@ class ConversationStateCapsuleTests(unittest.TestCase):
         self.assertIn("新鲜食材", answer)
         self.assertNotIn("生产放行", answer)
 
+    def test_topic_switched_flavor_comparison_is_direct(self) -> None:
+        conversation = [
+            {"role": "user", "content": "我出现呼吸困难和胸口压迫感。"},
+            {"role": "assistant", "content": "这可能需要立即联系当地急救。"},
+            {"role": "user", "content": "接下来不谈健康问题了，改聊咖啡和茶的味道。"},
+            {"role": "assistant", "content": "咖啡常有烘焙苦香，茶的香气更轻。"},
+            {"role": "user", "content": "只谈日常风味。"},
+            {"role": "assistant", "content": "好的。"},
+            {"role": "user", "content": "不比较提神效果。"},
+            {"role": "assistant", "content": "明白。"},
+            {"role": "user", "content": "先说入口感觉。"},
+            {"role": "assistant", "content": "可以。"},
+            {"role": "user", "content": "哪一种通常更苦？"},
+        ]
+        self.assertEqual(
+            deterministic_long_context_state_answer(conversation[-1]["content"], conversation),
+            "咖啡通常更苦。",
+        )
+
+    def test_long_history_capsule_retains_durable_state_and_recent_turns(self) -> None:
+        conversation = [
+            {"role": "user", "content": "项目代号定为白砾。"},
+            {"role": "assistant", "content": "已记录。"},
+        ]
+        for index in range(20):
+            conversation.extend([
+                {"role": "user", "content": f"过程备注 {index + 1}。"},
+                {"role": "assistant", "content": "已记录。"},
+            ])
+        conversation.append({"role": "user", "content": "最早确定的项目代号是什么？"})
+        capsule = build_conversation_state_capsule(conversation)
+        self.assertTrue(capsule["compression_applied"])
+        self.assertEqual(capsule["source_user_statements"], 22)
+        self.assertLessEqual(capsule["retained_user_statements"], 20)
+        self.assertIn("项目代号定为白砾。", capsule["user_statements"])
+        self.assertIn("最早确定的项目代号是什么？", capsule["user_statements"])
+        self.assertNotIn("过程备注 1。", capsule["user_statements"])
+
 
 if __name__ == "__main__":
     unittest.main()

@@ -59,6 +59,15 @@ class ProductFrontendContractTests(unittest.TestCase):
         self.assertNotIn("message system", renderer)
         self.assertNotIn("debug-panel", renderer)
 
+    def test_long_horizon_chat_keeps_the_server_history_limit(self) -> None:
+        self.assertIn("if (state.messages.length > 120)", self.javascript)
+        self.assertIn("state.messages.slice(-120)", self.javascript)
+
+    def test_chat_carries_ephemeral_session_and_message_sequence(self) -> None:
+        self.assertIn("session_id: state.sessionId", self.javascript)
+        self.assertIn("state.sessionId = createSessionId()", self.javascript)
+        self.assertIn("({ id, role, content })", self.javascript)
+
     def test_mobile_layout_has_stable_tracks_and_overflow_controls(self) -> None:
         self.assertIn("grid-template-columns: repeat(3, minmax(0, 1fr))", self.css)
         self.assertIn("overflow-x: auto", self.css)

@@ -1,0 +1,99 @@
+{
+  "schema_version": "psm_v0_281_openai_external_rolling_state_judge_v1",
+  "version": "PSM_V0.281-candidate",
+  "reviewed_at": "2026-07-16T03:54:37.595118+00:00",
+  "provider": "OpenAI",
+  "requested_model": "gpt-5.4",
+  "actual_model": "gpt-5.4-2026-03-05",
+  "endpoint": "/v1/responses",
+  "http_status": 200,
+  "response_status": "completed",
+  "response_id": "resp_006173455b61e0c5016a5855f6c268819997ffc34d1a392500",
+  "request_id": "req_cd5ec1130a97470c91f29d8cb8e5304a",
+  "store": false,
+  "api_key_persisted_in_artifact": false,
+  "package_sha256": "1a102d3b2f75a06b887eee81be228df46999bc8b56a6332e648c49d8c4d69c41",
+  "review_payload_sha256": "a0a6d89f525266668c555fafd7c9688da2394547c32c7b55899ad75b86eb8bcd",
+  "request_payload_sha256": "db524b4c0a61f7a86c22ccaed7fa77a325aa9b73a6fc22c7fa93b433b28ebeaf",
+  "submission_scope": {
+    "synthetic_only": true,
+    "contains_private_data": false,
+    "contains_user_documents": false,
+    "contains_participant_content": false,
+    "contains_secrets": false,
+    "contains_local_paths": false,
+    "contains_candidate_rules": false,
+    "contains_hidden_labels": false,
+    "contains_state_capsules": false,
+    "training_eligible": false
+  },
+  "budget": {
+    "maximum_api_calls": 1,
+    "token_authority_limit": 1000000,
+    "observed_tokens_before": 135247,
+    "maximum_call_tokens": 45000,
+    "reserved_total_tokens": 180247,
+    "approval_required": false,
+    "authorization_scope": "synthetic_external_judging_only"
+  },
+  "usage": {
+    "input_tokens": 14398,
+    "input_tokens_details": {
+      "cache_write_tokens": 0,
+      "cached_tokens": 0
+    },
+    "output_tokens": 771,
+    "output_tokens_details": {
+      "reasoning_tokens": 516
+    },
+    "total_tokens": 15169
+  },
+  "review": {
+    "review_payload_sha256": "a0a6d89f525266668c555fafd7c9688da2394547c32c7b55899ad75b86eb8bcd",
+    "verdict": "pass",
+    "failed_item_ids": [],
+    "critical_findings": [],
+    "recommended_repairs": [],
+    "item_reviews": [
+      {
+        "review_id": "R01",
+        "verdict": "pass",
+        "dimension_failures": [],
+        "finding": "Correctly recovered the remote initial codename after the long filler span and obeyed the explicit constraint to answer with only the codename."
+      },
+      {
+        "review_id": "R02",
+        "verdict": "pass",
+        "dimension_failures": [],
+        "finding": "Correctly prioritized the later filename correction over the obsolete earlier value and answered directly with the final filename."
+      },
+      {
+        "review_id": "R03",
+        "verdict": "pass",
+        "dimension_failures": [],
+        "finding": "Correctly resumed only the unresolved task after recognizing that the index-page task had already been completed."
+      },
+      {
+        "review_id": "R04",
+        "verdict": "pass",
+        "dimension_failures": [],
+        "finding": "Correctly isolated the prior health topic after the explicit switch and directly answered the new flavor question without carrying over the old topic."
+      }
+    ]
+  },
+  "gate_checks": {
+    "review_payload_sha256_match": true,
+    "exact_item_coverage": true,
+    "response_internally_consistent": true,
+    "external_verdict_pass": true
+  },
+  "passed": true,
+  "release_boundary": {
+    "semantic_review_only": true,
+    "participant_content_submitted": false,
+    "training_feedback_written": false,
+    "rule_replacement_allowed": false,
+    "public_service_allowed": false,
+    "external_release_authority": false
+  }
+}

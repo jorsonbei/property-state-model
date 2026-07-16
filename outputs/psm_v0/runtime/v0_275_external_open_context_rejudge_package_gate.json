@@ -1,0 +1,25 @@
+{
+  "schema_version": "psm_v0_275_external_open_context_rejudge_package_gate_v1",
+  "passed": true,
+  "checks": {
+    "original_external_failure_retained": true,
+    "local_repair_report_passed": true,
+    "local_repair_gate_passed": true,
+    "repaired_payload_hash_retained": true,
+    "only_failed_items_changed": true,
+    "prior_budget_closed": true,
+    "prior_checkpoint_blocked": true,
+    "single_rejudge_call_authorized": true,
+    "additional_budget_exactly_four_usd": true,
+    "effective_limit_exactly_thirty_six_usd": true,
+    "participant_content_calls_zero": true,
+    "privacy_boundary_closed": true,
+    "release_boundary_closed": true,
+    "prohibited_material_absent": true
+  },
+  "authorization": "approved_by_user_2026_07_16_additional_usd_4_v0_275_synthetic_open_context_rejudge",
+  "authorization_scope": "one_synthetic_open_context_semantic_rejudge_only",
+  "review_payload_sha256": "789d3a1b6233aef46e16ae0a35d6918cbaa3f3c1e397e2b6da8e634ddbf4d84e",
+  "authorized_package_sha256": "f4489a62fafda01ca87ffb1dda1648610688c2e507572e9400d3fb95cdb6c6c6",
+  "prohibited_material_found": []
+}

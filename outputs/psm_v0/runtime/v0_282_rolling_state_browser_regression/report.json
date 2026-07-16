@@ -1,0 +1,36 @@
+{
+  "schema_version": "psm_v0_282_rolling_state_browser_regression_v1",
+  "version": "PSM_V0.282-candidate",
+  "base_url": "http://127.0.0.1:8765",
+  "passed": true,
+  "synthetic_questions_only": true,
+  "human_participant_actions_executed": false,
+  "human_feedback_collected": false,
+  "browser_memory_persisted_after_reload": false,
+  "desktop": {
+    "answer": "白砾",
+    "visibleAnswer": "白砾",
+    "boundedMessages": 120,
+    "resetRotatedSession": true,
+    "reloadRotatedSession": true,
+    "externalReleaseClosed": true,
+    "horizontalOverflow": false,
+    "consoleErrors": 0
+  },
+  "mobile": {
+    "validEphemeralSession": true,
+    "horizontalOverflow": false,
+    "consoleErrors": 0
+  },
+  "checks": {
+    "cross_window_answer_visible": true,
+    "browser_window_bounded_to_120": true,
+    "reset_rotates_session": true,
+    "reload_rotates_session": true,
+    "external_release_closed": true,
+    "desktop_no_overflow": true,
+    "mobile_no_overflow": true,
+    "mobile_session_valid": true,
+    "console_errors_zero": true
+  }
+}

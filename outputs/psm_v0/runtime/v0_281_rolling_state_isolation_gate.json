@@ -1,0 +1,25 @@
+{
+  "schema_version": "psm_v0_281_rolling_state_isolation_gate_v1",
+  "passed": true,
+  "decision": "rolling_state_isolation_gate_passed",
+  "checks": {
+    "session_a_contains_only_a_fact": true,
+    "session_b_contains_only_b_fact": true,
+    "replay_is_idempotent": true,
+    "metadata_is_ephemeral": true,
+    "disk_persistence_disabled": true,
+    "expired_session_a_removed": true,
+    "expired_session_b_removed": true,
+    "trigger_session_retained": true,
+    "session_count_bounded": true,
+    "oldest_session_evicted": true,
+    "newest_session_retained": true
+  },
+  "metrics": {
+    "maximum_sessions": 64,
+    "idle_expiry_seconds": 1800,
+    "retained_sessions_after_capacity_test": 64,
+    "cross_session_leaks": 0,
+    "disk_writes": 0
+  }
+}

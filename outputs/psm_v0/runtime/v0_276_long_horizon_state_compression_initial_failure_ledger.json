@@ -1,0 +1,217 @@
+{
+  "schema_version": "psm_v0_276_long_horizon_state_compression_initial_failure_ledger_v1",
+  "version": "PSM_V0.276-candidate",
+  "contract_sha256": "0e9a9fb2597f36d669860f8e26fe4b1195988b69abc84b3c325e342a84ac3a0c",
+  "first_run_completed_before_candidate_changes": true,
+  "append_only": true,
+  "initial_failure_count": 10,
+  "initial_failures": [
+    {
+      "case_id": "H01",
+      "family": "remote_fact_after_long_noise",
+      "failed_checks": [
+        "required_answer_markers_present",
+        "long_history_retained",
+        "compression_applied",
+        "capsule_source_count_is_long",
+        "capsule_within_retained_limit",
+        "required_capsule_markers_retained"
+      ],
+      "answer": "未知。当前对话记录中仅包含“过程备注”，未提供最早确定的项目代号信息。请补充相关上下文或明确代号来源。",
+      "missing_answer_markers": [
+        "白砾"
+      ],
+      "missing_capsule_markers": [
+        "项目代号定为白砾。"
+      ],
+      "history_messages": 24
+    },
+    {
+      "case_id": "H02",
+      "family": "remote_fact_after_long_noise",
+      "failed_checks": [
+        "required_answer_markers_present",
+        "long_history_retained",
+        "compression_applied",
+        "capsule_source_count_is_long",
+        "capsule_within_retained_limit",
+        "required_capsule_markers_retained"
+      ],
+      "answer": "未知。当前记录均为过程备注，未包含具体场地信息。请提供明确地址或名称。",
+      "missing_answer_markers": [
+        "银杏厅"
+      ],
+      "missing_capsule_markers": [
+        "活动固定在银杏厅举行。"
+      ],
+      "history_messages": 24
+    },
+    {
+      "case_id": "H03",
+      "family": "latest_correction_after_compression",
+      "failed_checks": [
+        "required_answer_markers_present",
+        "long_history_retained",
+        "compression_applied",
+        "capsule_source_count_is_long",
+        "capsule_within_retained_limit",
+        "required_capsule_markers_retained"
+      ],
+      "answer": "当前对话中，您多次将“文件复核补充记录 7 至 17\"定义为“过程备注”，且尚未提供具体的文件内容、命名规则或最终生成的文件实体。因此，无法确定最终输出文件的确切名称。\n\n请补充以下信息以便我给出准确结论：\n1. 该文件的实际内容或生成结果；\n2. 预期的命名规范（如是否包含版本号、日期或特定前缀）；\n3. 是否有其他已生成的文件需合并或重命名。\n\n提供上述信息后，我将立即确认最终文件名。",
+      "missing_answer_markers": [
+        "final-long.zip"
+      ],
+      "missing_capsule_markers": [
+        "输出文件名改为 final-long.zip，旧名作废。"
+      ],
+      "history_messages": 24
+    },
+    {
+      "case_id": "H04",
+      "family": "latest_correction_after_compression",
+      "failed_checks": [
+        "required_answer_markers_present",
+        "long_history_retained",
+        "compression_applied",
+        "capsule_source_count_is_long",
+        "capsule_within_retained_limit",
+        "required_capsule_markers_retained"
+      ],
+      "answer": "当前对话记录中仅包含“过程备注”及“最终哪一天评审？”的提问，未提供具体的评审日期、排期表或相关会议信息。\n\n依据物性论原则，未知项不得自行补全数字或日期。目前无法给出确切评审日。\n\n建议：请查阅项目排期表、会议邀请或询问项目负责人以获取准确时间。若需我协助起草催办消息或整理待确认事项清单，请告知。",
+      "missing_answer_markers": [
+        "星期五"
+      ],
+      "missing_capsule_markers": [
+        "改期到星期五，星期一取消。"
+      ],
+      "history_messages": 24
+    },
+    {
+      "case_id": "H05",
+      "family": "unresolved_work_after_compression",
+      "failed_checks": [
+        "required_answer_markers_present",
+        "long_history_retained",
+        "compression_applied",
+        "capsule_source_count_is_long",
+        "capsule_within_retained_limit",
+        "required_capsule_markers_retained"
+      ],
+      "answer": "无法回答“还剩哪一件”，因为当前对话中未定义具体的任务清单或待办事项总数。\n\n之前的“过程备注”均未提供实质性的任务对象。若这是连续对话的一部分，请补充初始任务列表或明确剩余项的总数；若为新话题，请列出具体待办项，以便我协助核对进度。",
+      "missing_answer_markers": [
+        "补监控说明"
+      ],
+      "missing_capsule_markers": [
+        "今天两件正事：修索引页，再补监控说明。",
+        "索引页已经修完。"
+      ],
+      "history_messages": 24
+    },
+    {
+      "case_id": "H06",
+      "family": "unresolved_work_after_compression",
+      "failed_checks": [
+        "required_answer_markers_present",
+        "long_history_retained",
+        "compression_applied",
+        "capsule_source_count_is_long",
+        "capsule_within_retained_limit",
+        "required_capsule_markers_retained"
+      ],
+      "answer": "仅记录“过程备注”不足以支撑采购复核结论。缺失的关键项包括：供应商资质与合规性核验结果、物料规格与合同的一致性比对、价格波动合理性分析、异常数据（如超量、延迟）的根因及处理方案、以及最终复核签字确认。备注不能替代实质性证据。请补充上述实质性内容，或明确当前阶段是否仅需归档过程信息。若涉及高风险物料，需额外提供质量检测报告。",
+      "missing_answer_markers": [
+        "咖啡滤纸"
+      ],
+      "missing_capsule_markers": [
+        "采购清单是燕麦和咖啡滤纸。",
+        "燕麦已经买到了。"
+      ],
+      "history_messages": 24
+    },
+    {
+      "case_id": "H07",
+      "family": "constraint_inheritance_after_compression",
+      "failed_checks": [
+        "required_answer_markers_present",
+        "forbidden_answer_markers_absent",
+        "long_history_retained",
+        "compression_applied",
+        "capsule_source_count_is_long",
+        "capsule_within_retained_limit",
+        "required_capsule_markers_retained"
+      ],
+      "answer": "已执行替换：将\"ready\"改为\"complete\"。\n\n交付内容如下：\n此处为翻译过程补充记录 10 至 20 的过程备注。\n最新指令已应用：所有状态标记由 ready 更新为 complete。\n若涉及具体文档或上下文，请提供原文以便生成完整替换后的版本。\n当前操作仅基于文本指令执行，未引入外部数据或验证来源。\n如需进一步调整格式或补充其他内容，请随时指示。",
+      "missing_answer_markers": [
+        "The report is complete."
+      ],
+      "missing_capsule_markers": [
+        "把报告已经准备好译成英文，只写一句，不要加解释。"
+      ],
+      "history_messages": 24
+    },
+    {
+      "case_id": "H08",
+      "family": "constraint_inheritance_after_compression",
+      "failed_checks": [
+        "required_answer_markers_present",
+        "forbidden_answer_markers_absent",
+        "long_history_retained",
+        "compression_applied",
+        "capsule_source_count_is_long",
+        "capsule_within_retained_limit",
+        "required_capsule_markers_retained"
+      ],
+      "answer": "已执行替换：将\"ready\"更新为\"stable\"，其余内容保持原状。\n\n目前缺少可核验证据，不能确认“当前状态画像（φ）：”。\n\n- 对象：文本状态标识\n\n- 变更：ready → stable\n\n- 约束：其他不变\n\n- 不确定性（η）：无新增未知项\n\n下一步动作：\n\n请提供需要应用该状态的具体文本或上下文，以便我立即生成更新后的版本。\n\n若涉及生产部署或正式文档，请确认是否需补充测试、监控及审批流程。",
+      "missing_answer_markers": [
+        "The system is stable."
+      ],
+      "missing_capsule_markers": [
+        "把系统已经可用译成英文，只写一句，不要添加中文说明。"
+      ],
+      "history_messages": 24
+    },
+    {
+      "case_id": "H09",
+      "family": "topic_switch_after_compression",
+      "failed_checks": [
+        "required_answer_markers_present",
+        "long_history_retained",
+        "compression_applied",
+        "capsule_source_count_is_long",
+        "capsule_within_retained_limit",
+        "required_capsule_markers_retained",
+        "topic_switch_state_matches"
+      ],
+      "answer": "你未指明具体比较的对象（如咖啡、巧克力、苦瓜或不同产地茶叶等）。苦味强度高度依赖品种、产地、烘焙度及冲泡方式。例如，深烘咖啡通常比浅烘更苦；黑巧克力因可可含量不同苦度差异明显；苦瓜的苦味源于葫芦素，受成熟度影响大。请补充具体想对比的品类或场景，以便给出针对性结论。",
+      "missing_answer_markers": [
+        "咖啡通常更苦。"
+      ],
+      "missing_capsule_markers": [
+        "接下来不谈健康问题了，改聊咖啡和茶的味道。"
+      ],
+      "history_messages": 24
+    },
+    {
+      "case_id": "H10",
+      "family": "topic_switch_after_compression",
+      "failed_checks": [
+        "required_answer_markers_present",
+        "long_history_retained",
+        "compression_applied",
+        "capsule_source_count_is_long",
+        "capsule_within_retained_limit",
+        "required_capsule_markers_retained",
+        "topic_switch_state_matches"
+      ],
+      "answer": "缓存更新像厨房里“把新食材放进冰箱并更新标签”的过程。旧数据还在，但系统知道最新状态已就位，下次取用时直接拿新的。这既不是清空冰箱（全量刷新），也不是只闻味道（仅读缓存），而是明确替换并记录变更点。若类比烹饪，它像调整火候后立刻记下当前温度，确保后续步骤基于最新状态，避免用旧火候继续炖煮。实际应用中，需确认更新是否成功写入，防止出现“标签写了但食材没换”的中间态。",
+      "missing_answer_markers": [
+        "旧食材",
+        "新鲜食材"
+      ],
+      "missing_capsule_markers": [
+        "这一段到此为止，下面改用厨房比喻解释缓存。"
+      ],
+      "history_messages": 24
+    }
+  ]
+}

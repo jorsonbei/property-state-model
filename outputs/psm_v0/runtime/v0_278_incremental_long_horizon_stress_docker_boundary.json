@@ -1,0 +1,31 @@
+{
+  "schema_version": "psm_v0_278_incremental_long_horizon_stress_docker_boundary_v1",
+  "passed": true,
+  "checks": {
+    "stress_gate_passed": true,
+    "all_ten_cases_passed": true,
+    "host_and_docker_versions_are_v0_277": true,
+    "remote_fact_host": true,
+    "remote_fact_docker": true,
+    "host_retains_119_messages": true,
+    "docker_retains_119_messages": true,
+    "host_compression_applied": true,
+    "docker_compression_applied": true,
+    "public_capsules_hide_raw_user_state": true,
+    "frontend_retains_120_messages": true,
+    "stress_report_in_docker": true,
+    "external_user_release_closed": true,
+    "docker_localhost_only": true
+  },
+  "human_feedback_collected": false,
+  "human_validation_claimed": false,
+  "evaluation_rows_used_for_training": false,
+  "host": {
+    "version": "PSM V0.277",
+    "history_messages": 119
+  },
+  "docker": {
+    "version": "PSM V0.277",
+    "history_messages": 119
+  }
+}

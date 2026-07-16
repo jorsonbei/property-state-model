@@ -1,0 +1,17 @@
+{
+  "schema_version": "psm_v0_277_external_state_compression_checkpoint_v1",
+  "version": "PSM_V0.277-candidate",
+  "status": "v0_277_promoted_v0_278_long_horizon_stress_open",
+  "requires_user_input": false,
+  "next_action": "build_v0_278_incremental_long_horizon_stress_contract",
+  "review_payload_sha256": "3b59f7552916c69c088826af62af3c5a9d0c15da2fa6e28d23089fbb69937257",
+  "token_authority_limit": 1000000,
+  "observed_tokens_before_call": 101984,
+  "maximum_call_tokens": 30000,
+  "participant_content_calls": 0,
+  "external_release_authority": false,
+  "current_promoted_version": "PSM_V0.277",
+  "target_promoted": true,
+  "promotion_manifest": "runtime/v0_277_external_state_compression_promotion_manifest.json",
+  "required_decision": "无。"
+}

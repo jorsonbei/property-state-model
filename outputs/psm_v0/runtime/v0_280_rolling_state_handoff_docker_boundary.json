@@ -1,0 +1,35 @@
+{
+  "schema_version": "psm_v0_280_rolling_state_handoff_docker_boundary_v1",
+  "passed": true,
+  "checks": {
+    "rolling_gate_passed": true,
+    "all_four_cases_passed": true,
+    "host_and_docker_versions_are_v0_279": true,
+    "first_requests_completed": true,
+    "archived_fact_recovered_on_host": true,
+    "archived_fact_recovered_in_docker": true,
+    "host_window_bounded_to_120": true,
+    "docker_window_bounded_to_120": true,
+    "host_rolling_state_applied": true,
+    "docker_rolling_state_applied": true,
+    "ephemeral_memory_only": true,
+    "public_capsules_hide_raw_user_state": true,
+    "frontend_sends_session_and_sequence": true,
+    "rolling_report_in_docker": true,
+    "external_user_release_closed": true,
+    "docker_localhost_only": true
+  },
+  "human_feedback_collected": false,
+  "human_validation_claimed": false,
+  "evaluation_rows_used_for_training": false,
+  "host": {
+    "version": "PSM V0.279",
+    "history_messages": 120,
+    "effective_context_messages": 121
+  },
+  "docker": {
+    "version": "PSM V0.279",
+    "history_messages": 120,
+    "effective_context_messages": 121
+  }
+}

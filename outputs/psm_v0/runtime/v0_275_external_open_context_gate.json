@@ -1,0 +1,79 @@
+{
+  "schema_version": "psm_v0_275_external_open_context_gate_v1",
+  "version": "PSM_V0.275",
+  "passed": true,
+  "decision": "external_open_context_review_passed_on_attempt_3_after_retained_failures_and_local_repairs",
+  "checks": {
+    "source_version_is_v0_274": true,
+    "prepared_package_gate_passed": true,
+    "first_authorization_gate_passed": true,
+    "first_external_failure_retained": true,
+    "first_local_repairs_retained": true,
+    "first_rejudge_package_gate_passed": true,
+    "first_external_rejudge_failure_retained": true,
+    "second_local_repair_retained": true,
+    "attempt_3_package_gate_passed": true,
+    "attempt_3_payload_is_second_repair": true,
+    "attempt_3_external_review_passed": true,
+    "attempt_3_exact_ten_items_passed": true,
+    "attempt_3_no_failed_items": true,
+    "attempt_3_no_critical_findings": true,
+    "attempt_3_no_recommended_repairs": true,
+    "token_authority_is_one_million": true,
+    "actual_call_within_reservation": true,
+    "cumulative_usage_within_authority": true,
+    "legacy_dollar_reservations_retained": true,
+    "participant_content_calls_zero": true,
+    "submission_synthetic_only": true,
+    "release_boundary_closed": true
+  },
+  "external_model": "gpt-5.4-2026-03-05",
+  "items": 10,
+  "items_passed": 10,
+  "final_failed_items": [],
+  "final_critical_findings": [],
+  "first_failed_items_retained": [
+    "O01",
+    "O02",
+    "O10"
+  ],
+  "rejudge_failed_items_retained": [
+    "O09"
+  ],
+  "first_local_repairs": [
+    "O01",
+    "O02",
+    "O10"
+  ],
+  "second_local_repairs": [
+    "O09"
+  ],
+  "attempt_3_usage": {
+    "input_tokens": 2701,
+    "input_tokens_details": {
+      "cache_write_tokens": 0,
+      "cached_tokens": 0
+    },
+    "output_tokens": 1224,
+    "output_tokens_details": {
+      "reasoning_tokens": 778
+    },
+    "total_tokens": 3925
+  },
+  "observed_tokens_after_call": 101984,
+  "token_authority_limit": 1000000,
+  "review_payload_sha256": "6db0978f57a38de7c629569af519b4499092da143e85afc4d487f7dc0b0e8d2a",
+  "attempt_3_package_sha256": "fdf2a7e1c48563be716101639dfad96a527aef99320dc93d267172f3635eea3e",
+  "attempt_3_judge_sha256": "3ed5438bfdb5aade1c74e93f233abb3e333e5854261a820876168c186b4d44ff",
+  "human_feedback_collected": false,
+  "human_validation_claimed": false,
+  "evaluation_rows_used_for_training": false,
+  "release_boundary": {
+    "semantic_review_only": true,
+    "participant_content_submitted": false,
+    "training_feedback_written": false,
+    "rule_replacement_allowed": false,
+    "public_service_allowed": false,
+    "external_release_authority": false
+  }
+}

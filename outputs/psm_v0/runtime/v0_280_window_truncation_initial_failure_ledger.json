@@ -1,0 +1,61 @@
+{
+  "schema_version": "psm_v0_280_window_truncation_initial_failure_ledger_v1",
+  "version": "PSM_V0.280-candidate",
+  "contract_sha256": "41bff7c753615245232c1bf0aa05951fbac6ed231ea5d8d9b46399209e4f9389",
+  "captured_before_rolling_state_handoff_implementation": true,
+  "append_only": true,
+  "window_messages": 120,
+  "cases": 4,
+  "passed": 0,
+  "failed": 4,
+  "rows": [
+    {
+      "case_id": "R01",
+      "family": "remote_fact_after_window_exit",
+      "passed": false,
+      "answer": "未知。当前对话记录仅包含“无新增决定”的状态更新，未提供最早确定的项目代号信息。请补充相关背景或查阅原始项目文档以获取准确代号。",
+      "missing_answer_markers": [
+        "白砾"
+      ],
+      "forbidden_answer_markers": [],
+      "full_input_messages": 163,
+      "retained_history_messages": 120
+    },
+    {
+      "case_id": "R02",
+      "family": "correction_after_window_exit",
+      "passed": false,
+      "answer": "当前对话中未提供最终输出文件的具体命名规则或生成结果，因此无法直接给出文件名。\n\n请补充以下信息以便确认：\n1. 文件内容类型（如修订记录汇总、报告草案等）；\n2. 命名规范（如是否包含日期、版本号、项目代号）；\n3. 是否需关联特定过程记录编号（如 79）。\n\n若按常规归档逻辑，文件名可能为“修订后过程记录_79_最终输出”或类似格式，但需您确认具体约定。请指示下一步操作或提供命名约束。",
+      "missing_answer_markers": [
+        "final-long.zip"
+      ],
+      "forbidden_answer_markers": [],
+      "full_input_messages": 203,
+      "retained_history_messages": 120
+    },
+    {
+      "case_id": "R03",
+      "family": "unresolved_task_after_window_exit",
+      "passed": false,
+      "answer": "根据当前记录，任务后段过程记录 73 至 79 均已确认“无新增决定”。若初始清单包含更多项目，剩余未明确标记完成或无新增决定的项目即为“还剩的那一件”。由于当前上下文未提供完整的初始任务总数，无法直接指出具体名称。请补充初始任务列表或确认是否还有其他未记录的条目，以便精准定位剩余事项。",
+      "missing_answer_markers": [
+        "补监控说明"
+      ],
+      "forbidden_answer_markers": [],
+      "full_input_messages": 183,
+      "retained_history_messages": 120
+    },
+    {
+      "case_id": "R04",
+      "family": "topic_switch_after_window_exit",
+      "passed": false,
+      "answer": "苦味强度取决于具体比较对象。若指常见食材，苦瓜通常比苦菊、蒲公英等野菜更苦；若指咖啡，罗布斯塔豆比阿拉比卡豆更苦；若指巧克力，黑巧（高可可含量）比牛奶巧更苦。苦味由生物碱（如奎宁、咖啡因）或萜烯类物质（如苦瓜素）引起，浓度越高越苦。不同品种、产地及成熟度也会显著影响苦味。请补充具体想对比的类别（如蔬菜、咖啡、酒类等），以便给出更精准结论。",
+      "missing_answer_markers": [
+        "咖啡通常更苦。"
+      ],
+      "forbidden_answer_markers": [],
+      "full_input_messages": 183,
+      "retained_history_messages": 120
+    }
+  ]
+}

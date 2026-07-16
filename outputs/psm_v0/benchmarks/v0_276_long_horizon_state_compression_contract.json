@@ -1,0 +1,2038 @@
+{
+  "schema_version": "psm_v0_276_long_horizon_state_compression_contract_v1",
+  "version": "PSM_V0.276-candidate",
+  "frozen_at": "2026-07-16T03:08:30.868409+00:00",
+  "source_version": "PSM_V0.275",
+  "objective": "Verify state compression and recovery beyond the historical 24-message window without assistant-history authority.",
+  "evaluation": {
+    "frozen_case_count": 10,
+    "families": [
+      "constraint_inheritance_after_compression",
+      "latest_correction_after_compression",
+      "remote_fact_after_long_noise",
+      "topic_switch_after_compression",
+      "unresolved_work_after_compression"
+    ],
+    "cases_per_family": 2,
+    "minimum_input_messages": 40,
+    "maximum_retained_user_statements": 20,
+    "maximum_stale_state_violations": 0
+  },
+  "source_isolation": {
+    "candidate_reads_expected_answers": false,
+    "evaluation_rows_used_for_training": false,
+    "external_judge_feedback_used_as_training_truth": false
+  },
+  "release_boundary": {
+    "human_validation_claimed": false,
+    "open_domain_generalization_claimed": false,
+    "production_readiness_claimed": false,
+    "public_service_allowed": false,
+    "rule_replacement_allowed": false,
+    "external_release_authority": false
+  },
+  "cases": [
+    {
+      "id": "H01",
+      "family": "remote_fact_after_long_noise",
+      "messages": [
+        {
+          "role": "user",
+          "content": "项目代号定为白砾。"
+        },
+        {
+          "role": "assistant",
+          "content": "已记录项目代号。"
+        },
+        {
+          "role": "user",
+          "content": "远距代号补充记录 1：这里只是过程备注。"
+        },
+        {
+          "role": "assistant",
+          "content": "已记录。"
+        },
+        {
+          "role": "user",
+          "content": "远距代号补充记录 2：这里只是过程备注。"
+        },
+        {
+          "role": "assistant",
+          "content": "已记录。"
+        },
+        {
+          "role": "user",
+          "content": "远距代号补充记录 3：这里只是过程备注。"
+        },
+        {
+          "role": "assistant",
+          "content": "已记录。"
+        },
+        {
+          "role": "user",
+          "content": "远距代号补充记录 4：这里只是过程备注。"
+        },
+        {
+          "role": "assistant",
+          "content": "已记录。"
+        },
+        {
+          "role": "user",
+          "content": "远距代号补充记录 5：这里只是过程备注。"
+        },
+        {
+          "role": "assistant",
+          "content": "已记录。"
+        },
+        {
+          "role": "user",
+          "content": "远距代号补充记录 6：这里只是过程备注。"
+        },
+        {
+          "role": "assistant",
+          "content": "已记录。"
+        },
+        {
+          "role": "user",
+          "content": "远距代号补充记录 7：这里只是过程备注。"
+        },
+        {
+          "role": "assistant",
+          "content": "已记录。"
+        },
+        {
+          "role": "user",
+          "content": "远距代号补充记录 8：这里只是过程备注。"
+        },
+        {
+          "role": "assistant",
+          "content": "已记录。"
+        },
+        {
+          "role": "user",
+          "content": "远距代号补充记录 9：这里只是过程备注。"
+        },
+        {
+          "role": "assistant",
+          "content": "已记录。"
+        },
+        {
+          "role": "user",
+          "content": "远距代号补充记录 10：这里只是过程备注。"
+        },
+        {
+          "role": "assistant",
+          "content": "已记录。"
+        },
+        {
+          "role": "user",
+          "content": "远距代号补充记录 11：这里只是过程备注。"
+        },
+        {
+          "role": "assistant",
+          "content": "已记录。"
+        },
+        {
+          "role": "user",
+          "content": "远距代号补充记录 12：这里只是过程备注。"
+        },
+        {
+          "role": "assistant",
+          "content": "已记录。"
+        },
+        {
+          "role": "user",
+          "content": "远距代号补充记录 13：这里只是过程备注。"
+        },
+        {
+          "role": "assistant",
+          "content": "已记录。"
+        },
+        {
+          "role": "user",
+          "content": "远距代号补充记录 14：这里只是过程备注。"
+        },
+        {
+          "role": "assistant",
+          "content": "已记录。"
+        },
+        {
+          "role": "user",
+          "content": "远距代号补充记录 15：这里只是过程备注。"
+        },
+        {
+          "role": "assistant",
+          "content": "已记录。"
+        },
+        {
+          "role": "user",
+          "content": "远距代号补充记录 16：这里只是过程备注。"
+        },
+        {
+          "role": "assistant",
+          "content": "已记录。"
+        },
+        {
+          "role": "user",
+          "content": "远距代号补充记录 17：这里只是过程备注。"
+        },
+        {
+          "role": "assistant",
+          "content": "已记录。"
+        },
+        {
+          "role": "user",
+          "content": "远距代号补充记录 18：这里只是过程备注。"
+        },
+        {
+          "role": "assistant",
+          "content": "已记录。"
+        },
+        {
+          "role": "user",
+          "content": "远距代号补充记录 19：这里只是过程备注。"
+        },
+        {
+          "role": "assistant",
+          "content": "已记录。"
+        },
+        {
+          "role": "user",
+          "content": "远距代号补充记录 20：这里只是过程备注。"
+        },
+        {
+          "role": "assistant",
+          "content": "已记录。"
+        },
+        {
+          "role": "user",
+          "content": "最早确定的项目代号是什么？只回答代号。"
+        }
+      ],
+      "required_answer_markers": [
+        "白砾"
+      ],
+      "required_capsule_markers": [
+        "项目代号定为白砾。"
+      ],
+      "forbidden_answer_markers": [],
+      "topic_switch_expected": false,
+      "minimum_input_messages": 40,
+      "maximum_retained_user_statements": 20
+    },
+    {
+      "id": "H02",
+      "family": "remote_fact_after_long_noise",
+      "messages": [
+        {
+          "role": "user",
+          "content": "活动固定在银杏厅举行。"
+        },
+        {
+          "role": "assistant",
+          "content": "已记录场地。"
+        },
+        {
+          "role": "user",
+          "content": "远距场地补充记录 1：这里只是过程备注。"
+        },
+        {
+          "role": "assistant",
+          "content": "已记录。"
+        },
+        {
+          "role": "user",
+          "content": "远距场地补充记录 2：这里只是过程备注。"
+        },
+        {
+          "role": "assistant",
+          "content": "已记录。"
+        },
+        {
+          "role": "user",
+          "content": "远距场地补充记录 3：这里只是过程备注。"
+        },
+        {
+          "role": "assistant",
+          "content": "已记录。"
+        },
+        {
+          "role": "user",
+          "content": "远距场地补充记录 4：这里只是过程备注。"
+        },
+        {
+          "role": "assistant",
+          "content": "已记录。"
+        },
+        {
+          "role": "user",
+          "content": "远距场地补充记录 5：这里只是过程备注。"
+        },
+        {
+          "role": "assistant",
+          "content": "已记录。"
+        },
+        {
+          "role": "user",
+          "content": "远距场地补充记录 6：这里只是过程备注。"
+        },
+        {
+          "role": "assistant",
+          "content": "已记录。"
+        },
+        {
+          "role": "user",
+          "content": "远距场地补充记录 7：这里只是过程备注。"
+        },
+        {
+          "role": "assistant",
+          "content": "已记录。"
+        },
+        {
+          "role": "user",
+          "content": "远距场地补充记录 8：这里只是过程备注。"
+        },
+        {
+          "role": "assistant",
+          "content": "已记录。"
+        },
+        {
+          "role": "user",
+          "content": "远距场地补充记录 9：这里只是过程备注。"
+        },
+        {
+          "role": "assistant",
+          "content": "已记录。"
+        },
+        {
+          "role": "user",
+          "content": "远距场地补充记录 10：这里只是过程备注。"
+        },
+        {
+          "role": "assistant",
+          "content": "已记录。"
+        },
+        {
+          "role": "user",
+          "content": "远距场地补充记录 11：这里只是过程备注。"
+        },
+        {
+          "role": "assistant",
+          "content": "已记录。"
+        },
+        {
+          "role": "user",
+          "content": "远距场地补充记录 12：这里只是过程备注。"
+        },
+        {
+          "role": "assistant",
+          "content": "已记录。"
+        },
+        {
+          "role": "user",
+          "content": "远距场地补充记录 13：这里只是过程备注。"
+        },
+        {
+          "role": "assistant",
+          "content": "已记录。"
+        },
+        {
+          "role": "user",
+          "content": "远距场地补充记录 14：这里只是过程备注。"
+        },
+        {
+          "role": "assistant",
+          "content": "已记录。"
+        },
+        {
+          "role": "user",
+          "content": "远距场地补充记录 15：这里只是过程备注。"
+        },
+        {
+          "role": "assistant",
+          "content": "已记录。"
+        },
+        {
+          "role": "user",
+          "content": "远距场地补充记录 16：这里只是过程备注。"
+        },
+        {
+          "role": "assistant",
+          "content": "已记录。"
+        },
+        {
+          "role": "user",
+          "content": "远距场地补充记录 17：这里只是过程备注。"
+        },
+        {
+          "role": "assistant",
+          "content": "已记录。"
+        },
+        {
+          "role": "user",
+          "content": "远距场地补充记录 18：这里只是过程备注。"
+        },
+        {
+          "role": "assistant",
+          "content": "已记录。"
+        },
+        {
+          "role": "user",
+          "content": "远距场地补充记录 19：这里只是过程备注。"
+        },
+        {
+          "role": "assistant",
+          "content": "已记录。"
+        },
+        {
+          "role": "user",
+          "content": "远距场地补充记录 20：这里只是过程备注。"
+        },
+        {
+          "role": "assistant",
+          "content": "已记录。"
+        },
+        {
+          "role": "user",
+          "content": "活动场地定在哪里？只回答场地。"
+        }
+      ],
+      "required_answer_markers": [
+        "银杏厅"
+      ],
+      "required_capsule_markers": [
+        "活动固定在银杏厅举行。"
+      ],
+      "forbidden_answer_markers": [],
+      "topic_switch_expected": false,
+      "minimum_input_messages": 40,
+      "maximum_retained_user_statements": 20
+    },
+    {
+      "id": "H03",
+      "family": "latest_correction_after_compression",
+      "messages": [
+        {
+          "role": "user",
+          "content": "输出文件名先定为 draft-long.zip。"
+        },
+        {
+          "role": "assistant",
+          "content": "已记录。"
+        },
+        {
+          "role": "user",
+          "content": "文件准备补充记录 1：这里只是过程备注。"
+        },
+        {
+          "role": "assistant",
+          "content": "已记录。"
+        },
+        {
+          "role": "user",
+          "content": "文件准备补充记录 2：这里只是过程备注。"
+        },
+        {
+          "role": "assistant",
+          "content": "已记录。"
+        },
+        {
+          "role": "user",
+          "content": "文件准备补充记录 3：这里只是过程备注。"
+        },
+        {
+          "role": "assistant",
+          "content": "已记录。"
+        },
+        {
+          "role": "user",
+          "content": "文件准备补充记录 4：这里只是过程备注。"
+        },
+        {
+          "role": "assistant",
+          "content": "已记录。"
+        },
+        {
+          "role": "user",
+          "content": "输出文件名改为 final-long.zip，旧名作废。"
+        },
+        {
+          "role": "assistant",
+          "content": "已更新。"
+        },
+        {
+          "role": "user",
+          "content": "文件复核补充记录 1：这里只是过程备注。"
+        },
+        {
+          "role": "assistant",
+          "content": "已记录。"
+        },
+        {
+          "role": "user",
+          "content": "文件复核补充记录 2：这里只是过程备注。"
+        },
+        {
+          "role": "assistant",
+          "content": "已记录。"
+        },
+        {
+          "role": "user",
+          "content": "文件复核补充记录 3：这里只是过程备注。"
+        },
+        {
+          "role": "assistant",
+          "content": "已记录。"
+        },
+        {
+          "role": "user",
+          "content": "文件复核补充记录 4：这里只是过程备注。"
+        },
+        {
+          "role": "assistant",
+          "content": "已记录。"
+        },
+        {
+          "role": "user",
+          "content": "文件复核补充记录 5：这里只是过程备注。"
+        },
+        {
+          "role": "assistant",
+          "content": "已记录。"
+        },
+        {
+          "role": "user",
+          "content": "文件复核补充记录 6：这里只是过程备注。"
+        },
+        {
+          "role": "assistant",
+          "content": "已记录。"
+        },
+        {
+          "role": "user",
+          "content": "文件复核补充记录 7：这里只是过程备注。"
+        },
+        {
+          "role": "assistant",
+          "content": "已记录。"
+        },
+        {
+          "role": "user",
+          "content": "文件复核补充记录 8：这里只是过程备注。"
+        },
+        {
+          "role": "assistant",
+          "content": "已记录。"
+        },
+        {
+          "role": "user",
+          "content": "文件复核补充记录 9：这里只是过程备注。"
+        },
+        {
+          "role": "assistant",
+          "content": "已记录。"
+        },
+        {
+          "role": "user",
+          "content": "文件复核补充记录 10：这里只是过程备注。"
+        },
+        {
+          "role": "assistant",
+          "content": "已记录。"
+        },
+        {
+          "role": "user",
+          "content": "文件复核补充记录 11：这里只是过程备注。"
+        },
+        {
+          "role": "assistant",
+          "content": "已记录。"
+        },
+        {
+          "role": "user",
+          "content": "文件复核补充记录 12：这里只是过程备注。"
+        },
+        {
+          "role": "assistant",
+          "content": "已记录。"
+        },
+        {
+          "role": "user",
+          "content": "文件复核补充记录 13：这里只是过程备注。"
+        },
+        {
+          "role": "assistant",
+          "content": "已记录。"
+        },
+        {
+          "role": "user",
+          "content": "文件复核补充记录 14：这里只是过程备注。"
+        },
+        {
+          "role": "assistant",
+          "content": "已记录。"
+        },
+        {
+          "role": "user",
+          "content": "文件复核补充记录 15：这里只是过程备注。"
+        },
+        {
+          "role": "assistant",
+          "content": "已记录。"
+        },
+        {
+          "role": "user",
+          "content": "文件复核补充记录 16：这里只是过程备注。"
+        },
+        {
+          "role": "assistant",
+          "content": "已记录。"
+        },
+        {
+          "role": "user",
+          "content": "文件复核补充记录 17：这里只是过程备注。"
+        },
+        {
+          "role": "assistant",
+          "content": "已记录。"
+        },
+        {
+          "role": "user",
+          "content": "最终输出文件名是什么？"
+        }
+      ],
+      "required_answer_markers": [
+        "final-long.zip"
+      ],
+      "required_capsule_markers": [
+        "输出文件名改为 final-long.zip，旧名作废。"
+      ],
+      "forbidden_answer_markers": [
+        "draft-long.zip"
+      ],
+      "topic_switch_expected": false,
+      "minimum_input_messages": 40,
+      "maximum_retained_user_statements": 20
+    },
+    {
+      "id": "H04",
+      "family": "latest_correction_after_compression",
+      "messages": [
+        {
+          "role": "user",
+          "content": "评审原本排在星期一。"
+        },
+        {
+          "role": "assistant",
+          "content": "已记录。"
+        },
+        {
+          "role": "user",
+          "content": "排期准备补充记录 1：这里只是过程备注。"
+        },
+        {
+          "role": "assistant",
+          "content": "已记录。"
+        },
+        {
+          "role": "user",
+          "content": "排期准备补充记录 2：这里只是过程备注。"
+        },
+        {
+          "role": "assistant",
+          "content": "已记录。"
+        },
+        {
+          "role": "user",
+          "content": "排期准备补充记录 3：这里只是过程备注。"
+        },
+        {
+          "role": "assistant",
+          "content": "已记录。"
+        },
+        {
+          "role": "user",
+          "content": "排期准备补充记录 4：这里只是过程备注。"
+        },
+        {
+          "role": "assistant",
+          "content": "已记录。"
+        },
+        {
+          "role": "user",
+          "content": "改期到星期五，星期一取消。"
+        },
+        {
+          "role": "assistant",
+          "content": "已更新。"
+        },
+        {
+          "role": "user",
+          "content": "排期复核补充记录 1：这里只是过程备注。"
+        },
+        {
+          "role": "assistant",
+          "content": "已记录。"
+        },
+        {
+          "role": "user",
+          "content": "排期复核补充记录 2：这里只是过程备注。"
+        },
+        {
+          "role": "assistant",
+          "content": "已记录。"
+        },
+        {
+          "role": "user",
+          "content": "排期复核补充记录 3：这里只是过程备注。"
+        },
+        {
+          "role": "assistant",
+          "content": "已记录。"
+        },
+        {
+          "role": "user",
+          "content": "排期复核补充记录 4：这里只是过程备注。"
+        },
+        {
+          "role": "assistant",
+          "content": "已记录。"
+        },
+        {
+          "role": "user",
+          "content": "排期复核补充记录 5：这里只是过程备注。"
+        },
+        {
+          "role": "assistant",
+          "content": "已记录。"
+        },
+        {
+          "role": "user",
+          "content": "排期复核补充记录 6：这里只是过程备注。"
+        },
+        {
+          "role": "assistant",
+          "content": "已记录。"
+        },
+        {
+          "role": "user",
+          "content": "排期复核补充记录 7：这里只是过程备注。"
+        },
+        {
+          "role": "assistant",
+          "content": "已记录。"
+        },
+        {
+          "role": "user",
+          "content": "排期复核补充记录 8：这里只是过程备注。"
+        },
+        {
+          "role": "assistant",
+          "content": "已记录。"
+        },
+        {
+          "role": "user",
+          "content": "排期复核补充记录 9：这里只是过程备注。"
+        },
+        {
+          "role": "assistant",
+          "content": "已记录。"
+        },
+        {
+          "role": "user",
+          "content": "排期复核补充记录 10：这里只是过程备注。"
+        },
+        {
+          "role": "assistant",
+          "content": "已记录。"
+        },
+        {
+          "role": "user",
+          "content": "排期复核补充记录 11：这里只是过程备注。"
+        },
+        {
+          "role": "assistant",
+          "content": "已记录。"
+        },
+        {
+          "role": "user",
+          "content": "排期复核补充记录 12：这里只是过程备注。"
+        },
+        {
+          "role": "assistant",
+          "content": "已记录。"
+        },
+        {
+          "role": "user",
+          "content": "排期复核补充记录 13：这里只是过程备注。"
+        },
+        {
+          "role": "assistant",
+          "content": "已记录。"
+        },
+        {
+          "role": "user",
+          "content": "排期复核补充记录 14：这里只是过程备注。"
+        },
+        {
+          "role": "assistant",
+          "content": "已记录。"
+        },
+        {
+          "role": "user",
+          "content": "排期复核补充记录 15：这里只是过程备注。"
+        },
+        {
+          "role": "assistant",
+          "content": "已记录。"
+        },
+        {
+          "role": "user",
+          "content": "排期复核补充记录 16：这里只是过程备注。"
+        },
+        {
+          "role": "assistant",
+          "content": "已记录。"
+        },
+        {
+          "role": "user",
+          "content": "排期复核补充记录 17：这里只是过程备注。"
+        },
+        {
+          "role": "assistant",
+          "content": "已记录。"
+        },
+        {
+          "role": "user",
+          "content": "最终哪一天评审？"
+        }
+      ],
+      "required_answer_markers": [
+        "星期五"
+      ],
+      "required_capsule_markers": [
+        "改期到星期五，星期一取消。"
+      ],
+      "forbidden_answer_markers": [
+        "星期一。"
+      ],
+      "topic_switch_expected": false,
+      "minimum_input_messages": 40,
+      "maximum_retained_user_statements": 20
+    },
+    {
+      "id": "H05",
+      "family": "unresolved_work_after_compression",
+      "messages": [
+        {
+          "role": "user",
+          "content": "今天两件正事：修索引页，再补监控说明。"
+        },
+        {
+          "role": "assistant",
+          "content": "已记录两件事。"
+        },
+        {
+          "role": "user",
+          "content": "任务过程补充记录 1：这里只是过程备注。"
+        },
+        {
+          "role": "assistant",
+          "content": "已记录。"
+        },
+        {
+          "role": "user",
+          "content": "任务过程补充记录 2：这里只是过程备注。"
+        },
+        {
+          "role": "assistant",
+          "content": "已记录。"
+        },
+        {
+          "role": "user",
+          "content": "任务过程补充记录 3：这里只是过程备注。"
+        },
+        {
+          "role": "assistant",
+          "content": "已记录。"
+        },
+        {
+          "role": "user",
+          "content": "任务过程补充记录 4：这里只是过程备注。"
+        },
+        {
+          "role": "assistant",
+          "content": "已记录。"
+        },
+        {
+          "role": "user",
+          "content": "任务过程补充记录 5：这里只是过程备注。"
+        },
+        {
+          "role": "assistant",
+          "content": "已记录。"
+        },
+        {
+          "role": "user",
+          "content": "任务过程补充记录 6：这里只是过程备注。"
+        },
+        {
+          "role": "assistant",
+          "content": "已记录。"
+        },
+        {
+          "role": "user",
+          "content": "任务过程补充记录 7：这里只是过程备注。"
+        },
+        {
+          "role": "assistant",
+          "content": "已记录。"
+        },
+        {
+          "role": "user",
+          "content": "任务过程补充记录 8：这里只是过程备注。"
+        },
+        {
+          "role": "assistant",
+          "content": "已记录。"
+        },
+        {
+          "role": "user",
+          "content": "索引页已经修完。"
+        },
+        {
+          "role": "assistant",
+          "content": "已标记完成。"
+        },
+        {
+          "role": "user",
+          "content": "任务复核补充记录 1：这里只是过程备注。"
+        },
+        {
+          "role": "assistant",
+          "content": "已记录。"
+        },
+        {
+          "role": "user",
+          "content": "任务复核补充记录 2：这里只是过程备注。"
+        },
+        {
+          "role": "assistant",
+          "content": "已记录。"
+        },
+        {
+          "role": "user",
+          "content": "任务复核补充记录 3：这里只是过程备注。"
+        },
+        {
+          "role": "assistant",
+          "content": "已记录。"
+        },
+        {
+          "role": "user",
+          "content": "任务复核补充记录 4：这里只是过程备注。"
+        },
+        {
+          "role": "assistant",
+          "content": "已记录。"
+        },
+        {
+          "role": "user",
+          "content": "任务复核补充记录 5：这里只是过程备注。"
+        },
+        {
+          "role": "assistant",
+          "content": "已记录。"
+        },
+        {
+          "role": "user",
+          "content": "任务复核补充记录 6：这里只是过程备注。"
+        },
+        {
+          "role": "assistant",
+          "content": "已记录。"
+        },
+        {
+          "role": "user",
+          "content": "任务复核补充记录 7：这里只是过程备注。"
+        },
+        {
+          "role": "assistant",
+          "content": "已记录。"
+        },
+        {
+          "role": "user",
+          "content": "任务复核补充记录 8：这里只是过程备注。"
+        },
+        {
+          "role": "assistant",
+          "content": "已记录。"
+        },
+        {
+          "role": "user",
+          "content": "任务复核补充记录 9：这里只是过程备注。"
+        },
+        {
+          "role": "assistant",
+          "content": "已记录。"
+        },
+        {
+          "role": "user",
+          "content": "任务复核补充记录 10：这里只是过程备注。"
+        },
+        {
+          "role": "assistant",
+          "content": "已记录。"
+        },
+        {
+          "role": "user",
+          "content": "任务复核补充记录 11：这里只是过程备注。"
+        },
+        {
+          "role": "assistant",
+          "content": "已记录。"
+        },
+        {
+          "role": "user",
+          "content": "任务复核补充记录 12：这里只是过程备注。"
+        },
+        {
+          "role": "assistant",
+          "content": "已记录。"
+        },
+        {
+          "role": "user",
+          "content": "任务复核补充记录 13：这里只是过程备注。"
+        },
+        {
+          "role": "assistant",
+          "content": "已记录。"
+        },
+        {
+          "role": "user",
+          "content": "还剩哪一件？"
+        }
+      ],
+      "required_answer_markers": [
+        "补监控说明"
+      ],
+      "required_capsule_markers": [
+        "今天两件正事：修索引页，再补监控说明。",
+        "索引页已经修完。"
+      ],
+      "forbidden_answer_markers": [
+        "修索引页"
+      ],
+      "topic_switch_expected": false,
+      "minimum_input_messages": 40,
+      "maximum_retained_user_statements": 20
+    },
+    {
+      "id": "H06",
+      "family": "unresolved_work_after_compression",
+      "messages": [
+        {
+          "role": "user",
+          "content": "采购清单是燕麦和咖啡滤纸。"
+        },
+        {
+          "role": "assistant",
+          "content": "已记录清单。"
+        },
+        {
+          "role": "user",
+          "content": "采购过程补充记录 1：这里只是过程备注。"
+        },
+        {
+          "role": "assistant",
+          "content": "已记录。"
+        },
+        {
+          "role": "user",
+          "content": "采购过程补充记录 2：这里只是过程备注。"
+        },
+        {
+          "role": "assistant",
+          "content": "已记录。"
+        },
+        {
+          "role": "user",
+          "content": "采购过程补充记录 3：这里只是过程备注。"
+        },
+        {
+          "role": "assistant",
+          "content": "已记录。"
+        },
+        {
+          "role": "user",
+          "content": "采购过程补充记录 4：这里只是过程备注。"
+        },
+        {
+          "role": "assistant",
+          "content": "已记录。"
+        },
+        {
+          "role": "user",
+          "content": "采购过程补充记录 5：这里只是过程备注。"
+        },
+        {
+          "role": "assistant",
+          "content": "已记录。"
+        },
+        {
+          "role": "user",
+          "content": "采购过程补充记录 6：这里只是过程备注。"
+        },
+        {
+          "role": "assistant",
+          "content": "已记录。"
+        },
+        {
+          "role": "user",
+          "content": "采购过程补充记录 7：这里只是过程备注。"
+        },
+        {
+          "role": "assistant",
+          "content": "已记录。"
+        },
+        {
+          "role": "user",
+          "content": "采购过程补充记录 8：这里只是过程备注。"
+        },
+        {
+          "role": "assistant",
+          "content": "已记录。"
+        },
+        {
+          "role": "user",
+          "content": "燕麦已经买到了。"
+        },
+        {
+          "role": "assistant",
+          "content": "已标记。"
+        },
+        {
+          "role": "user",
+          "content": "采购复核补充记录 1：这里只是过程备注。"
+        },
+        {
+          "role": "assistant",
+          "content": "已记录。"
+        },
+        {
+          "role": "user",
+          "content": "采购复核补充记录 2：这里只是过程备注。"
+        },
+        {
+          "role": "assistant",
+          "content": "已记录。"
+        },
+        {
+          "role": "user",
+          "content": "采购复核补充记录 3：这里只是过程备注。"
+        },
+        {
+          "role": "assistant",
+          "content": "已记录。"
+        },
+        {
+          "role": "user",
+          "content": "采购复核补充记录 4：这里只是过程备注。"
+        },
+        {
+          "role": "assistant",
+          "content": "已记录。"
+        },
+        {
+          "role": "user",
+          "content": "采购复核补充记录 5：这里只是过程备注。"
+        },
+        {
+          "role": "assistant",
+          "content": "已记录。"
+        },
+        {
+          "role": "user",
+          "content": "采购复核补充记录 6：这里只是过程备注。"
+        },
+        {
+          "role": "assistant",
+          "content": "已记录。"
+        },
+        {
+          "role": "user",
+          "content": "采购复核补充记录 7：这里只是过程备注。"
+        },
+        {
+          "role": "assistant",
+          "content": "已记录。"
+        },
+        {
+          "role": "user",
+          "content": "采购复核补充记录 8：这里只是过程备注。"
+        },
+        {
+          "role": "assistant",
+          "content": "已记录。"
+        },
+        {
+          "role": "user",
+          "content": "采购复核补充记录 9：这里只是过程备注。"
+        },
+        {
+          "role": "assistant",
+          "content": "已记录。"
+        },
+        {
+          "role": "user",
+          "content": "采购复核补充记录 10：这里只是过程备注。"
+        },
+        {
+          "role": "assistant",
+          "content": "已记录。"
+        },
+        {
+          "role": "user",
+          "content": "采购复核补充记录 11：这里只是过程备注。"
+        },
+        {
+          "role": "assistant",
+          "content": "已记录。"
+        },
+        {
+          "role": "user",
+          "content": "采购复核补充记录 12：这里只是过程备注。"
+        },
+        {
+          "role": "assistant",
+          "content": "已记录。"
+        },
+        {
+          "role": "user",
+          "content": "采购复核补充记录 13：这里只是过程备注。"
+        },
+        {
+          "role": "assistant",
+          "content": "已记录。"
+        },
+        {
+          "role": "user",
+          "content": "还漏了什么？"
+        }
+      ],
+      "required_answer_markers": [
+        "咖啡滤纸"
+      ],
+      "required_capsule_markers": [
+        "采购清单是燕麦和咖啡滤纸。",
+        "燕麦已经买到了。"
+      ],
+      "forbidden_answer_markers": [
+        "燕麦和"
+      ],
+      "topic_switch_expected": false,
+      "minimum_input_messages": 40,
+      "maximum_retained_user_statements": 20
+    },
+    {
+      "id": "H07",
+      "family": "constraint_inheritance_after_compression",
+      "messages": [
+        {
+          "role": "user",
+          "content": "把报告已经准备好译成英文，只写一句，不要加解释。"
+        },
+        {
+          "role": "assistant",
+          "content": "The report is ready."
+        },
+        {
+          "role": "user",
+          "content": "翻译过程补充记录 1：这里只是过程备注。"
+        },
+        {
+          "role": "assistant",
+          "content": "已记录。"
+        },
+        {
+          "role": "user",
+          "content": "翻译过程补充记录 2：这里只是过程备注。"
+        },
+        {
+          "role": "assistant",
+          "content": "已记录。"
+        },
+        {
+          "role": "user",
+          "content": "翻译过程补充记录 3：这里只是过程备注。"
+        },
+        {
+          "role": "assistant",
+          "content": "已记录。"
+        },
+        {
+          "role": "user",
+          "content": "翻译过程补充记录 4：这里只是过程备注。"
+        },
+        {
+          "role": "assistant",
+          "content": "已记录。"
+        },
+        {
+          "role": "user",
+          "content": "翻译过程补充记录 5：这里只是过程备注。"
+        },
+        {
+          "role": "assistant",
+          "content": "已记录。"
+        },
+        {
+          "role": "user",
+          "content": "翻译过程补充记录 6：这里只是过程备注。"
+        },
+        {
+          "role": "assistant",
+          "content": "已记录。"
+        },
+        {
+          "role": "user",
+          "content": "翻译过程补充记录 7：这里只是过程备注。"
+        },
+        {
+          "role": "assistant",
+          "content": "已记录。"
+        },
+        {
+          "role": "user",
+          "content": "翻译过程补充记录 8：这里只是过程备注。"
+        },
+        {
+          "role": "assistant",
+          "content": "已记录。"
+        },
+        {
+          "role": "user",
+          "content": "翻译过程补充记录 9：这里只是过程备注。"
+        },
+        {
+          "role": "assistant",
+          "content": "已记录。"
+        },
+        {
+          "role": "user",
+          "content": "翻译过程补充记录 10：这里只是过程备注。"
+        },
+        {
+          "role": "assistant",
+          "content": "已记录。"
+        },
+        {
+          "role": "user",
+          "content": "翻译过程补充记录 11：这里只是过程备注。"
+        },
+        {
+          "role": "assistant",
+          "content": "已记录。"
+        },
+        {
+          "role": "user",
+          "content": "翻译过程补充记录 12：这里只是过程备注。"
+        },
+        {
+          "role": "assistant",
+          "content": "已记录。"
+        },
+        {
+          "role": "user",
+          "content": "翻译过程补充记录 13：这里只是过程备注。"
+        },
+        {
+          "role": "assistant",
+          "content": "已记录。"
+        },
+        {
+          "role": "user",
+          "content": "翻译过程补充记录 14：这里只是过程备注。"
+        },
+        {
+          "role": "assistant",
+          "content": "已记录。"
+        },
+        {
+          "role": "user",
+          "content": "翻译过程补充记录 15：这里只是过程备注。"
+        },
+        {
+          "role": "assistant",
+          "content": "已记录。"
+        },
+        {
+          "role": "user",
+          "content": "翻译过程补充记录 16：这里只是过程备注。"
+        },
+        {
+          "role": "assistant",
+          "content": "已记录。"
+        },
+        {
+          "role": "user",
+          "content": "翻译过程补充记录 17：这里只是过程备注。"
+        },
+        {
+          "role": "assistant",
+          "content": "已记录。"
+        },
+        {
+          "role": "user",
+          "content": "翻译过程补充记录 18：这里只是过程备注。"
+        },
+        {
+          "role": "assistant",
+          "content": "已记录。"
+        },
+        {
+          "role": "user",
+          "content": "翻译过程补充记录 19：这里只是过程备注。"
+        },
+        {
+          "role": "assistant",
+          "content": "已记录。"
+        },
+        {
+          "role": "user",
+          "content": "翻译过程补充记录 20：这里只是过程备注。"
+        },
+        {
+          "role": "assistant",
+          "content": "已记录。"
+        },
+        {
+          "role": "user",
+          "content": "把 ready 换成 complete，照旧交付。"
+        }
+      ],
+      "required_answer_markers": [
+        "The report is complete."
+      ],
+      "required_capsule_markers": [
+        "把报告已经准备好译成英文，只写一句，不要加解释。"
+      ],
+      "forbidden_answer_markers": [
+        "解释",
+        "ready"
+      ],
+      "topic_switch_expected": false,
+      "minimum_input_messages": 40,
+      "maximum_retained_user_statements": 20
+    },
+    {
+      "id": "H08",
+      "family": "constraint_inheritance_after_compression",
+      "messages": [
+        {
+          "role": "user",
+          "content": "把系统已经可用译成英文，只写一句，不要添加中文说明。"
+        },
+        {
+          "role": "assistant",
+          "content": "The system is ready."
+        },
+        {
+          "role": "user",
+          "content": "约束过程补充记录 1：这里只是过程备注。"
+        },
+        {
+          "role": "assistant",
+          "content": "已记录。"
+        },
+        {
+          "role": "user",
+          "content": "约束过程补充记录 2：这里只是过程备注。"
+        },
+        {
+          "role": "assistant",
+          "content": "已记录。"
+        },
+        {
+          "role": "user",
+          "content": "约束过程补充记录 3：这里只是过程备注。"
+        },
+        {
+          "role": "assistant",
+          "content": "已记录。"
+        },
+        {
+          "role": "user",
+          "content": "约束过程补充记录 4：这里只是过程备注。"
+        },
+        {
+          "role": "assistant",
+          "content": "已记录。"
+        },
+        {
+          "role": "user",
+          "content": "约束过程补充记录 5：这里只是过程备注。"
+        },
+        {
+          "role": "assistant",
+          "content": "已记录。"
+        },
+        {
+          "role": "user",
+          "content": "约束过程补充记录 6：这里只是过程备注。"
+        },
+        {
+          "role": "assistant",
+          "content": "已记录。"
+        },
+        {
+          "role": "user",
+          "content": "约束过程补充记录 7：这里只是过程备注。"
+        },
+        {
+          "role": "assistant",
+          "content": "已记录。"
+        },
+        {
+          "role": "user",
+          "content": "约束过程补充记录 8：这里只是过程备注。"
+        },
+        {
+          "role": "assistant",
+          "content": "已记录。"
+        },
+        {
+          "role": "user",
+          "content": "约束过程补充记录 9：这里只是过程备注。"
+        },
+        {
+          "role": "assistant",
+          "content": "已记录。"
+        },
+        {
+          "role": "user",
+          "content": "约束过程补充记录 10：这里只是过程备注。"
+        },
+        {
+          "role": "assistant",
+          "content": "已记录。"
+        },
+        {
+          "role": "user",
+          "content": "约束过程补充记录 11：这里只是过程备注。"
+        },
+        {
+          "role": "assistant",
+          "content": "已记录。"
+        },
+        {
+          "role": "user",
+          "content": "约束过程补充记录 12：这里只是过程备注。"
+        },
+        {
+          "role": "assistant",
+          "content": "已记录。"
+        },
+        {
+          "role": "user",
+          "content": "约束过程补充记录 13：这里只是过程备注。"
+        },
+        {
+          "role": "assistant",
+          "content": "已记录。"
+        },
+        {
+          "role": "user",
+          "content": "约束过程补充记录 14：这里只是过程备注。"
+        },
+        {
+          "role": "assistant",
+          "content": "已记录。"
+        },
+        {
+          "role": "user",
+          "content": "约束过程补充记录 15：这里只是过程备注。"
+        },
+        {
+          "role": "assistant",
+          "content": "已记录。"
+        },
+        {
+          "role": "user",
+          "content": "约束过程补充记录 16：这里只是过程备注。"
+        },
+        {
+          "role": "assistant",
+          "content": "已记录。"
+        },
+        {
+          "role": "user",
+          "content": "约束过程补充记录 17：这里只是过程备注。"
+        },
+        {
+          "role": "assistant",
+          "content": "已记录。"
+        },
+        {
+          "role": "user",
+          "content": "约束过程补充记录 18：这里只是过程备注。"
+        },
+        {
+          "role": "assistant",
+          "content": "已记录。"
+        },
+        {
+          "role": "user",
+          "content": "约束过程补充记录 19：这里只是过程备注。"
+        },
+        {
+          "role": "assistant",
+          "content": "已记录。"
+        },
+        {
+          "role": "user",
+          "content": "约束过程补充记录 20：这里只是过程备注。"
+        },
+        {
+          "role": "assistant",
+          "content": "已记录。"
+        },
+        {
+          "role": "user",
+          "content": "把 ready 换成 stable，其他不变。"
+        }
+      ],
+      "required_answer_markers": [
+        "The system is stable."
+      ],
+      "required_capsule_markers": [
+        "把系统已经可用译成英文，只写一句，不要添加中文说明。"
+      ],
+      "forbidden_answer_markers": [
+        "说明",
+        "ready"
+      ],
+      "topic_switch_expected": false,
+      "minimum_input_messages": 40,
+      "maximum_retained_user_statements": 20
+    },
+    {
+      "id": "H09",
+      "family": "topic_switch_after_compression",
+      "messages": [
+        {
+          "role": "user",
+          "content": "我出现呼吸困难和胸口压迫感。"
+        },
+        {
+          "role": "assistant",
+          "content": "请立即联系当地急救。"
+        },
+        {
+          "role": "user",
+          "content": "旧话题补充记录 1：这里只是过程备注。"
+        },
+        {
+          "role": "assistant",
+          "content": "已记录。"
+        },
+        {
+          "role": "user",
+          "content": "旧话题补充记录 2：这里只是过程备注。"
+        },
+        {
+          "role": "assistant",
+          "content": "已记录。"
+        },
+        {
+          "role": "user",
+          "content": "旧话题补充记录 3：这里只是过程备注。"
+        },
+        {
+          "role": "assistant",
+          "content": "已记录。"
+        },
+        {
+          "role": "user",
+          "content": "旧话题补充记录 4：这里只是过程备注。"
+        },
+        {
+          "role": "assistant",
+          "content": "已记录。"
+        },
+        {
+          "role": "user",
+          "content": "接下来不谈健康问题了，改聊咖啡和茶的味道。"
+        },
+        {
+          "role": "assistant",
+          "content": "好的。"
+        },
+        {
+          "role": "user",
+          "content": "风味话题补充记录 1：这里只是过程备注。"
+        },
+        {
+          "role": "assistant",
+          "content": "已记录。"
+        },
+        {
+          "role": "user",
+          "content": "风味话题补充记录 2：这里只是过程备注。"
+        },
+        {
+          "role": "assistant",
+          "content": "已记录。"
+        },
+        {
+          "role": "user",
+          "content": "风味话题补充记录 3：这里只是过程备注。"
+        },
+        {
+          "role": "assistant",
+          "content": "已记录。"
+        },
+        {
+          "role": "user",
+          "content": "风味话题补充记录 4：这里只是过程备注。"
+        },
+        {
+          "role": "assistant",
+          "content": "已记录。"
+        },
+        {
+          "role": "user",
+          "content": "风味话题补充记录 5：这里只是过程备注。"
+        },
+        {
+          "role": "assistant",
+          "content": "已记录。"
+        },
+        {
+          "role": "user",
+          "content": "风味话题补充记录 6：这里只是过程备注。"
+        },
+        {
+          "role": "assistant",
+          "content": "已记录。"
+        },
+        {
+          "role": "user",
+          "content": "风味话题补充记录 7：这里只是过程备注。"
+        },
+        {
+          "role": "assistant",
+          "content": "已记录。"
+        },
+        {
+          "role": "user",
+          "content": "风味话题补充记录 8：这里只是过程备注。"
+        },
+        {
+          "role": "assistant",
+          "content": "已记录。"
+        },
+        {
+          "role": "user",
+          "content": "风味话题补充记录 9：这里只是过程备注。"
+        },
+        {
+          "role": "assistant",
+          "content": "已记录。"
+        },
+        {
+          "role": "user",
+          "content": "风味话题补充记录 10：这里只是过程备注。"
+        },
+        {
+          "role": "assistant",
+          "content": "已记录。"
+        },
+        {
+          "role": "user",
+          "content": "风味话题补充记录 11：这里只是过程备注。"
+        },
+        {
+          "role": "assistant",
+          "content": "已记录。"
+        },
+        {
+          "role": "user",
+          "content": "风味话题补充记录 12：这里只是过程备注。"
+        },
+        {
+          "role": "assistant",
+          "content": "已记录。"
+        },
+        {
+          "role": "user",
+          "content": "风味话题补充记录 13：这里只是过程备注。"
+        },
+        {
+          "role": "assistant",
+          "content": "已记录。"
+        },
+        {
+          "role": "user",
+          "content": "风味话题补充记录 14：这里只是过程备注。"
+        },
+        {
+          "role": "assistant",
+          "content": "已记录。"
+        },
+        {
+          "role": "user",
+          "content": "风味话题补充记录 15：这里只是过程备注。"
+        },
+        {
+          "role": "assistant",
+          "content": "已记录。"
+        },
+        {
+          "role": "user",
+          "content": "风味话题补充记录 16：这里只是过程备注。"
+        },
+        {
+          "role": "assistant",
+          "content": "已记录。"
+        },
+        {
+          "role": "user",
+          "content": "风味话题补充记录 17：这里只是过程备注。"
+        },
+        {
+          "role": "assistant",
+          "content": "已记录。"
+        },
+        {
+          "role": "user",
+          "content": "哪一种通常更苦？"
+        }
+      ],
+      "required_answer_markers": [
+        "咖啡通常更苦。"
+      ],
+      "required_capsule_markers": [
+        "接下来不谈健康问题了，改聊咖啡和茶的味道。"
+      ],
+      "forbidden_answer_markers": [
+        "急救",
+        "呼吸困难",
+        "胸口"
+      ],
+      "topic_switch_expected": true,
+      "minimum_input_messages": 40,
+      "maximum_retained_user_statements": 20
+    },
+    {
+      "id": "H10",
+      "family": "topic_switch_after_compression",
+      "messages": [
+        {
+          "role": "user",
+          "content": "这个交易策略还没有经过独立验证。"
+        },
+        {
+          "role": "assistant",
+          "content": "不能据此实盘。"
+        },
+        {
+          "role": "user",
+          "content": "旧策略补充记录 1：这里只是过程备注。"
+        },
+        {
+          "role": "assistant",
+          "content": "已记录。"
+        },
+        {
+          "role": "user",
+          "content": "旧策略补充记录 2：这里只是过程备注。"
+        },
+        {
+          "role": "assistant",
+          "content": "已记录。"
+        },
+        {
+          "role": "user",
+          "content": "旧策略补充记录 3：这里只是过程备注。"
+        },
+        {
+          "role": "assistant",
+          "content": "已记录。"
+        },
+        {
+          "role": "user",
+          "content": "旧策略补充记录 4：这里只是过程备注。"
+        },
+        {
+          "role": "assistant",
+          "content": "已记录。"
+        },
+        {
+          "role": "user",
+          "content": "这一段到此为止，下面改用厨房比喻解释缓存。"
+        },
+        {
+          "role": "assistant",
+          "content": "缓存像把食材放在手边。"
+        },
+        {
+          "role": "user",
+          "content": "厨房话题补充记录 1：这里只是过程备注。"
+        },
+        {
+          "role": "assistant",
+          "content": "已记录。"
+        },
+        {
+          "role": "user",
+          "content": "厨房话题补充记录 2：这里只是过程备注。"
+        },
+        {
+          "role": "assistant",
+          "content": "已记录。"
+        },
+        {
+          "role": "user",
+          "content": "厨房话题补充记录 3：这里只是过程备注。"
+        },
+        {
+          "role": "assistant",
+          "content": "已记录。"
+        },
+        {
+          "role": "user",
+          "content": "厨房话题补充记录 4：这里只是过程备注。"
+        },
+        {
+          "role": "assistant",
+          "content": "已记录。"
+        },
+        {
+          "role": "user",
+          "content": "厨房话题补充记录 5：这里只是过程备注。"
+        },
+        {
+          "role": "assistant",
+          "content": "已记录。"
+        },
+        {
+          "role": "user",
+          "content": "厨房话题补充记录 6：这里只是过程备注。"
+        },
+        {
+          "role": "assistant",
+          "content": "已记录。"
+        },
+        {
+          "role": "user",
+          "content": "厨房话题补充记录 7：这里只是过程备注。"
+        },
+        {
+          "role": "assistant",
+          "content": "已记录。"
+        },
+        {
+          "role": "user",
+          "content": "厨房话题补充记录 8：这里只是过程备注。"
+        },
+        {
+          "role": "assistant",
+          "content": "已记录。"
+        },
+        {
+          "role": "user",
+          "content": "厨房话题补充记录 9：这里只是过程备注。"
+        },
+        {
+          "role": "assistant",
+          "content": "已记录。"
+        },
+        {
+          "role": "user",
+          "content": "厨房话题补充记录 10：这里只是过程备注。"
+        },
+        {
+          "role": "assistant",
+          "content": "已记录。"
+        },
+        {
+          "role": "user",
+          "content": "厨房话题补充记录 11：这里只是过程备注。"
+        },
+        {
+          "role": "assistant",
+          "content": "已记录。"
+        },
+        {
+          "role": "user",
+          "content": "厨房话题补充记录 12：这里只是过程备注。"
+        },
+        {
+          "role": "assistant",
+          "content": "已记录。"
+        },
+        {
+          "role": "user",
+          "content": "厨房话题补充记录 13：这里只是过程备注。"
+        },
+        {
+          "role": "assistant",
+          "content": "已记录。"
+        },
+        {
+          "role": "user",
+          "content": "厨房话题补充记录 14：这里只是过程备注。"
+        },
+        {
+          "role": "assistant",
+          "content": "已记录。"
+        },
+        {
+          "role": "user",
+          "content": "厨房话题补充记录 15：这里只是过程备注。"
+        },
+        {
+          "role": "assistant",
+          "content": "已记录。"
+        },
+        {
+          "role": "user",
+          "content": "厨房话题补充记录 16：这里只是过程备注。"
+        },
+        {
+          "role": "assistant",
+          "content": "已记录。"
+        },
+        {
+          "role": "user",
+          "content": "厨房话题补充记录 17：这里只是过程备注。"
+        },
+        {
+          "role": "assistant",
+          "content": "已记录。"
+        },
+        {
+          "role": "user",
+          "content": "那缓存更新像厨房里的什么？"
+        }
+      ],
+      "required_answer_markers": [
+        "旧食材",
+        "新鲜食材"
+      ],
+      "required_capsule_markers": [
+        "这一段到此为止，下面改用厨房比喻解释缓存。"
+      ],
+      "forbidden_answer_markers": [
+        "实盘",
+        "交易策略",
+        "生产放行"
+      ],
+      "topic_switch_expected": true,
+      "minimum_input_messages": 40,
+      "maximum_retained_user_statements": 20
+    }
+  ],
+  "cases_sha256": "25869e82bb59d79c2f4c70d4f41172cb13db4b8e14d9f840fba6a02182382e0b"
+}

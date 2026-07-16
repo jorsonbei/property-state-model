@@ -1,0 +1,24 @@
+{
+  "schema_version": "psm_v0_275_external_open_context_second_repair_report_v1",
+  "version": "PSM_V0.275-second-rejudge-candidate",
+  "passed": true,
+  "original_external_failure_retained": true,
+  "first_external_rejudge_failure_retained": true,
+  "failed_items_repaired_locally": [
+    "O09"
+  ],
+  "repair": {
+    "O09": "Return only the direct flavor comparison requested after the topic switch."
+  },
+  "local_contract_cases_passed": 10,
+  "external_second_rejudge_completed": false,
+  "release_boundary": {
+    "human_validation_claimed": false,
+    "open_domain_generalization_claimed": false,
+    "production_readiness_claimed": false,
+    "public_service_allowed": false,
+    "professional_authority_allowed": false,
+    "rule_replacement_allowed": false,
+    "external_release_authority": false
+  }
+}

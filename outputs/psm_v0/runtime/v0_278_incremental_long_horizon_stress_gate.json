@@ -1,0 +1,71 @@
+{
+  "schema_version": "psm_v0_278_incremental_long_horizon_stress_gate_v1",
+  "version": "PSM_V0.278-candidate",
+  "passed": true,
+  "decision": "incremental_long_horizon_stress_gate_passed",
+  "checks": {
+    "case_count_matches": true,
+    "all_cases_pass": true,
+    "all_families_pass": true,
+    "both_stress_levels_present": true,
+    "history_stays_within_product_limit": true,
+    "compression_applied_for_all": true,
+    "capsule_recovery_failures_zero": true,
+    "historical_window_baseline_fails_all": true,
+    "stale_state_violations_zero": true,
+    "total_duration_within_limit": true,
+    "p95_duration_within_limit": true,
+    "retained_v0_277_promotion": true,
+    "evaluation_backflow_zero": true,
+    "release_boundary_closed": true
+  },
+  "metrics": {
+    "cases": 10,
+    "passed": 10,
+    "failed": 0,
+    "message_levels": [
+      81,
+      119
+    ],
+    "minimum_messages": 81,
+    "maximum_messages": 119,
+    "stale_state_violations": 0,
+    "compression_missing": 0,
+    "capsule_recovery_failures": 0,
+    "window_baseline_failures": 10,
+    "total_duration_ms": 210,
+    "p50_duration_ms": 20,
+    "p95_duration_ms": 30,
+    "maximum_duration_ms": 30,
+    "families": {
+      "constraint_inheritance_near_history_limit": {
+        "cases": 2,
+        "passed": 2
+      },
+      "latest_correction_near_history_limit": {
+        "cases": 2,
+        "passed": 2
+      },
+      "remote_fact_near_history_limit": {
+        "cases": 2,
+        "passed": 2
+      },
+      "topic_switch_near_history_limit": {
+        "cases": 2,
+        "passed": 2
+      },
+      "unresolved_work_near_history_limit": {
+        "cases": 2,
+        "passed": 2
+      }
+    }
+  },
+  "release_boundary": {
+    "human_validation_claimed": false,
+    "open_domain_generalization_claimed": false,
+    "production_readiness_claimed": false,
+    "public_service_allowed": false,
+    "rule_replacement_allowed": false,
+    "external_release_authority": false
+  }
+}

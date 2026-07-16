@@ -1,0 +1,4238 @@
+{
+  "schema_version": "psm_v0_278_incremental_long_horizon_stress_contract_v1",
+  "version": "PSM_V0.278-candidate",
+  "frozen_at": "2026-07-16T03:30:25.128557+00:00",
+  "source_version": "PSM_V0.277",
+  "objective": "Stress long-horizon state recovery at 81 and 119 messages, immediately below the 120-message product limit.",
+  "evaluation": {
+    "frozen_case_count": 10,
+    "families": [
+      "constraint_inheritance_near_history_limit",
+      "latest_correction_near_history_limit",
+      "remote_fact_near_history_limit",
+      "topic_switch_near_history_limit",
+      "unresolved_work_near_history_limit"
+    ],
+    "cases_per_family": 2,
+    "message_levels": [
+      81,
+      119
+    ],
+    "minimum_input_messages": 80,
+    "maximum_input_messages": 120,
+    "maximum_retained_user_statements": 20,
+    "maximum_total_duration_ms": 10000,
+    "maximum_p95_duration_ms": 3000
+  },
+  "source_isolation": {
+    "candidate_reads_expected_answers": false,
+    "evaluation_rows_used_for_training": false,
+    "external_judge_feedback_used_as_training_truth": false
+  },
+  "release_boundary": {
+    "human_validation_claimed": false,
+    "open_domain_generalization_claimed": false,
+    "production_readiness_claimed": false,
+    "public_service_allowed": false,
+    "rule_replacement_allowed": false,
+    "external_release_authority": false
+  },
+  "cases": [
+    {
+      "id": "S01",
+      "family": "remote_fact_near_history_limit",
+      "messages": [
+        {
+          "role": "user",
+          "content": "项目代号定为白砾。"
+        },
+        {
+          "role": "assistant",
+          "content": "已记录项目代号。"
+        },
+        {
+          "role": "user",
+          "content": "八十轮代号补充记录 1：这里只是过程备注。"
+        },
+        {
+          "role": "assistant",
+          "content": "已记录。"
+        },
+        {
+          "role": "user",
+          "content": "八十轮代号补充记录 2：这里只是过程备注。"
+        },
+        {
+          "role": "assistant",
+          "content": "已记录。"
+        },
+        {
+          "role": "user",
+          "content": "八十轮代号补充记录 3：这里只是过程备注。"
+        },
+        {
+          "role": "assistant",
+          "content": "已记录。"
+        },
+        {
+          "role": "user",
+          "content": "八十轮代号补充记录 4：这里只是过程备注。"
+        },
+        {
+          "role": "assistant",
+          "content": "已记录。"
+        },
+        {
+          "role": "user",
+          "content": "八十轮代号补充记录 5：这里只是过程备注。"
+        },
+        {
+          "role": "assistant",
+          "content": "已记录。"
+        },
+        {
+          "role": "user",
+          "content": "八十轮代号补充记录 6：这里只是过程备注。"
+        },
+        {
+          "role": "assistant",
+          "content": "已记录。"
+        },
+        {
+          "role": "user",
+          "content": "八十轮代号补充记录 7：这里只是过程备注。"
+        },
+        {
+          "role": "assistant",
+          "content": "已记录。"
+        },
+        {
+          "role": "user",
+          "content": "八十轮代号补充记录 8：这里只是过程备注。"
+        },
+        {
+          "role": "assistant",
+          "content": "已记录。"
+        },
+        {
+          "role": "user",
+          "content": "八十轮代号补充记录 9：这里只是过程备注。"
+        },
+        {
+          "role": "assistant",
+          "content": "已记录。"
+        },
+        {
+          "role": "user",
+          "content": "八十轮代号补充记录 10：这里只是过程备注。"
+        },
+        {
+          "role": "assistant",
+          "content": "已记录。"
+        },
+        {
+          "role": "user",
+          "content": "八十轮代号补充记录 11：这里只是过程备注。"
+        },
+        {
+          "role": "assistant",
+          "content": "已记录。"
+        },
+        {
+          "role": "user",
+          "content": "八十轮代号补充记录 12：这里只是过程备注。"
+        },
+        {
+          "role": "assistant",
+          "content": "已记录。"
+        },
+        {
+          "role": "user",
+          "content": "八十轮代号补充记录 13：这里只是过程备注。"
+        },
+        {
+          "role": "assistant",
+          "content": "已记录。"
+        },
+        {
+          "role": "user",
+          "content": "八十轮代号补充记录 14：这里只是过程备注。"
+        },
+        {
+          "role": "assistant",
+          "content": "已记录。"
+        },
+        {
+          "role": "user",
+          "content": "八十轮代号补充记录 15：这里只是过程备注。"
+        },
+        {
+          "role": "assistant",
+          "content": "已记录。"
+        },
+        {
+          "role": "user",
+          "content": "八十轮代号补充记录 16：这里只是过程备注。"
+        },
+        {
+          "role": "assistant",
+          "content": "已记录。"
+        },
+        {
+          "role": "user",
+          "content": "八十轮代号补充记录 17：这里只是过程备注。"
+        },
+        {
+          "role": "assistant",
+          "content": "已记录。"
+        },
+        {
+          "role": "user",
+          "content": "八十轮代号补充记录 18：这里只是过程备注。"
+        },
+        {
+          "role": "assistant",
+          "content": "已记录。"
+        },
+        {
+          "role": "user",
+          "content": "八十轮代号补充记录 19：这里只是过程备注。"
+        },
+        {
+          "role": "assistant",
+          "content": "已记录。"
+        },
+        {
+          "role": "user",
+          "content": "八十轮代号补充记录 20：这里只是过程备注。"
+        },
+        {
+          "role": "assistant",
+          "content": "已记录。"
+        },
+        {
+          "role": "user",
+          "content": "八十轮代号补充记录 21：这里只是过程备注。"
+        },
+        {
+          "role": "assistant",
+          "content": "已记录。"
+        },
+        {
+          "role": "user",
+          "content": "八十轮代号补充记录 22：这里只是过程备注。"
+        },
+        {
+          "role": "assistant",
+          "content": "已记录。"
+        },
+        {
+          "role": "user",
+          "content": "八十轮代号补充记录 23：这里只是过程备注。"
+        },
+        {
+          "role": "assistant",
+          "content": "已记录。"
+        },
+        {
+          "role": "user",
+          "content": "八十轮代号补充记录 24：这里只是过程备注。"
+        },
+        {
+          "role": "assistant",
+          "content": "已记录。"
+        },
+        {
+          "role": "user",
+          "content": "八十轮代号补充记录 25：这里只是过程备注。"
+        },
+        {
+          "role": "assistant",
+          "content": "已记录。"
+        },
+        {
+          "role": "user",
+          "content": "八十轮代号补充记录 26：这里只是过程备注。"
+        },
+        {
+          "role": "assistant",
+          "content": "已记录。"
+        },
+        {
+          "role": "user",
+          "content": "八十轮代号补充记录 27：这里只是过程备注。"
+        },
+        {
+          "role": "assistant",
+          "content": "已记录。"
+        },
+        {
+          "role": "user",
+          "content": "八十轮代号补充记录 28：这里只是过程备注。"
+        },
+        {
+          "role": "assistant",
+          "content": "已记录。"
+        },
+        {
+          "role": "user",
+          "content": "八十轮代号补充记录 29：这里只是过程备注。"
+        },
+        {
+          "role": "assistant",
+          "content": "已记录。"
+        },
+        {
+          "role": "user",
+          "content": "八十轮代号补充记录 30：这里只是过程备注。"
+        },
+        {
+          "role": "assistant",
+          "content": "已记录。"
+        },
+        {
+          "role": "user",
+          "content": "八十轮代号补充记录 31：这里只是过程备注。"
+        },
+        {
+          "role": "assistant",
+          "content": "已记录。"
+        },
+        {
+          "role": "user",
+          "content": "八十轮代号补充记录 32：这里只是过程备注。"
+        },
+        {
+          "role": "assistant",
+          "content": "已记录。"
+        },
+        {
+          "role": "user",
+          "content": "八十轮代号补充记录 33：这里只是过程备注。"
+        },
+        {
+          "role": "assistant",
+          "content": "已记录。"
+        },
+        {
+          "role": "user",
+          "content": "八十轮代号补充记录 34：这里只是过程备注。"
+        },
+        {
+          "role": "assistant",
+          "content": "已记录。"
+        },
+        {
+          "role": "user",
+          "content": "八十轮代号补充记录 35：这里只是过程备注。"
+        },
+        {
+          "role": "assistant",
+          "content": "已记录。"
+        },
+        {
+          "role": "user",
+          "content": "八十轮代号补充记录 36：这里只是过程备注。"
+        },
+        {
+          "role": "assistant",
+          "content": "已记录。"
+        },
+        {
+          "role": "user",
+          "content": "八十轮代号补充记录 37：这里只是过程备注。"
+        },
+        {
+          "role": "assistant",
+          "content": "已记录。"
+        },
+        {
+          "role": "user",
+          "content": "八十轮代号补充记录 38：这里只是过程备注。"
+        },
+        {
+          "role": "assistant",
+          "content": "已记录。"
+        },
+        {
+          "role": "user",
+          "content": "八十轮代号补充记录 39：这里只是过程备注。"
+        },
+        {
+          "role": "assistant",
+          "content": "已记录。"
+        },
+        {
+          "role": "user",
+          "content": "最早确定的项目代号是什么？只回答代号。"
+        }
+      ],
+      "required_answer_markers": [
+        "白砾"
+      ],
+      "required_capsule_markers": [
+        "项目代号定为白砾。"
+      ],
+      "forbidden_answer_markers": [],
+      "topic_switch_expected": false,
+      "minimum_input_messages": 80,
+      "maximum_input_messages": 120,
+      "maximum_retained_user_statements": 20
+    },
+    {
+      "id": "S02",
+      "family": "remote_fact_near_history_limit",
+      "messages": [
+        {
+          "role": "user",
+          "content": "活动固定在银杏厅举行。"
+        },
+        {
+          "role": "assistant",
+          "content": "已记录场地。"
+        },
+        {
+          "role": "user",
+          "content": "百轮场地补充记录 1：这里只是过程备注。"
+        },
+        {
+          "role": "assistant",
+          "content": "已记录。"
+        },
+        {
+          "role": "user",
+          "content": "百轮场地补充记录 2：这里只是过程备注。"
+        },
+        {
+          "role": "assistant",
+          "content": "已记录。"
+        },
+        {
+          "role": "user",
+          "content": "百轮场地补充记录 3：这里只是过程备注。"
+        },
+        {
+          "role": "assistant",
+          "content": "已记录。"
+        },
+        {
+          "role": "user",
+          "content": "百轮场地补充记录 4：这里只是过程备注。"
+        },
+        {
+          "role": "assistant",
+          "content": "已记录。"
+        },
+        {
+          "role": "user",
+          "content": "百轮场地补充记录 5：这里只是过程备注。"
+        },
+        {
+          "role": "assistant",
+          "content": "已记录。"
+        },
+        {
+          "role": "user",
+          "content": "百轮场地补充记录 6：这里只是过程备注。"
+        },
+        {
+          "role": "assistant",
+          "content": "已记录。"
+        },
+        {
+          "role": "user",
+          "content": "百轮场地补充记录 7：这里只是过程备注。"
+        },
+        {
+          "role": "assistant",
+          "content": "已记录。"
+        },
+        {
+          "role": "user",
+          "content": "百轮场地补充记录 8：这里只是过程备注。"
+        },
+        {
+          "role": "assistant",
+          "content": "已记录。"
+        },
+        {
+          "role": "user",
+          "content": "百轮场地补充记录 9：这里只是过程备注。"
+        },
+        {
+          "role": "assistant",
+          "content": "已记录。"
+        },
+        {
+          "role": "user",
+          "content": "百轮场地补充记录 10：这里只是过程备注。"
+        },
+        {
+          "role": "assistant",
+          "content": "已记录。"
+        },
+        {
+          "role": "user",
+          "content": "百轮场地补充记录 11：这里只是过程备注。"
+        },
+        {
+          "role": "assistant",
+          "content": "已记录。"
+        },
+        {
+          "role": "user",
+          "content": "百轮场地补充记录 12：这里只是过程备注。"
+        },
+        {
+          "role": "assistant",
+          "content": "已记录。"
+        },
+        {
+          "role": "user",
+          "content": "百轮场地补充记录 13：这里只是过程备注。"
+        },
+        {
+          "role": "assistant",
+          "content": "已记录。"
+        },
+        {
+          "role": "user",
+          "content": "百轮场地补充记录 14：这里只是过程备注。"
+        },
+        {
+          "role": "assistant",
+          "content": "已记录。"
+        },
+        {
+          "role": "user",
+          "content": "百轮场地补充记录 15：这里只是过程备注。"
+        },
+        {
+          "role": "assistant",
+          "content": "已记录。"
+        },
+        {
+          "role": "user",
+          "content": "百轮场地补充记录 16：这里只是过程备注。"
+        },
+        {
+          "role": "assistant",
+          "content": "已记录。"
+        },
+        {
+          "role": "user",
+          "content": "百轮场地补充记录 17：这里只是过程备注。"
+        },
+        {
+          "role": "assistant",
+          "content": "已记录。"
+        },
+        {
+          "role": "user",
+          "content": "百轮场地补充记录 18：这里只是过程备注。"
+        },
+        {
+          "role": "assistant",
+          "content": "已记录。"
+        },
+        {
+          "role": "user",
+          "content": "百轮场地补充记录 19：这里只是过程备注。"
+        },
+        {
+          "role": "assistant",
+          "content": "已记录。"
+        },
+        {
+          "role": "user",
+          "content": "百轮场地补充记录 20：这里只是过程备注。"
+        },
+        {
+          "role": "assistant",
+          "content": "已记录。"
+        },
+        {
+          "role": "user",
+          "content": "百轮场地补充记录 21：这里只是过程备注。"
+        },
+        {
+          "role": "assistant",
+          "content": "已记录。"
+        },
+        {
+          "role": "user",
+          "content": "百轮场地补充记录 22：这里只是过程备注。"
+        },
+        {
+          "role": "assistant",
+          "content": "已记录。"
+        },
+        {
+          "role": "user",
+          "content": "百轮场地补充记录 23：这里只是过程备注。"
+        },
+        {
+          "role": "assistant",
+          "content": "已记录。"
+        },
+        {
+          "role": "user",
+          "content": "百轮场地补充记录 24：这里只是过程备注。"
+        },
+        {
+          "role": "assistant",
+          "content": "已记录。"
+        },
+        {
+          "role": "user",
+          "content": "百轮场地补充记录 25：这里只是过程备注。"
+        },
+        {
+          "role": "assistant",
+          "content": "已记录。"
+        },
+        {
+          "role": "user",
+          "content": "百轮场地补充记录 26：这里只是过程备注。"
+        },
+        {
+          "role": "assistant",
+          "content": "已记录。"
+        },
+        {
+          "role": "user",
+          "content": "百轮场地补充记录 27：这里只是过程备注。"
+        },
+        {
+          "role": "assistant",
+          "content": "已记录。"
+        },
+        {
+          "role": "user",
+          "content": "百轮场地补充记录 28：这里只是过程备注。"
+        },
+        {
+          "role": "assistant",
+          "content": "已记录。"
+        },
+        {
+          "role": "user",
+          "content": "百轮场地补充记录 29：这里只是过程备注。"
+        },
+        {
+          "role": "assistant",
+          "content": "已记录。"
+        },
+        {
+          "role": "user",
+          "content": "百轮场地补充记录 30：这里只是过程备注。"
+        },
+        {
+          "role": "assistant",
+          "content": "已记录。"
+        },
+        {
+          "role": "user",
+          "content": "百轮场地补充记录 31：这里只是过程备注。"
+        },
+        {
+          "role": "assistant",
+          "content": "已记录。"
+        },
+        {
+          "role": "user",
+          "content": "百轮场地补充记录 32：这里只是过程备注。"
+        },
+        {
+          "role": "assistant",
+          "content": "已记录。"
+        },
+        {
+          "role": "user",
+          "content": "百轮场地补充记录 33：这里只是过程备注。"
+        },
+        {
+          "role": "assistant",
+          "content": "已记录。"
+        },
+        {
+          "role": "user",
+          "content": "百轮场地补充记录 34：这里只是过程备注。"
+        },
+        {
+          "role": "assistant",
+          "content": "已记录。"
+        },
+        {
+          "role": "user",
+          "content": "百轮场地补充记录 35：这里只是过程备注。"
+        },
+        {
+          "role": "assistant",
+          "content": "已记录。"
+        },
+        {
+          "role": "user",
+          "content": "百轮场地补充记录 36：这里只是过程备注。"
+        },
+        {
+          "role": "assistant",
+          "content": "已记录。"
+        },
+        {
+          "role": "user",
+          "content": "百轮场地补充记录 37：这里只是过程备注。"
+        },
+        {
+          "role": "assistant",
+          "content": "已记录。"
+        },
+        {
+          "role": "user",
+          "content": "百轮场地补充记录 38：这里只是过程备注。"
+        },
+        {
+          "role": "assistant",
+          "content": "已记录。"
+        },
+        {
+          "role": "user",
+          "content": "百轮场地补充记录 39：这里只是过程备注。"
+        },
+        {
+          "role": "assistant",
+          "content": "已记录。"
+        },
+        {
+          "role": "user",
+          "content": "百轮场地补充记录 40：这里只是过程备注。"
+        },
+        {
+          "role": "assistant",
+          "content": "已记录。"
+        },
+        {
+          "role": "user",
+          "content": "百轮场地补充记录 41：这里只是过程备注。"
+        },
+        {
+          "role": "assistant",
+          "content": "已记录。"
+        },
+        {
+          "role": "user",
+          "content": "百轮场地补充记录 42：这里只是过程备注。"
+        },
+        {
+          "role": "assistant",
+          "content": "已记录。"
+        },
+        {
+          "role": "user",
+          "content": "百轮场地补充记录 43：这里只是过程备注。"
+        },
+        {
+          "role": "assistant",
+          "content": "已记录。"
+        },
+        {
+          "role": "user",
+          "content": "百轮场地补充记录 44：这里只是过程备注。"
+        },
+        {
+          "role": "assistant",
+          "content": "已记录。"
+        },
+        {
+          "role": "user",
+          "content": "百轮场地补充记录 45：这里只是过程备注。"
+        },
+        {
+          "role": "assistant",
+          "content": "已记录。"
+        },
+        {
+          "role": "user",
+          "content": "百轮场地补充记录 46：这里只是过程备注。"
+        },
+        {
+          "role": "assistant",
+          "content": "已记录。"
+        },
+        {
+          "role": "user",
+          "content": "百轮场地补充记录 47：这里只是过程备注。"
+        },
+        {
+          "role": "assistant",
+          "content": "已记录。"
+        },
+        {
+          "role": "user",
+          "content": "百轮场地补充记录 48：这里只是过程备注。"
+        },
+        {
+          "role": "assistant",
+          "content": "已记录。"
+        },
+        {
+          "role": "user",
+          "content": "百轮场地补充记录 49：这里只是过程备注。"
+        },
+        {
+          "role": "assistant",
+          "content": "已记录。"
+        },
+        {
+          "role": "user",
+          "content": "百轮场地补充记录 50：这里只是过程备注。"
+        },
+        {
+          "role": "assistant",
+          "content": "已记录。"
+        },
+        {
+          "role": "user",
+          "content": "百轮场地补充记录 51：这里只是过程备注。"
+        },
+        {
+          "role": "assistant",
+          "content": "已记录。"
+        },
+        {
+          "role": "user",
+          "content": "百轮场地补充记录 52：这里只是过程备注。"
+        },
+        {
+          "role": "assistant",
+          "content": "已记录。"
+        },
+        {
+          "role": "user",
+          "content": "百轮场地补充记录 53：这里只是过程备注。"
+        },
+        {
+          "role": "assistant",
+          "content": "已记录。"
+        },
+        {
+          "role": "user",
+          "content": "百轮场地补充记录 54：这里只是过程备注。"
+        },
+        {
+          "role": "assistant",
+          "content": "已记录。"
+        },
+        {
+          "role": "user",
+          "content": "百轮场地补充记录 55：这里只是过程备注。"
+        },
+        {
+          "role": "assistant",
+          "content": "已记录。"
+        },
+        {
+          "role": "user",
+          "content": "百轮场地补充记录 56：这里只是过程备注。"
+        },
+        {
+          "role": "assistant",
+          "content": "已记录。"
+        },
+        {
+          "role": "user",
+          "content": "百轮场地补充记录 57：这里只是过程备注。"
+        },
+        {
+          "role": "assistant",
+          "content": "已记录。"
+        },
+        {
+          "role": "user",
+          "content": "百轮场地补充记录 58：这里只是过程备注。"
+        },
+        {
+          "role": "assistant",
+          "content": "已记录。"
+        },
+        {
+          "role": "user",
+          "content": "活动场地定在哪里？只回答场地。"
+        }
+      ],
+      "required_answer_markers": [
+        "银杏厅"
+      ],
+      "required_capsule_markers": [
+        "活动固定在银杏厅举行。"
+      ],
+      "forbidden_answer_markers": [],
+      "topic_switch_expected": false,
+      "minimum_input_messages": 80,
+      "maximum_input_messages": 120,
+      "maximum_retained_user_statements": 20
+    },
+    {
+      "id": "S03",
+      "family": "latest_correction_near_history_limit",
+      "messages": [
+        {
+          "role": "user",
+          "content": "输出文件名先定为 draft-long.zip。"
+        },
+        {
+          "role": "assistant",
+          "content": "已记录。"
+        },
+        {
+          "role": "user",
+          "content": "文件准备补充记录 1：这里只是过程备注。"
+        },
+        {
+          "role": "assistant",
+          "content": "已记录。"
+        },
+        {
+          "role": "user",
+          "content": "文件准备补充记录 2：这里只是过程备注。"
+        },
+        {
+          "role": "assistant",
+          "content": "已记录。"
+        },
+        {
+          "role": "user",
+          "content": "文件准备补充记录 3：这里只是过程备注。"
+        },
+        {
+          "role": "assistant",
+          "content": "已记录。"
+        },
+        {
+          "role": "user",
+          "content": "文件准备补充记录 4：这里只是过程备注。"
+        },
+        {
+          "role": "assistant",
+          "content": "已记录。"
+        },
+        {
+          "role": "user",
+          "content": "输出文件名改为 final-long.zip，旧名作废。"
+        },
+        {
+          "role": "assistant",
+          "content": "已更新。"
+        },
+        {
+          "role": "user",
+          "content": "八十轮文件复核补充记录 1：这里只是过程备注。"
+        },
+        {
+          "role": "assistant",
+          "content": "已记录。"
+        },
+        {
+          "role": "user",
+          "content": "八十轮文件复核补充记录 2：这里只是过程备注。"
+        },
+        {
+          "role": "assistant",
+          "content": "已记录。"
+        },
+        {
+          "role": "user",
+          "content": "八十轮文件复核补充记录 3：这里只是过程备注。"
+        },
+        {
+          "role": "assistant",
+          "content": "已记录。"
+        },
+        {
+          "role": "user",
+          "content": "八十轮文件复核补充记录 4：这里只是过程备注。"
+        },
+        {
+          "role": "assistant",
+          "content": "已记录。"
+        },
+        {
+          "role": "user",
+          "content": "八十轮文件复核补充记录 5：这里只是过程备注。"
+        },
+        {
+          "role": "assistant",
+          "content": "已记录。"
+        },
+        {
+          "role": "user",
+          "content": "八十轮文件复核补充记录 6：这里只是过程备注。"
+        },
+        {
+          "role": "assistant",
+          "content": "已记录。"
+        },
+        {
+          "role": "user",
+          "content": "八十轮文件复核补充记录 7：这里只是过程备注。"
+        },
+        {
+          "role": "assistant",
+          "content": "已记录。"
+        },
+        {
+          "role": "user",
+          "content": "八十轮文件复核补充记录 8：这里只是过程备注。"
+        },
+        {
+          "role": "assistant",
+          "content": "已记录。"
+        },
+        {
+          "role": "user",
+          "content": "八十轮文件复核补充记录 9：这里只是过程备注。"
+        },
+        {
+          "role": "assistant",
+          "content": "已记录。"
+        },
+        {
+          "role": "user",
+          "content": "八十轮文件复核补充记录 10：这里只是过程备注。"
+        },
+        {
+          "role": "assistant",
+          "content": "已记录。"
+        },
+        {
+          "role": "user",
+          "content": "八十轮文件复核补充记录 11：这里只是过程备注。"
+        },
+        {
+          "role": "assistant",
+          "content": "已记录。"
+        },
+        {
+          "role": "user",
+          "content": "八十轮文件复核补充记录 12：这里只是过程备注。"
+        },
+        {
+          "role": "assistant",
+          "content": "已记录。"
+        },
+        {
+          "role": "user",
+          "content": "八十轮文件复核补充记录 13：这里只是过程备注。"
+        },
+        {
+          "role": "assistant",
+          "content": "已记录。"
+        },
+        {
+          "role": "user",
+          "content": "八十轮文件复核补充记录 14：这里只是过程备注。"
+        },
+        {
+          "role": "assistant",
+          "content": "已记录。"
+        },
+        {
+          "role": "user",
+          "content": "八十轮文件复核补充记录 15：这里只是过程备注。"
+        },
+        {
+          "role": "assistant",
+          "content": "已记录。"
+        },
+        {
+          "role": "user",
+          "content": "八十轮文件复核补充记录 16：这里只是过程备注。"
+        },
+        {
+          "role": "assistant",
+          "content": "已记录。"
+        },
+        {
+          "role": "user",
+          "content": "八十轮文件复核补充记录 17：这里只是过程备注。"
+        },
+        {
+          "role": "assistant",
+          "content": "已记录。"
+        },
+        {
+          "role": "user",
+          "content": "八十轮文件复核补充记录 18：这里只是过程备注。"
+        },
+        {
+          "role": "assistant",
+          "content": "已记录。"
+        },
+        {
+          "role": "user",
+          "content": "八十轮文件复核补充记录 19：这里只是过程备注。"
+        },
+        {
+          "role": "assistant",
+          "content": "已记录。"
+        },
+        {
+          "role": "user",
+          "content": "八十轮文件复核补充记录 20：这里只是过程备注。"
+        },
+        {
+          "role": "assistant",
+          "content": "已记录。"
+        },
+        {
+          "role": "user",
+          "content": "八十轮文件复核补充记录 21：这里只是过程备注。"
+        },
+        {
+          "role": "assistant",
+          "content": "已记录。"
+        },
+        {
+          "role": "user",
+          "content": "八十轮文件复核补充记录 22：这里只是过程备注。"
+        },
+        {
+          "role": "assistant",
+          "content": "已记录。"
+        },
+        {
+          "role": "user",
+          "content": "八十轮文件复核补充记录 23：这里只是过程备注。"
+        },
+        {
+          "role": "assistant",
+          "content": "已记录。"
+        },
+        {
+          "role": "user",
+          "content": "八十轮文件复核补充记录 24：这里只是过程备注。"
+        },
+        {
+          "role": "assistant",
+          "content": "已记录。"
+        },
+        {
+          "role": "user",
+          "content": "八十轮文件复核补充记录 25：这里只是过程备注。"
+        },
+        {
+          "role": "assistant",
+          "content": "已记录。"
+        },
+        {
+          "role": "user",
+          "content": "八十轮文件复核补充记录 26：这里只是过程备注。"
+        },
+        {
+          "role": "assistant",
+          "content": "已记录。"
+        },
+        {
+          "role": "user",
+          "content": "八十轮文件复核补充记录 27：这里只是过程备注。"
+        },
+        {
+          "role": "assistant",
+          "content": "已记录。"
+        },
+        {
+          "role": "user",
+          "content": "八十轮文件复核补充记录 28：这里只是过程备注。"
+        },
+        {
+          "role": "assistant",
+          "content": "已记录。"
+        },
+        {
+          "role": "user",
+          "content": "八十轮文件复核补充记录 29：这里只是过程备注。"
+        },
+        {
+          "role": "assistant",
+          "content": "已记录。"
+        },
+        {
+          "role": "user",
+          "content": "八十轮文件复核补充记录 30：这里只是过程备注。"
+        },
+        {
+          "role": "assistant",
+          "content": "已记录。"
+        },
+        {
+          "role": "user",
+          "content": "八十轮文件复核补充记录 31：这里只是过程备注。"
+        },
+        {
+          "role": "assistant",
+          "content": "已记录。"
+        },
+        {
+          "role": "user",
+          "content": "八十轮文件复核补充记录 32：这里只是过程备注。"
+        },
+        {
+          "role": "assistant",
+          "content": "已记录。"
+        },
+        {
+          "role": "user",
+          "content": "八十轮文件复核补充记录 33：这里只是过程备注。"
+        },
+        {
+          "role": "assistant",
+          "content": "已记录。"
+        },
+        {
+          "role": "user",
+          "content": "八十轮文件复核补充记录 34：这里只是过程备注。"
+        },
+        {
+          "role": "assistant",
+          "content": "已记录。"
+        },
+        {
+          "role": "user",
+          "content": "最终输出文件名是什么？"
+        }
+      ],
+      "required_answer_markers": [
+        "final-long.zip"
+      ],
+      "required_capsule_markers": [
+        "输出文件名改为 final-long.zip，旧名作废。"
+      ],
+      "forbidden_answer_markers": [
+        "draft-long.zip"
+      ],
+      "topic_switch_expected": false,
+      "minimum_input_messages": 80,
+      "maximum_input_messages": 120,
+      "maximum_retained_user_statements": 20
+    },
+    {
+      "id": "S04",
+      "family": "latest_correction_near_history_limit",
+      "messages": [
+        {
+          "role": "user",
+          "content": "评审原本排在星期一。"
+        },
+        {
+          "role": "assistant",
+          "content": "已记录。"
+        },
+        {
+          "role": "user",
+          "content": "排期准备补充记录 1：这里只是过程备注。"
+        },
+        {
+          "role": "assistant",
+          "content": "已记录。"
+        },
+        {
+          "role": "user",
+          "content": "排期准备补充记录 2：这里只是过程备注。"
+        },
+        {
+          "role": "assistant",
+          "content": "已记录。"
+        },
+        {
+          "role": "user",
+          "content": "排期准备补充记录 3：这里只是过程备注。"
+        },
+        {
+          "role": "assistant",
+          "content": "已记录。"
+        },
+        {
+          "role": "user",
+          "content": "排期准备补充记录 4：这里只是过程备注。"
+        },
+        {
+          "role": "assistant",
+          "content": "已记录。"
+        },
+        {
+          "role": "user",
+          "content": "改期到星期五，星期一取消。"
+        },
+        {
+          "role": "assistant",
+          "content": "已更新。"
+        },
+        {
+          "role": "user",
+          "content": "百轮排期复核补充记录 1：这里只是过程备注。"
+        },
+        {
+          "role": "assistant",
+          "content": "已记录。"
+        },
+        {
+          "role": "user",
+          "content": "百轮排期复核补充记录 2：这里只是过程备注。"
+        },
+        {
+          "role": "assistant",
+          "content": "已记录。"
+        },
+        {
+          "role": "user",
+          "content": "百轮排期复核补充记录 3：这里只是过程备注。"
+        },
+        {
+          "role": "assistant",
+          "content": "已记录。"
+        },
+        {
+          "role": "user",
+          "content": "百轮排期复核补充记录 4：这里只是过程备注。"
+        },
+        {
+          "role": "assistant",
+          "content": "已记录。"
+        },
+        {
+          "role": "user",
+          "content": "百轮排期复核补充记录 5：这里只是过程备注。"
+        },
+        {
+          "role": "assistant",
+          "content": "已记录。"
+        },
+        {
+          "role": "user",
+          "content": "百轮排期复核补充记录 6：这里只是过程备注。"
+        },
+        {
+          "role": "assistant",
+          "content": "已记录。"
+        },
+        {
+          "role": "user",
+          "content": "百轮排期复核补充记录 7：这里只是过程备注。"
+        },
+        {
+          "role": "assistant",
+          "content": "已记录。"
+        },
+        {
+          "role": "user",
+          "content": "百轮排期复核补充记录 8：这里只是过程备注。"
+        },
+        {
+          "role": "assistant",
+          "content": "已记录。"
+        },
+        {
+          "role": "user",
+          "content": "百轮排期复核补充记录 9：这里只是过程备注。"
+        },
+        {
+          "role": "assistant",
+          "content": "已记录。"
+        },
+        {
+          "role": "user",
+          "content": "百轮排期复核补充记录 10：这里只是过程备注。"
+        },
+        {
+          "role": "assistant",
+          "content": "已记录。"
+        },
+        {
+          "role": "user",
+          "content": "百轮排期复核补充记录 11：这里只是过程备注。"
+        },
+        {
+          "role": "assistant",
+          "content": "已记录。"
+        },
+        {
+          "role": "user",
+          "content": "百轮排期复核补充记录 12：这里只是过程备注。"
+        },
+        {
+          "role": "assistant",
+          "content": "已记录。"
+        },
+        {
+          "role": "user",
+          "content": "百轮排期复核补充记录 13：这里只是过程备注。"
+        },
+        {
+          "role": "assistant",
+          "content": "已记录。"
+        },
+        {
+          "role": "user",
+          "content": "百轮排期复核补充记录 14：这里只是过程备注。"
+        },
+        {
+          "role": "assistant",
+          "content": "已记录。"
+        },
+        {
+          "role": "user",
+          "content": "百轮排期复核补充记录 15：这里只是过程备注。"
+        },
+        {
+          "role": "assistant",
+          "content": "已记录。"
+        },
+        {
+          "role": "user",
+          "content": "百轮排期复核补充记录 16：这里只是过程备注。"
+        },
+        {
+          "role": "assistant",
+          "content": "已记录。"
+        },
+        {
+          "role": "user",
+          "content": "百轮排期复核补充记录 17：这里只是过程备注。"
+        },
+        {
+          "role": "assistant",
+          "content": "已记录。"
+        },
+        {
+          "role": "user",
+          "content": "百轮排期复核补充记录 18：这里只是过程备注。"
+        },
+        {
+          "role": "assistant",
+          "content": "已记录。"
+        },
+        {
+          "role": "user",
+          "content": "百轮排期复核补充记录 19：这里只是过程备注。"
+        },
+        {
+          "role": "assistant",
+          "content": "已记录。"
+        },
+        {
+          "role": "user",
+          "content": "百轮排期复核补充记录 20：这里只是过程备注。"
+        },
+        {
+          "role": "assistant",
+          "content": "已记录。"
+        },
+        {
+          "role": "user",
+          "content": "百轮排期复核补充记录 21：这里只是过程备注。"
+        },
+        {
+          "role": "assistant",
+          "content": "已记录。"
+        },
+        {
+          "role": "user",
+          "content": "百轮排期复核补充记录 22：这里只是过程备注。"
+        },
+        {
+          "role": "assistant",
+          "content": "已记录。"
+        },
+        {
+          "role": "user",
+          "content": "百轮排期复核补充记录 23：这里只是过程备注。"
+        },
+        {
+          "role": "assistant",
+          "content": "已记录。"
+        },
+        {
+          "role": "user",
+          "content": "百轮排期复核补充记录 24：这里只是过程备注。"
+        },
+        {
+          "role": "assistant",
+          "content": "已记录。"
+        },
+        {
+          "role": "user",
+          "content": "百轮排期复核补充记录 25：这里只是过程备注。"
+        },
+        {
+          "role": "assistant",
+          "content": "已记录。"
+        },
+        {
+          "role": "user",
+          "content": "百轮排期复核补充记录 26：这里只是过程备注。"
+        },
+        {
+          "role": "assistant",
+          "content": "已记录。"
+        },
+        {
+          "role": "user",
+          "content": "百轮排期复核补充记录 27：这里只是过程备注。"
+        },
+        {
+          "role": "assistant",
+          "content": "已记录。"
+        },
+        {
+          "role": "user",
+          "content": "百轮排期复核补充记录 28：这里只是过程备注。"
+        },
+        {
+          "role": "assistant",
+          "content": "已记录。"
+        },
+        {
+          "role": "user",
+          "content": "百轮排期复核补充记录 29：这里只是过程备注。"
+        },
+        {
+          "role": "assistant",
+          "content": "已记录。"
+        },
+        {
+          "role": "user",
+          "content": "百轮排期复核补充记录 30：这里只是过程备注。"
+        },
+        {
+          "role": "assistant",
+          "content": "已记录。"
+        },
+        {
+          "role": "user",
+          "content": "百轮排期复核补充记录 31：这里只是过程备注。"
+        },
+        {
+          "role": "assistant",
+          "content": "已记录。"
+        },
+        {
+          "role": "user",
+          "content": "百轮排期复核补充记录 32：这里只是过程备注。"
+        },
+        {
+          "role": "assistant",
+          "content": "已记录。"
+        },
+        {
+          "role": "user",
+          "content": "百轮排期复核补充记录 33：这里只是过程备注。"
+        },
+        {
+          "role": "assistant",
+          "content": "已记录。"
+        },
+        {
+          "role": "user",
+          "content": "百轮排期复核补充记录 34：这里只是过程备注。"
+        },
+        {
+          "role": "assistant",
+          "content": "已记录。"
+        },
+        {
+          "role": "user",
+          "content": "百轮排期复核补充记录 35：这里只是过程备注。"
+        },
+        {
+          "role": "assistant",
+          "content": "已记录。"
+        },
+        {
+          "role": "user",
+          "content": "百轮排期复核补充记录 36：这里只是过程备注。"
+        },
+        {
+          "role": "assistant",
+          "content": "已记录。"
+        },
+        {
+          "role": "user",
+          "content": "百轮排期复核补充记录 37：这里只是过程备注。"
+        },
+        {
+          "role": "assistant",
+          "content": "已记录。"
+        },
+        {
+          "role": "user",
+          "content": "百轮排期复核补充记录 38：这里只是过程备注。"
+        },
+        {
+          "role": "assistant",
+          "content": "已记录。"
+        },
+        {
+          "role": "user",
+          "content": "百轮排期复核补充记录 39：这里只是过程备注。"
+        },
+        {
+          "role": "assistant",
+          "content": "已记录。"
+        },
+        {
+          "role": "user",
+          "content": "百轮排期复核补充记录 40：这里只是过程备注。"
+        },
+        {
+          "role": "assistant",
+          "content": "已记录。"
+        },
+        {
+          "role": "user",
+          "content": "百轮排期复核补充记录 41：这里只是过程备注。"
+        },
+        {
+          "role": "assistant",
+          "content": "已记录。"
+        },
+        {
+          "role": "user",
+          "content": "百轮排期复核补充记录 42：这里只是过程备注。"
+        },
+        {
+          "role": "assistant",
+          "content": "已记录。"
+        },
+        {
+          "role": "user",
+          "content": "百轮排期复核补充记录 43：这里只是过程备注。"
+        },
+        {
+          "role": "assistant",
+          "content": "已记录。"
+        },
+        {
+          "role": "user",
+          "content": "百轮排期复核补充记录 44：这里只是过程备注。"
+        },
+        {
+          "role": "assistant",
+          "content": "已记录。"
+        },
+        {
+          "role": "user",
+          "content": "百轮排期复核补充记录 45：这里只是过程备注。"
+        },
+        {
+          "role": "assistant",
+          "content": "已记录。"
+        },
+        {
+          "role": "user",
+          "content": "百轮排期复核补充记录 46：这里只是过程备注。"
+        },
+        {
+          "role": "assistant",
+          "content": "已记录。"
+        },
+        {
+          "role": "user",
+          "content": "百轮排期复核补充记录 47：这里只是过程备注。"
+        },
+        {
+          "role": "assistant",
+          "content": "已记录。"
+        },
+        {
+          "role": "user",
+          "content": "百轮排期复核补充记录 48：这里只是过程备注。"
+        },
+        {
+          "role": "assistant",
+          "content": "已记录。"
+        },
+        {
+          "role": "user",
+          "content": "百轮排期复核补充记录 49：这里只是过程备注。"
+        },
+        {
+          "role": "assistant",
+          "content": "已记录。"
+        },
+        {
+          "role": "user",
+          "content": "百轮排期复核补充记录 50：这里只是过程备注。"
+        },
+        {
+          "role": "assistant",
+          "content": "已记录。"
+        },
+        {
+          "role": "user",
+          "content": "百轮排期复核补充记录 51：这里只是过程备注。"
+        },
+        {
+          "role": "assistant",
+          "content": "已记录。"
+        },
+        {
+          "role": "user",
+          "content": "百轮排期复核补充记录 52：这里只是过程备注。"
+        },
+        {
+          "role": "assistant",
+          "content": "已记录。"
+        },
+        {
+          "role": "user",
+          "content": "百轮排期复核补充记录 53：这里只是过程备注。"
+        },
+        {
+          "role": "assistant",
+          "content": "已记录。"
+        },
+        {
+          "role": "user",
+          "content": "最终哪一天评审？"
+        }
+      ],
+      "required_answer_markers": [
+        "星期五"
+      ],
+      "required_capsule_markers": [
+        "改期到星期五，星期一取消。"
+      ],
+      "forbidden_answer_markers": [
+        "星期一。"
+      ],
+      "topic_switch_expected": false,
+      "minimum_input_messages": 80,
+      "maximum_input_messages": 120,
+      "maximum_retained_user_statements": 20
+    },
+    {
+      "id": "S05",
+      "family": "unresolved_work_near_history_limit",
+      "messages": [
+        {
+          "role": "user",
+          "content": "今天两件正事：修索引页，再补监控说明。"
+        },
+        {
+          "role": "assistant",
+          "content": "已记录两件事。"
+        },
+        {
+          "role": "user",
+          "content": "任务过程补充记录 1：这里只是过程备注。"
+        },
+        {
+          "role": "assistant",
+          "content": "已记录。"
+        },
+        {
+          "role": "user",
+          "content": "任务过程补充记录 2：这里只是过程备注。"
+        },
+        {
+          "role": "assistant",
+          "content": "已记录。"
+        },
+        {
+          "role": "user",
+          "content": "任务过程补充记录 3：这里只是过程备注。"
+        },
+        {
+          "role": "assistant",
+          "content": "已记录。"
+        },
+        {
+          "role": "user",
+          "content": "任务过程补充记录 4：这里只是过程备注。"
+        },
+        {
+          "role": "assistant",
+          "content": "已记录。"
+        },
+        {
+          "role": "user",
+          "content": "任务过程补充记录 5：这里只是过程备注。"
+        },
+        {
+          "role": "assistant",
+          "content": "已记录。"
+        },
+        {
+          "role": "user",
+          "content": "任务过程补充记录 6：这里只是过程备注。"
+        },
+        {
+          "role": "assistant",
+          "content": "已记录。"
+        },
+        {
+          "role": "user",
+          "content": "任务过程补充记录 7：这里只是过程备注。"
+        },
+        {
+          "role": "assistant",
+          "content": "已记录。"
+        },
+        {
+          "role": "user",
+          "content": "任务过程补充记录 8：这里只是过程备注。"
+        },
+        {
+          "role": "assistant",
+          "content": "已记录。"
+        },
+        {
+          "role": "user",
+          "content": "索引页已经修完。"
+        },
+        {
+          "role": "assistant",
+          "content": "已标记完成。"
+        },
+        {
+          "role": "user",
+          "content": "八十轮任务复核补充记录 1：这里只是过程备注。"
+        },
+        {
+          "role": "assistant",
+          "content": "已记录。"
+        },
+        {
+          "role": "user",
+          "content": "八十轮任务复核补充记录 2：这里只是过程备注。"
+        },
+        {
+          "role": "assistant",
+          "content": "已记录。"
+        },
+        {
+          "role": "user",
+          "content": "八十轮任务复核补充记录 3：这里只是过程备注。"
+        },
+        {
+          "role": "assistant",
+          "content": "已记录。"
+        },
+        {
+          "role": "user",
+          "content": "八十轮任务复核补充记录 4：这里只是过程备注。"
+        },
+        {
+          "role": "assistant",
+          "content": "已记录。"
+        },
+        {
+          "role": "user",
+          "content": "八十轮任务复核补充记录 5：这里只是过程备注。"
+        },
+        {
+          "role": "assistant",
+          "content": "已记录。"
+        },
+        {
+          "role": "user",
+          "content": "八十轮任务复核补充记录 6：这里只是过程备注。"
+        },
+        {
+          "role": "assistant",
+          "content": "已记录。"
+        },
+        {
+          "role": "user",
+          "content": "八十轮任务复核补充记录 7：这里只是过程备注。"
+        },
+        {
+          "role": "assistant",
+          "content": "已记录。"
+        },
+        {
+          "role": "user",
+          "content": "八十轮任务复核补充记录 8：这里只是过程备注。"
+        },
+        {
+          "role": "assistant",
+          "content": "已记录。"
+        },
+        {
+          "role": "user",
+          "content": "八十轮任务复核补充记录 9：这里只是过程备注。"
+        },
+        {
+          "role": "assistant",
+          "content": "已记录。"
+        },
+        {
+          "role": "user",
+          "content": "八十轮任务复核补充记录 10：这里只是过程备注。"
+        },
+        {
+          "role": "assistant",
+          "content": "已记录。"
+        },
+        {
+          "role": "user",
+          "content": "八十轮任务复核补充记录 11：这里只是过程备注。"
+        },
+        {
+          "role": "assistant",
+          "content": "已记录。"
+        },
+        {
+          "role": "user",
+          "content": "八十轮任务复核补充记录 12：这里只是过程备注。"
+        },
+        {
+          "role": "assistant",
+          "content": "已记录。"
+        },
+        {
+          "role": "user",
+          "content": "八十轮任务复核补充记录 13：这里只是过程备注。"
+        },
+        {
+          "role": "assistant",
+          "content": "已记录。"
+        },
+        {
+          "role": "user",
+          "content": "八十轮任务复核补充记录 14：这里只是过程备注。"
+        },
+        {
+          "role": "assistant",
+          "content": "已记录。"
+        },
+        {
+          "role": "user",
+          "content": "八十轮任务复核补充记录 15：这里只是过程备注。"
+        },
+        {
+          "role": "assistant",
+          "content": "已记录。"
+        },
+        {
+          "role": "user",
+          "content": "八十轮任务复核补充记录 16：这里只是过程备注。"
+        },
+        {
+          "role": "assistant",
+          "content": "已记录。"
+        },
+        {
+          "role": "user",
+          "content": "八十轮任务复核补充记录 17：这里只是过程备注。"
+        },
+        {
+          "role": "assistant",
+          "content": "已记录。"
+        },
+        {
+          "role": "user",
+          "content": "八十轮任务复核补充记录 18：这里只是过程备注。"
+        },
+        {
+          "role": "assistant",
+          "content": "已记录。"
+        },
+        {
+          "role": "user",
+          "content": "八十轮任务复核补充记录 19：这里只是过程备注。"
+        },
+        {
+          "role": "assistant",
+          "content": "已记录。"
+        },
+        {
+          "role": "user",
+          "content": "八十轮任务复核补充记录 20：这里只是过程备注。"
+        },
+        {
+          "role": "assistant",
+          "content": "已记录。"
+        },
+        {
+          "role": "user",
+          "content": "八十轮任务复核补充记录 21：这里只是过程备注。"
+        },
+        {
+          "role": "assistant",
+          "content": "已记录。"
+        },
+        {
+          "role": "user",
+          "content": "八十轮任务复核补充记录 22：这里只是过程备注。"
+        },
+        {
+          "role": "assistant",
+          "content": "已记录。"
+        },
+        {
+          "role": "user",
+          "content": "八十轮任务复核补充记录 23：这里只是过程备注。"
+        },
+        {
+          "role": "assistant",
+          "content": "已记录。"
+        },
+        {
+          "role": "user",
+          "content": "八十轮任务复核补充记录 24：这里只是过程备注。"
+        },
+        {
+          "role": "assistant",
+          "content": "已记录。"
+        },
+        {
+          "role": "user",
+          "content": "八十轮任务复核补充记录 25：这里只是过程备注。"
+        },
+        {
+          "role": "assistant",
+          "content": "已记录。"
+        },
+        {
+          "role": "user",
+          "content": "八十轮任务复核补充记录 26：这里只是过程备注。"
+        },
+        {
+          "role": "assistant",
+          "content": "已记录。"
+        },
+        {
+          "role": "user",
+          "content": "八十轮任务复核补充记录 27：这里只是过程备注。"
+        },
+        {
+          "role": "assistant",
+          "content": "已记录。"
+        },
+        {
+          "role": "user",
+          "content": "八十轮任务复核补充记录 28：这里只是过程备注。"
+        },
+        {
+          "role": "assistant",
+          "content": "已记录。"
+        },
+        {
+          "role": "user",
+          "content": "八十轮任务复核补充记录 29：这里只是过程备注。"
+        },
+        {
+          "role": "assistant",
+          "content": "已记录。"
+        },
+        {
+          "role": "user",
+          "content": "八十轮任务复核补充记录 30：这里只是过程备注。"
+        },
+        {
+          "role": "assistant",
+          "content": "已记录。"
+        },
+        {
+          "role": "user",
+          "content": "还剩哪一件？"
+        }
+      ],
+      "required_answer_markers": [
+        "补监控说明"
+      ],
+      "required_capsule_markers": [
+        "今天两件正事：修索引页，再补监控说明。",
+        "索引页已经修完。"
+      ],
+      "forbidden_answer_markers": [
+        "修索引页"
+      ],
+      "topic_switch_expected": false,
+      "minimum_input_messages": 80,
+      "maximum_input_messages": 120,
+      "maximum_retained_user_statements": 20
+    },
+    {
+      "id": "S06",
+      "family": "unresolved_work_near_history_limit",
+      "messages": [
+        {
+          "role": "user",
+          "content": "采购清单是燕麦和咖啡滤纸。"
+        },
+        {
+          "role": "assistant",
+          "content": "已记录清单。"
+        },
+        {
+          "role": "user",
+          "content": "采购过程补充记录 1：这里只是过程备注。"
+        },
+        {
+          "role": "assistant",
+          "content": "已记录。"
+        },
+        {
+          "role": "user",
+          "content": "采购过程补充记录 2：这里只是过程备注。"
+        },
+        {
+          "role": "assistant",
+          "content": "已记录。"
+        },
+        {
+          "role": "user",
+          "content": "采购过程补充记录 3：这里只是过程备注。"
+        },
+        {
+          "role": "assistant",
+          "content": "已记录。"
+        },
+        {
+          "role": "user",
+          "content": "采购过程补充记录 4：这里只是过程备注。"
+        },
+        {
+          "role": "assistant",
+          "content": "已记录。"
+        },
+        {
+          "role": "user",
+          "content": "采购过程补充记录 5：这里只是过程备注。"
+        },
+        {
+          "role": "assistant",
+          "content": "已记录。"
+        },
+        {
+          "role": "user",
+          "content": "采购过程补充记录 6：这里只是过程备注。"
+        },
+        {
+          "role": "assistant",
+          "content": "已记录。"
+        },
+        {
+          "role": "user",
+          "content": "采购过程补充记录 7：这里只是过程备注。"
+        },
+        {
+          "role": "assistant",
+          "content": "已记录。"
+        },
+        {
+          "role": "user",
+          "content": "采购过程补充记录 8：这里只是过程备注。"
+        },
+        {
+          "role": "assistant",
+          "content": "已记录。"
+        },
+        {
+          "role": "user",
+          "content": "燕麦已经买到了。"
+        },
+        {
+          "role": "assistant",
+          "content": "已标记。"
+        },
+        {
+          "role": "user",
+          "content": "百轮采购复核补充记录 1：这里只是过程备注。"
+        },
+        {
+          "role": "assistant",
+          "content": "已记录。"
+        },
+        {
+          "role": "user",
+          "content": "百轮采购复核补充记录 2：这里只是过程备注。"
+        },
+        {
+          "role": "assistant",
+          "content": "已记录。"
+        },
+        {
+          "role": "user",
+          "content": "百轮采购复核补充记录 3：这里只是过程备注。"
+        },
+        {
+          "role": "assistant",
+          "content": "已记录。"
+        },
+        {
+          "role": "user",
+          "content": "百轮采购复核补充记录 4：这里只是过程备注。"
+        },
+        {
+          "role": "assistant",
+          "content": "已记录。"
+        },
+        {
+          "role": "user",
+          "content": "百轮采购复核补充记录 5：这里只是过程备注。"
+        },
+        {
+          "role": "assistant",
+          "content": "已记录。"
+        },
+        {
+          "role": "user",
+          "content": "百轮采购复核补充记录 6：这里只是过程备注。"
+        },
+        {
+          "role": "assistant",
+          "content": "已记录。"
+        },
+        {
+          "role": "user",
+          "content": "百轮采购复核补充记录 7：这里只是过程备注。"
+        },
+        {
+          "role": "assistant",
+          "content": "已记录。"
+        },
+        {
+          "role": "user",
+          "content": "百轮采购复核补充记录 8：这里只是过程备注。"
+        },
+        {
+          "role": "assistant",
+          "content": "已记录。"
+        },
+        {
+          "role": "user",
+          "content": "百轮采购复核补充记录 9：这里只是过程备注。"
+        },
+        {
+          "role": "assistant",
+          "content": "已记录。"
+        },
+        {
+          "role": "user",
+          "content": "百轮采购复核补充记录 10：这里只是过程备注。"
+        },
+        {
+          "role": "assistant",
+          "content": "已记录。"
+        },
+        {
+          "role": "user",
+          "content": "百轮采购复核补充记录 11：这里只是过程备注。"
+        },
+        {
+          "role": "assistant",
+          "content": "已记录。"
+        },
+        {
+          "role": "user",
+          "content": "百轮采购复核补充记录 12：这里只是过程备注。"
+        },
+        {
+          "role": "assistant",
+          "content": "已记录。"
+        },
+        {
+          "role": "user",
+          "content": "百轮采购复核补充记录 13：这里只是过程备注。"
+        },
+        {
+          "role": "assistant",
+          "content": "已记录。"
+        },
+        {
+          "role": "user",
+          "content": "百轮采购复核补充记录 14：这里只是过程备注。"
+        },
+        {
+          "role": "assistant",
+          "content": "已记录。"
+        },
+        {
+          "role": "user",
+          "content": "百轮采购复核补充记录 15：这里只是过程备注。"
+        },
+        {
+          "role": "assistant",
+          "content": "已记录。"
+        },
+        {
+          "role": "user",
+          "content": "百轮采购复核补充记录 16：这里只是过程备注。"
+        },
+        {
+          "role": "assistant",
+          "content": "已记录。"
+        },
+        {
+          "role": "user",
+          "content": "百轮采购复核补充记录 17：这里只是过程备注。"
+        },
+        {
+          "role": "assistant",
+          "content": "已记录。"
+        },
+        {
+          "role": "user",
+          "content": "百轮采购复核补充记录 18：这里只是过程备注。"
+        },
+        {
+          "role": "assistant",
+          "content": "已记录。"
+        },
+        {
+          "role": "user",
+          "content": "百轮采购复核补充记录 19：这里只是过程备注。"
+        },
+        {
+          "role": "assistant",
+          "content": "已记录。"
+        },
+        {
+          "role": "user",
+          "content": "百轮采购复核补充记录 20：这里只是过程备注。"
+        },
+        {
+          "role": "assistant",
+          "content": "已记录。"
+        },
+        {
+          "role": "user",
+          "content": "百轮采购复核补充记录 21：这里只是过程备注。"
+        },
+        {
+          "role": "assistant",
+          "content": "已记录。"
+        },
+        {
+          "role": "user",
+          "content": "百轮采购复核补充记录 22：这里只是过程备注。"
+        },
+        {
+          "role": "assistant",
+          "content": "已记录。"
+        },
+        {
+          "role": "user",
+          "content": "百轮采购复核补充记录 23：这里只是过程备注。"
+        },
+        {
+          "role": "assistant",
+          "content": "已记录。"
+        },
+        {
+          "role": "user",
+          "content": "百轮采购复核补充记录 24：这里只是过程备注。"
+        },
+        {
+          "role": "assistant",
+          "content": "已记录。"
+        },
+        {
+          "role": "user",
+          "content": "百轮采购复核补充记录 25：这里只是过程备注。"
+        },
+        {
+          "role": "assistant",
+          "content": "已记录。"
+        },
+        {
+          "role": "user",
+          "content": "百轮采购复核补充记录 26：这里只是过程备注。"
+        },
+        {
+          "role": "assistant",
+          "content": "已记录。"
+        },
+        {
+          "role": "user",
+          "content": "百轮采购复核补充记录 27：这里只是过程备注。"
+        },
+        {
+          "role": "assistant",
+          "content": "已记录。"
+        },
+        {
+          "role": "user",
+          "content": "百轮采购复核补充记录 28：这里只是过程备注。"
+        },
+        {
+          "role": "assistant",
+          "content": "已记录。"
+        },
+        {
+          "role": "user",
+          "content": "百轮采购复核补充记录 29：这里只是过程备注。"
+        },
+        {
+          "role": "assistant",
+          "content": "已记录。"
+        },
+        {
+          "role": "user",
+          "content": "百轮采购复核补充记录 30：这里只是过程备注。"
+        },
+        {
+          "role": "assistant",
+          "content": "已记录。"
+        },
+        {
+          "role": "user",
+          "content": "百轮采购复核补充记录 31：这里只是过程备注。"
+        },
+        {
+          "role": "assistant",
+          "content": "已记录。"
+        },
+        {
+          "role": "user",
+          "content": "百轮采购复核补充记录 32：这里只是过程备注。"
+        },
+        {
+          "role": "assistant",
+          "content": "已记录。"
+        },
+        {
+          "role": "user",
+          "content": "百轮采购复核补充记录 33：这里只是过程备注。"
+        },
+        {
+          "role": "assistant",
+          "content": "已记录。"
+        },
+        {
+          "role": "user",
+          "content": "百轮采购复核补充记录 34：这里只是过程备注。"
+        },
+        {
+          "role": "assistant",
+          "content": "已记录。"
+        },
+        {
+          "role": "user",
+          "content": "百轮采购复核补充记录 35：这里只是过程备注。"
+        },
+        {
+          "role": "assistant",
+          "content": "已记录。"
+        },
+        {
+          "role": "user",
+          "content": "百轮采购复核补充记录 36：这里只是过程备注。"
+        },
+        {
+          "role": "assistant",
+          "content": "已记录。"
+        },
+        {
+          "role": "user",
+          "content": "百轮采购复核补充记录 37：这里只是过程备注。"
+        },
+        {
+          "role": "assistant",
+          "content": "已记录。"
+        },
+        {
+          "role": "user",
+          "content": "百轮采购复核补充记录 38：这里只是过程备注。"
+        },
+        {
+          "role": "assistant",
+          "content": "已记录。"
+        },
+        {
+          "role": "user",
+          "content": "百轮采购复核补充记录 39：这里只是过程备注。"
+        },
+        {
+          "role": "assistant",
+          "content": "已记录。"
+        },
+        {
+          "role": "user",
+          "content": "百轮采购复核补充记录 40：这里只是过程备注。"
+        },
+        {
+          "role": "assistant",
+          "content": "已记录。"
+        },
+        {
+          "role": "user",
+          "content": "百轮采购复核补充记录 41：这里只是过程备注。"
+        },
+        {
+          "role": "assistant",
+          "content": "已记录。"
+        },
+        {
+          "role": "user",
+          "content": "百轮采购复核补充记录 42：这里只是过程备注。"
+        },
+        {
+          "role": "assistant",
+          "content": "已记录。"
+        },
+        {
+          "role": "user",
+          "content": "百轮采购复核补充记录 43：这里只是过程备注。"
+        },
+        {
+          "role": "assistant",
+          "content": "已记录。"
+        },
+        {
+          "role": "user",
+          "content": "百轮采购复核补充记录 44：这里只是过程备注。"
+        },
+        {
+          "role": "assistant",
+          "content": "已记录。"
+        },
+        {
+          "role": "user",
+          "content": "百轮采购复核补充记录 45：这里只是过程备注。"
+        },
+        {
+          "role": "assistant",
+          "content": "已记录。"
+        },
+        {
+          "role": "user",
+          "content": "百轮采购复核补充记录 46：这里只是过程备注。"
+        },
+        {
+          "role": "assistant",
+          "content": "已记录。"
+        },
+        {
+          "role": "user",
+          "content": "百轮采购复核补充记录 47：这里只是过程备注。"
+        },
+        {
+          "role": "assistant",
+          "content": "已记录。"
+        },
+        {
+          "role": "user",
+          "content": "百轮采购复核补充记录 48：这里只是过程备注。"
+        },
+        {
+          "role": "assistant",
+          "content": "已记录。"
+        },
+        {
+          "role": "user",
+          "content": "百轮采购复核补充记录 49：这里只是过程备注。"
+        },
+        {
+          "role": "assistant",
+          "content": "已记录。"
+        },
+        {
+          "role": "user",
+          "content": "还漏了什么？"
+        }
+      ],
+      "required_answer_markers": [
+        "咖啡滤纸"
+      ],
+      "required_capsule_markers": [
+        "采购清单是燕麦和咖啡滤纸。",
+        "燕麦已经买到了。"
+      ],
+      "forbidden_answer_markers": [
+        "燕麦和"
+      ],
+      "topic_switch_expected": false,
+      "minimum_input_messages": 80,
+      "maximum_input_messages": 120,
+      "maximum_retained_user_statements": 20
+    },
+    {
+      "id": "S07",
+      "family": "constraint_inheritance_near_history_limit",
+      "messages": [
+        {
+          "role": "user",
+          "content": "把报告已经准备好译成英文，只写一句，不要加解释。"
+        },
+        {
+          "role": "assistant",
+          "content": "The report is ready."
+        },
+        {
+          "role": "user",
+          "content": "八十轮翻译过程补充记录 1：这里只是过程备注。"
+        },
+        {
+          "role": "assistant",
+          "content": "已记录。"
+        },
+        {
+          "role": "user",
+          "content": "八十轮翻译过程补充记录 2：这里只是过程备注。"
+        },
+        {
+          "role": "assistant",
+          "content": "已记录。"
+        },
+        {
+          "role": "user",
+          "content": "八十轮翻译过程补充记录 3：这里只是过程备注。"
+        },
+        {
+          "role": "assistant",
+          "content": "已记录。"
+        },
+        {
+          "role": "user",
+          "content": "八十轮翻译过程补充记录 4：这里只是过程备注。"
+        },
+        {
+          "role": "assistant",
+          "content": "已记录。"
+        },
+        {
+          "role": "user",
+          "content": "八十轮翻译过程补充记录 5：这里只是过程备注。"
+        },
+        {
+          "role": "assistant",
+          "content": "已记录。"
+        },
+        {
+          "role": "user",
+          "content": "八十轮翻译过程补充记录 6：这里只是过程备注。"
+        },
+        {
+          "role": "assistant",
+          "content": "已记录。"
+        },
+        {
+          "role": "user",
+          "content": "八十轮翻译过程补充记录 7：这里只是过程备注。"
+        },
+        {
+          "role": "assistant",
+          "content": "已记录。"
+        },
+        {
+          "role": "user",
+          "content": "八十轮翻译过程补充记录 8：这里只是过程备注。"
+        },
+        {
+          "role": "assistant",
+          "content": "已记录。"
+        },
+        {
+          "role": "user",
+          "content": "八十轮翻译过程补充记录 9：这里只是过程备注。"
+        },
+        {
+          "role": "assistant",
+          "content": "已记录。"
+        },
+        {
+          "role": "user",
+          "content": "八十轮翻译过程补充记录 10：这里只是过程备注。"
+        },
+        {
+          "role": "assistant",
+          "content": "已记录。"
+        },
+        {
+          "role": "user",
+          "content": "八十轮翻译过程补充记录 11：这里只是过程备注。"
+        },
+        {
+          "role": "assistant",
+          "content": "已记录。"
+        },
+        {
+          "role": "user",
+          "content": "八十轮翻译过程补充记录 12：这里只是过程备注。"
+        },
+        {
+          "role": "assistant",
+          "content": "已记录。"
+        },
+        {
+          "role": "user",
+          "content": "八十轮翻译过程补充记录 13：这里只是过程备注。"
+        },
+        {
+          "role": "assistant",
+          "content": "已记录。"
+        },
+        {
+          "role": "user",
+          "content": "八十轮翻译过程补充记录 14：这里只是过程备注。"
+        },
+        {
+          "role": "assistant",
+          "content": "已记录。"
+        },
+        {
+          "role": "user",
+          "content": "八十轮翻译过程补充记录 15：这里只是过程备注。"
+        },
+        {
+          "role": "assistant",
+          "content": "已记录。"
+        },
+        {
+          "role": "user",
+          "content": "八十轮翻译过程补充记录 16：这里只是过程备注。"
+        },
+        {
+          "role": "assistant",
+          "content": "已记录。"
+        },
+        {
+          "role": "user",
+          "content": "八十轮翻译过程补充记录 17：这里只是过程备注。"
+        },
+        {
+          "role": "assistant",
+          "content": "已记录。"
+        },
+        {
+          "role": "user",
+          "content": "八十轮翻译过程补充记录 18：这里只是过程备注。"
+        },
+        {
+          "role": "assistant",
+          "content": "已记录。"
+        },
+        {
+          "role": "user",
+          "content": "八十轮翻译过程补充记录 19：这里只是过程备注。"
+        },
+        {
+          "role": "assistant",
+          "content": "已记录。"
+        },
+        {
+          "role": "user",
+          "content": "八十轮翻译过程补充记录 20：这里只是过程备注。"
+        },
+        {
+          "role": "assistant",
+          "content": "已记录。"
+        },
+        {
+          "role": "user",
+          "content": "八十轮翻译过程补充记录 21：这里只是过程备注。"
+        },
+        {
+          "role": "assistant",
+          "content": "已记录。"
+        },
+        {
+          "role": "user",
+          "content": "八十轮翻译过程补充记录 22：这里只是过程备注。"
+        },
+        {
+          "role": "assistant",
+          "content": "已记录。"
+        },
+        {
+          "role": "user",
+          "content": "八十轮翻译过程补充记录 23：这里只是过程备注。"
+        },
+        {
+          "role": "assistant",
+          "content": "已记录。"
+        },
+        {
+          "role": "user",
+          "content": "八十轮翻译过程补充记录 24：这里只是过程备注。"
+        },
+        {
+          "role": "assistant",
+          "content": "已记录。"
+        },
+        {
+          "role": "user",
+          "content": "八十轮翻译过程补充记录 25：这里只是过程备注。"
+        },
+        {
+          "role": "assistant",
+          "content": "已记录。"
+        },
+        {
+          "role": "user",
+          "content": "八十轮翻译过程补充记录 26：这里只是过程备注。"
+        },
+        {
+          "role": "assistant",
+          "content": "已记录。"
+        },
+        {
+          "role": "user",
+          "content": "八十轮翻译过程补充记录 27：这里只是过程备注。"
+        },
+        {
+          "role": "assistant",
+          "content": "已记录。"
+        },
+        {
+          "role": "user",
+          "content": "八十轮翻译过程补充记录 28：这里只是过程备注。"
+        },
+        {
+          "role": "assistant",
+          "content": "已记录。"
+        },
+        {
+          "role": "user",
+          "content": "八十轮翻译过程补充记录 29：这里只是过程备注。"
+        },
+        {
+          "role": "assistant",
+          "content": "已记录。"
+        },
+        {
+          "role": "user",
+          "content": "八十轮翻译过程补充记录 30：这里只是过程备注。"
+        },
+        {
+          "role": "assistant",
+          "content": "已记录。"
+        },
+        {
+          "role": "user",
+          "content": "八十轮翻译过程补充记录 31：这里只是过程备注。"
+        },
+        {
+          "role": "assistant",
+          "content": "已记录。"
+        },
+        {
+          "role": "user",
+          "content": "八十轮翻译过程补充记录 32：这里只是过程备注。"
+        },
+        {
+          "role": "assistant",
+          "content": "已记录。"
+        },
+        {
+          "role": "user",
+          "content": "八十轮翻译过程补充记录 33：这里只是过程备注。"
+        },
+        {
+          "role": "assistant",
+          "content": "已记录。"
+        },
+        {
+          "role": "user",
+          "content": "八十轮翻译过程补充记录 34：这里只是过程备注。"
+        },
+        {
+          "role": "assistant",
+          "content": "已记录。"
+        },
+        {
+          "role": "user",
+          "content": "八十轮翻译过程补充记录 35：这里只是过程备注。"
+        },
+        {
+          "role": "assistant",
+          "content": "已记录。"
+        },
+        {
+          "role": "user",
+          "content": "八十轮翻译过程补充记录 36：这里只是过程备注。"
+        },
+        {
+          "role": "assistant",
+          "content": "已记录。"
+        },
+        {
+          "role": "user",
+          "content": "八十轮翻译过程补充记录 37：这里只是过程备注。"
+        },
+        {
+          "role": "assistant",
+          "content": "已记录。"
+        },
+        {
+          "role": "user",
+          "content": "八十轮翻译过程补充记录 38：这里只是过程备注。"
+        },
+        {
+          "role": "assistant",
+          "content": "已记录。"
+        },
+        {
+          "role": "user",
+          "content": "八十轮翻译过程补充记录 39：这里只是过程备注。"
+        },
+        {
+          "role": "assistant",
+          "content": "已记录。"
+        },
+        {
+          "role": "user",
+          "content": "把 ready 换成 complete，照旧交付。"
+        }
+      ],
+      "required_answer_markers": [
+        "The report is complete."
+      ],
+      "required_capsule_markers": [
+        "把报告已经准备好译成英文，只写一句，不要加解释。"
+      ],
+      "forbidden_answer_markers": [
+        "解释",
+        "ready"
+      ],
+      "topic_switch_expected": false,
+      "minimum_input_messages": 80,
+      "maximum_input_messages": 120,
+      "maximum_retained_user_statements": 20
+    },
+    {
+      "id": "S08",
+      "family": "constraint_inheritance_near_history_limit",
+      "messages": [
+        {
+          "role": "user",
+          "content": "把系统已经可用译成英文，只写一句，不要添加中文说明。"
+        },
+        {
+          "role": "assistant",
+          "content": "The system is ready."
+        },
+        {
+          "role": "user",
+          "content": "百轮约束过程补充记录 1：这里只是过程备注。"
+        },
+        {
+          "role": "assistant",
+          "content": "已记录。"
+        },
+        {
+          "role": "user",
+          "content": "百轮约束过程补充记录 2：这里只是过程备注。"
+        },
+        {
+          "role": "assistant",
+          "content": "已记录。"
+        },
+        {
+          "role": "user",
+          "content": "百轮约束过程补充记录 3：这里只是过程备注。"
+        },
+        {
+          "role": "assistant",
+          "content": "已记录。"
+        },
+        {
+          "role": "user",
+          "content": "百轮约束过程补充记录 4：这里只是过程备注。"
+        },
+        {
+          "role": "assistant",
+          "content": "已记录。"
+        },
+        {
+          "role": "user",
+          "content": "百轮约束过程补充记录 5：这里只是过程备注。"
+        },
+        {
+          "role": "assistant",
+          "content": "已记录。"
+        },
+        {
+          "role": "user",
+          "content": "百轮约束过程补充记录 6：这里只是过程备注。"
+        },
+        {
+          "role": "assistant",
+          "content": "已记录。"
+        },
+        {
+          "role": "user",
+          "content": "百轮约束过程补充记录 7：这里只是过程备注。"
+        },
+        {
+          "role": "assistant",
+          "content": "已记录。"
+        },
+        {
+          "role": "user",
+          "content": "百轮约束过程补充记录 8：这里只是过程备注。"
+        },
+        {
+          "role": "assistant",
+          "content": "已记录。"
+        },
+        {
+          "role": "user",
+          "content": "百轮约束过程补充记录 9：这里只是过程备注。"
+        },
+        {
+          "role": "assistant",
+          "content": "已记录。"
+        },
+        {
+          "role": "user",
+          "content": "百轮约束过程补充记录 10：这里只是过程备注。"
+        },
+        {
+          "role": "assistant",
+          "content": "已记录。"
+        },
+        {
+          "role": "user",
+          "content": "百轮约束过程补充记录 11：这里只是过程备注。"
+        },
+        {
+          "role": "assistant",
+          "content": "已记录。"
+        },
+        {
+          "role": "user",
+          "content": "百轮约束过程补充记录 12：这里只是过程备注。"
+        },
+        {
+          "role": "assistant",
+          "content": "已记录。"
+        },
+        {
+          "role": "user",
+          "content": "百轮约束过程补充记录 13：这里只是过程备注。"
+        },
+        {
+          "role": "assistant",
+          "content": "已记录。"
+        },
+        {
+          "role": "user",
+          "content": "百轮约束过程补充记录 14：这里只是过程备注。"
+        },
+        {
+          "role": "assistant",
+          "content": "已记录。"
+        },
+        {
+          "role": "user",
+          "content": "百轮约束过程补充记录 15：这里只是过程备注。"
+        },
+        {
+          "role": "assistant",
+          "content": "已记录。"
+        },
+        {
+          "role": "user",
+          "content": "百轮约束过程补充记录 16：这里只是过程备注。"
+        },
+        {
+          "role": "assistant",
+          "content": "已记录。"
+        },
+        {
+          "role": "user",
+          "content": "百轮约束过程补充记录 17：这里只是过程备注。"
+        },
+        {
+          "role": "assistant",
+          "content": "已记录。"
+        },
+        {
+          "role": "user",
+          "content": "百轮约束过程补充记录 18：这里只是过程备注。"
+        },
+        {
+          "role": "assistant",
+          "content": "已记录。"
+        },
+        {
+          "role": "user",
+          "content": "百轮约束过程补充记录 19：这里只是过程备注。"
+        },
+        {
+          "role": "assistant",
+          "content": "已记录。"
+        },
+        {
+          "role": "user",
+          "content": "百轮约束过程补充记录 20：这里只是过程备注。"
+        },
+        {
+          "role": "assistant",
+          "content": "已记录。"
+        },
+        {
+          "role": "user",
+          "content": "百轮约束过程补充记录 21：这里只是过程备注。"
+        },
+        {
+          "role": "assistant",
+          "content": "已记录。"
+        },
+        {
+          "role": "user",
+          "content": "百轮约束过程补充记录 22：这里只是过程备注。"
+        },
+        {
+          "role": "assistant",
+          "content": "已记录。"
+        },
+        {
+          "role": "user",
+          "content": "百轮约束过程补充记录 23：这里只是过程备注。"
+        },
+        {
+          "role": "assistant",
+          "content": "已记录。"
+        },
+        {
+          "role": "user",
+          "content": "百轮约束过程补充记录 24：这里只是过程备注。"
+        },
+        {
+          "role": "assistant",
+          "content": "已记录。"
+        },
+        {
+          "role": "user",
+          "content": "百轮约束过程补充记录 25：这里只是过程备注。"
+        },
+        {
+          "role": "assistant",
+          "content": "已记录。"
+        },
+        {
+          "role": "user",
+          "content": "百轮约束过程补充记录 26：这里只是过程备注。"
+        },
+        {
+          "role": "assistant",
+          "content": "已记录。"
+        },
+        {
+          "role": "user",
+          "content": "百轮约束过程补充记录 27：这里只是过程备注。"
+        },
+        {
+          "role": "assistant",
+          "content": "已记录。"
+        },
+        {
+          "role": "user",
+          "content": "百轮约束过程补充记录 28：这里只是过程备注。"
+        },
+        {
+          "role": "assistant",
+          "content": "已记录。"
+        },
+        {
+          "role": "user",
+          "content": "百轮约束过程补充记录 29：这里只是过程备注。"
+        },
+        {
+          "role": "assistant",
+          "content": "已记录。"
+        },
+        {
+          "role": "user",
+          "content": "百轮约束过程补充记录 30：这里只是过程备注。"
+        },
+        {
+          "role": "assistant",
+          "content": "已记录。"
+        },
+        {
+          "role": "user",
+          "content": "百轮约束过程补充记录 31：这里只是过程备注。"
+        },
+        {
+          "role": "assistant",
+          "content": "已记录。"
+        },
+        {
+          "role": "user",
+          "content": "百轮约束过程补充记录 32：这里只是过程备注。"
+        },
+        {
+          "role": "assistant",
+          "content": "已记录。"
+        },
+        {
+          "role": "user",
+          "content": "百轮约束过程补充记录 33：这里只是过程备注。"
+        },
+        {
+          "role": "assistant",
+          "content": "已记录。"
+        },
+        {
+          "role": "user",
+          "content": "百轮约束过程补充记录 34：这里只是过程备注。"
+        },
+        {
+          "role": "assistant",
+          "content": "已记录。"
+        },
+        {
+          "role": "user",
+          "content": "百轮约束过程补充记录 35：这里只是过程备注。"
+        },
+        {
+          "role": "assistant",
+          "content": "已记录。"
+        },
+        {
+          "role": "user",
+          "content": "百轮约束过程补充记录 36：这里只是过程备注。"
+        },
+        {
+          "role": "assistant",
+          "content": "已记录。"
+        },
+        {
+          "role": "user",
+          "content": "百轮约束过程补充记录 37：这里只是过程备注。"
+        },
+        {
+          "role": "assistant",
+          "content": "已记录。"
+        },
+        {
+          "role": "user",
+          "content": "百轮约束过程补充记录 38：这里只是过程备注。"
+        },
+        {
+          "role": "assistant",
+          "content": "已记录。"
+        },
+        {
+          "role": "user",
+          "content": "百轮约束过程补充记录 39：这里只是过程备注。"
+        },
+        {
+          "role": "assistant",
+          "content": "已记录。"
+        },
+        {
+          "role": "user",
+          "content": "百轮约束过程补充记录 40：这里只是过程备注。"
+        },
+        {
+          "role": "assistant",
+          "content": "已记录。"
+        },
+        {
+          "role": "user",
+          "content": "百轮约束过程补充记录 41：这里只是过程备注。"
+        },
+        {
+          "role": "assistant",
+          "content": "已记录。"
+        },
+        {
+          "role": "user",
+          "content": "百轮约束过程补充记录 42：这里只是过程备注。"
+        },
+        {
+          "role": "assistant",
+          "content": "已记录。"
+        },
+        {
+          "role": "user",
+          "content": "百轮约束过程补充记录 43：这里只是过程备注。"
+        },
+        {
+          "role": "assistant",
+          "content": "已记录。"
+        },
+        {
+          "role": "user",
+          "content": "百轮约束过程补充记录 44：这里只是过程备注。"
+        },
+        {
+          "role": "assistant",
+          "content": "已记录。"
+        },
+        {
+          "role": "user",
+          "content": "百轮约束过程补充记录 45：这里只是过程备注。"
+        },
+        {
+          "role": "assistant",
+          "content": "已记录。"
+        },
+        {
+          "role": "user",
+          "content": "百轮约束过程补充记录 46：这里只是过程备注。"
+        },
+        {
+          "role": "assistant",
+          "content": "已记录。"
+        },
+        {
+          "role": "user",
+          "content": "百轮约束过程补充记录 47：这里只是过程备注。"
+        },
+        {
+          "role": "assistant",
+          "content": "已记录。"
+        },
+        {
+          "role": "user",
+          "content": "百轮约束过程补充记录 48：这里只是过程备注。"
+        },
+        {
+          "role": "assistant",
+          "content": "已记录。"
+        },
+        {
+          "role": "user",
+          "content": "百轮约束过程补充记录 49：这里只是过程备注。"
+        },
+        {
+          "role": "assistant",
+          "content": "已记录。"
+        },
+        {
+          "role": "user",
+          "content": "百轮约束过程补充记录 50：这里只是过程备注。"
+        },
+        {
+          "role": "assistant",
+          "content": "已记录。"
+        },
+        {
+          "role": "user",
+          "content": "百轮约束过程补充记录 51：这里只是过程备注。"
+        },
+        {
+          "role": "assistant",
+          "content": "已记录。"
+        },
+        {
+          "role": "user",
+          "content": "百轮约束过程补充记录 52：这里只是过程备注。"
+        },
+        {
+          "role": "assistant",
+          "content": "已记录。"
+        },
+        {
+          "role": "user",
+          "content": "百轮约束过程补充记录 53：这里只是过程备注。"
+        },
+        {
+          "role": "assistant",
+          "content": "已记录。"
+        },
+        {
+          "role": "user",
+          "content": "百轮约束过程补充记录 54：这里只是过程备注。"
+        },
+        {
+          "role": "assistant",
+          "content": "已记录。"
+        },
+        {
+          "role": "user",
+          "content": "百轮约束过程补充记录 55：这里只是过程备注。"
+        },
+        {
+          "role": "assistant",
+          "content": "已记录。"
+        },
+        {
+          "role": "user",
+          "content": "百轮约束过程补充记录 56：这里只是过程备注。"
+        },
+        {
+          "role": "assistant",
+          "content": "已记录。"
+        },
+        {
+          "role": "user",
+          "content": "百轮约束过程补充记录 57：这里只是过程备注。"
+        },
+        {
+          "role": "assistant",
+          "content": "已记录。"
+        },
+        {
+          "role": "user",
+          "content": "百轮约束过程补充记录 58：这里只是过程备注。"
+        },
+        {
+          "role": "assistant",
+          "content": "已记录。"
+        },
+        {
+          "role": "user",
+          "content": "把 ready 换成 stable，其他不变。"
+        }
+      ],
+      "required_answer_markers": [
+        "The system is stable."
+      ],
+      "required_capsule_markers": [
+        "把系统已经可用译成英文，只写一句，不要添加中文说明。"
+      ],
+      "forbidden_answer_markers": [
+        "说明",
+        "ready"
+      ],
+      "topic_switch_expected": false,
+      "minimum_input_messages": 80,
+      "maximum_input_messages": 120,
+      "maximum_retained_user_statements": 20
+    },
+    {
+      "id": "S09",
+      "family": "topic_switch_near_history_limit",
+      "messages": [
+        {
+          "role": "user",
+          "content": "我出现呼吸困难和胸口压迫感。"
+        },
+        {
+          "role": "assistant",
+          "content": "请立即联系当地急救。"
+        },
+        {
+          "role": "user",
+          "content": "旧话题补充记录 1：这里只是过程备注。"
+        },
+        {
+          "role": "assistant",
+          "content": "已记录。"
+        },
+        {
+          "role": "user",
+          "content": "旧话题补充记录 2：这里只是过程备注。"
+        },
+        {
+          "role": "assistant",
+          "content": "已记录。"
+        },
+        {
+          "role": "user",
+          "content": "旧话题补充记录 3：这里只是过程备注。"
+        },
+        {
+          "role": "assistant",
+          "content": "已记录。"
+        },
+        {
+          "role": "user",
+          "content": "旧话题补充记录 4：这里只是过程备注。"
+        },
+        {
+          "role": "assistant",
+          "content": "已记录。"
+        },
+        {
+          "role": "user",
+          "content": "接下来不谈健康问题了，改聊咖啡和茶的味道。"
+        },
+        {
+          "role": "assistant",
+          "content": "好的。"
+        },
+        {
+          "role": "user",
+          "content": "八十轮风味话题补充记录 1：这里只是过程备注。"
+        },
+        {
+          "role": "assistant",
+          "content": "已记录。"
+        },
+        {
+          "role": "user",
+          "content": "八十轮风味话题补充记录 2：这里只是过程备注。"
+        },
+        {
+          "role": "assistant",
+          "content": "已记录。"
+        },
+        {
+          "role": "user",
+          "content": "八十轮风味话题补充记录 3：这里只是过程备注。"
+        },
+        {
+          "role": "assistant",
+          "content": "已记录。"
+        },
+        {
+          "role": "user",
+          "content": "八十轮风味话题补充记录 4：这里只是过程备注。"
+        },
+        {
+          "role": "assistant",
+          "content": "已记录。"
+        },
+        {
+          "role": "user",
+          "content": "八十轮风味话题补充记录 5：这里只是过程备注。"
+        },
+        {
+          "role": "assistant",
+          "content": "已记录。"
+        },
+        {
+          "role": "user",
+          "content": "八十轮风味话题补充记录 6：这里只是过程备注。"
+        },
+        {
+          "role": "assistant",
+          "content": "已记录。"
+        },
+        {
+          "role": "user",
+          "content": "八十轮风味话题补充记录 7：这里只是过程备注。"
+        },
+        {
+          "role": "assistant",
+          "content": "已记录。"
+        },
+        {
+          "role": "user",
+          "content": "八十轮风味话题补充记录 8：这里只是过程备注。"
+        },
+        {
+          "role": "assistant",
+          "content": "已记录。"
+        },
+        {
+          "role": "user",
+          "content": "八十轮风味话题补充记录 9：这里只是过程备注。"
+        },
+        {
+          "role": "assistant",
+          "content": "已记录。"
+        },
+        {
+          "role": "user",
+          "content": "八十轮风味话题补充记录 10：这里只是过程备注。"
+        },
+        {
+          "role": "assistant",
+          "content": "已记录。"
+        },
+        {
+          "role": "user",
+          "content": "八十轮风味话题补充记录 11：这里只是过程备注。"
+        },
+        {
+          "role": "assistant",
+          "content": "已记录。"
+        },
+        {
+          "role": "user",
+          "content": "八十轮风味话题补充记录 12：这里只是过程备注。"
+        },
+        {
+          "role": "assistant",
+          "content": "已记录。"
+        },
+        {
+          "role": "user",
+          "content": "八十轮风味话题补充记录 13：这里只是过程备注。"
+        },
+        {
+          "role": "assistant",
+          "content": "已记录。"
+        },
+        {
+          "role": "user",
+          "content": "八十轮风味话题补充记录 14：这里只是过程备注。"
+        },
+        {
+          "role": "assistant",
+          "content": "已记录。"
+        },
+        {
+          "role": "user",
+          "content": "八十轮风味话题补充记录 15：这里只是过程备注。"
+        },
+        {
+          "role": "assistant",
+          "content": "已记录。"
+        },
+        {
+          "role": "user",
+          "content": "八十轮风味话题补充记录 16：这里只是过程备注。"
+        },
+        {
+          "role": "assistant",
+          "content": "已记录。"
+        },
+        {
+          "role": "user",
+          "content": "八十轮风味话题补充记录 17：这里只是过程备注。"
+        },
+        {
+          "role": "assistant",
+          "content": "已记录。"
+        },
+        {
+          "role": "user",
+          "content": "八十轮风味话题补充记录 18：这里只是过程备注。"
+        },
+        {
+          "role": "assistant",
+          "content": "已记录。"
+        },
+        {
+          "role": "user",
+          "content": "八十轮风味话题补充记录 19：这里只是过程备注。"
+        },
+        {
+          "role": "assistant",
+          "content": "已记录。"
+        },
+        {
+          "role": "user",
+          "content": "八十轮风味话题补充记录 20：这里只是过程备注。"
+        },
+        {
+          "role": "assistant",
+          "content": "已记录。"
+        },
+        {
+          "role": "user",
+          "content": "八十轮风味话题补充记录 21：这里只是过程备注。"
+        },
+        {
+          "role": "assistant",
+          "content": "已记录。"
+        },
+        {
+          "role": "user",
+          "content": "八十轮风味话题补充记录 22：这里只是过程备注。"
+        },
+        {
+          "role": "assistant",
+          "content": "已记录。"
+        },
+        {
+          "role": "user",
+          "content": "八十轮风味话题补充记录 23：这里只是过程备注。"
+        },
+        {
+          "role": "assistant",
+          "content": "已记录。"
+        },
+        {
+          "role": "user",
+          "content": "八十轮风味话题补充记录 24：这里只是过程备注。"
+        },
+        {
+          "role": "assistant",
+          "content": "已记录。"
+        },
+        {
+          "role": "user",
+          "content": "八十轮风味话题补充记录 25：这里只是过程备注。"
+        },
+        {
+          "role": "assistant",
+          "content": "已记录。"
+        },
+        {
+          "role": "user",
+          "content": "八十轮风味话题补充记录 26：这里只是过程备注。"
+        },
+        {
+          "role": "assistant",
+          "content": "已记录。"
+        },
+        {
+          "role": "user",
+          "content": "八十轮风味话题补充记录 27：这里只是过程备注。"
+        },
+        {
+          "role": "assistant",
+          "content": "已记录。"
+        },
+        {
+          "role": "user",
+          "content": "八十轮风味话题补充记录 28：这里只是过程备注。"
+        },
+        {
+          "role": "assistant",
+          "content": "已记录。"
+        },
+        {
+          "role": "user",
+          "content": "八十轮风味话题补充记录 29：这里只是过程备注。"
+        },
+        {
+          "role": "assistant",
+          "content": "已记录。"
+        },
+        {
+          "role": "user",
+          "content": "八十轮风味话题补充记录 30：这里只是过程备注。"
+        },
+        {
+          "role": "assistant",
+          "content": "已记录。"
+        },
+        {
+          "role": "user",
+          "content": "八十轮风味话题补充记录 31：这里只是过程备注。"
+        },
+        {
+          "role": "assistant",
+          "content": "已记录。"
+        },
+        {
+          "role": "user",
+          "content": "八十轮风味话题补充记录 32：这里只是过程备注。"
+        },
+        {
+          "role": "assistant",
+          "content": "已记录。"
+        },
+        {
+          "role": "user",
+          "content": "八十轮风味话题补充记录 33：这里只是过程备注。"
+        },
+        {
+          "role": "assistant",
+          "content": "已记录。"
+        },
+        {
+          "role": "user",
+          "content": "八十轮风味话题补充记录 34：这里只是过程备注。"
+        },
+        {
+          "role": "assistant",
+          "content": "已记录。"
+        },
+        {
+          "role": "user",
+          "content": "哪一种通常更苦？"
+        }
+      ],
+      "required_answer_markers": [
+        "咖啡通常更苦。"
+      ],
+      "required_capsule_markers": [
+        "接下来不谈健康问题了，改聊咖啡和茶的味道。"
+      ],
+      "forbidden_answer_markers": [
+        "急救",
+        "呼吸困难",
+        "胸口"
+      ],
+      "topic_switch_expected": true,
+      "minimum_input_messages": 80,
+      "maximum_input_messages": 120,
+      "maximum_retained_user_statements": 20
+    },
+    {
+      "id": "S10",
+      "family": "topic_switch_near_history_limit",
+      "messages": [
+        {
+          "role": "user",
+          "content": "这个交易策略还没有经过独立验证。"
+        },
+        {
+          "role": "assistant",
+          "content": "不能据此实盘。"
+        },
+        {
+          "role": "user",
+          "content": "旧策略补充记录 1：这里只是过程备注。"
+        },
+        {
+          "role": "assistant",
+          "content": "已记录。"
+        },
+        {
+          "role": "user",
+          "content": "旧策略补充记录 2：这里只是过程备注。"
+        },
+        {
+          "role": "assistant",
+          "content": "已记录。"
+        },
+        {
+          "role": "user",
+          "content": "旧策略补充记录 3：这里只是过程备注。"
+        },
+        {
+          "role": "assistant",
+          "content": "已记录。"
+        },
+        {
+          "role": "user",
+          "content": "旧策略补充记录 4：这里只是过程备注。"
+        },
+        {
+          "role": "assistant",
+          "content": "已记录。"
+        },
+        {
+          "role": "user",
+          "content": "这一段到此为止，下面改用厨房比喻解释缓存。"
+        },
+        {
+          "role": "assistant",
+          "content": "缓存像把食材放在手边。"
+        },
+        {
+          "role": "user",
+          "content": "百轮厨房话题补充记录 1：这里只是过程备注。"
+        },
+        {
+          "role": "assistant",
+          "content": "已记录。"
+        },
+        {
+          "role": "user",
+          "content": "百轮厨房话题补充记录 2：这里只是过程备注。"
+        },
+        {
+          "role": "assistant",
+          "content": "已记录。"
+        },
+        {
+          "role": "user",
+          "content": "百轮厨房话题补充记录 3：这里只是过程备注。"
+        },
+        {
+          "role": "assistant",
+          "content": "已记录。"
+        },
+        {
+          "role": "user",
+          "content": "百轮厨房话题补充记录 4：这里只是过程备注。"
+        },
+        {
+          "role": "assistant",
+          "content": "已记录。"
+        },
+        {
+          "role": "user",
+          "content": "百轮厨房话题补充记录 5：这里只是过程备注。"
+        },
+        {
+          "role": "assistant",
+          "content": "已记录。"
+        },
+        {
+          "role": "user",
+          "content": "百轮厨房话题补充记录 6：这里只是过程备注。"
+        },
+        {
+          "role": "assistant",
+          "content": "已记录。"
+        },
+        {
+          "role": "user",
+          "content": "百轮厨房话题补充记录 7：这里只是过程备注。"
+        },
+        {
+          "role": "assistant",
+          "content": "已记录。"
+        },
+        {
+          "role": "user",
+          "content": "百轮厨房话题补充记录 8：这里只是过程备注。"
+        },
+        {
+          "role": "assistant",
+          "content": "已记录。"
+        },
+        {
+          "role": "user",
+          "content": "百轮厨房话题补充记录 9：这里只是过程备注。"
+        },
+        {
+          "role": "assistant",
+          "content": "已记录。"
+        },
+        {
+          "role": "user",
+          "content": "百轮厨房话题补充记录 10：这里只是过程备注。"
+        },
+        {
+          "role": "assistant",
+          "content": "已记录。"
+        },
+        {
+          "role": "user",
+          "content": "百轮厨房话题补充记录 11：这里只是过程备注。"
+        },
+        {
+          "role": "assistant",
+          "content": "已记录。"
+        },
+        {
+          "role": "user",
+          "content": "百轮厨房话题补充记录 12：这里只是过程备注。"
+        },
+        {
+          "role": "assistant",
+          "content": "已记录。"
+        },
+        {
+          "role": "user",
+          "content": "百轮厨房话题补充记录 13：这里只是过程备注。"
+        },
+        {
+          "role": "assistant",
+          "content": "已记录。"
+        },
+        {
+          "role": "user",
+          "content": "百轮厨房话题补充记录 14：这里只是过程备注。"
+        },
+        {
+          "role": "assistant",
+          "content": "已记录。"
+        },
+        {
+          "role": "user",
+          "content": "百轮厨房话题补充记录 15：这里只是过程备注。"
+        },
+        {
+          "role": "assistant",
+          "content": "已记录。"
+        },
+        {
+          "role": "user",
+          "content": "百轮厨房话题补充记录 16：这里只是过程备注。"
+        },
+        {
+          "role": "assistant",
+          "content": "已记录。"
+        },
+        {
+          "role": "user",
+          "content": "百轮厨房话题补充记录 17：这里只是过程备注。"
+        },
+        {
+          "role": "assistant",
+          "content": "已记录。"
+        },
+        {
+          "role": "user",
+          "content": "百轮厨房话题补充记录 18：这里只是过程备注。"
+        },
+        {
+          "role": "assistant",
+          "content": "已记录。"
+        },
+        {
+          "role": "user",
+          "content": "百轮厨房话题补充记录 19：这里只是过程备注。"
+        },
+        {
+          "role": "assistant",
+          "content": "已记录。"
+        },
+        {
+          "role": "user",
+          "content": "百轮厨房话题补充记录 20：这里只是过程备注。"
+        },
+        {
+          "role": "assistant",
+          "content": "已记录。"
+        },
+        {
+          "role": "user",
+          "content": "百轮厨房话题补充记录 21：这里只是过程备注。"
+        },
+        {
+          "role": "assistant",
+          "content": "已记录。"
+        },
+        {
+          "role": "user",
+          "content": "百轮厨房话题补充记录 22：这里只是过程备注。"
+        },
+        {
+          "role": "assistant",
+          "content": "已记录。"
+        },
+        {
+          "role": "user",
+          "content": "百轮厨房话题补充记录 23：这里只是过程备注。"
+        },
+        {
+          "role": "assistant",
+          "content": "已记录。"
+        },
+        {
+          "role": "user",
+          "content": "百轮厨房话题补充记录 24：这里只是过程备注。"
+        },
+        {
+          "role": "assistant",
+          "content": "已记录。"
+        },
+        {
+          "role": "user",
+          "content": "百轮厨房话题补充记录 25：这里只是过程备注。"
+        },
+        {
+          "role": "assistant",
+          "content": "已记录。"
+        },
+        {
+          "role": "user",
+          "content": "百轮厨房话题补充记录 26：这里只是过程备注。"
+        },
+        {
+          "role": "assistant",
+          "content": "已记录。"
+        },
+        {
+          "role": "user",
+          "content": "百轮厨房话题补充记录 27：这里只是过程备注。"
+        },
+        {
+          "role": "assistant",
+          "content": "已记录。"
+        },
+        {
+          "role": "user",
+          "content": "百轮厨房话题补充记录 28：这里只是过程备注。"
+        },
+        {
+          "role": "assistant",
+          "content": "已记录。"
+        },
+        {
+          "role": "user",
+          "content": "百轮厨房话题补充记录 29：这里只是过程备注。"
+        },
+        {
+          "role": "assistant",
+          "content": "已记录。"
+        },
+        {
+          "role": "user",
+          "content": "百轮厨房话题补充记录 30：这里只是过程备注。"
+        },
+        {
+          "role": "assistant",
+          "content": "已记录。"
+        },
+        {
+          "role": "user",
+          "content": "百轮厨房话题补充记录 31：这里只是过程备注。"
+        },
+        {
+          "role": "assistant",
+          "content": "已记录。"
+        },
+        {
+          "role": "user",
+          "content": "百轮厨房话题补充记录 32：这里只是过程备注。"
+        },
+        {
+          "role": "assistant",
+          "content": "已记录。"
+        },
+        {
+          "role": "user",
+          "content": "百轮厨房话题补充记录 33：这里只是过程备注。"
+        },
+        {
+          "role": "assistant",
+          "content": "已记录。"
+        },
+        {
+          "role": "user",
+          "content": "百轮厨房话题补充记录 34：这里只是过程备注。"
+        },
+        {
+          "role": "assistant",
+          "content": "已记录。"
+        },
+        {
+          "role": "user",
+          "content": "百轮厨房话题补充记录 35：这里只是过程备注。"
+        },
+        {
+          "role": "assistant",
+          "content": "已记录。"
+        },
+        {
+          "role": "user",
+          "content": "百轮厨房话题补充记录 36：这里只是过程备注。"
+        },
+        {
+          "role": "assistant",
+          "content": "已记录。"
+        },
+        {
+          "role": "user",
+          "content": "百轮厨房话题补充记录 37：这里只是过程备注。"
+        },
+        {
+          "role": "assistant",
+          "content": "已记录。"
+        },
+        {
+          "role": "user",
+          "content": "百轮厨房话题补充记录 38：这里只是过程备注。"
+        },
+        {
+          "role": "assistant",
+          "content": "已记录。"
+        },
+        {
+          "role": "user",
+          "content": "百轮厨房话题补充记录 39：这里只是过程备注。"
+        },
+        {
+          "role": "assistant",
+          "content": "已记录。"
+        },
+        {
+          "role": "user",
+          "content": "百轮厨房话题补充记录 40：这里只是过程备注。"
+        },
+        {
+          "role": "assistant",
+          "content": "已记录。"
+        },
+        {
+          "role": "user",
+          "content": "百轮厨房话题补充记录 41：这里只是过程备注。"
+        },
+        {
+          "role": "assistant",
+          "content": "已记录。"
+        },
+        {
+          "role": "user",
+          "content": "百轮厨房话题补充记录 42：这里只是过程备注。"
+        },
+        {
+          "role": "assistant",
+          "content": "已记录。"
+        },
+        {
+          "role": "user",
+          "content": "百轮厨房话题补充记录 43：这里只是过程备注。"
+        },
+        {
+          "role": "assistant",
+          "content": "已记录。"
+        },
+        {
+          "role": "user",
+          "content": "百轮厨房话题补充记录 44：这里只是过程备注。"
+        },
+        {
+          "role": "assistant",
+          "content": "已记录。"
+        },
+        {
+          "role": "user",
+          "content": "百轮厨房话题补充记录 45：这里只是过程备注。"
+        },
+        {
+          "role": "assistant",
+          "content": "已记录。"
+        },
+        {
+          "role": "user",
+          "content": "百轮厨房话题补充记录 46：这里只是过程备注。"
+        },
+        {
+          "role": "assistant",
+          "content": "已记录。"
+        },
+        {
+          "role": "user",
+          "content": "百轮厨房话题补充记录 47：这里只是过程备注。"
+        },
+        {
+          "role": "assistant",
+          "content": "已记录。"
+        },
+        {
+          "role": "user",
+          "content": "百轮厨房话题补充记录 48：这里只是过程备注。"
+        },
+        {
+          "role": "assistant",
+          "content": "已记录。"
+        },
+        {
+          "role": "user",
+          "content": "百轮厨房话题补充记录 49：这里只是过程备注。"
+        },
+        {
+          "role": "assistant",
+          "content": "已记录。"
+        },
+        {
+          "role": "user",
+          "content": "百轮厨房话题补充记录 50：这里只是过程备注。"
+        },
+        {
+          "role": "assistant",
+          "content": "已记录。"
+        },
+        {
+          "role": "user",
+          "content": "百轮厨房话题补充记录 51：这里只是过程备注。"
+        },
+        {
+          "role": "assistant",
+          "content": "已记录。"
+        },
+        {
+          "role": "user",
+          "content": "百轮厨房话题补充记录 52：这里只是过程备注。"
+        },
+        {
+          "role": "assistant",
+          "content": "已记录。"
+        },
+        {
+          "role": "user",
+          "content": "百轮厨房话题补充记录 53：这里只是过程备注。"
+        },
+        {
+          "role": "assistant",
+          "content": "已记录。"
+        },
+        {
+          "role": "user",
+          "content": "那缓存更新像厨房里的什么？"
+        }
+      ],
+      "required_answer_markers": [
+        "旧食材",
+        "新鲜食材"
+      ],
+      "required_capsule_markers": [
+        "这一段到此为止，下面改用厨房比喻解释缓存。"
+      ],
+      "forbidden_answer_markers": [
+        "实盘",
+        "交易策略",
+        "生产放行"
+      ],
+      "topic_switch_expected": true,
+      "minimum_input_messages": 80,
+      "maximum_input_messages": 120,
+      "maximum_retained_user_statements": 20
+    }
+  ],
+  "cases_sha256": "352e7fa138487e06a954a7ddf28a6de0af49b85c877d361a53a2d752d35fb7df"
+}

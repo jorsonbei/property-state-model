@@ -1,0 +1,564 @@
+{
+  "schema_version": "psm_v0_276_long_horizon_state_compression_report_v1",
+  "version": "PSM_V0.276-candidate",
+  "contract_sha256": "0e9a9fb2597f36d669860f8e26fe4b1195988b69abc84b3c325e342a84ac3a0c",
+  "passed": false,
+  "summary": {
+    "cases": 10,
+    "passed": 0,
+    "failed": 10,
+    "stale_state_violations": 0,
+    "compression_missing": 0,
+    "capsule_recovery_failures": 10,
+    "window_baseline_failures": 10,
+    "total_duration_ms": 284,
+    "families": {
+      "constraint_inheritance_after_compression": {
+        "cases": 2,
+        "passed": 0
+      },
+      "latest_correction_after_compression": {
+        "cases": 2,
+        "passed": 0
+      },
+      "remote_fact_after_long_noise": {
+        "cases": 2,
+        "passed": 0
+      },
+      "topic_switch_after_compression": {
+        "cases": 2,
+        "passed": 0
+      },
+      "unresolved_work_after_compression": {
+        "cases": 2,
+        "passed": 0
+      }
+    }
+  },
+  "rows": [
+    {
+      "case_id": "H01",
+      "family": "remote_fact_after_long_noise",
+      "passed": false,
+      "checks": {
+        "required_answer_markers_present": true,
+        "forbidden_answer_markers_absent": true,
+        "full_input_exceeds_historical_window": true,
+        "long_history_retained": true,
+        "compression_applied": true,
+        "capsule_source_count_is_long": true,
+        "capsule_within_retained_limit": true,
+        "required_capsule_markers_retained": false,
+        "window_only_baseline_misses_remote_state": true,
+        "topic_switch_state_matches": true,
+        "generation_completed": true,
+        "quality_audit_passed": true,
+        "sigma_plus_delivery_passed": true,
+        "assistant_history_excluded_from_state_audit": true,
+        "release_boundary_closed": true
+      },
+      "answer": "白砾",
+      "missing_answer_markers": [],
+      "forbidden_answer_markers": [],
+      "missing_capsule_markers": [
+        "项目代号定为白砾。"
+      ],
+      "window_baseline_missing_capsule_markers": [
+        "项目代号定为白砾。"
+      ],
+      "generation": {
+        "status": "success",
+        "provider": "deterministic",
+        "model": null,
+        "error": null,
+        "state_capsule": {
+          "user_authoritative": true,
+          "topic_switch_applied": false,
+          "active_user_statements": 20,
+          "source_user_statements": 22,
+          "retained_user_statements": 20,
+          "dropped_user_statements": 2,
+          "compression_applied": true,
+          "compression_strategy": "durable_state_plus_recent",
+          "maximum_retained_user_statements": 20,
+          "sha256": "347d0053f31c96a4fc2608491394f6c2e550e46ff832649339d923627863f7a5"
+        }
+      },
+      "input_messages": 43,
+      "history_messages": 43,
+      "duration_ms": 54
+    },
+    {
+      "case_id": "H02",
+      "family": "remote_fact_after_long_noise",
+      "passed": false,
+      "checks": {
+        "required_answer_markers_present": true,
+        "forbidden_answer_markers_absent": true,
+        "full_input_exceeds_historical_window": true,
+        "long_history_retained": true,
+        "compression_applied": true,
+        "capsule_source_count_is_long": true,
+        "capsule_within_retained_limit": true,
+        "required_capsule_markers_retained": false,
+        "window_only_baseline_misses_remote_state": true,
+        "topic_switch_state_matches": true,
+        "generation_completed": true,
+        "quality_audit_passed": true,
+        "sigma_plus_delivery_passed": true,
+        "assistant_history_excluded_from_state_audit": true,
+        "release_boundary_closed": true
+      },
+      "answer": "银杏厅",
+      "missing_answer_markers": [],
+      "forbidden_answer_markers": [],
+      "missing_capsule_markers": [
+        "活动固定在银杏厅举行。"
+      ],
+      "window_baseline_missing_capsule_markers": [
+        "活动固定在银杏厅举行。"
+      ],
+      "generation": {
+        "status": "success",
+        "provider": "deterministic",
+        "model": null,
+        "error": null,
+        "state_capsule": {
+          "user_authoritative": true,
+          "topic_switch_applied": false,
+          "active_user_statements": 9,
+          "source_user_statements": 22,
+          "retained_user_statements": 9,
+          "dropped_user_statements": 13,
+          "compression_applied": true,
+          "compression_strategy": "durable_state_plus_recent",
+          "maximum_retained_user_statements": 20,
+          "sha256": "3ed590d632ad0e798ab1a57601d1ffa8a15376984ea83e61773afbf1f098ac7c"
+        }
+      },
+      "input_messages": 43,
+      "history_messages": 43,
+      "duration_ms": 25
+    },
+    {
+      "case_id": "H03",
+      "family": "latest_correction_after_compression",
+      "passed": false,
+      "checks": {
+        "required_answer_markers_present": true,
+        "forbidden_answer_markers_absent": true,
+        "full_input_exceeds_historical_window": true,
+        "long_history_retained": true,
+        "compression_applied": true,
+        "capsule_source_count_is_long": true,
+        "capsule_within_retained_limit": true,
+        "required_capsule_markers_retained": false,
+        "window_only_baseline_misses_remote_state": true,
+        "topic_switch_state_matches": true,
+        "generation_completed": true,
+        "quality_audit_passed": true,
+        "sigma_plus_delivery_passed": true,
+        "assistant_history_excluded_from_state_audit": true,
+        "release_boundary_closed": true
+      },
+      "answer": "final-long.zip",
+      "missing_answer_markers": [],
+      "forbidden_answer_markers": [],
+      "missing_capsule_markers": [
+        "输出文件名改为 final-long.zip，旧名作废。"
+      ],
+      "window_baseline_missing_capsule_markers": [
+        "输出文件名改为 final-long.zip，旧名作废。"
+      ],
+      "generation": {
+        "status": "success",
+        "provider": "deterministic",
+        "model": null,
+        "error": null,
+        "state_capsule": {
+          "user_authoritative": true,
+          "topic_switch_applied": false,
+          "active_user_statements": 10,
+          "source_user_statements": 24,
+          "retained_user_statements": 10,
+          "dropped_user_statements": 14,
+          "compression_applied": true,
+          "compression_strategy": "durable_state_plus_recent",
+          "maximum_retained_user_statements": 20,
+          "sha256": "b6b7901e7700915d26c36d183d28ecb2ae2cb4be3cc11d22691225417490b71e"
+        }
+      },
+      "input_messages": 47,
+      "history_messages": 47,
+      "duration_ms": 26
+    },
+    {
+      "case_id": "H04",
+      "family": "latest_correction_after_compression",
+      "passed": false,
+      "checks": {
+        "required_answer_markers_present": true,
+        "forbidden_answer_markers_absent": true,
+        "full_input_exceeds_historical_window": true,
+        "long_history_retained": true,
+        "compression_applied": true,
+        "capsule_source_count_is_long": true,
+        "capsule_within_retained_limit": true,
+        "required_capsule_markers_retained": false,
+        "window_only_baseline_misses_remote_state": true,
+        "topic_switch_state_matches": true,
+        "generation_completed": true,
+        "quality_audit_passed": true,
+        "sigma_plus_delivery_passed": true,
+        "assistant_history_excluded_from_state_audit": true,
+        "release_boundary_closed": true
+      },
+      "answer": "星期五",
+      "missing_answer_markers": [],
+      "forbidden_answer_markers": [],
+      "missing_capsule_markers": [
+        "改期到星期五，星期一取消。"
+      ],
+      "window_baseline_missing_capsule_markers": [
+        "改期到星期五，星期一取消。"
+      ],
+      "generation": {
+        "status": "success",
+        "provider": "deterministic",
+        "model": null,
+        "error": null,
+        "state_capsule": {
+          "user_authoritative": true,
+          "topic_switch_applied": false,
+          "active_user_statements": 9,
+          "source_user_statements": 24,
+          "retained_user_statements": 9,
+          "dropped_user_statements": 15,
+          "compression_applied": true,
+          "compression_strategy": "durable_state_plus_recent",
+          "maximum_retained_user_statements": 20,
+          "sha256": "b6a09dd3ad8e78a7319a41c78db7e77a9710d56d77f8d21dd67a4804ead3ec58"
+        }
+      },
+      "input_messages": 47,
+      "history_messages": 47,
+      "duration_ms": 28
+    },
+    {
+      "case_id": "H05",
+      "family": "unresolved_work_after_compression",
+      "passed": false,
+      "checks": {
+        "required_answer_markers_present": true,
+        "forbidden_answer_markers_absent": true,
+        "full_input_exceeds_historical_window": true,
+        "long_history_retained": true,
+        "compression_applied": true,
+        "capsule_source_count_is_long": true,
+        "capsule_within_retained_limit": true,
+        "required_capsule_markers_retained": false,
+        "window_only_baseline_misses_remote_state": true,
+        "topic_switch_state_matches": true,
+        "generation_completed": true,
+        "quality_audit_passed": true,
+        "sigma_plus_delivery_passed": true,
+        "assistant_history_excluded_from_state_audit": true,
+        "release_boundary_closed": true
+      },
+      "answer": "补监控说明",
+      "missing_answer_markers": [],
+      "forbidden_answer_markers": [],
+      "missing_capsule_markers": [
+        "今天两件正事：修索引页，再补监控说明。",
+        "索引页已经修完。"
+      ],
+      "window_baseline_missing_capsule_markers": [
+        "今天两件正事：修索引页，再补监控说明。",
+        "索引页已经修完。"
+      ],
+      "generation": {
+        "status": "success",
+        "provider": "deterministic",
+        "model": null,
+        "error": null,
+        "state_capsule": {
+          "user_authoritative": true,
+          "topic_switch_applied": false,
+          "active_user_statements": 10,
+          "source_user_statements": 24,
+          "retained_user_statements": 10,
+          "dropped_user_statements": 14,
+          "compression_applied": true,
+          "compression_strategy": "durable_state_plus_recent",
+          "maximum_retained_user_statements": 20,
+          "sha256": "db802ee916d916569fb24739999c873f75751cd80740dbb835e23ff7dd6c0b70"
+        }
+      },
+      "input_messages": 47,
+      "history_messages": 47,
+      "duration_ms": 27
+    },
+    {
+      "case_id": "H06",
+      "family": "unresolved_work_after_compression",
+      "passed": false,
+      "checks": {
+        "required_answer_markers_present": true,
+        "forbidden_answer_markers_absent": true,
+        "full_input_exceeds_historical_window": true,
+        "long_history_retained": true,
+        "compression_applied": true,
+        "capsule_source_count_is_long": true,
+        "capsule_within_retained_limit": true,
+        "required_capsule_markers_retained": false,
+        "window_only_baseline_misses_remote_state": true,
+        "topic_switch_state_matches": true,
+        "generation_completed": true,
+        "quality_audit_passed": true,
+        "sigma_plus_delivery_passed": true,
+        "assistant_history_excluded_from_state_audit": true,
+        "release_boundary_closed": true
+      },
+      "answer": "咖啡滤纸",
+      "missing_answer_markers": [],
+      "forbidden_answer_markers": [],
+      "missing_capsule_markers": [
+        "采购清单是燕麦和咖啡滤纸。",
+        "燕麦已经买到了。"
+      ],
+      "window_baseline_missing_capsule_markers": [
+        "采购清单是燕麦和咖啡滤纸。",
+        "燕麦已经买到了。"
+      ],
+      "generation": {
+        "status": "success",
+        "provider": "deterministic",
+        "model": null,
+        "error": null,
+        "state_capsule": {
+          "user_authoritative": true,
+          "topic_switch_applied": false,
+          "active_user_statements": 10,
+          "source_user_statements": 24,
+          "retained_user_statements": 10,
+          "dropped_user_statements": 14,
+          "compression_applied": true,
+          "compression_strategy": "durable_state_plus_recent",
+          "maximum_retained_user_statements": 20,
+          "sha256": "8c136ae744a0fc24c74bc6ce4dfb351dd8d564a5254ba4b5256ca07fe730c778"
+        }
+      },
+      "input_messages": 47,
+      "history_messages": 47,
+      "duration_ms": 23
+    },
+    {
+      "case_id": "H07",
+      "family": "constraint_inheritance_after_compression",
+      "passed": false,
+      "checks": {
+        "required_answer_markers_present": true,
+        "forbidden_answer_markers_absent": true,
+        "full_input_exceeds_historical_window": true,
+        "long_history_retained": true,
+        "compression_applied": true,
+        "capsule_source_count_is_long": true,
+        "capsule_within_retained_limit": true,
+        "required_capsule_markers_retained": false,
+        "window_only_baseline_misses_remote_state": true,
+        "topic_switch_state_matches": true,
+        "generation_completed": true,
+        "quality_audit_passed": true,
+        "sigma_plus_delivery_passed": true,
+        "assistant_history_excluded_from_state_audit": true,
+        "release_boundary_closed": true
+      },
+      "answer": "The report is complete.",
+      "missing_answer_markers": [],
+      "forbidden_answer_markers": [],
+      "missing_capsule_markers": [
+        "把报告已经准备好译成英文，只写一句，不要加解释。"
+      ],
+      "window_baseline_missing_capsule_markers": [
+        "把报告已经准备好译成英文，只写一句，不要加解释。"
+      ],
+      "generation": {
+        "status": "success",
+        "provider": "deterministic",
+        "model": null,
+        "error": null,
+        "state_capsule": {
+          "user_authoritative": true,
+          "topic_switch_applied": false,
+          "active_user_statements": 9,
+          "source_user_statements": 22,
+          "retained_user_statements": 9,
+          "dropped_user_statements": 13,
+          "compression_applied": true,
+          "compression_strategy": "durable_state_plus_recent",
+          "maximum_retained_user_statements": 20,
+          "sha256": "dc86d0150c8bb19837160eced4e7915b749f791f3b9641709e41b1f642a6ddf0"
+        }
+      },
+      "input_messages": 43,
+      "history_messages": 43,
+      "duration_ms": 28
+    },
+    {
+      "case_id": "H08",
+      "family": "constraint_inheritance_after_compression",
+      "passed": false,
+      "checks": {
+        "required_answer_markers_present": true,
+        "forbidden_answer_markers_absent": true,
+        "full_input_exceeds_historical_window": true,
+        "long_history_retained": true,
+        "compression_applied": true,
+        "capsule_source_count_is_long": true,
+        "capsule_within_retained_limit": true,
+        "required_capsule_markers_retained": false,
+        "window_only_baseline_misses_remote_state": true,
+        "topic_switch_state_matches": true,
+        "generation_completed": true,
+        "quality_audit_passed": true,
+        "sigma_plus_delivery_passed": true,
+        "assistant_history_excluded_from_state_audit": true,
+        "release_boundary_closed": true
+      },
+      "answer": "The system is stable.",
+      "missing_answer_markers": [],
+      "forbidden_answer_markers": [],
+      "missing_capsule_markers": [
+        "把系统已经可用译成英文，只写一句，不要添加中文说明。"
+      ],
+      "window_baseline_missing_capsule_markers": [
+        "把系统已经可用译成英文，只写一句，不要添加中文说明。"
+      ],
+      "generation": {
+        "status": "success",
+        "provider": "deterministic",
+        "model": null,
+        "error": null,
+        "state_capsule": {
+          "user_authoritative": true,
+          "topic_switch_applied": false,
+          "active_user_statements": 9,
+          "source_user_statements": 22,
+          "retained_user_statements": 9,
+          "dropped_user_statements": 13,
+          "compression_applied": true,
+          "compression_strategy": "durable_state_plus_recent",
+          "maximum_retained_user_statements": 20,
+          "sha256": "d5dda2512d60fc1ba0a01baeb162ef8cdeb3561713ae5fe578917580d1b79ec7"
+        }
+      },
+      "input_messages": 43,
+      "history_messages": 43,
+      "duration_ms": 23
+    },
+    {
+      "case_id": "H09",
+      "family": "topic_switch_after_compression",
+      "passed": false,
+      "checks": {
+        "required_answer_markers_present": true,
+        "forbidden_answer_markers_absent": true,
+        "full_input_exceeds_historical_window": true,
+        "long_history_retained": true,
+        "compression_applied": true,
+        "capsule_source_count_is_long": true,
+        "capsule_within_retained_limit": true,
+        "required_capsule_markers_retained": false,
+        "window_only_baseline_misses_remote_state": true,
+        "topic_switch_state_matches": true,
+        "generation_completed": true,
+        "quality_audit_passed": true,
+        "sigma_plus_delivery_passed": true,
+        "assistant_history_excluded_from_state_audit": true,
+        "release_boundary_closed": true
+      },
+      "answer": "咖啡通常更苦。",
+      "missing_answer_markers": [],
+      "forbidden_answer_markers": [],
+      "missing_capsule_markers": [
+        "接下来不谈健康问题了，改聊咖啡和茶的味道。"
+      ],
+      "window_baseline_missing_capsule_markers": [
+        "接下来不谈健康问题了，改聊咖啡和茶的味道。"
+      ],
+      "generation": {
+        "status": "success",
+        "provider": "deterministic",
+        "model": null,
+        "error": null,
+        "state_capsule": {
+          "user_authoritative": true,
+          "topic_switch_applied": true,
+          "active_user_statements": 9,
+          "source_user_statements": 19,
+          "retained_user_statements": 9,
+          "dropped_user_statements": 10,
+          "compression_applied": true,
+          "compression_strategy": "durable_state_plus_recent",
+          "maximum_retained_user_statements": 20,
+          "sha256": "4f805535bce2d061b909c9455cef6fa9a792f59c41d3439e5d9eb3eec6c94bdf"
+        }
+      },
+      "input_messages": 47,
+      "history_messages": 47,
+      "duration_ms": 23
+    },
+    {
+      "case_id": "H10",
+      "family": "topic_switch_after_compression",
+      "passed": false,
+      "checks": {
+        "required_answer_markers_present": true,
+        "forbidden_answer_markers_absent": true,
+        "full_input_exceeds_historical_window": true,
+        "long_history_retained": true,
+        "compression_applied": true,
+        "capsule_source_count_is_long": true,
+        "capsule_within_retained_limit": true,
+        "required_capsule_markers_retained": false,
+        "window_only_baseline_misses_remote_state": true,
+        "topic_switch_state_matches": true,
+        "generation_completed": true,
+        "quality_audit_passed": true,
+        "sigma_plus_delivery_passed": true,
+        "assistant_history_excluded_from_state_audit": true,
+        "release_boundary_closed": true
+      },
+      "answer": "缓存更新就像把厨房里过期或变质的旧食材撤下，换成新鲜食材，避免继续用旧东西做错菜。",
+      "missing_answer_markers": [],
+      "forbidden_answer_markers": [],
+      "missing_capsule_markers": [
+        "这一段到此为止，下面改用厨房比喻解释缓存。"
+      ],
+      "window_baseline_missing_capsule_markers": [
+        "这一段到此为止，下面改用厨房比喻解释缓存。"
+      ],
+      "generation": {
+        "status": "success",
+        "provider": "deterministic",
+        "model": null,
+        "error": null,
+        "state_capsule": {
+          "user_authoritative": true,
+          "topic_switch_applied": true,
+          "active_user_statements": 9,
+          "source_user_statements": 19,
+          "retained_user_statements": 9,
+          "dropped_user_statements": 10,
+          "compression_applied": true,
+          "compression_strategy": "durable_state_plus_recent",
+          "maximum_retained_user_statements": 20,
+          "sha256": "8bc2a7a2c7a271cad0a8f9d4f4d1e7a0b38718ef67026428ab00df1788ede8b5"
+        }
+      },
+      "input_messages": 47,
+      "history_messages": 47,
+      "duration_ms": 27
+    }
+  ]
+}

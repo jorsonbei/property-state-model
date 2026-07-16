@@ -1,0 +1,126 @@
+{
+  "schema_version": "psm_autonomous_api_token_authority_v1",
+  "effective_at": "2026-07-16",
+  "updated_at": "2026-07-16T03:56:24.151731+00:00",
+  "authorized_by_user": true,
+  "token_limit": 1000000,
+  "observed_tokens": 150416,
+  "reserved_tokens_for_next_call": 0,
+  "remaining_tokens": 849584,
+  "approval_required": false,
+  "scope": "synthetic_external_judging_only",
+  "participant_content_allowed": false,
+  "private_data_allowed": false,
+  "training_feedback_allowed": false,
+  "external_release_authority": false,
+  "usage_records": [
+    {
+      "artifact": "runtime/v0_261_openai_external_contract_judge.json",
+      "response_id": "resp_0a1615f3979991a3016a56e0bd45b081988dd643a3a95a9b53",
+      "request_id": "req_5a8587ef9bc745bcb223120a4ee1facd",
+      "total_tokens": 4716
+    },
+    {
+      "artifact": "runtime/v0_261_openai_external_contract_judge_attempt_1_failed.json",
+      "response_id": "resp_03dd1534162b1a10016a56dcb62148819abf5c18ed2d5add3f",
+      "request_id": "req_6bb02444c0d14c5e9b711f0b60ea69c2",
+      "total_tokens": 6250
+    },
+    {
+      "artifact": "runtime/v0_261_openai_external_contract_judge_attempt_2_passed_pre_leaf_hardening.json",
+      "response_id": "resp_041de23f97284424016a56de049f50819a975edcb7915d5f32",
+      "request_id": "req_792549417fa34e86b3ef2411fa58e033",
+      "total_tokens": 5075
+    },
+    {
+      "artifact": "runtime/v0_262_openai_external_trial_protocol_judge.json",
+      "response_id": "resp_07817b77afbe664a016a5739151edc819989f578d69ff2153f",
+      "request_id": "req_7f4d6b3e4f994e78af20d5a72d5b3264",
+      "total_tokens": 3981
+    },
+    {
+      "artifact": "runtime/v0_262_openai_external_trial_protocol_judge_attempt_1_failed.json",
+      "response_id": "resp_0749b672be5ac4b0016a573847c48481999ca828713c79c07b",
+      "request_id": "req_60d2b113cf734f21b432f1b2476cd8a7",
+      "total_tokens": 8737
+    },
+    {
+      "artifact": "runtime/v0_267_openai_external_adversarial_judge.json",
+      "response_id": "resp_0a2cfaa975b3da0b016a5816f443c8819bbbf24523b325a141",
+      "request_id": "req_b19be020b46f47898c13e629fdcdaabd",
+      "total_tokens": 12301
+    },
+    {
+      "artifact": "runtime/v0_267_openai_external_adversarial_judge_attempt_1_failed.json",
+      "response_id": null,
+      "request_id": null,
+      "total_tokens": 0
+    },
+    {
+      "artifact": "runtime/v0_267_openai_external_adversarial_judge_attempt_2_failed.json",
+      "response_id": "resp_04dcfa8a29cfc9cf016a58157b96bc8199b6a395da6c853211",
+      "request_id": "req_355d82b597e34be5bbadb3709ce83d30",
+      "total_tokens": 12775
+    },
+    {
+      "artifact": "runtime/v0_267_openai_external_adversarial_judge_attempt_3_failed.json",
+      "response_id": "resp_04117efcafc89a1a016a58166ba7f4819ab07c15476b563094",
+      "request_id": "req_fd15cf59913541c18834c5a5d7c27ef8",
+      "total_tokens": 13090
+    },
+    {
+      "artifact": "runtime/v0_271_openai_external_multiturn_judge.json",
+      "response_id": "resp_0912a0a1ab6c04a8016a5825853af48198abc94326d2b1935d",
+      "request_id": "req_16ecdd295b474539ad5b93fd6e40627c",
+      "total_tokens": 7939
+    },
+    {
+      "artifact": "runtime/v0_271_openai_external_multiturn_rejudge.json",
+      "response_id": "resp_0b52c8a4ee67bb82016a582b4c4b24819a8795feb8df27e25a",
+      "request_id": "req_fe8547aec2c642ec9e5f6ff45522f79a",
+      "total_tokens": 5406
+    },
+    {
+      "artifact": "runtime/v0_273_openai_external_long_context_judge.json",
+      "response_id": "resp_02301ca00cc6dc1f016a58346976448199b7064f31395ecb90",
+      "request_id": "req_857ee02f7d514926be216a6c71bf6f8e",
+      "total_tokens": 3188
+    },
+    {
+      "artifact": "runtime/v0_275_openai_external_open_context_judge.json",
+      "response_id": "resp_06aee9b3e6447015016a5841f88408819a837bef3a69d1a7db",
+      "request_id": "req_22e0e969eae24c5ba10b507f85d26472",
+      "total_tokens": 9401
+    },
+    {
+      "artifact": "runtime/v0_275_openai_external_open_context_judge_attempt_3.json",
+      "response_id": "resp_06a91804e918543b016a5849b611e8819bba7a5a5023c7eb9d",
+      "request_id": "req_9a5a564646fb4e9f8bf5884eb6d6819c",
+      "total_tokens": 3925
+    },
+    {
+      "artifact": "runtime/v0_275_openai_external_open_context_rejudge.json",
+      "response_id": "resp_0e3a9a20644f5a60016a58485109b0819992e6162c11d5d67e",
+      "request_id": "req_a3674ac7992f4ffd8a90917b08c3a2cc",
+      "total_tokens": 5200
+    },
+    {
+      "artifact": "runtime/v0_277_openai_external_state_compression_judge.json",
+      "response_id": "resp_00b1630244a39809016a584f62f3508199ab7a3e7c7b697130",
+      "request_id": "req_585e35909f5e4beeaa635d105c73592c",
+      "total_tokens": 10604
+    },
+    {
+      "artifact": "runtime/v0_279_openai_external_incremental_stress_judge.json",
+      "response_id": "resp_06d49c71a984e774016a5851864560819b961cc92b4068505b",
+      "request_id": "req_2ecc3ea46d08410fada9a0bdc598ea5a",
+      "total_tokens": 22659
+    },
+    {
+      "artifact": "runtime/v0_281_openai_external_rolling_state_judge.json",
+      "response_id": "resp_006173455b61e0c5016a5855f6c268819997ffc34d1a392500",
+      "request_id": "req_cd5ec1130a97470c91f29d8cb8e5304a",
+      "total_tokens": 15169
+    }
+  ]
+}

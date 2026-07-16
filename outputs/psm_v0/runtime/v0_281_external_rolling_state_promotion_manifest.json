@@ -1,0 +1,56 @@
+{
+  "schema_version": "psm_v0_281_external_rolling_state_promotion_manifest_v1",
+  "version": "PSM_V0.281",
+  "promoted_at": "2026-07-16",
+  "promoted": true,
+  "decision": "independent_external_rolling_state_and_isolation_review_passed",
+  "formal_core_source": "PSM_V0.251",
+  "formal_core_records": 2228,
+  "external_rolling_state_review": {
+    "decision": "independent_external_rolling_state_and_isolation_review_passed",
+    "passed": true,
+    "provider": "OpenAI",
+    "model": "gpt-5.4-2026-03-05",
+    "items": 4,
+    "items_passed": 4,
+    "families": 4,
+    "failed_item_ids": [],
+    "critical_findings": [],
+    "isolation_checks": 11,
+    "isolation_checks_passed": 11,
+    "cross_session_leaks": 0,
+    "disk_writes": 0,
+    "evaluator_gap_attempts_retained": 1,
+    "total_tokens": 15169,
+    "observed_cumulative_openai_tokens": 150416,
+    "autonomous_token_authority_limit": 1000000,
+    "participant_content_calls": 0,
+    "synthetic_only": true,
+    "human_validation_claimed": false,
+    "training_feedback_written": false,
+    "external_release_authority": false,
+    "review_payload_sha256": "a0a6d89f525266668c555fafd7c9688da2394547c32c7b55899ad75b86eb8bcd"
+  },
+  "evidence": {
+    "package": "runtime/v0_281_external_rolling_state_review_package.json",
+    "package_gate": "runtime/v0_281_external_rolling_state_package_gate.json",
+    "judge": "runtime/v0_281_openai_external_rolling_state_judge.json",
+    "isolation_report": "runtime/v0_281_rolling_state_isolation_report.json",
+    "isolation_gate": "runtime/v0_281_rolling_state_isolation_gate.json",
+    "evaluator_gap": "runtime/v0_281_rolling_state_isolation_attempt_1_evaluator_gap.json",
+    "gate": "runtime/v0_281_external_rolling_state_gate.json"
+  },
+  "release_boundary": {
+    "human_validation_claimed": false,
+    "training_feedback_allowed": false,
+    "rule_replacement_allowed": false,
+    "public_service_allowed": false,
+    "external_release_authority": false
+  },
+  "next_stage": {
+    "version": "PSM_V0.282",
+    "objective": "执行真实浏览器的跨窗口连续聊天回归，并明确页面刷新、服务重启与临时记忆失效时的用户体验和恢复边界。",
+    "blocked": false,
+    "requires_user_input": false
+  }
+}

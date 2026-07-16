@@ -1,0 +1,60 @@
+{
+  "schema_version": "psm_v0_276_long_horizon_state_compression_gate_v1",
+  "version": "PSM_V0.276-candidate",
+  "passed": true,
+  "decision": "long_horizon_state_compression_gate_passed",
+  "checks": {
+    "case_count_matches": true,
+    "all_cases_pass": true,
+    "all_families_pass": true,
+    "compression_applied_for_all": true,
+    "capsule_recovery_failures_zero": true,
+    "historical_window_baseline_fails_all": true,
+    "stale_state_violations_zero": true,
+    "initial_failure_ledger_retained": true,
+    "retained_v0_275_promotion": true,
+    "evaluation_backflow_zero": true,
+    "release_boundary_closed": true
+  },
+  "metrics": {
+    "cases": 10,
+    "passed": 10,
+    "failed": 0,
+    "stale_state_violations": 0,
+    "compression_missing": 0,
+    "capsule_recovery_failures": 0,
+    "window_baseline_failures": 10,
+    "total_duration_ms": 264,
+    "families": {
+      "constraint_inheritance_after_compression": {
+        "cases": 2,
+        "passed": 2
+      },
+      "latest_correction_after_compression": {
+        "cases": 2,
+        "passed": 2
+      },
+      "remote_fact_after_long_noise": {
+        "cases": 2,
+        "passed": 2
+      },
+      "topic_switch_after_compression": {
+        "cases": 2,
+        "passed": 2
+      },
+      "unresolved_work_after_compression": {
+        "cases": 2,
+        "passed": 2
+      }
+    }
+  },
+  "initial_failure_count": 10,
+  "release_boundary": {
+    "human_validation_claimed": false,
+    "open_domain_generalization_claimed": false,
+    "production_readiness_claimed": false,
+    "public_service_allowed": false,
+    "rule_replacement_allowed": false,
+    "external_release_authority": false
+  }
+}

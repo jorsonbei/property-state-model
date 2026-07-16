@@ -17,6 +17,7 @@ const state = {
   activeRequest: null,
   lastFailed: null,
   nextMessageId: 1,
+  sessionId: createSessionId(),
   trialSession: loadTrialSession()
 };
 
@@ -154,7 +155,8 @@ async function runChat(options = {}) {
       : {
           messages: conversationMessages(),
           scenario: state.scenario,
-          task_state_graph: state.taskGraph
+          task_state_graph: state.taskGraph,
+          session_id: state.sessionId
         };
     const response = await fetch(endpoint, {
       method: "POST",
@@ -281,7 +283,7 @@ function discardUnansweredFailedTurn() {
 }
 
 function conversationMessages() {
-  return state.messages.map(({ role, content }) => ({ role, content }));
+  return state.messages.map(({ id, role, content }) => ({ id, role, content }));
 }
 
 function resetChat() {
@@ -289,6 +291,7 @@ function resetChat() {
   state.messages = [];
   state.history = [];
   state.taskGraph = null;
+  state.sessionId = createSessionId();
   state.lastFailed = null;
   $("prompt").value = "";
   autoResizePrompt();
@@ -322,6 +325,12 @@ function loadTrialSession() {
   const invitationCode = sessionStorage.getItem("psmTrialInvitationCode") || "";
   if (!/^P\d{2}$/.test(participantId) || invitationCode.length < 16) return null;
   return { participantId, invitationCode };
+}
+
+function createSessionId() {
+  if (globalThis.crypto?.randomUUID) return globalThis.crypto.randomUUID();
+  const random = Math.random().toString(36).slice(2);
+  return `psm-${Date.now().toString(36)}-${random}-${random}`;
 }
 
 function configureTrialMode() {
@@ -389,7 +398,7 @@ function renderResult(payload) {
 function pushMessage(role, content) {
   const message = { id: state.nextMessageId++, role, content };
   state.messages.push(message);
-  if (state.messages.length > 24) state.messages = state.messages.slice(-24);
+  if (state.messages.length > 120) state.messages = state.messages.slice(-120);
   renderMessages();
   return message.id;
 }

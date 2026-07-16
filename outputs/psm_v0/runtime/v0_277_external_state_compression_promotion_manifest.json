@@ -1,0 +1,48 @@
+{
+  "schema_version": "psm_v0_277_external_state_compression_promotion_manifest_v1",
+  "version": "PSM_V0.277",
+  "promoted_at": "2026-07-16",
+  "promoted": true,
+  "decision": "independent_external_state_compression_review_passed",
+  "formal_core_source": "PSM_V0.251",
+  "formal_core_records": 2228,
+  "external_state_compression_review": {
+    "decision": "independent_external_state_compression_review_passed",
+    "passed": true,
+    "provider": "OpenAI",
+    "model": "gpt-5.4-2026-03-05",
+    "items": 10,
+    "items_passed": 10,
+    "families": 5,
+    "failed_item_ids": [],
+    "critical_findings": [],
+    "total_tokens": 10604,
+    "observed_cumulative_openai_tokens": 112588,
+    "autonomous_token_authority_limit": 1000000,
+    "participant_content_calls": 0,
+    "synthetic_only": true,
+    "human_validation_claimed": false,
+    "training_feedback_written": false,
+    "external_release_authority": false,
+    "review_payload_sha256": "3b59f7552916c69c088826af62af3c5a9d0c15da2fa6e28d23089fbb69937257"
+  },
+  "evidence": {
+    "package": "runtime/v0_277_external_state_compression_review_package.json",
+    "package_gate": "runtime/v0_277_external_state_compression_package_gate.json",
+    "judge": "runtime/v0_277_openai_external_state_compression_judge.json",
+    "gate": "runtime/v0_277_external_state_compression_gate.json"
+  },
+  "release_boundary": {
+    "human_validation_claimed": false,
+    "training_feedback_allowed": false,
+    "rule_replacement_allowed": false,
+    "public_service_allowed": false,
+    "external_release_authority": false
+  },
+  "next_stage": {
+    "version": "PSM_V0.278",
+    "objective": "扩展到 80 至 120 条消息的递增长时程压力测试，验证压缩时延、远距状态恢复、纠错优先级与话题切换隔离。",
+    "blocked": false,
+    "requires_user_input": false
+  }
+}

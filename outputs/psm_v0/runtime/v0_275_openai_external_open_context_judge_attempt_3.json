@@ -1,0 +1,136 @@
+{
+  "schema_version": "psm_v0_275_openai_external_open_context_judge_v1",
+  "version": "PSM_V0.275-candidate",
+  "reviewed_at": "2026-07-16T03:02:23.404686+00:00",
+  "provider": "OpenAI",
+  "requested_model": "gpt-5.4",
+  "actual_model": "gpt-5.4-2026-03-05",
+  "endpoint": "/v1/responses",
+  "http_status": 200,
+  "response_status": "completed",
+  "response_id": "resp_06a91804e918543b016a5849b611e8819bba7a5a5023c7eb9d",
+  "request_id": "req_9a5a564646fb4e9f8bf5884eb6d6819c",
+  "store": false,
+  "api_key_persisted_in_artifact": false,
+  "package_sha256": "fdf2a7e1c48563be716101639dfad96a527aef99320dc93d267172f3635eea3e",
+  "review_payload_sha256": "6db0978f57a38de7c629569af519b4499092da143e85afc4d487f7dc0b0e8d2a",
+  "request_payload_sha256": "4394ddcea04a53d3a991eb4228c8b76db8b5e9138216b7d36bf3bbfa946ac42f",
+  "submission_scope": {
+    "synthetic_only": true,
+    "contains_private_data": false,
+    "contains_user_documents": false,
+    "contains_participant_content": false,
+    "contains_secrets": false,
+    "contains_local_paths": false,
+    "contains_candidate_rules": false,
+    "contains_hidden_labels": false,
+    "training_eligible": false
+  },
+  "budget": {
+    "currency": "USD",
+    "maximum_api_calls": 1,
+    "reserved_usd": 0.0,
+    "token_authority_limit": 1000000,
+    "observed_tokens_before": 98059,
+    "maximum_call_tokens": 12000,
+    "reserved_total_tokens": 110059,
+    "approval_required": false,
+    "authorization_scope": "synthetic_external_judging_only"
+  },
+  "usage": {
+    "input_tokens": 2701,
+    "input_tokens_details": {
+      "cache_write_tokens": 0,
+      "cached_tokens": 0
+    },
+    "output_tokens": 1224,
+    "output_tokens_details": {
+      "reasoning_tokens": 778
+    },
+    "total_tokens": 3925
+  },
+  "review": {
+    "review_payload_sha256": "6db0978f57a38de7c629569af519b4499092da143e85afc4d487f7dc0b0e8d2a",
+    "verdict": "pass",
+    "failed_item_ids": [],
+    "critical_findings": [],
+    "recommended_repairs": [],
+    "item_reviews": [
+      {
+        "review_id": "O01",
+        "verdict": "pass",
+        "dimension_failures": [],
+        "finding": "Correctly recalls the earliest user-set label and answers directly with only the label."
+      },
+      {
+        "review_id": "O02",
+        "verdict": "pass",
+        "dimension_failures": [],
+        "finding": "Correctly preserves the remote user fact about the venue and responds succinctly."
+      },
+      {
+        "review_id": "O03",
+        "verdict": "pass",
+        "dimension_failures": [],
+        "finding": "Correctly uses the latest corrected filename and avoids the superseded value."
+      },
+      {
+        "review_id": "O04",
+        "verdict": "pass",
+        "dimension_failures": [],
+        "finding": "Correctly reflects the rescheduled day and does not repeat the canceled Tuesday state."
+      },
+      {
+        "review_id": "O05",
+        "verdict": "pass",
+        "dimension_failures": [],
+        "finding": "Correctly recovers the one unresolved task after marking the other as completed."
+      },
+      {
+        "review_id": "O06",
+        "verdict": "pass",
+        "dimension_failures": [],
+        "finding": "Correctly identifies the remaining shopping item after milk was completed."
+      },
+      {
+        "review_id": "O07",
+        "verdict": "pass",
+        "dimension_failures": [],
+        "finding": "Correctly applies the requested word substitution while preserving the one-sentence, no-explanation formatting constraint."
+      },
+      {
+        "review_id": "O08",
+        "verdict": "pass",
+        "dimension_failures": [],
+        "finding": "Correctly updates only the middle line and preserves the required three-line format and unchanged items."
+      },
+      {
+        "review_id": "O09",
+        "verdict": "pass",
+        "dimension_failures": [],
+        "finding": "Correctly honors the topic switch away from medical context and gives a direct flavor-focused answer."
+      },
+      {
+        "review_id": "O10",
+        "verdict": "pass",
+        "dimension_failures": [],
+        "finding": "Correctly maintains the kitchen metaphor after the topic shift and explains cache updating without reviving trading context or adding code."
+      }
+    ]
+  },
+  "gate_checks": {
+    "review_payload_sha256_match": true,
+    "exact_item_coverage": true,
+    "response_internally_consistent": true,
+    "external_verdict_pass": true
+  },
+  "passed": true,
+  "release_boundary": {
+    "semantic_review_only": true,
+    "participant_content_submitted": false,
+    "training_feedback_written": false,
+    "rule_replacement_allowed": false,
+    "public_service_allowed": false,
+    "external_release_authority": false
+  }
+}

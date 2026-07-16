@@ -1,0 +1,52 @@
+{
+  "schema_version": "psm_v0_279_external_incremental_stress_promotion_manifest_v1",
+  "version": "PSM_V0.279",
+  "promoted_at": "2026-07-16",
+  "promoted": true,
+  "decision": "independent_external_incremental_stress_review_passed",
+  "formal_core_source": "PSM_V0.251",
+  "formal_core_records": 2228,
+  "external_incremental_stress_review": {
+    "decision": "independent_external_incremental_stress_review_passed",
+    "passed": true,
+    "provider": "OpenAI",
+    "model": "gpt-5.4-2026-03-05",
+    "items": 10,
+    "items_passed": 10,
+    "families": 5,
+    "message_levels": [
+      81,
+      119
+    ],
+    "failed_item_ids": [],
+    "critical_findings": [],
+    "total_tokens": 22659,
+    "observed_cumulative_openai_tokens": 135247,
+    "autonomous_token_authority_limit": 1000000,
+    "participant_content_calls": 0,
+    "synthetic_only": true,
+    "human_validation_claimed": false,
+    "training_feedback_written": false,
+    "external_release_authority": false,
+    "review_payload_sha256": "09301aecbdccbe2c290cb086d0b906c70e780749e16adf1c10a69a5dbafb217b"
+  },
+  "evidence": {
+    "package": "runtime/v0_279_external_incremental_stress_review_package.json",
+    "package_gate": "runtime/v0_279_external_incremental_stress_package_gate.json",
+    "judge": "runtime/v0_279_openai_external_incremental_stress_judge.json",
+    "gate": "runtime/v0_279_external_incremental_stress_gate.json"
+  },
+  "release_boundary": {
+    "human_validation_claimed": false,
+    "training_feedback_allowed": false,
+    "rule_replacement_allowed": false,
+    "public_service_allowed": false,
+    "external_release_authority": false
+  },
+  "next_stage": {
+    "version": "PSM_V0.280",
+    "objective": "实现跨 120 消息截断的滚动状态交接，使早期用户事实在原始消息退出窗口后仍可恢复，同时保持无助手历史权威、无原文持久化与话题切换清理。",
+    "blocked": false,
+    "requires_user_input": false
+  }
+}

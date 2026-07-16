@@ -1,0 +1,12 @@
+{
+  "schema_version": "psm_v0_280_rolling_state_handoff_checkpoint_v1",
+  "current_promoted_version": "PSM_V0.280",
+  "target_version": "PSM_V0.280",
+  "target_promoted": true,
+  "passed": true,
+  "status": "v0_280_promoted_v0_281_external_and_isolation_review_open",
+  "requires_user_input": false,
+  "next_action": "build_v0_281_external_rolling_state_review_and_isolation_contract",
+  "promotion_manifest": "runtime/v0_280_rolling_state_handoff_promotion_manifest.json",
+  "required_decision": "无；合成外部评审可在 1,000,000-token 授权内自动执行。"
+}

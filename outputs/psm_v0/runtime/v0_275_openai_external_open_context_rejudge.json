@@ -1,0 +1,144 @@
+{
+  "schema_version": "psm_v0_275_openai_external_open_context_judge_v1",
+  "version": "PSM_V0.275-candidate",
+  "reviewed_at": "2026-07-16T02:56:36.348221+00:00",
+  "provider": "OpenAI",
+  "requested_model": "gpt-5.4",
+  "actual_model": "gpt-5.4-2026-03-05",
+  "endpoint": "/v1/responses",
+  "http_status": 200,
+  "response_status": "completed",
+  "response_id": "resp_0e3a9a20644f5a60016a58485109b0819992e6162c11d5d67e",
+  "request_id": "req_a3674ac7992f4ffd8a90917b08c3a2cc",
+  "store": false,
+  "api_key_persisted_in_artifact": false,
+  "package_sha256": "f4489a62fafda01ca87ffb1dda1648610688c2e507572e9400d3fb95cdb6c6c6",
+  "review_payload_sha256": "789d3a1b6233aef46e16ae0a35d6918cbaa3f3c1e397e2b6da8e634ddbf4d84e",
+  "request_payload_sha256": "377321207e5cd2198efbbd716cbc4398b27220b6bb47b66e268ea86e6b5cb134",
+  "submission_scope": {
+    "synthetic_only": true,
+    "contains_private_data": false,
+    "contains_user_documents": false,
+    "contains_participant_content": false,
+    "contains_secrets": false,
+    "contains_local_paths": false,
+    "contains_candidate_rules": false,
+    "contains_hidden_labels": false,
+    "training_eligible": false
+  },
+  "budget": {
+    "currency": "USD",
+    "maximum_api_calls": 1,
+    "reserved_usd": 4.0,
+    "reserved_total_month_usd": 36.0,
+    "monthly_limit_usd": 36.0,
+    "base_monthly_limit_usd": 20.0,
+    "prior_user_approved_extensions_usd": 12.0,
+    "user_approved_additional_usd": 4.0,
+    "authorization_scope": "synthetic_open_context_rejudge_only"
+  },
+  "usage": {
+    "input_tokens": 2822,
+    "input_tokens_details": {
+      "cache_write_tokens": 0,
+      "cached_tokens": 0
+    },
+    "output_tokens": 2378,
+    "output_tokens_details": {
+      "reasoning_tokens": 1852
+    },
+    "total_tokens": 5200
+  },
+  "review": {
+    "review_payload_sha256": "789d3a1b6233aef46e16ae0a35d6918cbaa3f3c1e397e2b6da8e634ddbf4d84e",
+    "verdict": "fail",
+    "failed_item_ids": [
+      "O09"
+    ],
+    "critical_findings": [
+      "O09 materially over-answers a simple flavor question; it stays clear of prior medical state, but it is not sufficiently direct."
+    ],
+    "recommended_repairs": [
+      "For O09, answer briefly and only within the new flavor topic, e.g. “咖啡通常更苦。”"
+    ],
+    "item_reviews": [
+      {
+        "review_id": "O01",
+        "verdict": "pass",
+        "dimension_failures": [],
+        "finding": "Correctly recalls the earliest scheme label as 榆叶 and answers directly."
+      },
+      {
+        "review_id": "O02",
+        "verdict": "pass",
+        "dimension_failures": [],
+        "finding": "Correctly recalls the event venue as 青松厅 with no unnecessary extra content."
+      },
+      {
+        "review_id": "O03",
+        "verdict": "pass",
+        "dimension_failures": [],
+        "finding": "Correctly uses the latest corrected filename final-pack.zip and does not repeat the stale name."
+      },
+      {
+        "review_id": "O04",
+        "verdict": "pass",
+        "dimension_failures": [],
+        "finding": "Correctly prioritizes the updated schedule and answers 星期四."
+      },
+      {
+        "review_id": "O05",
+        "verdict": "pass",
+        "dimension_failures": [],
+        "finding": "Correctly recovers the remaining unresolved task: 补部署说明."
+      },
+      {
+        "review_id": "O06",
+        "verdict": "pass",
+        "dimension_failures": [],
+        "finding": "Correctly identifies the remaining shopping item as 燕麦."
+      },
+      {
+        "review_id": "O07",
+        "verdict": "pass",
+        "dimension_failures": [],
+        "finding": "Preserves the inherited constraints: one English sentence, no explanation, same punctuation, with ready changed to complete."
+      },
+      {
+        "review_id": "O08",
+        "verdict": "pass",
+        "dimension_failures": [],
+        "finding": "Preserves the three-line format and only changes the middle item to 散步."
+      },
+      {
+        "review_id": "O09",
+        "verdict": "fail",
+        "dimension_failures": [
+          "answer_directness"
+        ],
+        "finding": "The response is semantically correct and does not revive the prior medical context, but it adds multiple unnecessary explanatory sentences instead of giving a concise direct answer to a simple question."
+      },
+      {
+        "review_id": "O10",
+        "verdict": "pass",
+        "dimension_failures": [],
+        "finding": "Stays within the kitchen analogy, avoids reviving trading or code context, and answers the cache-update question directly."
+      }
+    ]
+  },
+  "gate_checks": {
+    "review_payload_sha256_match": true,
+    "exact_item_coverage": true,
+    "response_internally_consistent": true,
+    "external_verdict_pass": false
+  },
+  "passed": false,
+  "release_boundary": {
+    "semantic_review_only": true,
+    "participant_content_submitted": false,
+    "training_feedback_written": false,
+    "rule_replacement_allowed": false,
+    "public_service_allowed": false,
+    "external_release_authority": false
+  }
+}

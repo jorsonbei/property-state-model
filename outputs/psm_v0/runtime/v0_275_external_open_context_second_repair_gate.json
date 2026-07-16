@@ -1,0 +1,34 @@
+{
+  "schema_version": "psm_v0_275_external_open_context_second_repair_gate_v1",
+  "passed": true,
+  "checks": {
+    "original_external_failure_retained": true,
+    "failed_external_rejudge_retained": true,
+    "rejudge_reviewed_prior_repaired_hash": true,
+    "local_contract_passed": true,
+    "only_rejudge_failure_changed": true,
+    "o09_is_direct": true,
+    "prior_repairs_retained": true,
+    "other_items_unchanged": true,
+    "payload_hash_changed": true,
+    "new_external_call_not_authorized": true,
+    "budget_fully_reserved": true,
+    "participant_content_calls_zero": true,
+    "privacy_boundary_closed": true,
+    "release_boundary_closed": true
+  },
+  "original_failed_item_ids": [
+    "O01",
+    "O02",
+    "O10"
+  ],
+  "rejudge_failed_item_ids": [
+    "O09"
+  ],
+  "incremental_changed_item_ids": [
+    "O09"
+  ],
+  "source_review_payload_sha256": "789d3a1b6233aef46e16ae0a35d6918cbaa3f3c1e397e2b6da8e634ddbf4d84e",
+  "repaired_review_payload_sha256": "6db0978f57a38de7c629569af519b4499092da143e85afc4d487f7dc0b0e8d2a",
+  "external_second_rejudge_completed": false
+}

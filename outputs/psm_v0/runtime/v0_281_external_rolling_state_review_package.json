@@ -1,0 +1,3008 @@
+{
+  "schema_version": "psm_v0_281_external_rolling_state_review_package_v1",
+  "version": "PSM_V0.281-candidate",
+  "prepared_at": "2026-07-16T03:53:47.609832+00:00",
+  "source_version": "PSM_V0.280",
+  "authorization": "approved_by_user_up_to_1000000_tokens_v0_281_synthetic_external_judge",
+  "authorization_scope": "synthetic_external_judging_within_1000000_token_authority",
+  "privacy": {
+    "synthetic_only": true,
+    "contains_private_data": false,
+    "contains_user_documents": false,
+    "contains_participant_content": false,
+    "contains_secrets": false,
+    "contains_local_paths": false,
+    "contains_candidate_rules": false,
+    "contains_hidden_labels": false,
+    "contains_state_capsules": false,
+    "training_eligible": false
+  },
+  "budget": {
+    "maximum_api_calls": 1,
+    "token_authority_limit": 1000000,
+    "observed_tokens_before": 135247,
+    "maximum_call_tokens": 45000,
+    "reserved_total_tokens": 180247,
+    "approval_required": false,
+    "authorization_scope": "synthetic_external_judging_only"
+  },
+  "release_boundary": {
+    "human_validation_claimed": false,
+    "training_feedback_allowed": false,
+    "rule_replacement_allowed": false,
+    "public_service_allowed": false,
+    "external_release_authority": false
+  },
+  "review_payload": {
+    "objective": "Independently review answers after durable user state has exited a 120-message window.",
+    "rubric_dimensions": [
+      "semantic_correctness",
+      "remote_state_recovery",
+      "latest_correction_priority",
+      "unresolved_task_recovery",
+      "constraint_inheritance",
+      "topic_switch_isolation",
+      "answer_directness",
+      "release_boundary"
+    ],
+    "items": [
+      {
+        "review_id": "R01",
+        "family": "remote_fact_after_window_exit",
+        "conversation": [
+          {
+            "role": "user",
+            "content": "项目代号定为白砾。"
+          },
+          {
+            "role": "assistant",
+            "content": "已记录项目代号。"
+          },
+          {
+            "role": "user",
+            "content": "远距代号过程记录 1：无新增决定。"
+          },
+          {
+            "role": "assistant",
+            "content": "已记录。"
+          },
+          {
+            "role": "user",
+            "content": "远距代号过程记录 2：无新增决定。"
+          },
+          {
+            "role": "assistant",
+            "content": "已记录。"
+          },
+          {
+            "role": "user",
+            "content": "远距代号过程记录 3：无新增决定。"
+          },
+          {
+            "role": "assistant",
+            "content": "已记录。"
+          },
+          {
+            "role": "user",
+            "content": "远距代号过程记录 4：无新增决定。"
+          },
+          {
+            "role": "assistant",
+            "content": "已记录。"
+          },
+          {
+            "role": "user",
+            "content": "远距代号过程记录 5：无新增决定。"
+          },
+          {
+            "role": "assistant",
+            "content": "已记录。"
+          },
+          {
+            "role": "user",
+            "content": "远距代号过程记录 6：无新增决定。"
+          },
+          {
+            "role": "assistant",
+            "content": "已记录。"
+          },
+          {
+            "role": "user",
+            "content": "远距代号过程记录 7：无新增决定。"
+          },
+          {
+            "role": "assistant",
+            "content": "已记录。"
+          },
+          {
+            "role": "user",
+            "content": "远距代号过程记录 8：无新增决定。"
+          },
+          {
+            "role": "assistant",
+            "content": "已记录。"
+          },
+          {
+            "role": "user",
+            "content": "远距代号过程记录 9：无新增决定。"
+          },
+          {
+            "role": "assistant",
+            "content": "已记录。"
+          },
+          {
+            "role": "user",
+            "content": "远距代号过程记录 10：无新增决定。"
+          },
+          {
+            "role": "assistant",
+            "content": "已记录。"
+          },
+          {
+            "role": "user",
+            "content": "远距代号过程记录 11：无新增决定。"
+          },
+          {
+            "role": "assistant",
+            "content": "已记录。"
+          },
+          {
+            "role": "user",
+            "content": "远距代号过程记录 12：无新增决定。"
+          },
+          {
+            "role": "assistant",
+            "content": "已记录。"
+          },
+          {
+            "role": "user",
+            "content": "远距代号过程记录 13：无新增决定。"
+          },
+          {
+            "role": "assistant",
+            "content": "已记录。"
+          },
+          {
+            "role": "user",
+            "content": "远距代号过程记录 14：无新增决定。"
+          },
+          {
+            "role": "assistant",
+            "content": "已记录。"
+          },
+          {
+            "role": "user",
+            "content": "远距代号过程记录 15：无新增决定。"
+          },
+          {
+            "role": "assistant",
+            "content": "已记录。"
+          },
+          {
+            "role": "user",
+            "content": "远距代号过程记录 16：无新增决定。"
+          },
+          {
+            "role": "assistant",
+            "content": "已记录。"
+          },
+          {
+            "role": "user",
+            "content": "远距代号过程记录 17：无新增决定。"
+          },
+          {
+            "role": "assistant",
+            "content": "已记录。"
+          },
+          {
+            "role": "user",
+            "content": "远距代号过程记录 18：无新增决定。"
+          },
+          {
+            "role": "assistant",
+            "content": "已记录。"
+          },
+          {
+            "role": "user",
+            "content": "远距代号过程记录 19：无新增决定。"
+          },
+          {
+            "role": "assistant",
+            "content": "已记录。"
+          },
+          {
+            "role": "user",
+            "content": "远距代号过程记录 20：无新增决定。"
+          },
+          {
+            "role": "assistant",
+            "content": "已记录。"
+          },
+          {
+            "role": "user",
+            "content": "远距代号过程记录 21：无新增决定。"
+          },
+          {
+            "role": "assistant",
+            "content": "已记录。"
+          },
+          {
+            "role": "user",
+            "content": "远距代号过程记录 22：无新增决定。"
+          },
+          {
+            "role": "assistant",
+            "content": "已记录。"
+          },
+          {
+            "role": "user",
+            "content": "远距代号过程记录 23：无新增决定。"
+          },
+          {
+            "role": "assistant",
+            "content": "已记录。"
+          },
+          {
+            "role": "user",
+            "content": "远距代号过程记录 24：无新增决定。"
+          },
+          {
+            "role": "assistant",
+            "content": "已记录。"
+          },
+          {
+            "role": "user",
+            "content": "远距代号过程记录 25：无新增决定。"
+          },
+          {
+            "role": "assistant",
+            "content": "已记录。"
+          },
+          {
+            "role": "user",
+            "content": "远距代号过程记录 26：无新增决定。"
+          },
+          {
+            "role": "assistant",
+            "content": "已记录。"
+          },
+          {
+            "role": "user",
+            "content": "远距代号过程记录 27：无新增决定。"
+          },
+          {
+            "role": "assistant",
+            "content": "已记录。"
+          },
+          {
+            "role": "user",
+            "content": "远距代号过程记录 28：无新增决定。"
+          },
+          {
+            "role": "assistant",
+            "content": "已记录。"
+          },
+          {
+            "role": "user",
+            "content": "远距代号过程记录 29：无新增决定。"
+          },
+          {
+            "role": "assistant",
+            "content": "已记录。"
+          },
+          {
+            "role": "user",
+            "content": "远距代号过程记录 30：无新增决定。"
+          },
+          {
+            "role": "assistant",
+            "content": "已记录。"
+          },
+          {
+            "role": "user",
+            "content": "远距代号过程记录 31：无新增决定。"
+          },
+          {
+            "role": "assistant",
+            "content": "已记录。"
+          },
+          {
+            "role": "user",
+            "content": "远距代号过程记录 32：无新增决定。"
+          },
+          {
+            "role": "assistant",
+            "content": "已记录。"
+          },
+          {
+            "role": "user",
+            "content": "远距代号过程记录 33：无新增决定。"
+          },
+          {
+            "role": "assistant",
+            "content": "已记录。"
+          },
+          {
+            "role": "user",
+            "content": "远距代号过程记录 34：无新增决定。"
+          },
+          {
+            "role": "assistant",
+            "content": "已记录。"
+          },
+          {
+            "role": "user",
+            "content": "远距代号过程记录 35：无新增决定。"
+          },
+          {
+            "role": "assistant",
+            "content": "已记录。"
+          },
+          {
+            "role": "user",
+            "content": "远距代号过程记录 36：无新增决定。"
+          },
+          {
+            "role": "assistant",
+            "content": "已记录。"
+          },
+          {
+            "role": "user",
+            "content": "远距代号过程记录 37：无新增决定。"
+          },
+          {
+            "role": "assistant",
+            "content": "已记录。"
+          },
+          {
+            "role": "user",
+            "content": "远距代号过程记录 38：无新增决定。"
+          },
+          {
+            "role": "assistant",
+            "content": "已记录。"
+          },
+          {
+            "role": "user",
+            "content": "远距代号过程记录 39：无新增决定。"
+          },
+          {
+            "role": "assistant",
+            "content": "已记录。"
+          },
+          {
+            "role": "user",
+            "content": "远距代号过程记录 40：无新增决定。"
+          },
+          {
+            "role": "assistant",
+            "content": "已记录。"
+          },
+          {
+            "role": "user",
+            "content": "远距代号过程记录 41：无新增决定。"
+          },
+          {
+            "role": "assistant",
+            "content": "已记录。"
+          },
+          {
+            "role": "user",
+            "content": "远距代号过程记录 42：无新增决定。"
+          },
+          {
+            "role": "assistant",
+            "content": "已记录。"
+          },
+          {
+            "role": "user",
+            "content": "远距代号过程记录 43：无新增决定。"
+          },
+          {
+            "role": "assistant",
+            "content": "已记录。"
+          },
+          {
+            "role": "user",
+            "content": "远距代号过程记录 44：无新增决定。"
+          },
+          {
+            "role": "assistant",
+            "content": "已记录。"
+          },
+          {
+            "role": "user",
+            "content": "远距代号过程记录 45：无新增决定。"
+          },
+          {
+            "role": "assistant",
+            "content": "已记录。"
+          },
+          {
+            "role": "user",
+            "content": "远距代号过程记录 46：无新增决定。"
+          },
+          {
+            "role": "assistant",
+            "content": "已记录。"
+          },
+          {
+            "role": "user",
+            "content": "远距代号过程记录 47：无新增决定。"
+          },
+          {
+            "role": "assistant",
+            "content": "已记录。"
+          },
+          {
+            "role": "user",
+            "content": "远距代号过程记录 48：无新增决定。"
+          },
+          {
+            "role": "assistant",
+            "content": "已记录。"
+          },
+          {
+            "role": "user",
+            "content": "远距代号过程记录 49：无新增决定。"
+          },
+          {
+            "role": "assistant",
+            "content": "已记录。"
+          },
+          {
+            "role": "user",
+            "content": "远距代号过程记录 50：无新增决定。"
+          },
+          {
+            "role": "assistant",
+            "content": "已记录。"
+          },
+          {
+            "role": "user",
+            "content": "远距代号过程记录 51：无新增决定。"
+          },
+          {
+            "role": "assistant",
+            "content": "已记录。"
+          },
+          {
+            "role": "user",
+            "content": "远距代号过程记录 52：无新增决定。"
+          },
+          {
+            "role": "assistant",
+            "content": "已记录。"
+          },
+          {
+            "role": "user",
+            "content": "远距代号过程记录 53：无新增决定。"
+          },
+          {
+            "role": "assistant",
+            "content": "已记录。"
+          },
+          {
+            "role": "user",
+            "content": "远距代号过程记录 54：无新增决定。"
+          },
+          {
+            "role": "assistant",
+            "content": "已记录。"
+          },
+          {
+            "role": "user",
+            "content": "远距代号过程记录 55：无新增决定。"
+          },
+          {
+            "role": "assistant",
+            "content": "已记录。"
+          },
+          {
+            "role": "user",
+            "content": "远距代号过程记录 56：无新增决定。"
+          },
+          {
+            "role": "assistant",
+            "content": "已记录。"
+          },
+          {
+            "role": "user",
+            "content": "远距代号过程记录 57：无新增决定。"
+          },
+          {
+            "role": "assistant",
+            "content": "已记录。"
+          },
+          {
+            "role": "user",
+            "content": "远距代号过程记录 58：无新增决定。"
+          },
+          {
+            "role": "assistant",
+            "content": "已记录。"
+          },
+          {
+            "role": "user",
+            "content": "远距代号过程记录 59：无新增决定。"
+          },
+          {
+            "role": "assistant",
+            "content": "已记录。"
+          },
+          {
+            "role": "user",
+            "content": "远距代号过程记录 60：无新增决定。"
+          },
+          {
+            "role": "assistant",
+            "content": "已记录。"
+          },
+          {
+            "role": "user",
+            "content": "远距代号过程记录 61：无新增决定。"
+          },
+          {
+            "role": "assistant",
+            "content": "已记录。"
+          },
+          {
+            "role": "user",
+            "content": "远距代号过程记录 62：无新增决定。"
+          },
+          {
+            "role": "assistant",
+            "content": "已记录。"
+          },
+          {
+            "role": "user",
+            "content": "远距代号过程记录 63：无新增决定。"
+          },
+          {
+            "role": "assistant",
+            "content": "已记录。"
+          },
+          {
+            "role": "user",
+            "content": "远距代号过程记录 64：无新增决定。"
+          },
+          {
+            "role": "assistant",
+            "content": "已记录。"
+          },
+          {
+            "role": "user",
+            "content": "远距代号过程记录 65：无新增决定。"
+          },
+          {
+            "role": "assistant",
+            "content": "已记录。"
+          },
+          {
+            "role": "user",
+            "content": "远距代号过程记录 66：无新增决定。"
+          },
+          {
+            "role": "assistant",
+            "content": "已记录。"
+          },
+          {
+            "role": "user",
+            "content": "远距代号过程记录 67：无新增决定。"
+          },
+          {
+            "role": "assistant",
+            "content": "已记录。"
+          },
+          {
+            "role": "user",
+            "content": "远距代号过程记录 68：无新增决定。"
+          },
+          {
+            "role": "assistant",
+            "content": "已记录。"
+          },
+          {
+            "role": "user",
+            "content": "远距代号过程记录 69：无新增决定。"
+          },
+          {
+            "role": "assistant",
+            "content": "已记录。"
+          },
+          {
+            "role": "user",
+            "content": "远距代号过程记录 70：无新增决定。"
+          },
+          {
+            "role": "assistant",
+            "content": "已记录。"
+          },
+          {
+            "role": "user",
+            "content": "远距代号过程记录 71：无新增决定。"
+          },
+          {
+            "role": "assistant",
+            "content": "已记录。"
+          },
+          {
+            "role": "user",
+            "content": "远距代号过程记录 72：无新增决定。"
+          },
+          {
+            "role": "assistant",
+            "content": "已记录。"
+          },
+          {
+            "role": "user",
+            "content": "远距代号过程记录 73：无新增决定。"
+          },
+          {
+            "role": "assistant",
+            "content": "已记录。"
+          },
+          {
+            "role": "user",
+            "content": "远距代号过程记录 74：无新增决定。"
+          },
+          {
+            "role": "assistant",
+            "content": "已记录。"
+          },
+          {
+            "role": "user",
+            "content": "远距代号过程记录 75：无新增决定。"
+          },
+          {
+            "role": "assistant",
+            "content": "已记录。"
+          },
+          {
+            "role": "user",
+            "content": "远距代号过程记录 76：无新增决定。"
+          },
+          {
+            "role": "assistant",
+            "content": "已记录。"
+          },
+          {
+            "role": "user",
+            "content": "远距代号过程记录 77：无新增决定。"
+          },
+          {
+            "role": "assistant",
+            "content": "已记录。"
+          },
+          {
+            "role": "user",
+            "content": "远距代号过程记录 78：无新增决定。"
+          },
+          {
+            "role": "assistant",
+            "content": "已记录。"
+          },
+          {
+            "role": "user",
+            "content": "远距代号过程记录 79：无新增决定。"
+          },
+          {
+            "role": "assistant",
+            "content": "已记录。"
+          },
+          {
+            "role": "user",
+            "content": "远距代号过程记录 80：无新增决定。"
+          },
+          {
+            "role": "assistant",
+            "content": "已记录。"
+          },
+          {
+            "role": "user",
+            "content": "最早确定的项目代号是什么？只回答代号。"
+          }
+        ],
+        "final_answer": "白砾"
+      },
+      {
+        "review_id": "R02",
+        "family": "correction_after_window_exit",
+        "conversation": [
+          {
+            "role": "user",
+            "content": "输出文件名先定为 draft-long.zip。"
+          },
+          {
+            "role": "assistant",
+            "content": "已记录。"
+          },
+          {
+            "role": "user",
+            "content": "修订前过程记录 1：无新增决定。"
+          },
+          {
+            "role": "assistant",
+            "content": "已记录。"
+          },
+          {
+            "role": "user",
+            "content": "修订前过程记录 2：无新增决定。"
+          },
+          {
+            "role": "assistant",
+            "content": "已记录。"
+          },
+          {
+            "role": "user",
+            "content": "修订前过程记录 3：无新增决定。"
+          },
+          {
+            "role": "assistant",
+            "content": "已记录。"
+          },
+          {
+            "role": "user",
+            "content": "修订前过程记录 4：无新增决定。"
+          },
+          {
+            "role": "assistant",
+            "content": "已记录。"
+          },
+          {
+            "role": "user",
+            "content": "修订前过程记录 5：无新增决定。"
+          },
+          {
+            "role": "assistant",
+            "content": "已记录。"
+          },
+          {
+            "role": "user",
+            "content": "修订前过程记录 6：无新增决定。"
+          },
+          {
+            "role": "assistant",
+            "content": "已记录。"
+          },
+          {
+            "role": "user",
+            "content": "修订前过程记录 7：无新增决定。"
+          },
+          {
+            "role": "assistant",
+            "content": "已记录。"
+          },
+          {
+            "role": "user",
+            "content": "修订前过程记录 8：无新增决定。"
+          },
+          {
+            "role": "assistant",
+            "content": "已记录。"
+          },
+          {
+            "role": "user",
+            "content": "修订前过程记录 9：无新增决定。"
+          },
+          {
+            "role": "assistant",
+            "content": "已记录。"
+          },
+          {
+            "role": "user",
+            "content": "修订前过程记录 10：无新增决定。"
+          },
+          {
+            "role": "assistant",
+            "content": "已记录。"
+          },
+          {
+            "role": "user",
+            "content": "修订前过程记录 11：无新增决定。"
+          },
+          {
+            "role": "assistant",
+            "content": "已记录。"
+          },
+          {
+            "role": "user",
+            "content": "修订前过程记录 12：无新增决定。"
+          },
+          {
+            "role": "assistant",
+            "content": "已记录。"
+          },
+          {
+            "role": "user",
+            "content": "修订前过程记录 13：无新增决定。"
+          },
+          {
+            "role": "assistant",
+            "content": "已记录。"
+          },
+          {
+            "role": "user",
+            "content": "修订前过程记录 14：无新增决定。"
+          },
+          {
+            "role": "assistant",
+            "content": "已记录。"
+          },
+          {
+            "role": "user",
+            "content": "修订前过程记录 15：无新增决定。"
+          },
+          {
+            "role": "assistant",
+            "content": "已记录。"
+          },
+          {
+            "role": "user",
+            "content": "修订前过程记录 16：无新增决定。"
+          },
+          {
+            "role": "assistant",
+            "content": "已记录。"
+          },
+          {
+            "role": "user",
+            "content": "修订前过程记录 17：无新增决定。"
+          },
+          {
+            "role": "assistant",
+            "content": "已记录。"
+          },
+          {
+            "role": "user",
+            "content": "修订前过程记录 18：无新增决定。"
+          },
+          {
+            "role": "assistant",
+            "content": "已记录。"
+          },
+          {
+            "role": "user",
+            "content": "修订前过程记录 19：无新增决定。"
+          },
+          {
+            "role": "assistant",
+            "content": "已记录。"
+          },
+          {
+            "role": "user",
+            "content": "修订前过程记录 20：无新增决定。"
+          },
+          {
+            "role": "assistant",
+            "content": "已记录。"
+          },
+          {
+            "role": "user",
+            "content": "输出文件名改为 final-long.zip，旧名作废。"
+          },
+          {
+            "role": "assistant",
+            "content": "已更新。"
+          },
+          {
+            "role": "user",
+            "content": "修订后过程记录 1：无新增决定。"
+          },
+          {
+            "role": "assistant",
+            "content": "已记录。"
+          },
+          {
+            "role": "user",
+            "content": "修订后过程记录 2：无新增决定。"
+          },
+          {
+            "role": "assistant",
+            "content": "已记录。"
+          },
+          {
+            "role": "user",
+            "content": "修订后过程记录 3：无新增决定。"
+          },
+          {
+            "role": "assistant",
+            "content": "已记录。"
+          },
+          {
+            "role": "user",
+            "content": "修订后过程记录 4：无新增决定。"
+          },
+          {
+            "role": "assistant",
+            "content": "已记录。"
+          },
+          {
+            "role": "user",
+            "content": "修订后过程记录 5：无新增决定。"
+          },
+          {
+            "role": "assistant",
+            "content": "已记录。"
+          },
+          {
+            "role": "user",
+            "content": "修订后过程记录 6：无新增决定。"
+          },
+          {
+            "role": "assistant",
+            "content": "已记录。"
+          },
+          {
+            "role": "user",
+            "content": "修订后过程记录 7：无新增决定。"
+          },
+          {
+            "role": "assistant",
+            "content": "已记录。"
+          },
+          {
+            "role": "user",
+            "content": "修订后过程记录 8：无新增决定。"
+          },
+          {
+            "role": "assistant",
+            "content": "已记录。"
+          },
+          {
+            "role": "user",
+            "content": "修订后过程记录 9：无新增决定。"
+          },
+          {
+            "role": "assistant",
+            "content": "已记录。"
+          },
+          {
+            "role": "user",
+            "content": "修订后过程记录 10：无新增决定。"
+          },
+          {
+            "role": "assistant",
+            "content": "已记录。"
+          },
+          {
+            "role": "user",
+            "content": "修订后过程记录 11：无新增决定。"
+          },
+          {
+            "role": "assistant",
+            "content": "已记录。"
+          },
+          {
+            "role": "user",
+            "content": "修订后过程记录 12：无新增决定。"
+          },
+          {
+            "role": "assistant",
+            "content": "已记录。"
+          },
+          {
+            "role": "user",
+            "content": "修订后过程记录 13：无新增决定。"
+          },
+          {
+            "role": "assistant",
+            "content": "已记录。"
+          },
+          {
+            "role": "user",
+            "content": "修订后过程记录 14：无新增决定。"
+          },
+          {
+            "role": "assistant",
+            "content": "已记录。"
+          },
+          {
+            "role": "user",
+            "content": "修订后过程记录 15：无新增决定。"
+          },
+          {
+            "role": "assistant",
+            "content": "已记录。"
+          },
+          {
+            "role": "user",
+            "content": "修订后过程记录 16：无新增决定。"
+          },
+          {
+            "role": "assistant",
+            "content": "已记录。"
+          },
+          {
+            "role": "user",
+            "content": "修订后过程记录 17：无新增决定。"
+          },
+          {
+            "role": "assistant",
+            "content": "已记录。"
+          },
+          {
+            "role": "user",
+            "content": "修订后过程记录 18：无新增决定。"
+          },
+          {
+            "role": "assistant",
+            "content": "已记录。"
+          },
+          {
+            "role": "user",
+            "content": "修订后过程记录 19：无新增决定。"
+          },
+          {
+            "role": "assistant",
+            "content": "已记录。"
+          },
+          {
+            "role": "user",
+            "content": "修订后过程记录 20：无新增决定。"
+          },
+          {
+            "role": "assistant",
+            "content": "已记录。"
+          },
+          {
+            "role": "user",
+            "content": "修订后过程记录 21：无新增决定。"
+          },
+          {
+            "role": "assistant",
+            "content": "已记录。"
+          },
+          {
+            "role": "user",
+            "content": "修订后过程记录 22：无新增决定。"
+          },
+          {
+            "role": "assistant",
+            "content": "已记录。"
+          },
+          {
+            "role": "user",
+            "content": "修订后过程记录 23：无新增决定。"
+          },
+          {
+            "role": "assistant",
+            "content": "已记录。"
+          },
+          {
+            "role": "user",
+            "content": "修订后过程记录 24：无新增决定。"
+          },
+          {
+            "role": "assistant",
+            "content": "已记录。"
+          },
+          {
+            "role": "user",
+            "content": "修订后过程记录 25：无新增决定。"
+          },
+          {
+            "role": "assistant",
+            "content": "已记录。"
+          },
+          {
+            "role": "user",
+            "content": "修订后过程记录 26：无新增决定。"
+          },
+          {
+            "role": "assistant",
+            "content": "已记录。"
+          },
+          {
+            "role": "user",
+            "content": "修订后过程记录 27：无新增决定。"
+          },
+          {
+            "role": "assistant",
+            "content": "已记录。"
+          },
+          {
+            "role": "user",
+            "content": "修订后过程记录 28：无新增决定。"
+          },
+          {
+            "role": "assistant",
+            "content": "已记录。"
+          },
+          {
+            "role": "user",
+            "content": "修订后过程记录 29：无新增决定。"
+          },
+          {
+            "role": "assistant",
+            "content": "已记录。"
+          },
+          {
+            "role": "user",
+            "content": "修订后过程记录 30：无新增决定。"
+          },
+          {
+            "role": "assistant",
+            "content": "已记录。"
+          },
+          {
+            "role": "user",
+            "content": "修订后过程记录 31：无新增决定。"
+          },
+          {
+            "role": "assistant",
+            "content": "已记录。"
+          },
+          {
+            "role": "user",
+            "content": "修订后过程记录 32：无新增决定。"
+          },
+          {
+            "role": "assistant",
+            "content": "已记录。"
+          },
+          {
+            "role": "user",
+            "content": "修订后过程记录 33：无新增决定。"
+          },
+          {
+            "role": "assistant",
+            "content": "已记录。"
+          },
+          {
+            "role": "user",
+            "content": "修订后过程记录 34：无新增决定。"
+          },
+          {
+            "role": "assistant",
+            "content": "已记录。"
+          },
+          {
+            "role": "user",
+            "content": "修订后过程记录 35：无新增决定。"
+          },
+          {
+            "role": "assistant",
+            "content": "已记录。"
+          },
+          {
+            "role": "user",
+            "content": "修订后过程记录 36：无新增决定。"
+          },
+          {
+            "role": "assistant",
+            "content": "已记录。"
+          },
+          {
+            "role": "user",
+            "content": "修订后过程记录 37：无新增决定。"
+          },
+          {
+            "role": "assistant",
+            "content": "已记录。"
+          },
+          {
+            "role": "user",
+            "content": "修订后过程记录 38：无新增决定。"
+          },
+          {
+            "role": "assistant",
+            "content": "已记录。"
+          },
+          {
+            "role": "user",
+            "content": "修订后过程记录 39：无新增决定。"
+          },
+          {
+            "role": "assistant",
+            "content": "已记录。"
+          },
+          {
+            "role": "user",
+            "content": "修订后过程记录 40：无新增决定。"
+          },
+          {
+            "role": "assistant",
+            "content": "已记录。"
+          },
+          {
+            "role": "user",
+            "content": "修订后过程记录 41：无新增决定。"
+          },
+          {
+            "role": "assistant",
+            "content": "已记录。"
+          },
+          {
+            "role": "user",
+            "content": "修订后过程记录 42：无新增决定。"
+          },
+          {
+            "role": "assistant",
+            "content": "已记录。"
+          },
+          {
+            "role": "user",
+            "content": "修订后过程记录 43：无新增决定。"
+          },
+          {
+            "role": "assistant",
+            "content": "已记录。"
+          },
+          {
+            "role": "user",
+            "content": "修订后过程记录 44：无新增决定。"
+          },
+          {
+            "role": "assistant",
+            "content": "已记录。"
+          },
+          {
+            "role": "user",
+            "content": "修订后过程记录 45：无新增决定。"
+          },
+          {
+            "role": "assistant",
+            "content": "已记录。"
+          },
+          {
+            "role": "user",
+            "content": "修订后过程记录 46：无新增决定。"
+          },
+          {
+            "role": "assistant",
+            "content": "已记录。"
+          },
+          {
+            "role": "user",
+            "content": "修订后过程记录 47：无新增决定。"
+          },
+          {
+            "role": "assistant",
+            "content": "已记录。"
+          },
+          {
+            "role": "user",
+            "content": "修订后过程记录 48：无新增决定。"
+          },
+          {
+            "role": "assistant",
+            "content": "已记录。"
+          },
+          {
+            "role": "user",
+            "content": "修订后过程记录 49：无新增决定。"
+          },
+          {
+            "role": "assistant",
+            "content": "已记录。"
+          },
+          {
+            "role": "user",
+            "content": "修订后过程记录 50：无新增决定。"
+          },
+          {
+            "role": "assistant",
+            "content": "已记录。"
+          },
+          {
+            "role": "user",
+            "content": "修订后过程记录 51：无新增决定。"
+          },
+          {
+            "role": "assistant",
+            "content": "已记录。"
+          },
+          {
+            "role": "user",
+            "content": "修订后过程记录 52：无新增决定。"
+          },
+          {
+            "role": "assistant",
+            "content": "已记录。"
+          },
+          {
+            "role": "user",
+            "content": "修订后过程记录 53：无新增决定。"
+          },
+          {
+            "role": "assistant",
+            "content": "已记录。"
+          },
+          {
+            "role": "user",
+            "content": "修订后过程记录 54：无新增决定。"
+          },
+          {
+            "role": "assistant",
+            "content": "已记录。"
+          },
+          {
+            "role": "user",
+            "content": "修订后过程记录 55：无新增决定。"
+          },
+          {
+            "role": "assistant",
+            "content": "已记录。"
+          },
+          {
+            "role": "user",
+            "content": "修订后过程记录 56：无新增决定。"
+          },
+          {
+            "role": "assistant",
+            "content": "已记录。"
+          },
+          {
+            "role": "user",
+            "content": "修订后过程记录 57：无新增决定。"
+          },
+          {
+            "role": "assistant",
+            "content": "已记录。"
+          },
+          {
+            "role": "user",
+            "content": "修订后过程记录 58：无新增决定。"
+          },
+          {
+            "role": "assistant",
+            "content": "已记录。"
+          },
+          {
+            "role": "user",
+            "content": "修订后过程记录 59：无新增决定。"
+          },
+          {
+            "role": "assistant",
+            "content": "已记录。"
+          },
+          {
+            "role": "user",
+            "content": "修订后过程记录 60：无新增决定。"
+          },
+          {
+            "role": "assistant",
+            "content": "已记录。"
+          },
+          {
+            "role": "user",
+            "content": "修订后过程记录 61：无新增决定。"
+          },
+          {
+            "role": "assistant",
+            "content": "已记录。"
+          },
+          {
+            "role": "user",
+            "content": "修订后过程记录 62：无新增决定。"
+          },
+          {
+            "role": "assistant",
+            "content": "已记录。"
+          },
+          {
+            "role": "user",
+            "content": "修订后过程记录 63：无新增决定。"
+          },
+          {
+            "role": "assistant",
+            "content": "已记录。"
+          },
+          {
+            "role": "user",
+            "content": "修订后过程记录 64：无新增决定。"
+          },
+          {
+            "role": "assistant",
+            "content": "已记录。"
+          },
+          {
+            "role": "user",
+            "content": "修订后过程记录 65：无新增决定。"
+          },
+          {
+            "role": "assistant",
+            "content": "已记录。"
+          },
+          {
+            "role": "user",
+            "content": "修订后过程记录 66：无新增决定。"
+          },
+          {
+            "role": "assistant",
+            "content": "已记录。"
+          },
+          {
+            "role": "user",
+            "content": "修订后过程记录 67：无新增决定。"
+          },
+          {
+            "role": "assistant",
+            "content": "已记录。"
+          },
+          {
+            "role": "user",
+            "content": "修订后过程记录 68：无新增决定。"
+          },
+          {
+            "role": "assistant",
+            "content": "已记录。"
+          },
+          {
+            "role": "user",
+            "content": "修订后过程记录 69：无新增决定。"
+          },
+          {
+            "role": "assistant",
+            "content": "已记录。"
+          },
+          {
+            "role": "user",
+            "content": "修订后过程记录 70：无新增决定。"
+          },
+          {
+            "role": "assistant",
+            "content": "已记录。"
+          },
+          {
+            "role": "user",
+            "content": "修订后过程记录 71：无新增决定。"
+          },
+          {
+            "role": "assistant",
+            "content": "已记录。"
+          },
+          {
+            "role": "user",
+            "content": "修订后过程记录 72：无新增决定。"
+          },
+          {
+            "role": "assistant",
+            "content": "已记录。"
+          },
+          {
+            "role": "user",
+            "content": "修订后过程记录 73：无新增决定。"
+          },
+          {
+            "role": "assistant",
+            "content": "已记录。"
+          },
+          {
+            "role": "user",
+            "content": "修订后过程记录 74：无新增决定。"
+          },
+          {
+            "role": "assistant",
+            "content": "已记录。"
+          },
+          {
+            "role": "user",
+            "content": "修订后过程记录 75：无新增决定。"
+          },
+          {
+            "role": "assistant",
+            "content": "已记录。"
+          },
+          {
+            "role": "user",
+            "content": "修订后过程记录 76：无新增决定。"
+          },
+          {
+            "role": "assistant",
+            "content": "已记录。"
+          },
+          {
+            "role": "user",
+            "content": "修订后过程记录 77：无新增决定。"
+          },
+          {
+            "role": "assistant",
+            "content": "已记录。"
+          },
+          {
+            "role": "user",
+            "content": "修订后过程记录 78：无新增决定。"
+          },
+          {
+            "role": "assistant",
+            "content": "已记录。"
+          },
+          {
+            "role": "user",
+            "content": "修订后过程记录 79：无新增决定。"
+          },
+          {
+            "role": "assistant",
+            "content": "已记录。"
+          },
+          {
+            "role": "user",
+            "content": "最终输出文件名是什么？"
+          }
+        ],
+        "final_answer": "final-long.zip"
+      },
+      {
+        "review_id": "R03",
+        "family": "unresolved_task_after_window_exit",
+        "conversation": [
+          {
+            "role": "user",
+            "content": "今天两件正事：修索引页，再补监控说明。"
+          },
+          {
+            "role": "assistant",
+            "content": "已记录两件事。"
+          },
+          {
+            "role": "user",
+            "content": "任务前段过程记录 1：无新增决定。"
+          },
+          {
+            "role": "assistant",
+            "content": "已记录。"
+          },
+          {
+            "role": "user",
+            "content": "任务前段过程记录 2：无新增决定。"
+          },
+          {
+            "role": "assistant",
+            "content": "已记录。"
+          },
+          {
+            "role": "user",
+            "content": "任务前段过程记录 3：无新增决定。"
+          },
+          {
+            "role": "assistant",
+            "content": "已记录。"
+          },
+          {
+            "role": "user",
+            "content": "任务前段过程记录 4：无新增决定。"
+          },
+          {
+            "role": "assistant",
+            "content": "已记录。"
+          },
+          {
+            "role": "user",
+            "content": "任务前段过程记录 5：无新增决定。"
+          },
+          {
+            "role": "assistant",
+            "content": "已记录。"
+          },
+          {
+            "role": "user",
+            "content": "任务前段过程记录 6：无新增决定。"
+          },
+          {
+            "role": "assistant",
+            "content": "已记录。"
+          },
+          {
+            "role": "user",
+            "content": "任务前段过程记录 7：无新增决定。"
+          },
+          {
+            "role": "assistant",
+            "content": "已记录。"
+          },
+          {
+            "role": "user",
+            "content": "任务前段过程记录 8：无新增决定。"
+          },
+          {
+            "role": "assistant",
+            "content": "已记录。"
+          },
+          {
+            "role": "user",
+            "content": "任务前段过程记录 9：无新增决定。"
+          },
+          {
+            "role": "assistant",
+            "content": "已记录。"
+          },
+          {
+            "role": "user",
+            "content": "任务前段过程记录 10：无新增决定。"
+          },
+          {
+            "role": "assistant",
+            "content": "已记录。"
+          },
+          {
+            "role": "user",
+            "content": "索引页已经修完。"
+          },
+          {
+            "role": "assistant",
+            "content": "已标记完成。"
+          },
+          {
+            "role": "user",
+            "content": "任务后段过程记录 1：无新增决定。"
+          },
+          {
+            "role": "assistant",
+            "content": "已记录。"
+          },
+          {
+            "role": "user",
+            "content": "任务后段过程记录 2：无新增决定。"
+          },
+          {
+            "role": "assistant",
+            "content": "已记录。"
+          },
+          {
+            "role": "user",
+            "content": "任务后段过程记录 3：无新增决定。"
+          },
+          {
+            "role": "assistant",
+            "content": "已记录。"
+          },
+          {
+            "role": "user",
+            "content": "任务后段过程记录 4：无新增决定。"
+          },
+          {
+            "role": "assistant",
+            "content": "已记录。"
+          },
+          {
+            "role": "user",
+            "content": "任务后段过程记录 5：无新增决定。"
+          },
+          {
+            "role": "assistant",
+            "content": "已记录。"
+          },
+          {
+            "role": "user",
+            "content": "任务后段过程记录 6：无新增决定。"
+          },
+          {
+            "role": "assistant",
+            "content": "已记录。"
+          },
+          {
+            "role": "user",
+            "content": "任务后段过程记录 7：无新增决定。"
+          },
+          {
+            "role": "assistant",
+            "content": "已记录。"
+          },
+          {
+            "role": "user",
+            "content": "任务后段过程记录 8：无新增决定。"
+          },
+          {
+            "role": "assistant",
+            "content": "已记录。"
+          },
+          {
+            "role": "user",
+            "content": "任务后段过程记录 9：无新增决定。"
+          },
+          {
+            "role": "assistant",
+            "content": "已记录。"
+          },
+          {
+            "role": "user",
+            "content": "任务后段过程记录 10：无新增决定。"
+          },
+          {
+            "role": "assistant",
+            "content": "已记录。"
+          },
+          {
+            "role": "user",
+            "content": "任务后段过程记录 11：无新增决定。"
+          },
+          {
+            "role": "assistant",
+            "content": "已记录。"
+          },
+          {
+            "role": "user",
+            "content": "任务后段过程记录 12：无新增决定。"
+          },
+          {
+            "role": "assistant",
+            "content": "已记录。"
+          },
+          {
+            "role": "user",
+            "content": "任务后段过程记录 13：无新增决定。"
+          },
+          {
+            "role": "assistant",
+            "content": "已记录。"
+          },
+          {
+            "role": "user",
+            "content": "任务后段过程记录 14：无新增决定。"
+          },
+          {
+            "role": "assistant",
+            "content": "已记录。"
+          },
+          {
+            "role": "user",
+            "content": "任务后段过程记录 15：无新增决定。"
+          },
+          {
+            "role": "assistant",
+            "content": "已记录。"
+          },
+          {
+            "role": "user",
+            "content": "任务后段过程记录 16：无新增决定。"
+          },
+          {
+            "role": "assistant",
+            "content": "已记录。"
+          },
+          {
+            "role": "user",
+            "content": "任务后段过程记录 17：无新增决定。"
+          },
+          {
+            "role": "assistant",
+            "content": "已记录。"
+          },
+          {
+            "role": "user",
+            "content": "任务后段过程记录 18：无新增决定。"
+          },
+          {
+            "role": "assistant",
+            "content": "已记录。"
+          },
+          {
+            "role": "user",
+            "content": "任务后段过程记录 19：无新增决定。"
+          },
+          {
+            "role": "assistant",
+            "content": "已记录。"
+          },
+          {
+            "role": "user",
+            "content": "任务后段过程记录 20：无新增决定。"
+          },
+          {
+            "role": "assistant",
+            "content": "已记录。"
+          },
+          {
+            "role": "user",
+            "content": "任务后段过程记录 21：无新增决定。"
+          },
+          {
+            "role": "assistant",
+            "content": "已记录。"
+          },
+          {
+            "role": "user",
+            "content": "任务后段过程记录 22：无新增决定。"
+          },
+          {
+            "role": "assistant",
+            "content": "已记录。"
+          },
+          {
+            "role": "user",
+            "content": "任务后段过程记录 23：无新增决定。"
+          },
+          {
+            "role": "assistant",
+            "content": "已记录。"
+          },
+          {
+            "role": "user",
+            "content": "任务后段过程记录 24：无新增决定。"
+          },
+          {
+            "role": "assistant",
+            "content": "已记录。"
+          },
+          {
+            "role": "user",
+            "content": "任务后段过程记录 25：无新增决定。"
+          },
+          {
+            "role": "assistant",
+            "content": "已记录。"
+          },
+          {
+            "role": "user",
+            "content": "任务后段过程记录 26：无新增决定。"
+          },
+          {
+            "role": "assistant",
+            "content": "已记录。"
+          },
+          {
+            "role": "user",
+            "content": "任务后段过程记录 27：无新增决定。"
+          },
+          {
+            "role": "assistant",
+            "content": "已记录。"
+          },
+          {
+            "role": "user",
+            "content": "任务后段过程记录 28：无新增决定。"
+          },
+          {
+            "role": "assistant",
+            "content": "已记录。"
+          },
+          {
+            "role": "user",
+            "content": "任务后段过程记录 29：无新增决定。"
+          },
+          {
+            "role": "assistant",
+            "content": "已记录。"
+          },
+          {
+            "role": "user",
+            "content": "任务后段过程记录 30：无新增决定。"
+          },
+          {
+            "role": "assistant",
+            "content": "已记录。"
+          },
+          {
+            "role": "user",
+            "content": "任务后段过程记录 31：无新增决定。"
+          },
+          {
+            "role": "assistant",
+            "content": "已记录。"
+          },
+          {
+            "role": "user",
+            "content": "任务后段过程记录 32：无新增决定。"
+          },
+          {
+            "role": "assistant",
+            "content": "已记录。"
+          },
+          {
+            "role": "user",
+            "content": "任务后段过程记录 33：无新增决定。"
+          },
+          {
+            "role": "assistant",
+            "content": "已记录。"
+          },
+          {
+            "role": "user",
+            "content": "任务后段过程记录 34：无新增决定。"
+          },
+          {
+            "role": "assistant",
+            "content": "已记录。"
+          },
+          {
+            "role": "user",
+            "content": "任务后段过程记录 35：无新增决定。"
+          },
+          {
+            "role": "assistant",
+            "content": "已记录。"
+          },
+          {
+            "role": "user",
+            "content": "任务后段过程记录 36：无新增决定。"
+          },
+          {
+            "role": "assistant",
+            "content": "已记录。"
+          },
+          {
+            "role": "user",
+            "content": "任务后段过程记录 37：无新增决定。"
+          },
+          {
+            "role": "assistant",
+            "content": "已记录。"
+          },
+          {
+            "role": "user",
+            "content": "任务后段过程记录 38：无新增决定。"
+          },
+          {
+            "role": "assistant",
+            "content": "已记录。"
+          },
+          {
+            "role": "user",
+            "content": "任务后段过程记录 39：无新增决定。"
+          },
+          {
+            "role": "assistant",
+            "content": "已记录。"
+          },
+          {
+            "role": "user",
+            "content": "任务后段过程记录 40：无新增决定。"
+          },
+          {
+            "role": "assistant",
+            "content": "已记录。"
+          },
+          {
+            "role": "user",
+            "content": "任务后段过程记录 41：无新增决定。"
+          },
+          {
+            "role": "assistant",
+            "content": "已记录。"
+          },
+          {
+            "role": "user",
+            "content": "任务后段过程记录 42：无新增决定。"
+          },
+          {
+            "role": "assistant",
+            "content": "已记录。"
+          },
+          {
+            "role": "user",
+            "content": "任务后段过程记录 43：无新增决定。"
+          },
+          {
+            "role": "assistant",
+            "content": "已记录。"
+          },
+          {
+            "role": "user",
+            "content": "任务后段过程记录 44：无新增决定。"
+          },
+          {
+            "role": "assistant",
+            "content": "已记录。"
+          },
+          {
+            "role": "user",
+            "content": "任务后段过程记录 45：无新增决定。"
+          },
+          {
+            "role": "assistant",
+            "content": "已记录。"
+          },
+          {
+            "role": "user",
+            "content": "任务后段过程记录 46：无新增决定。"
+          },
+          {
+            "role": "assistant",
+            "content": "已记录。"
+          },
+          {
+            "role": "user",
+            "content": "任务后段过程记录 47：无新增决定。"
+          },
+          {
+            "role": "assistant",
+            "content": "已记录。"
+          },
+          {
+            "role": "user",
+            "content": "任务后段过程记录 48：无新增决定。"
+          },
+          {
+            "role": "assistant",
+            "content": "已记录。"
+          },
+          {
+            "role": "user",
+            "content": "任务后段过程记录 49：无新增决定。"
+          },
+          {
+            "role": "assistant",
+            "content": "已记录。"
+          },
+          {
+            "role": "user",
+            "content": "任务后段过程记录 50：无新增决定。"
+          },
+          {
+            "role": "assistant",
+            "content": "已记录。"
+          },
+          {
+            "role": "user",
+            "content": "任务后段过程记录 51：无新增决定。"
+          },
+          {
+            "role": "assistant",
+            "content": "已记录。"
+          },
+          {
+            "role": "user",
+            "content": "任务后段过程记录 52：无新增决定。"
+          },
+          {
+            "role": "assistant",
+            "content": "已记录。"
+          },
+          {
+            "role": "user",
+            "content": "任务后段过程记录 53：无新增决定。"
+          },
+          {
+            "role": "assistant",
+            "content": "已记录。"
+          },
+          {
+            "role": "user",
+            "content": "任务后段过程记录 54：无新增决定。"
+          },
+          {
+            "role": "assistant",
+            "content": "已记录。"
+          },
+          {
+            "role": "user",
+            "content": "任务后段过程记录 55：无新增决定。"
+          },
+          {
+            "role": "assistant",
+            "content": "已记录。"
+          },
+          {
+            "role": "user",
+            "content": "任务后段过程记录 56：无新增决定。"
+          },
+          {
+            "role": "assistant",
+            "content": "已记录。"
+          },
+          {
+            "role": "user",
+            "content": "任务后段过程记录 57：无新增决定。"
+          },
+          {
+            "role": "assistant",
+            "content": "已记录。"
+          },
+          {
+            "role": "user",
+            "content": "任务后段过程记录 58：无新增决定。"
+          },
+          {
+            "role": "assistant",
+            "content": "已记录。"
+          },
+          {
+            "role": "user",
+            "content": "任务后段过程记录 59：无新增决定。"
+          },
+          {
+            "role": "assistant",
+            "content": "已记录。"
+          },
+          {
+            "role": "user",
+            "content": "任务后段过程记录 60：无新增决定。"
+          },
+          {
+            "role": "assistant",
+            "content": "已记录。"
+          },
+          {
+            "role": "user",
+            "content": "任务后段过程记录 61：无新增决定。"
+          },
+          {
+            "role": "assistant",
+            "content": "已记录。"
+          },
+          {
+            "role": "user",
+            "content": "任务后段过程记录 62：无新增决定。"
+          },
+          {
+            "role": "assistant",
+            "content": "已记录。"
+          },
+          {
+            "role": "user",
+            "content": "任务后段过程记录 63：无新增决定。"
+          },
+          {
+            "role": "assistant",
+            "content": "已记录。"
+          },
+          {
+            "role": "user",
+            "content": "任务后段过程记录 64：无新增决定。"
+          },
+          {
+            "role": "assistant",
+            "content": "已记录。"
+          },
+          {
+            "role": "user",
+            "content": "任务后段过程记录 65：无新增决定。"
+          },
+          {
+            "role": "assistant",
+            "content": "已记录。"
+          },
+          {
+            "role": "user",
+            "content": "任务后段过程记录 66：无新增决定。"
+          },
+          {
+            "role": "assistant",
+            "content": "已记录。"
+          },
+          {
+            "role": "user",
+            "content": "任务后段过程记录 67：无新增决定。"
+          },
+          {
+            "role": "assistant",
+            "content": "已记录。"
+          },
+          {
+            "role": "user",
+            "content": "任务后段过程记录 68：无新增决定。"
+          },
+          {
+            "role": "assistant",
+            "content": "已记录。"
+          },
+          {
+            "role": "user",
+            "content": "任务后段过程记录 69：无新增决定。"
+          },
+          {
+            "role": "assistant",
+            "content": "已记录。"
+          },
+          {
+            "role": "user",
+            "content": "任务后段过程记录 70：无新增决定。"
+          },
+          {
+            "role": "assistant",
+            "content": "已记录。"
+          },
+          {
+            "role": "user",
+            "content": "任务后段过程记录 71：无新增决定。"
+          },
+          {
+            "role": "assistant",
+            "content": "已记录。"
+          },
+          {
+            "role": "user",
+            "content": "任务后段过程记录 72：无新增决定。"
+          },
+          {
+            "role": "assistant",
+            "content": "已记录。"
+          },
+          {
+            "role": "user",
+            "content": "任务后段过程记录 73：无新增决定。"
+          },
+          {
+            "role": "assistant",
+            "content": "已记录。"
+          },
+          {
+            "role": "user",
+            "content": "任务后段过程记录 74：无新增决定。"
+          },
+          {
+            "role": "assistant",
+            "content": "已记录。"
+          },
+          {
+            "role": "user",
+            "content": "任务后段过程记录 75：无新增决定。"
+          },
+          {
+            "role": "assistant",
+            "content": "已记录。"
+          },
+          {
+            "role": "user",
+            "content": "任务后段过程记录 76：无新增决定。"
+          },
+          {
+            "role": "assistant",
+            "content": "已记录。"
+          },
+          {
+            "role": "user",
+            "content": "任务后段过程记录 77：无新增决定。"
+          },
+          {
+            "role": "assistant",
+            "content": "已记录。"
+          },
+          {
+            "role": "user",
+            "content": "任务后段过程记录 78：无新增决定。"
+          },
+          {
+            "role": "assistant",
+            "content": "已记录。"
+          },
+          {
+            "role": "user",
+            "content": "任务后段过程记录 79：无新增决定。"
+          },
+          {
+            "role": "assistant",
+            "content": "已记录。"
+          },
+          {
+            "role": "user",
+            "content": "还剩哪一件？"
+          }
+        ],
+        "final_answer": "补监控说明"
+      },
+      {
+        "review_id": "R04",
+        "family": "topic_switch_after_window_exit",
+        "conversation": [
+          {
+            "role": "user",
+            "content": "我出现呼吸困难和胸口压迫感。"
+          },
+          {
+            "role": "assistant",
+            "content": "请立即联系当地急救。"
+          },
+          {
+            "role": "user",
+            "content": "旧健康话题过程记录 1：无新增决定。"
+          },
+          {
+            "role": "assistant",
+            "content": "已记录。"
+          },
+          {
+            "role": "user",
+            "content": "旧健康话题过程记录 2：无新增决定。"
+          },
+          {
+            "role": "assistant",
+            "content": "已记录。"
+          },
+          {
+            "role": "user",
+            "content": "旧健康话题过程记录 3：无新增决定。"
+          },
+          {
+            "role": "assistant",
+            "content": "已记录。"
+          },
+          {
+            "role": "user",
+            "content": "旧健康话题过程记录 4：无新增决定。"
+          },
+          {
+            "role": "assistant",
+            "content": "已记录。"
+          },
+          {
+            "role": "user",
+            "content": "旧健康话题过程记录 5：无新增决定。"
+          },
+          {
+            "role": "assistant",
+            "content": "已记录。"
+          },
+          {
+            "role": "user",
+            "content": "旧健康话题过程记录 6：无新增决定。"
+          },
+          {
+            "role": "assistant",
+            "content": "已记录。"
+          },
+          {
+            "role": "user",
+            "content": "旧健康话题过程记录 7：无新增决定。"
+          },
+          {
+            "role": "assistant",
+            "content": "已记录。"
+          },
+          {
+            "role": "user",
+            "content": "旧健康话题过程记录 8：无新增决定。"
+          },
+          {
+            "role": "assistant",
+            "content": "已记录。"
+          },
+          {
+            "role": "user",
+            "content": "旧健康话题过程记录 9：无新增决定。"
+          },
+          {
+            "role": "assistant",
+            "content": "已记录。"
+          },
+          {
+            "role": "user",
+            "content": "旧健康话题过程记录 10：无新增决定。"
+          },
+          {
+            "role": "assistant",
+            "content": "已记录。"
+          },
+          {
+            "role": "user",
+            "content": "接下来不谈健康问题了，改聊咖啡和茶的味道。"
+          },
+          {
+            "role": "assistant",
+            "content": "好的。"
+          },
+          {
+            "role": "user",
+            "content": "新风味话题过程记录 1：无新增决定。"
+          },
+          {
+            "role": "assistant",
+            "content": "已记录。"
+          },
+          {
+            "role": "user",
+            "content": "新风味话题过程记录 2：无新增决定。"
+          },
+          {
+            "role": "assistant",
+            "content": "已记录。"
+          },
+          {
+            "role": "user",
+            "content": "新风味话题过程记录 3：无新增决定。"
+          },
+          {
+            "role": "assistant",
+            "content": "已记录。"
+          },
+          {
+            "role": "user",
+            "content": "新风味话题过程记录 4：无新增决定。"
+          },
+          {
+            "role": "assistant",
+            "content": "已记录。"
+          },
+          {
+            "role": "user",
+            "content": "新风味话题过程记录 5：无新增决定。"
+          },
+          {
+            "role": "assistant",
+            "content": "已记录。"
+          },
+          {
+            "role": "user",
+            "content": "新风味话题过程记录 6：无新增决定。"
+          },
+          {
+            "role": "assistant",
+            "content": "已记录。"
+          },
+          {
+            "role": "user",
+            "content": "新风味话题过程记录 7：无新增决定。"
+          },
+          {
+            "role": "assistant",
+            "content": "已记录。"
+          },
+          {
+            "role": "user",
+            "content": "新风味话题过程记录 8：无新增决定。"
+          },
+          {
+            "role": "assistant",
+            "content": "已记录。"
+          },
+          {
+            "role": "user",
+            "content": "新风味话题过程记录 9：无新增决定。"
+          },
+          {
+            "role": "assistant",
+            "content": "已记录。"
+          },
+          {
+            "role": "user",
+            "content": "新风味话题过程记录 10：无新增决定。"
+          },
+          {
+            "role": "assistant",
+            "content": "已记录。"
+          },
+          {
+            "role": "user",
+            "content": "新风味话题过程记录 11：无新增决定。"
+          },
+          {
+            "role": "assistant",
+            "content": "已记录。"
+          },
+          {
+            "role": "user",
+            "content": "新风味话题过程记录 12：无新增决定。"
+          },
+          {
+            "role": "assistant",
+            "content": "已记录。"
+          },
+          {
+            "role": "user",
+            "content": "新风味话题过程记录 13：无新增决定。"
+          },
+          {
+            "role": "assistant",
+            "content": "已记录。"
+          },
+          {
+            "role": "user",
+            "content": "新风味话题过程记录 14：无新增决定。"
+          },
+          {
+            "role": "assistant",
+            "content": "已记录。"
+          },
+          {
+            "role": "user",
+            "content": "新风味话题过程记录 15：无新增决定。"
+          },
+          {
+            "role": "assistant",
+            "content": "已记录。"
+          },
+          {
+            "role": "user",
+            "content": "新风味话题过程记录 16：无新增决定。"
+          },
+          {
+            "role": "assistant",
+            "content": "已记录。"
+          },
+          {
+            "role": "user",
+            "content": "新风味话题过程记录 17：无新增决定。"
+          },
+          {
+            "role": "assistant",
+            "content": "已记录。"
+          },
+          {
+            "role": "user",
+            "content": "新风味话题过程记录 18：无新增决定。"
+          },
+          {
+            "role": "assistant",
+            "content": "已记录。"
+          },
+          {
+            "role": "user",
+            "content": "新风味话题过程记录 19：无新增决定。"
+          },
+          {
+            "role": "assistant",
+            "content": "已记录。"
+          },
+          {
+            "role": "user",
+            "content": "新风味话题过程记录 20：无新增决定。"
+          },
+          {
+            "role": "assistant",
+            "content": "已记录。"
+          },
+          {
+            "role": "user",
+            "content": "新风味话题过程记录 21：无新增决定。"
+          },
+          {
+            "role": "assistant",
+            "content": "已记录。"
+          },
+          {
+            "role": "user",
+            "content": "新风味话题过程记录 22：无新增决定。"
+          },
+          {
+            "role": "assistant",
+            "content": "已记录。"
+          },
+          {
+            "role": "user",
+            "content": "新风味话题过程记录 23：无新增决定。"
+          },
+          {
+            "role": "assistant",
+            "content": "已记录。"
+          },
+          {
+            "role": "user",
+            "content": "新风味话题过程记录 24：无新增决定。"
+          },
+          {
+            "role": "assistant",
+            "content": "已记录。"
+          },
+          {
+            "role": "user",
+            "content": "新风味话题过程记录 25：无新增决定。"
+          },
+          {
+            "role": "assistant",
+            "content": "已记录。"
+          },
+          {
+            "role": "user",
+            "content": "新风味话题过程记录 26：无新增决定。"
+          },
+          {
+            "role": "assistant",
+            "content": "已记录。"
+          },
+          {
+            "role": "user",
+            "content": "新风味话题过程记录 27：无新增决定。"
+          },
+          {
+            "role": "assistant",
+            "content": "已记录。"
+          },
+          {
+            "role": "user",
+            "content": "新风味话题过程记录 28：无新增决定。"
+          },
+          {
+            "role": "assistant",
+            "content": "已记录。"
+          },
+          {
+            "role": "user",
+            "content": "新风味话题过程记录 29：无新增决定。"
+          },
+          {
+            "role": "assistant",
+            "content": "已记录。"
+          },
+          {
+            "role": "user",
+            "content": "新风味话题过程记录 30：无新增决定。"
+          },
+          {
+            "role": "assistant",
+            "content": "已记录。"
+          },
+          {
+            "role": "user",
+            "content": "新风味话题过程记录 31：无新增决定。"
+          },
+          {
+            "role": "assistant",
+            "content": "已记录。"
+          },
+          {
+            "role": "user",
+            "content": "新风味话题过程记录 32：无新增决定。"
+          },
+          {
+            "role": "assistant",
+            "content": "已记录。"
+          },
+          {
+            "role": "user",
+            "content": "新风味话题过程记录 33：无新增决定。"
+          },
+          {
+            "role": "assistant",
+            "content": "已记录。"
+          },
+          {
+            "role": "user",
+            "content": "新风味话题过程记录 34：无新增决定。"
+          },
+          {
+            "role": "assistant",
+            "content": "已记录。"
+          },
+          {
+            "role": "user",
+            "content": "新风味话题过程记录 35：无新增决定。"
+          },
+          {
+            "role": "assistant",
+            "content": "已记录。"
+          },
+          {
+            "role": "user",
+            "content": "新风味话题过程记录 36：无新增决定。"
+          },
+          {
+            "role": "assistant",
+            "content": "已记录。"
+          },
+          {
+            "role": "user",
+            "content": "新风味话题过程记录 37：无新增决定。"
+          },
+          {
+            "role": "assistant",
+            "content": "已记录。"
+          },
+          {
+            "role": "user",
+            "content": "新风味话题过程记录 38：无新增决定。"
+          },
+          {
+            "role": "assistant",
+            "content": "已记录。"
+          },
+          {
+            "role": "user",
+            "content": "新风味话题过程记录 39：无新增决定。"
+          },
+          {
+            "role": "assistant",
+            "content": "已记录。"
+          },
+          {
+            "role": "user",
+            "content": "新风味话题过程记录 40：无新增决定。"
+          },
+          {
+            "role": "assistant",
+            "content": "已记录。"
+          },
+          {
+            "role": "user",
+            "content": "新风味话题过程记录 41：无新增决定。"
+          },
+          {
+            "role": "assistant",
+            "content": "已记录。"
+          },
+          {
+            "role": "user",
+            "content": "新风味话题过程记录 42：无新增决定。"
+          },
+          {
+            "role": "assistant",
+            "content": "已记录。"
+          },
+          {
+            "role": "user",
+            "content": "新风味话题过程记录 43：无新增决定。"
+          },
+          {
+            "role": "assistant",
+            "content": "已记录。"
+          },
+          {
+            "role": "user",
+            "content": "新风味话题过程记录 44：无新增决定。"
+          },
+          {
+            "role": "assistant",
+            "content": "已记录。"
+          },
+          {
+            "role": "user",
+            "content": "新风味话题过程记录 45：无新增决定。"
+          },
+          {
+            "role": "assistant",
+            "content": "已记录。"
+          },
+          {
+            "role": "user",
+            "content": "新风味话题过程记录 46：无新增决定。"
+          },
+          {
+            "role": "assistant",
+            "content": "已记录。"
+          },
+          {
+            "role": "user",
+            "content": "新风味话题过程记录 47：无新增决定。"
+          },
+          {
+            "role": "assistant",
+            "content": "已记录。"
+          },
+          {
+            "role": "user",
+            "content": "新风味话题过程记录 48：无新增决定。"
+          },
+          {
+            "role": "assistant",
+            "content": "已记录。"
+          },
+          {
+            "role": "user",
+            "content": "新风味话题过程记录 49：无新增决定。"
+          },
+          {
+            "role": "assistant",
+            "content": "已记录。"
+          },
+          {
+            "role": "user",
+            "content": "新风味话题过程记录 50：无新增决定。"
+          },
+          {
+            "role": "assistant",
+            "content": "已记录。"
+          },
+          {
+            "role": "user",
+            "content": "新风味话题过程记录 51：无新增决定。"
+          },
+          {
+            "role": "assistant",
+            "content": "已记录。"
+          },
+          {
+            "role": "user",
+            "content": "新风味话题过程记录 52：无新增决定。"
+          },
+          {
+            "role": "assistant",
+            "content": "已记录。"
+          },
+          {
+            "role": "user",
+            "content": "新风味话题过程记录 53：无新增决定。"
+          },
+          {
+            "role": "assistant",
+            "content": "已记录。"
+          },
+          {
+            "role": "user",
+            "content": "新风味话题过程记录 54：无新增决定。"
+          },
+          {
+            "role": "assistant",
+            "content": "已记录。"
+          },
+          {
+            "role": "user",
+            "content": "新风味话题过程记录 55：无新增决定。"
+          },
+          {
+            "role": "assistant",
+            "content": "已记录。"
+          },
+          {
+            "role": "user",
+            "content": "新风味话题过程记录 56：无新增决定。"
+          },
+          {
+            "role": "assistant",
+            "content": "已记录。"
+          },
+          {
+            "role": "user",
+            "content": "新风味话题过程记录 57：无新增决定。"
+          },
+          {
+            "role": "assistant",
+            "content": "已记录。"
+          },
+          {
+            "role": "user",
+            "content": "新风味话题过程记录 58：无新增决定。"
+          },
+          {
+            "role": "assistant",
+            "content": "已记录。"
+          },
+          {
+            "role": "user",
+            "content": "新风味话题过程记录 59：无新增决定。"
+          },
+          {
+            "role": "assistant",
+            "content": "已记录。"
+          },
+          {
+            "role": "user",
+            "content": "新风味话题过程记录 60：无新增决定。"
+          },
+          {
+            "role": "assistant",
+            "content": "已记录。"
+          },
+          {
+            "role": "user",
+            "content": "新风味话题过程记录 61：无新增决定。"
+          },
+          {
+            "role": "assistant",
+            "content": "已记录。"
+          },
+          {
+            "role": "user",
+            "content": "新风味话题过程记录 62：无新增决定。"
+          },
+          {
+            "role": "assistant",
+            "content": "已记录。"
+          },
+          {
+            "role": "user",
+            "content": "新风味话题过程记录 63：无新增决定。"
+          },
+          {
+            "role": "assistant",
+            "content": "已记录。"
+          },
+          {
+            "role": "user",
+            "content": "新风味话题过程记录 64：无新增决定。"
+          },
+          {
+            "role": "assistant",
+            "content": "已记录。"
+          },
+          {
+            "role": "user",
+            "content": "新风味话题过程记录 65：无新增决定。"
+          },
+          {
+            "role": "assistant",
+            "content": "已记录。"
+          },
+          {
+            "role": "user",
+            "content": "新风味话题过程记录 66：无新增决定。"
+          },
+          {
+            "role": "assistant",
+            "content": "已记录。"
+          },
+          {
+            "role": "user",
+            "content": "新风味话题过程记录 67：无新增决定。"
+          },
+          {
+            "role": "assistant",
+            "content": "已记录。"
+          },
+          {
+            "role": "user",
+            "content": "新风味话题过程记录 68：无新增决定。"
+          },
+          {
+            "role": "assistant",
+            "content": "已记录。"
+          },
+          {
+            "role": "user",
+            "content": "新风味话题过程记录 69：无新增决定。"
+          },
+          {
+            "role": "assistant",
+            "content": "已记录。"
+          },
+          {
+            "role": "user",
+            "content": "新风味话题过程记录 70：无新增决定。"
+          },
+          {
+            "role": "assistant",
+            "content": "已记录。"
+          },
+          {
+            "role": "user",
+            "content": "新风味话题过程记录 71：无新增决定。"
+          },
+          {
+            "role": "assistant",
+            "content": "已记录。"
+          },
+          {
+            "role": "user",
+            "content": "新风味话题过程记录 72：无新增决定。"
+          },
+          {
+            "role": "assistant",
+            "content": "已记录。"
+          },
+          {
+            "role": "user",
+            "content": "新风味话题过程记录 73：无新增决定。"
+          },
+          {
+            "role": "assistant",
+            "content": "已记录。"
+          },
+          {
+            "role": "user",
+            "content": "新风味话题过程记录 74：无新增决定。"
+          },
+          {
+            "role": "assistant",
+            "content": "已记录。"
+          },
+          {
+            "role": "user",
+            "content": "新风味话题过程记录 75：无新增决定。"
+          },
+          {
+            "role": "assistant",
+            "content": "已记录。"
+          },
+          {
+            "role": "user",
+            "content": "新风味话题过程记录 76：无新增决定。"
+          },
+          {
+            "role": "assistant",
+            "content": "已记录。"
+          },
+          {
+            "role": "user",
+            "content": "新风味话题过程记录 77：无新增决定。"
+          },
+          {
+            "role": "assistant",
+            "content": "已记录。"
+          },
+          {
+            "role": "user",
+            "content": "新风味话题过程记录 78：无新增决定。"
+          },
+          {
+            "role": "assistant",
+            "content": "已记录。"
+          },
+          {
+            "role": "user",
+            "content": "新风味话题过程记录 79：无新增决定。"
+          },
+          {
+            "role": "assistant",
+            "content": "已记录。"
+          },
+          {
+            "role": "user",
+            "content": "哪一种通常更苦？"
+          }
+        ],
+        "final_answer": "咖啡通常更苦。"
+      }
+    ]
+  },
+  "review_payload_sha256": "a0a6d89f525266668c555fafd7c9688da2394547c32c7b55899ad75b86eb8bcd"
+}

@@ -16,7 +16,7 @@
     "failed": 0,
     "stale_state_violations": 0,
     "capsule_missing": 0,
-    "total_duration_ms": 33664,
+    "total_duration_ms": 20607,
     "families": {
       "remote_user_fact": {
         "cases": 2,
@@ -150,7 +150,7 @@
         }
       },
       "history_messages": 11,
-      "duration_ms": 15573
+      "duration_ms": 15683
     },
     {
       "case_id": "open_latest_review_day",
@@ -187,7 +187,7 @@
         }
       },
       "history_messages": 11,
-      "duration_ms": 30
+      "duration_ms": 34
     },
     {
       "case_id": "open_unresolved_design",
@@ -224,7 +224,7 @@
         }
       },
       "history_messages": 11,
-      "duration_ms": 18
+      "duration_ms": 17
     },
     {
       "case_id": "open_unresolved_purchase",
@@ -261,7 +261,7 @@
         }
       },
       "history_messages": 11,
-      "duration_ms": 17
+      "duration_ms": 19
     },
     {
       "case_id": "open_translation_edit",
@@ -298,7 +298,7 @@
         }
       },
       "history_messages": 11,
-      "duration_ms": 20
+      "duration_ms": 16
     },
     {
       "case_id": "open_list_edit",
@@ -335,7 +335,7 @@
         }
       },
       "history_messages": 11,
-      "duration_ms": 4671
+      "duration_ms": 4729
     },
     {
       "case_id": "open_medical_topic_change",
@@ -356,13 +356,13 @@
         "assistant_history_excluded_from_state_audit": true,
         "release_boundary_closed": true
       },
-      "answer": "咖啡通常比茶更苦。这主要源于烘焙程度：深烘焙会生成更多苦味物质，而浅烘焙则保留更多酸香。茶若未泡好或浓度过高也会苦涩，但日常饮用中，咖啡的苦味更为普遍且明显。茶的风味更偏向清淡、回甘，除非是特定品种或过度萃取。入口时，咖啡的苦感直接且持久，茶则较柔和。",
+      "answer": "咖啡通常更苦。",
       "missing_required_markers": [],
       "forbidden_found": [],
       "generation": {
         "status": "success",
-        "provider": "ollama",
-        "model": "qwen3.5:9b",
+        "provider": "deterministic",
+        "model": null,
         "error": null,
         "state_capsule": {
           "user_authoritative": true,
@@ -372,7 +372,7 @@
         }
       },
       "history_messages": 11,
-      "duration_ms": 13253
+      "duration_ms": 29
     },
     {
       "case_id": "open_trading_topic_change",
@@ -409,7 +409,7 @@
         }
       },
       "history_messages": 11,
-      "duration_ms": 28
+      "duration_ms": 26
     }
   ]
 }

@@ -1,0 +1,54 @@
+{
+  "schema_version": "psm_v0_282_rolling_state_browser_lifecycle_promotion_manifest_v1",
+  "version": "PSM_V0.282",
+  "promoted_at": "2026-07-16",
+  "promoted": true,
+  "decision": "rolling_state_browser_lifecycle_gate_passed",
+  "formal_core_source": "PSM_V0.251",
+  "formal_core_records": 2228,
+  "rolling_state_browser_lifecycle": {
+    "decision": "rolling_state_browser_lifecycle_gate_passed",
+    "passed": true,
+    "checks": {
+      "source_version_is_v0_281": true,
+      "browser_report_passed": true,
+      "cross_window_answer_visible": true,
+      "browser_window_bounded_to_120": true,
+      "reset_rotates_session": true,
+      "reload_rotates_session": true,
+      "reload_does_not_persist_memory": true,
+      "desktop_and_mobile_no_overflow": true,
+      "console_errors_zero": true,
+      "human_feedback_zero": true
+    },
+    "cross_window_answer": "白砾",
+    "browser_window_messages": 120,
+    "reset_rotates_session": true,
+    "reload_rotates_session": true,
+    "browser_memory_persisted_after_reload": false,
+    "desktop_horizontal_overflow": false,
+    "mobile_horizontal_overflow": false,
+    "console_errors": 0,
+    "synthetic_only": true,
+    "human_validation_claimed": false,
+    "external_release_authority": false
+  },
+  "evidence": {
+    "browser_report": "runtime/v0_282_rolling_state_browser_regression/report.json",
+    "desktop_screenshot": "runtime/v0_282_rolling_state_browser_regression/desktop-rolling-state.png",
+    "mobile_screenshot": "runtime/v0_282_rolling_state_browser_regression/mobile-rolling-state.png"
+  },
+  "release_boundary": {
+    "human_validation_claimed": false,
+    "persistent_conversation_memory_enabled": false,
+    "public_service_allowed": false,
+    "rule_replacement_allowed": false,
+    "external_release_authority": false
+  },
+  "next_stage": {
+    "version": "PSM_V0.283",
+    "objective": "验证服务重启导致临时记忆失效时的故障恢复和用户可见边界，保持隐私优先且不把原始对话写入磁盘。",
+    "blocked": false,
+    "requires_user_input": false
+  }
+}

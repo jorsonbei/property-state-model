@@ -7,6 +7,8 @@ from pathlib import Path
 
 from psm_v0.openai_external_open_context_judge import (
     APPROVED_AUTHORIZATION,
+    APPROVED_AUTONOMOUS_TOKEN_AUTHORIZATION,
+    APPROVED_REJUDGE_AUTHORIZATION,
     build_markdown_report,
     build_request_payload,
     review_open_context_package,
@@ -32,6 +34,30 @@ def authorized_package() -> dict:
         "reserved_total_month_usd": 32.0,
         "monthly_limit_usd": 32.0,
     })
+    return value
+
+
+def authorized_rejudge_package() -> dict:
+    value = authorized_package()
+    value["authorization"] = APPROVED_REJUDGE_AUTHORIZATION
+    value["budget"]["reserved_total_month_usd"] = 36.0
+    value["budget"]["monthly_limit_usd"] = 36.0
+    return value
+
+
+def autonomously_authorized_package() -> dict:
+    value = authorized_package()
+    value["authorization"] = APPROVED_AUTONOMOUS_TOKEN_AUTHORIZATION
+    value["budget"] = {
+        "currency": "USD",
+        "maximum_api_calls": 1,
+        "reserved_usd": 0.0,
+        "token_authority_limit": 1_000_000,
+        "observed_tokens_before": 98_059,
+        "maximum_call_tokens": 12_000,
+        "reserved_total_tokens": 110_059,
+        "approval_required": False,
+    }
     return value
 
 
@@ -93,6 +119,20 @@ class OpenAIExternalOpenContextJudgeTests(unittest.TestCase):
         with self.assertRaises(ValueError):
             validate_review_package(value, require_authorization=True)
 
+    def test_rejudge_authorization_has_a_distinct_thirty_six_dollar_cap(self) -> None:
+        value = authorized_rejudge_package()
+        validate_review_package(value, require_authorization=True)
+        value["budget"]["monthly_limit_usd"] = 40.0
+        with self.assertRaises(ValueError):
+            validate_review_package(value, require_authorization=True)
+
+    def test_one_million_token_authority_is_bounded_and_distinct(self) -> None:
+        value = autonomously_authorized_package()
+        validate_review_package(value, require_authorization=True)
+        value["budget"]["reserved_total_tokens"] = 1_000_001
+        with self.assertRaises(ValueError):
+            validate_review_package(value, require_authorization=True)
+
     def test_external_failure_and_local_repairs_are_distinct_states(self) -> None:
         judge_path = PSM_ROOT / "runtime" / "v0_275_openai_external_open_context_judge.json"
         repair_path = PSM_ROOT / "runtime" / "v0_275_external_open_context_repair_report.json"
@@ -111,6 +151,18 @@ class OpenAIExternalOpenContextJudgeTests(unittest.TestCase):
         self.assertFalse(repair["external_rejudge_completed"])
         self.assertTrue(gate["passed"])
         self.assertFalse(gate["external_rejudge_completed"])
+
+    def test_attempt_3_pass_preserves_both_external_failures(self) -> None:
+        final_gate_path = PSM_ROOT / "runtime" / "v0_275_external_open_context_gate.json"
+        if not final_gate_path.exists():
+            self.skipTest("V0.275 final external gate is not built yet.")
+        gate = json.loads(final_gate_path.read_text(encoding="utf-8"))
+        self.assertTrue(gate["passed"])
+        self.assertEqual(gate["items_passed"], 10)
+        self.assertEqual(gate["first_failed_items_retained"], ["O01", "O02", "O10"])
+        self.assertEqual(gate["rejudge_failed_items_retained"], ["O09"])
+        self.assertEqual(gate["final_failed_items"], [])
+        self.assertLessEqual(gate["observed_tokens_after_call"], gate["token_authority_limit"])
 
 
 if __name__ == "__main__":

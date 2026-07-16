@@ -1,0 +1,135 @@
+{
+  "schema_version": "psm_v0_279_openai_external_incremental_stress_judge_v1",
+  "version": "PSM_V0.279-candidate",
+  "reviewed_at": "2026-07-16T03:35:44.343780+00:00",
+  "provider": "OpenAI",
+  "requested_model": "gpt-5.4",
+  "actual_model": "gpt-5.4-2026-03-05",
+  "endpoint": "/v1/responses",
+  "http_status": 200,
+  "response_status": "completed",
+  "response_id": "resp_06d49c71a984e774016a5851864560819b961cc92b4068505b",
+  "request_id": "req_2ecc3ea46d08410fada9a0bdc598ea5a",
+  "store": false,
+  "api_key_persisted_in_artifact": false,
+  "package_sha256": "7c0a978cd65693c283fc8493116e8233a56a5084054a98c7565415457e52bdf1",
+  "review_payload_sha256": "09301aecbdccbe2c290cb086d0b906c70e780749e16adf1c10a69a5dbafb217b",
+  "request_payload_sha256": "886990e1f877c35a8912cb9610d12deca97ef5a4e6bba77211695644103f0c6c",
+  "submission_scope": {
+    "synthetic_only": true,
+    "contains_private_data": false,
+    "contains_user_documents": false,
+    "contains_participant_content": false,
+    "contains_secrets": false,
+    "contains_local_paths": false,
+    "contains_candidate_rules": false,
+    "contains_hidden_labels": false,
+    "contains_state_capsules": false,
+    "training_eligible": false
+  },
+  "budget": {
+    "maximum_api_calls": 1,
+    "token_authority_limit": 1000000,
+    "observed_tokens_before": 112588,
+    "maximum_call_tokens": 45000,
+    "reserved_total_tokens": 157588,
+    "approval_required": false,
+    "authorization_scope": "synthetic_external_judging_only"
+  },
+  "usage": {
+    "input_tokens": 21358,
+    "input_tokens_details": {
+      "cache_write_tokens": 0,
+      "cached_tokens": 0
+    },
+    "output_tokens": 1301,
+    "output_tokens_details": {
+      "reasoning_tokens": 849
+    },
+    "total_tokens": 22659
+  },
+  "review": {
+    "review_payload_sha256": "09301aecbdccbe2c290cb086d0b906c70e780749e16adf1c10a69a5dbafb217b",
+    "verdict": "pass",
+    "failed_item_ids": [],
+    "critical_findings": [],
+    "recommended_repairs": [],
+    "item_reviews": [
+      {
+        "review_id": "S01",
+        "verdict": "pass",
+        "dimension_failures": [],
+        "finding": "Correctly recovered the earliest codename from remote history and answered directly with only the codename."
+      },
+      {
+        "review_id": "S02",
+        "verdict": "pass",
+        "dimension_failures": [],
+        "finding": "Correctly recovered the venue from remote history and answered directly with only the venue."
+      },
+      {
+        "review_id": "S03",
+        "verdict": "pass",
+        "dimension_failures": [],
+        "finding": "Correctly prioritized the later filename correction over the obsolete earlier value and answered directly."
+      },
+      {
+        "review_id": "S04",
+        "verdict": "pass",
+        "dimension_failures": [],
+        "finding": "Correctly honored the reschedule to Friday and ignored the canceled Monday plan."
+      },
+      {
+        "review_id": "S05",
+        "verdict": "pass",
+        "dimension_failures": [],
+        "finding": "Correctly resumed only the unresolved task after marking the index-page work complete."
+      },
+      {
+        "review_id": "S06",
+        "verdict": "pass",
+        "dimension_failures": [],
+        "finding": "Correctly identified the remaining unpurchased item and did not include the completed one."
+      },
+      {
+        "review_id": "S07",
+        "verdict": "pass",
+        "dimension_failures": [],
+        "finding": "Correctly inherited the original output constraint, applied the requested word substitution, and returned a single sentence without extra explanation."
+      },
+      {
+        "review_id": "S08",
+        "verdict": "pass",
+        "dimension_failures": [],
+        "finding": "Correctly preserved the original translation/output constraints and changed only the requested word."
+      },
+      {
+        "review_id": "S09",
+        "verdict": "pass",
+        "dimension_failures": [],
+        "finding": "Correctly isolated the prior health topic after the explicit switch and answered the flavor question directly."
+      },
+      {
+        "review_id": "S10",
+        "verdict": "pass",
+        "dimension_failures": [],
+        "finding": "Correctly stayed within the later kitchen-cache analogy topic and answered directly without reviving the earlier trading discussion."
+      }
+    ]
+  },
+  "gate_checks": {
+    "review_payload_sha256_match": true,
+    "exact_item_coverage": true,
+    "response_internally_consistent": true,
+    "external_verdict_pass": true
+  },
+  "passed": true,
+  "release_boundary": {
+    "semantic_review_only": true,
+    "participant_content_submitted": false,
+    "training_feedback_written": false,
+    "rule_replacement_allowed": false,
+    "public_service_allowed": false,
+    "external_release_authority": false
+  }
+}

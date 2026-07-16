@@ -1,0 +1,21 @@
+{
+  "schema_version": "psm_v0_281_external_rolling_state_package_gate_v1",
+  "passed": true,
+  "checks": {
+    "source_version_promoted": true,
+    "source_gate_passed": true,
+    "source_cases_all_passed": true,
+    "isolation_gate_passed": true,
+    "exact_four_item_coverage": true,
+    "all_conversations_exceed_window": true,
+    "token_authority_exactly_one_million": true,
+    "single_call_reserved": true,
+    "reserved_total_within_authority": true,
+    "privacy_boundary_closed": true,
+    "release_boundary_closed": true,
+    "prohibited_material_absent": true
+  },
+  "review_payload_sha256": "a0a6d89f525266668c555fafd7c9688da2394547c32c7b55899ad75b86eb8bcd",
+  "package_sha256": "1a102d3b2f75a06b887eee81be228df46999bc8b56a6332e648c49d8c4d69c41",
+  "prohibited_material_found": []
+}

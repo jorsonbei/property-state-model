@@ -1,0 +1,20 @@
+{
+  "schema_version": "psm_v0_277_external_state_compression_package_gate_v1",
+  "passed": true,
+  "checks": {
+    "source_version_promoted": true,
+    "source_gate_passed": true,
+    "source_cases_all_passed": true,
+    "exact_ten_item_coverage": true,
+    "all_conversations_exceed_forty_messages": true,
+    "token_authority_exactly_one_million": true,
+    "single_call_reserved": true,
+    "reserved_total_within_authority": true,
+    "privacy_boundary_closed": true,
+    "release_boundary_closed": true,
+    "prohibited_material_absent": true
+  },
+  "review_payload_sha256": "3b59f7552916c69c088826af62af3c5a9d0c15da2fa6e28d23089fbb69937257",
+  "package_sha256": "bc47a25038f07908709eebd515e7f3a1781af35b2f956ccd1db56f23da86af73",
+  "prohibited_material_found": []
+}

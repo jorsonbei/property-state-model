@@ -1,0 +1,17 @@
+{
+  "schema_version": "psm_v0_279_external_incremental_stress_checkpoint_v1",
+  "version": "PSM_V0.279-candidate",
+  "status": "v0_279_promoted_v0_280_rolling_state_handoff_open",
+  "requires_user_input": false,
+  "next_action": "build_v0_280_rolling_state_handoff_contract",
+  "review_payload_sha256": "09301aecbdccbe2c290cb086d0b906c70e780749e16adf1c10a69a5dbafb217b",
+  "token_authority_limit": 1000000,
+  "observed_tokens_before_call": 112588,
+  "maximum_call_tokens": 45000,
+  "participant_content_calls": 0,
+  "external_release_authority": false,
+  "current_promoted_version": "PSM_V0.279",
+  "target_promoted": true,
+  "promotion_manifest": "runtime/v0_279_external_incremental_stress_promotion_manifest.json",
+  "required_decision": "无。"
+}

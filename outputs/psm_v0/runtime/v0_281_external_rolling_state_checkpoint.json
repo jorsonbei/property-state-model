@@ -1,0 +1,17 @@
+{
+  "schema_version": "psm_v0_281_external_rolling_state_checkpoint_v1",
+  "version": "PSM_V0.281-candidate",
+  "status": "v0_281_promoted_v0_282_browser_lifecycle_review_open",
+  "requires_user_input": false,
+  "next_action": "build_v0_282_browser_rolling_state_lifecycle_regression",
+  "review_payload_sha256": "a0a6d89f525266668c555fafd7c9688da2394547c32c7b55899ad75b86eb8bcd",
+  "token_authority_limit": 1000000,
+  "observed_tokens_before_call": 135247,
+  "maximum_call_tokens": 45000,
+  "participant_content_calls": 0,
+  "external_release_authority": false,
+  "current_promoted_version": "PSM_V0.281",
+  "target_promoted": true,
+  "promotion_manifest": "runtime/v0_281_external_rolling_state_promotion_manifest.json",
+  "required_decision": "无。"
+}

@@ -1,0 +1,20 @@
+{
+  "schema_version": "psm_v0_279_external_incremental_stress_package_gate_v1",
+  "passed": true,
+  "checks": {
+    "source_version_promoted": true,
+    "source_gate_passed": true,
+    "source_cases_all_passed": true,
+    "exact_ten_item_coverage": true,
+    "stress_levels_exact": true,
+    "token_authority_exactly_one_million": true,
+    "single_call_reserved": true,
+    "reserved_total_within_authority": true,
+    "privacy_boundary_closed": true,
+    "release_boundary_closed": true,
+    "prohibited_material_absent": true
+  },
+  "review_payload_sha256": "09301aecbdccbe2c290cb086d0b906c70e780749e16adf1c10a69a5dbafb217b",
+  "package_sha256": "7c0a978cd65693c283fc8493116e8233a56a5084054a98c7565415457e52bdf1",
+  "prohibited_material_found": []
+}

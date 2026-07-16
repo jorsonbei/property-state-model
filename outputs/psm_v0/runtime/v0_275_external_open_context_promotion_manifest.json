@@ -1,0 +1,71 @@
+{
+  "schema_version": "psm_v0_275_external_open_context_promotion_manifest_v1",
+  "version": "PSM_V0.275",
+  "promoted_at": "2026-07-16",
+  "promoted": true,
+  "decision": "external_open_context_review_passed_on_attempt_3_after_retained_failures_and_local_repairs",
+  "formal_core_source": "PSM_V0.251",
+  "formal_core_records": 2228,
+  "external_open_context": {
+    "decision": "external_open_context_review_passed_on_attempt_3_after_retained_failures_and_local_repairs",
+    "passed": true,
+    "provider": "OpenAI",
+    "model": "gpt-5.4-2026-03-05",
+    "items": 10,
+    "items_passed": 10,
+    "final_failed_items": 0,
+    "final_critical_findings": 0,
+    "first_failed_items_retained": [
+      "O01",
+      "O02",
+      "O10"
+    ],
+    "rejudge_failed_items_retained": [
+      "O09"
+    ],
+    "cumulative_local_repairs": [
+      "O01",
+      "O02",
+      "O09",
+      "O10"
+    ],
+    "attempt_3_total_tokens": 3925,
+    "observed_cumulative_openai_tokens": 101984,
+    "autonomous_token_authority_limit": 1000000,
+    "participant_content_calls": 0,
+    "synthetic_only": true,
+    "human_validation_claimed": false,
+    "training_feedback_written": false,
+    "external_release_authority": false
+  },
+  "evidence": {
+    "prepared_package": "runtime/v0_275_external_open_context_review_package.json",
+    "first_external_failure": "runtime/v0_275_openai_external_open_context_judge.json",
+    "first_repair": "runtime/v0_275_external_open_context_repaired_candidate.json",
+    "first_rejudge_failure": "runtime/v0_275_openai_external_open_context_rejudge.json",
+    "second_repair": "runtime/v0_275_external_open_context_second_repair_candidate.json",
+    "attempt_3_package": "runtime/v0_275_external_open_context_review_attempt_3_package.json",
+    "attempt_3_judge": "runtime/v0_275_openai_external_open_context_judge_attempt_3.json",
+    "final_gate": "runtime/v0_275_external_open_context_gate.json",
+    "token_authority": "runtime/v0_275_autonomous_api_token_authority.json"
+  },
+  "file_sha256": {
+    "attempt_3_judge": "2e18954dda8175bb52dab98708102d9ac980ee395689259667d88c954dd3332d",
+    "attempt_3_judge_markdown": "b5d6373d4fb3b142de43df183b01df75f7c47f04ccb67a626980a68f0377f532",
+    "final_gate": "2d7d3298e72f01842abbe176aae743291650bbf9de54bb0ac12520224865564e"
+  },
+  "release_boundary": {
+    "semantic_review_only": true,
+    "participant_content_submitted": false,
+    "training_feedback_written": false,
+    "rule_replacement_allowed": false,
+    "public_service_allowed": false,
+    "external_release_authority": false
+  },
+  "next_stage": {
+    "version": "PSM_V0.276",
+    "objective": "建立长时程状态压缩与恢复门：在更长、多主题、含摘要压缩的合成对话中验证远距用户事实、最新更正、未完成事项和输出约束仍能恢复；比较状态胶囊与普通窗口，并保持评测不回流训练、外部发布关闭。",
+    "blocked": false,
+    "requires_user_input": false
+  }
+}

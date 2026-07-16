@@ -20,7 +20,7 @@
     "failed": 0,
     "stale_state_violations": 0,
     "capsule_missing": 0,
-    "total_duration_ms": 33664,
+    "total_duration_ms": 20607,
     "families": {
       "remote_user_fact": {
         "cases": 2,
