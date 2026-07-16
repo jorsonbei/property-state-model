@@ -1,0 +1,15 @@
+{
+  "schema_version": "psm_v0_294_content_free_telemetry_baseline_v1",
+  "source_version": "PSM_V0.293",
+  "captured_before_implementation": true,
+  "observed": {
+    "health_endpoint_present": false,
+    "lifecycle_counters_present": false,
+    "latency_buckets_present": false,
+    "content_free_telemetry_contract_present": false,
+    "active_count_internal_only": true
+  },
+  "baseline_decision": "backpressure_passed_operational_observability_absent",
+  "target_contract": "benchmarks/v0_294_content_free_telemetry_contract.json",
+  "external_release_authority": false
+}

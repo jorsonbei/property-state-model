@@ -2,10 +2,10 @@
   "schema_version": "psm_public_runtime_snapshot_v1",
   "project_status": {
     "updated_from_local_artifacts": true,
-    "current_version": "psm_v0.293",
+    "current_version": "psm_v0.294",
     "source_evidence_version": "psm_v0.251",
-    "previous_formal_version": "psm_v0.292",
-    "completed_result": "concurrency_backpressure_gate_passed",
+    "previous_formal_version": "psm_v0.293",
+    "completed_result": "content_free_telemetry_gate_passed",
     "family": {
       "family_id": "v251_independent_chat_golden_blind_set_boundary_adversarial",
       "case_pack": "case_packs/v0_251_independent_chat_golden_blind_set_boundary_adversarial_cases.json",
@@ -244,10 +244,10 @@
       "rule_replacement_allowed": false
     },
     "next_stage": {
-      "version": "PSM_V0.294",
-      "objective": "加入内容为空的运行遥测与健康快照，统计 accepted、capacity-rejected、duplicate、cancelled、completed 和延迟，不记录 prompt、answer、session_id 或 request_id。",
-      "blocked": false,
-      "requires_user_input": false
+      "version": "PSM_V0.295",
+      "objective": "确定是否开启外部部署与真实用户验证路线，并冻结公开范围、数据责任、托管、预算和停止条件",
+      "blocked": true,
+      "requires_user_input": true
     },
     "primary_artifacts": {
       "case_pack": "case_packs/v0_251_independent_chat_golden_blind_set_boundary_adversarial_cases.json",
@@ -259,7 +259,7 @@
       "candidate_taxonomy": "taxonomy_out/psm_v0.251_candidate_taxonomy.json",
       "candidate_regression_fixtures": "fixture_out/psm_v0.251_candidate_regression_fixtures.json",
       "taxonomy_delta": "taxonomy_delta_out/psm_v0.251_taxonomy_delta.json",
-      "project_status": "project_status_out/psm_v0.293_project_status.json",
+      "project_status": "project_status_out/psm_v0.294_project_status.json",
       "regression": "regression_out/psm_v0.251_regression_check.json",
       "independent_chat_gate": "runtime/v0_251_wave_g_external_semantic_judge.json",
       "model_selection": "runtime/v0_251_base_upgrade_pairwise_gemini_pro_report.json",
@@ -578,7 +578,14 @@
       "v0_293_regression": "runtime/v0_293_regression_report.json",
       "v0_293_post_promotion_failure": "runtime/v0_293_post_promotion_regression_failure.json",
       "v0_293_checkpoint": "runtime/v0_293_concurrency_backpressure_checkpoint.json",
-      "v0_293_promotion_manifest": "runtime/v0_293_concurrency_backpressure_promotion_manifest.json"
+      "v0_293_promotion_manifest": "runtime/v0_293_concurrency_backpressure_promotion_manifest.json",
+      "v0_294_contract": "benchmarks/v0_294_content_free_telemetry_contract.json",
+      "v0_294_baseline": "runtime/v0_294_content_free_telemetry_baseline.json",
+      "v0_294_report": "runtime/v0_294_content_free_telemetry_report.json",
+      "v0_294_gate": "runtime/v0_294_content_free_telemetry_gate.json",
+      "v0_294_regression": "runtime/v0_294_regression_report.json",
+      "v0_294_checkpoint": "runtime/v0_294_content_free_telemetry_checkpoint.json",
+      "v0_294_promotion_manifest": "runtime/v0_294_content_free_telemetry_promotion_manifest.json"
     },
     "regression": {
       "stem": "psm_v0.251",
@@ -1663,6 +1670,72 @@
       "host_cancel_storm_max_ms": 31.61,
       "docker_cancel_storm_max_ms": 59.7,
       "browser_capacity_ui_ms": 231,
+      "synthetic_only": true,
+      "human_validation_claimed": false,
+      "persistent_conversation_memory_enabled": false,
+      "external_release_authority": false
+    },
+    "v0_294_content_free_telemetry_gate": {
+      "decision": "content_free_telemetry_gate_passed",
+      "passed": true,
+      "checks": {
+        "source_version_is_v0_293": true,
+        "contract_frozen_before_implementation": true,
+        "baseline_retains_observability_gap": true,
+        "runtime_gate_passed": true,
+        "host_and_docker_present": true,
+        "counter_deltas_exact": true,
+        "latency_totals_exact": true,
+        "active_returns_to_zero": true,
+        "raw_content_not_persisted": true,
+        "regression_257_or_more_passed": true,
+        "external_release_closed": true
+      },
+      "health_endpoint": "/api/health",
+      "counter_names": [
+        "accepted",
+        "capacity_rejected",
+        "duplicate_rejected",
+        "invalid_rejected",
+        "cancel_requests",
+        "cancel_active",
+        "cancel_inactive",
+        "cancelled",
+        "completed",
+        "failed"
+      ],
+      "latency_bucket_upper_bounds_ms": [
+        100,
+        500,
+        2000,
+        10000,
+        30000,
+        70000
+      ],
+      "host_counter_delta": {
+        "accepted": 2,
+        "capacity_rejected": 0,
+        "duplicate_rejected": 1,
+        "invalid_rejected": 1,
+        "cancel_requests": 2,
+        "cancel_active": 1,
+        "cancel_inactive": 1,
+        "cancelled": 1,
+        "completed": 1,
+        "failed": 0
+      },
+      "docker_counter_delta": {
+        "accepted": 2,
+        "capacity_rejected": 0,
+        "duplicate_rejected": 1,
+        "invalid_rejected": 1,
+        "cancel_requests": 2,
+        "cancel_active": 1,
+        "cancel_inactive": 1,
+        "cancelled": 1,
+        "completed": 1,
+        "failed": 0
+      },
       "synthetic_only": true,
       "human_validation_claimed": false,
       "persistent_conversation_memory_enabled": false,

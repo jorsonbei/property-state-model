@@ -1,0 +1,75 @@
+{
+  "schema_version": "psm_v0_294_content_free_telemetry_contract_v1",
+  "version": "PSM_V0.294-candidate",
+  "frozen_before_implementation": true,
+  "endpoint": {
+    "path": "/api/health",
+    "method": "GET",
+    "cache": "no-store",
+    "states": [
+      "healthy",
+      "busy",
+      "saturated"
+    ]
+  },
+  "counters": [
+    "accepted",
+    "capacity_rejected",
+    "duplicate_rejected",
+    "invalid_rejected",
+    "cancel_requests",
+    "cancel_active",
+    "cancel_inactive",
+    "cancelled",
+    "completed",
+    "failed"
+  ],
+  "latency": {
+    "bucket_upper_bounds_ms": [
+      100,
+      500,
+      2000,
+      10000,
+      30000,
+      70000
+    ],
+    "series": [
+      "completed",
+      "cancelled",
+      "failed"
+    ],
+    "raw_samples_retained": false
+  },
+  "privacy": {
+    "process_memory_only": true,
+    "disk_persistence": false,
+    "reset_on_server_restart": true,
+    "forbidden_fields": [
+      "prompt",
+      "answer",
+      "messages",
+      "session_id",
+      "request_id",
+      "participant_id",
+      "invitation_code",
+      "model_output"
+    ],
+    "identifiers_hashed": false,
+    "identifiers_retained": false
+  },
+  "runtime_acceptance": {
+    "host_required": true,
+    "docker_required": true,
+    "event_delta_exact": true,
+    "active_returns_to_zero": true,
+    "latency_bucket_totals_match_outcomes": true,
+    "disk_sentinel_hits": 0
+  },
+  "release_boundary": {
+    "synthetic_only": true,
+    "human_validation_claimed": false,
+    "persistent_conversation_memory_enabled": false,
+    "public_service_allowed": false,
+    "external_release_authority": false
+  }
+}

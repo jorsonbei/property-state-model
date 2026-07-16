@@ -9,7 +9,7 @@ PSM is an experimental state-first AI control layer. It routes a request through
 - Deterministic state pipeline: `Q -> Omega -> phi -> Delta sigma -> Pi -> eta -> B_sigma -> Sigma+`.
 - Candidate generation adapters, lexical auditing, deterministic gating, failure ledger, and regression artifacts.
 - Local chat alpha backed by Ollama.
-- Current public baseline: `PSM V0.293` (formal 2228-record core evidence source: `PSM V0.251`).
+- Current public baseline: `PSM V0.294` (formal 2228-record core evidence source: `PSM V0.251`).
 - V0.251's fresh externally authored Wave G passed 20/20 under an independent external semantic judge; usefulness, safety, correctness, relevance, boundary quality, and hallucination control were each 1.0000 on that frozen synthetic blind wave.
 - V0.252 adds a stable internal chat-product gate with cancel, timeout, retry, recovery, progressive display, hidden debug evidence, and desktop/mobile/real-backend browser regression.
 - V0.253 replaces passive Omega route labels with four executable local/read-only evidence adapters and a fail-closed provenance/failure-ledger contract.
@@ -45,6 +45,7 @@ PSM is an experimental state-first AI control layer. It routes a request through
 - V0.291 validates staged progress, cancel, prompt preservation, retry, and single-turn integrity in a real browser. Observed client cancellation is 37 ms; this does not claim server-side inference cancellation or network token streaming.
 - V0.292 adds bounded in-memory request cancellation and closes the server-owned Ollama connection without displaying partial model chunks. Host/Docker cancel 6/6 active requests, with observed maximum worker-stop latency of 38.49/276.25 ms; desktop/mobile browser and 249-test regressions pass. Direct model-kernel/GPU stop instrumentation and network token streaming remain unclaimed.
 - V0.293 caps active chat admission at four with no hidden queue. Four host/Docker waves cancel 16/16 active requests, reject every fifth request with structured 503, reject duplicate IDs with 409, preserve active work, and recover capacity. Browser backpressure recovery and 252/252 regression pass; unexpected console errors and raw-text disk writes are zero.
+- V0.294 adds a no-store `/api/health` snapshot with content-free lifecycle counters and fixed latency buckets. Host and Docker produce identical exact deltas for accepted, duplicate, invalid, cancelled, and completed events; active requests return to zero, disk sentinel hits are zero, and 257/257 regression passes. Prompts, answers, session/request IDs, and raw latency samples are not retained.
 
 This repository is an experimental research and engineering system. It is not a medical, legal, investment, production-release, or external-user authorization system. Passing synthetic regressions does not prove open-domain generalization.
 

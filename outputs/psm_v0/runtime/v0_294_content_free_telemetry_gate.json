@@ -1,0 +1,38 @@
+{
+  "schema_version": "psm_v0_294_content_free_telemetry_gate_v1",
+  "decision": "content_free_telemetry_gate_passed",
+  "passed": true,
+  "checks": {
+    "contract_frozen": true,
+    "host_passed": true,
+    "docker_passed": true,
+    "both_counter_deltas_exact": true,
+    "disk_sentinel_hits_zero": true,
+    "external_release_closed": true
+  },
+  "host_counter_delta": {
+    "accepted": 2,
+    "capacity_rejected": 0,
+    "duplicate_rejected": 1,
+    "invalid_rejected": 1,
+    "cancel_requests": 2,
+    "cancel_active": 1,
+    "cancel_inactive": 1,
+    "cancelled": 1,
+    "completed": 1,
+    "failed": 0
+  },
+  "docker_counter_delta": {
+    "accepted": 2,
+    "capacity_rejected": 0,
+    "duplicate_rejected": 1,
+    "invalid_rejected": 1,
+    "cancel_requests": 2,
+    "cancel_active": 1,
+    "cancel_inactive": 1,
+    "cancelled": 1,
+    "completed": 1,
+    "failed": 0
+  },
+  "external_release_authority": false
+}

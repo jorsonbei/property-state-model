@@ -1,13 +1,13 @@
 {
   "schema_version": "psm_artifact_inventory_v1",
-  "generated_at": "2026-07-16T11:15:06.154008+00:00",
+  "generated_at": "2026-07-16T11:29:05.423047+00:00",
   "root": "outputs/psm_v0",
   "read_only_scan": true,
   "content_hashing_performed": false,
-  "metadata_sha256": "6da135ad689b9e240bff416ed369ce7dea8e4df1aa40224c6d69003eca70a255",
+  "metadata_sha256": "7bed001babcb0a88a7f7fb67b96d695c567382c6db3aa337db2454d27e5dd22b",
   "summary": {
-    "files": 27474,
-    "bytes": 6482087356
+    "files": 27482,
+    "bytes": 6482199981
   },
   "directories": [
     {
@@ -61,14 +61,14 @@
     {
       "path": "project_status_out",
       "policy": "generated_evidence",
-      "files": 496,
-      "bytes": 17834104
+      "files": 497,
+      "bytes": 17908434
     },
     {
       "path": "runtime",
       "policy": "public_source_or_runtime",
-      "files": 462,
-      "bytes": 14711602
+      "files": 468,
+      "bytes": 14734411
     },
     {
       "path": "state_encoder_out",
@@ -163,8 +163,8 @@
     {
       "path": "benchmarks",
       "policy": "public_source_or_runtime",
-      "files": 47,
-      "bytes": 524589
+      "files": 48,
+      "bytes": 526209
     },
     {
       "path": "regression_out",
@@ -188,7 +188,7 @@
       "path": "product_alpha_app",
       "policy": "public_source_or_runtime",
       "files": 11,
-      "bytes": 422671
+      "bytes": 435218
     },
     {
       "path": "external_hardening_out",
@@ -248,7 +248,7 @@
       "path": ".",
       "policy": "public_source_or_runtime",
       "files": 10,
-      "bytes": 31255
+      "bytes": 32574
     },
     {
       "path": "product_alpha_out",

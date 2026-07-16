@@ -662,3 +662,17 @@ regression-v293:
 
 promote-v293:
 	$(PYTHON) scripts/promote_v0_293_concurrency_backpressure.py
+
+.PHONY: build-v294 telemetry-v294-eval regression-v294 promote-v294
+
+build-v294:
+	$(PYTHON) scripts/build_v0_294_content_free_telemetry_contract.py
+
+telemetry-v294-eval:
+	PYTHONPATH=$(PSM_ROOT) $(PYTHON) scripts/evaluate_v0_294_content_free_telemetry.py
+
+regression-v294:
+	PYTHONPATH=$(PSM_ROOT) $(PYTHON) scripts/run_v0_294_regression.py
+
+promote-v294:
+	$(PYTHON) scripts/promote_v0_294_content_free_telemetry.py

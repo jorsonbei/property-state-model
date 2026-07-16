@@ -1,6 +1,6 @@
-# PSM V0.293 Core Workspace
+# PSM V0.294 Core Workspace
 
-The current promoted project status is `psm_v0.293`. The deterministic formal evidence source remains `psm_v0.251` with 2228 records. V0.283-V0.293 add continuity recovery, independent review, runtime parity, server cancellation, and bounded backpressure without changing the formal core.
+The current promoted project status is `psm_v0.294`. The deterministic formal evidence source remains `psm_v0.251` with 2228 records. V0.283-V0.294 add continuity recovery, independent review, runtime parity, server cancellation, bounded backpressure, and content-free telemetry without changing the formal core.
 
 ## Latest Result
 
@@ -14,6 +14,7 @@ The current promoted project status is `psm_v0.293`. The deterministic formal ev
 - Desktop/mobile Chromium confirms active server cancellation, no partial assistant answer, single-turn retry, zero overflow, and zero console errors. Network token streaming is not claimed.
 - Active chat admission is capped at four with no queue. Host/Docker pass four concurrent waves, 16/16 cancellations, structured 503/409 probes, idempotent repeat cancel, and capacity recovery.
 - Browser capacity feedback appears in 231 ms, preserves the prompt, shows no rejected candidate, and completes one clean retry. The expected 503 resource event is classified; unexpected console errors are zero.
+- `/api/health` reports process-memory-only aggregate counters and fixed latency buckets. Host and Docker exact event deltas match, active requests return to zero, raw-content disk sentinel hits are zero, and 257/257 regression passes.
 
 ## Run
 
@@ -29,6 +30,7 @@ make server-cancel-v292-eval
 make browser-v292-cancel
 make concurrency-v293-eval
 make browser-v293-backpressure
+make telemetry-v294-eval
 ```
 
 The normal chat is `http://127.0.0.1:8765/`. Docker chat is `http://127.0.0.1:8766/`.
@@ -42,11 +44,12 @@ The normal chat is `http://127.0.0.1:8765/`. Docker chat is `http://127.0.0.1:87
 - Browser cancel now closes the server-owned Ollama HTTP connection and stops the chat worker; direct model-kernel/GPU stop instrumentation is not claimed.
 - Ollama chunks remain server-buffered until the complete candidate passes answer gates; raw network token streaming is not enabled.
 - The server admits at most four active chats, keeps no wait queue, and rejects overflow without evicting in-flight requests.
+- Operational health retains only aggregate process-memory counters and fixed latency buckets; it stores no prompts, answers, session/request IDs, or raw latency samples.
 - Human validation, evaluation-to-training backflow, public service, professional action, rule replacement, and external release remain closed.
 
 ## Recovery
 
 - `CURRENT_STATUS.md` is the human recovery point.
-- `project_status_out/psm_v0.293_project_status.json` is the promoted machine status.
+- `project_status_out/psm_v0.294_project_status.json` is the promoted machine status.
 - `runtime/current_runtime_snapshot.json` is the Docker/public runtime snapshot.
-- `runtime/v0_293_concurrency_backpressure_checkpoint.json` opens the V0.294 content-free telemetry stage.
+- `runtime/v0_294_content_free_telemetry_checkpoint.json` records that V0.295 external deployment requires explicit user authorization.

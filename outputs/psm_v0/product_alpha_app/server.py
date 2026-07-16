@@ -98,6 +98,26 @@ CHAT_CANCEL_MAX_ENTRIES = 128
 CHAT_CANCEL_TTL_SECONDS = 300
 CHAT_CONCURRENCY_LIMIT = 4
 CHAT_REQUEST_PATTERN = re.compile(r"^[A-Za-z0-9_-]{16,80}$")
+CHAT_TELEMETRY_LOCK = threading.Lock()
+CHAT_TELEMETRY_COUNTER_NAMES = (
+    "accepted",
+    "capacity_rejected",
+    "duplicate_rejected",
+    "invalid_rejected",
+    "cancel_requests",
+    "cancel_active",
+    "cancel_inactive",
+    "cancelled",
+    "completed",
+    "failed",
+)
+CHAT_TELEMETRY_LATENCY_BOUNDS_MS = (100, 500, 2000, 10000, 30000, 70000)
+CHAT_TELEMETRY_STARTED_AT = time.monotonic()
+CHAT_TELEMETRY_COUNTERS = {name: 0 for name in CHAT_TELEMETRY_COUNTER_NAMES}
+CHAT_TELEMETRY_LATENCIES = {
+    name: [0] * (len(CHAT_TELEMETRY_LATENCY_BOUNDS_MS) + 1)
+    for name in ("completed", "cancelled", "failed")
+}
 SERVER_INSTANCE_ID = secrets.token_urlsafe(16)
 CLIENT_CONTINUITY_EVENTS = {"active", "reset", "reload"}
 MEMORY_LOSS_STATES = {"reset", "reload", "expired", "restarted"}
@@ -146,18 +166,95 @@ def prune_chat_cancel_events(now: float) -> None:
         entry["event"].set()
 
 
+def increment_chat_counter(name: str) -> None:
+    with CHAT_TELEMETRY_LOCK:
+        CHAT_TELEMETRY_COUNTERS[name] += 1
+
+
+def record_chat_outcome(request_id: str, outcome: str) -> None:
+    with CHAT_CANCEL_LOCK:
+        entry = CHAT_CANCEL_EVENTS.get(request_id)
+        created_at = float(entry["created_at"]) if entry is not None else time.monotonic()
+    duration_ms = max(0, int((time.monotonic() - created_at) * 1000))
+    with CHAT_TELEMETRY_LOCK:
+        CHAT_TELEMETRY_COUNTERS[outcome] += 1
+        bucket_index = len(CHAT_TELEMETRY_LATENCY_BOUNDS_MS)
+        for index, upper_bound in enumerate(CHAT_TELEMETRY_LATENCY_BOUNDS_MS):
+            if duration_ms <= upper_bound:
+                bucket_index = index
+                break
+        CHAT_TELEMETRY_LATENCIES[outcome][bucket_index] += 1
+
+
+def reset_chat_telemetry() -> None:
+    global CHAT_TELEMETRY_STARTED_AT
+    with CHAT_TELEMETRY_LOCK:
+        CHAT_TELEMETRY_STARTED_AT = time.monotonic()
+        for name in CHAT_TELEMETRY_COUNTERS:
+            CHAT_TELEMETRY_COUNTERS[name] = 0
+        for buckets in CHAT_TELEMETRY_LATENCIES.values():
+            for index in range(len(buckets)):
+                buckets[index] = 0
+
+
+def chat_health_snapshot() -> dict:
+    with CHAT_CANCEL_LOCK:
+        active_requests = len(CHAT_CANCEL_EVENTS)
+    with CHAT_TELEMETRY_LOCK:
+        counters = dict(CHAT_TELEMETRY_COUNTERS)
+        latency_buckets = {
+            name: [
+                {
+                    "upper_bound_ms": (
+                        CHAT_TELEMETRY_LATENCY_BOUNDS_MS[index]
+                        if index < len(CHAT_TELEMETRY_LATENCY_BOUNDS_MS)
+                        else None
+                    ),
+                    "count": count,
+                }
+                for index, count in enumerate(values)
+            ]
+            for name, values in CHAT_TELEMETRY_LATENCIES.items()
+        }
+        uptime_seconds = max(0, int(time.monotonic() - CHAT_TELEMETRY_STARTED_AT))
+    health = (
+        "saturated"
+        if active_requests >= CHAT_CONCURRENCY_LIMIT
+        else "busy"
+        if active_requests
+        else "healthy"
+    )
+    return {
+        "schema_version": "psm_v0_294_content_free_health_v1",
+        "status": health,
+        "active_requests": active_requests,
+        "active_limit": CHAT_CONCURRENCY_LIMIT,
+        "queue_enabled": False,
+        "uptime_seconds": uptime_seconds,
+        "counters": counters,
+        "latency_buckets_ms": latency_buckets,
+        "raw_latency_samples_retained": False,
+        "identifiers_retained": False,
+        "content_retained": False,
+        "disk_persistence": False,
+    }
+
+
 def register_chat_request(request_id: str) -> threading.Event:
     if not CHAT_REQUEST_PATTERN.fullmatch(request_id):
+        increment_chat_counter("invalid_rejected")
         raise ChatRequestError("invalid chat request_id", 400, "invalid_request_id")
     with CHAT_CANCEL_LOCK:
         prune_chat_cancel_events(time.monotonic())
         if request_id in CHAT_CANCEL_EVENTS:
+            increment_chat_counter("duplicate_rejected")
             raise ChatRequestError(
                 "duplicate active chat request_id",
                 409,
                 "duplicate_request_id",
             )
         if len(CHAT_CANCEL_EVENTS) >= CHAT_CONCURRENCY_LIMIT:
+            increment_chat_counter("capacity_rejected")
             raise ChatRequestError(
                 "active chat capacity reached",
                 503,
@@ -165,6 +262,7 @@ def register_chat_request(request_id: str) -> threading.Event:
                 retry_after_seconds=1,
             )
         if len(CHAT_CANCEL_EVENTS) >= CHAT_CANCEL_MAX_ENTRIES:
+            increment_chat_counter("capacity_rejected")
             raise ChatRequestError(
                 "chat cancellation registry is at capacity",
                 503,
@@ -176,17 +274,21 @@ def register_chat_request(request_id: str) -> threading.Event:
             "event": event,
             "created_at": time.monotonic(),
         }
+        increment_chat_counter("accepted")
         return event
 
 
 def cancel_chat_request(request_id: str) -> dict:
     if not CHAT_REQUEST_PATTERN.fullmatch(request_id):
+        increment_chat_counter("invalid_rejected")
         raise ChatRequestError("invalid chat request_id", 400, "invalid_request_id")
     with CHAT_CANCEL_LOCK:
         prune_chat_cancel_events(time.monotonic())
         entry = CHAT_CANCEL_EVENTS.get(request_id)
         if entry is not None:
             entry["event"].set()
+        increment_chat_counter("cancel_requests")
+        increment_chat_counter("cancel_active" if entry is not None else "cancel_inactive")
         return {
             "request_id": request_id,
             "accepted": True,
@@ -217,10 +319,13 @@ def raise_if_chat_cancelled(
 
 
 class Handler(BaseHTTPRequestHandler):
-    server_version = "PSMProductAlpha/0.292"
+    server_version = "PSMProductAlpha/0.294"
 
     def do_GET(self) -> None:  # noqa: N802
         parsed = urlparse(self.path)
+        if parsed.path == "/api/health":
+            self.write_json(chat_health_snapshot(), no_store=True)
+            return
         if parsed.path == "/api/status":
             self.write_json(load_status_summary(), no_store=True)
             return
@@ -324,9 +429,14 @@ class Handler(BaseHTTPRequestHandler):
                             rolling_state_metadata=rolling_state,
                             cancel_event=cancel_event,
                         )
+                        raise_if_chat_cancelled(cancel_event, request_id)
                     except ChatCancelled as exc:
+                        record_chat_outcome(request_id, "cancelled")
                         raise ChatCancelled(request_id) from exc
-                    raise_if_chat_cancelled(cancel_event, request_id)
+                    except Exception:
+                        record_chat_outcome(request_id, "failed")
+                        raise
+                    record_chat_outcome(request_id, "completed")
                     self.write_json(result, no_store=True)
                 finally:
                     unregister_chat_request(request_id, cancel_event)
@@ -1828,6 +1938,13 @@ def roadmap_answer(context: dict) -> str:
             "确认容量满时拒绝新请求而不驱逐在途任务；最后跑浏览器和全量回归。"
             "原始提示不进入登记表，未审核 token 仍不直接显示。"
         )
+    elif context["next_version"] == "PSM V0.295":
+        construction = (
+            "V0.294 已完成本机和 Docker 的内容为空运行遥测，内部工程没有待补的小任务。"
+            "V0.295 会先冻结外部访问范围、真实对话的数据责任、托管与域名、预算、日志保留和紧急停止条件；"
+            "只有获得明确授权后才会配置公网入口或接触真实用户资料。"
+            f"继续前需要：{context['required_decision']}"
+        )
     elif context["stage_blocked"]:
         construction = (
             "当前内部阶段的工程与评审已经完成，但下一阶段涉及外部范围、数据处理、部署、费用或凭证，"
@@ -1921,6 +2038,17 @@ def roadmap_answer(context: dict) -> str:
 
 
 def project_results_answer(context: dict) -> str:
+    if context["current_version"] == "PSM V0.294":
+        return (
+            "目前已完成到 PSM V0.294。系统新增不含对话内容的 `/api/health` 运行健康快照，"
+            "只统计接受、容量拒绝、重复拒绝、无效拒绝、取消和完成事件，以及固定延迟桶；"
+            "不保留 prompt、answer、session_id、request_id 或原始延迟样本。\n\n"
+            "主机与 Docker 的精确事件序列都得到相同增量：2 个接受、1 个重复拒绝、1 个无效拒绝、"
+            "2 个取消请求、1 个实际取消和 1 个正常完成；活动请求最终回到 0，磁盘原文哨兵命中为 0。"
+            "257 项正式回归通过。它的作用是让服务容量、取消和失败可观察，同时不扩大数据收集边界。\n\n"
+            f"当前本地聊天模型是 `{context['selected_model']}`。"
+            f"下一阶段是 {context['next_version']}，需要你决定：{context['required_decision']}"
+        )
     if context["current_version"] == "PSM V0.293":
         return (
             "目前已完成到 PSM V0.293。服务端最多接受 4 个同时在途聊天，不建立隐式队列；"

@@ -1,0 +1,88 @@
+{
+  "schema_version": "psm_v0_294_content_free_telemetry_promotion_manifest_v1",
+  "version": "PSM_V0.294",
+  "promoted_at": "2026-07-16",
+  "promoted": true,
+  "decision": "content_free_telemetry_gate_passed",
+  "formal_core_source": "PSM_V0.251",
+  "formal_core_records": 2228,
+  "content_free_telemetry_gate": {
+    "decision": "content_free_telemetry_gate_passed",
+    "passed": true,
+    "checks": {
+      "source_version_is_v0_293": true,
+      "contract_frozen_before_implementation": true,
+      "baseline_retains_observability_gap": true,
+      "runtime_gate_passed": true,
+      "host_and_docker_present": true,
+      "counter_deltas_exact": true,
+      "latency_totals_exact": true,
+      "active_returns_to_zero": true,
+      "raw_content_not_persisted": true,
+      "regression_257_or_more_passed": true,
+      "external_release_closed": true
+    },
+    "health_endpoint": "/api/health",
+    "counter_names": [
+      "accepted",
+      "capacity_rejected",
+      "duplicate_rejected",
+      "invalid_rejected",
+      "cancel_requests",
+      "cancel_active",
+      "cancel_inactive",
+      "cancelled",
+      "completed",
+      "failed"
+    ],
+    "latency_bucket_upper_bounds_ms": [
+      100,
+      500,
+      2000,
+      10000,
+      30000,
+      70000
+    ],
+    "host_counter_delta": {
+      "accepted": 2,
+      "capacity_rejected": 0,
+      "duplicate_rejected": 1,
+      "invalid_rejected": 1,
+      "cancel_requests": 2,
+      "cancel_active": 1,
+      "cancel_inactive": 1,
+      "cancelled": 1,
+      "completed": 1,
+      "failed": 0
+    },
+    "docker_counter_delta": {
+      "accepted": 2,
+      "capacity_rejected": 0,
+      "duplicate_rejected": 1,
+      "invalid_rejected": 1,
+      "cancel_requests": 2,
+      "cancel_active": 1,
+      "cancel_inactive": 1,
+      "cancelled": 1,
+      "completed": 1,
+      "failed": 0
+    },
+    "synthetic_only": true,
+    "human_validation_claimed": false,
+    "persistent_conversation_memory_enabled": false,
+    "external_release_authority": false
+  },
+  "release_boundary": {
+    "synthetic_only": true,
+    "human_validation_claimed": false,
+    "persistent_conversation_memory_enabled": false,
+    "public_service_allowed": false,
+    "external_release_authority": false
+  },
+  "next_stage": {
+    "version": "PSM_V0.295",
+    "objective": "确定是否开启外部部署与真实用户验证路线，并冻结公开范围、数据责任、托管、预算和停止条件",
+    "blocked": true,
+    "requires_user_input": true
+  }
+}
