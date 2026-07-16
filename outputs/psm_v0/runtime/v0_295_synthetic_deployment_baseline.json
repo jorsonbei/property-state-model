@@ -1,0 +1,14 @@
+{
+  "schema_version": "psm_v0_295_synthetic_deployment_baseline_v1",
+  "source_version": "PSM_V0.294",
+  "captured_before_implementation": true,
+  "observed": {
+    "active_enrollment_link_present": true,
+    "trial_endpoints_served": true,
+    "invite_notice_copied_into_container": true,
+    "container_healthcheck_uses_content_free_health": false,
+    "github_ci_present": false,
+    "package_version": "0.274.0"
+  },
+  "baseline_decision": "human_trial_surface_active_synthetic_deployment_ci_absent"
+}

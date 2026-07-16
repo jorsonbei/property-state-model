@@ -1,0 +1,14 @@
+{
+  "schema_version": "psm_v0_295_no_human_decision_amendment_v1",
+  "recorded_at": "2026-07-16",
+  "source_checkpoint": "runtime/v0_294_content_free_telemetry_checkpoint.json",
+  "user_decision": "omit_invite_only_adult_participant_step",
+  "supersedes_requirement": "invite_only_up_to_five_adults",
+  "human_participant_recruitment_required": false,
+  "adult_verification_required": false,
+  "participant_consent_workflow_required": false,
+  "real_user_validation_claimed": false,
+  "replacement_evidence": "synthetic_roles_and_automated_runtime_checks_only",
+  "public_service_allowed": false,
+  "external_release_authority": false
+}

@@ -1,0 +1,17 @@
+{
+  "schema_version": "psm_v0_295_attempt_1_status_evaluator_gap_v1",
+  "version": "PSM_V0.295-candidate",
+  "retained": true,
+  "detected_after_initial_gate": true,
+  "initial_gate_passed": true,
+  "gap": "The first evaluator checked the new synthetic-only flags but did not reject legacy active-trial readiness fields sourced from the historical private V0.263 state.",
+  "observed_stale_fields": {
+    "ready_for_invite_only_external_trial_protocol": true,
+    "ready_for_supervised_invite_only_trial": true,
+    "external_trial_participant_enrollment_completed": true,
+    "external_trial_participant_minimum": 3,
+    "external_trial_participant_maximum": 5
+  },
+  "repair": "Force all current human-trial readiness, capacity, budget, and enrollment-interface fields closed while retaining version-labeled historical counts only for audit.",
+  "external_calls_triggered": 0
+}

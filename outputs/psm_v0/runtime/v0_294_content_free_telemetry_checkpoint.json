@@ -2,9 +2,10 @@
   "schema_version": "psm_v0_294_content_free_telemetry_checkpoint_v1",
   "current_promoted_version": "PSM_V0.294",
   "target_promoted": true,
-  "status": "blocked_v0_295_external_deployment_authorization_required",
+  "status": "v0_295_synthetic_deployment_open_no_human_participants",
   "promotion_manifest": "runtime/v0_294_content_free_telemetry_promotion_manifest.json",
-  "requires_user_input": true,
-  "next_action": "obtain_v0_295_external_deployment_scope_decision",
-  "required_decision": "请决定是否授权开启外部部署与真实用户验证路线；若授权，需要同时确定访问范围、是否允许处理真实对话、托管/域名预算、日志保留期和紧急停止责任人。"
+  "requires_user_input": false,
+  "next_action": "build_v0_295_synthetic_deployment_contract",
+  "required_decision": "无；用户已明确取消邀请制真人步骤。",
+  "decision_amendment": "runtime/v0_295_no_human_decision_amendment.json"
 }

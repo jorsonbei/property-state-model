@@ -1,0 +1,18 @@
+{
+  "schema_version": "psm_v0_295_regression_report_v1",
+  "version": "PSM_V0.295-candidate",
+  "tests_discovered": 262,
+  "tests_passed": 262,
+  "tests_failed": 0,
+  "passed": true,
+  "output_tail": [
+    "test_metal_touch_kernel_uses_heat_transfer_not_radiation (test_verified_knowledge.VerifiedKnowledgeTests.test_metal_touch_kernel_uses_heat_transfer_not_radiation) ... ok",
+    "test_pressure_kernel_preserves_direction_of_pressure_difference (test_verified_knowledge.VerifiedKnowledgeTests.test_pressure_kernel_preserves_direction_of_pressure_difference) ... ok",
+    "test_project_unknowns_are_not_filled_with_invented_milestones (test_verified_knowledge.VerifiedKnowledgeTests.test_project_unknowns_are_not_filled_with_invented_milestones) ... ok",
+    "",
+    "----------------------------------------------------------------------",
+    "Ran 262 tests in 1.680s",
+    "",
+    "OK"
+  ]
+}

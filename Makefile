@@ -676,3 +676,17 @@ regression-v294:
 
 promote-v294:
 	$(PYTHON) scripts/promote_v0_294_content_free_telemetry.py
+
+.PHONY: build-v295 deployment-v295-eval regression-v295 promote-v295
+
+build-v295:
+	$(PYTHON) scripts/build_v0_295_synthetic_deployment_contract.py
+
+deployment-v295-eval:
+	PYTHONPATH=$(PSM_ROOT) $(PYTHON) scripts/evaluate_v0_295_synthetic_deployment.py
+
+regression-v295:
+	PYTHONPATH=$(PSM_ROOT) $(PYTHON) scripts/run_v0_295_regression.py
+
+promote-v295:
+	$(PYTHON) scripts/promote_v0_295_synthetic_deployment.py

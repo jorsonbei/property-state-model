@@ -1,0 +1,173 @@
+{
+  "schema_version": "psm_v0_295_synthetic_deployment_report_v1",
+  "version": "PSM_V0.295-candidate",
+  "contract": "benchmarks/v0_295_synthetic_deployment_contract.json",
+  "amendment": "runtime/v0_295_no_human_decision_amendment.json",
+  "runtimes": [
+    {
+      "runtime_id": "host",
+      "base_url": "http://127.0.0.1:8765",
+      "version": "PSM V0.295",
+      "retired_get": [
+        {
+          "path": "/api/trial-notice",
+          "status": 410,
+          "error": "human_trial_workflow_retired",
+          "cache_control": "no-store"
+        },
+        {
+          "path": "/api/trial-enrollment",
+          "status": 410,
+          "error": "human_trial_workflow_retired",
+          "cache_control": "no-store"
+        },
+        {
+          "path": "/api/trial-enrollment/operator-cards",
+          "status": 410,
+          "error": "human_trial_workflow_retired",
+          "cache_control": "no-store"
+        },
+        {
+          "path": "/trial-enrollment",
+          "status": 410,
+          "error": null,
+          "cache_control": null
+        },
+        {
+          "path": "/trial-enrollment.html",
+          "status": 410,
+          "error": null,
+          "cache_control": null
+        },
+        {
+          "path": "/trial-enrollment.js",
+          "status": 410,
+          "error": null,
+          "cache_control": null
+        },
+        {
+          "path": "/trial-enrollment.css",
+          "status": 410,
+          "error": null,
+          "cache_control": null
+        }
+      ],
+      "retired_post": [
+        {
+          "path": "/api/trial-enrollment/action",
+          "status": 410,
+          "error": "human_trial_workflow_retired",
+          "cache_control": "no-store"
+        },
+        {
+          "path": "/api/trial-chat",
+          "status": 410,
+          "error": "human_trial_workflow_retired",
+          "cache_control": "no-store"
+        }
+      ],
+      "checks": {
+        "root_chat_200_without_enrollment_link": true,
+        "status_200_synthetic_only": true,
+        "health_200_no_store": true,
+        "all_retired_get_paths_410": true,
+        "all_retired_post_paths_410_json_no_store": true
+      },
+      "passed": true
+    },
+    {
+      "runtime_id": "docker",
+      "base_url": "http://127.0.0.1:8766",
+      "version": "PSM V0.295",
+      "retired_get": [
+        {
+          "path": "/api/trial-notice",
+          "status": 410,
+          "error": "human_trial_workflow_retired",
+          "cache_control": "no-store"
+        },
+        {
+          "path": "/api/trial-enrollment",
+          "status": 410,
+          "error": "human_trial_workflow_retired",
+          "cache_control": "no-store"
+        },
+        {
+          "path": "/api/trial-enrollment/operator-cards",
+          "status": 410,
+          "error": "human_trial_workflow_retired",
+          "cache_control": "no-store"
+        },
+        {
+          "path": "/trial-enrollment",
+          "status": 410,
+          "error": null,
+          "cache_control": null
+        },
+        {
+          "path": "/trial-enrollment.html",
+          "status": 410,
+          "error": null,
+          "cache_control": null
+        },
+        {
+          "path": "/trial-enrollment.js",
+          "status": 410,
+          "error": null,
+          "cache_control": null
+        },
+        {
+          "path": "/trial-enrollment.css",
+          "status": 410,
+          "error": null,
+          "cache_control": null
+        }
+      ],
+      "retired_post": [
+        {
+          "path": "/api/trial-enrollment/action",
+          "status": 410,
+          "error": "human_trial_workflow_retired",
+          "cache_control": "no-store"
+        },
+        {
+          "path": "/api/trial-chat",
+          "status": 410,
+          "error": "human_trial_workflow_retired",
+          "cache_control": "no-store"
+        }
+      ],
+      "checks": {
+        "root_chat_200_without_enrollment_link": true,
+        "status_200_synthetic_only": true,
+        "health_200_no_store": true,
+        "all_retired_get_paths_410": true,
+        "all_retired_post_paths_410_json_no_store": true
+      },
+      "passed": true
+    }
+  ],
+  "container_uid": "10001",
+  "invite_notice_in_container": false,
+  "checks": {
+    "contract_frozen": true,
+    "user_decision_recorded": true,
+    "zero_human_participants": true,
+    "baseline_retained": true,
+    "host_passed": true,
+    "docker_passed": true,
+    "docker_non_root_uid_10001": true,
+    "invite_notice_absent_from_container": true,
+    "docker_healthcheck_content_free": true,
+    "docker_default_bind_loopback": true,
+    "ci_python_matrix_and_container": true,
+    "ci_has_no_secret_or_external_call": true,
+    "package_versions_v0_295": true,
+    "human_and_release_claims_closed": true
+  },
+  "passed": true,
+  "human_participants": 0,
+  "synthetic_only": true,
+  "human_validation_claimed": false,
+  "external_release_authority": false
+}

@@ -1,0 +1,10 @@
+{
+  "schema_version": "psm_v0_295_synthetic_deployment_checkpoint_v1",
+  "current_promoted_version": "PSM_V0.295",
+  "target_promoted": true,
+  "status": "blocked_v0_296_external_network_hosting_decision_required",
+  "promotion_manifest": "runtime/v0_295_synthetic_deployment_promotion_manifest.json",
+  "requires_user_input": true,
+  "next_action": "obtain_v0_296_external_network_hosting_decision",
+  "required_decision": "请决定是否把当前无真人验证声明的产品部署到外部网络；若授权，需要提供或批准托管平台、域名、月预算和访问范围。邀请制人数、成年核验与真人满意度测试不再要求。"
+}

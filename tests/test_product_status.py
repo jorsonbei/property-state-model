@@ -30,8 +30,16 @@ class ProductStatusTests(unittest.TestCase):
         self.assertEqual(status["chat_timeout_seconds"], 60)
         self.assertEqual(status["chat_concurrency_limit"], 4)
         self.assertFalse(status["chat_queue_enabled"])
+        self.assertFalse(status["human_participant_workflow_enabled"])
+        self.assertTrue(status["synthetic_validation_only"])
+        self.assertFalse(status["ready_for_invite_only_external_trial_protocol"])
+        self.assertFalse(status["external_trial_participant_enrollment_completed"])
+        self.assertEqual(status["external_trial_participant_minimum"], 0)
+        self.assertEqual(status["external_trial_participant_maximum"], 0)
+        self.assertEqual(status["external_trial_monthly_api_budget_usd"], 0.0)
         self.assertEqual(status["v0_263_selected_participant_count"], 3)
         self.assertEqual(status["v0_263_pseudonymous_invitations_generated"], 3)
+        self.assertFalse(status["v0_263_enrollment_interface_ready"])
         self.assertFalse(status["ready_for_supervised_invite_only_trial"])
 
     def test_v0_262_notice_is_inactive_without_private_enrollment(self) -> None:

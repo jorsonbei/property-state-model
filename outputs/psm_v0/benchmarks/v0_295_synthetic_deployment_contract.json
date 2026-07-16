@@ -1,0 +1,47 @@
+{
+  "schema_version": "psm_v0_295_synthetic_deployment_contract_v1",
+  "version": "PSM_V0.295-candidate",
+  "frozen_before_implementation": true,
+  "decision_amendment": "runtime/v0_295_no_human_decision_amendment.json",
+  "human_boundary": {
+    "human_participants": 0,
+    "participant_recruitment_enabled": false,
+    "adult_verification_enabled": false,
+    "participant_consent_workflow_enabled": false,
+    "real_user_satisfaction_claimed": false,
+    "synthetic_role_proxies_allowed": true
+  },
+  "active_product": {
+    "enrollment_link_present": false,
+    "trial_static_surface_served": false,
+    "trial_api_served": false,
+    "retired_endpoints_status": 410
+  },
+  "continuous_integration": {
+    "workflow": ".github/workflows/ci.yml",
+    "python_versions": [
+      "3.11",
+      "3.12"
+    ],
+    "full_project_check": true,
+    "docker_build": true,
+    "container_health_check": true,
+    "non_root_check": true,
+    "external_model_calls": false,
+    "secrets_required": false
+  },
+  "container": {
+    "default_bind": "127.0.0.1",
+    "runtime_uid": 10001,
+    "health_endpoint": "/api/health",
+    "invite_notice_in_image": false
+  },
+  "release_boundary": {
+    "synthetic_only": true,
+    "human_validation_claimed": false,
+    "public_service_allowed": false,
+    "external_network_deployment_allowed": false,
+    "persistent_conversation_memory_enabled": false,
+    "external_release_authority": false
+  }
+}

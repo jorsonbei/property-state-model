@@ -2,10 +2,10 @@
   "schema_version": "psm_public_runtime_snapshot_v1",
   "project_status": {
     "updated_from_local_artifacts": true,
-    "current_version": "psm_v0.294",
+    "current_version": "psm_v0.295",
     "source_evidence_version": "psm_v0.251",
-    "previous_formal_version": "psm_v0.293",
-    "completed_result": "content_free_telemetry_gate_passed",
+    "previous_formal_version": "psm_v0.294",
+    "completed_result": "synthetic_deployment_gate_passed",
     "family": {
       "family_id": "v251_independent_chat_golden_blind_set_boundary_adversarial",
       "case_pack": "case_packs/v0_251_independent_chat_golden_blind_set_boundary_adversarial_cases.json",
@@ -244,8 +244,8 @@
       "rule_replacement_allowed": false
     },
     "next_stage": {
-      "version": "PSM_V0.295",
-      "objective": "确定是否开启外部部署与真实用户验证路线，并冻结公开范围、数据责任、托管、预算和停止条件",
+      "version": "PSM_V0.296",
+      "objective": "决定是否建立外部网络托管；真人招募与成年核验不再是该路线的前置步骤",
       "blocked": true,
       "requires_user_input": true
     },
@@ -259,7 +259,7 @@
       "candidate_taxonomy": "taxonomy_out/psm_v0.251_candidate_taxonomy.json",
       "candidate_regression_fixtures": "fixture_out/psm_v0.251_candidate_regression_fixtures.json",
       "taxonomy_delta": "taxonomy_delta_out/psm_v0.251_taxonomy_delta.json",
-      "project_status": "project_status_out/psm_v0.294_project_status.json",
+      "project_status": "project_status_out/psm_v0.295_project_status.json",
       "regression": "regression_out/psm_v0.251_regression_check.json",
       "independent_chat_gate": "runtime/v0_251_wave_g_external_semantic_judge.json",
       "model_selection": "runtime/v0_251_base_upgrade_pairwise_gemini_pro_report.json",
@@ -585,7 +585,17 @@
       "v0_294_gate": "runtime/v0_294_content_free_telemetry_gate.json",
       "v0_294_regression": "runtime/v0_294_regression_report.json",
       "v0_294_checkpoint": "runtime/v0_294_content_free_telemetry_checkpoint.json",
-      "v0_294_promotion_manifest": "runtime/v0_294_content_free_telemetry_promotion_manifest.json"
+      "v0_294_promotion_manifest": "runtime/v0_294_content_free_telemetry_promotion_manifest.json",
+      "v0_295_contract": "benchmarks/v0_295_synthetic_deployment_contract.json",
+      "v0_295_amendment": "runtime/v0_295_no_human_decision_amendment.json",
+      "v0_295_baseline": "runtime/v0_295_synthetic_deployment_baseline.json",
+      "v0_295_report": "runtime/v0_295_synthetic_deployment_report.json",
+      "v0_295_gate": "runtime/v0_295_synthetic_deployment_gate.json",
+      "v0_295_regression": "runtime/v0_295_regression_report.json",
+      "v0_295_post_promotion_failure": "runtime/v0_295_post_promotion_regression_failure.json",
+      "v0_295_evaluator_gap": "runtime/v0_295_attempt_1_status_evaluator_gap.json",
+      "v0_295_checkpoint": "runtime/v0_295_synthetic_deployment_checkpoint.json",
+      "v0_295_promotion_manifest": "runtime/v0_295_synthetic_deployment_promotion_manifest.json"
     },
     "regression": {
       "stem": "psm_v0.251",
@@ -1739,6 +1749,32 @@
       "synthetic_only": true,
       "human_validation_claimed": false,
       "persistent_conversation_memory_enabled": false,
+      "external_release_authority": false
+    },
+    "v0_295_synthetic_deployment_gate": {
+      "decision": "synthetic_deployment_gate_passed",
+      "passed": true,
+      "checks": {
+        "source_version_is_v0_294": true,
+        "contract_frozen": true,
+        "user_cancelled_human_step": true,
+        "zero_human_participants": true,
+        "baseline_retains_active_human_surface": true,
+        "runtime_gate_passed": true,
+        "both_runtimes_passed": true,
+        "all_nine_retired_paths_passed": true,
+        "regression_262_or_more_passed": true,
+        "post_promotion_regression_failure_retained": true,
+        "attempt_1_status_evaluator_gap_retained": true,
+        "human_validation_not_claimed": true,
+        "external_release_closed": true
+      },
+      "human_participants": 0,
+      "retired_endpoint_count_per_runtime": 9,
+      "container_uid": "10001",
+      "invite_notice_in_container": false,
+      "synthetic_only": true,
+      "human_validation_claimed": false,
       "external_release_authority": false
     }
   },

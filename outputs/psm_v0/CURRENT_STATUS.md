@@ -2,9 +2,9 @@
 
 ## Current Version
 
-`PSM V0.294`
+`PSM V0.295`
 
-V0.294 is promoted. The deterministic 2228-record formal evidence source remains `PSM V0.251`; V0.283-V0.294 add continuity recovery, independent semantic review, runtime parity, server cancellation, bounded backpressure, and content-free operational telemetry without changing that formal core.
+V0.295 is promoted. The deterministic 2228-record formal evidence source remains `PSM V0.251`; V0.283-V0.295 add continuity recovery, independent semantic review, runtime parity, server cancellation, bounded backpressure, content-free telemetry, and a synthetic-only deployment gate without changing that formal core.
 
 ## Latest Results
 
@@ -20,6 +20,7 @@ V0.294 is promoted. The deterministic 2228-record formal evidence source remains
 - V0.292 passes 6/6 active server cancellations across host and Docker. Maximum observed chat-worker stop time is 38.49/276.25 ms; both runtimes complete a normal Ollama retry afterward. Desktop/mobile server acknowledgements, no-partial-answer, single-turn retry, no-overflow, zero-console-error, 249/249 regression, and zero disk-sentinel gates pass.
 - V0.293 passes four host/Docker concurrency waves: 16/16 active requests cancel, every fifth request receives structured 503, every duplicate ID receives 409, repeat cancel is idempotent, and capacity recovers. Maximum capacity response is 1.14/32.62 ms; maximum four-way cancel storm is 31.61/59.7 ms. Browser recovery and 252/252 regression pass.
 - V0.294 adds a no-store `/api/health` endpoint with ten aggregate lifecycle counters and fixed completed/cancelled/failed latency buckets. Host and Docker produce identical exact event deltas, active requests return to zero, raw-content disk sentinel hits are zero, and 257/257 regression passes.
+- V0.295 records the user's decision to omit the invite-only adult participant step. Human participant count is 0; nine enrollment/trial paths return 410 on host and Docker, the active UI has no enrollment link, and the image excludes the invite notice. Secret-free CI covers Python 3.11/3.12, full checks, Docker health, non-root UID 10001, and 262/262 regression.
 
 ## Token Authority
 
@@ -42,11 +43,12 @@ V0.294 is promoted. The deterministic 2228-record formal evidence source remains
 - Raw Ollama chunks stay server-buffered until complete-answer review; network token streaming is not enabled.
 - Active chat limit: four. Queue: disabled. Capacity overflow never evicts an in-flight request.
 - Operational telemetry is process-memory-only and resets on restart. It retains no prompt, answer, message, session/request ID, participant data, model output, or raw latency sample.
+- Active participant recruitment, adult verification, participant consent, trial chat, and human ratings are retired. Historical V0.262-V0.264 artifacts remain audit-only.
 - Human validation, public service, production readiness, rule replacement, professional authority, and external release authority: false.
 
 ## Recovery Artifacts
 
-- Machine status: `project_status_out/psm_v0.294_project_status.json`.
+- Machine status: `project_status_out/psm_v0.295_project_status.json`.
 - Public runtime snapshot: `runtime/current_runtime_snapshot.json`.
 - V0.283 restart recovery: `runtime/v0_283_restart_recovery_gate.json`, `runtime/v0_283_controlled_restart_boundary.json`, `runtime/v0_283_restart_recovery_browser_regression/report.json`.
 - V0.284 external review: `runtime/v0_284_openai_external_restart_recovery_judge.json`, `runtime/v0_284_external_restart_recovery_gate.json`.
@@ -60,9 +62,10 @@ V0.294 is promoted. The deterministic 2228-record formal evidence source remains
 - V0.292 server cancel: `benchmarks/v0_292_server_cancel_contract.json`, `runtime/v0_292_server_cancel_runtime_report.json`, `runtime/v0_292_server_cancel_browser_regression/report.json`.
 - V0.293 backpressure: `benchmarks/v0_293_concurrency_backpressure_contract.json`, `runtime/v0_293_concurrency_backpressure_report.json`, `runtime/v0_293_backpressure_browser_regression/report.json`.
 - V0.294 telemetry: `benchmarks/v0_294_content_free_telemetry_contract.json`, `runtime/v0_294_content_free_telemetry_report.json`, `runtime/v0_294_content_free_telemetry_gate.json`.
+- V0.295 synthetic deployment: `benchmarks/v0_295_synthetic_deployment_contract.json`, `runtime/v0_295_no_human_decision_amendment.json`, `runtime/v0_295_synthetic_deployment_report.json`, `runtime/v0_295_synthetic_deployment_gate.json`.
 
 ## Next Stage
 
-`PSM V0.295` is blocked pending explicit authorization to open an external deployment and real-user validation route. The decision must define access scope, real-conversation handling, hosting/domain budget, log retention, and emergency-stop responsibility. Until then the product remains local-only and no external release authority is granted.
+`PSM V0.296` is blocked only on whether to establish external network hosting. If authorized, the remaining decision is hosting platform, domain, monthly budget, and access scope. Invite count, adult verification, participant consent, and human-satisfaction testing are no longer prerequisites. Until then the product remains local-only and no external release authority is granted.
 
 Version history remains in independent snapshots under `status_history/`; it is not embedded recursively here.

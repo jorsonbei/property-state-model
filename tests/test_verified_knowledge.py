@@ -110,7 +110,9 @@ class VerifiedKnowledgeTests(unittest.TestCase):
         self.assertIn(context["next_version"], answer)
         if context["stage_blocked"]:
             self.assertIn("确实受阻", answer)
-            self.assertIn(context["required_decision"], answer)
+            normalized_decision = "".join(context["required_decision"].split())
+            normalized_answer = "".join(answer.split())
+            self.assertIn(normalized_decision, normalized_answer)
             expected = "需要用户介入" if context["requires_user_input"] else "不需要用户介入"
             self.assertIn(expected, answer)
         else:

@@ -1,0 +1,13 @@
+{
+  "schema_version": "psm_v0_295_post_promotion_regression_failure_v1",
+  "version": "PSM_V0.295",
+  "retained": true,
+  "stage": "post_promotion_regression_attempt_1",
+  "tests_discovered": 262,
+  "failed_tests": 1,
+  "failing_test": "test_local_project_blocker_reports_current_structured_gate",
+  "cause": "The answer formatter inserted paragraph breaks inside the structured required_decision while the test required one contiguous display string.",
+  "product_boundary_affected": false,
+  "repair": "Compare the same structured decision after whitespace normalization so formatting cannot erase or invent decision content.",
+  "external_calls_triggered": 0
+}

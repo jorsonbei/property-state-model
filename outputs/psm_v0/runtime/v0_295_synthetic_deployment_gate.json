@@ -1,0 +1,24 @@
+{
+  "schema_version": "psm_v0_295_synthetic_deployment_gate_v1",
+  "decision": "synthetic_deployment_gate_passed",
+  "passed": true,
+  "checks": {
+    "contract_frozen": true,
+    "user_decision_recorded": true,
+    "zero_human_participants": true,
+    "baseline_retained": true,
+    "host_passed": true,
+    "docker_passed": true,
+    "docker_non_root_uid_10001": true,
+    "invite_notice_absent_from_container": true,
+    "docker_healthcheck_content_free": true,
+    "docker_default_bind_loopback": true,
+    "ci_python_matrix_and_container": true,
+    "ci_has_no_secret_or_external_call": true,
+    "package_versions_v0_295": true,
+    "human_and_release_claims_closed": true
+  },
+  "retired_endpoint_count_per_runtime": 9,
+  "human_participants": 0,
+  "external_release_authority": false
+}

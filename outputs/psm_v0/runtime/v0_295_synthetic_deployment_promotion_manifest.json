@@ -1,0 +1,49 @@
+{
+  "schema_version": "psm_v0_295_synthetic_deployment_promotion_manifest_v1",
+  "version": "PSM_V0.295",
+  "promoted_at": "2026-07-16",
+  "promoted": true,
+  "decision": "synthetic_deployment_gate_passed",
+  "formal_core_source": "PSM_V0.251",
+  "formal_core_records": 2228,
+  "synthetic_deployment_gate": {
+    "decision": "synthetic_deployment_gate_passed",
+    "passed": true,
+    "checks": {
+      "source_version_is_v0_294": true,
+      "contract_frozen": true,
+      "user_cancelled_human_step": true,
+      "zero_human_participants": true,
+      "baseline_retains_active_human_surface": true,
+      "runtime_gate_passed": true,
+      "both_runtimes_passed": true,
+      "all_nine_retired_paths_passed": true,
+      "regression_262_or_more_passed": true,
+      "post_promotion_regression_failure_retained": true,
+      "attempt_1_status_evaluator_gap_retained": true,
+      "human_validation_not_claimed": true,
+      "external_release_closed": true
+    },
+    "human_participants": 0,
+    "retired_endpoint_count_per_runtime": 9,
+    "container_uid": "10001",
+    "invite_notice_in_container": false,
+    "synthetic_only": true,
+    "human_validation_claimed": false,
+    "external_release_authority": false
+  },
+  "release_boundary": {
+    "synthetic_only": true,
+    "human_validation_claimed": false,
+    "public_service_allowed": false,
+    "external_network_deployment_allowed": false,
+    "persistent_conversation_memory_enabled": false,
+    "external_release_authority": false
+  },
+  "next_stage": {
+    "version": "PSM_V0.296",
+    "objective": "决定是否建立外部网络托管；真人招募与成年核验不再是该路线的前置步骤",
+    "blocked": true,
+    "requires_user_input": true
+  }
+}

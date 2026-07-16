@@ -98,6 +98,19 @@ CHAT_CANCEL_MAX_ENTRIES = 128
 CHAT_CANCEL_TTL_SECONDS = 300
 CHAT_CONCURRENCY_LIMIT = 4
 CHAT_REQUEST_PATTERN = re.compile(r"^[A-Za-z0-9_-]{16,80}$")
+RETIRED_TRIAL_API_PATHS = {
+    "/api/trial-notice",
+    "/api/trial-enrollment",
+    "/api/trial-enrollment/operator-cards",
+    "/api/trial-enrollment/action",
+    "/api/trial-chat",
+}
+RETIRED_TRIAL_STATIC_PATHS = {
+    "/trial-enrollment",
+    "/trial-enrollment.html",
+    "/trial-enrollment.js",
+    "/trial-enrollment.css",
+}
 CHAT_TELEMETRY_LOCK = threading.Lock()
 CHAT_TELEMETRY_COUNTER_NAMES = (
     "accepted",
@@ -319,38 +332,33 @@ def raise_if_chat_cancelled(
 
 
 class Handler(BaseHTTPRequestHandler):
-    server_version = "PSMProductAlpha/0.294"
+    server_version = "PSMProductAlpha/0.295"
 
     def do_GET(self) -> None:  # noqa: N802
         parsed = urlparse(self.path)
+        if parsed.path in RETIRED_TRIAL_API_PATHS:
+            self.write_json(
+                {
+                    "schema_version": "psm_v0_295_retired_human_trial_endpoint_v1",
+                    "error": "human_trial_workflow_retired",
+                    "synthetic_validation_only": True,
+                },
+                status=410,
+                no_store=True,
+            )
+            return
+        if parsed.path in RETIRED_TRIAL_STATIC_PATHS:
+            self.send_error(410, "Human trial workflow retired")
+            return
         if parsed.path == "/api/health":
             self.write_json(chat_health_snapshot(), no_store=True)
             return
         if parsed.path == "/api/status":
             self.write_json(load_status_summary(), no_store=True)
             return
-        if parsed.path == "/api/trial-notice":
-            self.write_json(load_trial_notice(), no_store=True)
-            return
-        if parsed.path == "/api/trial-enrollment":
-            try:
-                self.write_json(load_enrollment_api_status(), no_store=True)
-            except (EnrollmentError, FileNotFoundError) as exc:
-                self.write_json({"error": str(exc), "trial_active": False}, status=404, no_store=True)
-            return
-        if parsed.path == "/api/trial-enrollment/operator-cards":
-            if self.client_address[0] not in {"127.0.0.1", "::1"}:
-                self.write_json({"error": "operator cards are loopback-only"}, status=403, no_store=True)
-                return
-            try:
-                self.write_json(load_operator_cards(), no_store=True)
-            except (EnrollmentError, FileNotFoundError) as exc:
-                self.write_json({"error": str(exc)}, status=404, no_store=True)
-            return
         static_name = {
             "": "index.html",
             "/": "index.html",
-            "/trial-enrollment": "trial-enrollment.html",
         }.get(parsed.path, parsed.path.lstrip("/"))
         path = STATIC_ROOT / static_name
         if not path.is_file() or STATIC_ROOT not in path.resolve().parents and path.resolve() != STATIC_ROOT:
@@ -366,10 +374,12 @@ class Handler(BaseHTTPRequestHandler):
 
     def do_HEAD(self) -> None:  # noqa: N802
         parsed = urlparse(self.path)
+        if parsed.path in RETIRED_TRIAL_STATIC_PATHS:
+            self.send_error(410, "Human trial workflow retired")
+            return
         static_name = {
             "": "index.html",
             "/": "index.html",
-            "/trial-enrollment": "trial-enrollment.html",
         }.get(parsed.path, parsed.path.lstrip("/"))
         path = STATIC_ROOT / static_name
         if not path.is_file() or STATIC_ROOT not in path.resolve().parents and path.resolve() != STATIC_ROOT:
@@ -383,12 +393,21 @@ class Handler(BaseHTTPRequestHandler):
 
     def do_POST(self) -> None:  # noqa: N802
         parsed = urlparse(self.path)
+        if parsed.path in RETIRED_TRIAL_API_PATHS:
+            self.write_json(
+                {
+                    "schema_version": "psm_v0_295_retired_human_trial_endpoint_v1",
+                    "error": "human_trial_workflow_retired",
+                    "synthetic_validation_only": True,
+                },
+                status=410,
+                no_store=True,
+            )
+            return
         if parsed.path not in {
             "/api/run",
             "/api/chat",
             "/api/chat-cancel",
-            "/api/trial-enrollment/action",
-            "/api/trial-chat",
         }:
             self.send_error(404)
             return
@@ -396,12 +415,6 @@ class Handler(BaseHTTPRequestHandler):
             payload = self.read_json()
             if parsed.path == "/api/chat-cancel":
                 self.write_json(cancel_chat_request(str(payload.get("request_id") or "")), no_store=True)
-                return
-            if parsed.path == "/api/trial-enrollment/action":
-                self.write_json(handle_enrollment_action(payload), no_store=True)
-                return
-            if parsed.path == "/api/trial-chat":
-                self.write_json(run_trial_chat_turn(payload), no_store=True)
                 return
             scenario = str(payload.get("scenario") or "review")
             if parsed.path == "/api/chat":
@@ -1945,6 +1958,13 @@ def roadmap_answer(context: dict) -> str:
             "只有获得明确授权后才会配置公网入口或接触真实用户资料。"
             f"继续前需要：{context['required_decision']}"
         )
+    elif context["next_version"] == "PSM V0.296":
+        construction = (
+            "V0.295 已按你的决定取消邀请制真人步骤，并完成无真人的主机、Docker 和 CI 部署演练。"
+            "V0.296 只处理是否建立外部网络托管，以及对应的平台、域名、预算和访问范围；"
+            "不会重新加入参与者人数、成年核验或真人满意度流程。"
+            f"继续前需要：{context['required_decision']}"
+        )
     elif context["stage_blocked"]:
         construction = (
             "当前内部阶段的工程与评审已经完成，但下一阶段涉及外部范围、数据处理、部署、费用或凭证，"
@@ -2038,6 +2058,17 @@ def roadmap_answer(context: dict) -> str:
 
 
 def project_results_answer(context: dict) -> str:
+    if context["current_version"] == "PSM V0.295":
+        return (
+            "目前已完成到 PSM V0.295。邀请制真人步骤已经取消，活动聊天首页不再显示登记入口；"
+            "旧登记页、通知、操作员卡、登记动作和试用聊天共 9 个路径，在主机与 Docker 都明确返回 410。"
+            "旧模块只作为历史审计证据保留，不再是活动产品功能。\n\n"
+            "部署侧已加入不使用密钥或外部模型的 GitHub CI，覆盖 Python 3.11/3.12、完整项目检查、"
+            "Docker 构建、内容为空健康检查和非 root UID 10001。容器不再包含邀请通知，262 项回归通过。"
+            "这些结果是纯合成与自动化证据，不声称真人满意度或公开服务已经验证。\n\n"
+            f"当前本地聊天模型是 `{context['selected_model']}`。"
+            f"下一阶段是 {context['next_version']}，需要你决定：{context['required_decision']}"
+        )
     if context["current_version"] == "PSM V0.294":
         return (
             "目前已完成到 PSM V0.294。系统新增不含对话内容的 `/api/health` 运行健康快照，"
@@ -3076,6 +3107,8 @@ def load_status_summary() -> dict:
         "chat_timeout_seconds": selected_chat_timeout_seconds(),
         "chat_concurrency_limit": CHAT_CONCURRENCY_LIMIT,
         "chat_queue_enabled": False,
+        "human_participant_workflow_enabled": False,
+        "synthetic_validation_only": True,
         "core_cases": status["core_metrics"]["state_records"],
         "full_external_cases": full.get("holdout_cases"),
         "full_gated_risk": full.get("required_gated_psm_unsafe_or_risky"),
@@ -3091,20 +3124,20 @@ def load_status_summary() -> dict:
         "ready_for_internal_chat_demo": readiness.get("ready_for_internal_chat_demo", readiness.get("ready_for_internal_local_demo")),
         "ready_for_stable_internal_chat": internal_alpha_gate.get("decision") == "internal_trial_ready",
         "internal_trial_decision": internal_alpha_gate.get("decision") or "not_evaluated",
-        "ready_for_invite_only_external_trial_protocol": external_trial_gate.get("decision") == "invite_only_trial_protocol_ready",
-        "external_trial_participant_minimum": external_trial_gate.get("participant_minimum"),
-        "external_trial_participant_maximum": external_trial_gate.get("participant_maximum"),
-        "external_trial_metadata_retention_days": external_trial_gate.get("metadata_retention_days"),
-        "external_trial_monthly_api_budget_usd": external_trial_gate.get("monthly_api_budget_usd"),
-        "external_trial_participant_enrollment_completed": live_enrollment.get("trial_active") is True,
+        "ready_for_invite_only_external_trial_protocol": False,
+        "external_trial_participant_minimum": 0,
+        "external_trial_participant_maximum": 0,
+        "external_trial_metadata_retention_days": 0,
+        "external_trial_monthly_api_budget_usd": 0.0,
+        "external_trial_participant_enrollment_completed": False,
         "v0_263_selected_participant_count": enrollment_checkpoint.get("participant_count_selected", 0),
         "v0_263_pseudonymous_invitations_generated": enrollment_checkpoint.get("pseudonymous_invitations_generated", 0),
-        "v0_263_enrollment_interface_ready": bool(live_enrollment),
+        "v0_263_enrollment_interface_ready": False,
         "v0_263_adult_verified": (live_enrollment.get("counts") or {}).get("adult_verified", 0),
         "v0_263_notice_acknowledged": (live_enrollment.get("counts") or {}).get("notice_acknowledged", 0),
         "v0_263_explicitly_consented": (live_enrollment.get("counts") or {}).get("consented", 0),
         "v0_263_session_enabled": (live_enrollment.get("counts") or {}).get("session_enabled", 0),
-        "ready_for_supervised_invite_only_trial": live_enrollment.get("trial_active") is True,
+        "ready_for_supervised_invite_only_trial": False,
         "ready_for_external_user_trial": False,
     }
 

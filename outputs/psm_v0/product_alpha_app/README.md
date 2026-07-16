@@ -1,4 +1,4 @@
-# 物性AI Chat Alpha 0.274 / Open-context State Capsule
+# 物性AI Chat Alpha 0.295 / Synthetic-only Deployment
 
 Local normal-chat demo backed by the latest PSM pipeline status.
 
@@ -14,24 +14,18 @@ Open:
 http://127.0.0.1:8765
 ```
 
-The local three-person enrollment operator page is:
-
-```text
-http://127.0.0.1:8765/trial-enrollment
-```
-
 Boundary:
 
 - Internal local chat demo only.
-- The normal chat remains an internal local demo. The completed V0.264 invite-only trial remains historical evidence.
-- V0.274 uses frozen synthetic open-context cases; it collects no human ratings and claims no human validation.
+- The V0.262-V0.264 invite-only workflow remains historical evidence only; its active page and APIs return 410.
+- V0.295 uses synthetic and automated validation only; it recruits no humans and claims no human validation.
 - Not medical, legal, trading, or production release authority.
 - Session memory is not consent or release authority.
 - Rule replacement remains off.
 
 Verified scope:
 
-- `/api/status` reports the latest promoted project status, currently `PSM V0.274`, plus the historical enrollment counts.
+- `/api/status` reports the latest promoted project status, currently `PSM V0.295`, and explicitly marks the human workflow disabled.
 - `/api/status` exposes `internal_trial_ready` separately from the still-closed external-user gate.
 - `/api/chat` preserves user and assistant roles across multi-turn history.
 - Project status and roadmap answers are grounded in the local structured status.
