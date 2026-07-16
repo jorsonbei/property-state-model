@@ -1,0 +1,69 @@
+{
+  "schema_version": "psm_v0_292_server_cancel_browser_regression_v1",
+  "version": "PSM_V0.292-candidate",
+  "base_url": "http://127.0.0.1:8765",
+  "passed": true,
+  "synthetic_only": true,
+  "cancellation_scope": "server_ollama_connection_cancel",
+  "raw_model_chunks_user_visible": false,
+  "network_token_streaming_claimed": false,
+  "browser_chat_persisted": false,
+  "human_feedback_collected": false,
+  "external_release_authority": false,
+  "desktop": {
+    "cancellationMs": 466,
+    "cancelled": {
+      "serverCancel": {
+        "requestId": "chat_1_ac1fb227339448e1bfaaf20c417a2330",
+        "acknowledged": true,
+        "generationWasActive": true
+      },
+      "promptValue": "请给一个全新的本地知识项目起代号，并说明理由。",
+      "feedback": "已取消這次生成。你的問題已保留，可以重試。",
+      "retryVisible": true,
+      "cancelHidden": true,
+      "runDisabled": false,
+      "userMessages": 1,
+      "assistantMessages": 0
+    },
+    "retried": {
+      "answer": "nonempty",
+      "promptValue": "",
+      "retryHidden": true,
+      "cancelHidden": true,
+      "feedbackHidden": true,
+      "userMessages": 1,
+      "assistantMessages": 1
+    },
+    "horizontalOverflow": false,
+    "consoleErrors": 0
+  },
+  "mobile": {
+    "cancelled": {
+      "serverCancel": {
+        "requestId": "chat_1_9007e744748348e4b5aab9c2f9c22c5a",
+        "acknowledged": true,
+        "generationWasActive": true
+      },
+      "promptValue": "请设计一个新的本地笔记分类法，并给出理由。",
+      "feedback": "已取消這次生成。你的問題已保留，可以重試。",
+      "retryVisible": true,
+      "cancelHidden": true,
+      "runDisabled": false,
+      "userMessages": 1,
+      "assistantMessages": 0
+    },
+    "horizontalOverflow": false,
+    "runVisible": true,
+    "consoleErrors": 0
+  },
+  "checks": {
+    "desktop_server_cancel_acknowledged": true,
+    "desktop_cancel_completes_within_one_second": true,
+    "cancelled_candidate_not_displayed": true,
+    "retry_completes_single_turn": true,
+    "mobile_server_cancel_acknowledged": true,
+    "mobile_no_overflow": true,
+    "console_errors_zero": true
+  }
+}

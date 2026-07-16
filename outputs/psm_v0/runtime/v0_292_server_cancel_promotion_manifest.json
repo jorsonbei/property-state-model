@@ -1,0 +1,65 @@
+{
+  "schema_version": "psm_v0_292_server_cancel_promotion_manifest_v1",
+  "version": "PSM_V0.292",
+  "promoted_at": "2026-07-16",
+  "promoted": true,
+  "decision": "server_cancel_and_review_before_display_gate_passed",
+  "formal_core_source": "PSM_V0.251",
+  "formal_core_records": 2228,
+  "server_cancel_gate": {
+    "decision": "server_cancel_and_review_before_display_gate_passed",
+    "passed": true,
+    "checks": {
+      "source_version_is_v0_291": true,
+      "contract_frozen_before_implementation": true,
+      "baseline_retains_client_only_gap": true,
+      "runtime_gate_passed": true,
+      "host_three_of_three_cancelled": true,
+      "docker_three_of_three_cancelled": true,
+      "server_stop_under_two_seconds": true,
+      "host_and_docker_retry_pass": true,
+      "cancelled_content_not_persisted": true,
+      "browser_report_passed": true,
+      "desktop_and_mobile_server_ack": true,
+      "regression_249_or_more_passed": true,
+      "regression_evaluator_gap_retained": true,
+      "raw_chunks_not_visible": true,
+      "network_streaming_not_overclaimed": true,
+      "external_release_closed": true
+    },
+    "host_cancel_max_ms": 38.49,
+    "docker_cancel_max_ms": 276.25,
+    "browser_cancel_ms": 466,
+    "server_generation_cancellation_claimed": true,
+    "cancellation_claim_scope": "server_owned_ollama_http_connection_and_chat_worker",
+    "model_compute_stop_directly_instrumented": false,
+    "raw_model_chunks_user_visible": false,
+    "network_token_streaming_claimed": false,
+    "synthetic_only": true,
+    "human_validation_claimed": false,
+    "persistent_conversation_memory_enabled": false,
+    "external_release_authority": false
+  },
+  "evidence": {
+    "contract": "benchmarks/v0_292_server_cancel_contract.json",
+    "baseline": "runtime/v0_292_server_cancel_baseline.json",
+    "runtime_report": "runtime/v0_292_server_cancel_runtime_report.json",
+    "browser_report": "runtime/v0_292_server_cancel_browser_regression/report.json",
+    "regression_report": "runtime/v0_292_regression_report.json"
+  },
+  "release_boundary": {
+    "model_compute_stop_directly_instrumented": false,
+    "network_token_streaming_claimed": false,
+    "human_validation_claimed": false,
+    "persistent_conversation_memory_enabled": false,
+    "public_service_allowed": false,
+    "rule_replacement_allowed": false,
+    "external_release_authority": false
+  },
+  "next_stage": {
+    "version": "PSM_V0.293",
+    "objective": "冻结并验证并发容量、backpressure、重复 request_id、取消风暴与断线竞态；容量满时必须拒绝新请求而不是驱逐在途任务。",
+    "blocked": false,
+    "requires_user_input": false
+  }
+}

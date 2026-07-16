@@ -15,6 +15,7 @@ const state = {
   messages: [],
   taskGraph: null,
   activeRequest: null,
+  lastServerCancel: null,
   lastFailed: null,
   nextMessageId: 1,
   sessionId: createSessionId(),
@@ -122,7 +123,7 @@ async function runChat(options = {}) {
     userMessageId = pushMessage("user", text);
   }
 
-  const requestId = `${Date.now()}-${userMessageId}`;
+  const requestId = createRequestId(userMessageId);
   const controller = new AbortController();
   const request = {
     id: requestId,
@@ -136,6 +137,7 @@ async function runChat(options = {}) {
     canCancel: true
   };
   state.activeRequest = request;
+  state.lastServerCancel = null;
   state.lastFailed = null;
   $("prompt").value = "";
   autoResizePrompt();
@@ -143,8 +145,7 @@ async function runChat(options = {}) {
 
   request.timeoutId = window.setTimeout(() => {
     if (state.activeRequest?.id !== requestId) return;
-    request.reason = "timeout";
-    controller.abort();
+    cancelActiveRequest("timeout");
   }, REQUEST_TIMEOUT_MS);
 
   try {
@@ -157,6 +158,7 @@ async function runChat(options = {}) {
           scenario: state.scenario
         }
       : {
+          request_id: requestId,
           messages: conversationMessages(),
           scenario: state.scenario,
           task_state_graph: state.taskGraph,
@@ -215,11 +217,36 @@ function retryLastTurn() {
   runChat({ retry: true });
 }
 
-function cancelActiveRequest(reason) {
+async function cancelActiveRequest(reason) {
   const request = state.activeRequest;
   if (!request?.canCancel) return;
   request.reason = reason;
+  request.canCancel = false;
+  const cancelRequest = fetch("/api/chat-cancel", {
+    method: "POST",
+    headers: { "Content-Type": "application/json" },
+    body: JSON.stringify({ request_id: request.id }),
+    keepalive: true
+  });
   request.controller.abort();
+  try {
+    const response = await cancelRequest;
+    const result = await response.json().catch(() => ({}));
+    request.serverCancelAcknowledged = response.ok && result.accepted === true;
+    request.serverGenerationWasActive = result.active === true;
+    state.lastServerCancel = {
+      requestId: request.id,
+      acknowledged: request.serverCancelAcknowledged,
+      generationWasActive: request.serverGenerationWasActive
+    };
+  } catch (error) {
+    request.serverCancelAcknowledged = false;
+    state.lastServerCancel = {
+      requestId: request.id,
+      acknowledged: false,
+      generationWasActive: false
+    };
+  }
 }
 
 function beginRequestUi(request) {
@@ -286,6 +313,7 @@ function discardUnansweredFailedTurn() {
     if (!hasAssistantAfter) state.messages.splice(index, 1);
   }
   state.lastFailed = null;
+  state.lastServerCancel = null;
   renderMessages();
 }
 
@@ -340,6 +368,12 @@ function createSessionId() {
   if (globalThis.crypto?.randomUUID) return globalThis.crypto.randomUUID();
   const random = Math.random().toString(36).slice(2);
   return `psm-${Date.now().toString(36)}-${random}-${random}`;
+}
+
+function createRequestId(userMessageId) {
+  const random = globalThis.crypto?.randomUUID?.().replaceAll("-", "")
+    || `${Date.now().toString(36)}${Math.random().toString(36).slice(2)}`;
+  return `chat_${userMessageId}_${random}`.slice(0, 80);
 }
 
 function initialContinuityEvent() {

@@ -1,0 +1,248 @@
+{
+  "schema_version": "psm_v0_292_server_cancel_runtime_report_v1",
+  "version": "PSM_V0.292-candidate",
+  "contract": "benchmarks/v0_292_server_cancel_contract.json",
+  "runtimes": [
+    {
+      "runtime_id": "host",
+      "base_url": "http://127.0.0.1:8765",
+      "version": "PSM V0.291",
+      "cancel_rows": [
+        {
+          "case_id": "host-cancel-1",
+          "request_id": "chat_v292_host_1_dcf3f478f6a34670b3b993a2949e7452",
+          "cancel_ack_ms": 4.6,
+          "server_stop_ms": 35.65,
+          "cancel_status": 200,
+          "cancel_body": {
+            "request_id": "chat_v292_host_1_dcf3f478f6a34670b3b993a2949e7452",
+            "accepted": true,
+            "active": true
+          },
+          "chat_status": 499,
+          "chat_body": {
+            "error": "chat_cancelled",
+            "request_id": "chat_v292_host_1_dcf3f478f6a34670b3b993a2949e7452"
+          },
+          "chat_total_ms": 2040.87,
+          "checks": {
+            "cancel_ack_200": true,
+            "active_request_acknowledged": true,
+            "chat_thread_stopped": true,
+            "chat_returned_499": true,
+            "cancel_error_exact": true,
+            "partial_answer_not_released": true
+          },
+          "passed": true
+        },
+        {
+          "case_id": "host-cancel-2",
+          "request_id": "chat_v292_host_2_c44e75d0c69741e6b2ae587e21e93c83",
+          "cancel_ack_ms": 8.9,
+          "server_stop_ms": 38.49,
+          "cancel_status": 200,
+          "cancel_body": {
+            "request_id": "chat_v292_host_2_c44e75d0c69741e6b2ae587e21e93c83",
+            "accepted": true,
+            "active": true
+          },
+          "chat_status": 499,
+          "chat_body": {
+            "error": "chat_cancelled",
+            "request_id": "chat_v292_host_2_c44e75d0c69741e6b2ae587e21e93c83"
+          },
+          "chat_total_ms": 2039.35,
+          "checks": {
+            "cancel_ack_200": true,
+            "active_request_acknowledged": true,
+            "chat_thread_stopped": true,
+            "chat_returned_499": true,
+            "cancel_error_exact": true,
+            "partial_answer_not_released": true
+          },
+          "passed": true
+        },
+        {
+          "case_id": "host-cancel-3",
+          "request_id": "chat_v292_host_3_ca5df70560f441e4ad363f4f04752f31",
+          "cancel_ack_ms": 14.2,
+          "server_stop_ms": 18.46,
+          "cancel_status": 200,
+          "cancel_body": {
+            "request_id": "chat_v292_host_3_ca5df70560f441e4ad363f4f04752f31",
+            "accepted": true,
+            "active": true
+          },
+          "chat_status": 499,
+          "chat_body": {
+            "error": "chat_cancelled",
+            "request_id": "chat_v292_host_3_ca5df70560f441e4ad363f4f04752f31"
+          },
+          "chat_total_ms": 2019.82,
+          "checks": {
+            "cancel_ack_200": true,
+            "active_request_acknowledged": true,
+            "chat_thread_stopped": true,
+            "chat_returned_499": true,
+            "cancel_error_exact": true,
+            "partial_answer_not_released": true
+          },
+          "passed": true
+        }
+      ],
+      "cancel_max_ms": 38.49,
+      "retry": {
+        "status": 200,
+        "duration_ms": 18888.2,
+        "provider": "ollama",
+        "generation_status": "success",
+        "checks": {
+          "status_200": true,
+          "answer_nonempty": true,
+          "ollama_success": true,
+          "fallback_not_used": true,
+          "sigma_plus_passed": true
+        },
+        "passed": true
+      },
+      "checks": {
+        "status_available": true,
+        "source_version_valid": true,
+        "all_cancellations_pass": true,
+        "all_server_stops_within_limit": true,
+        "retry_after_cancel_passes": true,
+        "external_release_closed": true
+      },
+      "passed": true
+    },
+    {
+      "runtime_id": "docker",
+      "base_url": "http://127.0.0.1:8766",
+      "version": "PSM V0.291",
+      "cancel_rows": [
+        {
+          "case_id": "docker-cancel-1",
+          "request_id": "chat_v292_docker_1_a1680b1880224dac96f4414d28e30a36",
+          "cancel_ack_ms": 185.45,
+          "server_stop_ms": 276.25,
+          "cancel_status": 200,
+          "cancel_body": {
+            "request_id": "chat_v292_docker_1_a1680b1880224dac96f4414d28e30a36",
+            "accepted": true,
+            "active": true
+          },
+          "chat_status": 499,
+          "chat_body": {
+            "error": "chat_cancelled",
+            "request_id": "chat_v292_docker_1_a1680b1880224dac96f4414d28e30a36"
+          },
+          "chat_total_ms": 2279.02,
+          "checks": {
+            "cancel_ack_200": true,
+            "active_request_acknowledged": true,
+            "chat_thread_stopped": true,
+            "chat_returned_499": true,
+            "cancel_error_exact": true,
+            "partial_answer_not_released": true
+          },
+          "passed": true
+        },
+        {
+          "case_id": "docker-cancel-2",
+          "request_id": "chat_v292_docker_2_d07d53e49f6d4af5b8932b47b0dc87f9",
+          "cancel_ack_ms": 15.49,
+          "server_stop_ms": 20.43,
+          "cancel_status": 200,
+          "cancel_body": {
+            "request_id": "chat_v292_docker_2_d07d53e49f6d4af5b8932b47b0dc87f9",
+            "accepted": true,
+            "active": true
+          },
+          "chat_status": 499,
+          "chat_body": {
+            "error": "chat_cancelled",
+            "request_id": "chat_v292_docker_2_d07d53e49f6d4af5b8932b47b0dc87f9"
+          },
+          "chat_total_ms": 2025.23,
+          "checks": {
+            "cancel_ack_200": true,
+            "active_request_acknowledged": true,
+            "chat_thread_stopped": true,
+            "chat_returned_499": true,
+            "cancel_error_exact": true,
+            "partial_answer_not_released": true
+          },
+          "passed": true
+        },
+        {
+          "case_id": "docker-cancel-3",
+          "request_id": "chat_v292_docker_3_34c1985e70784c109c35e11128d75e13",
+          "cancel_ack_ms": 56.53,
+          "server_stop_ms": 79.83,
+          "cancel_status": 200,
+          "cancel_body": {
+            "request_id": "chat_v292_docker_3_34c1985e70784c109c35e11128d75e13",
+            "accepted": true,
+            "active": true
+          },
+          "chat_status": 499,
+          "chat_body": {
+            "error": "chat_cancelled",
+            "request_id": "chat_v292_docker_3_34c1985e70784c109c35e11128d75e13"
+          },
+          "chat_total_ms": 2082.88,
+          "checks": {
+            "cancel_ack_200": true,
+            "active_request_acknowledged": true,
+            "chat_thread_stopped": true,
+            "chat_returned_499": true,
+            "cancel_error_exact": true,
+            "partial_answer_not_released": true
+          },
+          "passed": true
+        }
+      ],
+      "cancel_max_ms": 276.25,
+      "retry": {
+        "status": 200,
+        "duration_ms": 20284.79,
+        "provider": "ollama",
+        "generation_status": "success",
+        "checks": {
+          "status_200": true,
+          "answer_nonempty": true,
+          "ollama_success": true,
+          "fallback_not_used": true,
+          "sigma_plus_passed": true
+        },
+        "passed": true
+      },
+      "checks": {
+        "status_available": true,
+        "source_version_valid": true,
+        "all_cancellations_pass": true,
+        "all_server_stops_within_limit": true,
+        "retry_after_cancel_passes": true,
+        "external_release_closed": true
+      },
+      "passed": true
+    }
+  ],
+  "disk_sentinel_hits": [],
+  "checks": {
+    "contract_frozen": true,
+    "host_passed": true,
+    "docker_passed": true,
+    "six_of_six_cancelled": true,
+    "cancelled_content_not_persisted": true,
+    "raw_chunks_not_user_visible": true,
+    "network_token_streaming_not_claimed": true,
+    "external_release_closed": true
+  },
+  "passed": true,
+  "synthetic_only": true,
+  "human_validation_claimed": false,
+  "persistent_conversation_memory_enabled": false,
+  "network_token_streaming_claimed": false,
+  "external_release_authority": false
+}

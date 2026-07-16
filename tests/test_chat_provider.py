@@ -1,14 +1,93 @@
 from __future__ import annotations
 
+import json
+import threading
 import unittest
 from unittest.mock import patch
 
 from product_alpha_app import server
 from psm_v0.chat_prompt import sanitize_model_answer
-from psm_v0.chat_provider import ProviderRequest, ProviderResult
+from psm_v0.chat_provider import OllamaChatProvider, ProviderRequest, ProviderResult
+
+
+class FakeStreamResponse:
+    def __init__(self, lines: list[bytes]) -> None:
+        self.lines = lines
+
+    def __enter__(self) -> FakeStreamResponse:
+        return self
+
+    def __exit__(self, *args) -> None:
+        return None
+
+    def __iter__(self):
+        return iter(self.lines)
+
+
+class CancellingStreamResponse(FakeStreamResponse):
+    def __init__(self, lines: list[bytes], cancel_event: threading.Event) -> None:
+        super().__init__(lines)
+        self.cancel_event = cancel_event
+
+    def __iter__(self):
+        yield self.lines[0]
+        self.cancel_event.set()
+        yield self.lines[1]
+
+
+class FakeConnection:
+    def __init__(self, response: FakeStreamResponse) -> None:
+        self.response = response
+        self.sock = None
+        self.request_call: tuple | None = None
+
+    def request(self, method, path, *, body, headers) -> None:
+        self.request_call = (method, path, body, headers)
+
+    def getresponse(self) -> FakeStreamResponse:
+        self.response.status = 200
+        return self.response
+
+    def close(self) -> None:
+        return None
 
 
 class ChatProviderTests(unittest.TestCase):
+    def test_ollama_internal_stream_joins_chunks_without_releasing_partial_data(self) -> None:
+        response = FakeStreamResponse([
+            b'{"response":"first ","done":false}\n',
+            b'{"response":"answer","done":true,"done_reason":"stop"}\n',
+        ])
+        connection = FakeConnection(response)
+        provider = OllamaChatProvider("http://ollama.test")
+        with patch.object(provider, "open_connection", return_value=connection):
+            result = provider.generate(
+                ProviderRequest(prompt="test", model="model:1b")
+            )
+        sent = json.loads(connection.request_call[2].decode("utf-8"))
+        self.assertTrue(sent["stream"])
+        self.assertEqual(connection.request_call[:2], ("POST", "/api/generate"))
+        self.assertEqual(result.status, "success")
+        self.assertEqual(result.answer, "first answer")
+        self.assertEqual(result.finish_reason, "stop")
+
+    def test_ollama_cancel_discards_all_buffered_chunks(self) -> None:
+        cancel_event = threading.Event()
+        response = CancellingStreamResponse([
+            b'{"response":"must never be released","done":false}\n',
+            b'{"response":"ignored","done":false}\n',
+        ], cancel_event)
+        connection = FakeConnection(response)
+        provider = OllamaChatProvider("http://ollama.test")
+        with patch.object(provider, "open_connection", return_value=connection):
+            result = provider.generate(
+                ProviderRequest(prompt="test", model="model:1b"),
+                cancel_event=cancel_event,
+            )
+        self.assertEqual(result.status, "cancelled")
+        self.assertEqual(result.answer, "")
+        self.assertEqual(result.finish_reason, "cancelled")
+
     def test_provider_request_disables_hidden_thinking_by_default(self) -> None:
         request = ProviderRequest(prompt="问题", model="example:1b")
         self.assertFalse(request.think)
@@ -73,6 +152,26 @@ class ChatProviderTests(unittest.TestCase):
         self.assertEqual(generation["answer"], "完整回答。")
         self.assertTrue(generation["truncation_retry"])
         self.assertEqual(generation["duration_ms"], 30)
+
+    def test_cancelled_model_generation_never_becomes_fallback_answer(self) -> None:
+        result = server.run_demo_case("请拟一个新项目名称。", "review")
+        cancelled = ProviderResult(
+            status="cancelled",
+            answer="",
+            provider="ollama",
+            model="example:1b",
+            duration_ms=5,
+            finish_reason="cancelled",
+        )
+        with patch.object(server.OllamaChatProvider, "generate", return_value=cancelled):
+            with self.assertRaises(server.ChatCancelled):
+                server.build_chat_generation(
+                    "请拟一个新项目名称。",
+                    [{"role": "user", "content": "请拟一个新项目名称。"}],
+                    result,
+                    "general",
+                    {},
+                )
 
 
 if __name__ == "__main__":

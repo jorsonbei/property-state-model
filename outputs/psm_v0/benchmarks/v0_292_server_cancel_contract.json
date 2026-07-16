@@ -1,0 +1,59 @@
+{
+  "schema_version": "psm_v0_292_server_cancel_contract_v1",
+  "version": "PSM_V0.292-candidate",
+  "frozen_before_implementation": true,
+  "objective": "Cancel active Ollama generation on the server while retaining full-answer Sigma+ review before display.",
+  "request_protocol": {
+    "request_id": {
+      "required_for_cancellable_chat": true,
+      "pattern": "^[A-Za-z0-9_-]{16,80}$",
+      "contains_prompt_or_private_data": false
+    },
+    "cancel_endpoint": "/api/chat-cancel",
+    "cancel_body_fields": [
+      "request_id"
+    ],
+    "cancel_response_fields": [
+      "request_id",
+      "accepted",
+      "active"
+    ],
+    "cancelled_chat_status": 499,
+    "cancelled_chat_error": "chat_cancelled"
+  },
+  "server_resource_contract": {
+    "registry_storage": "bounded_in_memory_only",
+    "registry_max_entries": 128,
+    "registry_ttl_seconds": 300,
+    "disk_persistence": false,
+    "raw_prompt_retained_in_registry": false,
+    "provider_transport": "ollama_ndjson_internal_stream",
+    "provider_cancel_status": "cancelled",
+    "cancelled_candidate_released": false
+  },
+  "delivery_contract": {
+    "raw_model_chunks_user_visible": false,
+    "complete_candidate_required_before_audit": true,
+    "sigma_plus_review_before_user_display": true,
+    "browser_progressive_display_scope": "accepted_answer_buffer_only",
+    "network_token_streaming_claimed": false
+  },
+  "acceptance": {
+    "provider_stream_chunks_join_exactly": true,
+    "provider_cancel_discards_partial_answer": true,
+    "server_cancel_acknowledged_for_active_request": true,
+    "cancelled_chat_returns_499_without_fallback_answer": true,
+    "cancel_to_server_stop_limit_ms": 2000,
+    "retry_after_cancel_succeeds": true,
+    "host_and_docker_required": true,
+    "browser_desktop_and_mobile_required": true,
+    "full_regression_required": true
+  },
+  "release_boundary": {
+    "synthetic_only": true,
+    "human_validation_claimed": false,
+    "persistent_conversation_memory_enabled": false,
+    "public_service_allowed": false,
+    "external_release_authority": false
+  }
+}

@@ -1,0 +1,19 @@
+{
+  "schema_version": "psm_v0_292_server_cancel_runtime_gate_v1",
+  "decision": "server_cancel_runtime_gate_passed",
+  "passed": true,
+  "checks": {
+    "contract_frozen": true,
+    "host_passed": true,
+    "docker_passed": true,
+    "six_of_six_cancelled": true,
+    "cancelled_content_not_persisted": true,
+    "raw_chunks_not_user_visible": true,
+    "network_token_streaming_not_claimed": true,
+    "external_release_closed": true
+  },
+  "host_cancel_max_ms": 38.49,
+  "docker_cancel_max_ms": 276.25,
+  "stop_limit_ms": 2000,
+  "external_release_authority": false
+}

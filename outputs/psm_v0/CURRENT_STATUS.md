@@ -2,9 +2,9 @@
 
 ## Current Version
 
-`PSM V0.291`
+`PSM V0.292`
 
-V0.291 is promoted. The deterministic 2228-record formal evidence source remains `PSM V0.251`; V0.283-V0.291 add continuity recovery, independent semantic review, runtime/browser parity, latency measurement, and cancel/retry interaction evidence without changing that formal core.
+V0.292 is promoted. The deterministic 2228-record formal evidence source remains `PSM V0.251`; V0.283-V0.292 add continuity recovery, independent semantic review, runtime/browser parity, latency measurement, and server-cancel evidence without changing that formal core.
 
 ## Latest Results
 
@@ -17,6 +17,7 @@ V0.291 is promoted. The deterministic 2228-record formal evidence source remains
 - V0.289 passes real Chromium desktop/mobile recovery, new-task, continuity-label, layout, and console gates.
 - V0.290 records deterministic recovery/identity P95 below 38 ms. Normal local-model generation succeeds 6/6 with fallback 0; host P50/P95 is 16.4/16.7 seconds and Docker P50/P95 is 13.4/16.7 seconds.
 - V0.291 passes real-browser staged progress, cancellation, prompt preservation, retry, and single-turn integrity. Observed client cancellation is 37 ms. Server-side inference cancellation and network streaming are explicitly not claimed.
+- V0.292 passes 6/6 active server cancellations across host and Docker. Maximum observed chat-worker stop time is 38.49/276.25 ms; both runtimes complete a normal Ollama retry afterward. Desktop/mobile server acknowledgements, no-partial-answer, single-turn retry, no-overflow, zero-console-error, 249/249 regression, and zero disk-sentinel gates pass.
 
 ## Token Authority
 
@@ -35,12 +36,13 @@ V0.291 is promoted. The deterministic 2228-record formal evidence source remains
 - User-statement and raw-conversation disk persistence: false.
 - Client continuity events: active, reset, reload. Expired and restarted states remain server-owned.
 - Page reset, reload, server restart, and expiry intentionally discard rolling memory and require restatement for prior-reference questions.
-- Client cancel stops browser transport waiting; it does not yet prove Ollama inference cancellation.
+- Client cancel closes the server-owned Ollama HTTP connection and stops the chat worker. Direct model-kernel/GPU stop instrumentation remains unclaimed.
+- Raw Ollama chunks stay server-buffered until complete-answer review; network token streaming is not enabled.
 - Human validation, public service, production readiness, rule replacement, professional authority, and external release authority: false.
 
 ## Recovery Artifacts
 
-- Machine status: `project_status_out/psm_v0.291_project_status.json`.
+- Machine status: `project_status_out/psm_v0.292_project_status.json`.
 - Public runtime snapshot: `runtime/current_runtime_snapshot.json`.
 - V0.283 restart recovery: `runtime/v0_283_restart_recovery_gate.json`, `runtime/v0_283_controlled_restart_boundary.json`, `runtime/v0_283_restart_recovery_browser_regression/report.json`.
 - V0.284 external review: `runtime/v0_284_openai_external_restart_recovery_judge.json`, `runtime/v0_284_external_restart_recovery_gate.json`.
@@ -51,9 +53,10 @@ V0.291 is promoted. The deterministic 2228-record formal evidence source remains
 - V0.289 browser recovery: `runtime/v0_289_natural_recovery_browser_regression/report.json`.
 - V0.290 latency: `benchmarks/v0_290_latency_budget_contract.json`, `runtime/v0_290_latency_budget_report.json`.
 - V0.291 cancel/retry: `runtime/v0_291_cancel_retry_browser_regression/report.json`, `runtime/v0_291_cancel_retry_checkpoint.json`.
+- V0.292 server cancel: `benchmarks/v0_292_server_cancel_contract.json`, `runtime/v0_292_server_cancel_runtime_report.json`, `runtime/v0_292_server_cancel_browser_regression/report.json`.
 
 ## Next Stage
 
-`PSM V0.292` evaluates cooperative server-side generation cancellation and true network streaming without releasing unreviewed tokens before the Sigma+ answer gate. It requires no user input and grants no external release authority.
+`PSM V0.293` freezes and validates concurrency capacity, backpressure, duplicate request IDs, cancellation storms, and disconnect races. It requires no user input and grants no external release authority.
 
 Version history remains in independent snapshots under `status_history/`; it is not embedded recursively here.

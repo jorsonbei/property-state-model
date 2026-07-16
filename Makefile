@@ -626,3 +626,21 @@ docker-build: sync-runtime
 
 docker-up: sync-runtime
 	docker compose up --build
+
+.PHONY: build-v292 server-cancel-v292-eval browser-v292-cancel regression-v292 promote-v292
+
+build-v292:
+	$(PYTHON) scripts/build_v0_292_server_cancel_contract.py
+
+server-cancel-v292-eval:
+	PYTHONPATH=$(PSM_ROOT) $(PYTHON) scripts/evaluate_v0_292_server_cancel.py
+
+browser-v292-cancel:
+	PSM_BASE_URL=$${PSM_BASE_URL:-http://127.0.0.1:8765} \
+	node scripts/browser_regression_v292_server_cancel.cjs
+
+regression-v292:
+	PYTHONPATH=$(PSM_ROOT) $(PYTHON) scripts/run_v0_292_regression.py
+
+promote-v292:
+	$(PYTHON) scripts/promote_v0_292_server_cancel.py

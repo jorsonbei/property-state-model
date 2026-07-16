@@ -1,10 +1,10 @@
 # PSM Artifact Storage Report
 
-- Generated at: `2026-07-15T09:39:15.824000+00:00`
+- Generated at: `2026-07-16T11:03:07.473816+00:00`
 - Read-only scan: `true`
-- Files: 27091
-- Total size: 6.030 GiB
-- Metadata digest: `eb729f558c5b4970492edb732d9c8b96218bcbf8a4dc1e0be09127f9e6158732`
+- Files: 27461
+- Total size: 6.037 GiB
+- Metadata digest: `77be356b8f320d929a32a4de8bad5de7a9c60386ffef586fb87dba7b76164286`
 - Content hashing: disabled to avoid rereading the multi-gigabyte evidence store.
 - Deletion or movement performed: none.
 
@@ -20,42 +20,42 @@
 | `candidate_external_reaudit_out` | `generated_evidence` | 330 | 0.104 GiB |
 | `shadow_out` | `generated_evidence` | 432 | 0.065 GiB |
 | `case_packs` | `public_source_or_runtime` | 347 | 0.017 GiB |
-| `project_status_out` | `generated_evidence` | 466 | 0.015 GiB |
+| `project_status_out` | `generated_evidence` | 495 | 0.017 GiB |
+| `runtime` | `public_source_or_runtime` | 451 | 0.013 GiB |
 | `state_encoder_out` | `generated_evidence` | 60 | 0.011 GiB |
-| `runtime` | `public_source_or_runtime` | 197 | 0.010 GiB |
 | `taxonomy_out` | `generated_evidence` | 216 | 0.007 GiB |
 | `taxonomy_external_out` | `generated_evidence` | 222 | 0.004 GiB |
 | `holdout_out` | `generated_evidence` | 669 | 0.004 GiB |
-| `psm_v0` | `public_source_or_runtime` | 119 | 0.002 GiB |
+| `psm_v0` | `public_source_or_runtime` | 139 | 0.003 GiB |
 | `cases` | `public_source_or_runtime` | 129 | 0.002 GiB |
 | `candidate_external_probe_out` | `generated_evidence` | 111 | 0.002 GiB |
 | `chat_eval_out` | `public_source_or_runtime` | 26 | 0.001 GiB |
+| `work` | `public_source_or_runtime` | 98 | 0.001 GiB |
 | `taxonomy_external_delta_out` | `generated_evidence` | 216 | 0.001 GiB |
 | `taxonomy_delta_out` | `generated_evidence` | 220 | 0.001 GiB |
-| `work` | `public_source_or_runtime` | 67 | 0.001 GiB |
 | `evidence_trend_out` | `generated_evidence` | 216 | 0.001 GiB |
 | `release_out` | `generated_evidence` | 206 | 0.001 GiB |
 | `status_history` | `local_archive` | 6 | 0.001 GiB |
 | `expansion_out` | `generated_evidence` | 206 | 0.001 GiB |
+| `benchmarks` | `public_source_or_runtime` | 46 | 0.000 GiB |
 | `regression_out` | `generated_evidence` | 342 | 0.000 GiB |
 | `fixtures_out` | `generated_evidence` | 140 | 0.000 GiB |
 | `regression_external_out` | `generated_evidence` | 222 | 0.000 GiB |
-| `external_hardening_out` | `generated_evidence` | 218 | 0.000 GiB |
 | `product_alpha_app` | `public_source_or_runtime` | 11 | 0.000 GiB |
+| `external_hardening_out` | `generated_evidence` | 218 | 0.000 GiB |
 | `fixture_out` | `generated_evidence` | 76 | 0.000 GiB |
 | `external_fixture_regression_out` | `generated_evidence` | 192 | 0.000 GiB |
 | `external_risk_out` | `generated_evidence` | 222 | 0.000 GiB |
-| `benchmarks` | `public_source_or_runtime` | 24 | 0.000 GiB |
 | `compare_out` | `generated_evidence` | 16 | 0.000 GiB |
+| `tools` | `public_source_or_runtime` | 10 | 0.000 GiB |
 | `dataset_out` | `generated_evidence` | 4 | 0.000 GiB |
 | `residual_out` | `generated_evidence` | 18 | 0.000 GiB |
-| `tools` | `public_source_or_runtime` | 6 | 0.000 GiB |
-| `roadmap_out` | `public_source_or_runtime` | 40 | 0.000 GiB |
+| `roadmap_out` | `public_source_or_runtime` | 49 | 0.000 GiB |
 | `.` | `public_source_or_runtime` | 10 | 0.000 GiB |
 | `product_alpha_out` | `generated_evidence` | 7 | 0.000 GiB |
 | `model_bakeoff_out` | `public_source_or_runtime` | 2 | 0.000 GiB |
+| `private_runtime` | `public_source_or_runtime` | 2 | 0.000 GiB |
 | `tmp_v61_residual_probe_cases` | `generated_evidence` | 1 | 0.000 GiB |
-| `private_runtime` | `public_source_or_runtime` | 1 | 0.000 GiB |
 | `examples` | `public_source_or_runtime` | 3 | 0.000 GiB |
 | `external_model_profiles` | `public_source_or_runtime` | 1 | 0.000 GiB |
 

@@ -92,6 +92,11 @@ ROLLING_STATE_MAX_SESSIONS = 64
 ROLLING_STATE_MAX_TOMBSTONES = 128
 ROLLING_STATE_TOMBSTONE_SECONDS = 3600
 ROLLING_SESSION_PATTERN = re.compile(r"^[A-Za-z0-9_-]{16,64}$")
+CHAT_CANCEL_LOCK = threading.Lock()
+CHAT_CANCEL_EVENTS: dict[str, dict] = {}
+CHAT_CANCEL_MAX_ENTRIES = 128
+CHAT_CANCEL_TTL_SECONDS = 300
+CHAT_REQUEST_PATTERN = re.compile(r"^[A-Za-z0-9_-]{16,80}$")
 SERVER_INSTANCE_ID = secrets.token_urlsafe(16)
 CLIENT_CONTINUITY_EVENTS = {"active", "reset", "reload"}
 MEMORY_LOSS_STATES = {"reset", "reload", "expired", "restarted"}
@@ -108,8 +113,81 @@ def main() -> None:
     server.serve_forever()
 
 
+class ChatCancelled(Exception):
+    def __init__(self, request_id: str = "") -> None:
+        super().__init__("chat generation cancelled")
+        self.request_id = request_id
+
+
+class ChatRequestError(ValueError):
+    def __init__(self, message: str, status: int) -> None:
+        super().__init__(message)
+        self.status = status
+
+
+def prune_chat_cancel_events(now: float) -> None:
+    expired = [
+        request_id
+        for request_id, entry in CHAT_CANCEL_EVENTS.items()
+        if now - float(entry["created_at"]) > CHAT_CANCEL_TTL_SECONDS
+    ]
+    for request_id in expired:
+        entry = CHAT_CANCEL_EVENTS.pop(request_id)
+        entry["event"].set()
+
+
+def register_chat_request(request_id: str) -> threading.Event:
+    if not CHAT_REQUEST_PATTERN.fullmatch(request_id):
+        raise ChatRequestError("invalid chat request_id", 400)
+    with CHAT_CANCEL_LOCK:
+        prune_chat_cancel_events(time.monotonic())
+        if request_id in CHAT_CANCEL_EVENTS:
+            raise ChatRequestError("duplicate active chat request_id", 409)
+        if len(CHAT_CANCEL_EVENTS) >= CHAT_CANCEL_MAX_ENTRIES:
+            raise ChatRequestError("chat cancellation registry is at capacity", 503)
+        event = threading.Event()
+        CHAT_CANCEL_EVENTS[request_id] = {
+            "event": event,
+            "created_at": time.monotonic(),
+        }
+        return event
+
+
+def cancel_chat_request(request_id: str) -> dict:
+    if not CHAT_REQUEST_PATTERN.fullmatch(request_id):
+        raise ChatRequestError("invalid chat request_id", 400)
+    with CHAT_CANCEL_LOCK:
+        prune_chat_cancel_events(time.monotonic())
+        entry = CHAT_CANCEL_EVENTS.get(request_id)
+        if entry is not None:
+            entry["event"].set()
+        return {
+            "request_id": request_id,
+            "accepted": True,
+            "active": entry is not None,
+        }
+
+
+def unregister_chat_request(
+    request_id: str,
+    cancel_event: threading.Event | None,
+) -> None:
+    with CHAT_CANCEL_LOCK:
+        entry = CHAT_CANCEL_EVENTS.get(request_id)
+        if entry is not None and entry["event"] is cancel_event:
+            CHAT_CANCEL_EVENTS.pop(request_id, None)
+
+
+def raise_if_chat_cancelled(
+    cancel_event: threading.Event | None,
+    request_id: str = "",
+) -> None:
+    if cancel_event is not None and cancel_event.is_set():
+        raise ChatCancelled(request_id)
+
+
 class Handler(BaseHTTPRequestHandler):
-    server_version = "PSMProductAlpha/0.283"
+    server_version = "PSMProductAlpha/0.292"
 
     def do_GET(self) -> None:  # noqa: N802
         parsed = urlparse(self.path)
@@ -173,6 +251,7 @@ class Handler(BaseHTTPRequestHandler):
         if parsed.path not in {
             "/api/run",
             "/api/chat",
+            "/api/chat-cancel",
             "/api/trial-enrollment/action",
             "/api/trial-chat",
         }:
@@ -180,6 +259,9 @@ class Handler(BaseHTTPRequestHandler):
             return
         try:
             payload = self.read_json()
+            if parsed.path == "/api/chat-cancel":
+                self.write_json(cancel_chat_request(str(payload.get("request_id") or "")), no_store=True)
+                return
             if parsed.path == "/api/trial-enrollment/action":
                 self.write_json(handle_enrollment_action(payload), no_store=True)
                 return
@@ -188,6 +270,8 @@ class Handler(BaseHTTPRequestHandler):
                 return
             scenario = str(payload.get("scenario") or "review")
             if parsed.path == "/api/chat":
+                request_id = str(payload.get("request_id") or "")
+                cancel_event = register_chat_request(request_id) if request_id else None
                 messages = payload.get("messages") if isinstance(payload.get("messages"), list) else []
                 previous_graph = (
                     payload.get("task_state_graph")
@@ -200,21 +284,36 @@ class Handler(BaseHTTPRequestHandler):
                     client_event=str(payload.get("continuity_event") or "active"),
                     client_server_instance_id=str(payload.get("server_instance_id") or ""),
                 )
-                self.write_json(
-                    run_chat_turn(
-                        messages,
-                        scenario,
-                        previous_graph=previous_graph,
-                        rolling_user_statements=rolling_user_statements,
-                        rolling_state_metadata=rolling_state,
-                    ),
-                    no_store=True,
-                )
+                try:
+                    try:
+                        result = run_chat_turn(
+                            messages,
+                            scenario,
+                            previous_graph=previous_graph,
+                            rolling_user_statements=rolling_user_statements,
+                            rolling_state_metadata=rolling_state,
+                            cancel_event=cancel_event,
+                        )
+                    except ChatCancelled as exc:
+                        raise ChatCancelled(request_id) from exc
+                    raise_if_chat_cancelled(cancel_event, request_id)
+                    self.write_json(result, no_store=True)
+                finally:
+                    if request_id:
+                        unregister_chat_request(request_id, cancel_event)
                 return
             text = str(payload.get("text") or "").strip()
             if not text:
                 text = SCENARIOS.get(scenario, SCENARIOS["review"])
             self.write_json(run_demo_case(text, scenario))
+        except ChatCancelled as exc:
+            self.write_json(
+                {"error": "chat_cancelled", "request_id": exc.request_id},
+                status=499,
+                no_store=True,
+            )
+        except ChatRequestError as exc:
+            self.write_json({"error": str(exc)}, status=exc.status, no_store=True)
         except (EnrollmentError, FileNotFoundError) as exc:
             self.write_json({"error": str(exc), "trial_active": False}, status=409, no_store=True)
         except Exception as exc:  # pragma: no cover - local demo should surface errors.
@@ -227,13 +326,16 @@ class Handler(BaseHTTPRequestHandler):
 
     def write_json(self, payload: dict, *, status: int = 200, no_store: bool = False) -> None:
         body = json.dumps(payload, ensure_ascii=False, indent=2).encode("utf-8")
-        self.send_response(status)
-        self.send_header("Content-Type", "application/json; charset=utf-8")
-        if no_store:
-            self.send_header("Cache-Control", "no-store")
-        self.send_header("Content-Length", str(len(body)))
-        self.end_headers()
-        self.wfile.write(body)
+        try:
+            self.send_response(status)
+            self.send_header("Content-Type", "application/json; charset=utf-8")
+            if no_store:
+                self.send_header("Cache-Control", "no-store")
+            self.send_header("Content-Length", str(len(body)))
+            self.end_headers()
+            self.wfile.write(body)
+        except (BrokenPipeError, ConnectionResetError):
+            return
 
     def log_message(self, format: str, *args) -> None:  # noqa: A003
         return
@@ -468,6 +570,7 @@ def run_chat_turn(
     previous_graph: dict | None = None,
     rolling_user_statements: list[str] | None = None,
     rolling_state_metadata: dict | None = None,
+    cancel_event: threading.Event | None = None,
 ) -> dict:
     window_conversation = normalize_chat_messages(messages)
     conversation = merge_rolling_user_state(window_conversation, rolling_user_statements or [])
@@ -550,7 +653,9 @@ def run_chat_turn(
             project_context,
             verified_knowledge=verified_knowledge,
             route_execution=route_execution,
+            cancel_event=cancel_event,
         )
+    raise_if_chat_cancelled(cancel_event)
     assistant_message = generation["answer"]
     quality_audit = audit_chat_answer(
         current,
@@ -945,6 +1050,7 @@ def build_chat_generation(
     *,
     verified_knowledge: VerifiedKnowledge | None = None,
     route_execution: dict | None = None,
+    cancel_event: threading.Event | None = None,
 ) -> dict:
     text = current.strip()
     if intent == "identity":
@@ -1008,7 +1114,10 @@ def build_chat_generation(
         conversation,
         result,
         route_execution=route_execution,
+        cancel_event=cancel_event,
     )
+    if model_generation["status"] == "cancelled":
+        raise ChatCancelled()
     if model_generation["status"] != "success":
         return deterministic_generation(
             fallback_chat_answer(current, result, conversation),
@@ -1680,6 +1789,13 @@ def roadmap_answer(context: dict) -> str:
             "最后才启用现场监督会话。"
             f"当前需要：{context['required_decision']}"
         )
+    elif context["next_version"] == "PSM V0.293":
+        construction = (
+            "施工顺序是：先冻结并发容量、排队和拒绝策略；再验证重复 request_id、容量满、取消风暴、"
+            "客户端断线与完成响应之间的竞态；随后在主机和 Docker 压测请求登记表、线程回收与取消延迟，"
+            "确认容量满时拒绝新请求而不驱逐在途任务；最后跑浏览器和全量回归。"
+            "原始提示不进入登记表，未审核 token 仍不直接显示。"
+        )
     elif context["stage_blocked"]:
         construction = (
             "当前内部阶段的工程与评审已经完成，但下一阶段涉及外部范围、数据处理、部署、费用或凭证，"
@@ -1773,6 +1889,18 @@ def roadmap_answer(context: dict) -> str:
 
 
 def project_results_answer(context: dict) -> str:
+    if context["current_version"] == "PSM V0.292":
+        return (
+            "目前已完成到 PSM V0.292。主机与 Docker 各完成 3 次真实服务端取消，6/6 都返回"
+            " `499 chat_cancelled` 且没有释放部分答案；观察到的最慢停止时间分别为 38.49 毫秒和"
+            " 276.25 毫秒，取消后两端都能由 Ollama 正常完成重试。\n\n"
+            "真实浏览器桌面和手机都确认取消发生时服务端请求仍在执行；桌面交互取消为 466 毫秒，"
+            "取消回合没有助手答案，重试后保持恰好一问一答。249 项全量测试通过，磁盘原文 sentinel 为 0。"
+            "当前声明范围是服务端持有的 Ollama HTTP 连接和聊天工作线程已停止；没有直接量测模型内核/GPU 停止，"
+            "也没有开放未审核 token 的网络串流。\n\n"
+            f"当前本地聊天模型是 `{context['selected_model']}`。"
+            f"下一阶段是 {context['next_version']}：{context['next_objective']}"
+        )
     if context["current_version"] == "PSM V0.291":
         return (
             "目前已完成到 PSM V0.291。V0.290 实测正常本地模型生成约需 13 至 17 秒，"
@@ -2156,6 +2284,7 @@ def try_ollama_chat_generation(
     result: dict,
     *,
     route_execution: dict | None = None,
+    cancel_event: threading.Event | None = None,
 ) -> dict:
     state_capsule = build_conversation_state_capsule(conversation)
     prompt = build_chat_prompt(current, conversation, result, route_execution=route_execution)
@@ -2168,7 +2297,8 @@ def try_ollama_chat_generation(
             timeout_seconds=selected_chat_timeout_seconds(),
             temperature=0.0,
             max_tokens=max_tokens,
-        )
+        ),
+        cancel_event=cancel_event,
     )
     first_result = provider_result
     if provider_result.status == "success" and provider_result.finish_reason == "length":
@@ -2179,7 +2309,8 @@ def try_ollama_chat_generation(
                 timeout_seconds=selected_chat_timeout_seconds(),
                 temperature=0.0,
                 max_tokens=max(600, max_tokens * 2),
-            )
+            ),
+            cancel_event=cancel_event,
         )
     generation = provider_result.to_dict()
     generation["state_capsule"] = {

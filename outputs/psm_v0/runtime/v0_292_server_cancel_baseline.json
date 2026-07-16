@@ -1,0 +1,18 @@
+{
+  "schema_version": "psm_v0_292_server_cancel_baseline_v1",
+  "source_version": "PSM_V0.291",
+  "captured_before_implementation": true,
+  "observed": {
+    "browser_abort_controller_present": true,
+    "client_cancel_observed_ms": 37,
+    "request_id_sent_to_server": false,
+    "server_cancel_endpoint_present": false,
+    "server_cancel_registry_present": false,
+    "ollama_stream_mode": false,
+    "ollama_generation_cooperatively_cancelled": false,
+    "network_token_streaming_present": false
+  },
+  "baseline_decision": "client_wait_cancel_only_server_generation_continues",
+  "target_contract": "benchmarks/v0_292_server_cancel_contract.json",
+  "external_release_authority": false
+}

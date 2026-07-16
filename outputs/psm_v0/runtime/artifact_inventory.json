@@ -1,13 +1,13 @@
 {
   "schema_version": "psm_artifact_inventory_v1",
-  "generated_at": "2026-07-15T09:39:15.824000+00:00",
+  "generated_at": "2026-07-16T11:03:07.473816+00:00",
   "root": "outputs/psm_v0",
   "read_only_scan": true,
   "content_hashing_performed": false,
-  "metadata_sha256": "eb729f558c5b4970492edb732d9c8b96218bcbf8a4dc1e0be09127f9e6158732",
+  "metadata_sha256": "77be356b8f320d929a32a4de8bad5de7a9c60386ffef586fb87dba7b76164286",
   "summary": {
-    "files": 27091,
-    "bytes": 6475010591
+    "files": 27461,
+    "bytes": 6481785019
   },
   "directories": [
     {
@@ -61,20 +61,20 @@
     {
       "path": "project_status_out",
       "policy": "generated_evidence",
-      "files": 466,
-      "bytes": 16389812
+      "files": 495,
+      "bytes": 17762006
+    },
+    {
+      "path": "runtime",
+      "policy": "public_source_or_runtime",
+      "files": 451,
+      "bytes": 14488700
     },
     {
       "path": "state_encoder_out",
       "policy": "generated_evidence",
       "files": 60,
       "bytes": 11358271
-    },
-    {
-      "path": "runtime",
-      "policy": "public_source_or_runtime",
-      "files": 197,
-      "bytes": 10232697
     },
     {
       "path": "taxonomy_out",
@@ -97,8 +97,8 @@
     {
       "path": "psm_v0",
       "policy": "public_source_or_runtime",
-      "files": 119,
-      "bytes": 2553115
+      "files": 139,
+      "bytes": 2894134
     },
     {
       "path": "cases",
@@ -119,6 +119,12 @@
       "bytes": 1433039
     },
     {
+      "path": "work",
+      "policy": "public_source_or_runtime",
+      "files": 98,
+      "bytes": 1255908
+    },
+    {
       "path": "taxonomy_external_delta_out",
       "policy": "generated_evidence",
       "files": 216,
@@ -129,12 +135,6 @@
       "policy": "generated_evidence",
       "files": 220,
       "bytes": 1207492
-    },
-    {
-      "path": "work",
-      "policy": "public_source_or_runtime",
-      "files": 67,
-      "bytes": 971963
     },
     {
       "path": "evidence_trend_out",
@@ -161,6 +161,12 @@
       "bytes": 540361
     },
     {
+      "path": "benchmarks",
+      "policy": "public_source_or_runtime",
+      "files": 46,
+      "bytes": 522986
+    },
+    {
       "path": "regression_out",
       "policy": "generated_evidence",
       "files": 342,
@@ -179,16 +185,16 @@
       "bytes": 437612
     },
     {
+      "path": "product_alpha_app",
+      "policy": "public_source_or_runtime",
+      "files": 11,
+      "bytes": 418170
+    },
+    {
       "path": "external_hardening_out",
       "policy": "generated_evidence",
       "files": 218,
       "bytes": 413633
-    },
-    {
-      "path": "product_alpha_app",
-      "policy": "public_source_or_runtime",
-      "files": 11,
-      "bytes": 292734
     },
     {
       "path": "fixture_out",
@@ -209,16 +215,16 @@
       "bytes": 224893
     },
     {
-      "path": "benchmarks",
-      "policy": "public_source_or_runtime",
-      "files": 24,
-      "bytes": 202270
-    },
-    {
       "path": "compare_out",
       "policy": "generated_evidence",
       "files": 16,
       "bytes": 121767
+    },
+    {
+      "path": "tools",
+      "policy": "public_source_or_runtime",
+      "files": 10,
+      "bytes": 113908
     },
     {
       "path": "dataset_out",
@@ -233,28 +239,22 @@
       "bytes": 85625
     },
     {
-      "path": "tools",
-      "policy": "public_source_or_runtime",
-      "files": 6,
-      "bytes": 68955
-    },
-    {
       "path": "roadmap_out",
       "policy": "public_source_or_runtime",
-      "files": 40,
-      "bytes": 53331
+      "files": 49,
+      "bytes": 69413
     },
     {
       "path": ".",
       "policy": "public_source_or_runtime",
       "files": 10,
-      "bytes": 27483
+      "bytes": 30022
     },
     {
       "path": "product_alpha_out",
       "policy": "generated_evidence",
       "files": 7,
-      "bytes": 20655
+      "bytes": 21777
     },
     {
       "path": "model_bakeoff_out",
@@ -263,16 +263,16 @@
       "bytes": 17737
     },
     {
+      "path": "private_runtime",
+      "policy": "public_source_or_runtime",
+      "files": 2,
+      "bytes": 17024
+    },
+    {
       "path": "tmp_v61_residual_probe_cases",
       "policy": "generated_evidence",
       "files": 1,
       "bytes": 8521
-    },
-    {
-      "path": "private_runtime",
-      "policy": "public_source_or_runtime",
-      "files": 1,
-      "bytes": 6605
     },
     {
       "path": "examples",
