@@ -1,0 +1,55 @@
+{
+  "schema_version": "psm_v0_284_external_restart_recovery_promotion_manifest_v1",
+  "version": "PSM_V0.284",
+  "promoted_at": "2026-07-16",
+  "promoted": true,
+  "decision": "independent_external_restart_recovery_review_passed",
+  "formal_core_source": "PSM_V0.251",
+  "formal_core_records": 2228,
+  "external_restart_recovery_review": {
+    "schema_version": "psm_v0_284_external_restart_recovery_gate_v1",
+    "decision": "independent_external_restart_recovery_review_passed",
+    "passed": true,
+    "checks": {
+      "source_version_is_v0_283": true,
+      "package_gate_passed": true,
+      "package_hash_matches_judge": true,
+      "external_judge_passed": true,
+      "all_five_items_passed": true,
+      "failed_items_zero": true,
+      "critical_findings_zero": true,
+      "observed_tokens_within_authority": true,
+      "participant_content_zero": true,
+      "private_data_zero": true,
+      "persistent_memory_closed": true,
+      "external_release_closed": true
+    },
+    "provider": "OpenAI",
+    "model": "gpt-5.4-2026-03-05",
+    "items": 5,
+    "items_passed": 5,
+    "failed_item_ids": [],
+    "critical_findings": [],
+    "total_tokens": 1568,
+    "observed_cumulative_openai_tokens": 151984,
+    "token_authority_limit": 1000000,
+    "synthetic_only": true,
+    "human_validation_claimed": false,
+    "persistent_conversation_memory_enabled": false,
+    "external_release_authority": false
+  },
+  "release_boundary": {
+    "semantic_review_only": true,
+    "participant_content_submitted": false,
+    "training_feedback_written": false,
+    "persistent_conversation_memory_enabled": false,
+    "public_service_allowed": false,
+    "external_release_authority": false
+  },
+  "next_stage": {
+    "version": "PSM_V0.285",
+    "objective": "执行生命周期间断信号的对抗与并发完整性测试，覆盖伪造事件、旧实例重放、过期墓碑容量、并发 session 隔离和无原文写盘边界。",
+    "blocked": false,
+    "requires_user_input": false
+  }
+}

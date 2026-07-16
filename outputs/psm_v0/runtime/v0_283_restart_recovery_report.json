@@ -1,0 +1,103 @@
+{
+  "schema_version": "psm_v0_283_restart_recovery_report_v1",
+  "version": "PSM_V0.283-candidate",
+  "synthetic_only": true,
+  "baseline_passed": 0,
+  "baseline_failed": 5,
+  "summary": {
+    "cases": 5,
+    "passed": 5,
+    "failed": 0,
+    "states_observed": [
+      "active",
+      "expired",
+      "reload",
+      "reset",
+      "restarted"
+    ],
+    "fabricated_archived_facts": 0,
+    "project_files_changed_during_evaluation": []
+  },
+  "rows": [
+    {
+      "case_id": "C01",
+      "event": "active",
+      "observed_state": "active",
+      "answer_class": "archived_fact",
+      "checks": {
+        "state_exact": true,
+        "memory_availability_exact": true,
+        "recovery_flag_exact": true,
+        "recovery_action_exact": true,
+        "answer_boundary_exact": true,
+        "raw_conversation_not_persisted": true,
+        "external_release_closed": true
+      },
+      "passed": true
+    },
+    {
+      "case_id": "C02",
+      "event": "reset",
+      "observed_state": "reset",
+      "answer_class": "recovery_boundary",
+      "checks": {
+        "state_exact": true,
+        "memory_availability_exact": true,
+        "recovery_flag_exact": true,
+        "recovery_action_exact": true,
+        "answer_boundary_exact": true,
+        "raw_conversation_not_persisted": true,
+        "external_release_closed": true
+      },
+      "passed": true
+    },
+    {
+      "case_id": "C03",
+      "event": "reload",
+      "observed_state": "reload",
+      "answer_class": "recovery_boundary",
+      "checks": {
+        "state_exact": true,
+        "memory_availability_exact": true,
+        "recovery_flag_exact": true,
+        "recovery_action_exact": true,
+        "answer_boundary_exact": true,
+        "raw_conversation_not_persisted": true,
+        "external_release_closed": true
+      },
+      "passed": true
+    },
+    {
+      "case_id": "C04",
+      "event": "expired",
+      "observed_state": "expired",
+      "answer_class": "recovery_boundary",
+      "checks": {
+        "state_exact": true,
+        "memory_availability_exact": true,
+        "recovery_flag_exact": true,
+        "recovery_action_exact": true,
+        "answer_boundary_exact": true,
+        "raw_conversation_not_persisted": true,
+        "external_release_closed": true
+      },
+      "passed": true
+    },
+    {
+      "case_id": "C05",
+      "event": "restarted",
+      "observed_state": "restarted",
+      "answer_class": "recovery_boundary",
+      "checks": {
+        "state_exact": true,
+        "memory_availability_exact": true,
+        "recovery_flag_exact": true,
+        "recovery_action_exact": true,
+        "answer_boundary_exact": true,
+        "raw_conversation_not_persisted": true,
+        "external_release_closed": true
+      },
+      "passed": true
+    }
+  ]
+}

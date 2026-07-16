@@ -1,0 +1,90 @@
+{
+  "schema_version": "psm_v0_290_latency_budget_gate_v1",
+  "decision": "latency_budget_gate_passed",
+  "passed": true,
+  "checks": {
+    "host_all_latency_categories_pass": true,
+    "docker_all_latency_categories_pass": true,
+    "both_versions_are_v0_289": true,
+    "all_success_rates_exact": true,
+    "fallbacks_zero": true,
+    "external_release_closed": true
+  },
+  "host": {
+    "deterministic_recovery": {
+      "samples": 5,
+      "successes": 5,
+      "success_rate": 1.0,
+      "fallbacks": 0,
+      "p50_ms": 29.34,
+      "p95_ms": 34.34,
+      "minimum_ms": 28.6,
+      "maximum_ms": 34.34,
+      "limit_ms": 1000,
+      "passed": true
+    },
+    "deterministic_identity": {
+      "samples": 5,
+      "successes": 5,
+      "success_rate": 1.0,
+      "fallbacks": 0,
+      "p50_ms": 29.05,
+      "p95_ms": 29.62,
+      "minimum_ms": 27.2,
+      "maximum_ms": 29.62,
+      "limit_ms": 1000,
+      "passed": true
+    },
+    "local_model_generation": {
+      "samples": 3,
+      "successes": 3,
+      "success_rate": 1.0,
+      "fallbacks": 0,
+      "p50_ms": 16413.57,
+      "p95_ms": 16713.21,
+      "minimum_ms": 12675.35,
+      "maximum_ms": 16713.21,
+      "limit_ms": 60000,
+      "passed": true
+    }
+  },
+  "docker": {
+    "deterministic_recovery": {
+      "samples": 5,
+      "successes": 5,
+      "success_rate": 1.0,
+      "fallbacks": 0,
+      "p50_ms": 9.83,
+      "p95_ms": 37.49,
+      "minimum_ms": 7.67,
+      "maximum_ms": 37.49,
+      "limit_ms": 1000,
+      "passed": true
+    },
+    "deterministic_identity": {
+      "samples": 5,
+      "successes": 5,
+      "success_rate": 1.0,
+      "fallbacks": 0,
+      "p50_ms": 8.87,
+      "p95_ms": 12.55,
+      "minimum_ms": 6.5,
+      "maximum_ms": 12.55,
+      "limit_ms": 1000,
+      "passed": true
+    },
+    "local_model_generation": {
+      "samples": 3,
+      "successes": 3,
+      "success_rate": 1.0,
+      "fallbacks": 0,
+      "p50_ms": 13351.38,
+      "p95_ms": 16667.38,
+      "minimum_ms": 12230.61,
+      "maximum_ms": 16667.38,
+      "limit_ms": 60000,
+      "passed": true
+    }
+  },
+  "external_release_authority": false
+}

@@ -1,0 +1,53 @@
+{
+  "schema_version": "psm_v0_289_browser_natural_recovery_promotion_manifest_v1",
+  "version": "PSM_V0.289",
+  "promoted_at": "2026-07-16",
+  "promoted": true,
+  "decision": "natural_recovery_real_browser_gate_passed",
+  "formal_core_source": "PSM_V0.251",
+  "formal_core_records": 2228,
+  "browser_natural_recovery": {
+    "decision": "natural_recovery_real_browser_gate_passed",
+    "passed": true,
+    "checks": {
+      "source_version_is_v0_288": true,
+      "browser_report_passed": true,
+      "reset_reference_recovers": true,
+      "new_task_returns_to_active": true,
+      "reload_reference_recovers": true,
+      "restarted_reference_recovers": true,
+      "mobile_interaction_passed": true,
+      "desktop_and_mobile_no_overflow": true,
+      "console_errors_zero": true,
+      "human_feedback_zero": true,
+      "external_release_closed": true
+    },
+    "desktop_interactions": 4,
+    "mobile_interactions": 1,
+    "desktop_horizontal_overflow": false,
+    "mobile_horizontal_overflow": false,
+    "console_errors": 0,
+    "synthetic_only": true,
+    "human_validation_claimed": false,
+    "persistent_conversation_memory_enabled": false,
+    "external_release_authority": false
+  },
+  "evidence": {
+    "browser_report": "runtime/v0_289_natural_recovery_browser_regression/report.json",
+    "desktop_screenshot": "runtime/v0_289_natural_recovery_browser_regression/desktop-natural-recovery.png",
+    "mobile_screenshot": "runtime/v0_289_natural_recovery_browser_regression/mobile-natural-recovery.png"
+  },
+  "release_boundary": {
+    "human_validation_claimed": false,
+    "persistent_conversation_memory_enabled": false,
+    "public_service_allowed": false,
+    "rule_replacement_allowed": false,
+    "external_release_authority": false
+  },
+  "next_stage": {
+    "version": "PSM_V0.290",
+    "objective": "冻结并测量正常聊天、自然指代恢复与 Docker 生成的延迟预算，区分确定性恢复路径和本地模型生成瓶颈。",
+    "blocked": false,
+    "requires_user_input": false
+  }
+}

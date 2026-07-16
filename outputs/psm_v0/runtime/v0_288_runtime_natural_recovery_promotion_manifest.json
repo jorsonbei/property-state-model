@@ -1,0 +1,46 @@
+{
+  "schema_version": "psm_v0_288_runtime_natural_recovery_promotion_manifest_v1",
+  "version": "PSM_V0.288",
+  "promoted_at": "2026-07-16",
+  "promoted": true,
+  "decision": "host_docker_natural_recovery_runtime_gate_passed",
+  "formal_core_source": "PSM_V0.251",
+  "formal_core_records": 2228,
+  "runtime_natural_recovery": {
+    "decision": "host_docker_natural_recovery_runtime_gate_passed",
+    "passed": true,
+    "checks": {
+      "source_version_is_v0_287": true,
+      "runtime_boundary_passed": true,
+      "host_all_sixteen_pass": true,
+      "docker_all_sixteen_pass": true,
+      "sentinel_disk_writes_zero": true,
+      "persistent_memory_closed": true,
+      "external_release_closed": true
+    },
+    "host_cases": 16,
+    "host_passed": 16,
+    "docker_cases": 16,
+    "docker_passed": 16,
+    "natural_reference_cases_per_runtime": 12,
+    "new_task_controls_per_runtime": 4,
+    "sentinel_disk_writes": 0,
+    "synthetic_only": true,
+    "human_validation_claimed": false,
+    "persistent_conversation_memory_enabled": false,
+    "external_release_authority": false
+  },
+  "release_boundary": {
+    "human_validation_claimed": false,
+    "persistent_conversation_memory_enabled": false,
+    "public_service_allowed": false,
+    "rule_replacement_allowed": false,
+    "external_release_authority": false
+  },
+  "next_stage": {
+    "version": "PSM_V0.289",
+    "objective": "执行桌面与手机真实浏览器的自然指代恢复、连续性状态提示、正常新任务交互和布局回归。",
+    "blocked": false,
+    "requires_user_input": false
+  }
+}

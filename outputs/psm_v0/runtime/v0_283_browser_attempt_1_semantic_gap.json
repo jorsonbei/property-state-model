@@ -1,0 +1,9 @@
+{
+  "schema_version": "psm_v0_283_browser_attempt_1_semantic_gap_v1",
+  "candidate_version": "PSM_V0.283",
+  "functional_checks_passed": true,
+  "semantic_quality_passed": false,
+  "gap": "Sigma+ treated the machine-observed continuity event as an unsupported strong claim and produced a contradictory first sentence.",
+  "repair": "Bind continuity status to runtime provenance and use a direct prior-context-unavailable answer.",
+  "external_release_authority_changed": false
+}

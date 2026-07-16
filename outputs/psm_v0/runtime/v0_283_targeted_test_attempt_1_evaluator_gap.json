@@ -1,0 +1,14 @@
+{
+  "schema_version": "psm_v0_283_targeted_test_attempt_1_evaluator_gap_v1",
+  "source_version": "PSM_V0.282",
+  "candidate_version": "PSM_V0.283",
+  "tests_run": 18,
+  "tests_passed": 17,
+  "tests_failed": 1,
+  "product_failure": false,
+  "evaluator_gap": true,
+  "failed_test": "test_expiry_tombstones_are_hash_only_and_bounded",
+  "gap": "The first test expected a tombstone to remain after the matching expired request consumed it.",
+  "correction": "Verify hash-only retention using a second expired session while requiring the consumed tombstone to be removed.",
+  "release_authority_changed": false
+}

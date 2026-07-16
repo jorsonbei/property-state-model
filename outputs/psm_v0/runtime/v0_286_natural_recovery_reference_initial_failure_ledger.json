@@ -1,0 +1,108 @@
+{
+  "schema_version": "psm_v0_286_natural_recovery_reference_initial_failure_ledger_v1",
+  "source_version": "PSM_V0.285",
+  "captured_before_v0_286_repair": true,
+  "cases": 16,
+  "passed": 4,
+  "failed": 12,
+  "positive_true": 0,
+  "negative_false": 4,
+  "rows": [
+    {
+      "case_id": "N01",
+      "should_trigger_recovery": true,
+      "observed_trigger": false,
+      "passed": false
+    },
+    {
+      "case_id": "N02",
+      "should_trigger_recovery": true,
+      "observed_trigger": false,
+      "passed": false
+    },
+    {
+      "case_id": "N03",
+      "should_trigger_recovery": true,
+      "observed_trigger": false,
+      "passed": false
+    },
+    {
+      "case_id": "N04",
+      "should_trigger_recovery": true,
+      "observed_trigger": false,
+      "passed": false
+    },
+    {
+      "case_id": "N05",
+      "should_trigger_recovery": true,
+      "observed_trigger": false,
+      "passed": false
+    },
+    {
+      "case_id": "N06",
+      "should_trigger_recovery": true,
+      "observed_trigger": false,
+      "passed": false
+    },
+    {
+      "case_id": "N07",
+      "should_trigger_recovery": true,
+      "observed_trigger": false,
+      "passed": false
+    },
+    {
+      "case_id": "N08",
+      "should_trigger_recovery": true,
+      "observed_trigger": false,
+      "passed": false
+    },
+    {
+      "case_id": "N09",
+      "should_trigger_recovery": true,
+      "observed_trigger": false,
+      "passed": false
+    },
+    {
+      "case_id": "N10",
+      "should_trigger_recovery": true,
+      "observed_trigger": false,
+      "passed": false
+    },
+    {
+      "case_id": "N11",
+      "should_trigger_recovery": true,
+      "observed_trigger": false,
+      "passed": false
+    },
+    {
+      "case_id": "N12",
+      "should_trigger_recovery": true,
+      "observed_trigger": false,
+      "passed": false
+    },
+    {
+      "case_id": "N13",
+      "should_trigger_recovery": false,
+      "observed_trigger": false,
+      "passed": true
+    },
+    {
+      "case_id": "N14",
+      "should_trigger_recovery": false,
+      "observed_trigger": false,
+      "passed": true
+    },
+    {
+      "case_id": "N15",
+      "should_trigger_recovery": false,
+      "observed_trigger": false,
+      "passed": true
+    },
+    {
+      "case_id": "N16",
+      "should_trigger_recovery": false,
+      "observed_trigger": false,
+      "passed": true
+    }
+  ]
+}

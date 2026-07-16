@@ -1,0 +1,18 @@
+{
+  "schema_version": "psm_v0_284_external_restart_recovery_package_gate_v1",
+  "passed": true,
+  "checks": {
+    "source_version_promoted": true,
+    "source_promotion_gate_passed": true,
+    "exact_five_event_coverage": true,
+    "active_recovers_fact": true,
+    "memory_loss_answers_do_not_leak_fact": true,
+    "reserved_total_within_authority": true,
+    "privacy_boundary_closed": true,
+    "release_boundary_closed": true,
+    "prohibited_material_absent": true
+  },
+  "review_payload_sha256": "898f04faf75e25bfbac6438c9cee8aaa30488053347b6c93a07aa9858cb22e5e",
+  "package_sha256": "32c96e4454d6dc76a2faa90b66a7fbeb587c8eb64a3a4a7cf61ad9b4ca78bdbd",
+  "prohibited_material_found": []
+}

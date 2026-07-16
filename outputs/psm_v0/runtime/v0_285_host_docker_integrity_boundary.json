@@ -1,0 +1,56 @@
+{
+  "schema_version": "psm_v0_285_host_docker_integrity_boundary_v1",
+  "version": "PSM_V0.285-candidate",
+  "passed": true,
+  "synthetic_only": true,
+  "host": {
+    "version": "PSM V0.284",
+    "persistent_conversation_memory_enabled": false,
+    "events": {
+      "reset": {
+        "observed_state": "reset",
+        "memory_cleared": true,
+        "old_fact_resurrected": false
+      },
+      "reload": {
+        "observed_state": "reload",
+        "memory_cleared": true,
+        "old_fact_resurrected": false
+      },
+      "restarted": {
+        "observed_state": "restarted",
+        "memory_cleared": true,
+        "old_fact_resurrected": false
+      }
+    }
+  },
+  "docker": {
+    "version": "PSM V0.284",
+    "persistent_conversation_memory_enabled": false,
+    "events": {
+      "reset": {
+        "observed_state": "reset",
+        "memory_cleared": true,
+        "old_fact_resurrected": false
+      },
+      "reload": {
+        "observed_state": "reload",
+        "memory_cleared": true,
+        "old_fact_resurrected": false
+      },
+      "restarted": {
+        "observed_state": "restarted",
+        "memory_cleared": true,
+        "old_fact_resurrected": false
+      }
+    }
+  },
+  "checks": {
+    "host_all_events_clear_memory": true,
+    "docker_all_events_clear_memory": true,
+    "host_zero_resurrection": true,
+    "docker_zero_resurrection": true,
+    "persistent_memory_closed": true
+  },
+  "external_release_authority": false
+}

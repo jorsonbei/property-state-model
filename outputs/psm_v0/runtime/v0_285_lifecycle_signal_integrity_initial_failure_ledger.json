@@ -1,0 +1,58 @@
+{
+  "schema_version": "psm_v0_285_lifecycle_signal_integrity_initial_failure_ledger_v1",
+  "source_version": "PSM_V0.284",
+  "captured_before_v0_285_repair": true,
+  "cases": 8,
+  "passed": 5,
+  "failed": 3,
+  "rows": [
+    {
+      "case_id": "S01",
+      "family": "same_session_reset_no_resurrection",
+      "passed": false,
+      "detail": "memory_resurrected"
+    },
+    {
+      "case_id": "S02",
+      "family": "same_session_reload_no_resurrection",
+      "passed": false,
+      "detail": "memory_resurrected"
+    },
+    {
+      "case_id": "S03",
+      "family": "stale_instance_no_resurrection",
+      "passed": false,
+      "detail": "memory_resurrected"
+    },
+    {
+      "case_id": "S04",
+      "family": "unknown_event_ignored",
+      "passed": true,
+      "detail": "active"
+    },
+    {
+      "case_id": "S05",
+      "family": "message_replay_idempotent",
+      "passed": true,
+      "detail": "replay_ignored"
+    },
+    {
+      "case_id": "S06",
+      "family": "hash_tombstones_bounded",
+      "passed": true,
+      "detail": "tombstones=128"
+    },
+    {
+      "case_id": "S07",
+      "family": "concurrent_session_isolation",
+      "passed": true,
+      "detail": "isolated=32"
+    },
+    {
+      "case_id": "S08",
+      "family": "zero_user_statement_disk_writes",
+      "passed": true,
+      "detail": "changed=0"
+    }
+  ]
+}

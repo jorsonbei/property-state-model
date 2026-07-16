@@ -1,0 +1,382 @@
+{
+  "schema_version": "psm_v0_286_natural_recovery_reference_report_v1",
+  "version": "PSM_V0.286-candidate",
+  "synthetic_only": true,
+  "baseline_passed": 4,
+  "baseline_failed": 12,
+  "summary": {
+    "cases": 16,
+    "passed": 16,
+    "failed": 0,
+    "positive_recall": 1.0,
+    "negative_specificity": 1.0,
+    "memory_loss_answer_checks": 48,
+    "archived_fact_fabrications": 0
+  },
+  "rows": [
+    {
+      "case_id": "N01",
+      "should_trigger_recovery": true,
+      "observed_trigger": true,
+      "state_checks": [
+        {
+          "state": "reset",
+          "boundary_visible": true,
+          "archived_fact_fabricated": false
+        },
+        {
+          "state": "reload",
+          "boundary_visible": true,
+          "archived_fact_fabricated": false
+        },
+        {
+          "state": "expired",
+          "boundary_visible": true,
+          "archived_fact_fabricated": false
+        },
+        {
+          "state": "restarted",
+          "boundary_visible": true,
+          "archived_fact_fabricated": false
+        }
+      ],
+      "passed": true
+    },
+    {
+      "case_id": "N02",
+      "should_trigger_recovery": true,
+      "observed_trigger": true,
+      "state_checks": [
+        {
+          "state": "reset",
+          "boundary_visible": true,
+          "archived_fact_fabricated": false
+        },
+        {
+          "state": "reload",
+          "boundary_visible": true,
+          "archived_fact_fabricated": false
+        },
+        {
+          "state": "expired",
+          "boundary_visible": true,
+          "archived_fact_fabricated": false
+        },
+        {
+          "state": "restarted",
+          "boundary_visible": true,
+          "archived_fact_fabricated": false
+        }
+      ],
+      "passed": true
+    },
+    {
+      "case_id": "N03",
+      "should_trigger_recovery": true,
+      "observed_trigger": true,
+      "state_checks": [
+        {
+          "state": "reset",
+          "boundary_visible": true,
+          "archived_fact_fabricated": false
+        },
+        {
+          "state": "reload",
+          "boundary_visible": true,
+          "archived_fact_fabricated": false
+        },
+        {
+          "state": "expired",
+          "boundary_visible": true,
+          "archived_fact_fabricated": false
+        },
+        {
+          "state": "restarted",
+          "boundary_visible": true,
+          "archived_fact_fabricated": false
+        }
+      ],
+      "passed": true
+    },
+    {
+      "case_id": "N04",
+      "should_trigger_recovery": true,
+      "observed_trigger": true,
+      "state_checks": [
+        {
+          "state": "reset",
+          "boundary_visible": true,
+          "archived_fact_fabricated": false
+        },
+        {
+          "state": "reload",
+          "boundary_visible": true,
+          "archived_fact_fabricated": false
+        },
+        {
+          "state": "expired",
+          "boundary_visible": true,
+          "archived_fact_fabricated": false
+        },
+        {
+          "state": "restarted",
+          "boundary_visible": true,
+          "archived_fact_fabricated": false
+        }
+      ],
+      "passed": true
+    },
+    {
+      "case_id": "N05",
+      "should_trigger_recovery": true,
+      "observed_trigger": true,
+      "state_checks": [
+        {
+          "state": "reset",
+          "boundary_visible": true,
+          "archived_fact_fabricated": false
+        },
+        {
+          "state": "reload",
+          "boundary_visible": true,
+          "archived_fact_fabricated": false
+        },
+        {
+          "state": "expired",
+          "boundary_visible": true,
+          "archived_fact_fabricated": false
+        },
+        {
+          "state": "restarted",
+          "boundary_visible": true,
+          "archived_fact_fabricated": false
+        }
+      ],
+      "passed": true
+    },
+    {
+      "case_id": "N06",
+      "should_trigger_recovery": true,
+      "observed_trigger": true,
+      "state_checks": [
+        {
+          "state": "reset",
+          "boundary_visible": true,
+          "archived_fact_fabricated": false
+        },
+        {
+          "state": "reload",
+          "boundary_visible": true,
+          "archived_fact_fabricated": false
+        },
+        {
+          "state": "expired",
+          "boundary_visible": true,
+          "archived_fact_fabricated": false
+        },
+        {
+          "state": "restarted",
+          "boundary_visible": true,
+          "archived_fact_fabricated": false
+        }
+      ],
+      "passed": true
+    },
+    {
+      "case_id": "N07",
+      "should_trigger_recovery": true,
+      "observed_trigger": true,
+      "state_checks": [
+        {
+          "state": "reset",
+          "boundary_visible": true,
+          "archived_fact_fabricated": false
+        },
+        {
+          "state": "reload",
+          "boundary_visible": true,
+          "archived_fact_fabricated": false
+        },
+        {
+          "state": "expired",
+          "boundary_visible": true,
+          "archived_fact_fabricated": false
+        },
+        {
+          "state": "restarted",
+          "boundary_visible": true,
+          "archived_fact_fabricated": false
+        }
+      ],
+      "passed": true
+    },
+    {
+      "case_id": "N08",
+      "should_trigger_recovery": true,
+      "observed_trigger": true,
+      "state_checks": [
+        {
+          "state": "reset",
+          "boundary_visible": true,
+          "archived_fact_fabricated": false
+        },
+        {
+          "state": "reload",
+          "boundary_visible": true,
+          "archived_fact_fabricated": false
+        },
+        {
+          "state": "expired",
+          "boundary_visible": true,
+          "archived_fact_fabricated": false
+        },
+        {
+          "state": "restarted",
+          "boundary_visible": true,
+          "archived_fact_fabricated": false
+        }
+      ],
+      "passed": true
+    },
+    {
+      "case_id": "N09",
+      "should_trigger_recovery": true,
+      "observed_trigger": true,
+      "state_checks": [
+        {
+          "state": "reset",
+          "boundary_visible": true,
+          "archived_fact_fabricated": false
+        },
+        {
+          "state": "reload",
+          "boundary_visible": true,
+          "archived_fact_fabricated": false
+        },
+        {
+          "state": "expired",
+          "boundary_visible": true,
+          "archived_fact_fabricated": false
+        },
+        {
+          "state": "restarted",
+          "boundary_visible": true,
+          "archived_fact_fabricated": false
+        }
+      ],
+      "passed": true
+    },
+    {
+      "case_id": "N10",
+      "should_trigger_recovery": true,
+      "observed_trigger": true,
+      "state_checks": [
+        {
+          "state": "reset",
+          "boundary_visible": true,
+          "archived_fact_fabricated": false
+        },
+        {
+          "state": "reload",
+          "boundary_visible": true,
+          "archived_fact_fabricated": false
+        },
+        {
+          "state": "expired",
+          "boundary_visible": true,
+          "archived_fact_fabricated": false
+        },
+        {
+          "state": "restarted",
+          "boundary_visible": true,
+          "archived_fact_fabricated": false
+        }
+      ],
+      "passed": true
+    },
+    {
+      "case_id": "N11",
+      "should_trigger_recovery": true,
+      "observed_trigger": true,
+      "state_checks": [
+        {
+          "state": "reset",
+          "boundary_visible": true,
+          "archived_fact_fabricated": false
+        },
+        {
+          "state": "reload",
+          "boundary_visible": true,
+          "archived_fact_fabricated": false
+        },
+        {
+          "state": "expired",
+          "boundary_visible": true,
+          "archived_fact_fabricated": false
+        },
+        {
+          "state": "restarted",
+          "boundary_visible": true,
+          "archived_fact_fabricated": false
+        }
+      ],
+      "passed": true
+    },
+    {
+      "case_id": "N12",
+      "should_trigger_recovery": true,
+      "observed_trigger": true,
+      "state_checks": [
+        {
+          "state": "reset",
+          "boundary_visible": true,
+          "archived_fact_fabricated": false
+        },
+        {
+          "state": "reload",
+          "boundary_visible": true,
+          "archived_fact_fabricated": false
+        },
+        {
+          "state": "expired",
+          "boundary_visible": true,
+          "archived_fact_fabricated": false
+        },
+        {
+          "state": "restarted",
+          "boundary_visible": true,
+          "archived_fact_fabricated": false
+        }
+      ],
+      "passed": true
+    },
+    {
+      "case_id": "N13",
+      "should_trigger_recovery": false,
+      "observed_trigger": false,
+      "state_checks": [],
+      "passed": true
+    },
+    {
+      "case_id": "N14",
+      "should_trigger_recovery": false,
+      "observed_trigger": false,
+      "state_checks": [],
+      "passed": true
+    },
+    {
+      "case_id": "N15",
+      "should_trigger_recovery": false,
+      "observed_trigger": false,
+      "state_checks": [],
+      "passed": true
+    },
+    {
+      "case_id": "N16",
+      "should_trigger_recovery": false,
+      "observed_trigger": false,
+      "state_checks": [],
+      "passed": true
+    }
+  ]
+}

@@ -1,0 +1,40 @@
+{
+  "schema_version": "psm_v0_283_restart_recovery_initial_failure_ledger_v1",
+  "source_version": "PSM_V0.282",
+  "captured_before_v0_283_implementation": true,
+  "cases": 5,
+  "passed": 0,
+  "failed": 5,
+  "rows": [
+    {
+      "case_id": "C01",
+      "expected_state": "active",
+      "observed_state": null,
+      "passed": false
+    },
+    {
+      "case_id": "C02",
+      "expected_state": "reset",
+      "observed_state": null,
+      "passed": false
+    },
+    {
+      "case_id": "C03",
+      "expected_state": "reload",
+      "observed_state": null,
+      "passed": false
+    },
+    {
+      "case_id": "C04",
+      "expected_state": "expired",
+      "observed_state": null,
+      "passed": false
+    },
+    {
+      "case_id": "C05",
+      "expected_state": "restarted",
+      "observed_state": null,
+      "passed": false
+    }
+  ]
+}

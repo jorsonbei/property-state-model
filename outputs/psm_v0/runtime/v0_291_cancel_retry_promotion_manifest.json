@@ -1,0 +1,53 @@
+{
+  "schema_version": "psm_v0_291_cancel_retry_promotion_manifest_v1",
+  "version": "PSM_V0.291",
+  "promoted_at": "2026-07-16",
+  "promoted": true,
+  "decision": "client_cancel_retry_interaction_gate_passed",
+  "formal_core_source": "PSM_V0.251",
+  "formal_core_records": 2228,
+  "cancel_retry_interaction": {
+    "decision": "client_cancel_retry_interaction_gate_passed",
+    "passed": true,
+    "checks": {
+      "source_version_is_v0_290": true,
+      "browser_report_passed": true,
+      "cancel_under_one_second": true,
+      "prompt_preserved": true,
+      "cancelled_turn_not_duplicated": true,
+      "retry_single_turn_completed": true,
+      "mobile_no_overflow": true,
+      "console_errors_zero": true,
+      "server_cancel_not_overclaimed": true,
+      "network_streaming_not_overclaimed": true,
+      "external_release_closed": true
+    },
+    "cancellation_scope": "client_transport_wait_only",
+    "cancel_p95_claimed": false,
+    "observed_cancel_ms": 37,
+    "server_generation_cancellation_claimed": false,
+    "network_streaming_claimed": false,
+    "synthetic_only": true,
+    "human_validation_claimed": false,
+    "persistent_conversation_memory_enabled": false,
+    "external_release_authority": false
+  },
+  "evidence": {
+    "browser_report": "runtime/v0_291_cancel_retry_browser_regression/report.json",
+    "desktop_screenshot": "runtime/v0_291_cancel_retry_browser_regression/desktop-cancel-retry.png",
+    "mobile_screenshot": "runtime/v0_291_cancel_retry_browser_regression/mobile-cancel-controls.png"
+  },
+  "release_boundary": {
+    "human_validation_claimed": false,
+    "persistent_conversation_memory_enabled": false,
+    "public_service_allowed": false,
+    "rule_replacement_allowed": false,
+    "external_release_authority": false
+  },
+  "next_stage": {
+    "version": "PSM_V0.292",
+    "objective": "评估服务端生成取消与真正网络流式输出，先验证 Ollama 协议和线程资源回收，不把客户端 abort 误写成推理已停止。",
+    "blocked": false,
+    "requires_user_input": false
+  }
+}

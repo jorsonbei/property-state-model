@@ -1,0 +1,20 @@
+{
+  "schema_version": "psm_v0_285_lifecycle_signal_integrity_gate_v1",
+  "decision": "lifecycle_signal_integrity_gate_passed",
+  "passed": true,
+  "checks": {
+    "baseline_retained_at_five_of_eight": true,
+    "all_eight_cases_pass": true,
+    "zero_memory_resurrection": true,
+    "zero_cross_session_leaks": true,
+    "zero_user_statement_disk_writes": true,
+    "external_release_closed": true
+  },
+  "summary": {
+    "cases": 8,
+    "passed": 8,
+    "failed": 0,
+    "memory_resurrection_events": 0,
+    "cross_session_leaks": 0
+  }
+}

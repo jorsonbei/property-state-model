@@ -1,0 +1,57 @@
+{
+  "schema_version": "psm_v0_283_restart_recovery_contract_v1",
+  "version": "PSM_V0.283-candidate",
+  "source_version": "PSM_V0.282",
+  "synthetic_only": true,
+  "frozen": true,
+  "case_sha256": "3b45cbeadb936c536b6c5a53f564cc3a95a0d4f8bd9248084641122500618a0e",
+  "cases": [
+    {
+      "case_id": "C01",
+      "event": "active",
+      "expected_state": "active"
+    },
+    {
+      "case_id": "C02",
+      "event": "reset",
+      "expected_state": "reset"
+    },
+    {
+      "case_id": "C03",
+      "event": "reload",
+      "expected_state": "reload"
+    },
+    {
+      "case_id": "C04",
+      "event": "expired",
+      "expected_state": "expired"
+    },
+    {
+      "case_id": "C05",
+      "event": "restarted",
+      "expected_state": "restarted"
+    }
+  ],
+  "requirements": {
+    "states_distinguishable": [
+      "active",
+      "reset",
+      "reload",
+      "expired",
+      "restarted"
+    ],
+    "memory_loss_states": [
+      "reset",
+      "reload",
+      "expired",
+      "restarted"
+    ],
+    "archived_fact_fabrication_allowed": false,
+    "recovery_action": "restate_context",
+    "raw_conversation_disk_persistence": false,
+    "cross_session_leaks_allowed": 0,
+    "host_and_docker_required": true,
+    "desktop_and_mobile_required": true,
+    "external_release_authority": false
+  }
+}

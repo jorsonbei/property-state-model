@@ -8,6 +8,7 @@ from product_alpha_app import server
 class RollingStateHandoffTests(unittest.TestCase):
     def setUp(self) -> None:
         server.ROLLING_STATE_SESSIONS.clear()
+        server.ROLLING_STATE_TOMBSTONES.clear()
 
     def test_archived_user_fact_survives_the_120_message_window(self) -> None:
         messages = [

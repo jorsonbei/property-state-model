@@ -1,0 +1,316 @@
+{
+  "schema_version": "psm_v0_288_host_docker_natural_recovery_boundary_v1",
+  "version": "PSM_V0.288-candidate",
+  "passed": true,
+  "synthetic_only": true,
+  "host": {
+    "version": "PSM V0.287",
+    "continuity_protocol": "psm_v0_283_restart_recovery_v1",
+    "persistent_conversation_memory_enabled": false,
+    "ready_for_external_user_trial": false,
+    "positive_passed": 12,
+    "negative_passed": 4,
+    "positive_rows": [
+      {
+        "case_id": "N01",
+        "requested_state": "reset",
+        "observed_state": "reset",
+        "memory_cleared": true,
+        "boundary_visible": true,
+        "archived_fact_fabricated": false,
+        "passed": true
+      },
+      {
+        "case_id": "N02",
+        "requested_state": "reload",
+        "observed_state": "reload",
+        "memory_cleared": true,
+        "boundary_visible": true,
+        "archived_fact_fabricated": false,
+        "passed": true
+      },
+      {
+        "case_id": "N03",
+        "requested_state": "expired",
+        "observed_state": "expired",
+        "memory_cleared": false,
+        "boundary_visible": true,
+        "archived_fact_fabricated": false,
+        "passed": true
+      },
+      {
+        "case_id": "N04",
+        "requested_state": "restarted",
+        "observed_state": "restarted",
+        "memory_cleared": true,
+        "boundary_visible": true,
+        "archived_fact_fabricated": false,
+        "passed": true
+      },
+      {
+        "case_id": "N05",
+        "requested_state": "reset",
+        "observed_state": "reset",
+        "memory_cleared": true,
+        "boundary_visible": true,
+        "archived_fact_fabricated": false,
+        "passed": true
+      },
+      {
+        "case_id": "N06",
+        "requested_state": "reload",
+        "observed_state": "reload",
+        "memory_cleared": true,
+        "boundary_visible": true,
+        "archived_fact_fabricated": false,
+        "passed": true
+      },
+      {
+        "case_id": "N07",
+        "requested_state": "expired",
+        "observed_state": "expired",
+        "memory_cleared": false,
+        "boundary_visible": true,
+        "archived_fact_fabricated": false,
+        "passed": true
+      },
+      {
+        "case_id": "N08",
+        "requested_state": "restarted",
+        "observed_state": "restarted",
+        "memory_cleared": true,
+        "boundary_visible": true,
+        "archived_fact_fabricated": false,
+        "passed": true
+      },
+      {
+        "case_id": "N09",
+        "requested_state": "reset",
+        "observed_state": "reset",
+        "memory_cleared": true,
+        "boundary_visible": true,
+        "archived_fact_fabricated": false,
+        "passed": true
+      },
+      {
+        "case_id": "N10",
+        "requested_state": "reload",
+        "observed_state": "reload",
+        "memory_cleared": true,
+        "boundary_visible": true,
+        "archived_fact_fabricated": false,
+        "passed": true
+      },
+      {
+        "case_id": "N11",
+        "requested_state": "expired",
+        "observed_state": "expired",
+        "memory_cleared": false,
+        "boundary_visible": true,
+        "archived_fact_fabricated": false,
+        "passed": true
+      },
+      {
+        "case_id": "N12",
+        "requested_state": "restarted",
+        "observed_state": "restarted",
+        "memory_cleared": true,
+        "boundary_visible": true,
+        "archived_fact_fabricated": false,
+        "passed": true
+      }
+    ],
+    "negative_rows": [
+      {
+        "case_id": "N13",
+        "observed_state": "active",
+        "false_recovery_refusal": false,
+        "nonempty_answer": true,
+        "passed": true
+      },
+      {
+        "case_id": "N14",
+        "observed_state": "active",
+        "false_recovery_refusal": false,
+        "nonempty_answer": true,
+        "passed": true
+      },
+      {
+        "case_id": "N15",
+        "observed_state": "active",
+        "false_recovery_refusal": false,
+        "nonempty_answer": true,
+        "passed": true
+      },
+      {
+        "case_id": "N16",
+        "observed_state": "active",
+        "false_recovery_refusal": false,
+        "nonempty_answer": true,
+        "passed": true
+      }
+    ]
+  },
+  "docker": {
+    "version": "PSM V0.287",
+    "continuity_protocol": "psm_v0_283_restart_recovery_v1",
+    "persistent_conversation_memory_enabled": false,
+    "ready_for_external_user_trial": false,
+    "positive_passed": 12,
+    "negative_passed": 4,
+    "positive_rows": [
+      {
+        "case_id": "N01",
+        "requested_state": "reset",
+        "observed_state": "reset",
+        "memory_cleared": true,
+        "boundary_visible": true,
+        "archived_fact_fabricated": false,
+        "passed": true
+      },
+      {
+        "case_id": "N02",
+        "requested_state": "reload",
+        "observed_state": "reload",
+        "memory_cleared": true,
+        "boundary_visible": true,
+        "archived_fact_fabricated": false,
+        "passed": true
+      },
+      {
+        "case_id": "N03",
+        "requested_state": "expired",
+        "observed_state": "expired",
+        "memory_cleared": false,
+        "boundary_visible": true,
+        "archived_fact_fabricated": false,
+        "passed": true
+      },
+      {
+        "case_id": "N04",
+        "requested_state": "restarted",
+        "observed_state": "restarted",
+        "memory_cleared": true,
+        "boundary_visible": true,
+        "archived_fact_fabricated": false,
+        "passed": true
+      },
+      {
+        "case_id": "N05",
+        "requested_state": "reset",
+        "observed_state": "reset",
+        "memory_cleared": true,
+        "boundary_visible": true,
+        "archived_fact_fabricated": false,
+        "passed": true
+      },
+      {
+        "case_id": "N06",
+        "requested_state": "reload",
+        "observed_state": "reload",
+        "memory_cleared": true,
+        "boundary_visible": true,
+        "archived_fact_fabricated": false,
+        "passed": true
+      },
+      {
+        "case_id": "N07",
+        "requested_state": "expired",
+        "observed_state": "expired",
+        "memory_cleared": false,
+        "boundary_visible": true,
+        "archived_fact_fabricated": false,
+        "passed": true
+      },
+      {
+        "case_id": "N08",
+        "requested_state": "restarted",
+        "observed_state": "restarted",
+        "memory_cleared": true,
+        "boundary_visible": true,
+        "archived_fact_fabricated": false,
+        "passed": true
+      },
+      {
+        "case_id": "N09",
+        "requested_state": "reset",
+        "observed_state": "reset",
+        "memory_cleared": true,
+        "boundary_visible": true,
+        "archived_fact_fabricated": false,
+        "passed": true
+      },
+      {
+        "case_id": "N10",
+        "requested_state": "reload",
+        "observed_state": "reload",
+        "memory_cleared": true,
+        "boundary_visible": true,
+        "archived_fact_fabricated": false,
+        "passed": true
+      },
+      {
+        "case_id": "N11",
+        "requested_state": "expired",
+        "observed_state": "expired",
+        "memory_cleared": false,
+        "boundary_visible": true,
+        "archived_fact_fabricated": false,
+        "passed": true
+      },
+      {
+        "case_id": "N12",
+        "requested_state": "restarted",
+        "observed_state": "restarted",
+        "memory_cleared": true,
+        "boundary_visible": true,
+        "archived_fact_fabricated": false,
+        "passed": true
+      }
+    ],
+    "negative_rows": [
+      {
+        "case_id": "N13",
+        "observed_state": "active",
+        "false_recovery_refusal": false,
+        "nonempty_answer": true,
+        "passed": true
+      },
+      {
+        "case_id": "N14",
+        "observed_state": "active",
+        "false_recovery_refusal": false,
+        "nonempty_answer": true,
+        "passed": true
+      },
+      {
+        "case_id": "N15",
+        "observed_state": "active",
+        "false_recovery_refusal": false,
+        "nonempty_answer": true,
+        "passed": true
+      },
+      {
+        "case_id": "N16",
+        "observed_state": "active",
+        "false_recovery_refusal": false,
+        "nonempty_answer": true,
+        "passed": true
+      }
+    ]
+  },
+  "sentinel_disk_hits": [],
+  "checks": {
+    "host_version_is_v0_287": true,
+    "docker_version_is_v0_287": true,
+    "host_twelve_natural_references_pass": true,
+    "docker_twelve_natural_references_pass": true,
+    "host_four_new_tasks_pass": true,
+    "docker_four_new_tasks_pass": true,
+    "persistent_memory_closed": true,
+    "external_release_closed": true,
+    "runtime_sentinel_disk_writes_zero": true
+  },
+  "human_validation_claimed": false,
+  "external_release_authority": false
+}

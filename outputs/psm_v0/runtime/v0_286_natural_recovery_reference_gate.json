@@ -1,0 +1,23 @@
+{
+  "schema_version": "psm_v0_286_natural_recovery_reference_gate_v1",
+  "decision": "natural_recovery_reference_gate_passed",
+  "passed": true,
+  "checks": {
+    "baseline_retained_at_four_of_sixteen": true,
+    "all_sixteen_detection_cases_pass": true,
+    "positive_recall_exact": true,
+    "negative_specificity_exact": true,
+    "all_forty_eight_loss_answers_checked": true,
+    "zero_archived_fact_fabrication": true,
+    "external_release_closed": true
+  },
+  "summary": {
+    "cases": 16,
+    "passed": 16,
+    "failed": 0,
+    "positive_recall": 1.0,
+    "negative_specificity": 1.0,
+    "memory_loss_answer_checks": 48,
+    "archived_fact_fabrications": 0
+  }
+}

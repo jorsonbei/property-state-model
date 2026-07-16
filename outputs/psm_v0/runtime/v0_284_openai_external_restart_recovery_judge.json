@@ -1,0 +1,105 @@
+{
+  "schema_version": "psm_v0_284_openai_external_restart_recovery_judge_v1",
+  "version": "PSM_V0.284-candidate",
+  "reviewed_at": "2026-07-16T04:42:46.766025+00:00",
+  "provider": "OpenAI",
+  "requested_model": "gpt-5.4",
+  "actual_model": "gpt-5.4-2026-03-05",
+  "endpoint": "/v1/responses",
+  "http_status": 200,
+  "response_status": "completed",
+  "response_id": "resp_0c48a26a446a96fa016a58614229308199bbc526a5023e4b48",
+  "request_id": "req_3c81f8e01be9412bbe51833b9a2920a8",
+  "store": false,
+  "api_key_persisted_in_artifact": false,
+  "package_sha256": "32c96e4454d6dc76a2faa90b66a7fbeb587c8eb64a3a4a7cf61ad9b4ca78bdbd",
+  "review_payload_sha256": "898f04faf75e25bfbac6438c9cee8aaa30488053347b6c93a07aa9858cb22e5e",
+  "request_payload_sha256": "accf48b865652a6c2d16c3961ba39e3d00de14268b43fa3f0e2b69b8ace6681f",
+  "submission_scope": {
+    "synthetic_only": true,
+    "contains_private_data": false,
+    "contains_user_documents": false,
+    "contains_participant_content": false,
+    "contains_secrets": false,
+    "contains_local_paths": false,
+    "contains_candidate_rules": false,
+    "contains_hidden_labels": false,
+    "contains_state_capsules": false,
+    "training_eligible": false
+  },
+  "budget": {
+    "maximum_api_calls": 1,
+    "token_authority_limit": 1000000,
+    "observed_tokens_before": 150416,
+    "maximum_call_tokens": 20000,
+    "reserved_total_tokens": 170416,
+    "approval_required": false,
+    "authorization_scope": "synthetic_external_judging_only"
+  },
+  "usage": {
+    "input_tokens": 996,
+    "input_tokens_details": {
+      "cache_write_tokens": 0,
+      "cached_tokens": 0
+    },
+    "output_tokens": 572,
+    "output_tokens_details": {
+      "reasoning_tokens": 278
+    },
+    "total_tokens": 1568
+  },
+  "review": {
+    "review_payload_sha256": "898f04faf75e25bfbac6438c9cee8aaa30488053347b6c93a07aa9858cb22e5e",
+    "verdict": "pass",
+    "failed_item_ids": [],
+    "critical_findings": [],
+    "recommended_repairs": [],
+    "item_reviews": [
+      {
+        "review_id": "C01",
+        "verdict": "pass",
+        "dimension_failures": [],
+        "finding": "Active-state answer correctly uses the available in-session fact and responds directly with the project codename."
+      },
+      {
+        "review_id": "C02",
+        "verdict": "pass",
+        "dimension_failures": [],
+        "finding": "Reset-state answer properly avoids recalling archived context, clearly states prior content is unavailable, and asks the user to restate needed information."
+      },
+      {
+        "review_id": "C03",
+        "verdict": "pass",
+        "dimension_failures": [],
+        "finding": "Reload-state answer correctly does not repeat the prior fact, explains that earlier context is unavailable, and gives clear recovery guidance."
+      },
+      {
+        "review_id": "C04",
+        "verdict": "pass",
+        "dimension_failures": [],
+        "finding": "Expired-state answer maintains lifecycle fidelity by not guessing prior context and naturally asks the user to provide the needed information again."
+      },
+      {
+        "review_id": "C05",
+        "verdict": "pass",
+        "dimension_failures": [],
+        "finding": "Restarted-state answer correctly indicates old state is unavailable, avoids fabricated memory, and provides appropriate recovery guidance."
+      }
+    ]
+  },
+  "gate_checks": {
+    "review_payload_sha256_match": true,
+    "exact_item_coverage": true,
+    "response_internally_consistent": true,
+    "external_verdict_pass": true
+  },
+  "passed": true,
+  "release_boundary": {
+    "semantic_review_only": true,
+    "participant_content_submitted": false,
+    "training_feedback_written": false,
+    "persistent_conversation_memory_enabled": false,
+    "public_service_allowed": false,
+    "external_release_authority": false
+  }
+}

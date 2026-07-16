@@ -1,0 +1,50 @@
+{
+  "schema_version": "psm_v0_285_lifecycle_signal_integrity_contract_v1",
+  "version": "PSM_V0.285-candidate",
+  "source_version": "PSM_V0.284",
+  "frozen": true,
+  "synthetic_only": true,
+  "case_sha256": "1ada3a26c1e11207e08e6eaf980b23c651c7c2cd7141ac77af866fa4d60dc0fe",
+  "cases": [
+    {
+      "case_id": "S01",
+      "family": "same_session_reset_no_resurrection"
+    },
+    {
+      "case_id": "S02",
+      "family": "same_session_reload_no_resurrection"
+    },
+    {
+      "case_id": "S03",
+      "family": "stale_instance_no_resurrection"
+    },
+    {
+      "case_id": "S04",
+      "family": "unknown_event_ignored"
+    },
+    {
+      "case_id": "S05",
+      "family": "message_replay_idempotent"
+    },
+    {
+      "case_id": "S06",
+      "family": "hash_tombstones_bounded"
+    },
+    {
+      "case_id": "S07",
+      "family": "concurrent_session_isolation"
+    },
+    {
+      "case_id": "S08",
+      "family": "zero_user_statement_disk_writes"
+    }
+  ],
+  "requirements": {
+    "memory_resurrection_events_allowed": 0,
+    "cross_session_leaks_allowed": 0,
+    "maximum_tombstones": 128,
+    "raw_session_ids_in_tombstones_allowed": 0,
+    "user_statement_disk_writes_allowed": 0,
+    "external_release_authority": false
+  }
+}

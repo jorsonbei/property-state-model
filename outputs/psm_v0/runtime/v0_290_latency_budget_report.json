@@ -1,0 +1,419 @@
+{
+  "schema_version": "psm_v0_290_latency_budget_report_v1",
+  "version": "PSM_V0.290-candidate",
+  "synthetic_only": true,
+  "runtimes": [
+    {
+      "runtime_id": "host",
+      "base_url": "http://127.0.0.1:8765",
+      "version": "PSM V0.289",
+      "summaries": {
+        "deterministic_recovery": {
+          "samples": 5,
+          "successes": 5,
+          "success_rate": 1.0,
+          "fallbacks": 0,
+          "p50_ms": 29.34,
+          "p95_ms": 34.34,
+          "minimum_ms": 28.6,
+          "maximum_ms": 34.34,
+          "limit_ms": 1000,
+          "passed": true
+        },
+        "deterministic_identity": {
+          "samples": 5,
+          "successes": 5,
+          "success_rate": 1.0,
+          "fallbacks": 0,
+          "p50_ms": 29.05,
+          "p95_ms": 29.62,
+          "minimum_ms": 27.2,
+          "maximum_ms": 29.62,
+          "limit_ms": 1000,
+          "passed": true
+        },
+        "local_model_generation": {
+          "samples": 3,
+          "successes": 3,
+          "success_rate": 1.0,
+          "fallbacks": 0,
+          "p50_ms": 16413.57,
+          "p95_ms": 16713.21,
+          "minimum_ms": 12675.35,
+          "maximum_ms": 16713.21,
+          "limit_ms": 60000,
+          "passed": true
+        }
+      },
+      "semantic_checks": {
+        "recovery_answers_show_boundary": true,
+        "identity_uses_deterministic_provider": true,
+        "normal_generation_uses_model_provider": true
+      },
+      "rows": {
+        "deterministic_recovery": [
+          {
+            "case_id": "R01",
+            "duration_ms": 34.34,
+            "generation_status": "success",
+            "provider": "deterministic",
+            "attempted_provider": null,
+            "fallback_used": false,
+            "continuity_state": "reset",
+            "answer_nonempty": true,
+            "recovery_boundary_visible": true
+          },
+          {
+            "case_id": "R02",
+            "duration_ms": 28.6,
+            "generation_status": "success",
+            "provider": "deterministic",
+            "attempted_provider": null,
+            "fallback_used": false,
+            "continuity_state": "reset",
+            "answer_nonempty": true,
+            "recovery_boundary_visible": true
+          },
+          {
+            "case_id": "R03",
+            "duration_ms": 29.34,
+            "generation_status": "success",
+            "provider": "deterministic",
+            "attempted_provider": null,
+            "fallback_used": false,
+            "continuity_state": "reset",
+            "answer_nonempty": true,
+            "recovery_boundary_visible": true
+          },
+          {
+            "case_id": "R04",
+            "duration_ms": 29.34,
+            "generation_status": "success",
+            "provider": "deterministic",
+            "attempted_provider": null,
+            "fallback_used": false,
+            "continuity_state": "reset",
+            "answer_nonempty": true,
+            "recovery_boundary_visible": true
+          },
+          {
+            "case_id": "R05",
+            "duration_ms": 30.56,
+            "generation_status": "success",
+            "provider": "deterministic",
+            "attempted_provider": null,
+            "fallback_used": false,
+            "continuity_state": "reset",
+            "answer_nonempty": true,
+            "recovery_boundary_visible": true
+          }
+        ],
+        "deterministic_identity": [
+          {
+            "case_id": "I01",
+            "duration_ms": 29.62,
+            "generation_status": "success",
+            "provider": "deterministic",
+            "attempted_provider": null,
+            "fallback_used": false,
+            "continuity_state": "active",
+            "answer_nonempty": true,
+            "recovery_boundary_visible": false
+          },
+          {
+            "case_id": "I02",
+            "duration_ms": 27.2,
+            "generation_status": "success",
+            "provider": "deterministic",
+            "attempted_provider": null,
+            "fallback_used": false,
+            "continuity_state": "active",
+            "answer_nonempty": true,
+            "recovery_boundary_visible": false
+          },
+          {
+            "case_id": "I03",
+            "duration_ms": 29.05,
+            "generation_status": "success",
+            "provider": "deterministic",
+            "attempted_provider": null,
+            "fallback_used": false,
+            "continuity_state": "active",
+            "answer_nonempty": true,
+            "recovery_boundary_visible": false
+          },
+          {
+            "case_id": "I04",
+            "duration_ms": 29.4,
+            "generation_status": "success",
+            "provider": "deterministic",
+            "attempted_provider": null,
+            "fallback_used": false,
+            "continuity_state": "active",
+            "answer_nonempty": true,
+            "recovery_boundary_visible": false
+          },
+          {
+            "case_id": "I05",
+            "duration_ms": 28.85,
+            "generation_status": "success",
+            "provider": "deterministic",
+            "attempted_provider": null,
+            "fallback_used": false,
+            "continuity_state": "active",
+            "answer_nonempty": true,
+            "recovery_boundary_visible": false
+          }
+        ],
+        "local_model_generation": [
+          {
+            "case_id": "G01",
+            "duration_ms": 16413.57,
+            "generation_status": "success",
+            "provider": "ollama",
+            "attempted_provider": null,
+            "fallback_used": false,
+            "continuity_state": "active",
+            "answer_nonempty": true,
+            "recovery_boundary_visible": false
+          },
+          {
+            "case_id": "G02",
+            "duration_ms": 16713.21,
+            "generation_status": "success",
+            "provider": "ollama",
+            "attempted_provider": null,
+            "fallback_used": false,
+            "continuity_state": "active",
+            "answer_nonempty": true,
+            "recovery_boundary_visible": false
+          },
+          {
+            "case_id": "G03",
+            "duration_ms": 12675.35,
+            "generation_status": "success",
+            "provider": "ollama",
+            "attempted_provider": null,
+            "fallback_used": false,
+            "continuity_state": "active",
+            "answer_nonempty": true,
+            "recovery_boundary_visible": false
+          }
+        ]
+      },
+      "passed": true
+    },
+    {
+      "runtime_id": "docker",
+      "base_url": "http://127.0.0.1:8766",
+      "version": "PSM V0.289",
+      "summaries": {
+        "deterministic_recovery": {
+          "samples": 5,
+          "successes": 5,
+          "success_rate": 1.0,
+          "fallbacks": 0,
+          "p50_ms": 9.83,
+          "p95_ms": 37.49,
+          "minimum_ms": 7.67,
+          "maximum_ms": 37.49,
+          "limit_ms": 1000,
+          "passed": true
+        },
+        "deterministic_identity": {
+          "samples": 5,
+          "successes": 5,
+          "success_rate": 1.0,
+          "fallbacks": 0,
+          "p50_ms": 8.87,
+          "p95_ms": 12.55,
+          "minimum_ms": 6.5,
+          "maximum_ms": 12.55,
+          "limit_ms": 1000,
+          "passed": true
+        },
+        "local_model_generation": {
+          "samples": 3,
+          "successes": 3,
+          "success_rate": 1.0,
+          "fallbacks": 0,
+          "p50_ms": 13351.38,
+          "p95_ms": 16667.38,
+          "minimum_ms": 12230.61,
+          "maximum_ms": 16667.38,
+          "limit_ms": 60000,
+          "passed": true
+        }
+      },
+      "semantic_checks": {
+        "recovery_answers_show_boundary": true,
+        "identity_uses_deterministic_provider": true,
+        "normal_generation_uses_model_provider": true
+      },
+      "rows": {
+        "deterministic_recovery": [
+          {
+            "case_id": "R01",
+            "duration_ms": 37.49,
+            "generation_status": "success",
+            "provider": "deterministic",
+            "attempted_provider": null,
+            "fallback_used": false,
+            "continuity_state": "reset",
+            "answer_nonempty": true,
+            "recovery_boundary_visible": true
+          },
+          {
+            "case_id": "R02",
+            "duration_ms": 9.83,
+            "generation_status": "success",
+            "provider": "deterministic",
+            "attempted_provider": null,
+            "fallback_used": false,
+            "continuity_state": "reset",
+            "answer_nonempty": true,
+            "recovery_boundary_visible": true
+          },
+          {
+            "case_id": "R03",
+            "duration_ms": 7.67,
+            "generation_status": "success",
+            "provider": "deterministic",
+            "attempted_provider": null,
+            "fallback_used": false,
+            "continuity_state": "reset",
+            "answer_nonempty": true,
+            "recovery_boundary_visible": true
+          },
+          {
+            "case_id": "R04",
+            "duration_ms": 9.92,
+            "generation_status": "success",
+            "provider": "deterministic",
+            "attempted_provider": null,
+            "fallback_used": false,
+            "continuity_state": "reset",
+            "answer_nonempty": true,
+            "recovery_boundary_visible": true
+          },
+          {
+            "case_id": "R05",
+            "duration_ms": 9.38,
+            "generation_status": "success",
+            "provider": "deterministic",
+            "attempted_provider": null,
+            "fallback_used": false,
+            "continuity_state": "reset",
+            "answer_nonempty": true,
+            "recovery_boundary_visible": true
+          }
+        ],
+        "deterministic_identity": [
+          {
+            "case_id": "I01",
+            "duration_ms": 8.21,
+            "generation_status": "success",
+            "provider": "deterministic",
+            "attempted_provider": null,
+            "fallback_used": false,
+            "continuity_state": "active",
+            "answer_nonempty": true,
+            "recovery_boundary_visible": false
+          },
+          {
+            "case_id": "I02",
+            "duration_ms": 12.55,
+            "generation_status": "success",
+            "provider": "deterministic",
+            "attempted_provider": null,
+            "fallback_used": false,
+            "continuity_state": "active",
+            "answer_nonempty": true,
+            "recovery_boundary_visible": false
+          },
+          {
+            "case_id": "I03",
+            "duration_ms": 8.87,
+            "generation_status": "success",
+            "provider": "deterministic",
+            "attempted_provider": null,
+            "fallback_used": false,
+            "continuity_state": "active",
+            "answer_nonempty": true,
+            "recovery_boundary_visible": false
+          },
+          {
+            "case_id": "I04",
+            "duration_ms": 9.02,
+            "generation_status": "success",
+            "provider": "deterministic",
+            "attempted_provider": null,
+            "fallback_used": false,
+            "continuity_state": "active",
+            "answer_nonempty": true,
+            "recovery_boundary_visible": false
+          },
+          {
+            "case_id": "I05",
+            "duration_ms": 6.5,
+            "generation_status": "success",
+            "provider": "deterministic",
+            "attempted_provider": null,
+            "fallback_used": false,
+            "continuity_state": "active",
+            "answer_nonempty": true,
+            "recovery_boundary_visible": false
+          }
+        ],
+        "local_model_generation": [
+          {
+            "case_id": "G01",
+            "duration_ms": 13351.38,
+            "generation_status": "success",
+            "provider": "ollama",
+            "attempted_provider": null,
+            "fallback_used": false,
+            "continuity_state": "active",
+            "answer_nonempty": true,
+            "recovery_boundary_visible": false
+          },
+          {
+            "case_id": "G02",
+            "duration_ms": 16667.38,
+            "generation_status": "success",
+            "provider": "ollama",
+            "attempted_provider": null,
+            "fallback_used": false,
+            "continuity_state": "active",
+            "answer_nonempty": true,
+            "recovery_boundary_visible": false
+          },
+          {
+            "case_id": "G03",
+            "duration_ms": 12230.61,
+            "generation_status": "success",
+            "provider": "ollama",
+            "attempted_provider": null,
+            "fallback_used": false,
+            "continuity_state": "active",
+            "answer_nonempty": true,
+            "recovery_boundary_visible": false
+          }
+        ]
+      },
+      "passed": true
+    }
+  ],
+  "checks": {
+    "host_all_latency_categories_pass": true,
+    "docker_all_latency_categories_pass": true,
+    "both_versions_are_v0_289": true,
+    "all_success_rates_exact": true,
+    "fallbacks_zero": true,
+    "external_release_closed": true
+  },
+  "passed": true,
+  "human_validation_claimed": false,
+  "persistent_conversation_memory_enabled": false,
+  "external_release_authority": false
+}

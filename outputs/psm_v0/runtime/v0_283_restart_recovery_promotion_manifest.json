@@ -1,0 +1,63 @@
+{
+  "schema_version": "psm_v0_283_restart_recovery_promotion_manifest_v1",
+  "version": "PSM_V0.283",
+  "promoted_at": "2026-07-16",
+  "promoted": true,
+  "decision": "restart_recovery_and_user_visible_continuity_gate_passed",
+  "formal_core_source": "PSM_V0.251",
+  "formal_core_records": 2228,
+  "restart_recovery": {
+    "decision": "restart_recovery_and_user_visible_continuity_gate_passed",
+    "passed": true,
+    "baseline_passed": 0,
+    "baseline_failed": 5,
+    "final_passed": 5,
+    "final_failed": 0,
+    "states": [
+      "active",
+      "reset",
+      "reload",
+      "expired",
+      "restarted"
+    ],
+    "fabricated_archived_facts": 0,
+    "host_controlled_restart": "passed",
+    "docker_controlled_restart": "passed",
+    "desktop_browser": "passed",
+    "mobile_browser": "passed",
+    "console_errors": 0,
+    "retained_gap_attempts": 2,
+    "synthetic_only": true,
+    "human_validation_claimed": false,
+    "persistent_conversation_memory_enabled": false,
+    "external_release_authority": false
+  },
+  "checks": {
+    "source_version_is_v0_282": true,
+    "contract_frozen_and_synthetic": true,
+    "baseline_retained_at_zero_of_five": true,
+    "local_gate_passed_five_of_five": true,
+    "all_states_distinguishable": true,
+    "zero_fabricated_archived_facts": true,
+    "host_docker_controlled_restart_passed": true,
+    "browser_regression_passed": true,
+    "desktop_mobile_no_overflow": true,
+    "console_errors_zero": true,
+    "evaluator_and_semantic_gaps_retained": true,
+    "raw_conversation_persistence_disabled": true,
+    "external_release_closed": true
+  },
+  "release_boundary": {
+    "human_validation_claimed": false,
+    "persistent_conversation_memory_enabled": false,
+    "public_service_allowed": false,
+    "rule_replacement_allowed": false,
+    "external_release_authority": false
+  },
+  "next_stage": {
+    "version": "PSM_V0.284",
+    "objective": "对 active、reset、reload、expired、restarted 五类合成恢复回答执行独立外部语义评审，确认状态说明自然、无旧事实臆造且不会扩大持久记忆或外部发布权限。",
+    "blocked": false,
+    "requires_user_input": false
+  }
+}

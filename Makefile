@@ -2,7 +2,7 @@ PYTHON ?= python3
 NPM ?= npm
 PSM_ROOT := outputs/psm_v0
 
-.PHONY: check test serve inventory sync-runtime route-v253-eval route-v253-docker state-v254-eval state-v254-docker alpha-v255-eval alpha-v255-docker annotation-v256-eval annotation-v256-docker encoder-v257-eval encoder-v257-docker calibrate-v258-eval calibrate-v258-docker sigma-v259-eval sigma-v259-docker readiness-v260-review readiness-v260-docker repair-v261-eval judge-v261-openai promote-v261 external-v261-docker protocol-v262-eval judge-v262-openai promote-v262 external-v262-docker prepare-v263 enrollment-v263-eval enrollment-v263-docker enrollment-v263-completed-docker promote-v263 pilot-v264-eval pilot-v264-docker promote-v264 quality-v265-eval quality-v265-docker promote-v265 adversarial-v266-eval adversarial-v266-docker promote-v266 prepare-v267 repair-v267-external judge-v267-openai external-v267-docker promote-v267 task-v268-eval task-v268-docker promote-v268 stability-v269-eval stability-v269-docker promote-v269 multiturn-v270-eval multiturn-v270-docker promote-v270 prepare-v271 judge-v271-openai repair-v271-local authorize-v271-rejudge rejudge-v271-openai finalize-v271 promote-v271 long-context-v272-eval long-context-v272-docker promote-v272 prepare-v273 authorize-v273 judge-v273-openai promote-v273 open-context-v274-eval open-context-v274-docker promote-v274 prepare-v275 authorize-v275 judge-v275-openai repair-v275-local authorize-v275-rejudge rejudge-v275-openai repair-v275-rejudge-local authorize-v275-attempt-3 judge-v275-attempt-3-openai promote-v275 build-v276 long-horizon-v276-eval long-horizon-v276-docker promote-v276 prepare-v277 judge-v277-openai promote-v277 build-v278 stress-v278-eval stress-v278-docker promote-v278 prepare-v279 judge-v279-openai promote-v279 build-v280 baseline-v280 rolling-v280-eval rolling-v280-docker promote-v280 isolation-v281-eval prepare-v281 judge-v281-openai promote-v281 browser-v282-rolling promote-v282 browser-install browser-regression browser-regression-real browser-regression-v253 browser-regression-v254 browser-regression-v255 browser-regression-v256 browser-regression-v257 browser-regression-v258 browser-regression-v259 browser-regression-v260 browser-regression-v261 browser-regression-v262 browser-regression-v263-enrollment browser-regression-v263-completed browser-regression-v264-completed browser-regression-v265-quality browser-regression-v266-adversarial browser-regression-v267-external browser-regression-v268-task browser-regression-v269-stability browser-regression-v270-multiturn browser-regression-v272-long-context browser-regression-v274-open-context judge-v251-external judge-v251-external-c judge-v251-external-d judge-v251-external-e judge-v251-external-f judge-v251-external-g docker-config docker-build docker-up
+.PHONY: check test serve inventory sync-runtime route-v253-eval route-v253-docker state-v254-eval state-v254-docker alpha-v255-eval alpha-v255-docker annotation-v256-eval annotation-v256-docker encoder-v257-eval encoder-v257-docker calibrate-v258-eval calibrate-v258-docker sigma-v259-eval sigma-v259-docker readiness-v260-review readiness-v260-docker repair-v261-eval judge-v261-openai promote-v261 external-v261-docker protocol-v262-eval judge-v262-openai promote-v262 external-v262-docker prepare-v263 enrollment-v263-eval enrollment-v263-docker enrollment-v263-completed-docker promote-v263 pilot-v264-eval pilot-v264-docker promote-v264 quality-v265-eval quality-v265-docker promote-v265 adversarial-v266-eval adversarial-v266-docker promote-v266 prepare-v267 repair-v267-external judge-v267-openai external-v267-docker promote-v267 task-v268-eval task-v268-docker promote-v268 stability-v269-eval stability-v269-docker promote-v269 multiturn-v270-eval multiturn-v270-docker promote-v270 prepare-v271 judge-v271-openai repair-v271-local authorize-v271-rejudge rejudge-v271-openai finalize-v271 promote-v271 long-context-v272-eval long-context-v272-docker promote-v272 prepare-v273 authorize-v273 judge-v273-openai promote-v273 open-context-v274-eval open-context-v274-docker promote-v274 prepare-v275 authorize-v275 judge-v275-openai repair-v275-local authorize-v275-rejudge rejudge-v275-openai repair-v275-rejudge-local authorize-v275-attempt-3 judge-v275-attempt-3-openai promote-v275 build-v276 long-horizon-v276-eval long-horizon-v276-docker promote-v276 prepare-v277 judge-v277-openai promote-v277 build-v278 stress-v278-eval stress-v278-docker promote-v278 prepare-v279 judge-v279-openai promote-v279 build-v280 baseline-v280 rolling-v280-eval rolling-v280-docker promote-v280 isolation-v281-eval prepare-v281 judge-v281-openai promote-v281 browser-v282-rolling promote-v282 build-v283 baseline-v283 recovery-v283-eval runtime-v283-restart browser-v283-recovery promote-v283 prepare-v284 judge-v284-openai promote-v284 build-v285 baseline-v285 integrity-v285-eval integrity-v285-runtime promote-v285 build-v286 baseline-v286 recovery-v286-eval promote-v286 prepare-v287 judge-v287-openai promote-v287 runtime-v288-parity promote-v288 browser-v289-recovery promote-v289 build-v290 latency-v290-eval promote-v290 browser-v291-cancel promote-v291 browser-install browser-regression browser-regression-real browser-regression-v253 browser-regression-v254 browser-regression-v255 browser-regression-v256 browser-regression-v257 browser-regression-v258 browser-regression-v259 browser-regression-v260 browser-regression-v261 browser-regression-v262 browser-regression-v263-enrollment browser-regression-v263-completed browser-regression-v264-completed browser-regression-v265-quality browser-regression-v266-adversarial browser-regression-v267-external browser-regression-v268-task browser-regression-v269-stability browser-regression-v270-multiturn browser-regression-v272-long-context browser-regression-v274-open-context judge-v251-external judge-v251-external-c judge-v251-external-d judge-v251-external-e judge-v251-external-f judge-v251-external-g docker-config docker-build docker-up
 
 check:
 	$(PYTHON) scripts/verify_project.py
@@ -336,6 +336,105 @@ browser-v282-rolling:
 
 promote-v282:
 	PYTHONPATH=$(PSM_ROOT) $(PYTHON) scripts/promote_v0_282_rolling_state_browser_lifecycle.py
+
+build-v283:
+	PYTHONPATH=$(PSM_ROOT) $(PYTHON) scripts/build_v0_283_restart_recovery_contract.py
+
+baseline-v283:
+	PYTHONPATH=$(PSM_ROOT) $(PYTHON) scripts/capture_v0_283_restart_recovery_baseline.py
+
+recovery-v283-eval:
+	PYTHONPATH=$(PSM_ROOT) $(PYTHON) scripts/evaluate_v0_283_restart_recovery.py
+
+runtime-v283-restart:
+	PYTHONPATH=$(PSM_ROOT) $(PYTHON) scripts/verify_v0_283_controlled_restart.py
+
+browser-v283-recovery:
+	PSM_BASE_URL=$${PSM_BASE_URL:-http://127.0.0.1:8765} node scripts/browser_regression_v283_restart_recovery.cjs
+
+promote-v283:
+	PYTHONPATH=$(PSM_ROOT) $(PYTHON) scripts/promote_v0_283_restart_recovery.py
+	$(MAKE) sync-runtime
+
+prepare-v284:
+	PYTHONPATH=$(PSM_ROOT) $(PYTHON) scripts/build_v0_284_external_restart_recovery_review.py
+
+judge-v284-openai:
+	PYTHONPATH=$(PSM_ROOT) $(PYTHON) scripts/run_v0_284_openai_restart_recovery_judge.py
+
+promote-v284:
+	PYTHONPATH=$(PSM_ROOT) $(PYTHON) scripts/promote_v0_284_external_restart_recovery.py
+	$(MAKE) sync-runtime
+
+build-v285:
+	PYTHONPATH=$(PSM_ROOT) $(PYTHON) scripts/build_v0_285_lifecycle_signal_integrity_contract.py
+
+baseline-v285:
+	PYTHONPATH=$(PSM_ROOT) $(PYTHON) scripts/capture_v0_285_lifecycle_signal_integrity_baseline.py
+
+integrity-v285-eval:
+	PYTHONPATH=$(PSM_ROOT) $(PYTHON) scripts/evaluate_v0_285_lifecycle_signal_integrity.py
+
+integrity-v285-runtime:
+	PYTHONPATH=$(PSM_ROOT) $(PYTHON) scripts/verify_v0_285_host_docker_integrity.py
+
+promote-v285:
+	PYTHONPATH=$(PSM_ROOT) $(PYTHON) scripts/promote_v0_285_lifecycle_signal_integrity.py
+	$(MAKE) sync-runtime
+
+build-v286:
+	PYTHONPATH=$(PSM_ROOT) $(PYTHON) scripts/build_v0_286_natural_recovery_reference_contract.py
+
+baseline-v286:
+	PYTHONPATH=$(PSM_ROOT) $(PYTHON) scripts/capture_v0_286_natural_recovery_reference_baseline.py
+
+recovery-v286-eval:
+	PYTHONPATH=$(PSM_ROOT) $(PYTHON) scripts/evaluate_v0_286_natural_recovery_reference.py
+
+promote-v286:
+	PYTHONPATH=$(PSM_ROOT) $(PYTHON) scripts/promote_v0_286_natural_recovery_reference.py
+	$(MAKE) sync-runtime
+
+prepare-v287:
+	PYTHONPATH=$(PSM_ROOT) $(PYTHON) scripts/build_v0_287_external_natural_recovery_review.py
+
+judge-v287-openai:
+	PYTHONPATH=$(PSM_ROOT) $(PYTHON) scripts/run_v0_287_openai_natural_recovery_judge.py
+
+promote-v287:
+	PYTHONPATH=$(PSM_ROOT) $(PYTHON) scripts/promote_v0_287_external_natural_recovery.py
+	$(MAKE) sync-runtime
+
+runtime-v288-parity:
+	PYTHONPATH=$(PSM_ROOT) $(PYTHON) scripts/verify_v0_288_host_docker_natural_recovery.py
+
+promote-v288:
+	PYTHONPATH=$(PSM_ROOT) $(PYTHON) scripts/promote_v0_288_runtime_natural_recovery.py
+	$(MAKE) sync-runtime
+
+browser-v289-recovery:
+	PSM_BASE_URL=$${PSM_BASE_URL:-http://127.0.0.1:8765} node scripts/browser_regression_v289_natural_recovery.cjs
+
+promote-v289:
+	PYTHONPATH=$(PSM_ROOT) $(PYTHON) scripts/promote_v0_289_browser_natural_recovery.py
+	$(MAKE) sync-runtime
+
+build-v290:
+	PYTHONPATH=$(PSM_ROOT) $(PYTHON) scripts/build_v0_290_latency_budget_contract.py
+
+latency-v290-eval:
+	PYTHONPATH=$(PSM_ROOT) $(PYTHON) scripts/evaluate_v0_290_latency_budget.py
+
+promote-v290:
+	PYTHONPATH=$(PSM_ROOT) $(PYTHON) scripts/promote_v0_290_latency_budget.py
+	$(MAKE) sync-runtime
+
+browser-v291-cancel:
+	PSM_BASE_URL=$${PSM_BASE_URL:-http://127.0.0.1:8765} node scripts/browser_regression_v291_cancel_retry.cjs
+
+promote-v291:
+	PYTHONPATH=$(PSM_ROOT) $(PYTHON) scripts/promote_v0_291_cancel_retry.py
+	$(MAKE) sync-runtime
 
 browser-install:
 	$(NPM) install

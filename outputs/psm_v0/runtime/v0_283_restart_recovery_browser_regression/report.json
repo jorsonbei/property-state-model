@@ -1,0 +1,48 @@
+{
+  "schema_version": "psm_v0_283_restart_recovery_browser_regression_v1",
+  "version": "PSM_V0.283-candidate",
+  "base_url": "http://127.0.0.1:8765",
+  "passed": true,
+  "synthetic_only": true,
+  "browser_chat_persisted": false,
+  "external_release_authority": false,
+  "desktop": {
+    "active": {
+      "answer": "白砾",
+      "continuity": "active",
+      "continuityText": "會話連續"
+    },
+    "reset": {
+      "answer": "我现在无法读取先前会话内容，因此不能确认你之前提供的信息。\n\n请把需要继续使用的信息重新告诉我。",
+      "continuity": "reset",
+      "continuityText": "會話已清空"
+    },
+    "reload": {
+      "answer": "我现在无法读取先前会话内容，因此不能确认你之前提供的信息。\n\n请把需要继续使用的信息重新告诉我。",
+      "continuity": "reload",
+      "continuityText": "頁面已刷新"
+    },
+    "restarted": {
+      "answer": "我现在无法读取先前会话内容，因此不能确认你之前提供的信息。\n\n请把需要继续使用的信息重新告诉我。",
+      "continuity": "restarted",
+      "continuityText": "服務已重啟"
+    },
+    "horizontalOverflow": false,
+    "consoleErrors": 0
+  },
+  "mobile": {
+    "continuityMetricVisible": true,
+    "horizontalOverflow": false,
+    "consoleErrors": 0
+  },
+  "checks": {
+    "active_state_recovers_fact": true,
+    "reset_state_visible_and_no_fabrication": true,
+    "reload_state_visible_and_no_fabrication": true,
+    "restarted_state_visible_and_no_fabrication": true,
+    "mobile_continuity_metric_visible": true,
+    "desktop_no_overflow": true,
+    "mobile_no_overflow": true,
+    "console_errors_zero": true
+  }
+}

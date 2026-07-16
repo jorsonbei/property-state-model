@@ -18,6 +18,9 @@ const state = {
   lastFailed: null,
   nextMessageId: 1,
   sessionId: createSessionId(),
+  continuityEvent: initialContinuityEvent(),
+  serverInstanceId: loadServerInstanceId(),
+  observedServerInstanceId: "",
   trialSession: loadTrialSession()
 };
 
@@ -79,6 +82,7 @@ async function loadStatus() {
     const response = await fetch("/api/status");
     if (!response.ok) throw new Error("status unavailable");
     const status = await response.json();
+    observeServerInstance(status.continuity_instance_id || "");
     $("metric-version").textContent = status.version;
     $("metric-core").textContent = `${status.core_cases} cases`;
     $("metric-risk").textContent = `chat risk ${status.chat_gated_risk ?? status.gated_psm_risky_rows}`;
@@ -156,7 +160,9 @@ async function runChat(options = {}) {
           messages: conversationMessages(),
           scenario: state.scenario,
           task_state_graph: state.taskGraph,
-          session_id: state.sessionId
+          session_id: state.sessionId,
+          continuity_event: state.continuityEvent,
+          server_instance_id: state.serverInstanceId
         };
     const response = await fetch(endpoint, {
       method: "POST",
@@ -175,6 +181,7 @@ async function runChat(options = {}) {
     if (!state.trialSession) {
       renderResult(payload);
       state.taskGraph = payload.task_state_graph || null;
+      applyContinuityStatus(payload.chat?.state_continuity?.continuity_status || {});
     }
     const answer = payload.chat?.assistant_message || "我收到你的問題了，但這次沒有生成有效回答。";
     await pushAssistantProgressively(answer, requestId);
@@ -292,6 +299,8 @@ function resetChat() {
   state.history = [];
   state.taskGraph = null;
   state.sessionId = createSessionId();
+  state.continuityEvent = "reset";
+  renderContinuityStatus("reset");
   state.lastFailed = null;
   $("prompt").value = "";
   autoResizePrompt();
@@ -331,6 +340,68 @@ function createSessionId() {
   if (globalThis.crypto?.randomUUID) return globalThis.crypto.randomUUID();
   const random = Math.random().toString(36).slice(2);
   return `psm-${Date.now().toString(36)}-${random}-${random}`;
+}
+
+function initialContinuityEvent() {
+  const navigation = performance.getEntriesByType?.("navigation")?.[0];
+  return navigation?.type === "reload" ? "reload" : "active";
+}
+
+function loadServerInstanceId() {
+  try {
+    return sessionStorage.getItem("psmServerInstanceId") || "";
+  } catch (error) {
+    return "";
+  }
+}
+
+function storeServerInstanceId(instanceId) {
+  try {
+    sessionStorage.setItem("psmServerInstanceId", instanceId);
+  } catch (error) {
+    // The protocol still works without browser-side instance retention.
+  }
+}
+
+function observeServerInstance(instanceId) {
+  if (!instanceId) return;
+  state.observedServerInstanceId = instanceId;
+  if (!state.serverInstanceId) {
+    state.serverInstanceId = instanceId;
+    storeServerInstanceId(instanceId);
+  } else if (state.serverInstanceId !== instanceId) {
+    state.continuityEvent = "restarted";
+    renderContinuityStatus("restarted");
+    return;
+  }
+  if (!$("metric-continuity").dataset.observed) {
+    renderContinuityStatus(state.continuityEvent);
+  }
+}
+
+function applyContinuityStatus(status) {
+  const continuityState = status.state || "active";
+  if (status.server_instance_id) {
+    state.serverInstanceId = status.server_instance_id;
+    state.observedServerInstanceId = status.server_instance_id;
+    storeServerInstanceId(status.server_instance_id);
+  }
+  state.continuityEvent = "active";
+  renderContinuityStatus(continuityState);
+}
+
+function renderContinuityStatus(continuityState) {
+  const labels = {
+    active: "會話連續",
+    reset: "會話已清空",
+    reload: "頁面已刷新",
+    expired: "會話已過期",
+    restarted: "服務已重啟"
+  };
+  const metric = $("metric-continuity");
+  metric.dataset.state = continuityState;
+  metric.dataset.observed = "true";
+  metric.textContent = labels[continuityState] || labels.active;
 }
 
 function configureTrialMode() {

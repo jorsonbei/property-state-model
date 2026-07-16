@@ -1,0 +1,19 @@
+{
+  "schema_version": "psm_v0_287_external_natural_recovery_package_gate_v1",
+  "passed": true,
+  "checks": {
+    "source_version_promoted": true,
+    "source_promotion_gate_passed": true,
+    "exact_sixteen_case_coverage": true,
+    "twelve_loss_answers_do_not_leak_fact": true,
+    "twelve_loss_answers_show_boundary": true,
+    "four_new_tasks_not_false_recovery": true,
+    "reserved_total_within_authority": true,
+    "privacy_boundary_closed": true,
+    "release_boundary_closed": true,
+    "prohibited_material_absent": true
+  },
+  "review_payload_sha256": "a7e635d2d5f4763adbc8c33332c015c498164c0f96d413733c46fae1dbd4ef57",
+  "package_sha256": "a34d87ea7906dfc016f275ccba5187715ac98e4faefb458ed8737cb35b3cfb17",
+  "prohibited_material_found": []
+}

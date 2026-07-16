@@ -148,6 +148,15 @@ h1 {
   text-decoration: none;
 }
 
+#metric-continuity[data-state="reset"],
+#metric-continuity[data-state="reload"],
+#metric-continuity[data-state="expired"],
+#metric-continuity[data-state="restarted"] {
+  border-color: rgba(184, 121, 19, 0.35);
+  background: #fff7e8;
+  color: #80540f;
+}
+
 .chat-card {
   min-height: 520px;
   display: grid;

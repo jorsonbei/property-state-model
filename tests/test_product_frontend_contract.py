@@ -68,6 +68,15 @@ class ProductFrontendContractTests(unittest.TestCase):
         self.assertIn("state.sessionId = createSessionId()", self.javascript)
         self.assertIn("({ id, role, content })", self.javascript)
 
+    def test_restart_recovery_status_is_visible_without_persisting_chat(self) -> None:
+        self.assertIn('id="metric-continuity"', self.html)
+        self.assertIn("continuity_event: state.continuityEvent", self.javascript)
+        self.assertIn("server_instance_id: state.serverInstanceId", self.javascript)
+        self.assertIn("initialContinuityEvent", self.javascript)
+        self.assertIn("sessionStorage.setItem(\"psmServerInstanceId\"", self.javascript)
+        self.assertNotIn("localStorage", self.javascript)
+        self.assertNotIn("sessionStorage.setItem(\"messages\"", self.javascript)
+
     def test_mobile_layout_has_stable_tracks_and_overflow_controls(self) -> None:
         self.assertIn("grid-template-columns: repeat(3, minmax(0, 1fr))", self.css)
         self.assertIn("overflow-x: auto", self.css)

@@ -1,6 +1,7 @@
 from __future__ import annotations
 
 import argparse
+import hashlib
 import json
 import mimetypes
 import os
@@ -85,9 +86,15 @@ ENROLLMENT_CHECKPOINT_PATH = PSM_ROOT / "runtime" / "v0_263_participant_enrollme
 ENROLLMENT_LOCK = threading.Lock()
 ROLLING_STATE_LOCK = threading.Lock()
 ROLLING_STATE_SESSIONS: dict[str, dict] = {}
+ROLLING_STATE_TOMBSTONES: dict[str, dict] = {}
 ROLLING_STATE_IDLE_SECONDS = 1800
 ROLLING_STATE_MAX_SESSIONS = 64
+ROLLING_STATE_MAX_TOMBSTONES = 128
+ROLLING_STATE_TOMBSTONE_SECONDS = 3600
 ROLLING_SESSION_PATTERN = re.compile(r"^[A-Za-z0-9_-]{16,64}$")
+SERVER_INSTANCE_ID = secrets.token_urlsafe(16)
+CLIENT_CONTINUITY_EVENTS = {"active", "reset", "reload"}
+MEMORY_LOSS_STATES = {"reset", "reload", "expired", "restarted"}
 
 
 def main() -> None:
@@ -102,12 +109,12 @@ def main() -> None:
 
 
 class Handler(BaseHTTPRequestHandler):
-    server_version = "PSMProductAlpha/0.274"
+    server_version = "PSMProductAlpha/0.283"
 
     def do_GET(self) -> None:  # noqa: N802
         parsed = urlparse(self.path)
         if parsed.path == "/api/status":
-            self.write_json(load_status_summary())
+            self.write_json(load_status_summary(), no_store=True)
             return
         if parsed.path == "/api/trial-notice":
             self.write_json(load_trial_notice(), no_store=True)
@@ -190,6 +197,8 @@ class Handler(BaseHTTPRequestHandler):
                 rolling_user_statements, rolling_state = update_rolling_session_state(
                     str(payload.get("session_id") or ""),
                     messages,
+                    client_event=str(payload.get("continuity_event") or "active"),
+                    client_server_instance_id=str(payload.get("server_instance_id") or ""),
                 )
                 self.write_json(
                     run_chat_turn(
@@ -479,6 +488,7 @@ def run_chat_turn(
     intent = detect_chat_intent(current, conversation)
     project_context = load_project_context()
     verified_knowledge = match_verified_knowledge(current)
+    continuity_status = (rolling_state_metadata or {}).get("continuity_status", {})
     grounding_facts, grounding_sources = grounding_for_intent(
         intent,
         current,
@@ -488,6 +498,12 @@ def run_chat_turn(
     if verified_knowledge:
         grounding_facts.extend(verified_knowledge.grounding_facts)
         grounding_sources.extend(verified_knowledge.grounding_sources)
+    if continuity_status.get("recovery_required"):
+        grounding_facts.extend((
+            f"服务端连续性状态为 {continuity_status.get('state')}",
+            "先前原始会话没有持久化，当前无法读取",
+        ))
+        grounding_sources.append("runtime:psm_v0_283_continuity_status")
     route_execution = execute_route(
         current,
         intent=intent,
@@ -523,15 +539,18 @@ def run_chat_turn(
         "pending_count": task_state_graph["state_counts"].get("pending", 0),
         "failure_learning_queue": task_state_graph["failure_learning_queue"],
     }
-    generation = build_chat_generation(
-        current,
-        conversation,
-        result,
-        intent,
-        project_context,
-        verified_knowledge=verified_knowledge,
-        route_execution=route_execution,
-    )
+    if continuity_status.get("recovery_required") and asks_unavailable_prior_state(current):
+        generation = deterministic_generation(continuity_loss_answer(continuity_status.get("state", "reset")))
+    else:
+        generation = build_chat_generation(
+            current,
+            conversation,
+            result,
+            intent,
+            project_context,
+            verified_knowledge=verified_knowledge,
+            route_execution=route_execution,
+        )
     assistant_message = generation["answer"]
     quality_audit = audit_chat_answer(
         current,
@@ -622,6 +641,15 @@ def run_chat_turn(
                 "enabled": bool(rolling_user_statements),
                 "ephemeral_memory_only": True,
                 "disk_persistence": False,
+            },
+            "continuity_status": continuity_status or {
+                "schema_version": "psm_v0_283_continuity_status_v1",
+                "state": "active",
+                "memory_available": bool(rolling_user_statements),
+                "recovery_required": False,
+                "recovery_action": "none",
+                "raw_conversation_persisted": False,
+                "server_instance_id": SERVER_INSTANCE_ID,
             },
             "context_carried_forward": len(conversation) > 1,
             "assistant_history_available": bool(assistant_messages),
@@ -724,6 +752,8 @@ def update_rolling_session_state(
     messages: list[dict],
     *,
     now: float | None = None,
+    client_event: str = "active",
+    client_server_instance_id: str = "",
 ) -> tuple[list[str], dict]:
     timestamp = time.time() if now is None else now
     if not ROLLING_SESSION_PATTERN.fullmatch(session_id):
@@ -732,20 +762,56 @@ def update_rolling_session_state(
             "ephemeral_memory_only": True,
             "disk_persistence": False,
             "reason": "missing_or_invalid_session_id",
+            "continuity_status": continuity_status(
+                "active",
+                memory_available=False,
+                invalid_session=True,
+            ),
         }
     with ROLLING_STATE_LOCK:
+        stale_tombstones = [
+            key
+            for key, value in ROLLING_STATE_TOMBSTONES.items()
+            if timestamp - float(value.get("recorded_at", 0)) > ROLLING_STATE_TOMBSTONE_SECONDS
+        ]
+        for key in stale_tombstones:
+            ROLLING_STATE_TOMBSTONES.pop(key, None)
         expired = [
             key
             for key, value in ROLLING_STATE_SESSIONS.items()
             if timestamp - float(value.get("updated_at", 0)) > ROLLING_STATE_IDLE_SECONDS
         ]
         for key in expired:
+            remember_rolling_state_loss(key, "expired", timestamp)
             ROLLING_STATE_SESSIONS.pop(key, None)
+        session_digest = rolling_session_digest(session_id)
+        tombstone = ROLLING_STATE_TOMBSTONES.get(session_digest, {})
+        had_session = session_id in ROLLING_STATE_SESSIONS
+        event = client_event if client_event in CLIENT_CONTINUITY_EVENTS else "active"
+        if client_server_instance_id and client_server_instance_id != SERVER_INSTANCE_ID:
+            state = "restarted"
+        elif tombstone.get("state") == "expired":
+            state = "expired"
+        elif event in {"reset", "reload"}:
+            state = event
+        else:
+            state = "active"
+        if tombstone:
+            ROLLING_STATE_TOMBSTONES.pop(session_digest, None)
+        cleared_existing_memory = False
+        if state in MEMORY_LOSS_STATES and session_id in ROLLING_STATE_SESSIONS:
+            ROLLING_STATE_SESSIONS.pop(session_id, None)
+            had_session = False
+            cleared_existing_memory = True
+        memory_available = had_session and bool(
+            ROLLING_STATE_SESSIONS[session_id].get("user_statements")
+        )
         if session_id not in ROLLING_STATE_SESSIONS and len(ROLLING_STATE_SESSIONS) >= ROLLING_STATE_MAX_SESSIONS:
             oldest = min(
                 ROLLING_STATE_SESSIONS,
                 key=lambda key: float(ROLLING_STATE_SESSIONS[key].get("updated_at", 0)),
             )
+            remember_rolling_state_loss(oldest, "expired", timestamp)
             ROLLING_STATE_SESSIONS.pop(oldest, None)
         entry = ROLLING_STATE_SESSIONS.setdefault(
             session_id,
@@ -785,7 +851,89 @@ def update_rolling_session_state(
             "idle_expiry_seconds": ROLLING_STATE_IDLE_SECONDS,
             "maximum_sessions": ROLLING_STATE_MAX_SESSIONS,
             "sha256": capsule["sha256"],
+            "continuity_status": continuity_status(
+                state,
+                memory_available=memory_available and state == "active",
+                memory_cleared=cleared_existing_memory,
+            ),
         }
+
+
+def rolling_session_digest(session_id: str) -> str:
+    return hashlib.sha256(session_id.encode("utf-8")).hexdigest()
+
+
+def remember_rolling_state_loss(session_id: str, state: str, timestamp: float) -> None:
+    if len(ROLLING_STATE_TOMBSTONES) >= ROLLING_STATE_MAX_TOMBSTONES:
+        oldest = min(
+            ROLLING_STATE_TOMBSTONES,
+            key=lambda key: float(ROLLING_STATE_TOMBSTONES[key].get("recorded_at", 0)),
+        )
+        ROLLING_STATE_TOMBSTONES.pop(oldest, None)
+    ROLLING_STATE_TOMBSTONES[rolling_session_digest(session_id)] = {
+        "state": state,
+        "recorded_at": timestamp,
+    }
+
+
+def continuity_status(
+    state: str,
+    *,
+    memory_available: bool,
+    invalid_session: bool = False,
+    memory_cleared: bool = False,
+) -> dict:
+    recovery_required = state in MEMORY_LOSS_STATES
+    return {
+        "schema_version": "psm_v0_283_continuity_status_v1",
+        "state": state,
+        "memory_available": memory_available,
+        "recovery_required": recovery_required,
+        "recovery_action": "restate_context" if recovery_required else "none",
+        "previous_state_recoverable": False if recovery_required else memory_available,
+        "raw_conversation_persisted": False,
+        "ephemeral_identifiers_only": True,
+        "invalid_session": invalid_session,
+        "memory_cleared": memory_cleared,
+        "server_instance_id": SERVER_INSTANCE_ID,
+    }
+
+
+def asks_unavailable_prior_state(text: str) -> bool:
+    folded = text.casefold()
+    prior_markers = (
+        "刚才",
+        "剛才",
+        "之前",
+        "此前",
+        "先前",
+        "最早",
+        "上次",
+        "原来",
+        "原來",
+        "还记得",
+        "還記得",
+        "记得吗",
+        "記得嗎",
+        "来着",
+        "來著",
+        "我们定的",
+        "我們定的",
+        "定稿",
+        "原定",
+        "未完成",
+        "剩下",
+        "没做",
+        "沒做",
+        "what was",
+        "remind me",
+        "settled on",
+    )
+    return any(marker in folded for marker in prior_markers)
+
+
+def continuity_loss_answer(state: str) -> str:
+    return "我现在无法读取先前会话内容，因此不能确认你之前提供的信息。请把需要继续使用的信息重新告诉我。"
 
 
 def build_chat_generation(
@@ -1625,6 +1773,90 @@ def roadmap_answer(context: dict) -> str:
 
 
 def project_results_answer(context: dict) -> str:
+    if context["current_version"] == "PSM V0.291":
+        return (
+            "目前已完成到 PSM V0.291。V0.290 实测正常本地模型生成约需 13 至 17 秒，"
+            "确定性恢复和身份回答则低于 38 毫秒，主机与 Docker 全部成功且 fallback 为 0。\n\n"
+            "V0.291 已用真实浏览器验证分段等待提示、取消和重试：观察到的客户端取消耗时 37 毫秒，"
+            "问题会保留，重试不会复制用户回合；桌面和手机无横向溢出或控制台错误。"
+            "当前只确认客户端停止等待，不声称服务端推理已停止，也不声称已实现网络流式输出。\n\n"
+            f"当前本地聊天模型是 `{context['selected_model']}`。"
+            f"下一阶段是 {context['next_version']}：{context['next_objective']}"
+        )
+    if context["current_version"] == "PSM V0.290":
+        return (
+            "目前已完成到 PSM V0.290。主机与 Docker 的确定性恢复和身份回答 p95 都低于 38 毫秒；"
+            "正常本地模型生成的主机 p50/p95 约为 16.4/16.7 秒，Docker 约为 13.4/16.7 秒。\n\n"
+            "两边共 6 次正常生成全部成功，fallback 为 0。这个结果说明正确性路径已经稳定，"
+            "当前主要体验瓶颈是本地模型约 13 至 17 秒的生成等待，而不是状态路由。外部发布仍关闭。\n\n"
+            f"当前本地聊天模型是 `{context['selected_model']}`。"
+            f"下一阶段是 {context['next_version']}：{context['next_objective']}"
+        )
+    if context["current_version"] == "PSM V0.289":
+        return (
+            "目前已完成到 PSM V0.289。V0.288 的主机与 Docker 自然指代回归均为 16/16，原文哨兵写盘为 0。\n\n"
+            "V0.289 又在真实 Chromium 桌面和手机视窗完成交互：reset、reload、restarted 的自然追问都正确要求重述，"
+            "明确的新任务能回到正常聊天；两种视窗都没有页面横向溢出或控制台错误。"
+            "原始聊天仍不持久化，外部发布仍关闭。\n\n"
+            f"当前本地聊天模型是 `{context['selected_model']}`。"
+            f"下一阶段是 {context['next_version']}：{context['next_objective']}"
+        )
+    if context["current_version"] == "PSM V0.288":
+        return (
+            "目前已完成到 PSM V0.288。V0.287 的 16 组自然指代与新任务问答已通过独立外部语义审查。\n\n"
+            "V0.288 又在真实主机和 Docker 服务各跑 16 个案例，两边都是 16/16；"
+            "服务端产生的过期墓碑、reset、reload、restarted 都没有泄漏旧事实，4 个新任务也没有被误拒绝。"
+            "一次性原文哨兵写盘为 0，持久原文记忆与外部发布仍关闭。\n\n"
+            f"当前本地聊天模型是 `{context['selected_model']}`。"
+            f"下一阶段是 {context['next_version']}：{context['next_objective']}"
+        )
+    if context["current_version"] == "PSM V0.287":
+        return (
+            "目前已完成到 PSM V0.287。V0.286 把自然指代恢复从基线 4/16 修到 16/16，"
+            "四种失忆状态完成 48 次回答检查，臆造已丢失事实为 0。\n\n"
+            "V0.287 再把 12 个中英文自然指代和 4 个明确新任务交给独立 OpenAI 模型审查，结果 16/16 通过，"
+            "没有失败项或关键发现。外部审查只使用合成问答，不包含私人资料，也不授予持久记忆或公开发布权限。\n\n"
+            f"当前本地聊天模型是 `{context['selected_model']}`。"
+            f"下一阶段是 {context['next_version']}：{context['next_objective']}"
+        )
+    if context["current_version"] == "PSM V0.286":
+        return (
+            "目前已完成到 PSM V0.286。V0.285 已封住 reset、reload、过期与旧实例重放后的旧记忆复活；"
+            "V0.286 继续检查不含固定提示词的自然指代，例如“那个项目代号来着”和“我们定的文件名呢”。\n\n"
+            "冻结基线仅通过 4/16，修复后达到 16/16；12 个真实指代全部识别，4 个新任务对照全部未误拦。"
+            "四种失忆状态共完成 48 次回答检查，臆造已丢失事实为 0。原始聊天仍不写盘，外部发布仍关闭。\n\n"
+            f"当前本地聊天模型是 `{context['selected_model']}`。"
+            f"下一阶段是 {context['next_version']}：{context['next_objective']}"
+        )
+    if context["current_version"] == "PSM V0.285":
+        return (
+            "目前已完成到 PSM V0.285。V0.284 的五类恢复回答通过独立外部评审 5/5；"
+            "V0.285 进一步发现并修复同一 session 在 reset、reload 或旧实例重放后可能重新取回旧记忆的问题。\n\n"
+            "攻击基线是 5/8，修复后达到 8/8；主机与 Docker 重放也都通过。旧记忆复活为 0，"
+            "32 个并发 session 串线为 0，过期墓碑最多 128 个且只留雜湊，原始聊天写盘为 0。\n\n"
+            f"当前本地聊天模型是 `{context['selected_model']}`。"
+            f"下一阶段是 {context['next_version']}：{context['next_objective']}"
+        )
+    if context["current_version"] == "PSM V0.284":
+        return (
+            "目前已完成到 PSM V0.284。V0.283 把五类会话生命周期间断从基线 0/5 修到 5/5，"
+            "主机、Docker、桌面和手机都通过，失忆后臆造旧事实为 0。\n\n"
+            "V0.284 又把 active、reset、reload、expired、restarted 五组短合成对话交给独立 OpenAI 模型评审，"
+            "结果 5/5 通过，没有失败项或关键发现。评审只验证回答的语义正确性、恢复提示和隐私边界，"
+            "不授予持久记忆、训练或外部发布权限。\n\n"
+            f"当前本地聊天模型是 `{context['selected_model']}`。"
+            f"下一阶段是 {context['next_version']}：{context['next_objective']}"
+        )
+    if context["current_version"] == "PSM V0.283":
+        return (
+            "目前已完成到 PSM V0.283。改造前，系统无法区分正常会话、清空、刷新、过期和服务重启，基线是 0/5；"
+            "现在五类状态达到 5/5，并且失忆后臆造旧事实为 0。\n\n"
+            "主机与 Docker 都完成了真实受控重启：进程实例确实轮换，旧会话只能得到重新陈述提示，不会返回已失效的代号。"
+            "桌面和手机浏览器也已通过，状态栏会显示会话连续、已清空、已刷新、已过期或服务已重启；页面无溢出，浏览器错误为 0。\n\n"
+            "原始聊天仍不写入磁盘，只保留有界进程内状态和非内容标识；外部正式发布仍关闭。"
+            f"当前本地聊天模型是 `{context['selected_model']}`。"
+            f"下一阶段是 {context['next_version']}：{context['next_objective']}"
+        )
     if context["current_version"] == "PSM V0.282":
         return (
             "目前已完成到 PSM V0.282。V0.276 把超过历史 24 条窗口的状态恢复从基线 0/10 修到 10/10；"
@@ -2534,6 +2766,9 @@ def load_status_summary() -> dict:
     current_version = status["current_version"].replace("psm_v", "PSM V")
     return {
         "version": current_version,
+        "continuity_protocol": "psm_v0_283_restart_recovery_v1",
+        "continuity_instance_id": SERVER_INSTANCE_ID,
+        "persistent_conversation_memory_enabled": False,
         "selected_chat_model": selected_chat_model(),
         "chat_timeout_seconds": selected_chat_timeout_seconds(),
         "core_cases": status["core_metrics"]["state_records"],

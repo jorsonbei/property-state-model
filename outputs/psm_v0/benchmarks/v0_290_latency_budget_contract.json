@@ -1,0 +1,45 @@
+{
+  "schema_version": "psm_v0_290_latency_budget_contract_v1",
+  "version": "PSM_V0.290-candidate",
+  "source_version": "PSM_V0.289",
+  "frozen": true,
+  "synthetic_only": true,
+  "measurement": {
+    "runtimes": [
+      {
+        "runtime_id": "host",
+        "base_url": "http://127.0.0.1:8765"
+      },
+      {
+        "runtime_id": "docker",
+        "base_url": "http://127.0.0.1:8766"
+      }
+    ],
+    "categories": [
+      {
+        "category": "deterministic_recovery",
+        "samples_per_runtime": 5,
+        "p95_limit_ms": 1000
+      },
+      {
+        "category": "deterministic_identity",
+        "samples_per_runtime": 5,
+        "p95_limit_ms": 1000
+      },
+      {
+        "category": "local_model_generation",
+        "samples_per_runtime": 3,
+        "p95_limit_ms": 60000
+      }
+    ],
+    "required_success_rate": 1.0,
+    "fallbacks_allowed": 0
+  },
+  "measurement_sha256": "085e08b4188c5f8ab2fc609d3043edee867addecf05b1308fcdd07412388d10e",
+  "release_boundary": {
+    "human_validation_claimed": false,
+    "persistent_conversation_memory_enabled": false,
+    "public_service_allowed": false,
+    "external_release_authority": false
+  }
+}

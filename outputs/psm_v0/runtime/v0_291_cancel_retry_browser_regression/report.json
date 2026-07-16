@@ -1,0 +1,59 @@
+{
+  "schema_version": "psm_v0_291_cancel_retry_browser_regression_v1",
+  "version": "PSM_V0.291-candidate",
+  "base_url": "http://127.0.0.1:8765",
+  "passed": true,
+  "synthetic_only": true,
+  "cancellation_scope": "client_transport_wait_only",
+  "server_generation_cancellation_claimed": false,
+  "network_streaming_claimed": false,
+  "browser_chat_persisted": false,
+  "human_feedback_collected": false,
+  "external_release_authority": false,
+  "desktop": {
+    "phaseBeforeCancel": "正在生成候選回答",
+    "cancellationMs": 37,
+    "cancelled": {
+      "promptValue": "请给一个新的本地知识项目起代号，并说明理由。",
+      "feedback": "已取消這次生成。你的問題已保留，可以重試。",
+      "retryVisible": true,
+      "cancelHidden": true,
+      "runDisabled": false,
+      "lastFailedReason": "cancelled",
+      "userMessages": 1,
+      "assistantMessages": 0
+    },
+    "retried": {
+      "answer": "nonempty",
+      "promptValue": "",
+      "retryHidden": true,
+      "cancelHidden": true,
+      "feedbackHidden": true,
+      "lastFailed": null,
+      "userMessages": 1,
+      "assistantMessages": 1
+    },
+    "horizontalOverflow": false,
+    "consoleErrors": 0
+  },
+  "mobile": {
+    "runVisible": true,
+    "cancelInitiallyHidden": true,
+    "retryInitiallyHidden": true,
+    "feedbackInitiallyHidden": true,
+    "scrollWidth": 390,
+    "innerWidth": 390,
+    "horizontalOverflow": false,
+    "consoleErrors": 0
+  },
+  "checks": {
+    "staged_progress_visible": true,
+    "client_cancel_completes_within_one_second": true,
+    "cancelled_prompt_and_retry_preserved": true,
+    "cancelled_turn_not_duplicated": true,
+    "retry_completes_single_turn": true,
+    "controls_return_to_idle": true,
+    "mobile_controls_visible_without_overflow": true,
+    "console_errors_zero": true
+  }
+}

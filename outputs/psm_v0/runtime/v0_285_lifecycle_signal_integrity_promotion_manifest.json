@@ -1,0 +1,50 @@
+{
+  "schema_version": "psm_v0_285_lifecycle_signal_integrity_promotion_manifest_v1",
+  "version": "PSM_V0.285",
+  "promoted_at": "2026-07-16",
+  "promoted": true,
+  "decision": "lifecycle_signal_integrity_and_runtime_gate_passed",
+  "formal_core_source": "PSM_V0.251",
+  "formal_core_records": 2228,
+  "lifecycle_signal_integrity": {
+    "decision": "lifecycle_signal_integrity_and_runtime_gate_passed",
+    "passed": true,
+    "baseline_passed": 5,
+    "baseline_failed": 3,
+    "final_passed": 8,
+    "final_failed": 0,
+    "memory_resurrection_events": 0,
+    "cross_session_leaks": 0,
+    "concurrent_sessions": 32,
+    "maximum_tombstones": 128,
+    "host_runtime": "passed",
+    "docker_runtime": "passed",
+    "user_statement_disk_writes": 0,
+    "persistent_conversation_memory_enabled": false,
+    "external_release_authority": false
+  },
+  "checks": {
+    "source_version_is_v0_284": true,
+    "contract_frozen_and_synthetic": true,
+    "baseline_retained_at_five_of_eight": true,
+    "local_gate_passed_eight_of_eight": true,
+    "zero_memory_resurrection": true,
+    "zero_cross_session_leaks": true,
+    "host_docker_runtime_passed": true,
+    "persistent_memory_closed": true,
+    "external_release_closed": true
+  },
+  "release_boundary": {
+    "human_validation_claimed": false,
+    "persistent_conversation_memory_enabled": false,
+    "public_service_allowed": false,
+    "rule_replacement_allowed": false,
+    "external_release_authority": false
+  },
+  "next_stage": {
+    "version": "PSM_V0.286",
+    "objective": "冻结并验证失忆后的自然指代改写，包括不含“之前、刚才、最早”等固定词的代号、文件、安排和未完成事项追问，防止改写绕过恢复边界。",
+    "blocked": false,
+    "requires_user_input": false
+  }
+}

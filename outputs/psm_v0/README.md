@@ -1,40 +1,43 @@
-# PSM V0.282 Core Workspace
+# PSM V0.291 Core Workspace
 
-The current promoted project status is `psm_v0.282`. The deterministic formal evidence source remains `psm_v0.251` with 2228 records. V0.282 adds bounded rolling state continuity and browser lifecycle evidence without changing the formal core.
+The current promoted project status is `psm_v0.291`. The deterministic formal evidence source remains `psm_v0.251` with 2228 records. V0.283-V0.291 add continuity recovery, independent review, host/Docker/browser parity, latency budgets, and cancel/retry evidence without changing the formal core.
 
 ## Latest Result
 
-- V0.276 moves long-horizon state recovery from a retained 0/10 baseline to 10/10.
-- V0.277 and V0.279 independently pass 10/10 external semantic reviews.
-- V0.278 passes 10/10 at 81/119 messages with 30 ms P95 and zero stale-state or capsule-recovery failures.
-- V0.280 moves cross-window recovery from a retained 0/4 truncation baseline to 4/4, including host/Docker verification.
-- V0.281 passes 11/11 session isolation checks and a 4/4 external rolling-state review.
-- V0.282 passes real desktop/mobile browser lifecycle regression with the correct visible answer, rotating reset/reload sessions, no overflow, and no console errors.
-- Synthetic external-judge usage is 150,416 / 1,000,000 authorized tokens.
+- Lifecycle recovery moved from a retained 0/5 baseline to 5/5; same-session resurrection moved from 5/8 to 8/8.
+- Natural prior-reference detection moved from 4/16 to 16/16, with 48 loss-state answer checks and zero archived-fact fabrication.
+- Independent V0.284 and V0.287 `gpt-5.4` reviews pass 5/5 and 16/16. Synthetic external-judge usage is 157,268 / 1,000,000 authorized tokens.
+- Host and Docker each pass 16/16 natural-reference/new-task runtime cases; raw-text sentinel disk writes are 0.
+- Desktop and mobile Chromium recovery/cancel/retry regressions pass with zero overflow or console errors.
+- Deterministic P95 is below 38 ms. Normal local-model generation P95 is about 16.7 seconds with 6/6 success and zero fallback.
+- Client cancellation is observed at 37 ms and preserves one retryable user turn. Server inference cancellation and network streaming are not claimed.
 
 ## Run
 
 ```bash
 make check
 make serve
-make rolling-v280-eval
-make rolling-v280-docker
-make isolation-v281-eval
-make browser-v282-rolling
+make recovery-v286-eval
+make runtime-v288-parity
+make browser-v289-recovery
+make latency-v290-eval
+make browser-v291-cancel
 ```
 
 The normal chat is `http://127.0.0.1:8765/`. Docker chat is `http://127.0.0.1:8766/`.
 
 ## Boundaries
 
-- The browser retains at most 120 messages.
+- The browser retains at most 120 visible messages.
 - Rolling state retains at most 20 user statements in process memory, expires after 30 idle minutes, and is capped at 64 sessions.
-- User statements are not persisted to disk; reset, reload, server restart, and expiry discard rolling memory.
+- Expiry tombstones are hash-only, capped at 128, and expire after one hour.
+- User statements and raw conversations are not persisted to disk; reset, reload, server restart, and expiry discard rolling memory.
+- Browser cancel currently stops client waiting only; it does not prove server-side inference cancellation.
 - Human validation, evaluation-to-training backflow, public service, professional action, rule replacement, and external release remain closed.
 
 ## Recovery
 
 - `CURRENT_STATUS.md` is the human recovery point.
-- `project_status_out/psm_v0.282_project_status.json` is the promoted machine status.
-- `runtime/v0_282_rolling_state_browser_regression/report.json` is the latest browser gate.
-- `roadmap_out/PSM_V0.282_to_V0.283_Restart_Recovery_Roadmap.md` is the active roadmap.
+- `project_status_out/psm_v0.291_project_status.json` is the promoted machine status.
+- `runtime/current_runtime_snapshot.json` is the Docker/public runtime snapshot.
+- `runtime/v0_291_cancel_retry_checkpoint.json` opens the V0.292 server-cancel/streaming protocol stage.

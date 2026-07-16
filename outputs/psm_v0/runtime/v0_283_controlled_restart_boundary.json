@@ -1,0 +1,39 @@
+{
+  "schema_version": "psm_v0_283_controlled_restart_boundary_v1",
+  "version": "PSM_V0.283-candidate",
+  "passed": true,
+  "synthetic_only": true,
+  "host": {
+    "old_instance_digest": "b24f5462b48d2ab2",
+    "new_instance_digest": "1d001381fa545b18",
+    "instance_rotated": true,
+    "state": "restarted",
+    "recovery_required": true,
+    "recovery_action": "restate_context",
+    "archived_fact_fabricated": false,
+    "boundary_visible": true,
+    "raw_conversation_persisted": false
+  },
+  "docker": {
+    "old_instance_digest": "84b14abdbcdd82ac",
+    "new_instance_digest": "63281120a58cac41",
+    "instance_rotated": true,
+    "state": "restarted",
+    "recovery_required": true,
+    "recovery_action": "restate_context",
+    "archived_fact_fabricated": false,
+    "boundary_visible": true,
+    "raw_conversation_persisted": false
+  },
+  "checks": {
+    "host_instance_rotated": true,
+    "docker_instance_rotated": true,
+    "host_restart_detected": true,
+    "docker_restart_detected": true,
+    "host_recovery_boundary_visible": true,
+    "docker_recovery_boundary_visible": true,
+    "zero_archived_fact_fabrication": true,
+    "zero_raw_conversation_persistence": true
+  },
+  "external_release_authority": false
+}

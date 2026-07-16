@@ -1,0 +1,53 @@
+{
+  "schema_version": "psm_v0_289_natural_recovery_browser_regression_v1",
+  "version": "PSM_V0.289-candidate",
+  "base_url": "http://127.0.0.1:8765",
+  "passed": true,
+  "synthetic_only": true,
+  "browser_chat_persisted": false,
+  "human_feedback_collected": false,
+  "external_release_authority": false,
+  "desktop": {
+    "reset": {
+      "answer": "我现在无法读取先前会话内容，因此不能确认你之前提供的信息。\n\n请把需要继续使用的信息重新告诉我。",
+      "continuity": "reset",
+      "continuityText": "會話已清空"
+    },
+    "newTask": {
+      "answer": "项目代号需结合具体领域与核心功能。若侧重探索未知，可用\"Q 核”象征不可击穿的目标边界；若强调状态演化，可选\"Δσ\"代表推动变化的压力差；若关注多角色协作，\"Π\"能涵盖对象与依赖关系。若项目涉及长尾不确定性，\"η\"或\"Σ+\"（带证据与下一步动作）更为贴切。请补充项目所属领域、关键约束或期望传达的意象，以便生成更精准的代号建议。",
+      "continuity": "active",
+      "continuityText": "會話連續"
+    },
+    "reload": {
+      "answer": "我现在无法读取先前会话内容，因此不能确认你之前提供的信息。\n\n请把需要继续使用的信息重新告诉我。",
+      "continuity": "reload",
+      "continuityText": "頁面已刷新"
+    },
+    "restarted": {
+      "answer": "我现在无法读取先前会话内容，因此不能确认你之前提供的信息。\n\n请把需要继续使用的信息重新告诉我。",
+      "continuity": "restarted",
+      "continuityText": "服務已重啟"
+    },
+    "horizontalOverflow": false,
+    "consoleErrors": 0
+  },
+  "mobile": {
+    "recovery": {
+      "answer": "我现在无法读取先前会话内容，因此不能确认你之前提供的信息。\n\n请把需要继续使用的信息重新告诉我。",
+      "continuity": "reset",
+      "continuityText": "會話已清空"
+    },
+    "horizontalOverflow": false,
+    "consoleErrors": 0
+  },
+  "checks": {
+    "reset_natural_reference_recovers_without_fabrication": true,
+    "explicit_new_task_returns_to_active_chat": true,
+    "reload_natural_reference_recovers": true,
+    "restarted_english_reference_recovers": true,
+    "mobile_recovery_interaction_passed": true,
+    "desktop_no_overflow": true,
+    "mobile_no_overflow": true,
+    "console_errors_zero": true
+  }
+}

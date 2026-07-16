@@ -1,0 +1,28 @@
+{
+  "schema_version": "psm_v0_283_restart_recovery_gate_v1",
+  "decision": "restart_recovery_gate_passed",
+  "passed": true,
+  "checks": {
+    "baseline_retained_at_zero_of_five": true,
+    "all_five_cases_pass": true,
+    "all_states_distinguishable": true,
+    "zero_fabricated_archived_facts": true,
+    "zero_project_file_writes_during_evaluation": true,
+    "raw_conversation_disk_persistence_disabled": true,
+    "external_release_closed": true
+  },
+  "summary": {
+    "cases": 5,
+    "passed": 5,
+    "failed": 0,
+    "states_observed": [
+      "active",
+      "expired",
+      "reload",
+      "reset",
+      "restarted"
+    ],
+    "fabricated_archived_facts": 0,
+    "project_files_changed_during_evaluation": []
+  }
+}

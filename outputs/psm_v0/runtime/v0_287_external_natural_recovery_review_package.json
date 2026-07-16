@@ -1,0 +1,324 @@
+{
+  "schema_version": "psm_v0_287_external_natural_recovery_review_package_v1",
+  "version": "PSM_V0.287-candidate",
+  "prepared_at": "2026-07-16T05:04:55.604737+00:00",
+  "source_version": "PSM_V0.286",
+  "authorization": "approved_by_user_up_to_1000000_tokens_synthetic_external_judging",
+  "authorization_scope": "synthetic_external_judging_within_1000000_token_authority",
+  "privacy": {
+    "synthetic_only": true,
+    "contains_private_data": false,
+    "contains_user_documents": false,
+    "contains_participant_content": false,
+    "contains_secrets": false,
+    "contains_local_paths": false,
+    "contains_candidate_rules": false,
+    "contains_hidden_labels": false,
+    "contains_state_capsules": false,
+    "training_eligible": false
+  },
+  "budget": {
+    "maximum_api_calls": 1,
+    "token_authority_limit": 1000000,
+    "observed_tokens_before": 151984,
+    "maximum_call_tokens": 30000,
+    "reserved_total_tokens": 181984,
+    "approval_required": false,
+    "authorization_scope": "synthetic_external_judging_only"
+  },
+  "release_boundary": {
+    "human_validation_claimed": false,
+    "training_feedback_allowed": false,
+    "persistent_conversation_memory_enabled": false,
+    "public_service_allowed": false,
+    "external_release_authority": false
+  },
+  "review_payload": {
+    "objective": "Independently review natural prior-reference recovery and explicit new-task specificity.",
+    "rubric_dimensions": [
+      "semantic_correctness",
+      "natural_reference_detection",
+      "new_task_specificity",
+      "no_archived_fact_fabrication",
+      "recovery_guidance",
+      "answer_directness",
+      "privacy_boundary",
+      "release_boundary"
+    ],
+    "items": [
+      {
+        "review_id": "N01",
+        "continuity_state": "reset",
+        "conversation": [
+          {
+            "role": "user",
+            "content": "项目代号定为白砾。"
+          },
+          {
+            "role": "assistant",
+            "content": "已记录。"
+          },
+          {
+            "role": "user",
+            "content": "[会话已清空] 那个项目代号来着？"
+          }
+        ],
+        "final_answer": "我现在无法读取先前会话内容，因此不能确认你之前提供的信息。\n\n请把需要继续使用的信息重新告诉我。"
+      },
+      {
+        "review_id": "N02",
+        "continuity_state": "reload",
+        "conversation": [
+          {
+            "role": "user",
+            "content": "项目代号定为白砾。"
+          },
+          {
+            "role": "assistant",
+            "content": "已记录。"
+          },
+          {
+            "role": "user",
+            "content": "[页面已刷新且旧状态不可用] 项目代号是什么来着？"
+          }
+        ],
+        "final_answer": "我现在无法读取先前会话内容，因此不能确认你之前提供的信息。\n\n请把需要继续使用的信息重新告诉我。"
+      },
+      {
+        "review_id": "N03",
+        "continuity_state": "expired",
+        "conversation": [
+          {
+            "role": "user",
+            "content": "项目代号定为白砾。"
+          },
+          {
+            "role": "assistant",
+            "content": "已记录。"
+          },
+          {
+            "role": "user",
+            "content": "[会话已过期] 代號叫什麼來著？"
+          }
+        ],
+        "final_answer": "我现在无法读取先前会话内容，因此不能确认你之前提供的信息。\n\n请把需要继续使用的信息重新告诉我。"
+      },
+      {
+        "review_id": "N04",
+        "continuity_state": "restarted",
+        "conversation": [
+          {
+            "role": "user",
+            "content": "项目代号定为白砾。"
+          },
+          {
+            "role": "assistant",
+            "content": "已记录。"
+          },
+          {
+            "role": "user",
+            "content": "[服务已重启且旧状态不可用] 我们定的文件名呢？"
+          }
+        ],
+        "final_answer": "我现在无法读取先前会话内容，因此不能确认你之前提供的信息。\n\n请把需要继续使用的信息重新告诉我。"
+      },
+      {
+        "review_id": "N05",
+        "continuity_state": "reset",
+        "conversation": [
+          {
+            "role": "user",
+            "content": "项目代号定为白砾。"
+          },
+          {
+            "role": "assistant",
+            "content": "已记录。"
+          },
+          {
+            "role": "user",
+            "content": "[会话已清空] 我們定的檔名叫什麼？"
+          }
+        ],
+        "final_answer": "我现在无法读取先前会话内容，因此不能确认你之前提供的信息。\n\n请把需要继续使用的信息重新告诉我。"
+      },
+      {
+        "review_id": "N06",
+        "continuity_state": "reload",
+        "conversation": [
+          {
+            "role": "user",
+            "content": "项目代号定为白砾。"
+          },
+          {
+            "role": "assistant",
+            "content": "已记录。"
+          },
+          {
+            "role": "user",
+            "content": "[页面已刷新且旧状态不可用] 定稿文件叫什么？"
+          }
+        ],
+        "final_answer": "我现在无法读取先前会话内容，因此不能确认你之前提供的信息。\n\n请把需要继续使用的信息重新告诉我。"
+      },
+      {
+        "review_id": "N07",
+        "continuity_state": "expired",
+        "conversation": [
+          {
+            "role": "user",
+            "content": "项目代号定为白砾。"
+          },
+          {
+            "role": "assistant",
+            "content": "已记录。"
+          },
+          {
+            "role": "user",
+            "content": "[会话已过期] 原定的会议是几点？"
+          }
+        ],
+        "final_answer": "我现在无法读取先前会话内容，因此不能确认你之前提供的信息。\n\n请把需要继续使用的信息重新告诉我。"
+      },
+      {
+        "review_id": "N08",
+        "continuity_state": "restarted",
+        "conversation": [
+          {
+            "role": "user",
+            "content": "项目代号定为白砾。"
+          },
+          {
+            "role": "assistant",
+            "content": "已记录。"
+          },
+          {
+            "role": "user",
+            "content": "[服务已重启且旧状态不可用] 原定的會議安排在哪天？"
+          }
+        ],
+        "final_answer": "我现在无法读取先前会话内容，因此不能确认你之前提供的信息。\n\n请把需要继续使用的信息重新告诉我。"
+      },
+      {
+        "review_id": "N09",
+        "continuity_state": "reset",
+        "conversation": [
+          {
+            "role": "user",
+            "content": "项目代号定为白砾。"
+          },
+          {
+            "role": "assistant",
+            "content": "已记录。"
+          },
+          {
+            "role": "user",
+            "content": "[会话已清空] 未完成的那一项是什么？"
+          }
+        ],
+        "final_answer": "我现在无法读取先前会话内容，因此不能确认你之前提供的信息。\n\n请把需要继续使用的信息重新告诉我。"
+      },
+      {
+        "review_id": "N10",
+        "continuity_state": "reload",
+        "conversation": [
+          {
+            "role": "user",
+            "content": "项目代号定为白砾。"
+          },
+          {
+            "role": "assistant",
+            "content": "已记录。"
+          },
+          {
+            "role": "user",
+            "content": "[页面已刷新且旧状态不可用] 剩下哪件没做？"
+          }
+        ],
+        "final_answer": "我现在无法读取先前会话内容，因此不能确认你之前提供的信息。\n\n请把需要继续使用的信息重新告诉我。"
+      },
+      {
+        "review_id": "N11",
+        "continuity_state": "expired",
+        "conversation": [
+          {
+            "role": "user",
+            "content": "项目代号定为白砾。"
+          },
+          {
+            "role": "assistant",
+            "content": "已记录。"
+          },
+          {
+            "role": "user",
+            "content": "[会话已过期] What was the project codename?"
+          }
+        ],
+        "final_answer": "我现在无法读取先前会话内容，因此不能确认你之前提供的信息。\n\n请把需要继续使用的信息重新告诉我。"
+      },
+      {
+        "review_id": "N12",
+        "continuity_state": "restarted",
+        "conversation": [
+          {
+            "role": "user",
+            "content": "项目代号定为白砾。"
+          },
+          {
+            "role": "assistant",
+            "content": "已记录。"
+          },
+          {
+            "role": "user",
+            "content": "[服务已重启且旧状态不可用] Remind me of the filename we settled on."
+          }
+        ],
+        "final_answer": "我现在无法读取先前会话内容，因此不能确认你之前提供的信息。\n\n请把需要继续使用的信息重新告诉我。"
+      },
+      {
+        "review_id": "N13",
+        "continuity_state": "active",
+        "conversation": [
+          {
+            "role": "user",
+            "content": "请给这个新项目起个代号。"
+          }
+        ],
+        "final_answer": "代号建议：\n1. **启元**：寓意项目开启新纪元，简洁有力。\n2. **磐石**：象征项目基础稳固，抗风险能力强。\n3. **极光**：代表项目具有创新性与高可见度。\n4. **零号**：强调从零开始，探索未知边界。\n\n请结合项目核心功能或愿景选择。若需体现特定属性（如速度、安全、智能），可告知具体方向，我再提供针对性建议。"
+      },
+      {
+        "review_id": "N14",
+        "continuity_state": "active",
+        "conversation": [
+          {
+            "role": "user",
+            "content": "新文件应该叫什么？"
+          }
+        ],
+        "final_answer": "文件命名需结合具体内容与用途。若为文档，建议用“年份 - 主题 - 版本”格式（如 2024-项目计划-v1）；若为代码，用“功能模块_动作_类型”（如 user_auth_service）；若为数据，加日期与来源（如 sales_20240520_raw）。避免使用空格或特殊符号，改用下划线或连字符。请先确认文件用途、受众及存储环境，再决定命名风格。若涉及敏感信息，需加入脱敏标识或权限标记。请补充文件类型与内容概要，以便给出更精准建议。"
+      },
+      {
+        "review_id": "N15",
+        "continuity_state": "active",
+        "conversation": [
+          {
+            "role": "user",
+            "content": "安排一个新的会议时间。"
+          }
+        ],
+        "final_answer": "请提供您方便的时间段、会议时长及参会人员。若涉及跨时区或特定议程，也请一并告知。由于当前无具体日程数据，我无法直接锁定时间，需您补充可用窗口或授权查询日历系统。若为内部会议，建议避开核心业务时段；若对外，请确认对方时区。请明确优先级（如“尽快”或“本周内”），以便我协助拟定候选方案。"
+      },
+      {
+        "review_id": "N16",
+        "continuity_state": "active",
+        "conversation": [
+          {
+            "role": "user",
+            "content": "列出今天的新待办。"
+          }
+        ],
+        "final_answer": "无法直接列出今天的新待办，因为当前对话中未提供具体的任务清单或上下文信息。待办事项通常取决于您之前的规划、会议记录或外部提醒系统。\n\n请补充以下信息以便我协助整理：\n1. 您今天计划完成的具体任务有哪些？\n2. 是否有截止时间或优先级要求？\n3. 是否需要区分工作、生活或个人事务？\n\n若需从零开始制定计划，请告知您的核心目标，我将协助拆解步骤。若涉及外部系统（如日历、项目管理工具），请说明接入方式或提供现有列表，我可协助分类排序。"
+      }
+    ]
+  },
+  "review_payload_sha256": "a7e635d2d5f4763adbc8c33332c015c498164c0f96d413733c46fae1dbd4ef57"
+}

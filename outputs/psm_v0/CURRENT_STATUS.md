@@ -2,50 +2,58 @@
 
 ## Current Version
 
-`PSM V0.282`
+`PSM V0.291`
 
-V0.282 is promoted. The deterministic 2228-record formal evidence source remains `PSM V0.251`; V0.282 adds bounded cross-window state continuity and real-browser lifecycle evidence without changing that formal core.
+V0.291 is promoted. The deterministic 2228-record formal evidence source remains `PSM V0.251`; V0.283-V0.291 add continuity recovery, independent semantic review, runtime/browser parity, latency measurement, and cancel/retry interaction evidence without changing that formal core.
 
 ## Latest Results
 
-- V0.275 retains its O01/O02/O10 and O09 external failures, then passes an independent 10/10 third review after local repair.
-- V0.276 retains a 0/10 truncation baseline and finishes 10/10 across five long-horizon state families.
-- V0.277 independently reviews the V0.276 answers and passes 10/10.
-- V0.278 passes 10/10 at 81 and 119 messages; stale-state, compression, and capsule-recovery failures are 0, with 30 ms P95.
-- V0.279 independently reviews the 81/119-message answers and passes 10/10.
-- V0.280 retains a 4/4 failure after early state exits the 120-message window, then passes 4/4 with rolling state handoff. Host and Docker recover the archived fact while the visible window remains bounded to 120.
-- V0.281 passes 11 session isolation, expiry, replay, and capacity checks, then passes a 4/4 independent external review.
-- V0.282 passes real Playwright desktop/mobile lifecycle regression: the visible cross-window answer is correct, reset/reload rotate sessions, overflow is 0, and console errors are 0.
+- V0.283 retains a 0/5 lifecycle baseline and finishes 5/5 across active, reset, reload, expired, and restarted states. Host, Docker, desktop, and mobile checks pass; archived-fact fabrication is 0.
+- V0.284 passes a 5/5 independent `gpt-5.4` semantic review of lifecycle recovery answers.
+- V0.285 retains a 5/8 adversarial baseline, closes old-memory resurrection, and finishes 8/8. Cross-session leaks are 0 across 32 concurrent sessions; expiry tombstones are capped at 128 and store hashes only.
+- V0.286 retains a 4/16 natural-reference baseline and finishes 16/16, including 12 Chinese/Traditional-Chinese/English prior references and four explicit new-task controls. All 48 loss-state answer checks pass with zero archived-fact fabrication.
+- V0.287 passes an independent 16/16 `gpt-5.4` review with no failed items or critical findings.
+- V0.288 passes 16/16 on both host and Docker, including authentic server-owned expiry eviction. Synthetic raw-text sentinel disk writes are 0; the retained first runtime attempt documents the invalid client-expiry injection gap.
+- V0.289 passes real Chromium desktop/mobile recovery, new-task, continuity-label, layout, and console gates.
+- V0.290 records deterministic recovery/identity P95 below 38 ms. Normal local-model generation succeeds 6/6 with fallback 0; host P50/P95 is 16.4/16.7 seconds and Docker P50/P95 is 13.4/16.7 seconds.
+- V0.291 passes real-browser staged progress, cancellation, prompt preservation, retry, and single-turn integrity. Observed client cancellation is 37 ms. Server-side inference cancellation and network streaming are explicitly not claimed.
 
 ## Token Authority
 
 - User-authorized ceiling: 1,000,000 cumulative tokens for synthetic external judging.
-- Observed usage: 150,416 tokens.
-- Remaining authority: 849,584 tokens.
+- Observed usage: 157,268 tokens.
+- Remaining authority: 842,732 tokens.
 - Per-call approval required within this ceiling: false.
 - Private data, participant content, user documents, training feedback, and external release are outside this authority.
 
 ## Memory And Release Boundary
 
-- Browser/server message window: 120 messages.
+- Browser/server visible message window: 120 messages.
 - Rolling user-state maximum: 20 statements.
 - Session memory: process memory only, maximum 64 sessions, 30-minute idle expiry.
-- User-statement disk persistence: false.
-- Assistant history cannot override user facts; explicit topic switches clear old-topic state.
-- Page reset, page reload, server restart, and session expiry intentionally discard rolling memory.
+- Expiry tombstones: maximum 128, SHA-256 session hashes only, one-hour TTL.
+- User-statement and raw-conversation disk persistence: false.
+- Client continuity events: active, reset, reload. Expired and restarted states remain server-owned.
+- Page reset, reload, server restart, and expiry intentionally discard rolling memory and require restatement for prior-reference questions.
+- Client cancel stops browser transport waiting; it does not yet prove Ollama inference cancellation.
 - Human validation, public service, production readiness, rule replacement, professional authority, and external release authority: false.
 
 ## Recovery Artifacts
 
-- Machine status: `project_status_out/psm_v0.282_project_status.json`.
+- Machine status: `project_status_out/psm_v0.291_project_status.json`.
 - Public runtime snapshot: `runtime/current_runtime_snapshot.json`.
-- V0.276 contract/report/gate: `benchmarks/v0_276_long_horizon_state_compression_contract.json`, `runtime/v0_276_long_horizon_state_compression_report.json`, `runtime/v0_276_long_horizon_state_compression_gate.json`.
-- V0.277 package/judge/gate: `runtime/v0_277_external_state_compression_review_package.json`, `runtime/v0_277_openai_external_state_compression_judge.json`, `runtime/v0_277_external_state_compression_gate.json`.
-- V0.278 stress contract/report/Docker: `benchmarks/v0_278_incremental_long_horizon_stress_contract.json`, `runtime/v0_278_incremental_long_horizon_stress_report.json`, `runtime/v0_278_incremental_long_horizon_stress_docker_boundary.json`.
-- V0.279 package/judge/gate: `runtime/v0_279_external_incremental_stress_review_package.json`, `runtime/v0_279_openai_external_incremental_stress_judge.json`, `runtime/v0_279_external_incremental_stress_gate.json`.
-- V0.280 contract/baseline/report/Docker: `benchmarks/v0_280_rolling_state_handoff_contract.json`, `runtime/v0_280_window_truncation_initial_failure_ledger.json`, `runtime/v0_280_rolling_state_handoff_report.json`, `runtime/v0_280_rolling_state_handoff_docker_boundary.json`.
-- V0.281 isolation/external review: `runtime/v0_281_rolling_state_isolation_gate.json`, `runtime/v0_281_external_rolling_state_review_package.json`, `runtime/v0_281_openai_external_rolling_state_judge.json`, `runtime/v0_281_external_rolling_state_gate.json`.
-- V0.282 browser report: `runtime/v0_282_rolling_state_browser_regression/report.json`.
-- Current roadmap: `roadmap_out/PSM_V0.282_to_V0.283_Restart_Recovery_Roadmap.md`.
+- V0.283 restart recovery: `runtime/v0_283_restart_recovery_gate.json`, `runtime/v0_283_controlled_restart_boundary.json`, `runtime/v0_283_restart_recovery_browser_regression/report.json`.
+- V0.284 external review: `runtime/v0_284_openai_external_restart_recovery_judge.json`, `runtime/v0_284_external_restart_recovery_gate.json`.
+- V0.285 lifecycle integrity: `runtime/v0_285_lifecycle_signal_integrity_report.json`, `runtime/v0_285_host_docker_integrity_boundary.json`.
+- V0.286 natural references: `benchmarks/v0_286_natural_recovery_reference_contract.json`, `runtime/v0_286_natural_recovery_reference_report.json`.
+- V0.287 external review: `runtime/v0_287_openai_external_natural_recovery_judge.json`, `runtime/v0_287_external_natural_recovery_gate.json`.
+- V0.288 runtime parity: `runtime/v0_288_host_docker_natural_recovery_boundary.json`, `runtime/v0_288_host_docker_attempt_1_evaluator_gap.json`.
+- V0.289 browser recovery: `runtime/v0_289_natural_recovery_browser_regression/report.json`.
+- V0.290 latency: `benchmarks/v0_290_latency_budget_contract.json`, `runtime/v0_290_latency_budget_report.json`.
+- V0.291 cancel/retry: `runtime/v0_291_cancel_retry_browser_regression/report.json`, `runtime/v0_291_cancel_retry_checkpoint.json`.
+
+## Next Stage
+
+`PSM V0.292` evaluates cooperative server-side generation cancellation and true network streaming without releasing unreviewed tokens before the Sigma+ answer gate. It requires no user input and grants no external release authority.
 
 Version history remains in independent snapshots under `status_history/`; it is not embedded recursively here.
